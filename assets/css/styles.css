@@ -52,6 +52,8 @@ a{color:inherit}
 a:hover{text-decoration:none}
 :focus-visible{outline:3px solid var(--focus); outline-offset:3px}
 
+.muted{color:var(--muted)}
+
 .container{max-width:var(--max); margin:0 auto; padding:0 18px}
 
 .skip-link{

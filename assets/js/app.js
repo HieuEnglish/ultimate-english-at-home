@@ -10,6 +10,9 @@
 
   const basePath = detectBasePath();
 
+  // Make <a href="/resources"> work on GitHub Pages project URLs (prepend basePath)
+  rewriteNavHrefs();
+
   restoreRedirectedPath();
 
   window.addEventListener("popstate", () => render(getAppPath()));
@@ -25,6 +28,18 @@
       return parts.length ? `/${parts[0]}` : "";
     }
     return "";
+  }
+
+  function rewriteNavHrefs() {
+    if (!basePath) return;
+    const links = document.querySelectorAll("a[data-nav]");
+    links.forEach((a) => {
+      const href = a.getAttribute("href");
+      if (!href) return;
+      if (href.startsWith("/") && !href.startsWith(basePath + "/")) {
+        a.setAttribute("href", basePath + href);
+      }
+    });
   }
 
   function hrefFor(appPath) {
@@ -73,9 +88,7 @@
     const href = a.getAttribute("href");
     if (!href) return;
 
-    // FIX: resolve relative hrefs against CURRENT PAGE (not origin)
     const url = new URL(href, window.location.href);
-
     if (url.origin !== window.location.origin) return;
 
     const path = url.pathname || "/";
@@ -257,7 +270,6 @@
 
         <div class="note">
           <strong>Coming soon:</strong> ${capitalize(skill)} resources for ages ${escapeHtml(age)}.
-          Add your content later without changing the routing structure.
         </div>
 
         <div class="actions">
