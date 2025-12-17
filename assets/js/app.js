@@ -229,7 +229,7 @@
         href: hrefFor(`/resources/${age}`),
         title: age,
         text: "Choose a skill area next.",
-        icon: iconUsers(),
+        icon: iconAge(age), // ✅ age-based icon
         ctaText: "",
         glow: glowKeys[i % glowKeys.length]
       })
@@ -425,6 +425,77 @@
         </div>
         ${ctaHtml}
       </a>
+    `;
+  }
+
+  // -------------------------
+  // Age icons (baby → adult)
+  // -------------------------
+  function iconAge(age) {
+    if (age === "0-3") return iconBabyBottle();
+    if (age === "4-7") return iconTeddy();
+    if (age === "8-10") return iconPencil();
+    if (age === "11-12") return iconHeadphones();
+    return iconGradCap(); // 13-18
+  }
+
+  function iconBabyBottle() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M10 2h4v2h-4V2Z" fill="currentColor" opacity=".25"></path>
+        <path d="M9 4h6v2H9V4Z" fill="currentColor" opacity=".18"></path>
+        <path d="M9 6h6v2.2l-.9.9V19a3 3 0 0 1-6 0V9.1l-.9-.9V6Z" fill="currentColor" opacity=".20"></path>
+        <path d="M10 9h4v10a2 2 0 0 1-4 0V9Z" fill="currentColor"></path>
+        <path d="M11 12h2v1h-2v-1Zm0 3h2v1h-2v-1Z" fill="currentColor" opacity=".55"></path>
+      </svg>
+    `;
+  }
+
+  function iconTeddy() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <circle cx="8" cy="8" r="2" fill="currentColor" opacity=".25"></circle>
+        <circle cx="16" cy="8" r="2" fill="currentColor" opacity=".25"></circle>
+        <circle cx="12" cy="9.5" r="4.5" fill="currentColor" opacity=".18"></circle>
+        <path d="M7.5 20a4.5 4.5 0 0 1 9 0v1H7.5v-1Z" fill="currentColor" opacity=".18"></path>
+        <path d="M9.2 13.2a2.8 2.8 0 0 0 5.6 0" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".9"></path>
+        <circle cx="10.4" cy="9.6" r=".7" fill="currentColor"></circle>
+        <circle cx="13.6" cy="9.6" r=".7" fill="currentColor"></circle>
+        <path d="M11.2 11.2h1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+      </svg>
+    `;
+  }
+
+  function iconPencil() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M15.7 3.9a2 2 0 0 1 2.8 0l1.6 1.6a2 2 0 0 1 0 2.8L10 18.4 5 19l.6-5 10.1-10.1Z" fill="currentColor" opacity=".18"></path>
+        <path d="M7.2 16.8 16.9 7.1l2 2-9.7 9.7-2.6.3.6-2.3Z" fill="currentColor"></path>
+        <path d="M15.5 5.3 18.7 8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".85"></path>
+      </svg>
+    `;
+  }
+
+  function iconHeadphones() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-7h3v-1Z" fill="currentColor" opacity=".18"></path>
+        <path d="M4 12v1h3v7H6a2 2 0 0 1-2-2v-6Z" fill="currentColor" opacity=".18"></path>
+        <path d="M7 12h2v8H7a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2Z" fill="currentColor"></path>
+        <path d="M15 12h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2v-8Z" fill="currentColor"></path>
+        <path d="M6 12a6 6 0 0 1 12 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity=".85"></path>
+      </svg>
+    `;
+  }
+
+  function iconGradCap() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M12 4 2.5 9 12 14l9.5-5L12 4Z" fill="currentColor" opacity=".18"></path>
+        <path d="M6.5 12v4.2c0 .8 2.6 2.8 5.5 2.8s5.5-2 5.5-2.8V12l-5.5 2.9L6.5 12Z" fill="currentColor"></path>
+        <path d="M21.5 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"></path>
+        <path d="M21.5 15c-1.2.6-2.3 1-3.5 1.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".65"></path>
+      </svg>
     `;
   }
 
