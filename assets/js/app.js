@@ -204,10 +204,6 @@
             icon: iconClipboard()
           })}
         </div>
-
-        <div class="note">
-          <strong>Tip:</strong> deep links work on GitHub Pages via a 404 redirect to this app.
-        </div>
       </section>
     `;
     return { view: { title, html } };
