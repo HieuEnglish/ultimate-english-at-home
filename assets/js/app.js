@@ -108,7 +108,17 @@
   }
 
   function setActiveNav(appPath) {
-    const key = appPath === "/" ? "home" : appPath.startsWith("/resources") ? "resources" : "";
+    const key =
+      appPath === "/"
+        ? "home"
+        : appPath.startsWith("/resources")
+        ? "resources"
+        : appPath.startsWith("/games")
+        ? "games"
+        : appPath.startsWith("/tests")
+        ? "tests"
+        : "";
+
     navLinks.forEach((el) => {
       const isActive = el.getAttribute("data-nav-key") === key;
       el.classList.toggle("is-active", isActive);
@@ -141,6 +151,12 @@
     const parts = appPath.split("/").filter(Boolean);
 
     if (parts.length === 0) return viewHome();
+
+    // New placeholders
+    if (parts[0] === "games" && parts.length === 1) return viewGames();
+    if (parts[0] === "tests" && parts.length === 1) return viewTests();
+
+    // Existing resources routes
     if (parts[0] !== "resources") return viewNotFound(appPath);
     if (parts.length === 1) return viewResourcesIndex();
 
@@ -160,18 +176,32 @@
     const html = `
       <section class="hero">
         <p class="eyebrow">Ultimate English At Home</p>
-        <h1 class="hero-title">Pastel, professional learning paths — by age and skill.</h1>
+        <h1 class="hero-title">learning paths — by age and skill</h1>
         <p class="hero-subtitle">
           Start with Resources, choose an age group, then pick Reading, Listening, Writing, or Speaking.
         </p>
 
-        <div class="card-grid card-grid--single" role="list">
+        <div class="card-grid" role="list">
           ${card({
             href: hrefFor("/resources"),
             title: "Resources",
             text: "Browse by age group, then choose a skill area.",
             icon: iconBook(),
             primary: true
+          })}
+
+          ${card({
+            href: hrefFor("/games"),
+            title: "Games",
+            text: "Placeholder for now (coming soon).",
+            icon: iconGamepad()
+          })}
+
+          ${card({
+            href: hrefFor("/tests"),
+            title: "Tests",
+            text: "Placeholder for now (coming soon).",
+            icon: iconClipboard()
           })}
         </div>
 
@@ -211,6 +241,58 @@
 
         <div class="actions">
           <a class="btn" href="${hrefFor("/")}" data-nav>← Back to Home</a>
+        </div>
+      </section>
+    `;
+    return { view: { title, html } };
+  }
+
+  function viewGames() {
+    const title = "Games — UEAH";
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/") },
+      { label: "Games" }
+    ]);
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Games</h1>
+        <p class="page-subtitle">This page is a placeholder for now.</p>
+
+        <div class="note">
+          <strong>Coming soon:</strong> interactive games by age group and skill.
+        </div>
+
+        <div class="actions">
+          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+        </div>
+      </section>
+    `;
+    return { view: { title, html } };
+  }
+
+  function viewTests() {
+    const title = "Tests — UEAH";
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/") },
+      { label: "Tests" }
+    ]);
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Tests</h1>
+        <p class="page-subtitle">This page is a placeholder for now.</p>
+
+        <div class="note">
+          <strong>Coming soon:</strong> quizzes and tests by age group and skill.
+        </div>
+
+        <div class="actions">
+          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
         </div>
       </section>
     `;
@@ -305,10 +387,12 @@
   }
 
   function breadcrumbs(items) {
-    const li = items.map((it) => {
-      if (it.href) return `<li><a href="${it.href}" data-nav>${escapeHtml(it.label)}</a></li>`;
-      return `<li aria-current="page">${escapeHtml(it.label)}</li>`;
-    }).join("");
+    const li = items
+      .map((it) => {
+        if (it.href) return `<li><a href="${it.href}" data-nav>${escapeHtml(it.label)}</a></li>`;
+        return `<li aria-current="page">${escapeHtml(it.label)}</li>`;
+      })
+      .join("");
     return `<nav aria-label="Breadcrumb"><ol class="breadcrumbs">${li}</ol></nav>`;
   }
 
@@ -346,14 +430,37 @@
     `;
   }
 
+  function iconGamepad() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M7 9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6a3 3 0 0 1-3 3h-1l-1.2-1.2a1 1 0 0 0-.7-.3h-1.2a1 1 0 0 0-.7.3L9 18H8a3 3 0 0 1-3-3V9Z" fill="currentColor" opacity=".18"></path>
+        <path d="M10 11H8v2h2v2h2v-2h2v-2h-2V9h-2v2Z" fill="currentColor"></path>
+        <path d="M16.5 11.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill="currentColor"></path>
+        <path d="M17.75 13a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill="currentColor"></path>
+      </svg>
+    `;
+  }
+
+  function iconClipboard() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M7 4h7l3 3v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" fill="currentColor" opacity=".18"></path>
+        <path d="M14 4v3a1 1 0 0 0 1 1h3" fill="currentColor"></path>
+        <path d="M8.5 11.5h7v1.5h-7v-1.5Zm0 3h7V16h-7v-1.5Z" fill="currentColor"></path>
+      </svg>
+    `;
+  }
+
   function iconSkill(skill) {
     if (skill === "reading") return iconBook();
-    if (skill === "listening") return `
+    if (skill === "listening")
+      return `
       <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
         <path d="M12 3a6 6 0 0 0-6 6v4a4 4 0 0 0 8 0V9a2 2 0 0 0-4 0v4a1 1 0 0 0 2 0V9h2v4a3 3 0 0 1-6 0V9a4 4 0 0 1 8 0v5a5 5 0 0 1-10 0V9H4v5a7 7 0 0 0 14 0V9a6 6 0 0 0-6-6Z" fill="currentColor"></path>
       </svg>
     `;
-    if (skill === "writing") return `
+    if (skill === "writing")
+      return `
       <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
         <path d="M4 20h4l10.5-10.5a2 2 0 0 0 0-3L16.5 4.5a2 2 0 0 0-3 0L3 15v5Z" fill="currentColor" opacity=".18"></path>
         <path d="M14.5 6.5 17.5 9.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"></path>
