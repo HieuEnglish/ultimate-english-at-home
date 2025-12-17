@@ -1,0 +1,15 @@
+﻿# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Secrets (if you add them later)
+.env
+.env.*
