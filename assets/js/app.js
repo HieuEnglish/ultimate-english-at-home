@@ -152,11 +152,9 @@
 
     if (parts.length === 0) return viewHome();
 
-    // New placeholders
     if (parts[0] === "games" && parts.length === 1) return viewGames();
     if (parts[0] === "tests" && parts.length === 1) return viewTests();
 
-    // Existing resources routes
     if (parts[0] !== "resources") return viewNotFound(appPath);
     if (parts.length === 1) return viewResourcesIndex();
 
@@ -186,7 +184,7 @@
             href: hrefFor("/resources"),
             title: "Resources",
             text: "Browse by age group, then choose a skill area.",
-            icon: iconBook(),
+            icon: iconBook(), // ✅ book icon on homepage
             primary: true,
             ctaText: "",
             glow: "green"
@@ -229,7 +227,7 @@
         href: hrefFor(`/resources/${age}`),
         title: age,
         text: "Choose a skill area next.",
-        icon: iconAge(age), // ✅ age-based icon
+        icon: iconAge(age),
         ctaText: "",
         glow: glowKeys[i % glowKeys.length]
       })
@@ -428,15 +426,12 @@
     `;
   }
 
-  // -------------------------
-  // Age icons (baby → adult)
-  // -------------------------
   function iconAge(age) {
     if (age === "0-3") return iconBabyBottle();
     if (age === "4-7") return iconTeddy();
     if (age === "8-10") return iconPencil();
     if (age === "11-12") return iconHeadphones();
-    return iconGradCap(); // 13-18
+    return iconGradCap();
   }
 
   function iconBabyBottle() {
@@ -504,17 +499,6 @@
       <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
         <path d="M4 5.5C4 4.67 4.67 4 5.5 4H19a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5H6.25A2.25 2.25 0 0 0 4 22V5.5Z" fill="currentColor" opacity=".18"></path>
         <path d="M6.25 20H18.5a.5.5 0 0 0 .5-.5V6H6.5A.5.5 0 0 0 6 6.5V19a1 1 0 0 0 .25 1Z" fill="currentColor"></path>
-      </svg>
-    `;
-  }
-
-  function iconUsers() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M16 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3Z" fill="currentColor"></path>
-        <path d="M7.5 12a2.5 2.5 0 1 0-2.5-2.5A2.5 2.5 0 0 0 7.5 12Z" fill="currentColor" opacity=".7"></path>
-        <path d="M16 13c-2.76 0-5 1.79-5 4v2h10v-2c0-2.21-2.24-4-5-4Z" fill="currentColor" opacity=".18"></path>
-        <path d="M7.5 13C5.02 13 3 14.57 3 16.5V19h7v-2c0-1.3.43-2.5 1.16-3.43A6.4 6.4 0 0 0 7.5 13Z" fill="currentColor" opacity=".12"></path>
       </svg>
     `;
   }
