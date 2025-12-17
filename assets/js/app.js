@@ -216,12 +216,16 @@
       { label: "Resources" }
     ]);
 
-    const cards = AGE_GROUPS.map((age) =>
+    const glowKeys = ["green", "yellow", "red", "blue"];
+
+    const cards = AGE_GROUPS.map((age, i) =>
       card({
         href: hrefFor(`/resources/${age}`),
         title: age,
         text: "Choose a skill area next.",
-        icon: iconUsers()
+        icon: iconUsers(),
+        ctaText: "",
+        glow: glowKeys[i % glowKeys.length]
       })
     ).join("");
 
@@ -303,12 +307,21 @@
       { label: age }
     ]);
 
+    const glowBySkill = {
+      reading: "blue",
+      listening: "green",
+      writing: "yellow",
+      speaking: "red"
+    };
+
     const cards = SKILLS.map((skill) =>
       card({
         href: hrefFor(`/resources/${age}/${skill}`),
         title: capitalize(skill),
         text: "Open placeholder page (coming soon).",
-        icon: iconSkill(skill)
+        icon: iconSkill(skill),
+        ctaText: "",
+        glow: glowBySkill[skill] || "green"
       })
     ).join("");
 
@@ -392,16 +405,19 @@
     return `<nav aria-label="Breadcrumb"><ol class="breadcrumbs">${li}</ol></nav>`;
   }
 
-  function card({ href, title, text, icon, primary }) {
+  function card({ href, title, text, icon, primary, ctaText = "Open →", glow = "" }) {
     const cls = primary ? "card card--primary" : "card";
+    const glowAttr = glow ? ` data-glow="${escapeHtml(glow)}"` : "";
+    const ctaHtml = ctaText ? `<span class="card-cta" aria-hidden="true">${escapeHtml(ctaText)}</span>` : "";
+
     return `
-      <a class="${cls}" href="${href}" data-nav role="listitem">
+      <a class="${cls}" href="${href}" data-nav role="listitem"${glowAttr}>
         <div class="card-icon" aria-hidden="true">${icon}</div>
         <div class="card-body">
           <h2 class="card-title">${escapeHtml(title)}</h2>
           <p class="card-text">${escapeHtml(text)}</p>
         </div>
-        <span class="card-cta" aria-hidden="true">Open →</span>
+        ${ctaHtml}
       </a>
     `;
   }

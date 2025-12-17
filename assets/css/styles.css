@@ -160,12 +160,15 @@ a:hover{text-decoration:none}
   box-shadow: var(--shadow2);
   transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
+
+/* Default hover (kept for cards without glow) */
 .card:hover{
   transform: translateY(-2px);
   box-shadow: var(--shadow);
   border-color: rgba(107,102,255,.22);
 }
 .card:active{transform: translateY(0px) scale(.99)}
+
 .card--primary{
   border-color: rgba(107,102,255,.24);
   background:
@@ -173,6 +176,7 @@ a:hover{text-decoration:none}
     radial-gradient(640px 240px at 100% 0%, rgba(255,106,179,.12), transparent 62%),
     var(--surface);
 }
+
 .card-icon{
   display:grid;
   place-items:center;
@@ -193,6 +197,45 @@ a:hover{text-decoration:none}
   color: var(--muted);
   padding-left: 8px;
 }
+
+/* -------------------------------------------------
+   Cyber glow hover for "pills" (cards with data-glow)
+   (works with your updated app.js)
+-------------------------------------------------- */
+.card[data-glow]{
+  --glow: rgba(0,255,136,.35);
+  --glow-border: rgba(0,255,136,.85);
+  position: relative;
+}
+
+.card[data-glow]:hover,
+.card[data-glow]:focus-visible{
+  transform: translateY(-2px);
+  border-color: var(--glow-border);
+  box-shadow:
+    0 0 0 1px var(--glow-border),
+    0 0 28px 6px var(--glow),
+    var(--shadow);
+}
+
+/* Palette: green / yellow / red / blue */
+.card[data-glow="green"]{ --glow: rgba(0,255,136,.35); --glow-border: rgba(0,255,136,.85); }
+.card[data-glow="yellow"]{ --glow: rgba(255,230,70,.30); --glow-border: rgba(255,230,70,.85); }
+.card[data-glow="red"]{ --glow: rgba(255,70,90,.28); --glow-border: rgba(255,70,90,.85); }
+.card[data-glow="blue"]{ --glow: rgba(90,160,255,.28); --glow-border: rgba(90,160,255,.85); }
+
+/* Slightly tint the icon background on glow cards for a more "pill" feel */
+.card[data-glow] .card-icon{
+  background: rgba(255,255,255,.04);
+}
+@media (prefers-color-scheme: dark){
+  .card[data-glow] .card-icon{
+    background: rgba(255,255,255,.06);
+  }
+}
+
+/* If a card has no CTA (we removed "Open →" on resources), don't reserve space */
+.card-cta:empty{display:none}
 
 .page-top{margin-top:8px}
 .breadcrumbs{
