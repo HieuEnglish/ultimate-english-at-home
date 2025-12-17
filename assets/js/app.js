@@ -187,21 +187,27 @@
             title: "Resources",
             text: "Browse by age group, then choose a skill area.",
             icon: iconBook(),
-            primary: true
+            primary: true,
+            ctaText: "",
+            glow: "green"
           })}
 
           ${card({
             href: hrefFor("/games"),
             title: "Games",
             text: "Placeholder for now (coming soon).",
-            icon: iconGamepad()
+            icon: iconGamepad(),
+            ctaText: "",
+            glow: "yellow"
           })}
 
           ${card({
             href: hrefFor("/tests"),
             title: "Tests",
             text: "Placeholder for now (coming soon).",
-            icon: iconClipboard()
+            icon: iconClipboard(),
+            ctaText: "",
+            glow: "blue"
           })}
         </div>
       </section>

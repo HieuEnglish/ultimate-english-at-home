@@ -200,13 +200,15 @@ a:hover{text-decoration:none}
 
 /* -------------------------------------------------
    Cyber glow hover for "pills" (cards with data-glow)
-   (works with your updated app.js)
 -------------------------------------------------- */
 .card[data-glow]{
   --glow: rgba(0,255,136,.35);
   --glow-border: rgba(0,255,136,.85);
   position: relative;
 }
+
+/* Hide CTA on any glow cards (Home + Resources), even if present */
+.card[data-glow] .card-cta{display:none}
 
 .card[data-glow]:hover,
 .card[data-glow]:focus-visible{
@@ -224,17 +226,25 @@ a:hover{text-decoration:none}
 .card[data-glow="red"]{ --glow: rgba(255,70,90,.28); --glow-border: rgba(255,70,90,.85); }
 .card[data-glow="blue"]{ --glow: rgba(90,160,255,.28); --glow-border: rgba(90,160,255,.85); }
 
-/* Slightly tint the icon background on glow cards for a more "pill" feel */
+/* Slightly tint the icon background on glow cards, but keep primary styling */
 .card[data-glow] .card-icon{
-  background: rgba(255,255,255,.04);
+  background: rgba(255,255,255,.06);
+}
+.card.card--primary[data-glow] .card-icon{
+  background: rgba(255,106,179,.10);
+  color: var(--accent2);
 }
 @media (prefers-color-scheme: dark){
   .card[data-glow] .card-icon{
-    background: rgba(255,255,255,.06);
+    background: rgba(255,255,255,.08);
+  }
+  .card.card--primary[data-glow] .card-icon{
+    background: rgba(255,106,179,.12);
+    color: var(--accent2);
   }
 }
 
-/* If a card has no CTA (we removed "Open →" on resources), don't reserve space */
+/* If a card has no CTA, don't reserve space (safe either way) */
 .card-cta:empty{display:none}
 
 .page-top{margin-top:8px}
