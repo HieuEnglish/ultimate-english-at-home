@@ -1,5 +1,5 @@
 /* assets/js/resources/0-3.js
-   Age 0–3 resource data pack.
+   Age 0––3 resource data pack.
    Do NOT host files in repo — only external links.
 */
 (function () {
@@ -24,11 +24,35 @@
         ],
         // Used for the callout + to keep the “best set” stable.
         bestSetSlug: "best-set-recommended-bundle-for-0-3-reading"
+      },
+
+      "0-3/listening": {
+        title: "0–3 Listening 🎧👶✨",
+        overview:
+          "This pack supports early listening development for ages 0–3 using short songs, toddler-friendly clips, and calm audio stories, with an emphasis on repetition and caregiver interaction (gestures/pointing) in short daily routines.",
+        objectives: [
+          "Increase attention to sounds, words, and rhythm (songs/routines).",
+          "Build basic receptive vocabulary (e.g., animals, body parts, actions).",
+          "Practice responding to simple cues (e.g., “where is…?”, “stop/go”).",
+          "Develop turn-taking: listen → pause → copy 1 word/sound.",
+          "Establish a calm listening routine (especially bedtime/wind-down)."
+        ],
+        materials: [
+          "Phone/tablet/computer + internet (or downloaded audio for offline use).",
+          "A simple weekly playlist (1 routine song + 1 short story + 1 calm audio segment).",
+          "Safe playback option (YouTube Kids if using YouTube) + adult supervision.",
+          "Simple props for pointing: stuffed toy, a few real objects, or picture cards.",
+          "Quiet, comfortable listening space; optional small speaker (low volume)."
+        ],
+        bestSetSlug: "best-set-recommended-bundle-for-0-3-listening"
       }
     },
 
     // Each resource must have unique slug per age+skill.
     resources: [
+      // =========================
+      // 0–3 READING (existing)
+      // =========================
       {
         age: "0-3",
         skill: "reading",
@@ -372,15 +396,12 @@
         level: "caregiver-led"
       },
 
-      // ---------------------------
-      // Best Set (featured bundle)
-      // ---------------------------
       {
         age: "0-3",
         skill: "reading",
         slug: "best-set-recommended-bundle-for-0-3-reading",
         title: "Best “Set” (recommended bundle for 0–3 Reading) 🧺📚",
-        link: "", // intentionally empty: this is a bundle card (no single external link)
+        link: "",
         format: "other",
         isBestSet: true,
         description:
@@ -408,6 +429,436 @@
         },
         focus: "routine, repetition",
         time: "10 min/day",
+        level: "caregiver-led"
+      },
+
+      // =========================
+      // 0–3 LISTENING (new)
+      // =========================
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "super-simple-songs-website",
+        title: "Super Simple Songs (Website) 🎵",
+        link: "https://supersimple.com/super-simple-songs/",
+        format: "site",
+        description:
+          "Toddler-friendly songs/videos that build listening through repetition (actions, routines, basic vocabulary, rhythm).",
+        details: {
+          type: "Songs/videos (website + links out) 📺🎵",
+          teaches: "Listening through repetition (actions, routines, basic vocab, rhythms). 🎧🔁",
+          howTo: [
+            "Pick 1 song theme (body parts / animals). 🎯🐶",
+            "Play 1–2 minutes, pause, repeat key words with gestures. ⏱️⏸️👐",
+            "Replay once later the same day (same song). 🔁📅"
+          ],
+          whyTopPick: "Very simple language + predictable repetition. ⭐✅",
+          freeAccess: "Free to browse/play on the site. 🆓🌐",
+          ageCheck: "Toddler-friendly; supervise if it opens YouTube (ads). 👶⚠️"
+        },
+        focus: "songs, routines, repetition",
+        time: "2–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "super-simple-songs-youtube",
+        title: "Super Simple Songs (YouTube channel) 📺🎵",
+        link: "https://www.youtube.com/user/SuperSimpleSongs",
+        format: "video",
+        description:
+          "Short song videos to practice listening for key words, sounds, and routines.",
+        details: {
+          type: "Videos 📺",
+          teaches: "Listening for key words, sounds, and routines via songs. 🎧🗝️🎶",
+          howTo: [
+            "Use YouTube Kids if possible. 👶📱",
+            "Choose short videos (2–4 min). ⏱️📺",
+            "Do “listen → point → copy 1 word” (nose / go / stop). 🎧👉🗣️"
+          ],
+          whyTopPick: "Easy to access on almost any device. ⭐📱💻",
+          freeAccess: "Free to watch (YouTube). 🆓▶️",
+          ageCheck: "Adult supervision recommended (ads + autoplay). 👶⚠️"
+        },
+        focus: "songs, copy 1 word",
+        time: "2–4 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "sesame-street-videos-official-site",
+        title: "Sesame Street Videos (official site) 📺🌈",
+        link: "https://www.sesamestreet.org/videos",
+        format: "video",
+        description:
+          "High-quality clips and songs that support listening with clear speech and simple story contexts.",
+        details: {
+          type: "Videos/songs 📺🎵",
+          teaches: "Listening with clear speech, songs, simple story contexts. 🎧🗣️📖",
+          howTo: [
+            "Pick a short clip or song. 🎬🎵",
+            "Watch together; pause to repeat 1–2 words. 👀⏸️🗣️",
+            "Rewatch tomorrow to reinforce. 🔁📅"
+          ],
+          whyTopPick: "High-quality, child-safe educational content. ⭐🛡️",
+          freeAccess: "Free to watch on the official page. 🆓📺",
+          ageCheck: "Appropriate for toddlers; co-viewing recommended. 👶👀"
+        },
+        focus: "songs, clear speech",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "sesame-street-youtube",
+        title: "Sesame Street (YouTube channel) 📺🌈",
+        link: "https://www.youtube.com/sesamestreet",
+        format: "video",
+        description:
+          "Songs and clips to build listening and early vocabulary through familiar characters.",
+        details: {
+          type: "Videos/songs 📺🎵",
+          teaches: "Listening + early vocab through songs and characters. 🎧🧠🎶",
+          howTo: [
+            "Use YouTube Kids if available. 👶📱",
+            "Start with song compilations; stop after 5–10 minutes. 🎶⏱️🛑",
+            "Repeat the same favorite segment for a week. 🔁❤️📅"
+          ],
+          whyTopPick: "Strong engagement + lots of music-based listening. ⭐🎵",
+          freeAccess: "Free to watch (YouTube). 🆓▶️",
+          ageCheck: "Supervision needed (ads + autoplay). 👶⚠️"
+        },
+        focus: "songs, vocab",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "pbs-kids-videos-library",
+        title: "PBS KIDS Videos (general library) 📺🧩",
+        link: "https://pbskids.org/videos",
+        format: "video",
+        description:
+          "Short episodes and songs to support early listening comprehension and vocabulary.",
+        details: {
+          type: "Videos 📺",
+          teaches: "Listening comprehension via short episodes and songs. 🎧📖🎶",
+          howTo: [
+            "Choose calm, song-heavy clips. 😌🎵",
+            "Ask “Where is…?” while pointing (colors/animals/objects). 👆❓🎨🐻",
+            "Keep sessions short (5–8 min). ⏱️✅"
+          ],
+          whyTopPick: "Reputable kids broadcaster; free streaming library. ⭐📺🆓",
+          freeAccess: "Free to watch on PBS KIDS. 🆓📺",
+          ageCheck: "Generally toddler-safe; co-view to avoid overstimulation. 👶👀😌"
+        },
+        focus: "short videos, listening prompts",
+        time: "5–8 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "pbs-kids-songs-page",
+        title: "PBS KIDS Songs page 🎵🐾",
+        link: "https://pbskids.org/videos/songs",
+        format: "video",
+        description:
+          "Very short repeatable songs that support rhythm, repeated phrases, and routine cues.",
+        details: {
+          type: "Short songs 🎶",
+          teaches: "Listening to rhythm, repeated phrases, theme songs. 🎧🥁🔁",
+          howTo: [
+            "Play 1 song; clap the beat. ▶️👏",
+            "Repeat the chorus together. 🔁👫",
+            "Use the same song for a week as a routine cue. 🔁📅⏰"
+          ],
+          whyTopPick: "Very short + repeatable. ⭐⏱️🔁",
+          freeAccess: "Free to watch. 🆓📺",
+          ageCheck: "Works for 0–3 with caregiver support. 👶🧑‍🍼"
+        },
+        focus: "songs, rhythm, repetition",
+        time: "2–4 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "khan-academy-kids-app",
+        title: "Khan Academy Kids 📱🧸",
+        link: "https://www.khanacademy.org/kids",
+        format: "app",
+        description:
+          "Free learning app with songs/stories/activities; useful for caregiver-led listening time.",
+        details: {
+          type: "Free learning app (songs, stories, activities) 📱🎵📖",
+          teaches: "Listening to instructions + simple stories/songs (plus early literacy). 🎧✅📚",
+          howTo: [
+            "Use “Books” or story read-alouds for listening time. 📖🎧",
+            "Sit with the child; echo 1–2 words per page. 👶🗣️",
+            "Stop after 10 minutes. ⏱️🛑"
+          ],
+          whyTopPick: "Designed to be free (no ads/subscriptions). ⭐🆓",
+          freeAccess: "Free to use (app install required). 🆓📲",
+          ageCheck: "Designed for young kids; 0–3 should be caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "listen & follow, short stories",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "storynory-audio-stories",
+        title: "Storynory — free audio stories 🎧📖",
+        link: "https://www.storynory.com/",
+        format: "audio",
+        description:
+          "Free audio stories to build gentle listening stamina and vocabulary (choose the shortest options).",
+        details: {
+          type: "Audio stories 🎧",
+          teaches: "Listening stamina through short stories; gentle vocab exposure. 🎧💪🗣️",
+          howTo: [
+            "Use “Small Stories” for shorter options. 🎯⏱️",
+            "Play 2–5 minutes; stop and summarize with gestures. ⏱️🛑👐",
+            "Repeat the same story 2–3 times across the week. 🔁📅"
+          ],
+          whyTopPick: "Large library of free audio stories. ⭐🎧🆓",
+          freeAccess: "Free to stream from the site. 🆓🌐",
+          ageCheck: "Some stories skew older; preview first and choose short ones. 👶⚠️👀",
+          otherLinks: ["https://www.storynory.com/category/fairy-tales/small-stories/"]
+        },
+        focus: "audio stories, short listening",
+        time: "2–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "little-stories-for-tiny-people-podcast",
+        title: "Little Stories for Tiny People 🎧🧸",
+        link: "https://www.littlestoriestinypeople.com/",
+        format: "podcast",
+        description:
+          "Podcast stories (calmer episodes work well for bedtime/car rides; use short chunks for toddlers).",
+        details: {
+          type: "Podcast (stories) 🎧",
+          teaches: "Listening to narrative + emotions/vocab. 🎧❤️🗣️",
+          howTo: [
+            "Choose calmer episodes for bedtime/car rides. 😌🌙🚗",
+            "Listen in short chunks (pause often). ⏸️⏱️",
+            "Reuse favorite episodes repeatedly (toddlers learn via repetition). 🔁👶"
+          ],
+          whyTopPick: "High-quality storytelling; easy to play anywhere. ⭐🎧",
+          freeAccess: "Free episodes available (premium exists for extras/ad-free). 🆓➕",
+          ageCheck: "Best for 2–3 with caregiver; 0–1 use short snippets. 👶🧑‍🍼"
+        },
+        focus: "calm stories, repetition",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "sleep-tight-stories-podcast",
+        title: "Sleep Tight Stories 🌙🎧",
+        link: "https://sleeptightstories.org/",
+        format: "podcast",
+        description:
+          "Bedtime podcast designed to be calming; useful for a wind-down listening routine.",
+        details: {
+          type: "Bedtime podcast 🌙🎧",
+          teaches: "Calm listening, routine language, story comprehension. 😌🎧📖",
+          howTo: [
+            "Use as a nightly routine cue (same time). 🌙⏰",
+            "Dim lights; play 5–10 minutes. 💡⬇️⏱️",
+            "Ask one simple question after: “More?” / “Sleep?” ❓😴"
+          ],
+          whyTopPick: "Specifically designed to be calming at bedtime. ⭐🌙",
+          freeAccess: "Free listening available (some platforms may upsell). 🆓⚠️",
+          ageCheck: "Appropriate for toddlers; supervise device use. 👶📱👀"
+        },
+        focus: "bedtime routine, calm audio",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "abc-kids-listen-lullabies",
+        title: "ABC Kids Listen – Lullabies 🎶😴",
+        link: "https://www.abc.net.au/kidslisten/programs/lullabies",
+        format: "audio",
+        description:
+          "Audio lullabies for calm listening and bedtime routine cues (low volume; audio-only).",
+        details: {
+          type: "Audio program (lullabies) 🎧🎶",
+          teaches: "Calm listening, rhythm, bedtime routine language. 😌🥁🌙",
+          howTo: [
+            "Play during wind-down (same playlist each night). 🌙▶️🔁",
+            "Add a repeated phrase: “Sleep time.” 🗣️🔁😴",
+            "Keep volume low; no screen needed. 🔉⬇️🚫📺"
+          ],
+          whyTopPick: "Audio-only environment; built for young kids. ⭐🛡️🎧",
+          freeAccess: "Free to stream on the ABC site. 🆓🌐",
+          ageCheck: "Strong fit for 0–3 (caregiver-led). 👶🧑‍🍼"
+        },
+        focus: "lullabies, calm routine",
+        time: "5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "abc-kids-listen-bedtime-stories",
+        title: "ABC Kids Listen – Bedtime Stories 🌙📖🎧",
+        link: "https://www.abc.net.au/kidslisten/programs/bedtime-stories",
+        format: "audio",
+        description:
+          "Audio stories to support simple narrative listening and bedtime vocabulary (use short excerpts for younger children).",
+        details: {
+          type: "Audio stories 🎧📖",
+          teaches: "Listening to simple narratives; bedtime vocabulary. 🎧📚🌙",
+          howTo: [
+            "Play 1 story; pause halfway to recap with gestures. ▶️⏸️👐",
+            "Repeat the same story another day. 🔁📅",
+            "Pair with a stuffed toy for “point/listen” moments. 🧸👉🎧"
+          ],
+          whyTopPick: "High-quality kids audio. ⭐📻",
+          freeAccess: "Free to stream. 🆓🎧",
+          ageCheck: "Best for toddlers; 0–1 use short excerpts. 👶🧑‍🍼"
+        },
+        focus: "bedtime stories, calm listening",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "national-literacy-trust-free-resources",
+        title: "National Literacy Trust — free early years resources (0–5) 📚👶",
+        link: "https://literacytrust.org.uk/free-resources/",
+        format: "site",
+        description:
+          "Caregiver activities and guidance to build talk/listen routines (often no-screen).",
+        details: {
+          type: "Parent resources/activities (language + listening routines) 🧑‍🍼🧩",
+          teaches: "Caregiver-led talk/listen routines (chat/play/read). 🗣️🎧📖",
+          howTo: [
+            "Download one 0–3 activity idea. ⬇️💡",
+            "Do it for 3–5 minutes daily (no screen). ⏱️🚫📺",
+            "Repeat weekly. 🔁📅"
+          ],
+          whyTopPick: "Reputable literacy org; practical for families. ⭐👨‍👩‍👧‍👦",
+          freeAccess: "Free resources/downloads available. 🆓⬇️",
+          ageCheck: "Built for birth–5; adult-led. 👶🧑‍🍼"
+        },
+        focus: "caregiver routines, no-screen options",
+        time: "3–5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "unicef-parenting-early-learning",
+        title: "UNICEF Parenting — early learning 👶🌍",
+        link: "https://www.unicef.org/parenting/topics/early-learning",
+        format: "site",
+        description:
+          "Caregiver guidance for early learning (music + interaction ideas for language and listening).",
+        details: {
+          type: "Caregiver guidance + embedded media 🧑‍🍼📺",
+          teaches: "How to use music and interaction to build early language/listening. 🎶🤝🗣️🎧",
+          howTo: [
+            "Pick one idea (music + interaction). 🎶🤝",
+            "Do a 2-minute “sing + pause” routine daily. 🎤⏸️📅",
+            "Keep it playful; repeat often. 🎈🔁"
+          ],
+          whyTopPick: "Evidence-informed parenting guidance. ⭐📘",
+          freeAccess: "Free to access. 🆓🌐",
+          ageCheck: "Suitable for 0–3; caregiver content (not toddler-alone). 👶🧑‍🍼"
+        },
+        focus: "caregiver guidance, sing & pause",
+        time: "2–5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "dream-english-nursery-rhyme-mp3s",
+        title: "Dream English — downloadable nursery rhyme MP3s 🎶⬇️",
+        link: "https://www.dreamenglish.com/topicnurseryrhymes",
+        format: "download",
+        description:
+          "Downloadable songs for offline listening (reduces ad/screen issues); great for rhythm and repetition.",
+        details: {
+          type: "Downloadable songs (MP3) 🎵⬇️",
+          teaches: "Listening through classic rhymes; repetition + rhythm. 🎧🔁🥁",
+          howTo: [
+            "Download 3–5 favorite songs for offline use. ⬇️❤️🎶",
+            "Play audio-only (no video) during playtime. 🎧🚫📺🧸",
+            "Add gestures for key words (bus, wheels, up/down). 🚌👐⬆️⬇️"
+          ],
+          whyTopPick: "Offline audio reduces ad/screen issues. ⭐🎧🚫📺",
+          freeAccess: "Free downloads provided on the page. 🆓⬇️",
+          ageCheck: "Very good for 0–3 with caregiver-led actions. 👶🧑‍🍼👐"
+        },
+        focus: "offline songs, gestures",
+        time: "5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "best-set-recommended-bundle-for-0-3-listening",
+        title: "Best “Set” (bundle + simple weekly plan for 0–3 Listening) 🧺🎧",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description:
+          "Short, repeatable exposure (10–15 minutes/day total), mostly caregiver-led: one routine song, one mini story, one calm audio segment, plus a weekend “big fun” co-view clip.",
+        bundleItems: [
+          "super-simple-songs-website",
+          "storynory-audio-stories",
+          "abc-kids-listen-lullabies",
+          "sesame-street-videos-official-site",
+          "national-literacy-trust-free-resources"
+        ],
+        details: {
+          type: "Recommended bundle 🧺",
+          teaches: "A calm listening routine built on repetition + simple caregiver interaction. 🔁🧑‍🍼🎧",
+          howTo: [
+            "Mon–Fri (10–15 min/day): Routine song (2–3 min) — Super Simple Songs (pick ONE song for the whole week). 🎵⏱️🔁",
+            "Mon–Fri: Mini-story (3–5 min) — Storynory (choose one short story; repeat all week). 🎧📖🔁",
+            "Mon–Fri: Calm audio (5 min) — ABC Kids Listen Lullabies (same segment daily as a cue). 😌🎶⏱️",
+            "Weekend (5–10 min): Co-view “big fun” — Sesame Street official videos (pick one song clip; repeat). 📺🎵🔁",
+            "Daily micro-skill: Add 2 pauses to point/gesture and let the child copy 1 sound/word. ⏸️👉🗣️"
+          ],
+          whyTopPick: "Easy weekly structure: same song + same story + same calm audio. ⭐🔁",
+          freeAccess: "Uses free resources; some video links may include ads depending on platform. 🆓⚠️",
+          ageCheck: "Designed for 0–3 with caregiver supervision. 👶🧑‍🍼"
+        },
+        focus: "routine, repetition, calm listening",
+        time: "10–15 min/day",
         level: "caregiver-led"
       }
     ]
