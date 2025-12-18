@@ -196,7 +196,7 @@
           ${card({
             href: hrefFor("/games"),
             title: "Games",
-            text: "Improve with fun",
+            text: "Learn with fun",
             icon: iconGamepad(),
             ctaText: "",
             glow: "yellow"
