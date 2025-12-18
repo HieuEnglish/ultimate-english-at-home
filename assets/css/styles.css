@@ -273,6 +273,12 @@ a:hover{text-decoration:none}
   color: var(--accent2);
 }
 
+/* Games (yellow glow) icon tint */
+.card[data-glow="yellow"] .card-icon{
+  background: rgba(255,230,70,.12);
+  color: rgba(255,230,70,.95);
+}
+
 /* Keep primary styling consistent */
 .card.card--primary[data-glow] .card-icon{
   background: rgba(255,106,179,.10);
@@ -293,6 +299,12 @@ a:hover{text-decoration:none}
   .card[data-glow="pink"] .card-icon{
     background: rgba(255,106,179,.14);
     color: var(--accent2);
+  }
+
+  /* Games (yellow glow) icon tint */
+  .card[data-glow="yellow"] .card-icon{
+    background: rgba(255,230,70,.14);
+    color: rgba(255,230,70,.95);
   }
 
   .card.card--primary[data-glow] .card-icon{
