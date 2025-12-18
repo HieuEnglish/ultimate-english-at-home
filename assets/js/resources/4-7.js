@@ -58,6 +58,27 @@
           "Optional “quick tip” support: Vroom 1 tip/day."
         ],
         bestSetSlug: "best-set-recommended-bundle-for-4-7-writing"
+      },
+
+      "4-7/speaking": {
+        title: "4–7 Speaking 🗣️✨",
+        overview:
+          "A short, repeatable 4–7 speaking routine focused on pronunciation, rhythm/chanting, and simple conversation through kid-friendly stories, songs, and speaking games. The goal is high repetition in small daily bursts to build confidence and clearer speech.",
+        objectives: [
+          "Improve clear pronunciation of target sounds/words through guided repeat-after-me practice.",
+          "Build confidence speaking in rhythm and chunks (chants, action songs).",
+          "Use simple sentence frames (e.g., “It’s a…” “I see…” “I like…”).",
+          "Answer basic speaking prompts (Who/Where/What happened?) and practice short retells.",
+          "Talk about emotions with basic language (e.g., “I feel…” “because…”)."
+        ],
+        materials: [
+          "Device + internet (tablet/phone/laptop), optional headphones/speaker.",
+          "LearnEnglish Kids (British Council): Speak, Sounds, Grammar Chants, optional Tongue Twisters.",
+          "Simple speaking games (Games4ESL / ESL activity bank PDF).",
+          "Printable picture cards (10–12 flashcards for the week).",
+          "Optional weekend resources: Storyline Online (retell), Sesame Workshop feelings story."
+        ],
+        bestSetSlug: "best-set-recommended-bundle-for-4-7-speaking"
       }
     },
 
@@ -851,7 +872,7 @@
       },
 
       // =========================
-      // 4–7 WRITING (new)
+      // 4–7 WRITING
       // =========================
       {
         age: "4-7",
@@ -1200,6 +1221,490 @@
           ageCheck: "Designed for 4–7 with caregiver support and short sessions. 🧒🧑‍🏫"
         },
         focus: "handwriting, sentences, real writing",
+        time: "10–15 min/day",
+        level: "caregiver-led"
+      },
+
+      // =========================
+      // 4–7 SPEAKING (new)
+      // =========================
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-british-council-speak",
+        title: "LearnEnglish Kids (British Council) — Speak 🚀🧩",
+        link: "https://learnenglishkids.britishcouncil.org/speak-spell/speak",
+        format: "site",
+        description:
+          "Kid-focused speaking practice with stories, pronunciation activities, and simple games/printables.",
+        details: {
+          type: "Stories + pronunciation practice + games/printables 📖🗣️🧩",
+          teaches: "Saying English sounds/words clearly (guided speaking practice). 👄✅",
+          howTo: [
+            "Pick 1 short “Sam & Pam” story. 🎬",
+            "Pause → repeat the target sound/word together. ⏸️👄🔁",
+            "Do 1 quick game/printable after (optional). ✅"
+          ],
+          whyTopPick: "Built specifically for kids’ pronunciation practice. ⭐",
+          freeAccess: "Free to access/use; login only needed for optional site features. 🆓🔓",
+          ageCheck: "Great for 4–7 with adult support for pacing. 👨‍👩‍👧‍👦"
+        },
+        focus: "pronunciation, repeat-after-me",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-british-council-sounds",
+        title: "LearnEnglish Kids (British Council) — Sounds (action songs) 🎶👣",
+        link: "https://learnenglishkids.britishcouncil.org/speak-spell/sounds",
+        format: "site",
+        description:
+          "Action songs and sound practice that build speaking through echoing short lines and repeating sound patterns.",
+        details: {
+          type: "Action songs + games/printables 🎶🧩🖨️",
+          teaches: "Speaking through sing-along + repeating sound patterns. 🎤🔁",
+          howTo: [
+            "Play 1 song (keep it short). ⏱️",
+            "Listen once → echo one line. 👂➡️🗣️",
+            "Add actions for meaning (TPR). 🤸"
+          ],
+          whyTopPick: "Easy “copy me” speaking for young learners. ⭐",
+          freeAccess: "Free to access/use. 🆓✅",
+          ageCheck: "Very suitable for 4–7 (high energy). ⚡"
+        },
+        focus: "echo speaking, action songs",
+        time: "3–7 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-british-council-grammar-chants",
+        title: "LearnEnglish Kids (British Council) — Grammar chants 🎤📣",
+        link: "https://learnenglishkids.britishcouncil.org/grammar-vocabulary/grammar-chants",
+        format: "site",
+        description:
+          "Chants that build speaking confidence through rhythm and repeatable chunks (questions/answers).",
+        details: {
+          type: "Chants + games/printables 🎤🧩🖨️",
+          teaches: "Speaking in rhythm (natural chunks like questions/answers). 👄🎵",
+          howTo: [
+            "Play 1 chant. 🎧",
+            "Clap the beat. 👏",
+            "Repeat the same chant daily for a week. 📅🔁"
+          ],
+          whyTopPick: "Chunks + rhythm = fast confidence boost. ⭐",
+          freeAccess: "Free to access/use. 🆓✅",
+          ageCheck: "Best for 5–7; simplify for 4s (shorter repeats). 👶➡️🧒"
+        },
+        focus: "rhythm, chunks",
+        time: "2–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-british-council-tongue-twisters",
+        title: "LearnEnglish Kids (British Council) — Tongue twisters 😛⚡",
+        link: "https://learnenglishkids.britishcouncil.org/fun-games/tongue-twisters",
+        format: "site",
+        description:
+          "Fun pronunciation practice that builds clear sounds and mouth movement without worksheets.",
+        details: {
+          type: "Pronunciation practice (speaking) 🗣️",
+          teaches: "Clear sounds, mouth movement, speed control. 👄🎯",
+          howTo: [
+            "Pick 1 easy twister. 🧩",
+            "Say it slow → medium → fast. 🐢➡️🐇",
+            "Make it a “best try” game (no pressure). 🏆"
+          ],
+          whyTopPick: "Fun pronunciation practice that feels like a game. ⭐",
+          freeAccess: "Free to access/use. 🆓✅",
+          ageCheck: "Works best 6–7; choose the simplest for 4–5. 🎯"
+        },
+        focus: "pronunciation, mouth movement",
+        time: "2–4 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-british-council-fun-games",
+        title: "LearnEnglish Kids (British Council) — Fun & games hub 🎲😄",
+        link: "https://learnenglishkids.britishcouncil.org/fun-games",
+        format: "site",
+        description:
+          "A hub of kid-friendly activities (games/jokes) that can be used for simple speaking performance and repeatable lines.",
+        details: {
+          type: "Games + jokes (speaking-friendly options) 🎲😄",
+          teaches: "Speaking for fun: repeating lines, telling jokes, simple performance. 🎭🗣️",
+          howTo: [
+            "Choose 1 “tell it to a friend” joke. 😄",
+            "Practice together (you model first). 🪞",
+            "Child performs for family/class. 🎭"
+          ],
+          whyTopPick: "Turns speaking into play (lower anxiety). ⭐",
+          freeAccess: "Free to access/use. 🆓✅",
+          ageCheck: "Preview content and help with meaning for younger kids. 👀"
+        },
+        focus: "performance speaking, confidence",
+        time: "5–8 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-teachingenglish-kids-and-speaking",
+        title: "TeachingEnglish (British Council) — Kids and speaking ideas 🧑‍🏫🗣️",
+        link: "https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/kids-and-speaking",
+        format: "site",
+        description:
+          "Practical activity ideas for running short, playful speaking practice with kids.",
+        details: {
+          type: "Activity ideas/lesson guidance 📄",
+          teaches: "Speaking practice structures (routines, prompts, pairwork-style ideas). 🗣️✅",
+          howTo: [
+            "Pick 1 activity idea. ✅",
+            "Run it 5–10 minutes. ⏱️",
+            "Repeat weekly with new vocab. 🔁"
+          ],
+          whyTopPick: "Very practical “do-this-tomorrow” speaking ideas. ⭐",
+          freeAccess: "Free webpage. 🆓✅",
+          ageCheck: "Choose the most playful/short activities for 4–7. 🎈"
+        },
+        focus: "teacher/parent speaking routines",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-games4esl-kindergarten-games",
+        title: "Games4ESL — Kindergarten ESL games (speaking-heavy) 🎮🧒",
+        link: "https://games4esl.com/esl-kindergarten-games/",
+        format: "site",
+        description:
+          "Fast, low-prep speaking games (e.g., Simon Says, What’s missing, I Spy) that create lots of repetition.",
+        details: {
+          type: "Speaking games list 🎲🗣️",
+          teaches: "Speaking through commands, guessing, and Q&A patterns. 🗣️❓✅",
+          howTo: [
+            "Pick 1 game (no prep). ✅",
+            "Use 6–10 target words. 🧠",
+            "Play 8 minutes, stop while it’s fun. ⏱️🛑🙂"
+          ],
+          whyTopPick: "Quick repetitions with simple rules (great for daily speaking bursts). ⭐",
+          freeAccess: "Free to read/use. 🆓✅",
+          ageCheck: "Great for 4–7; adult leads the rules. 👨‍👩‍👧‍👦"
+        },
+        focus: "speaking games, repetition",
+        time: "5–8 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-esl-game-activity-book-pdf",
+        title: "Game and Activity book (PDF) — ESL speaking games 📘🗣️",
+        link: "https://fredpoole.github.io/eslMaterial/Game%20and%20Activity%20book.pdf",
+        format: "download",
+        description:
+          "Downloadable PDF with a large bank of ESL games, including many suitable for ages 4–8 (e.g., I spy).",
+        details: {
+          type: "Downloadable PDF (game instructions) 📄⬇️",
+          teaches: "Speaking via classic games and repeatable prompts. 🗣️🔁",
+          howTo: [
+            "Search inside the PDF for “Age: 4–8”. 🔎",
+            "Pick 1 game (e.g., “I spy…”). 👀",
+            "Reuse the same game all week with new vocab. 🔁"
+          ],
+          whyTopPick: "One download = months of speaking game ideas. ⭐📘",
+          freeAccess: "Free to download (hosted externally). 🆓⬇️",
+          ageCheck: "Adult supervision for movement games (safe space). 🧠✅"
+        },
+        focus: "activity bank, speaking games",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-kids-flashcards",
+        title: "Kids Flashcards — printable picture cards 🃏🗣️",
+        link: "https://kids-flashcards.com/",
+        format: "printable",
+        description:
+          "Free printable picture flashcards for naming, describing, and sentence frames like “It’s a… / I see… / I like…”.",
+        details: {
+          type: "Printable flashcards (PDF) 🖨️🃏",
+          teaches: "Naming, describing, and sentence-frame speaking. 🗣️✅",
+          howTo: [
+            "Print 10 cards (keep sets small). 🖨️🔟",
+            "Play “What is it?” + “What color?” 🎨❓",
+            "Add “I like / I don’t like…” for 6–7. 👍👎"
+          ],
+          whyTopPick: "Simple visuals = instant speaking prompts. ⭐",
+          freeAccess: "Free downloads; no registration needed. 🆓✅",
+          ageCheck: "Great for 4–7; keep sets small to avoid overload. 🎯"
+        },
+        focus: "flashcard speaking prompts",
+        time: "3–7 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-pbs-kids-songs",
+        title: "PBS KIDS — Songs & sing-alongs (echo speaking) 🎵🗣️",
+        link: "https://pbskids.org/videos/songs",
+        format: "video",
+        description:
+          "Short song clips that support speaking through sing-along and echoing lines with pauses.",
+        details: {
+          type: "Song clips + sing-along videos 🎶🎬",
+          teaches: "Pronunciation + rhythm + common phrases via echoing lines. 👄🎵🔁",
+          howTo: [
+            "Choose 1 sing-along. 🎤",
+            "Watch 30s → pause → repeat 1 line. ⏸️🔁",
+            "Reuse the same clip for a week. 📅"
+          ],
+          whyTopPick: "Short clips = easy daily routine. ⭐⏱️",
+          freeAccess: "Free to watch on PBS KIDS. 🆓✅",
+          ageCheck: "Good for 4–7; adult supervises screen time. 👀"
+        },
+        focus: "echo speaking, rhythm",
+        time: "3–6 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-sesame-workshop-resources",
+        title: "Sesame Workshop — free games & storybooks 📚🎮",
+        link: "https://sesameworkshop.org/resources/",
+        format: "site",
+        description:
+          "Storybooks and activities that support speaking through retell, role-play, and feelings vocabulary (adult-selected).",
+        details: {
+          type: "Storybooks + games + activities 📚🎮",
+          teaches: "Speaking through story retell, feelings words, role-play. 🎭🗣️😊",
+          howTo: [
+            "Pick 1 storybook/game suitable for ages 3–6. 🎯",
+            "Read/play together. 🤝",
+            "Do a 1-minute retell: “First… then… finally…”. 🧩"
+          ],
+          whyTopPick: "Reputable library of age-tagged resources. ⭐",
+          freeAccess: "Free to access; download options vary by item. 🆓⚠️",
+          ageCheck: "Strong for 4–7; preview topics (some are “tough topics”). 👀"
+        },
+        focus: "retell, role-play, feelings",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-elmos-big-feelings",
+        title: "Sesame Workshop — “Elmo’s Big Feelings” 😃📖",
+        link: "https://sesameworkshop.org/resources/elmos-big-feelings/",
+        format: "download",
+        description:
+          "A story resource that supports speaking about emotions using simple frames like “I feel… because…”.",
+        details: {
+          type: "Storybook (read online / download) 📖⬇️",
+          teaches: "Emotions language: “I feel…”, “because…”, “I can…”. 😊💬",
+          howTo: [
+            "Read together. 📖",
+            "Stop on each page: “How does Elmo feel?” 😃😢",
+            "Child answers with 1–2 words → grow into a sentence. 🌱🗣️"
+          ],
+          whyTopPick: "Excellent for building feelings vocabulary and simple explanations. ⭐",
+          freeAccess: "Free to access; download options available on page. 🆓⬇️",
+          ageCheck: "Good for 4–7 with gentle support. 🤝"
+        },
+        focus: "feelings talk, sentence frames",
+        time: "5–8 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-storyline-online-retell",
+        title: "Storyline Online — retelling practice 🎬🗣️",
+        link: "https://storylineonline.net/",
+        format: "video",
+        description:
+          "Read-aloud videos that are ideal for speaking via retell prompts (Who/Where/What happened?) and simple role-play.",
+        details: {
+          type: "Read-aloud videos 📺📖",
+          teaches: "Speaking via retell and short answers to prompts. 🗣️❓",
+          howTo: [
+            "Watch 3–6 minutes. 🎥",
+            "Ask 3 questions: “Who? Where? What happened?” ❓❓❓",
+            "Act out 1 scene (simple role-play). 🎭"
+          ],
+          whyTopPick: "Retelling is one of the best speaking builders at 4–7. ⭐",
+          freeAccess: "Free to access on the official site. 🆓✅",
+          ageCheck: "Choose shorter/calmer books for 4–5. 🧸"
+        },
+        focus: "retell, role-play",
+        time: "6–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-super-simple-songs",
+        title: "Super Simple Songs — sing-along speaking 🎶👄",
+        link: "https://supersimple.com/super-simple-songs/",
+        format: "site",
+        description:
+          "Repeatable action songs that build pronunciation and basic phrases through high repetition.",
+        details: {
+          type: "Songs/videos 🎶🎬",
+          teaches: "Pronunciation + basic phrases through repetition. 👄🔁",
+          howTo: [
+            "Pick 1 action song. 🕺",
+            "Echo 1 line at a time. 🔁",
+            "Reuse daily for a week. 📅"
+          ],
+          whyTopPick: "Very repeatable = fast speaking confidence. ⭐🔁",
+          freeAccess: "Free to browse (some playback may link out). 🆓⚠️",
+          ageCheck: "Great for 4–7; supervise if it links out to video platforms. 👀"
+        },
+        focus: "songs, repetition, phrases",
+        time: "3–6 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-asha-activities",
+        title: "ASHA — Activities to encourage speech & language 🧠🗣️",
+        link: "https://www.asha.org/public/speech/development/activities-to-encourage-speech-and-language-development/",
+        format: "site",
+        description:
+          "Everyday activity ideas to encourage speech and language through role-play, describing, predicting, and recounting.",
+        details: {
+          type: "Parent/teacher activity list 📄",
+          teaches: "Speaking through role-play, describing, predicting, recounting. 🗣️🎭🧠",
+          howTo: [
+            "Pick 1 idea (e.g., role-play “house”). 🏠",
+            "Model 2 short sentences. 🪞",
+            "Child repeats/changes 1 word (swap practice). 🔄"
+          ],
+          whyTopPick: "Practical, real-life speaking ideas that work without screens. ⭐",
+          freeAccess: "Free webpage. 🆓✅",
+          ageCheck: "Adapt language to simple sentences for 4–7. 🎯"
+        },
+        focus: "home speaking routines",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-esl-kids-games-online",
+        title: "ESL Kids Games — online games (use as speaking prompts) 💻🗣️",
+        link: "https://www.eslkidsgames.com/online-esl-games",
+        format: "site",
+        description:
+          "Online games that can become speaking practice if you add “say it out loud” routines before clicking.",
+        details: {
+          type: "Online games 🎮",
+          teaches: "Speaking through reading aloud + sentence frames (It’s a…, I see…). 🗣️✅",
+          howTo: [
+            "You read the instructions aloud. 📣",
+            "Child says answers before clicking. 🗣️",
+            "Add “Say it in a sentence” (It’s a…, I see…). ✅"
+          ],
+          whyTopPick: "Quick practice when you need something instant. ⚡",
+          freeAccess: "Free to access/play (ad-supported; site experience varies). 🆓⚠️",
+          ageCheck: "Adult supervision recommended (ads/links). 👀⚠️"
+        },
+        focus: "speaking prompts + games",
+        time: "3–7 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-khan-academy-kids-prompts",
+        title: "Khan Academy Kids — storytelling prompts 🧸📱🗣️",
+        link: "https://www.khanacademy.org/kids",
+        format: "app",
+        description:
+          "Use the app’s stories/activities with caregiver prompts (“What do you see?” “What happens next?”) to elicit full sentences.",
+        details: {
+          type: "Free learning app (caregiver-led prompts) 📱",
+          teaches: "Speaking through picture/story talk and simple prediction. 👀➡️🗣️",
+          howTo: [
+            "Choose a book/activity in the app. 📚",
+            "Pause and ask: “What do you see?” “What happens next?” 👀➡️",
+            "Encourage 1 full sentence (even simple). ✅"
+          ],
+          whyTopPick: "Easy way to turn story time into speaking practice. ⭐",
+          freeAccess: "Free to use (app install required). 🆓📲",
+          ageCheck: "Great for 4–7 with caregiver-led questions. 👨‍👩‍👧‍👦"
+        },
+        focus: "picture talk, sentence frames",
+        time: "5–8 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "best-set-recommended-bundle-for-4-7-speaking",
+        title: "Best “Set” (bundle + simple weekly plan for 4–7 Speaking) 🗓️🗣️",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description:
+          "Goal: 10–15 minutes/day of high-repeat speaking. Daily: chant warm-up → pronunciation/story repeat → flashcard talk → one speaking game. Weekend: retell practice + feelings talk.",
+        bundleItems: [
+          "4-7-speaking-british-council-grammar-chants",
+          "4-7-speaking-british-council-speak",
+          "4-7-speaking-kids-flashcards",
+          "4-7-speaking-games4esl-kindergarten-games",
+          "4-7-speaking-esl-game-activity-book-pdf",
+          "4-7-speaking-storyline-online-retell",
+          "4-7-speaking-elmos-big-feelings"
+        ],
+        details: {
+          type: "Recommended bundle 🧺",
+          teaches: "Pronunciation + rhythm + sentence frames + retelling through short, repeatable practice. 👄🎵🗣️",
+          howTo: [
+            "Mon–Fri (10–15 min/day): Warm-up chant (2 min) — British Council Grammar Chants (repeat the SAME chant all week). 🎤🔁",
+            "Mon–Fri: Pronunciation/story (5 min) — British Council “Speak” (pause + repeat target sound/word). 🚀⏸️👄",
+            "Mon–Fri: Flashcard talk (3 min) — Kids Flashcards (“It’s a… / I see… / I like…”). 🃏🗣️",
+            "Mon–Fri: Game (3–5 min) — One speaking game from Games4ESL or the ESL Game & Activity Book (repeat all week). 🎲🔁",
+            "Weekend (pick 1–2): Retell (8–10 min) — Storyline Online (Who/Where/What happened?). 🎬❓",
+            "Weekend: Feelings talk (5–8 min) — Sesame Workshop “Elmo’s Big Feelings” (I feel… because…). 😃💬"
+          ],
+          whyTopPick: "High repetition, same few items all week = faster confidence and clearer speech. ⭐🔁",
+          freeAccess: "Uses free resources; some are apps/PDFs; web experiences can vary by device. 🆓⚠️",
+          ageCheck: "Designed for 4–7 with adult-led pacing and short sessions. 🧒🧑‍🏫"
+        },
+        focus: "speaking confidence, repetition",
         time: "10–15 min/day",
         level: "caregiver-led"
       }
