@@ -262,9 +262,23 @@ a:hover{text-decoration:none}
 /* Palette: pink */
 .card[data-glow="pink"]{ --glow: rgba(255,106,179,.26); --glow-border: rgba(255,106,179,.85); }
 
-/* Slightly tint the icon background on glow cards, but keep primary styling */
+/* Base icon background on glow cards */
 .card[data-glow] .card-icon{
   background: rgba(255,255,255,.06);
+}
+
+/* ✅ Match icon color to glow (fixes 0-3 green, 8-10 red, etc.) */
+.card[data-glow="green"] .card-icon{
+  background: rgba(0,255,136,.12);
+  color: rgba(0,255,136,.95);
+}
+.card[data-glow="red"] .card-icon{
+  background: rgba(255,70,90,.12);
+  color: rgba(255,70,90,.95);
+}
+.card[data-glow="blue"] .card-icon{
+  background: rgba(90,160,255,.12);
+  color: rgba(90,160,255,.95);
 }
 
 /* Favourites-specific icon tint */
@@ -294,6 +308,19 @@ a:hover{text-decoration:none}
 @media (prefers-color-scheme: dark){
   .card[data-glow] .card-icon{
     background: rgba(255,255,255,.08);
+  }
+
+  .card[data-glow="green"] .card-icon{
+    background: rgba(0,255,136,.14);
+    color: rgba(0,255,136,.95);
+  }
+  .card[data-glow="red"] .card-icon{
+    background: rgba(255,70,90,.14);
+    color: rgba(255,70,90,.95);
+  }
+  .card[data-glow="blue"] .card-icon{
+    background: rgba(90,160,255,.14);
+    color: rgba(90,160,255,.95);
   }
 
   .card[data-glow="pink"] .card-icon{

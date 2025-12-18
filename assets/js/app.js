@@ -258,16 +258,23 @@
       { label: "Resources" }
     ]);
 
-    const glowKeys = ["green", "yellow", "red", "blue"];
+    // Fixed glow mapping so each age group is consistent (and 13–18 is pink)
+    const glowByAge = {
+      "0-3": "green",
+      "4-7": "yellow",
+      "8-10": "red",
+      "11-12": "blue",
+      "13-18": "pink"
+    };
 
-    const cards = AGE_GROUPS.map((age, i) =>
+    const cards = AGE_GROUPS.map((age) =>
       card({
         href: hrefFor(`/resources/${age}`),
         title: age,
         text: "Choose a skill area next.",
         icon: iconAge(age),
         ctaText: "",
-        glow: glowKeys[i % glowKeys.length]
+        glow: glowByAge[age] || "green"
       })
     ).join("");
 
