@@ -187,19 +187,10 @@
             href: hrefFor("/resources"),
             title: "Resources",
             text: "Browse by age group, then choose a skill area.",
-            icon: iconBook(),
+            icon: iconLeaf(),
             primary: true,
             ctaText: "",
             glow: "green"
-          })}
-
-          ${card({
-            href: hrefFor("/favourites"),
-            title: "Favourites",
-            text: "Save and revisit resources (coming soon).",
-            icon: iconHeart(),
-            ctaText: "",
-            glow: "pink"
           })}
 
           ${card({
@@ -218,6 +209,15 @@
             icon: iconClipboard(),
             ctaText: "",
             glow: "blue"
+          })}
+
+          ${card({
+            href: hrefFor("/favourites"),
+            title: "Favourites",
+            text: "Save and revisit resources (coming soon).",
+            icon: iconHeart(),
+            ctaText: "",
+            glow: "pink"
           })}
         </div>
       </section>
@@ -398,7 +398,9 @@
     const html = `
       <section class="page-top">
         ${breadcrumb}
-        <h1 class="page-title">${capitalize(skill)} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(age)}</span></h1>
+        <h1 class="page-title">${capitalize(skill)} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(
+          age
+        )}</span></h1>
         <p class="page-subtitle">This content page is a placeholder for now.</p>
 
         <div class="note">
@@ -470,6 +472,18 @@
     if (age === "8-10") return iconPencil();
     if (age === "11-12") return iconHeadphones();
     return iconGradCap();
+  }
+
+  function iconLeaf() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M12 2c4.6 2.3 7.7 6.2 8 10.5.3 4.4-2.8 8.3-7.2 9.2-2.4.5-4.8.1-6.7-1.1-1.9-1.2-3.2-3.1-3.7-5.2C1.4 11.1 4.5 6 12 2Z" fill="currentColor" opacity=".18"></path>
+        <path d="M12 5c3.7 2 6.2 5 6.3 8.1.2 3.3-2.2 6.3-5.6 7-1.8.4-3.7.1-5.2-.9-1.5-.9-2.5-2.4-2.9-4C3.9 11.7 6.3 8.1 12 5Z" fill="currentColor"></path>
+        <path d="M12 7v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".75"></path>
+        <path d="M12 13c1.2-1.1 2.5-2 4-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"></path>
+        <path d="M12 16c-1.1-.9-2.3-1.6-3.6-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"></path>
+      </svg>
+    `;
   }
 
   function iconBabyBottle() {

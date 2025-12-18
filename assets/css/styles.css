@@ -279,6 +279,12 @@ a:hover{text-decoration:none}
   color: var(--accent2);
 }
 
+/* ✅ Resources primary icon should be green (override the primary pink icon styling) */
+.card.card--primary[data-glow="green"] .card-icon{
+  background: rgba(0,230,140,.12);
+  color: rgba(0,230,140,.95);
+}
+
 @media (prefers-color-scheme: dark){
   .card[data-glow] .card-icon{
     background: rgba(255,255,255,.08);
@@ -292,6 +298,12 @@ a:hover{text-decoration:none}
   .card.card--primary[data-glow] .card-icon{
     background: rgba(255,106,179,.12);
     color: var(--accent2);
+  }
+
+  /* ✅ Dark mode override for green Resources icon */
+  .card.card--primary[data-glow="green"] .card-icon{
+    background: rgba(0,230,140,.14);
+    color: rgba(0,230,140,.95);
   }
 }
 
