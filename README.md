@@ -86,7 +86,7 @@ You can help by:
 
 To keep the app consistent and easy to use:
 
-- 🧁 Keep the **pastel / friendly / minimal** style
+- 🧁 Keep the **friendly / minimal** style
 - 🧩 Follow the **existing page structure** (Age ➜ Skill ➜ Resources)
 - 📝 Use the same tone: **short, clear, parent-friendly**
 - 🔘 Keep buttons/cards consistent in **size, spacing, and wording**
