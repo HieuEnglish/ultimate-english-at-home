@@ -6,7 +6,7 @@
   const DATA = {
     packs: {
       "8-10/reading": {
-        title: "8–10 Reading 📚🧠✨",
+        title: "8–10 Reading 📚✨",
         overview:
           "A structured 8–10 reading guide that builds reading confidence through free digital libraries, leveled readers, read-aloud videos, and interactive reading practice, organized into a simple 6-week rotation plan.",
         objectives: [
@@ -20,9 +20,9 @@
           "Device with internet (tablet/laptop/phone).",
           "Optional printer (for printable PDFs).",
           "Core sites used in this guide (rotate): StoryWeaver, Unite for Literacy, Oxford Owl, British Council LearnEnglish Kids, English e-Reader, Storyline Online.",
-          "Optional story libraries for variety: FreeKidsBooks, Monkey Pen, Global Storybooks, Storyberries."
+          "Optional story libraries for extra variety: FreeKidsBooks, Monkey Pen, Global Storybooks, Storyberries."
         ],
-        bestSetSlug: "best-set-6-week-rotation-for-8-10-reading"
+        bestSetSlug: "best-set-recommended-bundle-for-8-10-reading"
       },
 
       "8-10/listening": {
@@ -39,7 +39,24 @@
           "Device + internet and (optional) a podcast app; headphones recommended for clarity.",
           "Core resources (rotate): Storynory, Storyline Online, Storyberries Radio, Circle Round, Greeking Out, Wow in the World, GamesToLearnEnglish, PBS KIDS podcasts (Odd Squadcast/Arthur/others)."
         ],
-        bestSetSlug: "best-set-5-week-listening-plan-for-8-10"
+        bestSetSlug: "best-set-recommended-bundle-for-8-10-listening"
+      },
+
+      "8-10/writing": {
+        title: "8–10 Writing ✍️🧒📚✨",
+        overview:
+          "This guide supports 8–10 writing development by combining printable worksheets, interactive story prompts/games, creative story-building tools, and grammar + feedback platforms into a simple weekly routine.",
+        objectives: [
+          "Strengthen handwriting, spelling, and vocabulary through printable tasks.",
+          "Build creative writing (ideas, sequencing, linking sentences) using story dice and prompt generators."
+        ],
+        materials: [
+          "Pencil/pen + notebook (or writing paper), plus optional colouring pencils for planning/illustration.",
+          "Printer (helpful for worksheets), or write answers into a notebook instead.",
+          "Device with internet for: British Council worksheets, story dice/prompt tools, sentence-builder grammar games.",
+          "Optional accounts (for feedback/tracking): Cambridge Write & Improve and Quill."
+        ],
+        bestSetSlug: "best-set-recommended-bundle-for-8-10-writing"
       }
     },
 
@@ -52,24 +69,28 @@
         age: "8-10",
         skill: "reading",
         slug: "8-10-reading-storyweaver",
-        title: "StoryWeaver — Digital Library 📚🖼️",
+        title: "StoryWeaver (Digital Library) 📚🖼️",
         link: "https://storyweaver.org.in/",
         format: "site",
         description:
-          "A large digital storybook library with illustrated books, often with audio and printable PDF options.",
+          "Free illustrated storybooks with optional audio and printable PDF downloads; great for vocabulary and comprehension.",
         details: {
-          type: "Digital storybooks (often printable PDFs) 📖🖨️",
-          teaches: "Vocabulary, comprehension, and reading for pleasure through illustrated stories. 🧠📚",
+          type: "Digital library (storybooks + printable PDFs) 📖🖨️",
+          teaches:
+            "Rich vocabulary, comprehension, and cultural awareness through illustrated stories. 🌍🧠",
           howTo: [
-            "Browse by age/level or search by topic. 🔎",
-            "Open a story and click “Read Now”. 📖",
-            "Optional: use audio narration or download/print a PDF (if available). 🎧⬇️🖨️"
+            "Browse by age/level or search a topic. 🔎",
+            "Open a story and click “Read”. 📖",
+            "Optional: use audio narration or download/print PDF. 🎧⬇️🖨️",
+            "Do a 2-minute talk: Who? Where? What happened? ❓❓❓"
           ],
-          whyTopPick: "Great for reading for enjoyment with lots of choice and strong visuals. ⭐",
-          freeAccess: "Free to read online; download/print options vary by title. 🆓⚠️",
-          ageCheck: "Strong for 8–10 (especially illustrated stories); choose longer texts for confident readers. 🎯"
+          whyTopPick:
+            "Huge free library with audio + print options and strong story variety. ⭐",
+          freeAccess: "Free to read; many books are downloadable/printable. 🆓✅",
+          ageCheck:
+            "Strong fit for 8–10 (use filters like 7–8 / 9–10 to match level). 🎯"
         },
-        focus: "digital library, comprehension, vocabulary",
+        focus: "illustrated stories, vocabulary, comprehension",
         time: "10–20 min",
         level: "independent or caregiver-led"
       },
@@ -78,50 +99,58 @@
         age: "8-10",
         skill: "reading",
         slug: "8-10-reading-unite-for-literacy",
-        title: "Unite for Literacy — Online Picture Books 📚🌟",
+        title: "Unite for Literacy (Online Picture Books) 📚🌟",
         link: "https://www.uniteforliteracy.com/free-books-online/home",
         format: "site",
         description:
-          "Illustrated picture books (often narrated) that support vocabulary and content knowledge with simple, readable text.",
+          "Free illustrated books with narration and language options; excellent for comprehension + confidence.",
         details: {
-          type: "Illustrated eBooks (often with audio narration) 🎧📖",
-          teaches: "Vocabulary + comprehension using short, clear stories and nonfiction topics. 🧠🗣️",
+          type: "Illustrated eBooks with audio narration 🎧📖",
+          teaches:
+            "Basic reading skills, vocabulary, and content knowledge via simple stories. 🗣️📚",
           howTo: [
-            "Browse by Topic (animals, science, community, etc.). 🐾🔬",
-            "Read on screen; optional: replay audio and shadow-read key lines. 🎧🔁🗣️",
-            "Do 3 quick questions: Who/Where/What happened? (or What did you learn?). ❓❓❓"
+            "Browse by Topic (animals, nature, community). 🐾🌿🏙️",
+            "Read once silently, then replay with narration if helpful. 📖🎧",
+            "Pick 5 words to explain/act out. 🗝️🗣️",
+            "Re-read the same book 2–3 times that week. 🔁"
           ],
-          whyTopPick: "Fast to use and great for building meaning through pictures + short text. ⭐",
-          freeAccess: "Free to access; no purchase required. 🆓✅",
-          ageCheck: "Some books are easy for 8–10, which is perfect for confidence-building or ESL. 🎯"
+          whyTopPick:
+            "No login, easy navigation, and strong audio support for ESL readers. ⭐",
+          freeAccess: "Free access; no login required. 🆓✅",
+          ageCheck:
+            "Made for younger readers, but many topics still work well for 8–10. 🎯"
         },
-        focus: "vocabulary, comprehension, picture support",
+        focus: "audio-supported reading, confidence",
         time: "8–15 min",
-        level: "independent or caregiver-led"
+        level: "caregiver-led or independent"
       },
 
       {
         age: "8-10",
         skill: "reading",
         slug: "8-10-reading-oxford-owl-free-ebook-library",
-        title: "Oxford Owl — FREE eBook Library 🦉📘",
+        title: "Oxford Owl (OUP eBook Library) 🦉📘",
         link: "https://www.oxfordowl.co.uk/for-home/find-a-book/library-page/",
         format: "site",
         description:
-          "High-quality leveled readers (including phonics/decodable options) to build foundations and fluency.",
+          "High-quality leveled readers and phonics-linked books from Oxford University Press (free after signup).",
         details: {
-          type: "Leveled readers (often with audio) 📚🎚️",
-          teaches: "Reading foundations, decoding/phonics options, fluency, and comprehension. 🔤🧠",
+          type: "Leveled eBook library (OUP) 📚📈",
+          teaches:
+            "Decodable phonics stories, fiction/nonfiction, comprehension support. 🔤🧠",
           howTo: [
-            "Create a free account and log in. 🔐",
-            "Filter by age/level and start slightly EASY for confidence. ✅",
-            "Read 1 chapter/book section; optional: use audio for echo/shadow reading. 🎧🗣️"
+            "Create a free parent account and log in. 🔐",
+            "Filter by age/level and pick an achievable book. 🎯",
+            "Read a short section, then do a quick summary (1–2 sentences). 📝",
+            "Optional: use audio if available, then re-read independently. 🎧➡️📖"
           ],
-          whyTopPick: "Reliable leveled progression for skill-building and confidence. ⭐🏗️",
-          freeAccess: "Free after signup/login. 🆓🔐",
-          ageCheck: "Excellent for 8–10 ESL and mixed ability because you can choose easier or harder levels. 🎯"
+          whyTopPick:
+            "Trusted school-style leveled readers with clear progression. ⭐",
+          freeAccess: "Free library access after signup/login. 🆓🔐",
+          ageCheck:
+            "Good for 8–10 (use level filters to avoid books that are too easy/too hard). 🎯"
         },
-        focus: "leveled readers, decoding, fluency",
+        focus: "leveled readers, decoding, progression",
         time: "10–20 min",
         level: "independent or caregiver-led"
       },
@@ -130,22 +159,25 @@
         age: "8-10",
         skill: "reading",
         slug: "8-10-reading-british-council-reading-practice",
-        title: "LearnEnglish Kids (British Council) — Reading Practice 🇬🇧📖",
+        title: "British Council — LearnEnglish Kids: Reading Practice 🇬🇧📖",
         link: "https://learnenglishkids.britishcouncil.org/read-write/reading-practice",
         format: "site",
         description:
-          "Short texts with interactive games/quizzes and printables to practice comprehension and vocabulary.",
+          "Short readings with games/quizzes and printables to boost comprehension and vocabulary.",
         details: {
-          type: "Short stories + quizzes/games + printables 🧩🎮🖨️",
-          teaches: "Reading comprehension + vocabulary through short graded texts. 🧠📚",
+          type: "Interactive reading texts + games + printables 🎮🖨️",
+          teaches: "Reading comprehension and vocabulary through graded tasks. 🧠📚",
           howTo: [
-            "Pick a suitable level/story. 🎚️",
-            "Read the text once for meaning, then again for details. 🔁",
-            "Complete the game/quiz; optional: print the worksheet. 🎮🖨️"
+            "Choose a Level 1–3 reading. 🎚️",
+            "Read the text online. 📖",
+            "Play the comprehension game/quiz. 🎮✅",
+            "Optional: print 1 worksheet for extra practice. 🖨️"
           ],
-          whyTopPick: "Built-in practice loop (read → quiz → worksheet) makes progress visible. ⭐📈",
-          freeAccess: "Free to access/use; registration is optional for extra site features. 🆓🔓",
-          ageCheck: "Very good for 8–10 (upper primary ESL-friendly). 🎯"
+          whyTopPick:
+            "Professional ESL tasks that combine reading + immediate practice. ⭐",
+          freeAccess:
+            "Free to use; registration only needed for posting comments. 🆓🔓",
+          ageCheck: "Excellent fit for 8–10 and upper-primary ESL. 🎯"
         },
         focus: "comprehension practice, quizzes",
         time: "10–15 min",
@@ -155,51 +187,29 @@
       {
         age: "8-10",
         skill: "reading",
-        slug: "8-10-reading-english-e-reader",
-        title: "English e-Reader — Graded Readers 📚🎯",
-        link: "https://english-e-reader.net/",
-        format: "site",
-        description:
-          "Graded reading library by level (A1–C2). Useful for matching text difficulty to the learner.",
-        details: {
-          type: "Graded eBooks (levelled by proficiency) 📘📈",
-          teaches: "Progressive reading practice: vocabulary, grammar patterns, and fluency at the right level. 🧠🔁",
-          howTo: [
-            "Choose a level (A1/A2/B1…). 🎚️",
-            "Pick a short title and read 1–2 pages per session. 📖",
-            "Optional: use audio if available, then re-read aloud for fluency. 🎧🗣️"
-          ],
-          whyTopPick: "Level choice makes it easy for mixed-ability 8–10 learners to succeed. ⭐",
-          freeAccess: "Free to read online; download/audio availability varies by title. 🆓⚠️",
-          ageCheck: "Not age-filtered—choose kid-appropriate topics and keep levels comfortable. 👀🎯"
-        },
-        focus: "graded reading, level matching",
-        time: "10–20 min",
-        level: "independent or caregiver-led"
-      },
-
-      {
-        age: "8-10",
-        skill: "reading",
         slug: "8-10-reading-storyline-online",
-        title: "Storyline Online — Video Read-Alouds 🎬📖",
+        title: "Storyline Online (Video Read-Alouds) 🎬📖",
         link: "https://storylineonline.net/",
         format: "video",
         description:
-          "High-quality read-aloud videos that support comprehension, vocabulary, and fluency through modeled reading.",
+          "High-quality read-aloud videos with optional activity guides; great for vocabulary and story understanding.",
         details: {
-          type: "Video read-alouds + optional activity guides 📺📝",
-          teaches: "Listening-supported comprehension + vocabulary in story context. 🧠🗣️",
+          type: "Read-aloud videos + activity guides 📺⬇️",
+          teaches:
+            "Listening-to-reading support, fluency modelling, vocabulary in context. 🎧🗣️📚",
           howTo: [
-            "Choose a book and watch 5–10 minutes. ⏱️",
-            "Pause 2–3 times for quick meaning checks (Who/Where/Why). ⏸️❓",
-            "Optional: use an activity/guide if provided on the page. 📝✅"
+            "Watch 5–10 minutes of a story video. 🎥⏱️",
+            "Pause 2–3 times for: Who? Where? What happened? ⏸️❓",
+            "Replay key parts and repeat tricky sentences (shadow reading). 🗣️🔁",
+            "Optional: use the downloadable activity guide. 📄✅"
           ],
-          whyTopPick: "Great for comprehension + motivation, especially for reluctant readers. ⭐",
-          freeAccess: "Free to access on the official site. 🆓✅",
-          ageCheck: "Some books may feel easy for 10-year-olds—use for fluency practice or quick warm-ups. 🎯"
+          whyTopPick:
+            "Very engaging read-alouds with strong narration and classroom-friendly extras. ⭐",
+          freeAccess: "Free to stream on the official site. 🆓✅",
+          ageCheck:
+            "Many books suit 8–10 (some may feel easy—use as fluency/vocab support). 🎯"
         },
-        focus: "read-aloud support, comprehension",
+        focus: "fluency model, story comprehension",
         time: "8–15 min",
         level: "caregiver-led or independent"
       },
@@ -207,25 +217,57 @@
       {
         age: "8-10",
         skill: "reading",
-        slug: "8-10-reading-free-children-stories",
-        title: "Free Children’s Stories (Stories for Kids) 📖✨",
+        slug: "8-10-reading-english-e-reader",
+        title: "English e-Reader (Graded Readers) 📚🎯",
+        link: "https://english-e-reader.net/",
+        format: "site",
+        description:
+          "Large library of graded readers by CEFR level (often with downloads and audio).",
+        details: {
+          type: "Graded readers library (A1–C2) 📘📈",
+          teaches:
+            "Progressive reading practice with level control (vocab/grammar in context). 🎚️🧠",
+          howTo: [
+            "Choose a level (A1/A2 for easier; B1 for stronger readers). 🎚️",
+            "Pick a short title and read 1–2 pages/day. 📖",
+            "Optional: use audio if available, then re-read silently. 🎧➡️📖",
+            "Write a 2-sentence summary. 📝2️⃣"
+          ],
+          whyTopPick:
+            "Level choice makes it easy to match mixed abilities. ⭐",
+          freeAccess: "Free to read online; downloads/audio vary by title. 🆓⚠️",
+          ageCheck:
+            "Not age-labeled—choose titles with kid-appropriate themes. 👀🎯"
+        },
+        focus: "graded levels, independent reading",
+        time: "10–20 min",
+        level: "independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "8-10-reading-freechildrenstories",
+        title: "Free Children’s Stories (Age 8–10 section) 📖✨",
         link: "https://www.freechildrenstories.com/",
         format: "site",
         description:
-          "Story site with age sections and read/listen options for engaging, kid-friendly reading practice.",
+          "Original and classic stories organized by age, often with audio/podcast links.",
         details: {
-          type: "Stories (read online) + some listen options 🎧📖",
-          teaches: "Reading for enjoyment, story comprehension, and vocabulary through varied themes. 🧠📚",
+          type: "Story site (read + listen options) 🎧📘",
+          teaches:
+            "Reading for enjoyment + vocabulary growth through varied story themes. 🧠📚",
           howTo: [
-            "Open an age-appropriate section (8–10 / 7–10). 🎯",
-            "Read one story; highlight 5 new words. ✍️5️⃣",
-            "Talk about the lesson/message in 2–3 sentences. 💬"
+            "Find the Age 8–10 category on the site. 🎯",
+            "Pick one story and read it in two sittings. ⏱️",
+            "Underline 5 new words and explain them. ✍️🗝️",
+            "Optional: listen to the narration/podcast version. 🎧"
           ],
-          whyTopPick: "Simple access to age-targeted stories for motivation and variety. ⭐",
-          freeAccess: "Free to access; embedded media options can vary by story/page. 🆓⚠️",
-          ageCheck: "Good for 8–10; preview topics and choose longer stories for stronger readers. 👀🎯"
+          whyTopPick: "Age categories make it easy for kids to choose. ⭐",
+          freeAccess: "Free to access; media links may vary by story. 🆓⚠️",
+          ageCheck: "Use the 8–10 section for best match. ✅"
         },
-        focus: "reading for pleasure, vocabulary",
+        focus: "reading for fun, vocabulary",
         time: "10–20 min",
         level: "independent or caregiver-led"
       },
@@ -234,50 +276,27 @@
         age: "8-10",
         skill: "reading",
         slug: "8-10-reading-freekidsbooks",
-        title: "FreeKidsBooks — Digital Children’s Library 📚🧒",
-        link: "https://freekidsbooks.org/",
+        title: "FreeKidsBooks.org (Digital Children’s Library) 📚🧒",
+        link: "https://www.freekidsbooks.org/",
         format: "site",
         description:
-          "Downloadable and online children’s books (fiction and nonfiction) with categories by age and topic.",
+          "Large collection of free children’s books (read online or download).",
         details: {
-          type: "Digital library (read online / download) 📖⬇️",
-          teaches: "General literacy, comprehension, and topic vocabulary (STEM/values/fiction). 🌍🔬",
+          type: "Digital library (online + PDF/EPUB downloads) 📖⬇️",
+          teaches:
+            "General literacy and content knowledge via fiction/nonfiction books. 📚🧠",
           howTo: [
-            "Browse by Age and choose a book that matches interest. 🎯",
-            "Read online or download/print if needed. 📖⬇️🖨️",
-            "Do a quick summary: 3 sentences (Beginning/Middle/End). 🧩📝"
+            "Browse by Age (e.g., 6–9 / 8–10) or Subject. 🎯",
+            "Open a book to read online or download for offline. 📖⬇️",
+            "Read 10–15 minutes. ⏱️",
+            "Do a quick ‘beginning/middle/end’ retell. 🧩"
           ],
-          whyTopPick: "Good variety of story types and topics for building motivation. ⭐",
-          freeAccess: "Free to access; download formats/options vary by book. 🆓⚠️",
-          ageCheck: "Pick age-appropriate books; some texts may be longer or shorter than expected. 👀🎯"
+          whyTopPick:
+            "Big variety of genres and formats for different interests. ⭐",
+          freeAccess: "Free to read/download (site experience varies). 🆓⚠️",
+          ageCheck: "Choose age categories to keep it appropriate. 🎯"
         },
-        focus: "library variety, interest-based reading",
-        time: "10–25 min",
-        level: "independent or caregiver-led"
-      },
-
-      {
-        age: "8-10",
-        skill: "reading",
-        slug: "8-10-reading-monkey-pen",
-        title: "Monkey Pen — Free Stories for Kids 🐒📖",
-        link: "https://monkeypen.com/pages/free-stories-for-kids",
-        format: "site",
-        description:
-          "A curated page of free storybooks, often as easy-to-open PDFs with strong illustrations.",
-        details: {
-          type: "Storybooks (often PDF) 📄📖",
-          teaches: "Reading for enjoyment + comprehension through illustrated narratives. 🧠📚",
-          howTo: [
-            "Choose one free title and open the PDF. 📄",
-            "Read 2–4 pages per session (don’t rush). ⏱️",
-            "Ask 3 questions: Who? What happened? What’s the lesson? ❓❓❓"
-          ],
-          whyTopPick: "PDF format is convenient for classroom/projector or printing. ⭐🖨️",
-          freeAccess: "Free titles listed on the page; access can vary by item. 🆓⚠️",
-          ageCheck: "Good for 8–10; pick slightly longer books for stronger readers. 🎯"
-        },
-        focus: "illustrated stories, comprehension talk",
+        focus: "variety library, downloads",
         time: "10–20 min",
         level: "independent or caregiver-led"
       },
@@ -285,25 +304,58 @@
       {
         age: "8-10",
         skill: "reading",
-        slug: "8-10-reading-global-storybooks",
-        title: "Global Storybooks — Multilingual Stories 🌍📘",
+        slug: "8-10-reading-monkeypen-free-stories",
+        title: "Monkey Pen (Free Stories for Kids) 🐒📖",
+        link: "https://monkeypen.com/pages/free-stories-for-kids",
+        format: "site",
+        description:
+          "Free illustrated PDF storybooks; easy to open and read with minimal setup.",
+        details: {
+          type: "PDF storybooks 📄📚",
+          teaches:
+            "Reading practice with picture support + simple story structure. 🖼️🧠",
+          howTo: [
+            "Open the Free Stories page and pick a title. 🎯",
+            "Read the PDF on screen (or print if you want). 💻🖨️",
+            "Choose 3 ‘good sentences’ and copy them neatly. ✍️3️⃣",
+            "Retell the story in 4 sentences. 📝4️⃣"
+          ],
+          whyTopPick:
+            "Low friction: click → PDF opens → start reading. ⭐",
+          freeAccess: "Free titles available on the site. 🆓✅",
+          ageCheck:
+            "Works for 8–10 (choose picture-rich stories for lower readers). 🎯"
+        },
+        focus: "pdf stories, easy access",
+        time: "10–20 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "8-10-reading-globalstorybooks",
+        title: "Global Storybooks (Multilingual Stories) 🌍📘",
         link: "https://globalstorybooks.net/",
         format: "site",
         description:
-          "A multilingual story platform where learners can compare English with another language to support meaning.",
+          "Multilingual story collections that can support ESL bridging and comprehension checking.",
         details: {
-          type: "Multilingual story library (often with download/audio options) 📚🗣️",
-          teaches: "Comprehension support via bilingual reading and cross-language checking. 🌐🧠",
+          type: "Multilingual story library 📚🌐",
+          teaches:
+            "Reading comprehension and cross-language support (toggle languages). 🌍🧠",
           howTo: [
-            "Pick a story and read in English first. 🇬🇧📖",
-            "Check a second language to confirm meaning (optional). 🌍✅",
-            "Retell the story in 4 sentences (First/Then/Then/Finally). 🗣️🧩"
+            "Pick a story and read in English first. 📖🇬🇧",
+            "Check meaning using the second language if available. 🌐✅",
+            "Pick 6 useful words and make sentences. 📝6️⃣",
+            "Repeat the same story later in the week for fluency. 🔁"
           ],
-          whyTopPick: "Helpful for ESL learners who benefit from meaning checks. ⭐",
-          freeAccess: "Free to access; features vary by story/collection. 🆓⚠️",
-          ageCheck: "Very suitable for 8–10; choose age-appropriate collections and keep it simple. 🎯"
+          whyTopPick:
+            "Language toggles can reduce frustration and support understanding. ⭐",
+          freeAccess: "Free to access; downloadable options vary by collection. 🆓⚠️",
+          ageCheck: "Good for 8–10; choose stories with age-appropriate topics. 🎯"
         },
-        focus: "bilingual support, retelling",
+        focus: "bilingual support, comprehension",
         time: "10–20 min",
         level: "independent or caregiver-led"
       },
@@ -312,38 +364,41 @@
         age: "8-10",
         skill: "reading",
         slug: "8-10-reading-storyberries",
-        title: "Storyberries — Online Storybooks 🍓📖",
+        title: "Storyberries (Online Storybooks) 🍓📖",
         link: "https://www.storyberries.com/",
         format: "site",
         description:
-          "Story site with themed collections and some audio options—useful for reading for pleasure and repeat reading.",
+          "Free stories with many themes; some include audio and discussion guides.",
         details: {
-          type: "Online stories (some with audio) 📖🎧",
-          teaches: "Reading for pleasure, vocabulary growth, and fluency through repeat reading. 📚🔁",
+          type: "Story site (read + some audio) 📖🎧",
+          teaches:
+            "Reading for pleasure, vocabulary, and theme-based comprehension. 🧠📚",
           howTo: [
-            "Choose an age/theme collection (e.g., 7–12). 🎯",
-            "Read one short story; re-read it aloud the next day. 🗣️🔁",
-            "Pick 5 words/phrases to reuse in a sentence. ✍️5️⃣"
+            "Choose Ages 7–12 or a theme. 🎯",
+            "Read one story and note 5 new words. 🗝️5️⃣",
+            "Optional: use the audio button when available. 🎧",
+            "Answer: What was the problem? How was it solved? ❓✅"
           ],
-          whyTopPick: "Great for motivation and quick, repeatable reading practice. ⭐",
-          freeAccess: "Free to read online; audio/video availability varies by story. 🆓⚠️",
-          ageCheck: "Good for 8–10; choose slightly longer stories for stronger readers. 🎯"
+          whyTopPick:
+            "Lots of engaging stories and themes that keep motivation high. ⭐",
+          freeAccess: "Free to read; some extras may be optional. 🆓✅",
+          ageCheck: "Ages 7–12 section fits 8–10 well. ✅"
         },
-        focus: "reading for pleasure, fluency",
-        time: "10–15 min",
+        focus: "reading for enjoyment, themes",
+        time: "10–20 min",
         level: "independent or caregiver-led"
       },
 
       {
         age: "8-10",
         skill: "reading",
-        slug: "best-set-6-week-rotation-for-8-10-reading",
-        title: "Best Set — 6-Week ESL Reading Rotation 🗓️📚✨",
+        slug: "best-set-recommended-bundle-for-8-10-reading",
+        title: "Best Set — 6-Week ESL Reading Plan 🗓️📚✨",
         link: "",
         format: "other",
         isBestSet: true,
         description:
-          "A simple 6-week rotation combining leveled readers, story libraries, read-aloud video support, and interactive comprehension practice.",
+          "A simple 6-week rotation using a mix of leveled readers, story libraries, and interactive practice to build vocabulary, comprehension, and confidence.",
         bundleItems: [
           "8-10-reading-oxford-owl-free-ebook-library",
           "8-10-reading-unite-for-literacy",
@@ -351,30 +406,34 @@
           "8-10-reading-storyline-online",
           "8-10-reading-english-e-reader",
           "8-10-reading-freekidsbooks",
-          "8-10-reading-free-children-stories",
+          "8-10-reading-freechildrenstories",
           "8-10-reading-storyberries",
-          "8-10-reading-monkey-pen",
-          "8-10-reading-global-storybooks",
+          "8-10-reading-monkeypen-free-stories",
+          "8-10-reading-globalstorybooks",
           "8-10-reading-storyweaver"
         ],
         details: {
-          type: "Recommended 6-week plan 🧺",
-          teaches: "Vocabulary, comprehension, decoding support, fluency, and reading motivation. 🧠📚",
+          type: "Recommended rotation plan 🧭",
+          teaches:
+            "Vocabulary + comprehension + decoding support through varied, repeatable reading practice. 🔤🧠📚",
           howTo: [
-            "Week 1: Oxford Owl (leveled reader) + Unite for Literacy (topic picture book) + British Council Reading Practice (quiz/game). 📘📖🎮",
-            "Week 2: Storyline Online (pause for questions) + British Council Reading Practice + one related Oxford Owl book for reinforcement. 🎬⏸️📘",
-            "Week 3: English e-Reader (comfortable level) + Oxford Owl (confidence book on similar theme). 📚🎚️",
-            "Week 4: FreeKidsBooks + Free Children’s Stories + quick summary/drawing. 📚✍️🎨",
-            "Week 5: Storyberries + Monkey Pen + vocabulary game using story words. 🍓🐒🎮",
-            "Week 6: Global Storybooks + StoryWeaver + “reading party” share/retell/role-play. 🌍📚🎉"
+            "Week 1 (Foundations): Oxford Owl + Unite for Literacy (2 reads + 1 short quiz on British Council). 📘📖✅",
+            "Week 2 (Video + Comprehension): Storyline Online + British Council Reading Practice. 🎬🇬🇧",
+            "Week 3 (Leveled Readers): English e-Reader + Oxford Owl (match themes, adjust level). 🎚️📘",
+            "Week 4 (Free Story Sites): FreeKidsBooks + FreeChildrenStories (end with 4-sentence summary). ✍️4️⃣",
+            "Week 5 (Fun + Review): Storyberries + Monkey Pen (add a vocab game or mini-quiz). 🎮🗝️",
+            "Week 6 (Project/Showcase): Global Storybooks + StoryWeaver (retell/role-play favorite scenes). 🎭"
           ],
-          whyTopPick: "Rotation keeps motivation high while still repeating key skills each week. ⭐🔁",
-          freeAccess: "Uses free-to-access resources; some require signup/login; some offer downloads/printables. 🆓⚠️",
-          ageCheck: "Designed for 8–10 with flexible leveling. 🎯"
+          whyTopPick:
+            "Rotation prevents boredom while still repeating key skills each week. ⭐🔁",
+          freeAccess:
+            "Uses free resources; some require signup (Oxford Owl) and some offer optional downloads. 🆓⚠️",
+          ageCheck:
+            "Designed for 8–10; choose levels that feel achievable to keep confidence high. 🎯🙂"
         },
-        focus: "6-week structure, motivation, comprehension",
-        time: "6 weeks (3 sessions/week)",
-        level: "independent or caregiver-led"
+        focus: "6-week plan, balanced reading sources",
+        time: "3 sessions/week (10–20 min each)",
+        level: "caregiver-led or independent"
       },
 
       // =========================
@@ -386,23 +445,26 @@
         slug: "8-10-listening-storynory",
         title: "Storynory — Free Audio Stories 🎧📖",
         link: "https://www.storynory.com/",
-        format: "podcast",
+        format: "audio",
         description:
-          "Free audio stories (fairy tales, myths, poems, originals) with text to follow along.",
+          "Free narrated audio stories (fairy tales, myths, poems) often with text to follow along.",
         details: {
-          type: "Audio stories (podcast episodes) 🎧",
-          teaches: "Listening comprehension, vocabulary, narrative structure (beginning/middle/end). 🧠📚",
+          type: "Audio stories (podcast-style) 🎙️",
+          teaches:
+            "Listening comprehension, vocabulary, and narrative structure. 🧠🗣️",
           howTo: [
-            "Open Storynory or subscribe in a podcast app. 📱🎧",
-            "Pick a category (Fairy Tales / Myths / etc.). 🧩",
-            "Listen while following along with the text; pause for 2 questions. 📖⏸️❓"
+            "Pick a category (Fairy Tales / Myths). 🧚‍♂️🏛️",
+            "Listen 10–15 minutes while following the text if helpful. 🎧📄",
+            "Pause once to predict what happens next. ⏸️🔮",
+            "After: beginning/middle/end retell in 3 sentences. 🧩3️⃣"
           ],
-          whyTopPick: "High-quality narration and rich story language that builds vocabulary naturally. ⭐",
+          whyTopPick:
+            "High-quality narration with rich language and kid-friendly topics. ⭐",
           freeAccess: "Free to access; no sign-up required. 🆓✅",
-          ageCheck: "Works well for 8–10 (choose slightly longer stories for stronger listeners). 🎯"
+          ageCheck: "Good for 8–10 (choose shorter stories for lower listeners). 🎯"
         },
-        focus: "audio stories, vocabulary",
-        time: "10–20 min",
+        focus: "audio stories, narrative structure",
+        time: "10–15 min",
         level: "independent or caregiver-led"
       },
 
@@ -414,20 +476,22 @@
         link: "https://storylineonline.net/",
         format: "video",
         description:
-          "Read-aloud videos with strong narration and visuals; great for comprehension and follow-up discussion.",
+          "Read-aloud videos that support listening comprehension, vocabulary, and fluency modelling.",
         details: {
-          type: "Video read-alouds 📺📖",
-          teaches: "Listening comprehension, vocabulary, and story meaning with visual support. 🧠🗣️",
+          type: "Video read-alouds (audio + visuals) 📺",
+          teaches:
+            "Listening + story comprehension; supports fluency through modelling. 👂📚",
           howTo: [
-            "Choose a book and watch/listen 8–12 minutes. ⏱️",
-            "Pause 2–3 times: predict what happens next. ⏸️🔮",
-            "After: retell in 3 parts (Beginning/Middle/End). 🧩🗣️"
+            "Choose a story and watch 8–12 minutes. 🎥⏱️",
+            "Use subtitles when helpful. 🔤",
+            "Stop 2 times: explain 1 new word; predict the next event. ⏸️🗝️🔮",
+            "Do 3 quick questions: Who? Where? What happened? ❓❓❓"
           ],
-          whyTopPick: "Very engaging and easy to build a quick discussion routine around. ⭐",
-          freeAccess: "Free to access on the official site. 🆓✅",
-          ageCheck: "Good for 8–10; use as a weekly ‘story listening’ anchor. 🎯"
+          whyTopPick: "Very engaging and easy to run as a routine. ⭐",
+          freeAccess: "Free to stream. 🆓✅",
+          ageCheck: "Good for 8–10 (some titles are easier—use for fluency). 🎯"
         },
-        focus: "read-aloud listening, retell",
+        focus: "listening + comprehension pauses",
         time: "10–15 min",
         level: "caregiver-led or independent"
       },
@@ -436,25 +500,28 @@
         age: "8-10",
         skill: "listening",
         slug: "8-10-listening-storyberries-radio",
-        title: "Storyberries — Bedtime Radio 🍓🎧",
-        link: "https://www.storyberries.com/radio/",
+        title: "Storyberries Radio (Audiobook Playlists) 📚🎧",
+        link: "https://storyberries.com/radio",
         format: "audio",
         description:
-          "Free audiobook-style playlists for kids (great for building listening stamina).",
+          "Audiobook playlists for kids (great for longer listening and bedtime routines).",
         details: {
-          type: "Audiobook playlists (stories) 🎧📚",
-          teaches: "Listening stamina, vocabulary in context, and story comprehension. 🧠📈",
+          type: "Audiobook playlists 🎧",
+          teaches:
+            "Listening stamina, vocabulary in context, and story understanding. 🧠📚",
           howTo: [
-            "Open the Radio page and choose an age group (e.g., 7–12). 🎯",
-            "Play a playlist during quiet time or bedtime. 🌙🎧",
-            "After: ask 3 questions (Who? Problem? Ending?). ❓❓❓"
+            "Choose Ages 7–12 playlist. 🎯",
+            "Listen 10–20 minutes (or longer during quiet time). ⏱️",
+            "After: name 3 events from the story. 🧩3️⃣",
+            "Repeat the same playlist later in the week. 🔁"
           ],
-          whyTopPick: "Great for longer listening and calm routines. ⭐🌙",
-          freeAccess: "Free to stream; no login required. 🆓✅",
-          ageCheck: "Excellent fit for 8–10 (pick shorter segments if attention is low). 🎯"
+          whyTopPick:
+            "Great for building listening stamina with calm, story-based audio. ⭐",
+          freeAccess: "Free to stream (no login required). 🆓✅",
+          ageCheck: "Ages 7–12 playlists fit 8–10 well. ✅"
         },
-        focus: "audiobooks, stamina",
-        time: "10–30 min",
+        focus: "stamina, audio stories",
+        time: "10–20+ min",
         level: "independent or caregiver-led"
       },
 
@@ -462,76 +529,84 @@
         age: "8-10",
         skill: "listening",
         slug: "8-10-listening-circle-round",
-        title: "Circle Round — Folktale Podcast 🌍🎧",
+        title: "Circle Round (Folktale Podcast) 🌍🎧",
         link: "https://www.wbur.org/podcasts/circleround",
         format: "podcast",
         description:
-          "Folktale podcast episodes (~10–15 minutes) with strong narration and discussion prompts.",
+          "Folktales from around the world (short episodes) with built-in discussion starters.",
         details: {
-          type: "Podcast (audio folktales) 📻",
-          teaches: "Comprehension, morals/values, and cultural vocabulary through global folktales. 🧠🌍",
+          type: "Podcast episodes (folktales) 🎙️",
+          teaches:
+            "Listening comprehension + morals/themes + cultural vocabulary. 🌍🧠",
           howTo: [
-            "Pick an episode (aim 10–15 minutes). ⏱️",
-            "Pause once to clarify 1–2 new words. ⏸️🆕",
-            "Use 2 follow-up questions (What lesson? Favorite part?). ❓⭐"
+            "Pick a 10–15 minute episode. ⏱️",
+            "Pause once to explain a new culture word. ⏸️🗝️",
+            "After: What lesson did the story teach? 🧠✅",
+            "Optional: use the discussion questions if provided. ❓"
           ],
-          whyTopPick: "Professional audio storytelling that keeps kids engaged. ⭐",
-          freeAccess: "Free podcast access. 🆓✅",
-          ageCheck: "Strong for 8–10; great weekly routine option. 🎯"
+          whyTopPick:
+            "Professional production keeps kids engaged while hearing fluent English. ⭐",
+          freeAccess: "Free (podcast). 🆓✅",
+          ageCheck: "Ideal for 8–10 for full engagement. 🎯"
         },
-        focus: "folktales, moral lessons, vocabulary",
+        focus: "folktales, themes, discussion",
         time: "10–15 min",
-        level: "independent or caregiver-led"
-      },
-
-      {
-        age: "8-10",
-        skill: "listening",
-        slug: "8-10-listening-greeking-out",
-        title: "Nat Geo Kids — Greeking Out 🏛️🎙️",
-        link: "https://www.nationalgeographic.com/podcasts/greeking-out/",
-        format: "podcast",
-        description:
-          "Greek mythology podcast stories that build listening comprehension and myth-related vocabulary.",
-        details: {
-          type: "Podcast (mythology stories) 🎙️",
-          teaches: "Listening comprehension + narrative vocabulary (heroes, gods, quests). 🧠⚡",
-          howTo: [
-            "Choose an episode and listen together. 🎧",
-            "Pause to explain 1 tricky part (names/events). ⏸️🧩",
-            "Summarize: Who was the hero? What was the challenge? ✅"
-          ],
-          whyTopPick: "High-interest content for 8–10 who like adventure stories. ⭐",
-          freeAccess: "Free podcast streaming (platform availability varies). 🆓⚠️",
-          ageCheck: "Best for 8–10; preview episode themes if needed. 👀🎯"
-        },
-        focus: "myths, vocabulary, story structure",
-        time: "10–20 min",
         level: "caregiver-led or independent"
       },
 
       {
         age: "8-10",
         skill: "listening",
-        slug: "8-10-listening-wow-in-the-world",
-        title: "Wow in the World — Science Podcast 🔬🎧",
-        link: "https://tinkercast.com/all-podcasts/wow-in-the-world/",
+        slug: "8-10-listening-greeking-out",
+        title: "NatGeo Kids — Greeking Out (Myth Podcast) 🏛️🎧",
+        link: "https://www.nationalgeographic.com/podcasts/greeking-out/",
         format: "podcast",
         description:
-          "Science and tech podcast for kids; great for topic vocabulary and listening stamina.",
+          "Greek mythology stories for kids; great for adventurous listening and new vocabulary.",
         details: {
-          type: "Podcast (science & tech for kids) 🎙️",
-          teaches: "Listening comprehension + science vocabulary in context. 🧠🔬",
+          type: "Podcast (myth stories) 🎙️",
+          teaches:
+            "Listening comprehension and myth vocabulary (gods, heroes, quests). 🗣️🏛️",
           howTo: [
-            "Pick an episode with an interesting topic. 🎯",
-            "Listen 10–17 minutes; pause for 1 new word explanation. ⏸️🆕",
-            "Child draws 1 picture and labels 3 key words. 🎨🏷️3️⃣"
+            "Choose an episode and listen together. 🎧",
+            "Pause when needed to explain a tricky word. ⏸️🗝️",
+            "After: name 2 characters and the main problem. 👤👤❓",
+            "Optional: draw a scene from the story. 🎨"
           ],
-          whyTopPick: "High motivation + rich vocabulary because kids care about the topic. ⭐",
-          freeAccess: "Free to stream as a podcast (platform availability varies). 🆓⚠️",
-          ageCheck: "Excellent for 8–10; pick shorter segments if needed. 🎯"
+          whyTopPick: "High-interest topics keep motivation strong. ⭐",
+          freeAccess: "Free to stream as a podcast. 🆓✅",
+          ageCheck: "Best for 8–10 (especially confident listeners). 🎯"
         },
-        focus: "science listening, vocabulary",
+        focus: "myths, rich vocabulary",
+        time: "10–20 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "8-10-listening-wow-in-the-world",
+        title: "Wow in the World (Science Podcast) 🔬🎧",
+        link: "https://tinkercast.com/podcasts/wow-in-the-world/",
+        format: "podcast",
+        description:
+          "Science and tech podcast for kids with humor and sound effects; strong for vocabulary and curiosity.",
+        details: {
+          type: "Podcast (science topics) 🎙️",
+          teaches:
+            "Listening + science vocabulary + explaining ideas in simple language. 🧠🔬🗣️",
+          howTo: [
+            "Pick a topic episode (space/animals/body). 🪐🐾🧠",
+            "Listen 10–17 minutes with headphones. 🎧",
+            "Pause to define 2 new science words. ⏸️🗝️2️⃣",
+            "After: child explains the topic in 3 sentences. 📝3️⃣"
+          ],
+          whyTopPick:
+            "Highly engaging format makes longer listening feel easier. ⭐",
+          freeAccess: "Free (podcast platforms; site access may vary). 🆓⚠️",
+          ageCheck: "Great fit for 8–10. ✅"
+        },
+        focus: "science listening, new vocabulary",
         time: "10–17 min",
         level: "caregiver-led or independent"
       },
@@ -539,79 +614,58 @@
       {
         age: "8-10",
         skill: "listening",
-        slug: "8-10-listening-games-to-learn-english",
+        slug: "8-10-listening-gamestolearnenglish",
         title: "GamesToLearnEnglish — Listening Games 🎮🔊",
         link: "https://www.gamestolearnenglish.com/",
-        format: "site",
+        format: "game",
         description:
-          "Interactive listening/matching games (listen and click/drag) with instant feedback.",
+          "Interactive listening-and-matching games (listen then click/drag) with immediate feedback.",
         details: {
-          type: "Interactive web games (listening + matching) 🎮",
-          teaches: "Vocabulary listening accuracy + matching (fast feedback). 👂✅",
+          type: "Interactive web games 🎮",
+          teaches:
+            "Listening for words/phrases + matching accuracy and speed. 👂✅",
           howTo: [
-            "Pick a simple listening topic/game. 🎯",
-            "Listen and click/drag the matching picture/answer. 👂👉",
-            "Do 8 minutes max; repeat the same game later in the week. ⏱️🔁"
+            "Choose a topic (food/animals/weather). 🐶🍎🌦️",
+            "Play 5–8 minutes (headphones help). 🎧⏱️",
+            "Say answers out loud before clicking. 🗣️🖱️",
+            "Repeat the same topic 2–3 times that week. 🔁"
           ],
-          whyTopPick: "Quick, effective listening practice with immediate correction avoiding guesswork. ⭐",
-          freeAccess: "Free to access; site experience can vary by device/browser. 🆓⚠️",
-          ageCheck: "Suitable for 8–10; adult support helps with instructions if needed. 🧑‍🏫"
+          whyTopPick:
+            "Fast, high-repetition listening practice with instant correction. ⭐",
+          freeAccess: "Free to access; web experience can vary. 🆓⚠️",
+          ageCheck: "Suitable for 8–10; adult help for instructions if needed. 👀"
         },
-        focus: "listening accuracy, matching",
-        time: "5–10 min",
+        focus: "listening + matching",
+        time: "5–8 min",
         level: "independent or caregiver-led"
       },
 
       {
         age: "8-10",
         skill: "listening",
-        slug: "8-10-listening-pbs-kids-podcasts-page",
-        title: "PBS KIDS — Podcasts Hub 🎙️🐾",
-        link: "https://pbskids.org/videos/podcasts",
-        format: "audio",
-        description:
-          "A safe hub for kid-friendly podcast-style listening (great for variety).",
-        details: {
-          type: "Podcast episodes / audio stories 🎧",
-          teaches: "Listening comprehension through familiar characters and short narratives. 👂📖",
-          howTo: [
-            "Pick one short episode (7–15 minutes). ⏱️",
-            "Pause once to predict what happens next. ⏸️🔮",
-            "After: retell in 3 parts (Begin/Middle/End). 🧩🗣️"
-          ],
-          whyTopPick: "Kids stay engaged with familiar worlds, making comprehension easier. ⭐",
-          freeAccess: "Free to stream on PBS KIDS. 🆓✅",
-          ageCheck: "Good for 8–10; choose the most age-appropriate series/episodes. 🎯"
-        },
-        focus: "podcast listening, retell",
-        time: "7–15 min",
-        level: "independent or caregiver-led"
-      },
-
-      {
-        age: "8-10",
-        skill: "listening",
-        slug: "8-10-listening-pbs-odd-squadcast-playlist",
-        title: "PBS KIDS — The Odd Squadcast (playlist) 🕵️🎧",
+        slug: "8-10-listening-pbs-odd-squadcast",
+        title: "PBS KIDS — The Odd Squadcast 🕵️🎧",
         link: "https://pbskids.org/videos/playlist/the-odd-squadcast",
         format: "audio",
         description:
-          "Mystery/problem-solving audio episodes that encourage active listening for clues and instructions.",
+          "Mystery-style audio episodes that encourage active listening and problem solving.",
         details: {
-          type: "Audio mystery episodes 🎧🧩",
-          teaches: "Active listening, inference, following spoken clues, and problem-solving vocabulary. 🧠🕵️",
+          type: "Audio episodes (mystery) 🎧",
+          teaches:
+            "Listening for clues, following instructions, and story details. 🧠🗣️",
           howTo: [
-            "Play one episode (about 7–10 minutes). ⏱️",
-            "Ask: What was the mystery? What clues did you hear? ❓🧩",
-            "Replay and listen for 3 specific details. 🔁3️⃣"
+            "Play one episode (7–10 minutes). ⏱️",
+            "Pause once: What clue did we hear? ⏸️🕵️",
+            "After: summarize the solution in 2 sentences. 📝2️⃣"
           ],
-          whyTopPick: "Makes listening active (kids want to solve the mystery). ⭐",
+          whyTopPick:
+            "Turns listening into a game—great for attention and engagement. ⭐",
           freeAccess: "Free to stream on PBS KIDS. 🆓✅",
-          ageCheck: "Works well for 8–10; great as a weekly ‘fun listening’ session. 🎯"
+          ageCheck: "Works well for 8–10 (especially kids who like mysteries). 🎯"
         },
-        focus: "active listening, inference",
-        time: "7–12 min",
-        level: "independent or caregiver-led"
+        focus: "active listening, story details",
+        time: "7–10 min",
+        level: "caregiver-led or independent"
       },
 
       {
@@ -622,20 +676,22 @@
         link: "https://pbskids.org/videos/arthur/the-arthur-podcast",
         format: "audio",
         description:
-          "Longer audio story episodes (often 15–17 minutes) that build stamina and narrative understanding.",
+          "Longer story episodes (about 15–17 minutes) that build listening stamina and narrative comprehension.",
         details: {
           type: "Audio story episodes 🎧",
-          teaches: "Listening stamina + comprehension of longer narratives and everyday social vocabulary. 🧠💬",
+          teaches:
+            "Listening stamina, narrative structure, and social vocabulary. 🧠🗣️",
           howTo: [
-            "Choose one episode (aim 15–17 minutes). ⏱️",
-            "After: child retells 5 key events (bullet list). 📝5️⃣",
-            "Optional: act out one short scene to check understanding. 🎭"
+            "Play 15–17 minutes (or split into 2 parts). ⏱️",
+            "After: identify beginning/middle/end. 🧩",
+            "Retell using 5 key words from the episode. 🗝️5️⃣"
           ],
-          whyTopPick: "Great for building stamina with familiar, relatable stories. ⭐",
+          whyTopPick:
+            "Longer episodes are perfect for building stamina and story tracking. ⭐",
           freeAccess: "Free to stream on PBS KIDS. 🆓✅",
-          ageCheck: "Very good for 8–10; use headphones for clarity. 🎧🎯"
+          ageCheck: "Good fit for 8–10. ✅"
         },
-        focus: "longer listening, story structure",
+        focus: "stamina, narrative comprehension",
         time: "15–17 min",
         level: "independent or caregiver-led"
       },
@@ -644,67 +700,418 @@
         age: "8-10",
         skill: "listening",
         slug: "8-10-listening-british-council-listen-watch",
-        title: "LearnEnglish Kids (British Council) — Listen & Watch 🎶📺",
+        title: "British Council — LearnEnglish Kids: Listen & Watch 🎶📺🇬🇧",
         link: "https://learnenglishkids.britishcouncil.org/listen-watch",
         format: "site",
         description:
-          "Songs, short stories, videos, and worksheets that support vocabulary and listening comprehension for kids.",
+          "Songs, videos, and short stories designed for ESL listening with optional follow-up activities.",
         details: {
-          type: "Songs + videos + short stories + printables 🎵📺📝",
-          teaches: "Listening for key words, grammar patterns, and story meaning in kid-friendly ESL content. 👂🗝️",
+          type: "Songs + short videos + activities 🎵📺📝",
+          teaches:
+            "Vocabulary, grammar patterns, and listening comprehension through media. 👂🧠",
           howTo: [
-            "Choose a short story video or a song with clear lyrics. 🎯",
-            "Listen once for meaning; replay and note 5 key words. 🔁✍️5️⃣",
-            "Optional: do one printable follow-up (keep it short). 📝⏱️"
+            "Pick one song or short story video for the week. 1️⃣🗓️",
+            "Listen once, then replay and shadow one line at a time. 🔁🗣️",
+            "Optional: do one printable follow-up. 🖨️✅"
           ],
-          whyTopPick: "Safe, curriculum-style ESL listening with lots of ready content. ⭐",
-          freeAccess: "Free to access/use on the site. 🆓✅",
-          ageCheck: "Great for 8–10 ESL; pick the more challenging stories for older kids. 🎯"
+          whyTopPick:
+            "Safe, curriculum-aligned ESL media built for kids. ⭐",
+          freeAccess: "Free to access/use. 🆓✅",
+          ageCheck: "Great for 8–10. ✅"
         },
-        focus: "ESL listening, vocabulary",
+        focus: "songs/videos, shadowing",
+        time: "10–15 min",
+        level: "caregiver-led or independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "best-set-recommended-bundle-for-8-10-listening",
+        title: "Best Set — 5-Week Listening Plan 🎒🎧✨",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description:
+          "A simple weekly rotation mixing songs, games, story podcasts, and longer episodes to build vocabulary, comprehension, and listening stamina.",
+        bundleItems: [
+          "8-10-listening-british-council-listen-watch",
+          "8-10-listening-gamestolearnenglish",
+          "8-10-listening-storynory",
+          "8-10-listening-wow-in-the-world",
+          "8-10-listening-storyberries-radio",
+          "8-10-listening-circle-round",
+          "8-10-listening-pbs-arthur-podcast",
+          "8-10-listening-pbs-odd-squadcast",
+          "8-10-listening-greeking-out",
+          "8-10-listening-storyline-online"
+        ],
+        details: {
+          type: "Recommended plan 🧭",
+          teaches:
+            "Comprehension + vocabulary growth + stamina via consistent listening routines. 👂📈",
+          howTo: [
+            "Week 1: British Council song + GamesToLearnEnglish listening game + Storynory story. 🎵🎮📚",
+            "Week 2: Wow in the World + Storyberries Radio (longer listen) + a short PBS episode. 🔬🎧📺",
+            "Week 3: Circle Round folktale + Arthur Podcast (stamina) + British Council short story. 🌍🎧🇬🇧",
+            "Week 4: Greeking Out myth + listening game theme repeat + Storyline Online (pause + talk). 🏛️🎮🎬",
+            "Week 5: Repeat favorites + do a “mini presentation” (child retells 60 seconds). 🔁🗣️"
+          ],
+          whyTopPick:
+            "Balanced mix keeps kids engaged while steadily increasing listening length. ⭐",
+          freeAccess:
+            "All links are free resources; access may vary by region/platform. 🆓⚠️",
+          ageCheck:
+            "Designed for 8–10; simplify by shortening episodes for lower listeners. 🎯"
+        },
+        focus: "weekly rotation, stamina, comprehension",
+        time: "3 sessions/week (10–17 min each)",
+        level: "caregiver-led"
+      },
+
+      // =========================
+      // 8–10 WRITING
+      // =========================
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-british-council-worksheets",
+        title: "British Council — LearnEnglish Kids: Worksheets 🧩🖨️",
+        link: "https://learnenglishkids.britishcouncil.org/print-make/worksheets",
+        format: "printable",
+        description:
+          "Free printable worksheets (PDF) for vocabulary, grammar, and themed writing tasks (e.g., poems, puzzles, short responses).",
+        details: {
+          type: "Printable worksheets (PDF) 📄🖨️",
+          teaches:
+            "Writing practice + vocabulary and grammar through themed tasks. 🧠🔤",
+          howTo: [
+            "Browse and pick 1 worksheet (don’t overprint). 1️⃣🖨️",
+            "Complete in notebook or on the printout. ✍️",
+            "Underline 5 useful words and use them in new sentences. 🗝️5️⃣",
+            "Keep total time to 15 minutes. ⏱️"
+          ],
+          whyTopPick:
+            "Trusted, well-designed ESL activities that are easy to use at home or class. ⭐",
+          freeAccess: "Free to access; no login needed for worksheets. 🆓✅",
+          ageCheck: "Very suitable for 8–10. 🎯"
+        },
+        focus: "printable writing tasks, vocab/grammar",
         time: "10–15 min",
         level: "independent or caregiver-led"
       },
 
       {
         age: "8-10",
-        skill: "listening",
-        slug: "best-set-5-week-listening-plan-for-8-10",
-        title: "Best Set — 5-Week Listening Plan 🎒🗓️🎧",
+        skill: "writing",
+        slug: "8-10-writing-eslkidsgames-story-dice",
+        title: "ESL Kids Games — Story Dice Online 🎲📖",
+        link: "https://www.eslkidsgames.com/esl-story-dice-online",
+        format: "interactive",
+        description:
+          "Interactive dice that generate pictures to inspire stories; great for sequencing and linking sentences.",
+        details: {
+          type: "Interactive writing/storytelling tool 🎮🧩",
+          teaches:
+            "Creative writing, sentence linking, and story sequencing. 🧠🧵",
+          howTo: [
+            "Roll the dice. 🎲",
+            "Use 3 images for beginning, 3 for middle, 3 for end. 3️⃣/3️⃣/3️⃣",
+            "Write 6–10 sentences connecting all images. ✍️",
+            "Read it aloud once at the end. 🗣️"
+          ],
+          whyTopPick:
+            "Instant ideas + high engagement; perfect for reluctant writers. ⭐",
+          freeAccess: "Free to use; no signup. 🆓✅",
+          ageCheck: "Great for 8–10 (A1–A2 writers can do shorter stories). 🎯"
+        },
+        focus: "creative writing, sequencing",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-eslkidsgames-prompt-generator",
+        title: "ESL Kids Games — Who/What/Where/When Prompt Generator 🎲🧠",
+        link: "https://www.eslkidsgames.com/writing-prompt-generator-who-what-where-and-when",
+        format: "interactive",
+        description:
+          "Random prompt builder (Who/What/Where/When) to spark story ideas, ideal for ESL writers.",
+        details: {
+          type: "Interactive story prompt tool 🔎🧩",
+          teaches:
+            "Story planning, idea generation, and writing with required elements. ✨",
+          howTo: [
+            "Click Who/What/Where/When to generate a full prompt. 👤➡️🎬➡️🏝️➡️🕒",
+            "Write 1 paragraph that uses every element. 📝",
+            "Add 3 linking words: first/then/finally. 🔗",
+            "Share/read aloud. 🗣️"
+          ],
+          whyTopPick:
+            "Stops writer’s block fast and keeps prompts simple for ESL. ⭐",
+          freeAccess: "Free to use; no login. 🆓✅",
+          ageCheck: "Strong fit for 8–10 (A1–A2). 🎯"
+        },
+        focus: "prompt writing, planning",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-kidsacademy-3rd-grade-worksheets",
+        title: "Kids Academy — 3rd Grade Writing Worksheets 🖨️✍️",
+        link: "https://www.kidsacademy.mobi/printable-worksheets/third-grade/writing/",
+        format: "printable",
+        description:
+          "Printable Grade 3 writing worksheets (spelling, grammar, short tasks) that reinforce writing mechanics and vocabulary.",
+        details: {
+          type: "Printable worksheets (PDF) 📄🖨️",
+          teaches:
+            "Writing mechanics: spelling, grammar, short responses, and vocabulary reinforcement. 🔤🧠",
+          howTo: [
+            "Pick one worksheet and print (or copy tasks into notebook). 🖨️/📒",
+            "Complete the short task set. ✅",
+            "Rewrite 5 answers as full sentences. 📝5️⃣",
+            "Keep the work neat and readable. ✍️"
+          ],
+          whyTopPick:
+            "Short, structured tasks that build consistency and accuracy. ⭐",
+          freeAccess:
+            "Some materials are free; availability can vary by worksheet/page. 🆓⚠️",
+          ageCheck: "Designed for Grade 3 (around 8–9), ideal for 8–10. 🎯"
+        },
+        focus: "handwriting + spelling/grammar",
+        time: "10–20 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-eslgamesplus-sentence-games",
+        title: "ESL Games Plus — Sentence Builder / Grammar Games 🧱🎮",
+        link: "https://www.eslgamesplus.com/fun-games/",
+        format: "game",
+        description:
+          "Self-paced grammar games that support sentence building (drag/drop and quick checks).",
+        details: {
+          type: "Interactive grammar/sentence games 🎮🧩",
+          teaches:
+            "Sentence structure and grammar patterns (e.g., comparatives, prepositions). 🧠🔤",
+          howTo: [
+            "Choose one sentence/grammar game and play 8–10 minutes. ⏱️",
+            "Say the correct sentence out loud before submitting. 🗣️✅",
+            "Write 5 example sentences using the same structure. ✍️5️⃣",
+            "Repeat the same structure next day for mastery. 🔁"
+          ],
+          whyTopPick:
+            "Fast feedback makes grammar practice feel like a game, not a worksheet. ⭐",
+          freeAccess: "Free to access; site experience can vary. 🆓⚠️",
+          ageCheck: "Good for 8–10 (A2–B1 structures with support). 🎯"
+        },
+        focus: "sentence structure, grammar patterns",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-write-and-improve",
+        title: "Cambridge — Write & Improve 📋✍️",
+        link: "https://writeandimprove.com/",
+        format: "tool",
+        description:
+          "Online writing practice with automated feedback on grammar, vocabulary, and clarity (CEFR aligned).",
+        details: {
+          type: "Online writing tool (feedback) 💻✅",
+          teaches:
+            "Revising and improving writing quality through feedback and resubmission. 📈",
+          howTo: [
+            "Create an account (free) and choose a short task. 🔐",
+            "Write a paragraph and submit. 📝➡️✅",
+            "Fix highlighted issues and resubmit once. 🔁",
+            "Save your ‘best version’ in your notebook. 📒⭐"
+          ],
+          whyTopPick:
+            "Immediate feedback supports faster improvement and clearer writing habits. ⭐",
+          freeAccess: "Free to use (account required). 🆓🔐",
+          ageCheck:
+            "Best for stronger 8–10 writers (upper end of the range). 🎯"
+        },
+        focus: "feedback, editing",
+        time: "10–20 min",
+        level: "independent (with guidance)"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-scholastic-story-starters",
+        title: "Scholastic — Story Starters 🚀📝",
+        link: "https://www.scholastic.com/teachers/story-starters/",
+        format: "interactive",
+        description:
+          "Genre-based writing starter generator (Adventure/Fantasy/Sci-Fi) to beat writer’s block.",
+        details: {
+          type: "Interactive prompt generator 🎲💻",
+          teaches:
+            "Creative writing ideas, openings, and sustained writing from a starter. ✨",
+          howTo: [
+            "Pick a theme (Adventure/Fantasy/Sci-Fi). 🎭",
+            "Generate a prompt and write 1 page (or 1 paragraph for lower writers). 📝",
+            "Add a clear ending sentence. ✅",
+            "Optional: illustrate the best scene. 🎨"
+          ],
+          whyTopPick:
+            "Simple prompts that feel exciting and age-appropriate. ⭐",
+          freeAccess: "Free to access (site availability can vary). 🆓⚠️",
+          ageCheck: "Great fit for 8–10. 🎯"
+        },
+        focus: "creative prompts, sustained writing",
+        time: "10–20 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-imagine-forest-story-creator",
+        title: "Imagine Forest — Story Creator 📝🌳",
+        link: "https://www.imagineforest.com/picture-book-creator",
+        format: "tool",
+        description:
+          "Guided story-building tool that supports planning and writing step-by-step (often with download/print options).",
+        details: {
+          type: "Online story-making tool 🧩💻",
+          teaches:
+            "Narrative structure, planning, and building a story in steps. 🏗️📖",
+          howTo: [
+            "Start a new story and choose a simple structure. 🧱",
+            "Write 3 sections: beginning/middle/end. 🧩",
+            "Re-read and improve 2 sentences. ✍️2️⃣",
+            "Optional: export/print if available. 🖨️"
+          ],
+          whyTopPick:
+            "Adds structure for beginners while still being creative and fun. ⭐",
+          freeAccess:
+            "Free to access; ads/feature availability can vary. 🆓⚠️",
+          ageCheck: "Works well for 8–10. ✅"
+        },
+        focus: "guided story writing, structure",
+        time: "15–25 min",
+        level: "independent (with light guidance)"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-splashlearn-writing-games",
+        title: "SplashLearn — Writing Games & Worksheets 📱✍️",
+        link: "https://www.splashlearn.com/ela/writing-games",
+        format: "site",
+        description:
+          "Mixed interactive practice and printable-friendly resources that support writing foundations (spelling, sentences, writing routines).",
+        details: {
+          type: "Games + practice resources (web/app) 🎮🖨️",
+          teaches:
+            "Foundational writing skills (sentence practice, spelling habits, writing routines). ✍️🧠",
+          howTo: [
+            "Pick one short writing activity/game. 🎯",
+            "Do 8–10 minutes max. ⏱️",
+            "Write 5 sentences using the same pattern/vocab. ✍️5️⃣",
+            "Stop while confidence is high. ⭐"
+          ],
+          whyTopPick:
+            "Game-like practice supports consistency without feeling like heavy homework. ⭐",
+          freeAccess:
+            "Some content is free; access can vary by activity/account. 🆓⚠️",
+          ageCheck: "Fits 8–10 (Grade 3–4 level). 🎯"
+        },
+        focus: "writing practice routines",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-quill",
+        title: "Quill.org — Interactive Writing & Grammar ✍️🧩",
+        link: "https://www.quill.org/",
+        format: "tool",
+        description:
+          "Nonprofit writing/grammar practice platform with instant feedback (sentence combining, proofreading, grammar).",
+        details: {
+          type: "Online writing practice platform 💻✅",
+          teaches:
+            "Editing, grammar, sentence combining, and clarity through feedback. 🧠🔤",
+          howTo: [
+            "Create a free teacher/parent account and set up a learner. 🔐",
+            "Assign one short activity (sentence combining or proofreading). ✅",
+            "Complete 10–15 minutes. ⏱️",
+            "Copy 3 corrected sentences into a notebook. ✍️3️⃣"
+          ],
+          whyTopPick:
+            "Polished, research-based activities with strong feedback and tracking. ⭐",
+          freeAccess:
+            "Free to use (account setup required). 🆓🔐",
+          ageCheck:
+            "Best for stronger 8–10 writers; choose simpler activities at first. 🎯"
+        },
+        focus: "grammar + editing feedback",
+        time: "10–15 min",
+        level: "independent (with setup)"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "best-set-recommended-bundle-for-8-10-writing",
+        title: "Best Set (Bundle + Weekly Plan) 🗓️✍️📚✨",
         link: "",
         format: "other",
         isBestSet: true,
         description:
-          "A simple 5-week rotation that mixes songs, listening games, story podcasts, and topic podcasts (science/myths) to build comprehension and stamina.",
+          "A balanced weekly routine mixing handwriting/vocab, creative prompts, sentence building, and (optional) feedback tools.",
         bundleItems: [
-          "8-10-listening-british-council-listen-watch",
-          "8-10-listening-games-to-learn-english",
-          "8-10-listening-storynory",
-          "8-10-listening-wow-in-the-world",
-          "8-10-listening-storyberries-radio",
-          "8-10-listening-circle-round",
-          "8-10-listening-pbs-arthur-podcast",
-          "8-10-listening-greeking-out",
-          "8-10-listening-pbs-odd-squadcast-playlist",
-          "8-10-listening-storyline-online"
+          "8-10-writing-british-council-worksheets",
+          "8-10-writing-kidsacademy-3rd-grade-worksheets",
+          "8-10-writing-eslkidsgames-story-dice",
+          "8-10-writing-eslkidsgames-prompt-generator",
+          "8-10-writing-scholastic-story-starters",
+          "8-10-writing-imagine-forest-story-creator",
+          "8-10-writing-eslgamesplus-sentence-games",
+          "8-10-writing-write-and-improve",
+          "8-10-writing-quill",
+          "8-10-writing-splashlearn-writing-games"
         ],
         details: {
-          type: "Recommended 5-week plan 🧺",
-          teaches: "Story comprehension + vocabulary growth + listening stamina with active listening routines. 👂🧠📈",
+          type: "Recommended weekly plan 🧺",
+          teaches:
+            "Neat writing + vocab/grammar + creative writing structure + revision habits. ✍️🔤🧠",
           howTo: [
-            "Week 1: LearnEnglish Kids (song/story) + GamesToLearnEnglish (listening game) + Storynory (story + discussion). 🎶🎮📖",
-            "Week 2: Wow in the World (science) + Storyberries Radio (longer listening) + PBS KIDS pick (optional). 🔬🎧🐾",
-            "Week 3: Circle Round (folktale) + PBS Arthur (stamina) + LearnEnglish Kids (short story + printable). 🌍🎧📺",
-            "Week 4: Greeking Out (mythology) + GamesToLearnEnglish (new topic) + Storyline Online (pause + retell). 🏛️🎮🎬",
-            "Week 5: Repeat the best 3 activities from Weeks 1–4 and track improvement (fewer pauses, better retell). 🔁✅"
+            "Monday — Handwriting & Vocabulary: 1 printable worksheet (British Council or Kids Academy) + write answers neatly. 🖨️✍️",
+            "Tuesday — Storytelling Fun: Story Dice → write 6–10 sentences (First/Next/Finally). 🎲🧵",
+            "Wednesday — Prompt Writing: Scholastic Story Starters OR Who/What/Where/When prompt → write 1 paragraph/page. 📝",
+            "Thursday — Sentence Practice: ESL Games Plus sentence/grammar game → write 5 matching example sentences. 🧱5️⃣",
+            "Friday — Digital Story Creator or Feedback: Imagine Forest story creator OR Cambridge Write & Improve (one paragraph + revise). 💻🔁",
+            "Optional (any day): Quill activity (10–15 min) for editing/grammar feedback. ✅"
           ],
-          whyTopPick: "Balanced mix: stories + topic podcasts + games, with repeat listening for real improvement. ⭐🔁",
-          freeAccess: "Uses free resources; podcast/app availability may vary by platform/region. 🆓⚠️",
-          ageCheck: "Designed for 8–10; adjust difficulty by choosing easier/harder episodes. 🎯"
+          whyTopPick:
+            "Covers mechanics + creativity + structure + revision without overloading any single day. ⭐",
+          freeAccess:
+            "Uses free sites; some items require accounts or have limited free content. 🆓⚠️",
+          ageCheck:
+            "Designed for 8–10; shorten writing length for lower writers and increase feedback tools for stronger writers. 🎯"
         },
-        focus: "rotation plan, stamina, comprehension",
-        time: "5 weeks",
-        level: "independent or caregiver-led"
+        focus: "weekly routine, balanced writing skills",
+        time: "15–25 min/day (Mon–Fri)",
+        level: "independent (with light support)"
       }
     ]
   };
@@ -713,6 +1120,7 @@
   if (window.UEAH_RESOURCES_STORE && typeof window.UEAH_RESOURCES_STORE.add === "function") {
     window.UEAH_RESOURCES_STORE.add(DATA);
   } else {
+    // Fail softly if store isn't loaded for some reason
     window.UEAH_RESOURCES_DATA_FALLBACK = DATA;
   }
 })();
