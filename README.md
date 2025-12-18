@@ -1,6 +1,6 @@
 # Ultimate English At Home (UEAH) 🏡✨📚
 
-**A pastel, friendly GitHub Pages web app for FREE English practice resources — organized by Age ➜ Skill.**  
+**A friendly GitHub Pages web app for FREE English practice resources — organized by Age ➜ Skill.**  
 Built to be **simple**, **fast**, and **easy to expand** 🚀
 
 ✅ **Core promise:** This project is focused on **FREE learning** and **FREE resources** for everyone 💛
