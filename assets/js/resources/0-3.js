@@ -1,5 +1,5 @@
-/* assets/js/resources-data.js
-   Central resource data store for UEAH (append new packs safely).
+/* assets/js/resources/0-3.js
+   Age 0–3 resource data pack.
    Do NOT host files in repo — only external links.
 */
 (function () {
@@ -413,6 +413,11 @@
     ]
   };
 
-  // Expose globally for app.js
-  window.UEAH_RESOURCES_DATA = DATA;
+  // Register into the global store (router lazy-loads this file)
+  if (window.UEAH_RESOURCES_STORE && typeof window.UEAH_RESOURCES_STORE.add === "function") {
+    window.UEAH_RESOURCES_STORE.add(DATA);
+  } else {
+    // Fail softly if store isn't loaded for some reason
+    window.UEAH_RESOURCES_DATA_FALLBACK = DATA;
+  }
 })();

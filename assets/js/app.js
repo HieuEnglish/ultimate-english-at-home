@@ -1,4 +1,8 @@
-﻿(function () {
+﻿/* assets/js/app.js
+   UEAH SPA router + UI renderer (GitHub Pages friendly).
+   Uses window.UEAH_RESOURCES_STORE (loaded via assets/js/resources-store.js).
+*/
+(function () {
   const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18"];
   const SKILLS = ["reading", "listening", "writing", "speaking"];
 
@@ -10,14 +14,11 @@
 
   const basePath = detectBasePath();
 
-  // Central data (loaded from assets/js/resources-data.js if present)
-  const RESOURCE_DATA = (function getResourceData() {
-    const d = window.UEAH_RESOURCES_DATA;
-    if (!d || typeof d !== "object") return { packs: {}, resources: [] };
-    return {
-      packs: d.packs && typeof d.packs === "object" ? d.packs : {},
-      resources: Array.isArray(d.resources) ? d.resources : []
-    };
+  // Resources store (must be loaded before app.js)
+  const STORE = (function getStore() {
+    const s = window.UEAH_RESOURCES_STORE;
+    if (s && typeof s === "object") return s;
+    return null;
   })();
 
   // Make <a href="/resources"> work on GitHub Pages project URLs (prepend basePath)
@@ -47,6 +48,7 @@
     links.forEach((a) => {
       const href = a.getAttribute("href");
       if (!href) return;
+
       // Ignore full URLs, mailto/tel, hashes
       if (
         href.startsWith("http://") ||
@@ -57,6 +59,7 @@
       ) {
         return;
       }
+
       // Only rewrite absolute site paths
       if (href.startsWith("/") && !href.startsWith(basePath + "/") && href !== basePath) {
         a.setAttribute("href", basePath + href);
@@ -95,7 +98,6 @@
   function restoreRedirectedPath() {
     const url = new URL(window.location.href);
 
-    // Your current 404 router uses ?r=
     const r = url.searchParams.get("r");
     if (!r) return;
 
@@ -175,12 +177,32 @@
     });
   }
 
-  function render(appPath) {
+  let renderToken = 0;
+
+  async function render(appPath) {
+    const token = ++renderToken;
     const p = normalizeAppPath(appPath);
     setActiveNav(p);
 
     const route = matchRoute(p);
-    const view = route.view;
+
+    // If view is async, show a quick loading state
+    const isPromise = route && route.view && typeof route.view.then === "function";
+    if (isPromise) {
+      document.title = "Loading… — UEAH";
+      appEl.innerHTML = loadingViewHtml();
+      rewriteNavHrefs(appEl);
+    }
+
+    let view;
+    try {
+      view = await route.view;
+    } catch (err) {
+      view = viewError("Something went wrong while loading this page.", err);
+    }
+
+    // Outdated render (navigation happened)
+    if (token !== renderToken) return;
 
     document.title = view.title;
     appEl.innerHTML = view.html;
@@ -202,34 +224,128 @@
   function matchRoute(appPath) {
     const parts = appPath.split("/").filter(Boolean);
 
-    if (parts.length === 0) return viewHome();
+    if (parts.length === 0) return { view: Promise.resolve(viewHome().view) };
 
-    if (parts[0] === "favourites" && parts.length === 1) return viewFavourites();
-    if (parts[0] === "games" && parts.length === 1) return viewGames();
-    if (parts[0] === "tests" && parts.length === 1) return viewTests();
+    if (parts[0] === "favourites" && parts.length === 1) return { view: Promise.resolve(viewFavourites().view) };
+    if (parts[0] === "games" && parts.length === 1) return { view: Promise.resolve(viewGames().view) };
+    if (parts[0] === "tests" && parts.length === 1) return { view: Promise.resolve(viewTests().view) };
 
-    if (parts[0] !== "resources") return viewNotFound(appPath);
-    if (parts.length === 1) return viewResourcesIndex();
+    if (parts[0] !== "resources") return { view: Promise.resolve(viewNotFound(appPath).view) };
+    if (parts.length === 1) return { view: Promise.resolve(viewResourcesIndex().view) };
 
     const age = parts[1];
-    if (!AGE_GROUPS.includes(age)) return viewNotFound(appPath);
-    if (parts.length === 2) return viewAge(age);
+    if (!AGE_GROUPS.includes(age)) return { view: Promise.resolve(viewNotFound(appPath).view) };
+    if (parts.length === 2) return { view: Promise.resolve(viewAge(age).view) };
 
     const skill = parts[2];
-    if (!SKILLS.includes(skill)) return viewNotFound(appPath);
+    if (!SKILLS.includes(skill)) return { view: Promise.resolve(viewNotFound(appPath).view) };
 
-    if (parts.length === 3) return viewSkill(age, skill);
+    if (parts.length === 3) return { view: viewSkillAsync(age, skill).then((x) => x.view) };
 
-    // NEW: /resources/:age/:skill/:slug
     const slug = parts[3];
-    if (parts.length === 4 && slug) return viewResourceDetail(age, skill, slug);
+    if (parts.length === 4 && slug) return { view: viewResourceDetailAsync(age, skill, slug).then((x) => x.view) };
 
-    return viewNotFound(appPath);
+    return { view: Promise.resolve(viewNotFound(appPath).view) };
+  }
+
+  // -----------------------------
+  // Store helpers (robust to minor API differences)
+  // -----------------------------
+
+  async function ensureAgeLoaded(age) {
+    if (!STORE) return;
+    if (typeof STORE.ensureAgeLoaded === "function") {
+      await STORE.ensureAgeLoaded(age, { basePath });
+    }
+  }
+
+  function storeGetPack(age, skill) {
+    if (!STORE) return null;
+    if (typeof STORE.getPack === "function") return STORE.getPack(age, skill);
+    if (STORE.packs && typeof STORE.packs === "object") {
+      const key = `${age}/${skill}`;
+      return STORE.packs[key] || null;
+    }
+    return null;
+  }
+
+  function storeGetResources(age, skill) {
+    if (!STORE) return [];
+    if (typeof STORE.getResourcesFor === "function") return STORE.getResourcesFor(age, skill) || [];
+    if (Array.isArray(STORE.resources)) return STORE.resources.filter((r) => r && r.age === age && r.skill === skill);
+    return [];
+  }
+
+  function storeGetResource(age, skill, slug) {
+    if (!STORE) return null;
+    if (typeof STORE.getResource === "function") return STORE.getResource(age, skill, slug);
+    const list = storeGetResources(age, skill);
+    return list.find((r) => r && r.slug === slug) || null;
+  }
+
+  // Keep featured “Best Set” at the end
+  function normalizeResourcesList(list) {
+    const items = Array.isArray(list) ? list.slice() : [];
+    items.sort((a, b) => {
+      const af = a && a.isBestSet ? 1 : 0;
+      const bf = b && b.isBestSet ? 1 : 0;
+      if (af !== bf) return af - bf;
+      return String(a && a.title ? a.title : "").localeCompare(String(b && b.title ? b.title : ""));
+    });
+    return items;
   }
 
   // -----------------------------
   // Views
   // -----------------------------
+
+  function loadingViewHtml() {
+    return `
+      <section class="page-top">
+        ${breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Loading…" }])}
+        <h1 class="page-title">Loading…</h1>
+        <p class="page-subtitle">Please wait a moment.</p>
+      </section>
+    `;
+  }
+
+  function viewError(message, err) {
+    const title = "Error — UEAH";
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Error" }]);
+    const detail = err ? `<p class="muted" style="margin-top:10px"><code>${escapeHtml(String(err))}</code></p>` : "";
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Error</h1>
+        <p class="page-subtitle">${escapeHtml(message || "An error occurred.")}</p>
+        ${detail}
+        <div class="actions">
+          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+        </div>
+      </section>
+    `;
+    return { view: { title, html } };
+  }
+
+  function viewStoreMissing() {
+    const title = "Resources unavailable — UEAH";
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Resources" }]);
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Resources unavailable</h1>
+        <p class="page-subtitle">The resources store script is not loaded.</p>
+        <div class="note">
+          <strong>Fix:</strong> Ensure <code>assets/js/resources-store.js</code> is loaded before <code>assets/js/app.js</code>.
+        </div>
+        <div class="actions">
+          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+        </div>
+      </section>
+    `;
+    return { view: { title, html } };
+  }
 
   function viewHome() {
     const title = "UEAH — Ultimate English At Home";
@@ -286,10 +402,7 @@
 
   function viewFavourites() {
     const title = "Favourites — UEAH";
-    const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Favourites" }
-    ]);
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Favourites" }]);
 
     const html = `
       <section class="page-top">
@@ -312,10 +425,7 @@
 
   function viewResourcesIndex() {
     const title = "Resources — UEAH";
-    const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Resources" }
-    ]);
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Resources" }]);
 
     const glowByAge = {
       "0-3": "green",
@@ -356,10 +466,7 @@
 
   function viewGames() {
     const title = "Games — UEAH";
-    const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Games" }
-    ]);
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Games" }]);
 
     const html = `
       <section class="page-top">
@@ -382,10 +489,7 @@
 
   function viewTests() {
     const title = "Tests — UEAH";
-    const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Tests" }
-    ]);
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Tests" }]);
 
     const html = `
       <section class="page-top">
@@ -451,7 +555,11 @@
     return { view: { title, html } };
   }
 
-  function viewSkill(age, skill) {
+  async function viewSkillAsync(age, skill) {
+    if (!STORE) return viewStoreMissing();
+
+    await ensureAgeLoaded(age);
+
     const title = `${capitalize(skill)} (${age}) — UEAH`;
     const breadcrumb = breadcrumbs([
       { label: "Home", href: hrefFor("/") },
@@ -460,16 +568,18 @@
       { label: capitalize(skill) }
     ]);
 
-    const pack = getPack(age, skill);
-    const resources = getResources(age, skill);
+    const pack = storeGetPack(age, skill);
+    const resources = normalizeResourcesList(storeGetResources(age, skill));
 
-    const heading = pack && pack.title
-      ? escapeHtml(pack.title)
-      : `${capitalize(skill)} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(age)}</span>`;
+    const heading =
+      pack && pack.title
+        ? escapeHtml(pack.title)
+        : `${capitalize(skill)} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(age)}</span>`;
 
-    const subtitle = pack && pack.overview
-      ? escapeHtml(pack.overview)
-      : `Resources for ${capitalize(skill)} — ages ${escapeHtml(age)}.`;
+    const subtitle =
+      pack && pack.overview
+        ? escapeHtml(pack.overview)
+        : `Resources for ${capitalize(skill)} — ages ${escapeHtml(age)}.`;
 
     const packHtml = pack
       ? `
@@ -477,8 +587,9 @@
           <h2 class="detail-title" style="font-size:18px; margin:0">Overview</h2>
           <p class="detail-desc" style="margin-top:10px">${escapeHtml(pack.overview || "")}</p>
 
-          ${Array.isArray(pack.objectives) && pack.objectives.length
-            ? `
+          ${
+            Array.isArray(pack.objectives) && pack.objectives.length
+              ? `
               <div class="detail-section">
                 <h2>Objectives</h2>
                 <ul>
@@ -486,10 +597,12 @@
                 </ul>
               </div>
             `
-            : ""}
+              : ""
+          }
 
-          ${Array.isArray(pack.materials) && pack.materials.length
-            ? `
+          ${
+            Array.isArray(pack.materials) && pack.materials.length
+              ? `
               <div class="detail-section">
                 <h2>Materials / Resources</h2>
                 <ul>
@@ -497,7 +610,8 @@
                 </ul>
               </div>
             `
-            : ""}
+              : ""
+          }
         </div>
       `
       : "";
@@ -513,12 +627,18 @@
               const chips = renderChips(r);
               const isFeatured = r.isBestSet ? " is-featured" : "";
               const openBtn = r.link
-                ? `<a class="btn btn--primary btn--small" href="${escapeAttr(r.link)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(r.title)} in a new tab">Open Resource ↗</a>`
+                ? `<a class="btn btn--primary btn--small" href="${escapeAttr(
+                    r.link
+                  )}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(
+                    r.title
+                  )} in a new tab">Open Resource ↗</a>`
                 : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
 
               return `
                 <article class="resource-item${isFeatured}" role="listitem">
-                  <button class="resource-card" type="button" data-nav-to="${escapeAttr(detailPath)}" aria-label="View details: ${escapeAttr(r.title)}">
+                  <button class="resource-card" type="button" data-nav-to="${escapeAttr(
+                    detailPath
+                  )}" aria-label="View details: ${escapeAttr(r.title)}">
                     <h2 class="resource-title">${escapeHtml(r.title)}</h2>
                     <p class="resource-desc">${escapeHtml(r.description || `Practice resource for ${skill}.`)}</p>
                     ${chips}
@@ -539,21 +659,22 @@
         </div>
       `;
 
-    const bestSetNote = pack && pack.bestSetSlug
-      ? (() => {
-          const best = resources.find((r) => r.slug === pack.bestSetSlug);
-          if (!best) return "";
-          return `
-            <div class="note" style="margin-top:20px">
-              <strong>${escapeHtml(best.title)}</strong>
-              <p style="margin:8px 0 0">${escapeHtml(best.description || "")}</p>
-              <div class="actions" style="margin-top:12px">
-                <a class="btn btn--primary" href="${hrefFor(`/resources/${age}/${skill}/${best.slug}`)}" data-nav>Open Best Set →</a>
+    const bestSetNote =
+      pack && pack.bestSetSlug
+        ? (() => {
+            const best = resources.find((r) => r.slug === pack.bestSetSlug);
+            if (!best) return "";
+            return `
+              <div class="note" style="margin-top:20px">
+                <strong>${escapeHtml(best.title)}</strong>
+                <p style="margin:8px 0 0">${escapeHtml(best.description || "")}</p>
+                <div class="actions" style="margin-top:12px">
+                  <a class="btn btn--primary" href="${hrefFor(`/resources/${age}/${skill}/${best.slug}`)}" data-nav>Open Best Set →</a>
+                </div>
               </div>
-            </div>
-          `;
-        })()
-      : "";
+            `;
+          })()
+        : "";
 
     const html = `
       <section class="page-top">
@@ -578,8 +699,12 @@
     return { view: { title, html } };
   }
 
-  function viewResourceDetail(age, skill, slug) {
-    const resource = getResourceBySlug(age, skill, slug);
+  async function viewResourceDetailAsync(age, skill, slug) {
+    if (!STORE) return viewStoreMissing();
+
+    await ensureAgeLoaded(age);
+
+    const resource = storeGetResource(age, skill, slug);
     if (!resource) return viewNotFound(`/resources/${age}/${skill}/${slug}`);
 
     const title = `${resource.title} — UEAH`;
@@ -594,7 +719,9 @@
     const chips = renderChips(resource, true);
 
     const openBtn = resource.link
-      ? `<a class="btn btn--primary" href="${escapeAttr(resource.link)}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>`
+      ? `<a class="btn btn--primary" href="${escapeAttr(
+          resource.link
+        )}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>`
       : `<span class="btn btn--primary btn--disabled" aria-disabled="true">MISSING LINK</span>`;
 
     const details = resource.details || {};
@@ -608,7 +735,9 @@
             ${otherLinks
               .map(
                 (u) =>
-                  `<a class="btn btn--small" href="${escapeAttr(u)}" target="_blank" rel="noopener noreferrer">Open extra link ↗</a>`
+                  `<a class="btn btn--small" href="${escapeAttr(
+                    u
+                  )}" target="_blank" rel="noopener noreferrer">Open extra link ↗</a>`
               )
               .join("")}
           </div>
@@ -616,14 +745,15 @@
       `
       : "";
 
-    const bundleHtml = Array.isArray(resource.bundleItems) && resource.bundleItems.length
-      ? `
+    const bundleHtml =
+      Array.isArray(resource.bundleItems) && resource.bundleItems.length
+        ? `
         <div class="detail-section">
           <h2>Included resources</h2>
           <ul>
             ${resource.bundleItems
               .map((s) => {
-                const r = getResourceBySlug(age, skill, s);
+                const r = storeGetResource(age, skill, s);
                 if (!r) return `<li>${escapeHtml(s)}</li>`;
                 const internalHref = hrefFor(`/resources/${age}/${skill}/${r.slug}`);
                 const external = r.link
@@ -635,7 +765,7 @@
           </ul>
         </div>
       `
-      : "";
+        : "";
 
     const html = `
       <section class="page-top">
@@ -674,10 +804,7 @@
 
   function viewNotFound(appPath) {
     const title = "Not Found — UEAH";
-    const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Not Found" }
-    ]);
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Not Found" }]);
 
     const html = `
       <section class="page-top">
@@ -695,37 +822,8 @@
   }
 
   // -----------------------------
-  // Resources data helpers
+  // Resource UI helpers
   // -----------------------------
-
-  function getPackKey(age, skill) {
-    return `${age}/${skill}`;
-  }
-
-  function getPack(age, skill) {
-    const key = getPackKey(age, skill);
-    return RESOURCE_DATA.packs && RESOURCE_DATA.packs[key] ? RESOURCE_DATA.packs[key] : null;
-  }
-
-  function getResources(age, skill) {
-    const items = (RESOURCE_DATA.resources || []).filter((r) => r && r.age === age && r.skill === skill);
-
-    // Keep featured “Best Set” at the end.
-    items.sort((a, b) => {
-      const af = a && a.isBestSet ? 1 : 0;
-      const bf = b && b.isBestSet ? 1 : 0;
-      if (af !== bf) return af - bf;
-      return String(a.title || "").localeCompare(String(b.title || ""));
-    });
-
-    return items;
-  }
-
-  function getResourceBySlug(age, skill, slug) {
-    return (
-      (RESOURCE_DATA.resources || []).find((r) => r && r.age === age && r.skill === skill && r.slug === slug) || null
-    );
-  }
 
   function renderChips(resource, showAll) {
     const chips = [];
@@ -741,9 +839,7 @@
       return `<div class="chips" aria-label="Metadata"><span class="chip">Not specified</span></div>`;
     }
 
-    const html = chips
-      .map((c) => `<span class="chip">${escapeHtml(c.label)}: ${escapeHtml(c.value)}</span>`)
-      .join("");
+    const html = chips.map((c) => `<span class="chip">${escapeHtml(c.label)}: ${escapeHtml(c.value)}</span>`).join("");
     return `<div class="chips" aria-label="Metadata">${html}</div>`;
   }
 
