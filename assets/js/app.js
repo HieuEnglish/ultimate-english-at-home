@@ -113,6 +113,8 @@
         ? "home"
         : appPath.startsWith("/resources")
         ? "resources"
+        : appPath.startsWith("/favourites")
+        ? "favourites"
         : appPath.startsWith("/games")
         ? "games"
         : appPath.startsWith("/tests")
@@ -152,6 +154,7 @@
 
     if (parts.length === 0) return viewHome();
 
+    if (parts[0] === "favourites" && parts.length === 1) return viewFavourites();
     if (parts[0] === "games" && parts.length === 1) return viewGames();
     if (parts[0] === "tests" && parts.length === 1) return viewTests();
 
@@ -184,10 +187,19 @@
             href: hrefFor("/resources"),
             title: "Resources",
             text: "Browse by age group, then choose a skill area.",
-            icon: iconBook(), // ✅ book icon on homepage
+            icon: iconBook(),
             primary: true,
             ctaText: "",
             glow: "green"
+          })}
+
+          ${card({
+            href: hrefFor("/favourites"),
+            title: "Favourites",
+            text: "Save and revisit resources (coming soon).",
+            icon: iconHeart(),
+            ctaText: "",
+            glow: "pink"
           })}
 
           ${card({
@@ -207,6 +219,32 @@
             ctaText: "",
             glow: "blue"
           })}
+        </div>
+      </section>
+    `;
+    return { view: { title, html } };
+  }
+
+  function viewFavourites() {
+    const title = "Favourites — UEAH";
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/") },
+      { label: "Favourites" }
+    ]);
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Favourites</h1>
+        <p class="page-subtitle">This page is a placeholder for now.</p>
+
+        <div class="note">
+          <strong>Coming soon:</strong> save resources you like and come back to them later.
+        </div>
+
+        <div class="actions">
+          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
         </div>
       </section>
     `;
@@ -499,6 +537,15 @@
       <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
         <path d="M4 5.5C4 4.67 4.67 4 5.5 4H19a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5H6.25A2.25 2.25 0 0 0 4 22V5.5Z" fill="currentColor" opacity=".18"></path>
         <path d="M6.25 20H18.5a.5.5 0 0 0 .5-.5V6H6.5A.5.5 0 0 0 6 6.5V19a1 1 0 0 0 .25 1Z" fill="currentColor"></path>
+      </svg>
+    `;
+  }
+
+  function iconHeart() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M12 21s-7-4.6-9.2-9C1 8.4 3.4 5.5 6.6 5.5c1.7 0 3.1.8 3.9 2 0 0 .8-2 3.5-2 3.2 0 5.6 2.9 3.8 6.5C19 16.4 12 21 12 21Z" fill="currentColor" opacity=".18"></path>
+        <path d="M12 19.6c-1.9-1.3-5.5-4.2-6.8-7C3.7 9.4 5.3 7.5 7.3 7.5c1.5 0 2.6 1.1 3.1 2.1h1.1c.5-1 1.6-2.1 3.1-2.1 2 0 3.6 1.9 2.1 5.1-1.3 2.8-4.9 5.7-6.8 7Z" fill="currentColor"></path>
       </svg>
     `;
   }

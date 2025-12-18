@@ -225,19 +225,36 @@ a:hover{text-decoration:none}
 .card[data-glow="yellow"]{ --glow: rgba(255,230,70,.30); --glow-border: rgba(255,230,70,.85); }
 .card[data-glow="red"]{ --glow: rgba(255,70,90,.28); --glow-border: rgba(255,70,90,.85); }
 .card[data-glow="blue"]{ --glow: rgba(90,160,255,.28); --glow-border: rgba(90,160,255,.85); }
+/* Palette: pink */
+.card[data-glow="pink"]{ --glow: rgba(255,106,179,.26); --glow-border: rgba(255,106,179,.85); }
 
 /* Slightly tint the icon background on glow cards, but keep primary styling */
 .card[data-glow] .card-icon{
   background: rgba(255,255,255,.06);
 }
+
+/* Favourites-specific icon tint */
+.card[data-glow="pink"] .card-icon{
+  background: rgba(255,106,179,.12);
+  color: var(--accent2);
+}
+
+/* Keep primary styling consistent */
 .card.card--primary[data-glow] .card-icon{
   background: rgba(255,106,179,.10);
   color: var(--accent2);
 }
+
 @media (prefers-color-scheme: dark){
   .card[data-glow] .card-icon{
     background: rgba(255,255,255,.08);
   }
+
+  .card[data-glow="pink"] .card-icon{
+    background: rgba(255,106,179,.14);
+    color: var(--accent2);
+  }
+
   .card.card--primary[data-glow] .card-icon{
     background: rgba(255,106,179,.12);
     color: var(--accent2);
