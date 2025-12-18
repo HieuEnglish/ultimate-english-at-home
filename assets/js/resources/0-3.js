@@ -1,5 +1,5 @@
 /* assets/js/resources/0-3.js
-   Age 0––3 resource data pack.
+   Age 0–3 resource data pack.
    Do NOT host files in repo — only external links.
 */
 (function () {
@@ -45,6 +45,25 @@
           "Quiet, comfortable listening space; optional small speaker (low volume)."
         ],
         bestSetSlug: "best-set-recommended-bundle-for-0-3-listening"
+      },
+
+      "0-3/writing": {
+        title: "0–3 Writing ✍️👶✨",
+        overview:
+          "This pack builds 0–3 early “writing” readiness through mark-making (scribbles, lines, circles) using short, playful daily routines that strengthen fine-motor control and help children communicate ideas through drawing.",
+        objectives: [
+          "Support pre-writing stages by practicing scribble → lines → circles (developmentally appropriate targets).",
+          "Strengthen early hand skills through frequent, short mark-making sessions.",
+          "Build early “stroke language” by narrating simple movements (e.g., up/down, round/round) while the child draws.",
+          "Encourage confidence and motivation by celebrating effort and displaying the child’s work."
+        ],
+        materials: [
+          "Chunky crayons/markers and big paper (easy grip, large surface).",
+          "1 sensory “mark-making” option: foam tray / water painting outside / chalk.",
+          "Washable materials and adult supervision (especially for babies/toddlers).",
+          "Optional: a quick daily parent tip from Vroom for extra fine-motor practice in routines."
+        ],
+        bestSetSlug: "best-set-recommended-bundle-for-0-3-writing"
       }
     },
 
@@ -433,7 +452,7 @@
       },
 
       // =========================
-      // 0–3 LISTENING (new)
+      // 0–3 LISTENING (existing/new)
       // =========================
       {
         age: "0-3",
@@ -859,6 +878,435 @@
         },
         focus: "routine, repetition, calm listening",
         time: "10–15 min/day",
+        level: "caregiver-led"
+      },
+
+      // =========================
+      // 0–3 WRITING (new)
+      // =========================
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "zero-to-three-learning-to-write-and-draw",
+        title: "ZERO TO THREE — Learning to Write and Draw ✍️🖍️",
+        link: "https://www.zerotothree.org/resource/distillation/learning-to-write-and-draw/",
+        format: "site",
+        description:
+          "Parent guidance on pre-writing stages (scribbling → lines/patterns) and how to encourage mark-making.",
+        details: {
+          type: "Parent guide 📘",
+          teaches: "“Pre-writing” stages (scribbling → lines/patterns) and how to support them. ✍️➡️〰️",
+          howTo: [
+            "Match activities to your child’s stage (random scribble vs. controlled scribble). 🎯✍️",
+            "Offer chunky crayons/markers and big paper. 🖍️📄",
+            "Praise effort and display their “writing.” 🌟🖼️"
+          ],
+          whyTopPick: "Clear age-banded stages and practical ideas. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Best for ~15 months–3; for 0–12 months do supported mark-making (finger paint, big strokes). 👶🖐️🎨"
+        },
+        focus: "development stages, mark-making",
+        time: "3–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "pbs-parents-writing-at-age-2",
+        title: "PBS KIDS for Parents — Writing at Age 2 ✍️🐾",
+        link: "https://www.pbs.org/parents/learn-grow/age-2/literacy/writing",
+        format: "site",
+        description:
+          "Simple parent tips for early writing via scribbling/painting and strengthening hand muscles.",
+        details: {
+          type: "Parent tips 📋",
+          teaches: "Early writing through scribbling/painting and strong hand muscles. ✍️🎨💪",
+          howTo: [
+            "Keep thick crayons/markers and paper easy to access. 🖍️📄✅",
+            "Do a 3-minute “scribble time” daily. ⏱️✍️",
+            "Talk about what they made (“line”, “big”, “more”). 🗣️〰️⬆️➕"
+          ],
+          whyTopPick: "Practical, toddler-specific, quick routines. ⭐👶",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Ideal for ~18 months–3; supervise for mess/safety. 👶🧑‍🍼⚠️"
+        },
+        focus: "daily scribble routine",
+        time: "3 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "montana-pbs-writing-milestone-baby",
+        title: "Montana PBS — Writing Milestones (Baby) ✍️👶",
+        link: "https://montanapbs.org/parents/readinglanguage/baby/writing_milestone_baby.html",
+        format: "site",
+        description:
+          "Early “writing” as mark-making using washable materials with full caregiver support.",
+        details: {
+          type: "Parent tips 📋",
+          teaches: "Earliest mark-making with washable materials and short sessions. ✍️🧼",
+          howTo: [
+            "Use washable crayons/paint. 🖍️🎨🧼",
+            "Let baby make marks while you hold/steady paper. 👶✍️📄",
+            "Keep it under 2–3 minutes. ⏱️✅"
+          ],
+          whyTopPick: "Good for the youngest end (0–12 months) with caregiver support. ⭐👶",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "0–1 requires full supervision; avoid small parts/caps. 👶⚠️"
+        },
+        focus: "supported mark-making",
+        time: "2–3 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "montana-pbs-writing-milestone-toddler",
+        title: "Montana PBS — Writing Milestones (Toddler) ✍️👶",
+        link: "https://montanapbs.org/parents/readinglanguage/toddler/writing_milestone_toddler.html",
+        format: "site",
+        description:
+          "Toddler scribbling/lines as meaningful early writing, with ideas for home routines.",
+        details: {
+          type: "Parent tips 📋",
+          teaches: "Scribbling/lines as meaningful early writing and communication. ✍️〰️",
+          howTo: [
+            "Leave crayons in easy reach (safe, supervised). 🖍️✅",
+            "Encourage “pictures, squiggles, lines,” then ask “Tell me!” 🗣️❓",
+            "Display their work at eye level. 🖼️👀"
+          ],
+          whyTopPick: "Clear expectations for toddler scribble development. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Strong for 1–3; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "scribbles to lines",
+        time: "3–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "naeyc-support-writing-at-home",
+        title: "NAEYC — Support Writing at Home ✍️🏠",
+        link: "https://www.naeyc.org/our-work/families/support-writing-home",
+        format: "site",
+        description:
+          "Family-friendly strategies that treat scribbles and mark-making as real writing and communication.",
+        details: {
+          type: "Parent strategies 📘",
+          teaches: "Writing begins with marks/scribbles and play; adults model without pressure. ✍️🧸",
+          howTo: [
+            "Provide different tools (crayons, paintbrush, sidewalk chalk). 🖍️🖌️🧱",
+            "Let your child “write” lists/cards while you model. 📝👶",
+            "Accept scribbles as real writing. ✅✍️"
+          ],
+          whyTopPick: "Developmentally appropriate, play-based guidance. ⭐👨‍👩‍👧‍👦",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Fits 0–3 with adult modeling and supervision. 👶🧑‍🍼"
+        },
+        focus: "play-based writing",
+        time: "3–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "reading-rockets-writing-basics",
+        title: "Reading Rockets — Writing Basics ✍️🚀",
+        link: "https://www.readingrockets.org/literacy-home/reading-101-guide-parents/writing-basics",
+        format: "site",
+        description:
+          "Explains why scribbling matters and how early mark-making supports print awareness and writing foundations.",
+        details: {
+          type: "Parent guide 📘",
+          teaches: "Scribbling as early writing; tools, meaning, and print awareness. ✍️🔤",
+          howTo: [
+            "Point out real-world writing (labels, signs). 👉🏷️🪧",
+            "Offer safe tools and let your child imitate. 🖍️👶",
+            "Keep it playful and short. 🎈⏱️"
+          ],
+          whyTopPick: "Clear explanation of why early marks matter. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Great for 2–3; adapt for younger with more modeling. 👶🧑‍🍼"
+        },
+        focus: "why scribbling matters",
+        time: "2–5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "vroom-free-tips",
+        title: "Vroom — Free Tips (1000+ quick activities) 🧠🧩",
+        link: "https://www.vroom.org/",
+        format: "site",
+        description:
+          "Low-prep activity ideas that build fine-motor strength and pre-writing readiness during daily routines.",
+        details: {
+          type: "Activity bank (tips + printable ideas) 📄📱",
+          teaches: "Fine-motor + “pre-writing” readiness through everyday routines. ✍️💪",
+          howTo: [
+            "Pick one tip (or print a few). 📱🖨️",
+            "Do 1 tip/day during meals/bath/play (2–5 minutes). 🍽️🛁🧸⏱️",
+            "Repeat favorites for a week. 🔁📅"
+          ],
+          whyTopPick: "Very low prep and designed for birth–5 routines. ⭐👶",
+          freeAccess: "Free to access. 🆓🌐",
+          ageCheck: "0–3 appropriate; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "fine motor, routines",
+        time: "2–5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "nhs-cambs-getting-ready-to-write",
+        title: "NHS (Cambs & Peterborough) — Getting ready to write ✍️🏥",
+        link: "https://cambspborochildrenshealth.nhs.uk/child-development-and-growing-up/hand-skills/getting-ready-to-write/",
+        format: "site",
+        description:
+          "OT-style activity ideas for mark making using sensory media (foam, chalk, water painting outside).",
+        details: {
+          type: "OT-style activity ideas 🧩",
+          teaches: "Mark making with sensory media and big movements before pencil control. ✍️🎨",
+          howTo: [
+            "Choose 1 medium (water + brush on pavement; shaving foam tray; chalk). 💧🖌️🧼🧱",
+            "Model one stroke (“up/down”, “round”). ⬆️⬇️⭕️",
+            "Let the child explore freely for 3–5 minutes. 🎈⏱️"
+          ],
+          whyTopPick: "Concrete, toddler-appropriate activity list. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Supervise closely; use toddler-safe materials if mouthing is likely. 👶⚠️"
+        },
+        focus: "sensory mark-making",
+        time: "3–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "nhs-west-suffolk-pre-writing-early-pencil-skills-pdf",
+        title: "NHS (West Suffolk) — Pre-Writing / Early Pencil Skills (PDF) ✍️📄",
+        link: "https://www.wsh.nhs.uk/CMS-Documents/Services/Integrated-Community-Paediatric-Services-OT/f.-Pre-Writing-Early-Pencil-Skills.pdf",
+        format: "pdf",
+        description:
+          "Printable OT handout: foundations before pencil control and copying simple marks with narrated strokes.",
+        details: {
+          type: "Printable OT handout 📄",
+          teaches: "Foundations before pencil control; copying simple marks with narration. ✍️🗣️",
+          howTo: [
+            "Start with big movements (arm/shoulder) and large surfaces. 💪📄",
+            "Copy their marks and narrate “up/down, round/round.” 🗣️⬆️⬇️⭕️",
+            "Gradually introduce simple shapes. 🔺⭕️⬜️"
+          ],
+          whyTopPick: "Step-by-step and practical for parents. ⭐✅",
+          freeAccess: "Free PDF. 🆓📄",
+          ageCheck: "Best for ~18 months–3; adapt down with finger painting. 👶🖐️🎨"
+        },
+        focus: "stroke talk, foundations",
+        time: "5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "nhs-uhb-pre-writing-skills-pdf",
+        title: "NHS (Solihull / UHB) — Pre-writing skills (PDF) ✍️📄",
+        link: "https://childrenscommunitytherapies.uhb.nhs.uk/wp-content/uploads/WEB_DIGITAL_PI24_3087_01-Pre-writing-skills-advice-sheet-copy.pdf",
+        format: "pdf",
+        description:
+          "Printable advice sheet: pre-writing strokes and playful ways to practice them (sensory first, then chunky tools).",
+        details: {
+          type: "Printable OT advice sheet 📄",
+          teaches: "Pre-writing strokes that build toward letters, without letter drilling. ✍️➡️🔤",
+          howTo: [
+            "Practice strokes in sensory media first (tray, foam, sand). 🧼🏖️",
+            "Move to chunky crayons on big paper. 🖍️📄",
+            "Keep it playful, not worksheet-heavy. 🎈🚫📄"
+          ],
+          whyTopPick: "Clear progression from strokes to writing readiness. ⭐✅",
+          freeAccess: "Free PDF. 🆓📄",
+          ageCheck: "For 2–3 use only a few strokes; under-2 focus on free marks. 👶✅"
+        },
+        focus: "pre-writing strokes",
+        time: "5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "birth-to-5-matters-mark-making-matters-pdf",
+        title: "Birth to 5 Matters — Mark Making Matters (PDF) ✍️📄",
+        link: "https://birthto5matters.org.uk/wp-content/uploads/2021/03/Mark_Marking_Matters.pdf",
+        format: "pdf",
+        description:
+          "Guidance on why mark-making is meaningful communication and how adults can support it at home.",
+        details: {
+          type: "Guidance PDF 📄",
+          teaches: "Why mark-making is meaningful communication + how to support it. ✍️🗣️",
+          howTo: [
+            "Skim the overview once. 👀1️⃣",
+            "Choose 2 activity ideas that fit your home routines. 2️⃣🏠",
+            "Use them consistently for a week. 🔁📅"
+          ],
+          whyTopPick: "Strong rationale + practical early-years framing. ⭐✅",
+          freeAccess: "Free PDF. 🆓📄",
+          ageCheck: "Adult-facing; choose toddler-safe materials. 👶🧑‍🍼✅"
+        },
+        focus: "why marks matter",
+        time: "10 min (read once)",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "dfe-help-for-early-years-writing",
+        title: "UK DfE — Help for early years providers: Writing ✍️🏛️",
+        link: "https://help-for-early-years-providers.education.gov.uk/areas-of-learning/literacy/writing",
+        format: "site",
+        description:
+          "Official guidance emphasizing mark making first, hand-eye coordination, and finger strength (adaptable for home use).",
+        details: {
+          type: "Guidance page 📘",
+          teaches: "Mark making first; build hand-eye coordination and finger strength. ✍️👁️✋💪",
+          howTo: [
+            "Use a “mark making first” approach. ✅✍️",
+            "Set up a simple “mark station” (paper + chunky tool). 📄🖍️",
+            "Rotate surfaces (paper, cardboard, chalk outdoors). 📄📦🧱🌤️"
+          ],
+          whyTopPick: "Clear framework aligned to early years practice. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Suitable framework for 0–3 with caregiver adaptation. 👶🧑‍🍼"
+        },
+        focus: "framework, mark station",
+        time: "5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "bbc-tiny-happy-people-spring-pack-pdf",
+        title: "BBC Tiny Happy People — Spring Pack (PDF) 🌸📄",
+        link: "https://teach.files.bbci.co.uk/tiny-happy-people/THP%20SPRING%20PACK_ONLINE_0403.pdf",
+        format: "pdf",
+        description:
+          "Printable activity pack with play-based early learning ideas (including mark-making style activities).",
+        details: {
+          type: "Activity pack (printable) 📄",
+          teaches: "Play-based early learning + mark-making activities. 🧸✍️",
+          howTo: [
+            "Print only the pages you need. 🖨️✅",
+            "Do 1 activity, 5 minutes max. 1️⃣⏱️",
+            "Talk while making marks (“long line”, “dots”, “again”). 🗣️〰️•🔁"
+          ],
+          whyTopPick: "Ready-to-use family activities in one pack. ⭐✅",
+          freeAccess: "Free PDF download. 🆓⬇️",
+          ageCheck: "Appropriate for under-5s; supervise crafts. 👶🧑‍🍼⚠️"
+        },
+        focus: "printable activities",
+        time: "5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "pregnancy-birth-baby-learning-to-draw-and-write",
+        title: "Pregnancy, Birth and Baby (Australia) — learning how to draw and write ✍️🖍️",
+        link: "https://www.pregnancybirthbaby.org.au/toddler-development-learning-how-to-draw-and-write",
+        format: "site",
+        description:
+          "Developmental overview of progression from scribbles to circles/outlines with practical guidance for parents.",
+        details: {
+          type: "Parent guidance 📘",
+          teaches: "Typical progression from scribbles to circles/outlines and beyond. ✍️➡️⭕️",
+          howTo: [
+            "Check what “stage” your toddler is in. 🎯👶",
+            "Offer suitable tools and simple prompts (no letter drilling). 🖍️✅🚫🔤",
+            "Keep sessions short and frequent. ⏱️🔁"
+          ],
+          whyTopPick: "Clear developmental overview and expectations. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Best for ~2+; for younger focus on sensory mark-making. 👶🎨"
+        },
+        focus: "development milestones",
+        time: "5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "aap-healthychildren-scribble-time-handwriting-foundations",
+        title: "HealthyChildren.org (AAP) — “Allow for scribble time” ✍️🧠",
+        link: "https://www.healthychildren.org/English/family-life/Media/Pages/The-Importance-of-Handwriting-in-the-Digital-Age.aspx",
+        format: "site",
+        description:
+          "Pediatric advice emphasizing scribble/shape practice before letters to build handwriting foundations.",
+        details: {
+          type: "Parent advice (AAP) 📘",
+          teaches: "Scribble/trace shapes before letters; shape copying builds foundations. ✍️⭕️➡️🔤",
+          howTo: [
+            "Do 2–3 minutes of scribble time daily. 📅⏱️✍️",
+            "Trace big shapes with finger first, then chunky crayon. 👆⭕️➡️🖍️",
+            "Stop before frustration. 🛑😊"
+          ],
+          whyTopPick: "Simple “before letters” message from a pediatric source. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Works best for 2–3; under-2 keep it sensory and large-scale. 👶🎨"
+        },
+        focus: "scribble time, shapes",
+        time: "2–3 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "best-set-recommended-bundle-for-0-3-writing",
+        title: "Best “Set” (recommended bundle for 0–3 Writing) 🧺✍️",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description:
+          "A repeatable 10-minute routine, 5 days/week (repeat for 1–2 weeks): stage target + sensory marks + scribble station + stroke talk + 1 parent micro-tip.",
+        bundleItems: [
+          "zero-to-three-learning-to-write-and-draw",
+          "nhs-cambs-getting-ready-to-write",
+          "pbs-parents-writing-at-age-2",
+          "nhs-west-suffolk-pre-writing-early-pencil-skills-pdf",
+          "vroom-free-tips"
+        ],
+        details: {
+          type: "Recommended bundle 🧺",
+          teaches: "Fine-motor strength + mark-making progression (scribble → lines → circles) through short, playful routines. ✍️💪🔁",
+          howTo: [
+            "Development target (1 min): ZERO TO THREE stage check → pick today’s goal (scribble / lines / circles). 🎯✍️",
+            "Sensory mark-making (3 min): NHS “Getting ready to write” (foam tray / water painting / chalk). 🎨💧🧱⏱️",
+            "Scribble station (3 min): PBS idea — thick crayons/markers + big paper. 🖍️📄⏱️",
+            "Stroke talk (2 min): West Suffolk NHS PDF — copy their marks and narrate “up/down, round/round.” 🗣️⬆️⬇️⭕️",
+            "Parent micro-tip (1 min): Vroom — do one fine-motor/hand activity in a normal routine. ✋💪⏱️"
+          ],
+          whyTopPick: "Very repeatable, low prep, and supports real developmental stages. ⭐🔁",
+          freeAccess: "Uses free resources (some are PDFs). 🆓📄",
+          ageCheck: "Designed for 0–3 with close supervision and washable materials. 👶🧑‍🍼"
+        },
+        focus: "mark-making routine, fine motor",
+        time: "10 min/day",
         level: "caregiver-led"
       }
     ]
