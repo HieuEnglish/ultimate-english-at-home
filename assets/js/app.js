@@ -10,9 +10,20 @@
 
   const basePath = detectBasePath();
 
-  // Make <a href="/resources"> work on GitHub Pages project URLs (prepend basePath)
-  rewriteNavHrefs();
+  // Central data (loaded from assets/js/resources-data.js if present)
+  const RESOURCE_DATA = (function getResourceData() {
+    const d = window.UEAH_RESOURCES_DATA;
+    if (!d || typeof d !== "object") return { packs: {}, resources: [] };
+    return {
+      packs: d.packs && typeof d.packs === "object" ? d.packs : {},
+      resources: Array.isArray(d.resources) ? d.resources : []
+    };
+  })();
 
+  // Make <a href="/resources"> work on GitHub Pages project URLs (prepend basePath)
+  rewriteNavHrefs(document);
+
+  // Support the existing 404 redirect query param (?r=...)
   restoreRedirectedPath();
 
   window.addEventListener("popstate", () => render(getAppPath()));
@@ -30,38 +41,61 @@
     return "";
   }
 
-  function rewriteNavHrefs() {
+  function rewriteNavHrefs(root) {
     if (!basePath) return;
-    const links = document.querySelectorAll("a[data-nav]");
+    const links = root.querySelectorAll("a[data-nav][href]");
     links.forEach((a) => {
       const href = a.getAttribute("href");
       if (!href) return;
-      if (href.startsWith("/") && !href.startsWith(basePath + "/")) {
+      // Ignore full URLs, mailto/tel, hashes
+      if (
+        href.startsWith("http://") ||
+        href.startsWith("https://") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("tel:") ||
+        href.startsWith("#")
+      ) {
+        return;
+      }
+      // Only rewrite absolute site paths
+      if (href.startsWith("/") && !href.startsWith(basePath + "/") && href !== basePath) {
         a.setAttribute("href", basePath + href);
       }
     });
   }
 
   function hrefFor(appPath) {
-    return `${basePath}${appPath}`;
+    const p = normalizeAppPath(appPath);
+    return `${basePath}${p}`;
   }
 
   function getAppPath() {
     const full = window.location.pathname || "/";
     let p = full.startsWith(basePath) ? full.slice(basePath.length) : full;
     if (!p) p = "/";
-    if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
+    p = normalizeAppPath(p);
     return p;
   }
 
   function normalizeAppPath(p) {
     if (!p) return "/";
-    if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
-    return p;
+    let out = String(p);
+
+    // If a full URL is passed, reduce to path
+    try {
+      const u = new URL(out, window.location.origin);
+      if (u.origin === window.location.origin) out = u.pathname;
+    } catch (_) {}
+
+    if (!out.startsWith("/")) out = "/" + out;
+    if (out.length > 1 && out.endsWith("/")) out = out.slice(0, -1);
+    return out;
   }
 
   function restoreRedirectedPath() {
     const url = new URL(window.location.href);
+
+    // Your current 404 router uses ?r=
     const r = url.searchParams.get("r");
     if (!r) return;
 
@@ -73,12 +107,23 @@
     } catch (_) {}
 
     if (target.startsWith(basePath)) target = target.slice(basePath.length);
-    if (!target.startsWith("/")) target = "/" + target;
+    target = normalizeAppPath(target);
 
-    history.replaceState({}, "", hrefFor(normalizeAppPath(target)));
+    history.replaceState({}, "", hrefFor(target));
   }
 
   function onDocumentClick(e) {
+    // Support <button data-nav-to="/resources/..."> navigation (resource cards)
+    const navToEl = e.target && e.target.closest ? e.target.closest("[data-nav-to]") : null;
+    if (navToEl) {
+      const to = navToEl.getAttribute("data-nav-to");
+      if (to) {
+        e.preventDefault();
+        navigate(normalizeAppPath(to));
+        return;
+      }
+    }
+
     const a = e.target && e.target.closest ? e.target.closest("a[data-nav]") : null;
     if (!a) return;
 
@@ -103,8 +148,9 @@
   }
 
   function navigate(appPath) {
-    history.pushState({}, "", hrefFor(appPath));
-    render(appPath);
+    const p = normalizeAppPath(appPath);
+    history.pushState({}, "", hrefFor(p));
+    render(p);
   }
 
   function setActiveNav(appPath) {
@@ -130,13 +176,17 @@
   }
 
   function render(appPath) {
-    setActiveNav(appPath);
+    const p = normalizeAppPath(appPath);
+    setActiveNav(p);
 
-    const route = matchRoute(appPath);
+    const route = matchRoute(p);
     const view = route.view;
 
     document.title = view.title;
     appEl.innerHTML = view.html;
+
+    // Ensure any newly-rendered internal links get basePath applied (GitHub Pages)
+    rewriteNavHrefs(appEl);
 
     const main = document.getElementById("main");
     if (main) main.focus({ preventScroll: true });
@@ -167,10 +217,19 @@
 
     const skill = parts[2];
     if (!SKILLS.includes(skill)) return viewNotFound(appPath);
+
     if (parts.length === 3) return viewSkill(age, skill);
+
+    // NEW: /resources/:age/:skill/:slug
+    const slug = parts[3];
+    if (parts.length === 4 && slug) return viewResourceDetail(age, skill, slug);
 
     return viewNotFound(appPath);
   }
+
+  // -----------------------------
+  // Views
+  // -----------------------------
 
   function viewHome() {
     const title = "UEAH — Ultimate English At Home";
@@ -258,7 +317,6 @@
       { label: "Resources" }
     ]);
 
-    // Fixed glow mapping so each age group is consistent (and 13–18 is pink)
     const glowByAge = {
       "0-3": "green",
       "4-7": "yellow",
@@ -367,7 +425,7 @@
       card({
         href: hrefFor(`/resources/${age}/${skill}`),
         title: capitalize(skill),
-        text: "Open placeholder page (coming soon).",
+        text: "Open this skill page.",
         icon: iconSkill(skill),
         ctaText: "",
         glow: glowBySkill[skill] || "green"
@@ -402,17 +460,113 @@
       { label: capitalize(skill) }
     ]);
 
-    const html = `
-      <section class="page-top">
-        ${breadcrumb}
-        <h1 class="page-title">${capitalize(skill)} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(
-          age
-        )}</span></h1>
-        <p class="page-subtitle">This content page is a placeholder for now.</p>
+    const pack = getPack(age, skill);
+    const resources = getResources(age, skill);
 
+    const heading = pack && pack.title
+      ? escapeHtml(pack.title)
+      : `${capitalize(skill)} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(age)}</span>`;
+
+    const subtitle = pack && pack.overview
+      ? escapeHtml(pack.overview)
+      : `Resources for ${capitalize(skill)} — ages ${escapeHtml(age)}.`;
+
+    const packHtml = pack
+      ? `
+        <div class="detail-card" role="region" aria-label="Pack overview">
+          <h2 class="detail-title" style="font-size:18px; margin:0">Overview</h2>
+          <p class="detail-desc" style="margin-top:10px">${escapeHtml(pack.overview || "")}</p>
+
+          ${Array.isArray(pack.objectives) && pack.objectives.length
+            ? `
+              <div class="detail-section">
+                <h2>Objectives</h2>
+                <ul>
+                  ${pack.objectives.map((o) => `<li>${escapeHtml(o)}</li>`).join("")}
+                </ul>
+              </div>
+            `
+            : ""}
+
+          ${Array.isArray(pack.materials) && pack.materials.length
+            ? `
+              <div class="detail-section">
+                <h2>Materials / Resources</h2>
+                <ul>
+                  ${pack.materials.map((m) => `<li>${escapeHtml(m)}</li>`).join("")}
+                </ul>
+              </div>
+            `
+            : ""}
+        </div>
+      `
+      : "";
+
+    const gridHtml = resources.length
+      ? `
+        <div class="resource-grid" role="list" aria-label="Resources">
+          ${resources
+            .map((r) => {
+              const detailPath = `/resources/${age}/${skill}/${r.slug}`;
+              const detailHref = hrefFor(detailPath);
+
+              const chips = renderChips(r);
+              const isFeatured = r.isBestSet ? " is-featured" : "";
+              const openBtn = r.link
+                ? `<a class="btn btn--primary btn--small" href="${escapeAttr(r.link)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(r.title)} in a new tab">Open Resource ↗</a>`
+                : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
+
+              return `
+                <article class="resource-item${isFeatured}" role="listitem">
+                  <button class="resource-card" type="button" data-nav-to="${escapeAttr(detailPath)}" aria-label="View details: ${escapeAttr(r.title)}">
+                    <h2 class="resource-title">${escapeHtml(r.title)}</h2>
+                    <p class="resource-desc">${escapeHtml(r.description || `Practice resource for ${skill}.`)}</p>
+                    ${chips}
+                  </button>
+                  <div class="resource-actions" aria-label="Resource actions">
+                    <a class="btn btn--small" href="${detailHref}" data-nav>Details →</a>
+                    ${openBtn}
+                  </div>
+                </article>
+              `;
+            })
+            .join("")}
+        </div>
+      `
+      : `
         <div class="note">
           <strong>Coming soon:</strong> ${capitalize(skill)} resources for ages ${escapeHtml(age)}.
         </div>
+      `;
+
+    const bestSetNote = pack && pack.bestSetSlug
+      ? (() => {
+          const best = resources.find((r) => r.slug === pack.bestSetSlug);
+          if (!best) return "";
+          return `
+            <div class="note" style="margin-top:20px">
+              <strong>${escapeHtml(best.title)}</strong>
+              <p style="margin:8px 0 0">${escapeHtml(best.description || "")}</p>
+              <div class="actions" style="margin-top:12px">
+                <a class="btn btn--primary" href="${hrefFor(`/resources/${age}/${skill}/${best.slug}`)}" data-nav>Open Best Set →</a>
+              </div>
+            </div>
+          `;
+        })()
+      : "";
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">${heading}</h1>
+        <p class="page-subtitle">${subtitle}</p>
+
+        ${packHtml}
+
+        <h2 class="page-title" style="margin-top:22px; font-size:20px">Resources</h2>
+        ${gridHtml}
+
+        ${bestSetNote}
 
         <div class="actions">
           <a class="btn" href="${hrefFor(`/resources/${age}`)}" data-nav>← Back to Skills</a>
@@ -421,6 +575,100 @@
         </div>
       </section>
     `;
+    return { view: { title, html } };
+  }
+
+  function viewResourceDetail(age, skill, slug) {
+    const resource = getResourceBySlug(age, skill, slug);
+    if (!resource) return viewNotFound(`/resources/${age}/${skill}/${slug}`);
+
+    const title = `${resource.title} — UEAH`;
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/") },
+      { label: "Resources", href: hrefFor("/resources") },
+      { label: age, href: hrefFor(`/resources/${age}`) },
+      { label: capitalize(skill), href: hrefFor(`/resources/${age}/${skill}`) },
+      { label: resource.title }
+    ]);
+
+    const chips = renderChips(resource, true);
+
+    const openBtn = resource.link
+      ? `<a class="btn btn--primary" href="${escapeAttr(resource.link)}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>`
+      : `<span class="btn btn--primary btn--disabled" aria-disabled="true">MISSING LINK</span>`;
+
+    const details = resource.details || {};
+
+    const otherLinks = Array.isArray(details.otherLinks) ? details.otherLinks : [];
+    const otherLinksHtml = otherLinks.length
+      ? `
+        <div class="detail-section">
+          <h2>Extra links</h2>
+          <div class="detail-links">
+            ${otherLinks
+              .map(
+                (u) =>
+                  `<a class="btn btn--small" href="${escapeAttr(u)}" target="_blank" rel="noopener noreferrer">Open extra link ↗</a>`
+              )
+              .join("")}
+          </div>
+        </div>
+      `
+      : "";
+
+    const bundleHtml = Array.isArray(resource.bundleItems) && resource.bundleItems.length
+      ? `
+        <div class="detail-section">
+          <h2>Included resources</h2>
+          <ul>
+            ${resource.bundleItems
+              .map((s) => {
+                const r = getResourceBySlug(age, skill, s);
+                if (!r) return `<li>${escapeHtml(s)}</li>`;
+                const internalHref = hrefFor(`/resources/${age}/${skill}/${r.slug}`);
+                const external = r.link
+                  ? ` <a href="${escapeAttr(r.link)}" target="_blank" rel="noopener noreferrer">(Open ↗)</a>`
+                  : ` <span class="muted">(MISSING LINK)</span>`;
+                return `<li><a href="${internalHref}" data-nav>${escapeHtml(r.title)}</a>${external}</li>`;
+              })
+              .join("")}
+          </ul>
+        </div>
+      `
+      : "";
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+
+        <div class="detail-card">
+          <h1 class="detail-title">${escapeHtml(resource.title)}</h1>
+          <p class="detail-desc">${escapeHtml(resource.description || `Practice resource for ${skill}.`)}</p>
+          ${chips}
+
+          <div class="actions" style="margin-top:14px">
+            <a class="btn" href="${hrefFor(`/resources/${age}/${skill}`)}" data-nav>← Back</a>
+            ${openBtn}
+          </div>
+
+          ${renderDetailSection("Type", details.type)}
+          ${renderDetailSection("What it teaches", details.teaches)}
+          ${renderDetailListSection("How to use", details.howTo)}
+          ${renderDetailSection("Why it’s a top pick", details.whyTopPick)}
+          ${renderDetailSection("Free access check", details.freeAccess)}
+          ${renderDetailSection("Age check", details.ageCheck)}
+          ${bundleHtml}
+          ${otherLinksHtml}
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="${hrefFor(`/resources/${age}/${skill}`)}" data-nav>← Back to ${capitalize(skill)}</a>
+          <a class="btn" href="${hrefFor(`/resources/${age}`)}" data-nav>Skills</a>
+          <a class="btn" href="${hrefFor("/resources")}" data-nav>Age Groups</a>
+        </div>
+      </section>
+    `;
+
     return { view: { title, html } };
   }
 
@@ -445,6 +693,100 @@
     `;
     return { view: { title, html } };
   }
+
+  // -----------------------------
+  // Resources data helpers
+  // -----------------------------
+
+  function getPackKey(age, skill) {
+    return `${age}/${skill}`;
+  }
+
+  function getPack(age, skill) {
+    const key = getPackKey(age, skill);
+    return RESOURCE_DATA.packs && RESOURCE_DATA.packs[key] ? RESOURCE_DATA.packs[key] : null;
+  }
+
+  function getResources(age, skill) {
+    const items = (RESOURCE_DATA.resources || []).filter((r) => r && r.age === age && r.skill === skill);
+
+    // Keep featured “Best Set” at the end.
+    items.sort((a, b) => {
+      const af = a && a.isBestSet ? 1 : 0;
+      const bf = b && b.isBestSet ? 1 : 0;
+      if (af !== bf) return af - bf;
+      return String(a.title || "").localeCompare(String(b.title || ""));
+    });
+
+    return items;
+  }
+
+  function getResourceBySlug(age, skill, slug) {
+    return (
+      (RESOURCE_DATA.resources || []).find((r) => r && r.age === age && r.skill === skill && r.slug === slug) || null
+    );
+  }
+
+  function renderChips(resource, showAll) {
+    const chips = [];
+
+    if (resource && resource.format) chips.push({ label: "Format", value: resource.format });
+    if (resource && resource.level) chips.push({ label: "Level", value: resource.level });
+    if (resource && resource.time) chips.push({ label: "Time", value: resource.time });
+    if (resource && resource.focus) chips.push({ label: "Focus", value: resource.focus });
+
+    if (!chips.length && !showAll) return "";
+
+    if (!chips.length && showAll) {
+      return `<div class="chips" aria-label="Metadata"><span class="chip">Not specified</span></div>`;
+    }
+
+    const html = chips
+      .map((c) => `<span class="chip">${escapeHtml(c.label)}: ${escapeHtml(c.value)}</span>`)
+      .join("");
+    return `<div class="chips" aria-label="Metadata">${html}</div>`;
+  }
+
+  function renderDetailSection(label, value) {
+    const safeLabel = escapeHtml(label);
+    const body = value ? escapeHtml(value) : '<span class="muted">Not specified</span>';
+    return `
+      <div class="detail-section">
+        <h2>${safeLabel}</h2>
+        <p>${body}</p>
+      </div>
+    `;
+  }
+
+  function renderDetailListSection(label, items) {
+    const safeLabel = escapeHtml(label);
+    const arr = Array.isArray(items) ? items.filter(Boolean) : [];
+    if (!arr.length) {
+      return `
+        <div class="detail-section">
+          <h2>${safeLabel}</h2>
+          <p><span class="muted">Not specified</span></p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="detail-section">
+        <h2>${safeLabel}</h2>
+        <ul>
+          ${arr.map((x) => `<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+      </div>
+    `;
+  }
+
+  function escapeAttr(s) {
+    return escapeHtml(String(s)).replaceAll("\n", " ");
+  }
+
+  // -----------------------------
+  // UI helpers
+  // -----------------------------
 
   function breadcrumbs(items) {
     const li = items
@@ -472,6 +814,10 @@
       </a>
     `;
   }
+
+  // -----------------------------
+  // Icons + utils (unchanged)
+  // -----------------------------
 
   function iconAge(age) {
     if (age === "0-3") return iconBabyBottle();
