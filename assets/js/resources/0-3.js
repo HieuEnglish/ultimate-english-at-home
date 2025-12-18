@@ -64,6 +64,26 @@
           "Optional: a quick daily parent tip from Vroom for extra fine-motor practice in routines."
         ],
         bestSetSlug: "best-set-recommended-bundle-for-0-3-writing"
+      },
+
+      "0-3/speaking": {
+        title: "0–3 Speaking 🗣️👶✨",
+        overview:
+          "This pack supports 0–3 speaking and early communication through caregiver-led “serve and return” turn-taking, short daily talk routines, sing-along imitation, and simple choice questions—repeating the same materials across the week for faster learning.",
+        objectives: [
+          "Build back-and-forth communication (child “serves” → adult responds → pause for the next turn).",
+          "Encourage copying sounds/words/short phrases through repeatable songs and echoing.",
+          "Increase everyday functional language using short narration and waiting for attempts.",
+          "Prompt first words/choices with simple either/or questions (e.g., “milk or water?”).",
+          "Keep goals age-appropriate by choosing a realistic “next step” (gesture → 1 word → 2-word phrase)."
+        ],
+        materials: [
+          "A caregiver for active interaction (not passive watching).",
+          "A few toys/objects for play-based talk (cars, dolls, blocks, food items).",
+          "Phone/tablet for: one Vroom tip/day + one short sing-along clip/song.",
+          "Optional weekly reference: CDC milestones to choose the next target."
+        ],
+        bestSetSlug: "best-set-recommended-bundle-for-0-3-speaking"
       }
     },
 
@@ -668,7 +688,7 @@
         skill: "listening",
         slug: "little-stories-for-tiny-people-podcast",
         title: "Little Stories for Tiny People 🎧🧸",
-        link: "https://www.littlestoriestinypeople.com/",
+        link: "https://www.littlestoriestinypepeople.com/",
         format: "podcast",
         description:
           "Podcast stories (calmer episodes work well for bedtime/car rides; use short chunks for toddlers).",
@@ -1306,6 +1326,436 @@
           ageCheck: "Designed for 0–3 with close supervision and washable materials. 👶🧑‍🍼"
         },
         focus: "mark-making routine, fine motor",
+        time: "10 min/day",
+        level: "caregiver-led"
+      },
+
+      // =========================
+      // 0–3 SPEAKING (new)
+      // =========================
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "harvard-serve-and-return-5-steps-parents-caregivers-pdf",
+        title: "Harvard — 5 Steps for “Serve and Return” (PDF) 🧠👶📄",
+        link: "https://developingchild.harvard.edu/wp-content/uploads/2024/10/HCDC_ServeReturn_for_Parents_Caregivers_2019.pdf",
+        format: "pdf",
+        description:
+          "Printable guide showing how to do back-and-forth “serve and return” turn-taking for early communication (even before words).",
+        details: {
+          type: "Printable guide (PDF) 📄",
+          teaches: "Back-and-forth “turn taking” that builds early communication. 🔁🗣️",
+          howTo: [
+            "Notice your child’s “serve” (look, sound, reach). 👀🔊✋",
+            "Respond right away with a word + face + action. 🗣️🙂👐",
+            "Pause and wait for the next “serve.” ⏸️👶"
+          ],
+          whyTopPick: "Clear, science-based steps that fit birth–3. ⭐🧠",
+          freeAccess: "Free PDF. 🆓📄",
+          ageCheck: "Ideal for 0–3; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "serve and return, turn-taking",
+        time: "5 min (read once) + daily practice",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "harvard-serve-and-return-how-to-page",
+        title: "Harvard — Serve and Return “How-to” (page + video) 🎥🧠",
+        link: "https://developingchild.harvard.edu/resources/videos/how-to-5-steps-for-brain-building-serve-and-return/",
+        format: "video",
+        description:
+          "Short video and guidance demonstrating responsive “talking turns” with babies and toddlers.",
+        details: {
+          type: "Short video + guidance 🎬📘",
+          teaches: "How to do responsive back-and-forth turns during everyday play. 🗣️🔁👶",
+          howTo: [
+            "Watch once. 👀1️⃣",
+            "Practice during play (blocks, peekaboo) for 2–3 minutes. 🧱🙈⏱️",
+            "Repeat daily with the same routine. 🔁📅"
+          ],
+          whyTopPick: "Shows exactly what to do (easy to copy). ⭐✅",
+          freeAccess: "Free to view. 🆓👀",
+          ageCheck: "0–3 appropriate; co-view. 👶👀"
+        },
+        focus: "responsive interaction, modeling",
+        time: "2–3 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "zero-to-three-tips-on-learning-to-talk",
+        title: "ZERO TO THREE — Tips on Learning to Talk 🗣️👶",
+        link: "https://www.zerotothree.org/resource/tips-on-learning-to-talk/",
+        format: "site",
+        description:
+          "Practical daily tips to prompt first words through repetition, following the child’s lead, and waiting for responses.",
+        details: {
+          type: "Parent tip list 📋",
+          teaches: "First words through daily talk routines, repetition, and waiting. 🗣️🔁⏸️",
+          howTo: [
+            "Choose 2 tips (follow interests; repeat simple words). 2️⃣💡",
+            "Apply them during meals/bath/play. 🍽️🛁🧸",
+            "Keep “talk bursts” short (30–60 seconds). ⏱️✅"
+          ],
+          whyTopPick: "Everyday, toddler-ready guidance. ⭐🏠",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Built for early childhood; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "first words, routines",
+        time: "1–3 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "nhs-help-your-baby-learn-to-talk",
+        title: "NHS — Help your baby learn to talk 🏥🗣️",
+        link: "https://www.nhs.uk/baby/babys-development/play-and-learning/help-your-baby-learn-to-talk/",
+        format: "site",
+        description:
+          "Health-service guidance with simple ways to prompt sounds/words, including tips that work well in routines.",
+        details: {
+          type: "Parent guidance 🧑‍🍼",
+          teaches: "Prompting sounds/words and supporting communication in daily routines. 🗣️✅",
+          howTo: [
+            "Pick one daily moment (changing, feeding). 🍼👶",
+            "Narrate actions with 1–2 word phrases (“up”, “wash”, “more”). 🗣️⬆️🧼➕",
+            "Pause to let your child attempt a sound/gesture. ⏸️👶👐"
+          ],
+          whyTopPick: "Trustworthy, clear, age-aligned advice. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Appropriate for babies and toddlers; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "routine narration, pausing",
+        time: "1–3 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "naeyc-support-language-development-infants-toddlers",
+        title: "NAEYC — 12 Ways to Support Language Development (Infants & Toddlers) 🗣️👶",
+        link: "https://www.naeyc.org/our-work/families/support-language-development-infants-and-toddlers",
+        format: "site",
+        description:
+          "Fast, actionable ideas (gestures + simple talk routines) that lead into speaking.",
+        details: {
+          type: "Parent activity ideas 🧩",
+          teaches: "Gestures + short talk routines that support early language and speaking. 👐🗣️",
+          howTo: [
+            "Choose 1 idea per week (gesture + word; describe what they do). 1️⃣📅",
+            "Repeat it in the same routine daily. 🔁📅",
+            "Celebrate any attempt (sound/gesture/word). 🎉👶🗣️"
+          ],
+          whyTopPick: "Developmentally realistic and easy to apply. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Specifically for infants/toddlers. 👶✅"
+        },
+        focus: "gestures to words",
+        time: "2–5 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "asha-activities-encourage-speech-language-development",
+        title: "ASHA — Activities to Encourage Speech and Language Development 🗣️🧠",
+        link: "https://www.asha.org/public/speech/development/activities-to-encourage-speech-and-language-development/",
+        format: "site",
+        description:
+          "Authoritative play-based ideas for early talking opportunities, short phrases, and simple choice questions.",
+        details: {
+          type: "Parent activity list 📋",
+          teaches: "Play-based talking opportunities + early conversation skills. 🧸🗣️",
+          howTo: [
+            "Pick one play theme (house, cars, dolls). 🏠🚗🧸",
+            "Model short phrases (“car go”, “baby sleep”). 🗣️✅",
+            "Offer choices to prompt speech (“milk or water?”). 🥛❓💧"
+          ],
+          whyTopPick: "Practical guidance that maps to real play. ⭐🧸",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Use simplest activities for 0–3; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "choices, short phrases",
+        time: "2–5 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "vroom-mobile-app-speaking",
+        title: "Vroom — Free daily tips + app 🧠📱",
+        link: "https://www.vroom.org/mobile",
+        format: "app",
+        description:
+          "Micro-activities built into daily life, especially “Chat / Take Turns” moments for early communication.",
+        details: {
+          type: "App + micro-activities 📱🧩",
+          teaches: "Back-and-forth “chat/take turns” moments in routines. 🗣️🔁",
+          howTo: [
+            "Install/open from the official page. 📲⬇️",
+            "Do 1 tip/day during mealtime/bathtime/bedtime. 🍽️🛁🌙",
+            "Repeat favorite tips (toddlers love repetition). 🔁👶"
+          ],
+          whyTopPick: "Extremely low prep; designed for birth–5. ⭐👶",
+          freeAccess: "Free to access; app install may be optional. 🆓✅",
+          ageCheck: "Fits 0–3; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "daily talk turns",
+        time: "1–2 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "talking-is-teaching-parent-resources",
+        title: "Talking Is Teaching — Parent Resources (Talk, Read, Sing) 🗣️📖🎶",
+        link: "https://talkingisteaching.org/parent-resources/",
+        format: "site",
+        description:
+          "Printable resources and tips for everyday language routines that support first words and short phrases.",
+        details: {
+          type: "Printable tips/resources 📄",
+          teaches: "Everyday language routines for first words/phrases. 🗣️✅",
+          howTo: [
+            "Pick a topic (routines, play, early literacy). 🎯",
+            "Use one tip per day for a week. 1️⃣📅",
+            "Keep it playful; lots of back-and-forth. 🎈🔁🗣️"
+          ],
+          whyTopPick: "Made for caregivers of young children. ⭐👨‍👩‍👧‍👦",
+          freeAccess: "Resources are openly accessible. 🆓🌐",
+          ageCheck: "Best with adult guidance. 👶🧑‍🍼"
+        },
+        focus: "talk-read-sing routines",
+        time: "2–5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "raising-children-network-talking-with-babies-toddlers",
+        title: "RaisingChildren.net.au — Talking with babies & toddlers 🗣️👶",
+        link: "https://raisingchildren.net.au/babies/connecting-communicating/communicating/talking-with-babies-toddlers",
+        format: "site",
+        description:
+          "Routine-based guidance for responsive chatting, following the child’s lead, and pausing for attempts.",
+        details: {
+          type: "Parent guide 📘",
+          teaches: "Responsive chatting, tuning in, and encouraging attempts. 🗣️👂✅",
+          howTo: [
+            "Follow your child’s lead in play. 🧸➡️👶",
+            "Comment (don’t quiz) using short phrases. 🗣️✅",
+            "Pause to invite a response. ⏸️👶"
+          ],
+          whyTopPick: "Clear, realistic routine-based approach. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Specifically babies/toddlers; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "responsive talking",
+        time: "2–5 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "gosh-speech-language-development-12-24-months",
+        title: "Great Ormond Street Hospital — Speech & language (12–24 months) 🏥🗣️",
+        link: "https://www.gosh.nhs.uk/conditions-and-treatments/procedures-and-treatments/speech-and-language-development-12-24-months/",
+        format: "site",
+        description:
+          "Age-banded guidance and activity ideas for stimulating talking around 12–24 months (adaptable younger).",
+        details: {
+          type: "Parent leaflet/webpage 📄🌐",
+          teaches: "What’s typical + activities to stimulate talking in 12–24 months. 🗣️✅",
+          howTo: [
+            "Find your child’s stage. 🎯",
+            "Use suggested activities during play and routines. 🧸🏠",
+            "Repeat the same language frames daily. 🔁📅"
+          ],
+          whyTopPick: "Age-banded guidance with concrete activity ideas. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "Best for 1–2; adapt down for under-1 with gestures/sounds. 👶👐🔊"
+        },
+        focus: "milestones + activities",
+        time: "5 min (read) + daily use",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "cdc-act-early-milestones",
+        title: "CDC — Developmental milestones (speech/language reference) 📋🗣️",
+        link: "https://www.cdc.gov/act-early/milestones/index.html",
+        format: "site",
+        description:
+          "Milestone reference to keep speaking goals realistic and choose the next target (gesture → 1 word → 2-word phrase).",
+        details: {
+          type: "Milestone tracker ✅",
+          teaches: "What to expect in communication (choose realistic targets). 🎯🗣️",
+          howTo: [
+            "Check your child’s age band monthly. 📅",
+            "Pick 1 “next” communication behavior to encourage. 1️⃣➡️👶",
+            "If concerned, follow CDC guidance for next steps. ⚠️✅"
+          ],
+          whyTopPick: "Helps keep goals age-appropriate. ⭐✅",
+          freeAccess: "Free webpages. 🆓🌐",
+          ageCheck: "Caregiver resource (birth–5 focus). 👶🧑‍🍼"
+        },
+        focus: "age-appropriate targets",
+        time: "5 min/month",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "hanen-laying-foundation-first-words",
+        title: "The Hanen Centre — Laying the Foundation for First Words 🗣️👶",
+        link: "https://www.hanen.org/information-tips/laying-the-foundation-for-first-words",
+        format: "site",
+        description:
+          "Evidence-based tips using gesture + voice + pointing to build understanding that leads to first words.",
+        details: {
+          type: "Parent tips (article) 📘",
+          teaches: "Gesture + voice + pointing to support understanding and first words. 👐🗣️👉",
+          howTo: [
+            "During play, point/hold the item as you name it. 👉🧸🗣️",
+            "Add one gesture (come/stop/big/small). 👐✋⬆️⬇️",
+            "Pause for imitation (sound/gesture/word). ⏸️👶🗣️"
+          ],
+          whyTopPick: "Highly actionable “how to” for first words. ⭐✅",
+          freeAccess: "Free webpage. 🆓🌐",
+          ageCheck: "0–3 friendly; caregiver-led. 👶🧑‍🍼"
+        },
+        focus: "first words, imitation",
+        time: "2–5 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "super-simple-songs-sing-along-speaking",
+        title: "Super Simple Songs — sing-along speaking practice 🎤🎵",
+        link: "https://supersimple.com/super-simple-songs/",
+        format: "video",
+        description:
+          "Songs/videos for copying sounds/words and simple phrases through repetition and melody.",
+        details: {
+          type: "Songs/videos 🎵📺",
+          teaches: "Copying sounds/words and simple phrases through repetition. 🗣️🔁🎶",
+          howTo: [
+            "Choose 1 action song (“up/down”, “clap”, animals). 🎵⬆️⬇️👏🐶",
+            "You sing; child copies a sound/action. 🎤➡️👶👐",
+            "Repeat the same song daily for a week. 🔁📅"
+          ],
+          whyTopPick: "Very young-learner friendly; repetition is built in. ⭐🎶",
+          freeAccess: "Free to access on the site (some videos may link out). 🆓🌐",
+          ageCheck: "Great for 0–3 with supervision (screen time/ads if on YouTube). 👶⚠️"
+        },
+        focus: "sing-along imitation",
+        time: "2–3 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "pbs-kids-songs-speaking",
+        title: "PBS KIDS — Songs (short, repeatable) 🎶🐾",
+        link: "https://pbskids.org/videos/songs",
+        format: "video",
+        description:
+          "Short song clips that help toddlers echo key words (names, greetings, feelings) and sing along.",
+        details: {
+          type: "Short song clips 🎵",
+          teaches: "Singing along + copying key words/lines. 🎤🗣️",
+          howTo: [
+            "Pick a 30–60s clip. ⏱️🎬",
+            "Do “listen once → sing/echo one line.” 🎧➡️🎤",
+            "Reuse the same clip all week. 🔁📅"
+          ],
+          whyTopPick: "Very short and toddler-manageable. ⭐⏱️👶",
+          freeAccess: "Free to watch on PBS KIDS. 🆓📺",
+          ageCheck: "Appropriate for toddlers; co-view recommended. 👶👀"
+        },
+        focus: "echoing, short clips",
+        time: "1–2 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "sesame-street-official-videos-talk-along-speaking",
+        title: "Sesame Street — Official videos (talk-along routines) 📺🗣️",
+        link: "https://www.sesamestreet.org/videos",
+        format: "video",
+        description:
+          "Songs and clips for greeting phrases, feelings words, and imitation through repeatable character routines.",
+        details: {
+          type: "Videos/songs 📺🎵",
+          teaches: "Greeting phrases, feelings words, and imitation through songs. 👋😊🗣️",
+          howTo: [
+            "Choose a short song clip. 🎵🎬",
+            "Pause to copy 1 word (“hello”, “bye”, “happy”). ⏸️🗣️👋",
+            "Repeat the same clip 3–4 times across the week. 🔁📅"
+          ],
+          whyTopPick: "High-quality preschool language content. ⭐✅",
+          freeAccess: "Free on the official site. 🆓🌐",
+          ageCheck: "Toddler-safe with supervision. 👶👀✅"
+        },
+        focus: "greetings, feelings, imitation",
+        time: "3–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "best-set-recommended-bundle-for-0-3-speaking",
+        title: "Best “Set” (bundle + simple weekly plan for 0–3 Speaking) 🧺🗣️",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description:
+          "Daily 10-minute routine (repeat the same materials all week): serve-and-return practice + one Vroom tip + one sing-along + simple choice questions, plus a weekly milestone check to pick the next target.",
+        bundleItems: [
+          "harvard-serve-and-return-5-steps-parents-caregivers-pdf",
+          "vroom-mobile-app-speaking",
+          "super-simple-songs-sing-along-speaking",
+          "pbs-kids-songs-speaking",
+          "asha-activities-encourage-speech-language-development",
+          "cdc-act-early-milestones"
+        ],
+        details: {
+          type: "Recommended bundle 🧺",
+          teaches: "Turn-taking + imitation + functional first words through repeatable daily routines. 🔁🗣️",
+          howTo: [
+            "Daily (10 min): 2 min Harvard “Serve and Return” practice during play. ⏱️🧠🗣️",
+            "Daily: 2 min ONE Vroom tip (mealtime/bathtime/bedtime). ⏱️🧩",
+            "Daily: 3 min ONE sing-along song (Super Simple OR PBS KIDS clip). ⏱️🎤🎶",
+            "Daily: 3 min “Choice questions” + short phrases (ASHA idea): “milk/water?”, “car/ball?”. ⏱️❓🗣️",
+            "Weekly (5 min): Use CDC milestones to pick a realistic next step (gesture → 1 word → 2-word phrase). 📅🎯"
+          ],
+          whyTopPick: "Same routine every day → faster learning through repetition. ⭐🔁",
+          freeAccess: "Uses free resources; some video platforms may include ads. 🆓⚠️",
+          ageCheck: "Designed for 0–3 with active caregiver interaction. 👶🧑‍🍼"
+        },
+        focus: "serve & return, imitation, choices",
         time: "10 min/day",
         level: "caregiver-led"
       }
