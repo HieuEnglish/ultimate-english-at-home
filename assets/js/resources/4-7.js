@@ -38,6 +38,26 @@
           "Optional extras (weekend/variety): PBS KIDS Podcasts, Unite for Literacy narrated books."
         ],
         bestSetSlug: "best-set-recommended-bundle-for-4-7-listening"
+      },
+
+      "4-7/writing": {
+        title: "4–7 Writing ✍️🧒📄",
+        overview:
+          "A short, low-frustration 4–7 writing routine that builds handwriting confidence through pre-writing lines/curves, letter tracing, simple sentence work, and real-life writing (labels/lists/signs). It uses small daily sessions with lots of repetition.",
+        objectives: [
+          "Strengthen fine-motor control and pencil control (lines/curves → letters).",
+          "Improve letter formation by repeating the same letters across the week.",
+          "Build early writing output from words → short sentences (with drawing support).",
+          "Practice “real writing” for meaning (labels, lists, simple signs/messages)."
+        ],
+        materials: [
+          "Pencil + crayons/markers, paper (plus optional wide-line paper).",
+          "2–3 printable worksheet pages per week (don’t overprint).",
+          "Optional digital practice (short only): Khan Academy Kids tracing/creating.",
+          "Optional “real writing corner” setup (paper + markers) for lists/labels.",
+          "Optional “quick tip” support: Vroom 1 tip/day."
+        ],
+        bestSetSlug: "best-set-recommended-bundle-for-4-7-writing"
       }
     },
 
@@ -826,6 +846,360 @@
           ageCheck: "Designed for 4–7 with short sessions and caregiver support. 🧒🧑‍🏫"
         },
         focus: "routine, repetition, comprehension",
+        time: "10–15 min/day",
+        level: "caregiver-led"
+      },
+
+      // =========================
+      // 4–7 WRITING (new)
+      // =========================
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-khan-academy-kids",
+        title: "Khan Academy Kids 🐻✏️",
+        link: "https://www.khanacademy.org/kids",
+        format: "app",
+        description:
+          "Free learning app with tracing/drawing/early writing activities to build letter tracing and fine-motor confidence.",
+        details: {
+          type: "Free learning app (tracing, drawing, early writing) 📱",
+          teaches: "Letter tracing, early spelling/writing tasks, fine-motor confidence. ✍️🔤💪",
+          howTo: [
+            "Open Create / tracing activities. ✍️",
+            "Do 5 minutes max (stop while it’s fun). ⏱️",
+            "Repeat the same letters for a whole week. 🔁"
+          ],
+          whyTopPick: "Consistent, kid-friendly writing practice inside a structured app. 🌟",
+          freeAccess: "Free to access/use (app install required). ✅🆓📲",
+          ageCheck: "Great fit for 4–7; adult sets boundaries for screen time. 👀🧑‍🧒"
+        },
+        focus: "digital tracing, fine motor",
+        time: "5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-british-council-writing",
+        title: "LearnEnglish Kids (British Council) — Writing practice 🧩📝",
+        link: "https://learnenglishkids.britishcouncil.org/skills/writing",
+        format: "site",
+        description:
+          "Online practice and printable-style activities for ESL-friendly writing (words → short sentences).",
+        details: {
+          type: "Online practice + printable-style activities 🌐",
+          teaches: "Simple writing tasks for young learners (words → short sentences). ✍️➡️📝",
+          howTo: [
+            "Pick 1 easy topic (e.g., “about me”). 👤",
+            "Do 1 activity, then copy 3–5 words onto paper. ✍️3️⃣–5️⃣",
+            "Reuse the same topic 2–3 times that week. 🔁"
+          ],
+          whyTopPick: "Purpose-built for young English learners. 🎯",
+          freeAccess: "Free to use on the site. ✅🆓",
+          ageCheck: "4–7 appropriate; caregiver support for navigation/typing. 🧑‍🧒👀"
+        },
+        focus: "ESL writing, short outputs",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-worksheetfun-alphabet-printable",
+        title: "WorksheetFun — Alphabet tracing / handwriting printables 🔤🖍️",
+        link: "https://www.worksheetfun.com/tag/alphabet-printable/",
+        format: "printable",
+        description:
+          "Printable tracing and handwriting worksheets to practice letter formation (trace → write).",
+        details: {
+          type: "Printable tracing/handwriting worksheets 🧾",
+          teaches: "Letter formation practice (trace → write). 🔤✍️",
+          howTo: [
+            "Print 2–3 pages only. 🖨️",
+            "Trace once, then write the same letter 3 times. ✍️3️⃣",
+            "Circle the “best one.” ⭐"
+          ],
+          whyTopPick: "Lots of simple, repeatable tracing sheets. 🔁",
+          freeAccess: "Free to access/print (site experience can vary). ✅🆓⚠️",
+          ageCheck: "Good for 4–7; supervise due to ads/links common on free worksheet sites. 👀⚠️"
+        },
+        focus: "letter tracing",
+        time: "4–6 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-superstar-worksheets",
+        title: "Superstar Worksheets — Free writing/sentence worksheets 🧠✍️",
+        link: "https://superstarworksheets.com/",
+        format: "printable",
+        description:
+          "Printable worksheets for handwriting and early sentence writing (often includes draw + write formats).",
+        details: {
+          type: "Printable worksheets (handwriting, sentences, draw + write) 🧾",
+          teaches: "Early sentence writing + handwriting practice. 📝✍️",
+          howTo: [
+            "Choose 1 worksheet (don’t binge-print). 🖨️",
+            "Do “trace → write → draw.” 🎨✍️",
+            "Read the sentence aloud at the end. 🗣️"
+          ],
+          whyTopPick: "Clear, classroom-style worksheets with direct PDFs. ✅",
+          freeAccess: "Free printable PDFs are accessible (site content varies). ✅🆓⚠️",
+          ageCheck: "Great for 5–7; 4-year-olds do “draw + label” with adult help. 🧒🧑‍🧒"
+        },
+        focus: "sentences, draw + write",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-kidzone-prewriting",
+        title: "KidZone — Pre-writing / tracing practice 🌀✋",
+        link: "https://www.kidzone.ws/prek_wrksht/",
+        format: "printable",
+        description:
+          "Printable pre-writing sheets for pencil control patterns (lines, curves, shapes) before letters.",
+        details: {
+          type: "Printable pre-writing worksheets 🧾",
+          teaches: "Pencil control (lines, curves, shapes) → readiness for letters. ➖➰➡️🔤",
+          howTo: [
+            "Pick 1 pattern page (lines or curves). ➖➰",
+            "Trace slowly with a chunky pencil. ✏️",
+            "Do 3 minutes, then stop. ⏱️"
+          ],
+          whyTopPick: "Strong “before letters” skill-building for young kids. 💪",
+          freeAccess: "Free to access/print. ✅🆓",
+          ageCheck: "Very suitable for 4–6; adult supervision recommended. 👀🧑‍🧒"
+        },
+        focus: "pre-writing patterns",
+        time: "3 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-dltk-kids",
+        title: "DLTK — Printable writing paper / handwriting supports 📄✍️",
+        link: "https://www.dltk-kids.com/",
+        format: "printable",
+        description:
+          "Printable writing paper and early writing tools (including wide-line options) to help spacing and first sentences.",
+        details: {
+          type: "Printable writing paper / early writing tools 🧾",
+          teaches: "Better spacing and line use (useful for first sentences). 📏",
+          howTo: [
+            "Print wide-line paper. 📄",
+            "Write 1 short sentence (“I like cats.”). ✍️",
+            "Add 1 picture that matches. 🐱🎨"
+          ],
+          whyTopPick: "Quick way to make writing feel structured at home. 🏫✨",
+          freeAccess: "Free site access (ad-supported; content varies). ✅🆓⚠️",
+          ageCheck: "4–7 appropriate; supervise browsing/ads. 👀⚠️"
+        },
+        focus: "wide-line paper, spacing",
+        time: "5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-pbs-parents",
+        title: "PBS Parents — Home writing ideas 👨‍👩‍👧‍👦📝",
+        link: "https://www.pbs.org/parents/",
+        format: "site",
+        description:
+          "Parent-friendly ideas that support writing development through real routines (labels, lists, messages).",
+        details: {
+          type: "Parent-friendly activity ideas 🌐",
+          teaches: "Age-appropriate writing development + simple at-home routines. 🏠✍️",
+          howTo: [
+            "Pick 1 idea (labels, lists, messages). 🏷️🛒💬",
+            "Do it during a real routine (snack / toys). 🍎🧸",
+            "Keep it short and positive. 😊"
+          ],
+          whyTopPick: "Practical, low-prep routines for families. ✅",
+          freeAccess: "Free to access. ✅🆓",
+          ageCheck: "Adult-led content; safe and appropriate with guidance. 🧑‍🧒"
+        },
+        focus: "real-life writing routines",
+        time: "2–5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-naeyc-support-writing-home",
+        title: "NAEYC — Support Writing at Home 🏠✍️",
+        link: "https://www.naeyc.org/our-work/families/support-writing-home",
+        format: "site",
+        description:
+          "Family guidance that encourages “real writing” through play (notes, lists, signs, pretend writing).",
+        details: {
+          type: "Family guidance + activity ideas 📄",
+          teaches: "Real writing through play (notes, lists, signs, pretend). 📝🛒🏷️",
+          howTo: [
+            "Set up a “writing corner” (paper + markers). 🖍️📄",
+            "Model 1 real task (“shopping list”). 🛒",
+            "Let the child copy/try their version. ✍️"
+          ],
+          whyTopPick: "Developmentally realistic early-childhood approach. 🌟",
+          freeAccess: "Free webpage. ✅🆓",
+          ageCheck: "Great for 4–7; adult guidance recommended. 👀🧑‍🧒"
+        },
+        focus: "writing corner, real tasks",
+        time: "2–5 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-national-literacy-trust-free-resources",
+        title: "National Literacy Trust — Free resources 📚📝",
+        link: "https://literacytrust.org.uk/free-resources/",
+        format: "site",
+        description:
+          "Free family-friendly packs and activities (varies by topic) that can include labels, captions, and simple sentence writing.",
+        details: {
+          type: "Free activity packs/resources (varies by topic) 🧾",
+          teaches: "Early literacy activities that can include writing tasks (labels, captions, simple sentences). 🏷️📝",
+          howTo: [
+            "Choose 1 short activity. 🧩",
+            "Do it 10 minutes max. ⏱️",
+            "Repeat weekly with a new theme. 🔁"
+          ],
+          whyTopPick: "Reputable literacy organization with family-friendly materials. ✅",
+          freeAccess: "Free downloads/resources available. ✅🆓⬇️",
+          ageCheck: "Suitable for children; adult-led selection. 🧑‍🧒👀"
+        },
+        focus: "family resources, writing activities",
+        time: "10 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-vroom-mobile",
+        title: "Vroom — Quick daily “brain building” tips 🧠✨",
+        link: "https://www.vroom.org/mobile",
+        format: "site",
+        description:
+          "Micro-activities that support fine-motor and routine habits that help writing (short daily tips).",
+        details: {
+          type: "Micro-activities (site/app tips) 📱",
+          teaches: "Fine-motor + routine habits that support writing readiness. ✍️💪🔁",
+          howTo: [
+            "Pick 1 tip/day. 🗓️",
+            "Do it during routine time (getting dressed, meals). 👕🍽️",
+            "Repeat favorites all week. 🔁"
+          ],
+          whyTopPick: "Extremely low prep—easy to sustain. ✅",
+          freeAccess: "Free to access. ✅🆓",
+          ageCheck: "Strong for 4–7 with caregiver-led routines. 🧑‍🧒"
+        },
+        focus: "quick tips, fine motor",
+        time: "2 min",
+        level: "parent tips"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-readwritethink-postcard-creator",
+        title: "ReadWriteThink — Postcard Creator 📨✍️",
+        link: "https://www.readwritethink.org/classroom-resources/student-interactives/postcard-creator",
+        format: "interactive",
+        description:
+          "Interactive tool for writing short real-world messages (greeting, message, closing) and printing/saving.",
+        details: {
+          type: "Interactive writing tool (type + print) 💻🖨️",
+          teaches: "Short message writing: greeting, message, closing. 📨📝",
+          howTo: [
+            "Write 1–2 short sentences (“Hi… I like…”). ✍️",
+            "Add a simple picture. 🖼️",
+            "Print or screenshot to keep. 📄"
+          ],
+          whyTopPick: "Real-world writing in a fun format. 🌟",
+          freeAccess: "Free to use. ✅🆓",
+          ageCheck: "Best for 6–7; 4–5 need adult typing help. 🧑‍🧒⌨️"
+        },
+        focus: "short messages, real writing",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-kindergartenworksheetsandgames-sentence-cut-paste",
+        title: "Simple sentence cut-and-paste (free printable) ✂️🧩✍️",
+        link: "https://www.kindergartenworksheetsandgames.com/farm-sentences-worksheets/",
+        format: "printable",
+        description:
+          "Cut-and-paste sentence building that supports word order and copying a full sentence neatly.",
+        details: {
+          type: "Printable sentence-building worksheet (cut → order → write) 🧾",
+          teaches: "Word order + copying a full sentence neatly. 🧩➡️✍️",
+          howTo: [
+            "Cut out words. ✂️",
+            "Put them in order. 🧩",
+            "Copy the full sentence onto lines. ✍️"
+          ],
+          whyTopPick: "Clear bridge from single words to full sentences. 🌉",
+          freeAccess: "Free printable link provided on the page (site experience can vary). ✅🆓⚠️",
+          ageCheck: "Great for 5–7; adult supervision recommended (scissors + ads/links). 👀⚠️"
+        },
+        focus: "sentence building, handwriting",
+        time: "10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "best-set-recommended-bundle-for-4-7-writing",
+        title: "Best “Set” (bundle + simple weekly plan for 4–7 Writing) 🗓️✍️",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description:
+          "Goal: 10–15 minutes/day, lots of repetition, low frustration. Daily: warm-up patterns → letter practice → sentence/draw → real-life writing. Weekend: one fun message task + one parent micro-upgrade.",
+        bundleItems: [
+          "4-7-writing-kidzone-prewriting",
+          "4-7-writing-worksheetfun-alphabet-printable",
+          "4-7-writing-superstar-worksheets",
+          "4-7-writing-naeyc-support-writing-home",
+          "4-7-writing-readwritethink-postcard-creator",
+          "4-7-writing-pbs-parents",
+          "4-7-writing-vroom-mobile"
+        ],
+        details: {
+          type: "Recommended bundle 🧺",
+          teaches: "Handwriting confidence via patterns → letters → short sentences + meaningful writing. ➖➰➡️🔤➡️📝",
+          howTo: [
+            "Mon–Fri: Warm-up (3 min) — KidZone pre-writing lines/curves. ➖➰⏱️",
+            "Mon–Fri: Letters (4 min) — WorksheetFun tracing (same 3 letters all week). 🔤✍️🔁",
+            "Mon–Fri: Sentence (5 min) — Superstar Worksheets “trace/write + draw”; read aloud at end. 🧾🎨🗣️",
+            "Mon–Fri: Real-life writing (2 min) — NAEYC idea (labels/list/sign: “TOYS”, “MILK”). 🏷️🛒",
+            "Weekend: Fun digital task (5–10 min) — ReadWriteThink Postcard Creator (thank you / hello message). 📨✨",
+            "Weekend: Parent micro-upgrade (2 min) — PBS Parents idea → apply immediately. 👨‍👩‍👧‍👦📝"
+          ],
+          whyTopPick: "Short blocks + repetition keeps handwriting practice calm and sustainable. ⭐🙂",
+          freeAccess: "Uses free resources; some worksheet sites may be ad-supported; print selectively. 🆓⚠️",
+          ageCheck: "Designed for 4–7 with caregiver support and short sessions. 🧒🧑‍🏫"
+        },
+        focus: "handwriting, sentences, real writing",
         time: "10–15 min/day",
         level: "caregiver-led"
       }
