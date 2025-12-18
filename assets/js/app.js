@@ -186,7 +186,7 @@
           ${card({
             href: hrefFor("/resources"),
             title: "Resources",
-            text: "Browse by age group, then choose a skill area.",
+            text: "Improve a skill",
             icon: iconLeaf(),
             primary: true,
             ctaText: "",
@@ -196,7 +196,7 @@
           ${card({
             href: hrefFor("/games"),
             title: "Games",
-            text: "Placeholder for now (coming soon).",
+            text: "Improve with fun",
             icon: iconGamepad(),
             ctaText: "",
             glow: "yellow"
@@ -205,7 +205,7 @@
           ${card({
             href: hrefFor("/tests"),
             title: "Tests",
-            text: "Placeholder for now (coming soon).",
+            text: "Test your skills",
             icon: iconClipboard(),
             ctaText: "",
             glow: "blue"
@@ -214,7 +214,7 @@
           ${card({
             href: hrefFor("/favourites"),
             title: "Favourites",
-            text: "Save and revisit resources (coming soon).",
+            text: "Save your favourites",
             icon: iconHeart(),
             ctaText: "",
             glow: "pink"
