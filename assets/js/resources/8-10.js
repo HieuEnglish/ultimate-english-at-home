@@ -57,6 +57,26 @@
           "Optional accounts (for feedback/tracking): Cambridge Write & Improve and Quill."
         ],
         bestSetSlug: "best-set-recommended-bundle-for-8-10-writing"
+      },
+
+      "8-10/speaking": {
+        title: "8–10 Speaking 🗣️✨",
+        overview:
+          "A short, repeatable weekly speaking routine for 8–10 year-old ESL learners. It builds pronunciation, clarity, confidence, and longer speaking turns using kid-friendly speaking games, short videos, storytelling prompts, and one “performance” task each week.",
+        objectives: [
+          "Improve pronunciation + clear sounds through guided practice and repetition.",
+          "Build speech rhythm and clarity with short tongue twister routines.",
+          "Develop speaking fluency by describing, retelling, and sharing opinions in short, structured tasks.",
+          "Increase confidence with weekly output (joke performance / mini-speech / recorded speaking)."
+        ],
+        materials: [
+          "Device with internet (tablet/laptop/phone).",
+          "Optional headphones for clearer model audio.",
+          "Optional: simple notebook for speaking notes (5-bullet plan), plus a timer.",
+          "Core sites/apps used in this guide (rotate): LearnEnglish Kids Speak & Spell, Tongue Twisters, Jokes, Video Zone, Story Maker 1/2, LearnEnglish Sounds Right (app), Cambridge activities, NeoK12 public speaking.",
+          "Optional extras: ChatterPix Kids app, Conversation Starters PDF, ELT Buzz story generator, English Heritage story dice, British Council drama games (offline)."
+        ],
+        bestSetSlug: "best-set-recommended-bundle-for-8-10-speaking"
       }
     },
 
@@ -147,8 +167,7 @@
           whyTopPick:
             "Trusted school-style leveled readers with clear progression. ⭐",
           freeAccess: "Free library access after signup/login. 🆓🔐",
-          ageCheck:
-            "Good for 8–10 (use level filters to avoid books that are too easy/too hard). 🎯"
+          ageCheck: "Good for 8–10 (use level filters to match ability). 🎯"
         },
         focus: "leveled readers, decoding, progression",
         time: "10–20 min",
@@ -1112,6 +1131,460 @@
         focus: "weekly routine, balanced writing skills",
         time: "15–25 min/day (Mon–Fri)",
         level: "independent (with light support)"
+      },
+
+      // =========================
+      // 8–10 SPEAKING
+      // =========================
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-learnenglishkids-speak",
+        title: "LearnEnglish Kids — Speak (Speak & Spell) 🧑‍🏫🗣️",
+        link: "https://learnenglishkids.britishcouncil.org/speak-spell/speak",
+        format: "site",
+        description:
+          "Kid-friendly speaking practice with clear models and short tasks to improve pronunciation and confidence.",
+        details: {
+          type: "Speaking practice (models + activities) 🎮🧩",
+          teaches:
+            "Pronunciation practice + saying words/sounds clearly. 🔤🗣️",
+          howTo: [
+            "Choose 1 activity (keep it short). 1️⃣⏱️",
+            "Pick 5 target words and copy them aloud clearly. 🗣️5️⃣",
+            "Repeat the same activity 2–3 times this week. 🔁"
+          ],
+          whyTopPick:
+            "Made specifically for children learning English; easy to reuse in short sessions. ⭐",
+          freeAccess:
+            "Free to use; some community features may require login. 🆓⚠️",
+          ageCheck:
+            "Safe for 8–10; short sessions work best. 🎯"
+        },
+        focus: "pronunciation, clarity",
+        time: "5–10 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-learnenglishkids-tongue-twisters",
+        title: "LearnEnglish Kids — Tongue Twisters 👅⚡",
+        link: "https://learnenglishkids.britishcouncil.org/fun-games/tongue-twisters",
+        format: "site",
+        description:
+          "Audio-supported tongue twisters for rhythm, clarity, and tricky sounds.",
+        details: {
+          type: "Listen + repeat speaking practice 🎧🔁",
+          teaches:
+            "Clarity, rhythm, and tricky sounds (fast + fun). 🗣️🎵",
+          howTo: [
+            "Play one twister. 🎧",
+            "Repeat slowly 3 times (clear sounds). 🐢3️⃣",
+            "Repeat faster 3 times (keep it playful). 🚀3️⃣"
+          ],
+          whyTopPick:
+            "Instant pronunciation practice with built-in audio modelling. ⭐",
+          freeAccess: "Free webpage/audio. 🆓✅",
+          ageCheck:
+            "Great for 8–10; stop before frustration. 🎯🙂"
+        },
+        focus: "rhythm, articulation",
+        time: "2–5 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-learnenglishkids-jokes",
+        title: "LearnEnglish Kids — Jokes (Tell-a-joke speaking) 😄🎤",
+        link: "https://learnenglishkids.britishcouncil.org/fun-games/jokes",
+        format: "site",
+        description:
+          "Short jokes that are perfect for weekly speaking performance and confidence building.",
+        details: {
+          type: "Reading + speaking performance 🎭🗣️",
+          teaches:
+            "Natural phrases, timing, and confidence speaking in front of someone. 🧠🎤",
+          howTo: [
+            "Pick 1 short joke. 1️⃣😂",
+            "Practice reading it aloud twice (slow then normal). 🗣️🔁",
+            "Tell it to someone or record once. 🎤"
+          ],
+          whyTopPick:
+            "Clear weekly outcome: perform something short and fun. ⭐",
+          freeAccess: "Free to access. 🆓✅",
+          ageCheck:
+            "Kid-focused; adult can preview if needed. 👀✅"
+        },
+        focus: "confidence, performance",
+        time: "5–10 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-learnenglishkids-video-zone",
+        title: "LearnEnglish Kids — Video Zone (Watch → discuss → speak) 🎥🗣️",
+        link: "https://learnenglishkids.britishcouncil.org/listen-watch/video-zone",
+        format: "video",
+        description:
+          "Short videos that naturally lead into speaking: discussion, opinions, and retelling.",
+        details: {
+          type: "Short videos + activities 📺📝",
+          teaches:
+            "Speaking through retelling, opinions, and discussion prompts. 💬🧠",
+          howTo: [
+            "Watch 1 short video. 🎥",
+            "Answer 3 simple questions aloud. ❓3️⃣",
+            "Retell the video in 3 sentences (beginning/middle/end). 🧩3️⃣"
+          ],
+          whyTopPick:
+            "Clean, structured “watch + respond” flow. ⭐",
+          freeAccess: "Free to watch/use. 🆓✅",
+          ageCheck: "8–10 appropriate; adult help if needed. 🎯"
+        },
+        focus: "retell, opinions",
+        time: "8–12 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-learnenglishkids-story-maker-1",
+        title: "LearnEnglish Kids — Story Maker 1 (Create → read aloud) 🧙📖",
+        link: "https://learnenglishkids.britishcouncil.org/fun-games/games/story-maker-1",
+        format: "interactive",
+        description:
+          "Interactive story maker that supports storytelling and speaking turns (read aloud + retell).",
+        details: {
+          type: "Interactive story generator 🎮📖",
+          teaches:
+            "Storytelling, sequencing, and expressive speaking. 🗣️🏗️",
+          howTo: [
+            "Build a story in the game. 🎮",
+            "Read it aloud with expression. 🎭🗣️",
+            "Optional: retell without reading (1 minute). ⏱️"
+          ],
+          whyTopPick:
+            "Speaking + creativity with very low prep. ⭐",
+          freeAccess: "Free to play/use. 🆓✅",
+          ageCheck: "Strong fit for 8–10; help with harder words if needed. 🎯"
+        },
+        focus: "storytelling, sequencing",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-learnenglishkids-story-maker-2",
+        title: "LearnEnglish Kids — Story Maker 2 (Step-up) 📖🎲",
+        link: "https://learnenglishkids.britishcouncil.org/fun-games/games/story-maker-2",
+        format: "interactive",
+        description:
+          "A slightly harder story maker for longer speaking turns and clearer story structure.",
+        details: {
+          type: "Interactive story generator 🎮📚",
+          teaches:
+            "Longer speaking turns and story structure (beginning–middle–end). 🧩🗣️",
+          howTo: [
+            "Create the story. 🎮",
+            "Practice a beginning–middle–end retell. 🧩",
+            "Do a 60-second performance to a partner. 🎤⏱️"
+          ],
+          whyTopPick:
+            "Natural progression from Story Maker 1 for stronger speakers. ⭐",
+          freeAccess: "Free to play/use. 🆓✅",
+          ageCheck: "Best for confident 8–10 learners. 🎯"
+        },
+        focus: "longer speaking turns, structure",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-sounds-right-app-ios",
+        title: "LearnEnglish Sounds Right (Pronunciation app) 🔤🎧",
+        link: "https://apps.apple.com/vn/app/learnenglish-sounds-right/id387588128",
+        format: "app",
+        description:
+          "Phonemic chart app with model audio for English sounds (quick, focused pronunciation practice).",
+        details: {
+          type: "Pronunciation chart app 📲🎙️",
+          teaches:
+            "English sounds with model audio (great for tricky vowel/consonant clarity). 🔊",
+          howTo: [
+            "Tap one sound and copy it 5 times. 🔤🗣️5️⃣",
+            "Put the sound into 3 example words (adult chooses). 🧠3️⃣",
+            "Record and replay once to check clarity (optional). 🎤🔁"
+          ],
+          whyTopPick:
+            "Fast, distraction-light sound practice; ideal for 2-minute drills. ⭐",
+          freeAccess:
+            "App listing and availability can vary by store/region. 🆓⚠️",
+          ageCheck:
+            "Good for 8–10 with guidance (symbols can be optional). 🎯"
+        },
+        focus: "sounds, pronunciation clarity",
+        time: "2–5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-cambridge-activities-for-children",
+        title: "Cambridge English — Activities for Children 🎯🗣️",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Levelled activities (Pre-A1/A1/A2) that can be used for speaking practice with short, structured answers.",
+        details: {
+          type: "Levelled activities (kid ESL) 🧩📚",
+          teaches:
+            "Speaking practice inside kid-friendly, levelled tasks. 🗣️📈",
+          howTo: [
+            "Choose a level (Pre-A1/A1 works well). 🎯",
+            "Do 1 activity. ✅",
+            "Say answers aloud + add one extra sentence. 💬➕1️⃣",
+            "Repeat with the same format next week. 🔁"
+          ],
+          whyTopPick:
+            "Levelled content supports mixed-ability speaking. ⭐",
+          freeAccess: "Public activity pages (availability can vary). 🆓⚠️",
+          ageCheck: "Designed for children; adult support helps. 🎯"
+        },
+        focus: "structured speaking, levelled practice",
+        time: "8–12 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-neok12-public-speaking",
+        title: "NeoK12 — Public Speaking for Kids 🎤🧠",
+        link: "https://www.neok12.com/Public-Speaking.htm",
+        format: "site",
+        description:
+          "Videos and lessons that focus directly on speaking structure and delivery (simple mini-speeches).",
+        details: {
+          type: "Curated video lessons 📺🧑‍🏫",
+          teaches:
+            "Speaking structure and delivery basics (confidence, clarity, organization). 🗣️🏗️",
+          howTo: [
+            "Watch 1 short lesson. 🎥",
+            "Make a 5-bullet plan. 📝5️⃣",
+            "Give a 60-second talk (record if possible). 🎤⏱️"
+          ],
+          whyTopPick:
+            "Direct focus on speaking skills, not just vocabulary. ⭐",
+          freeAccess: "Public access site; content may vary. 🆓⚠️",
+          ageCheck: "Good for 8–10; adult helps choose topics. 🎯"
+        },
+        focus: "mini-speeches, confidence",
+        time: "10–15 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-chatterpix-kids-ios",
+        title: "ChatterPix Kids (Optional speaking output) 🖼️🗣️",
+        link: "https://apps.apple.com/us/app/chatterpix-duck-duck-moose/id734038526",
+        format: "app",
+        description:
+          "Record short speaking turns by making a photo ‘talk’ (fun output with low reading load).",
+        details: {
+          type: "Creative recording app 🎙️📸",
+          teaches:
+            "Short speaking turns, pronunciation practice, confidence through replay. 🎤🔁",
+          howTo: [
+            "Take a photo. 📸",
+            "Record a 10–20 second message. 🗣️⏱️",
+            "Replay and improve ONE thing (volume / clear ending sounds). 🔁✅"
+          ],
+          whyTopPick:
+            "Fun weekly output without heavy writing/reading demands. ⭐",
+          freeAccess:
+            "App availability/pricing can vary by store/region. 🆓⚠️",
+          ageCheck:
+            "Great for 8–10 with supervision for saving/sharing. 🛡️"
+        },
+        focus: "recorded speaking, confidence",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-conversation-starters-pdf",
+        title: "Conversation Starters (Printable PDF) 🗣️📄",
+        link: "https://thefamilydinnerproject.org/wp-content/uploads/2020/03/Conversation-Starters_2020.pdf",
+        format: "printable",
+        description:
+          "Printable prompt cards for longer answers, opinions, and storytelling.",
+        details: {
+          type: "Printable speaking prompts 🖨️",
+          teaches:
+            "Longer answers, opinions, and personal storytelling. 💬🧠",
+          howTo: [
+            "Print + cut into a ‘conversation jar’. 🫙✂️",
+            "Pick 2 cards/day. 🎴2️⃣",
+            "Answer with: ‘Because…’ + one example. ✅"
+          ],
+          whyTopPick:
+            "Offline-friendly, reusable, and very low prep. ⭐",
+          freeAccess: "Direct free PDF. 🆓✅",
+          ageCheck:
+            "Some prompts may be more mature; adult selects kid-friendly cards. 🎯"
+        },
+        focus: "opinions, longer turns",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-eltbuzz-story-generator",
+        title: "ELT Buzz — Story Generator (Visual prompts) 🖼️🎲",
+        link: "https://www.eltbuzz.com/storytelling/storygen/",
+        format: "tool",
+        description:
+          "Random visual prompts for describing and building stories (excellent for fluency).",
+        details: {
+          type: "Speaking prompt tool (visual storytelling) 🧰",
+          teaches:
+            "Speaking fluency through describing and story-building. 🗣️🧠",
+          howTo: [
+            "Generate 3–6 images. 🎲🖼️",
+            "Say 1 sentence per image. 🗣️",
+            "Retell the whole story in 30 seconds. ⏱️"
+          ],
+          whyTopPick:
+            "Works on any device and creates instant speaking tasks. ⭐",
+          freeAccess: "Free webpage/tool. 🆓✅",
+          ageCheck: "Safe for 8–10; adult supports vocabulary as needed. 🎯"
+        },
+        focus: "describe, retell, fluency",
+        time: "5–10 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-english-heritage-story-dice",
+        title: "English Heritage — Story Dice 🎲✨",
+        link: "https://storydice.english-heritage.org.uk/",
+        format: "tool",
+        description:
+          "Creative story dice prompts for mini-stories and short performances (great for mixed levels).",
+        details: {
+          type: "Prompt generator 🎲",
+          teaches:
+            "Creative speaking through prompts + imagination + short structure. 🗣️🏗️",
+          howTo: [
+            "Roll prompts. 🎲",
+            "Speak a 4-sentence mini-story (or 4 lines). 🗣️4️⃣",
+            "Repeat with a new roll. 🔁"
+          ],
+          whyTopPick:
+            "Unique prompts that work well for quick ‘performance’ practice. ⭐",
+          freeAccess: "Free web tool. 🆓✅",
+          ageCheck:
+            "Some prompts may feel ‘older’; adult frames topics and supports vocabulary. 🎯"
+        },
+        focus: "creative speaking prompts",
+        time: "5–10 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-british-council-drama-games",
+        title: "British Council — Drama games (Offline speaking) 🎭🗣️",
+        link: "https://www.britishcouncil.in/blog/theatre-english-children",
+        format: "site",
+        description:
+          "Offline drama/improvisation games to build speaking confidence with minimal screen time.",
+        details: {
+          type: "Activity ideas (offline speaking games) 📘🎭",
+          teaches:
+            "Speaking confidence, role-play, and improvisation. 🎭🗣️",
+          howTo: [
+            "Choose 1 drama game. 🎭1️⃣",
+            "Do it for 5–10 minutes. ⏱️",
+            "Repeat weekly with the same rules and new words. 🔁"
+          ],
+          whyTopPick:
+            "Great speaking practice without needing screens; easy to run in class. ⭐",
+          freeAccess: "Free webpage/article. 🆓✅",
+          ageCheck: "Good for 8–10 with adult facilitation. 🎯"
+        },
+        focus: "confidence, role-play",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "best-set-recommended-bundle-for-8-10-speaking",
+        title: "Best Set (8–10 Speaking bundle + weekly plan) 🗓️🗣️✨",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description:
+          "Goal: short daily speaking + one weekly ‘performance’. A simple routine that repeats core speaking drills (clarity + fluency) and ends each week with an output task (joke/mini-speech/recording).",
+        bundleItems: [
+          "8-10-speaking-learnenglishkids-tongue-twisters",
+          "8-10-speaking-learnenglishkids-speak",
+          "8-10-speaking-eltbuzz-story-generator",
+          "8-10-speaking-learnenglishkids-jokes",
+          "8-10-speaking-conversation-starters-pdf",
+          "8-10-speaking-neok12-public-speaking",
+          "8-10-speaking-learnenglishkids-video-zone",
+          "8-10-speaking-learnenglishkids-story-maker-1",
+          "8-10-speaking-learnenglishkids-story-maker-2",
+          "8-10-speaking-english-heritage-story-dice",
+          "8-10-speaking-sounds-right-app-ios",
+          "8-10-speaking-british-council-drama-games",
+          "8-10-speaking-chatterpix-kids-ios",
+          "8-10-speaking-cambridge-activities-for-children"
+        ],
+        details: {
+          type: "Recommended weekly routine 🧺",
+          teaches:
+            "Pronunciation + rhythm + longer speaking turns + confidence through repeated output. 🗣️📈",
+          howTo: [
+            "Mon–Thu (10–15 min/day): 1) Tongue Twister drill (2 min) → 2) Speak & Spell activity (5 min) → 3) ELT Buzz story images (1 sentence per image). 👅🧑‍🏫🎲",
+            "Fri (performance): Tell 1 joke (practice twice → perform/record once). 😄🎤",
+            "Weekend (light): Conversation jar (3 cards) + optional 60-second mini-speech (NeoK12 5-bullet plan). 🫙🎤",
+            "Optional swap: Use Video Zone or Story Maker (retell beginning/middle/end in 3 sentences). 🎥📖"
+          ],
+          whyTopPick:
+            "Repeatable structure keeps progress steady without needing new prep each day. ⭐🔁",
+          freeAccess:
+            "Uses free websites; app availability can vary; choose optional tools as needed. 🆓⚠️",
+          ageCheck:
+            "Designed for 8–10; keep it playful and short for lower-confidence speakers. 🎯🙂"
+        },
+        focus: "routine, confidence, performance",
+        time: "10–15 min/day",
+        level: "caregiver-led or independent"
       }
     ]
   };
