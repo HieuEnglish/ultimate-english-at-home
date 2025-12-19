@@ -3,6 +3,9 @@
    Uses:
    - window.UEAH_RESOURCES_STORE (loaded via assets/js/resources-store.js).
    - window.UEAH_TESTS_STORE (loaded via assets/js/tests-store.js + data files).
+   Optional:
+   - window.UEAH_PROFILE_STORE (loaded via assets/js/profile-store.js).
+   - window.UEAH_CONTACT (loaded via assets/js/contact.js).
 */
 (function () {
   const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18"];
@@ -27,6 +30,20 @@
   const TESTS_STORE = (function getTestsStore() {
     const s = window.UEAH_TESTS_STORE;
     if (s && typeof s === "object") return s;
+    return null;
+  })();
+
+  // Optional: Profile store
+  const PROFILE_STORE = (function getProfileStore() {
+    const s = window.UEAH_PROFILE_STORE;
+    if (s && typeof s === "object") return s;
+    return null;
+  })();
+
+  // Optional: Contact helper module
+  const CONTACT = (function getContactHelpers() {
+    const s = window.UEAH_CONTACT;
+    if (s && (typeof s === "object" || typeof s === "function")) return s;
     return null;
   })();
 
@@ -256,6 +273,10 @@
 
     if (parts.length === 0) return { view: Promise.resolve(viewHome().view) };
 
+    // NEW: profile + contact (single pages)
+    if (parts[0] === "profile" && parts.length === 1) return { view: Promise.resolve(viewProfile().view) };
+    if (parts[0] === "contact" && parts.length === 1) return { view: Promise.resolve(viewContact().view) };
+
     if (parts[0] === "favourites" && parts.length === 1) return { view: Promise.resolve(viewFavourites().view) };
     if (parts[0] === "games" && parts.length === 1) return { view: Promise.resolve(viewGames().view) };
 
@@ -336,6 +357,84 @@
     if (typeof TESTS_STORE.hasRunner === "function") return !!TESTS_STORE.hasRunner(slug);
     if (typeof TESTS_STORE.getRunner === "function") return !!TESTS_STORE.getRunner(slug);
     return false;
+  }
+
+  // Profile helpers (fallback to localStorage if profile-store.js not loaded yet)
+  const PROFILE_KEY = "UEAH_PROFILE_V1";
+
+  function profileGet() {
+    if (PROFILE_STORE && typeof PROFILE_STORE.get === "function") {
+      try {
+        return PROFILE_STORE.get() || null;
+      } catch (_) {
+        return null;
+      }
+    }
+    try {
+      const raw = localStorage.getItem(PROFILE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function profileSet(data) {
+    if (PROFILE_STORE && typeof PROFILE_STORE.set === "function") {
+      try {
+        PROFILE_STORE.set(data);
+        return true;
+      } catch (_) {
+        // fall through
+      }
+    }
+    try {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(data || {}));
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function profileClear() {
+    if (PROFILE_STORE && typeof PROFILE_STORE.clear === "function") {
+      try {
+        PROFILE_STORE.clear();
+        return true;
+      } catch (_) {
+        // fall through
+      }
+    }
+    try {
+      localStorage.removeItem(PROFILE_KEY);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  // Contact helpers (fallback to mailto)
+  const CONTACT_TO = "hieuenglishapps@gmail.com";
+
+  function buildMailto(to, subject, body) {
+    const s = encodeURIComponent(String(subject || ""));
+    const b = encodeURIComponent(String(body || ""));
+    return `mailto:${encodeURIComponent(String(to || ""))}?subject=${s}&body=${b}`;
+  }
+
+  function contactSend(payload) {
+    // If contact.js provides a helper, prefer it
+    // Expected shape: window.UEAH_CONTACT.send({ to, subject, message, fromEmail })
+    if (CONTACT && typeof CONTACT === "object" && typeof CONTACT.send === "function") {
+      return CONTACT.send({ to: CONTACT_TO, ...payload });
+    }
+    // Fallback: mailto
+    const subject = payload && payload.subject ? payload.subject : "UEAH Contact";
+    const message = payload && payload.message ? payload.message : "";
+    const fromEmail = payload && payload.fromEmail ? payload.fromEmail : "";
+    const body = fromEmail ? `From: ${fromEmail}\n\n${message}` : message;
+    window.location.href = buildMailto(CONTACT_TO, subject, body);
+    return true;
   }
 
   // Keep featured “Best Set” at the end
@@ -493,6 +592,24 @@
           })}
 
           ${card({
+            href: hrefFor("/profile"),
+            title: "Profile",
+            text: "Save IELS info",
+            icon: iconUser(),
+            ctaText: "",
+            glow: "orange"
+          })}
+
+          ${card({
+            href: hrefFor("/contact"),
+            title: "Contact",
+            text: "Send a message",
+            icon: iconMail(),
+            ctaText: "",
+            glow: "purple"
+          })}
+
+          ${card({
             href: hrefFor("/favourites"),
             title: "Favourites",
             text: "Save your favourites",
@@ -504,6 +621,188 @@
       </section>
     `;
     return { view: { title, html } };
+  }
+
+  function viewProfile() {
+    const title = "Profile — UEAH";
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Profile" }]);
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Profile</h1>
+        <p class="page-subtitle">Saved on this device.</p>
+
+        <div class="detail-card" role="region" aria-label="Profile form">
+          <form id="profile-form" novalidate>
+            <div class="detail-section">
+              <h2>Email</h2>
+              <p class="muted" style="margin-bottom:10px">Used for score tracking and contact.</p>
+              <input id="profile-email" name="email" type="email" autocomplete="email" inputmode="email"
+                style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
+                placeholder="name@example.com" />
+            </div>
+
+            <div class="detail-section">
+              <h2>Display name</h2>
+              <input id="profile-name" name="name" type="text" autocomplete="name"
+                style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
+                placeholder="Optional" />
+            </div>
+
+            <div class="detail-section">
+              <h2>Target IELS score</h2>
+              <input id="profile-target" name="targetScore" type="number" inputmode="decimal" min="0" max="9" step="0.5"
+                style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
+                placeholder="Optional (e.g., 6.5)" />
+            </div>
+
+            <div class="actions">
+              <button class="btn btn--primary" type="submit">Save</button>
+              <button class="btn" type="button" id="profile-clear">Clear</button>
+              <a class="btn" href="${hrefFor("/")}" data-nav>Home</a>
+            </div>
+
+            <p id="profile-status" class="muted" style="margin:12px 0 0"></p>
+          </form>
+        </div>
+      </section>
+    `;
+
+    const afterRender = function () {
+      const form = document.getElementById("profile-form");
+      const emailEl = document.getElementById("profile-email");
+      const nameEl = document.getElementById("profile-name");
+      const targetEl = document.getElementById("profile-target");
+      const clearBtn = document.getElementById("profile-clear");
+      const statusEl = document.getElementById("profile-status");
+
+      if (!form || !emailEl || !nameEl || !targetEl || !clearBtn || !statusEl) return;
+
+      const existing = profileGet() || {};
+      emailEl.value = existing.email || "";
+      nameEl.value = existing.name || "";
+      targetEl.value = typeof existing.targetScore === "number" ? String(existing.targetScore) : existing.targetScore || "";
+
+      function setStatus(msg) {
+        statusEl.textContent = msg || "";
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = String(emailEl.value || "").trim();
+        const name = String(nameEl.value || "").trim();
+        const targetRaw = String(targetEl.value || "").trim();
+
+        let targetScore = null;
+        if (targetRaw) {
+          const n = Number(targetRaw);
+          targetScore = Number.isFinite(n) ? n : null;
+        }
+
+        const data = { email, name, targetScore };
+
+        const ok = profileSet(data);
+        setStatus(ok ? "Saved." : "Could not save on this device.");
+      });
+
+      clearBtn.addEventListener("click", () => {
+        const ok = profileClear();
+        emailEl.value = "";
+        nameEl.value = "";
+        targetEl.value = "";
+        setStatus(ok ? "Cleared." : "Could not clear on this device.");
+      });
+    };
+
+    return { view: { title, html, afterRender } };
+  }
+
+  function viewContact() {
+    const title = "Contact — UEAH";
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Contact" }]);
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Contact</h1>
+        <p class="page-subtitle">Send a message to <span class="muted">${escapeHtml(CONTACT_TO)}</span>.</p>
+
+        <div class="detail-card" role="region" aria-label="Contact form">
+          <form id="contact-form" novalidate>
+            <div class="detail-section">
+              <h2>Your email</h2>
+              <input id="contact-from" name="fromEmail" type="email" autocomplete="email" inputmode="email"
+                style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
+                placeholder="Optional" />
+            </div>
+
+            <div class="detail-section">
+              <h2>Subject</h2>
+              <input id="contact-subject" name="subject" type="text"
+                style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
+                placeholder="What is this about?" />
+            </div>
+
+            <div class="detail-section">
+              <h2>Message</h2>
+              <textarea id="contact-message" name="message" rows="6"
+                style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text); resize:vertical;"
+                placeholder="Write your message..."></textarea>
+              <p class="muted" style="margin:10px 0 0">If email sending isn’t configured yet, this will open your email app.</p>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn--primary" type="submit">Send</button>
+              <a class="btn" href="${hrefFor("/")}" data-nav>Home</a>
+            </div>
+
+            <p id="contact-status" class="muted" style="margin:12px 0 0"></p>
+          </form>
+        </div>
+      </section>
+    `;
+
+    const afterRender = function () {
+      const form = document.getElementById("contact-form");
+      const fromEl = document.getElementById("contact-from");
+      const subjectEl = document.getElementById("contact-subject");
+      const messageEl = document.getElementById("contact-message");
+      const statusEl = document.getElementById("contact-status");
+
+      if (!form || !fromEl || !subjectEl || !messageEl || !statusEl) return;
+
+      const prof = profileGet() || {};
+      if (prof.email && !fromEl.value) fromEl.value = String(prof.email);
+
+      function setStatus(msg) {
+        statusEl.textContent = msg || "";
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const fromEmail = String(fromEl.value || "").trim();
+        const subject = String(subjectEl.value || "").trim() || "UEAH Contact";
+        const message = String(messageEl.value || "").trim();
+
+        if (!message) {
+          setStatus("Please write a message.");
+          messageEl.focus();
+          return;
+        }
+
+        try {
+          contactSend({ fromEmail, subject, message });
+          setStatus("Opening email…");
+        } catch (_) {
+          setStatus("Could not send from this page.");
+        }
+      });
+    };
+
+    return { view: { title, html, afterRender } };
   }
 
   function viewFavourites() {
@@ -1137,7 +1436,7 @@
   }
 
   // -----------------------------
-  // Icons + utils (unchanged)
+  // Icons + utils
   // -----------------------------
 
   function iconAge(age) {
@@ -1146,6 +1445,26 @@
     if (age === "8-10") return iconPencil();
     if (age === "11-12") return iconHeadphones();
     return iconGradCap();
+  }
+
+  function iconUser() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M12 12.2a4.4 4.4 0 1 0-4.4-4.4 4.4 4.4 0 0 0 4.4 4.4Z" fill="currentColor" opacity=".18"></path>
+        <path d="M12 11a3.2 3.2 0 1 0-3.2-3.2A3.2 3.2 0 0 0 12 11Z" fill="currentColor"></path>
+        <path d="M4.5 20a7.5 7.5 0 0 1 15 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity=".85"></path>
+      </svg>
+    `;
+  }
+
+  function iconMail() {
+    return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="M5.5 6h13A1.5 1.5 0 0 1 20 7.5v9A1.5 1.5 0 0 1 18.5 18h-13A1.5 1.5 0 0 1 4 16.5v-9A1.5 1.5 0 0 1 5.5 6Z" fill="currentColor" opacity=".18"></path>
+        <path d="M5.8 7.8 12 12.2l6.2-4.4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M6.2 16.2h11.6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"></path>
+      </svg>
+    `;
   }
 
   function iconLeaf() {
