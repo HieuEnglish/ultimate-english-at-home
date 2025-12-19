@@ -1,1732 +1,1856 @@
-/* assets/js/resources/11-12.js
-   Age 11–12 resource data pack.
-   Do NOT host files in repo — only external links.
-*/
-(function () {
-  const AGE = "11-12";
+/* global window */
+/**
+ * Age pack: 11–12
+ * This file is auto-consumed by the SPA router (assets/js/app.js) via UEAH_RESOURCES_STORE.
+ */
+(() => {
+  "use strict";
 
   const DATA = {
-    packs: {
+    "age": "11-12",
+    "packs": {
       "11-12/reading": {
-        title: "11–12 Reading 📖✨",
-        overview:
-          "A flexible reading program that builds comprehension, vocabulary, inference, and reading stamina using short daily passages, weekly close-reading texts, and graded news/story read-alongs for mixed-ability classes.",
-        objectives: [
-          "Strengthen comprehension + background knowledge through consistent passage routines.",
-          "Improve close reading (annotation, inference, theme) using higher-quality texts and questions.",
-          "Develop main idea, detail, vocab-in-context, and inference using adaptive practice.",
-          "Build news reading fluency with leveled articles and opinion sharing.",
-          "Increase confidence with graded stories + read-along and short written summaries."
+        "title": "11–12 Reading 📖✨🧠",
+        "overview": "📌 A structured reading mini-pack for ages 11–12 that builds fluency, comprehension, and confidence through daily practice: leveled passages, audio-supported reading, vocabulary in context, and fun reading games. It combines printable texts, online reading libraries, and engaging story platforms.",
+        "objectives": [
+          "🎯 Improve reading fluency and comprehension (gist + detail).",
+          "🎯 Build stronger vocabulary through context, synonyms, and topic reading.",
+          "🎯 Practice common reading tasks: main idea, inference, true/false, short answer.",
+          "🎯 Develop stamina: read a little every day and track progress.",
+          "🎯 Encourage reading for enjoyment (stories, comics, fun facts)."
         ],
-        materials: [
-          "Device + internet (optional printer) and a notebook for summaries/vocab.",
-          "Core platforms to rotate: ReadWorks, ReadTheory, CommonLit, Khan Academy (Grade 5/6 Reading & Vocab).",
-          "Extra reading options (leveled + ESL-friendly): LearnEnglish Kids, LearnEnglish Teens (B1 graded).",
-          "News + discussion: Breaking News English, News in Levels.",
-          "Read-along stories/dialogues: VOA American Stories, Storynory.",
-          "Comprehension organizers: ReadWriteThink Student Interactives (Story Map, etc.)."
-        ],
-        bestSetSlug: "best-set-bundle-plan-11-12-reading"
+        "materials": [
+          "🧰 Notebook or reading journal (for vocab, summaries, “new words”).",
+          "🧰 Device + internet access for: ReadWorks, CommonLit, ReadTheory, Newsela, Epic, etc.",
+          "🧰 Optional: printer for passages and worksheets.",
+          "🧰 Optional: headphones for audio-supported reading."
+        ]
       },
-
       "11-12/listening": {
-        title: "11–12 Listening 🎧📚",
-        overview:
-          "A listening routine for ages 11–12 that builds confidence + comprehension using short ESL videos/stories, levelled teen listening lessons, listening quizzes, audio stories, and simple news listening—following a consistent “gist → details → notes → retell” process.",
-        objectives: [
-          "Listen for main idea (gist) first, then listen again for details.",
-          "Build vocabulary in context from stories/videos and real-life listening topics.",
-          "Improve exam-style comprehension with “before listening” tasks + question sets.",
-          "Practice shadowing (repeat after audio) to improve speed and accuracy.",
-          "Speak after listening: retell stories/news clearly (4–6 sentences or 3-sentence summary)."
+        "title": "11–12 Listening 🎧📚✨",
+        "overview": "📌 A structured listening mini-pack for ages 11–12 that builds real listening skills through short daily practice: leveled listening lessons, video/audio stories, listening quizzes, and fun listening games. It mixes kid-safe content with slightly more “teen” listening for stronger learners.",
+        "objectives": [
+          "🎯 Improve comprehension of everyday spoken English (A2–B1 range).",
+          "🎯 Practice listening for gist and detail using short audio/video clips.",
+          "🎯 Build vocabulary through repeated listening + phrase noticing.",
+          "🎯 Develop confidence with different accents and speaking speeds.",
+          "🎯 Train listening habits: predict, listen, check, and retell."
         ],
-        materials: [
-          "Device + internet (tablet/laptop/phone) and headphones if possible.",
-          "A notebook (or notes app) to write 5 key words / 5 useful phrases.",
-          "Listening sources to rotate: LearnEnglish Kids, LearnEnglish Teens, Randall’s ESL Lab, ELLLO, Storynory, News in Levels (+ optional PBS Kids / TED-Ed)."
-        ],
-        bestSetSlug: "best-set-mini-pack-11-12-listening"
+        "materials": [
+          "🧰 Device + internet (tablet/laptop/phone) and headphones if possible.",
+          "🧰 A notebook (or notes app) to write 5 key words / 5 useful phrases.",
+          "🧰 Listening sources to rotate (from your guide): LearnEnglish Kids/Teens, ESL-Lab, ELLLO, Storynory, News in Levels (+ optional PBS Kids/TED-Ed)."
+        ]
       },
-
       "11-12/writing": {
-        title: "11–12 Writing ✍️",
-        overview:
-          "A structured writing mini-pack that helps students write clearer texts by using model examples → guided drafting → grammar accuracy → paragraph structure → revision. It combines teen-friendly writing lessons, creative prompts, and feedback tools to build both confidence and quality.",
-        objectives: [
-          "Write common A2–B1 text types (messages/chats/emails/short paragraphs; longer connected writing for stronger learners).",
-          "Improve organization using planning tools (intro → ideas → details → conclusion) and linking words.",
-          "Increase sentence accuracy (punctuation + structure) and turn correct sentences into a paragraph.",
-          "Build the habit of revising: submit writing, fix key issues, and resubmit to improve."
+        "title": "11–12 Writing ✍️📝✨",
+        "overview": "📌 A structured writing mini-pack that helps students write clearer texts by using model examples → guided drafting → grammar accuracy → paragraph structure → revision. It combines teen-friendly writing lessons, creative prompts, and feedback tools to build both confidence and quality.",
+        "objectives": [
+          "🎯 Write common A2–B1 text types (messages/chats/emails/short paragraphs; longer connected writing for stronger learners).",
+          "🎯 Improve organization using planning tools (intro → ideas → details → conclusion) and linking words.",
+          "🎯 Increase sentence accuracy (punctuation + structure) and turn correct sentences into a paragraph.",
+          "🎯 Build the habit of revising: submit writing, fix key issues, and resubmit to improve."
         ],
-        materials: [
-          "Notebook or writing folder (for drafts + “before vs after” versions).",
-          "Device + internet access for: LearnEnglish Kids/Teens writing, Quill Grammar, 826 Digital prompts, ReadWriteThink organizers/tools, Write & Improve.",
-          "Optional: printer (for worksheets / saving final drafts).",
-          "Optional editing tools (only after drafting): LanguageTool or Hemingway Editor."
-        ],
-        bestSetSlug: "best-set-mini-pack-11-12-writing"
+        "materials": [
+          "🧰 Notebook or writing folder (for drafts + “before vs after” versions).",
+          "🧰 Device + internet access for: LearnEnglish Kids/Teens writing, Quill Grammar, 826 Digital prompts, ReadWriteThink organizers/tools, Write & Improve.",
+          "🧰 Optional: printer (for worksheets / saving final drafts).",
+          "🧰 Optional editing tools (only after drafting): LanguageTool or Hemingway Editor."
+        ]
       },
-
       "11-12/speaking": {
-        title: "11–12 Speaking 🎤",
-        overview:
-          "A curated speaking mini-pack for ages 11–12 that builds real-life communication through short daily practice: dialogue role-plays, levelled speaking videos, conversation questions, and pronunciation/fluency games, organized into an easy weekly routine.",
-        objectives: [
-          "Improve confidence and fluency through repeated speaking practice (pair work, role-play, short talks).",
-          "Use practical everyday phrases and complete short dialogues with adapted details (names/places/prices).",
-          "Build stronger pronunciation and clearer speech (target sounds, tongue twisters, phonemic support).",
-          "Develop longer answers and follow-up questions (“Why?” / “Tell me more…”) to extend conversations."
+        "title": "11–12 Speaking 🎤🗣️✨",
+        "overview": "📌 A curated speaking mini-pack for ages 11–12 that builds real-life communication through short daily practice: dialogue role-plays, levelled speaking videos, conversation questions, and pronunciation/fluency games, organized into an easy weekly routine.",
+        "objectives": [
+          "🎯 Improve confidence and fluency through repeated speaking practice (pair work, role-play, short talks).",
+          "🎯 Use practical everyday phrases and complete short dialogues with adapted details (names/places/prices).",
+          "🎯 Build stronger pronunciation and clearer speech (target sounds, tongue twisters, phonemic support).",
+          "🎯 Develop longer answers and follow-up questions (“Why?” / “Tell me more…”) to extend conversations."
         ],
-        materials: [
-          "LearnEnglish Teens: Speaking (A1–B2) videos + tasks.",
-          "AmericanEnglish: Everyday Conversations dialogue book (role-play).",
-          "LearnEnglish Kids: Speak and Spell + Tongue Twisters.",
-          "ITESLJ Conversation Questions (topic lists).",
-          "EnglishClub: Small Talk starters + Talking Point worksheets.",
-          "TeachingEnglish (British Council): “Kids and speaking” teacher tips.",
-          "Games4esl: classroom speaking games + printables.",
-          "Baamboozle (speaking games), Wheel of Names (prompt spinner).",
-          "Vocaroo (voice recording), Sounds Right (pronunciation chart), Cambridge pronunciation hub."
-        ],
-        bestSetSlug: "best-set-mini-pack-11-12-speaking"
+        "materials": [
+          "🧰 LearnEnglish Teens: Speaking (A1–B2) videos + tasks",
+          "🧰 AmericanEnglish: Everyday Conversations dialogue book (role-play)",
+          "🧰 LearnEnglish Kids: Speak and Spell + Tongue Twisters",
+          "🧰 ITESLJ Conversation Questions (topic lists)",
+          "🧰 EnglishClub: Small Talk starters + Talking Point worksheets",
+          "🧰 TeachingEnglish (British Council): “Kids and speaking” teacher tips",
+          "🧰 Games4esl: classroom speaking games + printables",
+          "🧰 Baamboozle (speaking games), Wheel of Names (prompt spinner)",
+          "🧰 Vocaroo (voice recording), Sounds Right (pronunciation chart), Cambridge pronunciation hub"
+        ]
       }
     },
-
-    // Each resource must have unique slug per age+skill.
-    resources: [
-      // =========================
-      // 11–12 READING
-      // =========================
+    "resources": [
       {
-        age: AGE,
-        skill: "reading",
-        slug: "readworks-article-a-day",
-        title: "ReadWorks — Article-A-Day & Passages 🗞️📚",
-        link: "https://www.readworks.org/article-a-day",
-        format: "site",
-        description: "Reading passages + routine (digital/print).",
-        details: {
-          type: "Reading passages + routine (digital/print)",
-          teaches: "Comprehension; Vocabulary; Background knowledge; Reading stamina.",
-          howTo: [
-            "Pick an Article-A-Day set (topic your class likes).",
-            "Students read (or listen if available) and underline key facts.",
-            "Write 2–3 ‘Book of Knowledge’ takeaways.",
-            "Quick pair-share + 1 class summary sentence."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "readworks-article-a-day-passages",
+        "title": "ReadWorks — Article-A-Day & Passages 🗞️📚",
+        "description": "Reading passages + routine (digital/print) 📄",
+        "link": "https://www.readworks.org/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "comprehension, vocab",
+        "notes": "",
+        "details": {
+          "type": "Reading passages + routine (digital/print) 📄",
+          "teaches": "Comprehension, vocabulary, background knowledge, reading stamina",
+          "howTo": [
+            "1️⃣ Pick an Article-A-Day set (topic your class likes) 🧭",
+            "2️⃣ Students read (or listen) + underline key facts 📝",
+            "3️⃣ Write 2–3 “Book of Knowledge” takeaways ✍️",
+            "4️⃣ Quick pair-share + 1 class summary sentence 🗣️"
           ],
-          whyTopPick: "A short daily routine that builds knowledge quickly and is easy to run.",
-          freeAccess: "Free resources; free account is used for assigning/tracking in classrooms.",
-          ageCheck: "Great fit for 11–12 (choose grade-appropriate sets for your learners)."
+          "whyTopPick": "Short daily routine that builds knowledge fast and is easy to run.",
+          "freeAccess": "Free resources; free account used for assigning/tracking.",
+          "ageCheck": "Great fit for 11–12 (K-8 routine; choose grade-appropriate sets)."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "commonlit-library",
-        title: "CommonLit — Text Library (Grades 3–12) 📚🧠",
-        link: "https://www.commonlit.org/en/library",
-        format: "site",
-        description: "Online text library + questions/annotations.",
-        details: {
-          type: "Online text library + questions/annotations",
-          teaches: "Close reading; Inference; Theme; Nonfiction comprehension.",
-          howTo: [
-            "Filter by grade / Lexile / topic.",
-            "Assign 1 text + 1 short discussion question.",
-            "Students annotate 3 key lines + write a 3-sentence summary.",
-            "Complete built-in comprehension questions."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "commonlit-text-library-grades-3-12",
+        "title": "CommonLit — Text Library (Grades 3–12) 📚🧠",
+        "description": "Online text library + questions/annotations ✍️",
+        "link": "https://www.commonlit.org/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "15–25 min",
+        "focus": "comprehension, inference",
+        "notes": "",
+        "details": {
+          "type": "Online text library + questions/annotations ✍️",
+          "teaches": "Close reading, inference, theme, nonfiction comprehension",
+          "howTo": [
+            "1️⃣ Filter by grade/lexile/topic 🔎",
+            "2️⃣ Read the text + highlight key info ✨",
+            "3️⃣ Answer questions (text evidence!) ✅",
+            "4️⃣ Write 1 summary sentence + 1 opinion sentence 🗣️"
           ],
-          whyTopPick: "High-quality texts across many levels in one place with built-in supports.",
-          freeAccess: "Free account required for full classroom assigning/tracking features.",
-          ageCheck: "11–12 fits well (use 5th–6th grade and up as needed)."
+          "whyTopPick": "High-quality texts with built-in comprehension tasks.",
+          "freeAccess": "Many texts free; full features may require educator account.",
+          "ageCheck": "Excellent for 11–12; teacher/parent preview recommended."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "readtheory-adaptive-reading",
-        title: "ReadTheory — Adaptive Reading Practice 🧩📈",
-        link: "https://readtheory.org/",
-        format: "site",
-        description: "Adaptive reading quizzes + passages.",
-        time: "10–15 min",
-        focus: "adaptive comprehension",
-        details: {
-          type: "Adaptive reading quizzes + passages",
-          teaches: "Main idea; Detail; Vocab-in-context; Inference.",
-          howTo: [
-            "Learner takes placement quiz.",
-            "Do 10–15 minutes/day (3–5 short passages).",
-            "Track weak question types (inference/detail).",
-            "Re-read 1 passage and highlight evidence."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "readtheory-adaptive-reading-practice",
+        "title": "ReadTheory — Adaptive Reading Practice 📈📖",
+        "description": "Adaptive reading quizzes + leveled passages ✅",
+        "link": "https://readtheory.org/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "comprehension",
+        "notes": "",
+        "details": {
+          "type": "Adaptive reading quizzes + leveled passages ✅",
+          "teaches": "Reading comprehension skills + stamina with leveled texts",
+          "howTo": [
+            "1️⃣ Create a free student account (or teacher assigns) 🆓",
+            "2️⃣ Do 1–2 short passages per session 📄",
+            "3️⃣ Review wrong answers (why?) 🔎",
+            "4️⃣ Track level progress weekly 📈"
           ],
-          whyTopPick: "Automatically adjusts difficulty—excellent for mixed-level classes.",
-          freeAccess: "Free account available (core practice usable).",
-          ageCheck: "Works well for 11–12; keep sessions short to avoid fatigue."
+          "whyTopPick": "Personalized leveled reading practice that tracks progress.",
+          "freeAccess": "Free access available; accounts supported.",
+          "ageCheck": "Great for 11–12; supports independent practice."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "khan-academy-5th-reading-vocab",
-        title: "Khan Academy — Grade 5 Reading & Vocab 🧠📚",
-        link: "https://www.khanacademy.org/ela/5th-grade-reading-and-vocab",
-        format: "site",
-        description: "Interactive reading lessons + vocab practice.",
-        level: "Grade 5",
-        details: {
-          type: "Interactive reading lessons + vocab practice",
-          teaches: "Text structure; Author’s purpose; Claims/evidence; Vocabulary.",
-          howTo: [
-            "Pick 1 unit per week (theme students like).",
-            "Read 1 article + answer practice questions.",
-            "Do 1 vocab set (5–10 mins).",
-            "Finish with a 1-minute oral summary."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "khan-academy-grade-5-reading-vocab",
+        "title": "Khan Academy — 5th/6th Grade Reading & Vocab 🧠📚",
+        "description": "Skill practice (reading + vocabulary) 🎯",
+        "link": "https://www.khanacademy.org/ela/cc-5th-reading-vocab",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "vocab, comprehension",
+        "notes": "",
+        "details": {
+          "type": "Skill practice (reading + vocabulary) 🎯",
+          "teaches": "Main idea, inference, word meaning, reading strategies",
+          "howTo": [
+            "1️⃣ Choose 1 skill (e.g., inference, context clues) 🎯",
+            "2️⃣ Watch the explanation video (if included) 🎥",
+            "3️⃣ Do 5–10 practice questions ✅",
+            "4️⃣ Write 3 new words + 3 example sentences ✍️"
           ],
-          whyTopPick: "Clear progression + strong skills practice for grades 5–6.",
-          freeAccess: "Always-free learning library.",
-          ageCheck: "Direct match for 11–12 (grade 5 content)."
+          "whyTopPick": "Clear explanations + structured skill practice.",
+          "freeAccess": "Free access (Khan Academy).",
+          "ageCheck": "Excellent for 11–12; supports self-paced learning."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "khan-academy-6th-reading-vocab",
-        title: "Khan Academy — Grade 6 Reading & Vocab 🧠📚",
-        link: "https://www.khanacademy.org/ela/6th-grade-reading-and-vocab",
-        format: "site",
-        description: "Interactive reading lessons + vocab practice.",
-        level: "Grade 6",
-        details: {
-          type: "Interactive reading lessons + vocab practice",
-          teaches: "Text structure; Author’s purpose; Claims/evidence; Vocabulary.",
-          howTo: [
-            "Pick 1 unit per week (theme students like).",
-            "Read 1 article + answer practice questions.",
-            "Do 1 vocab set (5–10 mins).",
-            "Finish with a 1-minute oral summary."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "khan-academy-grade-6-reading-vocab",
+        "title": "Khan Academy — 5th/6th Grade Reading & Vocab 🧠📚",
+        "description": "Skill practice (reading + vocabulary) 🎯",
+        "link": "https://www.khanacademy.org/ela/cc-6th-reading-vocab",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "vocab, comprehension",
+        "notes": "",
+        "details": {
+          "type": "Skill practice (reading + vocabulary) 🎯",
+          "teaches": "Main idea, inference, word meaning, reading strategies",
+          "howTo": [
+            "1️⃣ Choose 1 skill (e.g., inference, context clues) 🎯",
+            "2️⃣ Watch the explanation video (if included) 🎥",
+            "3️⃣ Do 5–10 practice questions ✅",
+            "4️⃣ Write 3 new words + 3 example sentences ✍️"
           ],
-          whyTopPick: "Strong Grade 6 alignment for 11–12 reading skills.",
-          freeAccess: "Always-free learning library.",
-          ageCheck: "Direct match for 11–12 (grade 6 content)."
+          "whyTopPick": "Clear explanations + structured skill practice.",
+          "freeAccess": "Free access (Khan Academy).",
+          "ageCheck": "Excellent for 11–12; supports self-paced learning."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "learnenglishkids-reading-practice",
-        title: "British Council — LearnEnglish Kids (Reading Practice) 🐣📖",
-        link: "https://learnenglishkids.britishcouncil.org/read-write/reading-practice",
-        format: "site",
-        description: "Short texts + activities/worksheets.",
-        details: {
-          type: "Short texts + activities/worksheets",
-          teaches: "Comprehension; Vocabulary; Story understanding.",
-          howTo: [
-            "Choose a story/reading at the right difficulty.",
-            "Pre-teach 5 key words.",
-            "Read + do tasks (matching/true-false/etc.).",
-            "Retell in 5 sentences (or comic strip)."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "british-council-learnenglish-kids-reading-practice",
+        "title": "British Council — LearnEnglish Kids (Reading Practice) 🐣📖",
+        "description": "Short texts + activities/worksheets",
+        "link": "https://learnenglishkids.britishcouncil.org/read-write/reading-practice",
+        "format": "site",
+        "level": "A1–A2",
+        "time": "10–15 min",
+        "focus": "comprehension",
+        "notes": "",
+        "details": {
+          "type": "Short texts + activities/worksheets",
+          "teaches": "Comprehension, vocabulary, story understanding",
+          "howTo": [
+            "1️⃣ Choose a story/reading at the right difficulty 🎚️",
+            "2️⃣ Pre-teach 5 key words 🧩",
+            "3️⃣ Read + do tasks (matching/true-false/etc.) ✅",
+            "4️⃣ Retell in 5 sentences (or comic strip) 🎨"
           ],
-          whyTopPick: "Friendly ESL scaffolding with ready-made tasks and worksheets.",
-          freeAccess: "Free to use online (login mainly for posting comments).",
-          ageCheck: "Suitable for 11–12—pick harder texts for stronger readers."
+          "whyTopPick": "Friendly ESL scaffolding with ready-made tasks.",
+          "freeAccess": "Free to use online.",
+          "ageCheck": "Suitable for 11–12; pick harder texts for stronger readers."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "learnenglishteens-b1-graded-reading",
-        title: "British Council — LearnEnglish Teens (B1 Graded Reading) 🧑‍🎓📚",
-        link: "https://learnenglishteens.britishcouncil.org/study-break/reading-zone/b1-graded-reading",
-        format: "site",
-        level: "B1",
-        description: "B1 stories/articles + exercises.",
-        details: {
-          type: "B1 stories/articles + exercises",
-          teaches: "B1 reading; Gist/detail; Vocabulary.",
-          howTo: [
-            "Pick 1 text/week.",
-            "Do the preparation task first.",
-            "Read + complete exercises.",
-            "Write 5 ‘new word’ sentences."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "british-council-learnenglish-teens-reading",
+        "title": "British Council — LearnEnglish Teens (Reading) 🧑‍🎓📖",
+        "description": "Reading lessons with tasks + model answers",
+        "link": "https://learnenglishteens.britishcouncil.org/skills/reading",
+        "format": "site",
+        "level": "A2–B2",
+        "time": "15–25 min",
+        "focus": "comprehension, exam skills",
+        "notes": "",
+        "details": {
+          "type": "Reading lessons with tasks + model answers",
+          "teaches": "Reading strategies, exam-style questions, vocabulary in context",
+          "howTo": [
+            "1️⃣ Choose A2 or B1 reading to match ability 🎚️",
+            "2️⃣ Do the “pre-reading” task 🧠",
+            "3️⃣ Read + answer questions ✅",
+            "4️⃣ Copy 5 useful phrases into your notebook ✍️"
           ],
-          whyTopPick: "Level-based reading that feels more grown-up for advanced 11–12 learners.",
-          freeAccess: "Free to read/do tasks; login mainly for posting comments.",
-          ageCheck: "Great for advanced 11–12 / early secondary; preview topics as needed."
+          "whyTopPick": "Levelled teen-friendly reading with built-in practice tasks.",
+          "freeAccess": "Free to use; login optional for commenting.",
+          "ageCheck": "Good for advanced 11–12; preview topics."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "breaking-news-english",
-        title: "Breaking News English — Graded News Lessons 🗞️✅",
-        link: "https://breakingnewsenglish.com/",
-        format: "site",
-        description: "News article + multi-level readings + worksheets.",
-        focus: "news reading",
-        details: {
-          type: "News article + multi-level readings + worksheets",
-          teaches: "Skimming/scanning; Vocabulary; Comprehension; Discussion prep.",
-          howTo: [
-            "Choose Level 0–6 (match your class).",
-            "Read once for gist, once for details.",
-            "Do 10-minute vocab + 10-minute questions.",
-            "Finish with 2-minute opinion share."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "newsela-articles-by-level",
+        "title": "Newsela — Articles by Level 📰📈",
+        "description": "Leveled news articles + questions",
+        "link": "https://newsela.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "15–25 min",
+        "focus": "comprehension, vocab",
+        "notes": "Some content/features may require teacher account.",
+        "details": {
+          "type": "Leveled news articles + questions",
+          "teaches": "Reading for gist/detail, current topic vocabulary",
+          "howTo": [
+            "1️⃣ Pick an article (student interest!) 🗞️",
+            "2️⃣ Choose a simpler level if needed 🎚️",
+            "3️⃣ Read + highlight key facts ✨",
+            "4️⃣ Answer questions + discuss 1 opinion 🗣️"
           ],
-          whyTopPick: "Ready-to-print news lessons at multiple levels with built-in tasks.",
-          freeAccess: "Core lessons and PDFs are free on the site.",
-          ageCheck: "Works for 11–12 if you choose school-safe topics and suitable levels."
+          "whyTopPick": "Real-world texts with level support.",
+          "freeAccess": "Some content free; features may require account.",
+          "ageCheck": "Preview topics; generally suitable for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "news-in-levels-reading",
-        title: "News in Levels — Same News, 3 Reading Levels 📰🎚️",
-        link: "https://www.newsinlevels.com/",
-        format: "site",
-        description: "Graded news (Level 1/2/3) + audio option.",
-        focus: "graded news",
-        details: {
-          type: "Graded news (Level 1/2/3) + audio option",
-          teaches: "Reading fluency; Core vocabulary; Current-events comprehension.",
-          howTo: [
-            "Read Level 1 → Level 2 → Level 3 over 3 days.",
-            "Highlight repeated words across levels.",
-            "Write 3 facts + 1 opinion.",
-            "Optional: listen after reading for pronunciation."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "epic-digital-library",
+        "title": "Epic — Digital Library 📚✨",
+        "description": "Kids’ books + read-to-me audio",
+        "link": "https://www.getepic.com/",
+        "format": "site",
+        "level": "A1–B1",
+        "time": "10–20 min",
+        "focus": "reading for enjoyment",
+        "notes": "May require account; free options vary.",
+        "details": {
+          "type": "Kids’ books + read-to-me audio",
+          "teaches": "Reading fluency, enjoyment, vocabulary",
+          "howTo": [
+            "1️⃣ Choose a book at the right level 📘",
+            "2️⃣ Read 10–15 minutes daily ⏱️",
+            "3️⃣ Write 3 new words + meanings ✍️",
+            "4️⃣ Give a 1-minute book talk 🎤"
           ],
-          whyTopPick: "Built-in differentiation using the same topic across three levels.",
-          freeAccess: "Free website access (ad-supported).",
-          ageCheck: "Good for 11–12; preview news topics for sensitivity."
+          "whyTopPick": "Huge library that encourages daily reading.",
+          "freeAccess": "Free options vary; may require account.",
+          "ageCheck": "Kid-focused; good for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "voa-american-stories-voa-learning-english",
-        title: "VOA Learning English — American Stories 🇺🇸📖",
-        link: "https://learningenglish.voanews.com/z/1581",
-        format: "site",
-        description: "Short stories with text + audio.",
-        details: {
-          type: "Short stories with text + audio",
-          teaches: "Narrative reading; Vocabulary; Comprehension (intermediate).",
-          howTo: [
-            "Read the story first (no audio).",
-            "Mark unknown words (max 8).",
-            "Re-read while listening for fluency.",
-            "Write a 4-sentence plot summary."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "duolingo-stories",
+        "title": "Duolingo Stories — Short Reading Stories 📖🟢",
+        "description": "Short stories + comprehension practice",
+        "link": "https://www.duolingo.com/stories",
+        "format": "site",
+        "level": "A1–A2",
+        "time": "5–10 min",
+        "focus": "comprehension, vocab",
+        "notes": "Availability may vary by language/account.",
+        "details": {
+          "type": "Short stories + comprehension practice",
+          "teaches": "Reading fluency, listening + reading combo, vocab",
+          "howTo": [
+            "1️⃣ Read the story once for meaning 👀",
+            "2️⃣ Answer the questions ✅",
+            "3️⃣ Repeat aloud (fluency) 🗣️",
+            "4️⃣ Copy 5 useful phrases ✍️"
           ],
-          whyTopPick: "Classic-style stories adapted for English learners with audio support.",
-          freeAccess: "Free texts and audio on VOA Learning English.",
-          ageCheck: "Good for strong 11–12 readers; preview themes (some classics can be darker)."
+          "whyTopPick": "Quick, motivating daily reading practice.",
+          "freeAccess": "Free access; account required.",
+          "ageCheck": "Suitable for 11–12 with supervision."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "storyweaver-11-12",
-        title: "StoryWeaver (Pratham Books) — Free Online Books 🌍📚",
-        link: "https://storyweaver.org.in/",
-        format: "site",
-        description: "Online story library (read online; often downloadable).",
-        details: {
-          type: "Online story library (read online; often downloadable)",
-          teaches: "Reading for pleasure; Vocabulary; Story patterns.",
-          howTo: [
-            "Filter by age/length/genre.",
-            "Pick 1 story + 5 key words.",
-            "Read + answer ‘Somebody–Wanted–But–So–Then’.",
-            "Optional: download/print for homework."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "read-along-by-google",
+        "title": "Read Along by Google — Reading Practice App 📱📖",
+        "description": "Reading practice with voice support",
+        "link": "https://readalong.google/",
+        "format": "site",
+        "level": "A1–A2",
+        "time": "10–15 min",
+        "focus": "fluency, pronunciation",
+        "notes": "App-based; availability may vary.",
+        "details": {
+          "type": "Reading practice with voice support",
+          "teaches": "Fluency, pronunciation, confidence reading aloud",
+          "howTo": [
+            "1️⃣ Choose a story at the right level 🎚️",
+            "2️⃣ Read aloud and follow the prompts 🎙️",
+            "3️⃣ Repeat tricky sentences 🔁",
+            "4️⃣ Track improvement weekly 📈"
           ],
-          whyTopPick: "Huge free library with choice—supports independent reading motivation.",
-          freeAccess: "Read online for free (account can help with saving/downloads).",
-          ageCheck: "11–12 works well; select longer/harder stories for stronger readers."
+          "whyTopPick": "Supports reading aloud and fluency building.",
+          "freeAccess": "Free (app).",
+          "ageCheck": "Suitable for 11–12 with adult guidance."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "storynory-read-along",
-        title: "Storynory — Read-Along Stories (Text + Audio) 🎧📖",
-        link: "https://www.storynory.com/",
-        format: "site",
-        description: "Stories with on-page text + audio.",
-        details: {
-          type: "Stories with on-page text + audio",
-          teaches: "Reading fluency; Narrative comprehension; Vocabulary in context.",
-          howTo: [
-            "Read the first half silently.",
-            "Listen to the same part and track with your eyes/finger.",
-            "Finish reading silently + write a 5-sentence summary.",
-            "Discuss moral/lesson + new words."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "freerice-vocabulary",
+        "title": "FreeRice — Vocabulary Game 🍚🧠",
+        "description": "Vocabulary quiz game (donation-based impact)",
+        "link": "https://freerice.com/",
+        "format": "game",
+        "level": "A2–B1",
+        "time": "5–15 min",
+        "focus": "vocab",
+        "notes": "Website with ads/links; supervise browsing.",
+        "details": {
+          "type": "Vocabulary quiz game (donation-based impact)",
+          "teaches": "Vocabulary meaning and quick word recognition",
+          "howTo": [
+            "1️⃣ Play 10 questions 📌",
+            "2️⃣ Write down 5 new words ✍️",
+            "3️⃣ Use each in a sentence 🗣️",
+            "4️⃣ Replay and try to beat your score 🎮"
           ],
-          whyTopPick: "Read-along format supports fluency without feeling ‘babyish’.",
-          freeAccess: "Free access on-site (no paywall for listening/reading).",
-          ageCheck: "Good for 11–12 (choose classics/myths; preview for scary themes)."
+          "whyTopPick": "Fast vocab practice with motivation.",
+          "freeAccess": "Free to use.",
+          "ageCheck": "Suitable for 11–12 with supervision."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "readwritethink-student-interactives",
-        title: "ReadWriteThink — Student Interactives (Comprehension Tools) 🧩🗺️",
-        link: "https://www.readwritethink.org/classroom-resources/student-interactives",
-        format: "site",
-        description: "Graphic organizers (story map, timeline, etc.).",
-        focus: "organizers",
-        details: {
-          type: "Graphic organizers (story map, timeline, etc.)",
-          teaches: "Summarizing; Sequencing; Character/problem/solution; Text structure.",
-          howTo: [
-            "Read any story/article.",
-            "Fill a Story Map or organizer.",
-            "Turn the organizer into a 1-paragraph summary.",
-            "Share with a partner and improve 1 sentence."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "readworks-vocabulary-articles",
+        "title": "ReadWorks — Vocabulary Articles 🧠🗞️",
+        "description": "Vocab-in-context reading practice",
+        "link": "https://www.readworks.org/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "vocab, comprehension",
+        "notes": "Use search to find vocab/skill content.",
+        "details": {
+          "type": "Vocab-in-context reading practice",
+          "teaches": "Vocabulary building through reading context",
+          "howTo": [
+            "1️⃣ Choose an article with target vocabulary 🎯",
+            "2️⃣ Highlight new words ✨",
+            "3️⃣ Guess meaning from context 🧩",
+            "4️⃣ Confirm meaning and write examples ✍️"
           ],
-          whyTopPick: "Makes comprehension visible and easy to assess with low prep.",
-          freeAccess: "Free online tools.",
-          ageCheck: "Great for 11–12; supports independent reading tasks."
+          "whyTopPick": "Connects vocabulary learning to real reading.",
+          "freeAccess": "Free access.",
+          "ageCheck": "Good for 11–12 with guidance."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "project-gutenberg",
-        title: "Project Gutenberg — Free eBooks Library 📚🌐",
-        link: "https://www.gutenberg.org/",
-        format: "site",
-        description: "Free eBooks (read online / download).",
-        details: {
-          type: "Free eBooks (read online / download)",
-          teaches: "Extensive reading; Classic literature exposure; Vocabulary growth.",
-          howTo: [
-            "Choose a shorter book or graded-friendly classic.",
-            "Read 10 minutes/day.",
-            "Mark 5 unfamiliar words/week.",
-            "Write a 1-paragraph weekly ‘book reaction’."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "library-of-congress-childrens-books",
+        "title": "Library of Congress — Children’s Books 📚🏛️",
+        "description": "Classic children’s books (digital collection)",
+        "link": "https://www.loc.gov/collections/childrens-books/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "reading for enjoyment",
+        "notes": "Selection requires adult guidance.",
+        "details": {
+          "type": "Classic children’s books (digital collection)",
+          "teaches": "Reading enjoyment and exposure to classic texts",
+          "howTo": [
+            "1️⃣ Pick a short story/book excerpt 📘",
+            "2️⃣ Read together (or independently) 👀",
+            "3️⃣ Summarize in 3–5 sentences ✍️",
+            "4️⃣ Discuss 2 questions (characters/setting) 🗣️"
           ],
-          whyTopPick: "Massive legal free library for sustained reading.",
-          freeAccess: "Free public-domain eBooks.",
-          ageCheck: "Best for advanced 11–12 with support; pick simpler titles and preview themes."
+          "whyTopPick": "Free access to classic children’s literature.",
+          "freeAccess": "Free collection.",
+          "ageCheck": "Adult preview recommended."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "standard-ebooks",
-        title: "Standard Ebooks — Clean, Well-Formatted Classics 📘✨",
-        link: "https://standardebooks.org/",
-        format: "site",
-        description: "Public-domain eBooks (high-quality formatting).",
-        details: {
-          type: "Public-domain eBooks (high-quality formatting)",
-          teaches: "Longer reading; Vocabulary; Reading enjoyment.",
-          howTo: [
-            "Pick a short classic (or short-story collection).",
-            "Read 2–3 pages/day.",
-            "Keep a ‘best quote’ notebook line.",
-            "Weekly: write a 5-sentence reflection."
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "best-set-mini-pack-11-12-reading",
+        "title": "Best “Set” 🎒🗓️ (11–12 Reading mini-pack)",
+        "description": "A weekly routine that mixes skills + fun 📖✨",
+        "link": "",
+        "format": "other",
+        "level": "A2–B1",
+        "time": "20–30 min/day",
+        "focus": "fluency, comprehension, vocab",
+        "notes": "Use the listed resources above in a simple weekly rotation.",
+        "details": {
+          "type": "Weekly routine (20–30 minutes/day) ⏱️📖",
+          "teaches": "Balanced reading practice: skills + enjoyment + vocabulary",
+          "howTo": [
+            "Goal: Read daily + build vocabulary + summarize clearly 🧠✍️",
+            "Mon 🟦: ReadWorks Article-A-Day — read + 2 takeaways 🗞️",
+            "Tue 🟩: LearnEnglish Teens Reading — 1 lesson + tasks ✅",
+            "Wed 🟨: ReadTheory — 1–2 passages + review mistakes 📈",
+            "Thu 🟧: Newsela/News in Levels — leveled article + 1 opinion 📰",
+            "Fri 🟥: Fun reading (Epic/Duolingo Stories) + 3 new words 📚✨",
+            "Weekend 🌈: Library/Story choice — book talk (1 minute) 🎤"
           ],
-          whyTopPick: "Often easier to read on phones/tablets than scanned PDFs.",
-          freeAccess: "Free public-domain ebooks.",
-          ageCheck: "For stronger 11–12 readers; preview difficulty and themes."
+          "whyTopPick": "Simple routine that’s easy to repeat and track.",
+          "freeAccess": "Uses free sources listed above.",
+          "ageCheck": "Flexible; adjust levels for each learner."
+        },
+        "isBestSet": true,
+        "bundleItems": [
+          "readworks-article-a-day-passages",
+          "british-council-learnenglish-teens-reading",
+          "readtheory-adaptive-reading-practice",
+          "newsela-articles-by-level",
+          "epic-digital-library"
+        ]
+      },
+      {
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "learnenglishkids-listen-watch",
+        "title": "🌟 LearnEnglish Kids — Listen & Watch (British Council) 🧒🎧",
+        "description": "Videos + songs + short stories + poems (+ printable activities) 📺🎶",
+        "link": "https://learnenglishkids.britishcouncil.org/listen-watch",
+        "format": "site",
+        "level": "A1–A2",
+        "time": "10–15 min",
+        "focus": "listening, vocab",
+        "notes": "",
+        "details": {
+          "type": "Videos + songs + short stories + poems (+ printable activities) 📺🎶",
+          "teaches": "Listening for gist/details + vocabulary in context 📚",
+          "howTo": [
+            "▶️ Pick Songs / Short stories / Video zone",
+            "🎧 Listen once (no pausing) for the main idea",
+            "🔁 Listen again and do the activity/worksheet",
+            "🗣️ Retell the story in 4–6 sentences"
+          ],
+          "whyTopPick": "High-quality kid-safe ESL listening with built-in practice.",
+          "freeAccess": "Free website access (account optional for comments).",
+          "ageCheck": "Designed for children learning English; good fit for 11–12 (choose harder videos/stories)."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "loc-free-to-use-classic-childrens-books",
-        title: "Library of Congress — Free to Use & Reuse: Classic Children’s Books 🏛️📖",
-        link: "https://www.loc.gov/free-to-use/classic-childrens-books/",
-        format: "site",
-        description: "Public-domain classics (online page-turn style).",
-        details: {
-          type: "Public-domain classics (online page-turn style)",
-          teaches: "Reading stamina; Classic vocabulary; Story structure.",
-          howTo: [
-            "Pick one title.",
-            "Read 2–3 pages + note 3 interesting words.",
-            "Retell the scene in your own words.",
-            "Optional: draw a scene snapshot."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "learnenglishteens-listening",
+        "title": "🎧 LearnEnglish Teens — Listening (British Council) 🧑‍🎓🎧",
+        "description": "Levelled listening lessons + activities 📝",
+        "link": "https://learnenglishteens.britishcouncil.org/skills/listening",
+        "format": "site",
+        "level": "A2–B2",
+        "time": "15–20 min",
+        "focus": "listening, exam skills",
+        "notes": "",
+        "details": {
+          "type": "Levelled listening lessons + activities 📝",
+          "teaches": "Real-life listening situations + exam-style comprehension ✅",
+          "howTo": [
+            "🎚️ Choose a lesson near your level",
+            "🧠 Do the “before listening” task",
+            "🎧 Listen + answer questions",
+            "📌 Note 5 useful phrases"
           ],
-          whyTopPick: "High-quality scanned originals—great for a ‘real book’ feel.",
-          freeAccess: "Free to use/reuse collection.",
-          ageCheck: "11–12 friendly, but language can be challenging—use short chunks."
+          "whyTopPick": "Slightly more “grown-up” topics that suit 11–12 moving toward teen content.",
+          "freeAccess": "Free website access (no paid gate observed).",
+          "ageCheck": "Appropriate for older kids; preview topics if sensitive themes appear."
         }
       },
       {
-        age: AGE,
-        skill: "reading",
-        slug: "best-set-bundle-plan-11-12-reading",
-        title: "Best “Set” (Bundle Plan) 🎒📚✅",
-        link: "",
-        format: "other",
-        isBestSet: true,
-        description: "Weekly routine bundle for 11–12 Reading.",
-        time: "20–30 min/day",
-        focus: "routine + differentiation",
-        bundleItems: [
-          "readworks-article-a-day",
-          "readtheory-adaptive-reading",
-          "news-in-levels-reading",
-          "commonlit-library",
-          "readwritethink-student-interactives",
-          "voa-american-stories-voa-learning-english"
-        ],
-        details: {
-          type: "Weekly routine bundle",
-          teaches: "Daily reading stamina; Skills practice; Differentiation for mixed levels.",
-          howTo: [
-            "Goal: 20–30 minutes/day, 5 days/week (level-flexible).",
-            "1) ReadWorks Article-A-Day — 10 mins/day (Mon–Thu).",
-            "2) ReadTheory — 10 mins/day (Mon–Fri).",
-            "3) News in Levels — 1 article/week across 3 days (Level 1→2→3).",
-            "4) CommonLit — 1 text/week + questions (Friday).",
-            "5) ReadWriteThink Story Map — Friday wrap-up (map + paragraph summary).",
-            "6) Weekend choice (strong readers): VOA American Stories or Storynory read-along."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "randalls-esl-lab",
+        "title": "🎙️ Randall’s ESL Cyber Listening Lab (ESL-Lab) 🎧📝",
+        "description": "Listening quizzes (Easy / Intermediate / Difficult) ✅",
+        "link": "https://www.esl-lab.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "listening, everyday English",
+        "notes": "",
+        "details": {
+          "type": "Listening quizzes (Easy / Intermediate / Difficult) ✅",
+          "teaches": "Everyday listening comprehension + question answering 📌",
+          "howTo": [
+            "🎚️ Start at Easy (or Intermediate if strong)",
+            "🎧 Listen + answer the quiz questions",
+            "🔁 Replay and take notes (key words)",
+            "🗣️ Retell the situation in your own words"
           ],
-          whyTopPick: "Blends routine practice, adaptive differentiation, and one weekly close-reading task.",
-          freeAccess: "All items include free access options (some require free accounts).",
-          ageCheck: "Designed for 11–12 and mixed-ability ESL classes."
-        }
-      },
-
-      // =========================
-      // 11–12 LISTENING
-      // =========================
-      {
-        age: AGE,
-        skill: "listening",
-        slug: "learnenglishkids-listen-watch-11-12",
-        title: "LearnEnglish Kids — Listen & Watch (British Council) 🧒🎧",
-        link: "https://learnenglishkids.britishcouncil.org/listen-watch",
-        format: "site",
-        description: "Videos + songs + short stories + poems (+ printables).",
-        details: {
-          type: "Videos + songs + short stories + poems (+ printables)",
-          teaches: "Listening for gist/details; Vocabulary in context.",
-          howTo: [
-            "Pick Songs / Short stories / Video zone.",
-            "Listen once (no pausing) for the main idea.",
-            "Listen again and do the activity/worksheet.",
-            "Retell the story in 4–6 sentences."
-          ],
-          whyTopPick: "Kid-safe ESL listening with built-in practice and extension tasks.",
-          freeAccess: "Free website access (account optional for comments).",
-          ageCheck: "Good fit for 11–12—choose harder videos/stories for older learners."
+          "whyTopPick": "Fast, clear practice with tons of topics and built-in quizzes.",
+          "freeAccess": "Free site access; ads may appear.",
+          "ageCheck": "Generally appropriate; supervise browsing due to ads/links."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "learnenglishteens-listening",
-        title: "LearnEnglish Teens — Listening (British Council) 🧑‍🎓🎧",
-        link: "https://learnenglishteens.britishcouncil.org/skills/listening",
-        format: "site",
-        description: "Levelled listening lessons + activities.",
-        details: {
-          type: "Levelled listening lessons + activities",
-          teaches: "Real-life listening; Exam-style comprehension.",
-          howTo: [
-            "Choose a lesson near your level.",
-            "Do the ‘before listening’ task.",
-            "Listen + answer questions.",
-            "Note 5 useful phrases."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "elllo-listening-library",
+        "title": "🎧 ELLLO — English Listening Lesson Library Online 🌍📝",
+        "description": "Short listening lessons + quizzes + accents 🌎🎧",
+        "link": "https://elllo.org/",
+        "format": "site",
+        "level": "A2–B2",
+        "time": "10–15 min",
+        "focus": "listening, accents",
+        "notes": "",
+        "details": {
+          "type": "Short listening lessons + quizzes + accents 🌎🎧",
+          "teaches": "Listening comprehension + global accents + useful phrases",
+          "howTo": [
+            "🔎 Choose a topic (food, hobbies, travel, school)",
+            "🎧 Listen once for gist",
+            "✅ Do the quiz / fill-in tasks",
+            "🗣️ Repeat 3 key sentences aloud"
           ],
-          whyTopPick: "More ‘grown-up’ topics that suit 11–12 moving toward teen content.",
-          freeAccess: "Free website access.",
-          ageCheck: "Appropriate for older kids; preview topics if sensitive themes appear."
+          "whyTopPick": "Huge library and great exposure to different accents.",
+          "freeAccess": "Free access.",
+          "ageCheck": "Appropriate for 11–12; pick kid-safe topics."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "randalls-esl-lab",
-        title: "Randall’s ESL Cyber Listening Lab (ESL-Lab) 🎧📝",
-        link: "https://www.esl-lab.com/",
-        format: "site",
-        description: "Listening quizzes (Easy / Intermediate / Difficult).",
-        details: {
-          type: "Listening quizzes (Easy / Intermediate / Difficult)",
-          teaches: "Everyday listening; Question answering; Listening strategies.",
-          howTo: [
-            "Start at Easy (or Intermediate if strong).",
-            "Listen once for gist.",
-            "Do the quiz.",
-            "Re-listen and shadow 5 lines."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "voa-lets-learn-english-level-1",
+        "title": "📺 VOA Learning English — Let’s Learn English (Level 1) 🇺🇸🎧",
+        "description": "Video story series + slow clear listening 🎬",
+        "link": "https://learningenglish.voanews.com/z/951",
+        "format": "video",
+        "level": "A1–A2",
+        "time": "10–15 min",
+        "focus": "listening, speaking",
+        "notes": "",
+        "details": {
+          "type": "Video story series + slow clear listening 🎬",
+          "teaches": "Everyday listening + useful phrases + pronunciation support",
+          "howTo": [
+            "▶️ Watch one episode",
+            "📝 Write 5 key words",
+            "🔁 Rewatch and repeat key lines",
+            "🎭 Act out 1 short dialogue"
           ],
-          whyTopPick: "Clear levels + lots of structured listening practice.",
-          freeAccess: "Free website access (some pages may show ads).",
-          ageCheck: "Works well for 11–12; choose school-friendly topics."
+          "whyTopPick": "Very clear audio and strong beginner-friendly scaffolding.",
+          "freeAccess": "Free access on VOA.",
+          "ageCheck": "Suitable for 11–12 with adult guidance."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "elllo-listening-library",
-        title: "ELLLO — English Listening Lesson Library Online 🌍📝",
-        link: "https://www.elllo.org/",
-        format: "site",
-        description: "Listening lessons with transcript + quiz.",
-        details: {
-          type: "Listening lessons with transcript + quiz",
-          teaches: "Listening fluency; Vocabulary; Comprehension strategies.",
-          howTo: [
-            "Choose a beginner/intermediate conversation.",
-            "Listen → read transcript → listen again.",
-            "Do the interactive quiz.",
-            "Record yourself copying ~30 seconds (optional)."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "voa-american-stories",
+        "title": "📖🎧 VOA American Stories (AmericanEnglish.state.gov) 🇺🇸📚",
+        "description": "Audio stories + printable text (short classics) 📄🎧",
+        "link": "https://americanenglish.state.gov/resources/american-stories",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "listening, reading",
+        "notes": "",
+        "details": {
+          "type": "Audio stories + printable text (short classics) 📄🎧",
+          "teaches": "Listening comprehension + story vocabulary + retelling",
+          "howTo": [
+            "🎧 Listen once without reading",
+            "📄 Listen again with the text",
+            "📝 Write 3 key events",
+            "🗣️ Retell the story in order"
           ],
-          whyTopPick: "Huge free library; many lessons include transcript + quiz for support.",
-          freeAccess: "Free lessons on-site.",
-          ageCheck: "Mixed topics (kids–adult). Adult/teacher should preview and select."
+          "whyTopPick": "Classic stories with clear audio and printable texts.",
+          "freeAccess": "Free official resource.",
+          "ageCheck": "Generally suitable; preview story themes."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "voa-lets-learn-english-level-1",
-        title: "VOA Learning English — Let’s Learn English (Level 1) 🇺🇸🎧",
-        link: "https://learningenglish.voanews.com/p/5644.html",
-        format: "site",
-        description: "Video lessons + printables.",
-        details: {
-          type: "Video lessons + printables",
-          teaches: "Clear beginner listening; Daily-life vocabulary.",
-          howTo: [
-            "Watch a lesson video.",
-            "Write 8 new words with meanings.",
-            "Rewatch and pause to repeat key lines (shadowing).",
-            "Do worksheets if available."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "storynory-audio-stories",
+        "title": "📚🎧 Storynory — Free Audio Stories for Kids 🧒✨",
+        "description": "Audio stories + fairy tales + classics 📖🎧",
+        "link": "https://www.storynory.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "listening, stories",
+        "notes": "",
+        "details": {
+          "type": "Audio stories + fairy tales + classics 📖🎧",
+          "teaches": "Listening stamina, story comprehension, vocabulary",
+          "howTo": [
+            "🎧 Choose a short story episode",
+            "📝 Pause 3 times to note key words",
+            "🗣️ Retell the episode in order",
+            "🎭 Act out 1 short scene/dialogue"
           ],
-          whyTopPick: "Structured course style with clear speech designed for learners.",
-          freeAccess: "Free website access.",
-          ageCheck: "Family-friendly everyday topics; good for 11–12 beginners."
+          "whyTopPick": "Engaging stories that build listening stamina naturally.",
+          "freeAccess": "Free access.",
+          "ageCheck": "Kid-friendly and suitable for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "americanenglish-voa-american-stories",
-        title: "VOA American Stories (AmericanEnglish) 🇺🇸📖🎧",
-        link: "https://americanenglish.state.gov/resources/voa-american-stories",
-        format: "site",
-        description: "Short stories with audio/video + quizzes.",
-        details: {
-          type: "Short stories with audio/video + quizzes",
-          teaches: "Story listening; Narrative vocabulary; Inference.",
-          howTo: [
-            "Pick a story (start with easier ones).",
-            "Listen and track characters/setting/problem.",
-            "Do the quiz activities.",
-            "Give a 1-minute story summary."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "news-in-levels",
+        "title": "📰🎧 News in Levels 📈🗞️",
+        "description": "Leveled news listening/reading (Level 1–3) 🎚️",
+        "link": "https://www.newsinlevels.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "listening, current events",
+        "notes": "",
+        "details": {
+          "type": "Leveled news listening/reading (Level 1–3) 🎚️",
+          "teaches": "Listening for gist/detail + vocabulary in context",
+          "howTo": [
+            "🎚️ Choose Level 1–3",
+            "🎧 Listen once and answer: “What happened?”",
+            "🔁 Listen again and read along",
+            "🗣️ Give a 30-second summary + opinion"
           ],
-          whyTopPick: "Designed for English learners; includes audio + quizzes for checking understanding.",
-          freeAccess: "Free government resource page.",
-          ageCheck: "Some classic stories can be spooky/older; preview first."
+          "whyTopPick": "Quick, levelled listening practice with current topics.",
+          "freeAccess": "Free access (ads may appear).",
+          "ageCheck": "Preview topics; generally fine for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "storynory-audio-stories-11-12",
-        title: "Storynory — Free Audio Stories for Kids 🧒✨",
-        link: "https://www.storynory.com/",
-        format: "site",
-        description: "Audio stories + text (fairy tales, myths, originals).",
-        details: {
-          type: "Audio stories + text (fairy tales, myths, originals)",
-          teaches: "Listening comprehension; Story vocabulary; Sequencing.",
-          howTo: [
-            "Choose a story category (Fairy Tales / Myths / Educational).",
-            "Read along while listening.",
-            "Write 5 new words + 1 sentence each.",
-            "Answer: ‘What happened first/next/last?’"
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "breaking-news-english",
+        "title": "⚡🎧 Breaking News English — Multi-Speed Listening 🗞️🎚️",
+        "description": "News lessons with 2 speeds + activities ⚡",
+        "link": "https://breakingnewsenglish.com/",
+        "format": "site",
+        "level": "A2–B2",
+        "time": "15–25 min",
+        "focus": "listening, vocab",
+        "notes": "",
+        "details": {
+          "type": "News lessons with 2 speeds + activities ⚡",
+          "teaches": "Listening + vocabulary + discussion",
+          "howTo": [
+            "1️⃣ Choose a short lesson (L0–L6) 🎚️",
+            "2️⃣ Listen at slow speed first 🎧",
+            "3️⃣ Try faster speed and check understanding ✅",
+            "4️⃣ Do 1–2 worksheet tasks 📝"
           ],
-          whyTopPick: "Kid-focused audio stories with read-along text support.",
-          freeAccess: "Free access on-site.",
-          ageCheck: "Strong fit for 11–12 (choose longer/older stories)."
+          "whyTopPick": "Two speeds makes it flexible for mixed levels.",
+          "freeAccess": "Free access; printables available.",
+          "ageCheck": "Preview topics; some may be more mature."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "news-in-levels-listening",
-        title: "News in Levels 📰🎧",
-        link: "https://www.newsinlevels.com/",
-        format: "site",
-        description: "News at Level 1/2/3 (+ exercises) with audio.",
-        details: {
-          type: "News at Level 1/2/3 (+ exercises) with audio",
-          teaches: "Listening + reading on the same topic; Retelling.",
-          howTo: [
-            "Start with Level 1 or 2.",
-            "Listen, then read.",
-            "Do the exercises.",
-            "Tell the news in 3 sentences."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "listen-a-minute",
+        "title": "⏱️🎧 Listen A Minute 📝📄",
+        "description": "1-minute listening lessons + quiz ✅",
+        "link": "https://listenaminute.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "5–10 min",
+        "focus": "listening, fluency",
+        "notes": "",
+        "details": {
+          "type": "1-minute listening lessons + quiz ✅",
+          "teaches": "Short listening practice + repetition for fluency",
+          "howTo": [
+            "1️⃣ Pick 1 topic (student interest) 🎯",
+            "2️⃣ Listen 2–3 times 🔁",
+            "3️⃣ Answer the quiz questions ✅",
+            "4️⃣ Read aloud once for fluency 🗣️"
           ],
-          whyTopPick: "Adjustable difficulty makes it easy to match 11–12 levels.",
-          freeAccess: "Free website access (ad-supported).",
-          ageCheck: "News can include serious topics; adult/teacher should select safe articles."
+          "whyTopPick": "Quick wins and easy daily routine.",
+          "freeAccess": "Free access.",
+          "ageCheck": "Suitable for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "breaking-news-english-multi-speed-listening",
-        title: "Breaking News English — Multi-Speed Listening 🗞️🎚️",
-        link: "https://breakingnewsenglish.com/multi-speed-listening.html",
-        format: "site",
-        description: "Listening at multiple speeds + activities.",
-        details: {
-          type: "Listening at multiple speeds + activities",
-          teaches: "Listening fluency (slow → fast); Key vocabulary; Opinion speaking.",
-          howTo: [
-            "Listen at the slowest speed for gist.",
-            "Increase speed and repeat.",
-            "Do the online activities/quizzes.",
-            "Debate a simple opinion question."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "englishclub-listening",
+        "title": "🎧 EnglishClub — Listening 🧩📚",
+        "description": "Listening practice by topic + worksheets 📝",
+        "link": "https://www.englishclub.com/listening/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "listening",
+        "notes": "",
+        "details": {
+          "type": "Listening practice by topic + worksheets 📝",
+          "teaches": "Listening comprehension + topic vocabulary",
+          "howTo": [
+            "1️⃣ Choose a topic page (school, sports, etc.) 🎯",
+            "2️⃣ Listen and read along if available 🎧",
+            "3️⃣ Do the tasks/worksheet ✅",
+            "4️⃣ Write 3 sentences summarizing ✍️"
           ],
-          whyTopPick: "Speed control is excellent for building confidence and fluency.",
-          freeAccess: "Site provides free ESL/EFL listening lessons.",
-          ageCheck: "News themes vary; adult/teacher should pre-check topics."
+          "whyTopPick": "Simple, no-frills listening practice bank.",
+          "freeAccess": "Free access.",
+          "ageCheck": "Suitable for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "listen-a-minute",
-        title: "Listen A Minute ⏱️🎧",
-        link: "https://listenaminute.com/",
-        format: "site",
-        description: "60-second listenings + handouts + quizzes.",
-        details: {
-          type: "60-second listenings + handouts + quizzes",
-          teaches: "Short focused listening; Gap-fills; Spelling + vocab.",
-          howTo: [
-            "Listen twice (no reading).",
-            "Read the text and underline unknown words.",
-            "Do 1 quiz.",
-            "Speak for 30 seconds: ‘My opinion is…’"
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "eslvideo-listening-quizzes",
+        "title": "🧩🎧 ESLvideo.com — Listening Quizzes 📺✅",
+        "description": "Video-based listening quizzes + answers 🎬",
+        "link": "https://www.eslvideo.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "listening",
+        "notes": "",
+        "details": {
+          "type": "Video-based listening quizzes + answers 🎬",
+          "teaches": "Listening comprehension with engaging clips",
+          "howTo": [
+            "1️⃣ Pick a kid-safe video quiz 🎯",
+            "2️⃣ Watch once for gist 👀",
+            "3️⃣ Answer quiz questions ✅",
+            "4️⃣ Rewatch and repeat key phrases 🗣️"
           ],
-          whyTopPick: "Perfect for quick daily practice across many topics.",
-          freeAccess: "Site provides free handouts + MP3 + quizzes.",
-          ageCheck: "Some topics can be adult; teacher must choose safe topics."
+          "whyTopPick": "High engagement and lots of variety.",
+          "freeAccess": "Free access; user-generated content.",
+          "ageCheck": "Teacher/parent preview required for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "englishclub-listening",
-        title: "EnglishClub — Listening 🧩🎧",
-        link: "https://www.englishclub.com/listening/",
-        format: "site",
-        description: "Listening guides + quizzes + easy audio practice.",
-        details: {
-          type: "Listening guides + quizzes + easy audio practice",
-          teaches: "Listening strategies; Listening comprehension; Useful expressions.",
-          howTo: [
-            "Use ‘Listening Quizzes’ or ‘Listen & Learn’.",
-            "Listen → answer → check.",
-            "Copy 5 useful expressions.",
-            "Make 3 sentences using the expressions."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "pbs-kids-podcasts",
+        "title": "🎙️ PBS KIDS Podcasts 🧒🎧",
+        "description": "Kid-safe podcasts with stories + science 🧠",
+        "link": "https://pbskids.org/podcasts/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "listening, vocab",
+        "notes": "",
+        "details": {
+          "type": "Kid-safe podcasts with stories + science 🧠",
+          "teaches": "Listening to stories/explanations + vocabulary in context",
+          "howTo": [
+            "1️⃣ Pick one episode (8–13 minutes) 🎧",
+            "2️⃣ Pause 3 times to note key words 📝",
+            "3️⃣ Retell the episode in order 🗣️",
+            "4️⃣ Share 1 new fact learned 💡"
           ],
-          whyTopPick: "Clear ESL listening hub with multiple practice paths.",
-          freeAccess: "Free website access.",
-          ageCheck: "Generally suitable; preview pages because it’s a broad ESL site."
+          "whyTopPick": "Safe and engaging listening content for kids.",
+          "freeAccess": "Free access.",
+          "ageCheck": "Designed for kids; great for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "eslvideo-listening-quizzes",
-        title: "ESLvideo.com — Listening Quizzes 📺✅",
-        link: "https://www.eslvideo.com/",
-        format: "site",
-        description: "Video-based listening quizzes (often from YouTube).",
-        details: {
-          type: "Video-based listening quizzes (often from YouTube)",
-          teaches: "Listening for details; Fast feedback via quizzes.",
-          howTo: [
-            "Search for kid-safe topics (animals, school, science, sports).",
-            "Watch once → then take the quiz.",
-            "Rewatch and pause to repeat key phrases.",
-            "Write 5 answers in full sentences."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "ted-ed-youtube",
+        "title": "🎓📺 TED-Ed (YouTube) 🧠🎧",
+        "description": "Short educational videos (subtitles + discussion) 🎬",
+        "link": "https://www.youtube.com/teded",
+        "format": "video",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "listening, academic vocab",
+        "notes": "YouTube access required; supervise ads/comments.",
+        "details": {
+          "type": "Short educational videos (subtitles + discussion) 🎬",
+          "teaches": "Listening to explanations + academic vocabulary 📚",
+          "howTo": [
+            "🔎 Choose a topic the student likes",
+            "🎧 Watch with English subtitles ON",
+            "📝 Write 5 key words + a 2–3 sentence summary",
+            "🗣️ Explain the idea to a parent/friend"
           ],
-          whyTopPick: "High engagement; quiz format keeps focus.",
-          freeAccess: "Site accessible without a paid gate (accounts may be used for saving/creating).",
-          ageCheck: "User-generated content; adult supervision + preview required."
+          "whyTopPick": "Very motivating content for curious 11–12 learners.",
+          "freeAccess": "Free-to-watch channel (YouTube access required).",
+          "ageCheck": "YouTube ads/comments risk; use Restricted Mode and adult supervision."
         }
       },
       {
-        age: AGE,
-        skill: "listening",
-        slug: "pbs-kids-podcasts",
-        title: "PBS KIDS Podcasts 🧒🎙️",
-        link: "https://pbskids.org/videos/podcasts",
-        format: "site",
-        description: "Kids podcasts (short episodes).",
-        details: {
-          type: "Kids podcasts (short episodes)",
-          teaches: "Listening stamina; Everyday vocabulary; Story sequencing.",
-          howTo: [
-            "Pick one episode (8–13 minutes).",
-            "Pause 3 times to note key words.",
-            "Retell the episode in order.",
-            "Act out 1 short scene/dialogue."
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "best-set-mini-pack-11-12-listening",
+        "title": "Best “Set” 🎧🗓️ (11–12 Listening mini-pack)",
+        "description": "Simple weekly listening routine (short + consistent) 🎧✨",
+        "link": "",
+        "format": "other",
+        "level": "A2–B1",
+        "time": "15–25 min/day",
+        "focus": "listening, vocab, retelling",
+        "notes": "Rotate through 5 core sources for variety without overload.",
+        "details": {
+          "type": "Weekly routine (15–25 minutes/day) ⏱️🎧",
+          "teaches": "Gist + detail + retelling + phrase noticing",
+          "howTo": [
+            "Weekly routine 🗓️🎧 (15–25 minutes/day):",
+            "Mon 🟦: LearnEnglish Kids — 1 short story + retell 🧒📚",
+            "Tue 🟩: LearnEnglish Teens Listening — 1 lesson + note 5 phrases 🧑‍🎓",
+            "Wed 🟨: ESL-Lab — 1 quiz + retell the situation 🎙️",
+            "Thu 🟧: Storynory — 1 audio story + 3 key events 📖",
+            "Fri 🟥: News in Levels — leveled news + 30s summary 📰",
+            "Weekend (optional) 🌈: PBS Kids Podcast or TED-Ed + 5 key words 🎙️🧠"
           ],
-          whyTopPick: "High-quality, age-appropriate audio for children.",
-          freeAccess: "Episode list playable on-site.",
-          ageCheck: "Designed for kids; good for 11–12 as ‘fun listening’."
-        }
-      },
-      {
-        age: AGE,
-        skill: "listening",
-        slug: "ted-ed-youtube",
-        title: "TED-Ed (YouTube) 🎓📺",
-        link: "https://www.youtube.com/@TEDEd",
-        format: "video",
-        description: "Short animated lessons (science/history/ideas).",
-        details: {
-          type: "Short animated lessons (science/history/ideas)",
-          teaches: "Listening to explanations; Academic vocabulary; Summarizing.",
-          howTo: [
-            "Choose a topic the student likes.",
-            "Watch with English subtitles ON.",
-            "Write 5 key words + a 2–3 sentence summary.",
-            "Explain the idea to a parent/friend."
-          ],
-          whyTopPick: "Motivating content for curious learners; great for CLIL-style listening.",
-          freeAccess: "Free-to-watch channel (YouTube access required).",
-          ageCheck: "YouTube ads/comments risk; use Restricted Mode and adult supervision."
-        }
-      },
-      {
-        age: AGE,
-        skill: "listening",
-        slug: "best-set-mini-pack-11-12-listening",
-        title: "Best “Set” (5-day mini-pack for 11–12 Listening) 🎧📅",
-        link: "",
-        format: "other",
-        isBestSet: true,
-        description: "Weekly routine bundle (about 20 minutes/day) for 11–12 Listening.",
-        time: "~20 min/day",
-        focus: "gist → details → retell",
-        bundleItems: [
-          "learnenglishkids-listen-watch-11-12",
+          "whyTopPick": "Balanced, repeatable routine that builds listening fast.",
+          "freeAccess": "Uses free sources listed above.",
+          "ageCheck": "Adjust levels and topics based on the learner."
+        },
+        "isBestSet": true,
+        "bundleItems": [
+          "learnenglishkids-listen-watch",
+          "learnenglishteens-listening",
           "randalls-esl-lab",
-          "elllo-listening-library",
-          "storynory-audio-stories-11-12",
-          "news-in-levels-listening",
-          "pbs-kids-podcasts"
-        ],
-        details: {
-          type: "Weekly routine bundle",
-          teaches: "Gist → details listening process; Vocabulary capture; Retell speaking after listening.",
-          howTo: [
-            "Goal: ~20 minutes/day.",
-            "Mon: LearnEnglish Kids (Listen & Watch) → 1 song or short story.",
-            "Tue: Randall’s ESL-Lab → 1 quiz + shadow 5 lines.",
-            "Wed: ELLLO → 1 lesson + transcript + quiz.",
-            "Thu: Storynory → 1 story + first/next/last retell.",
-            "Fri: News in Levels → Level 1/2 audio + 3-sentence summary.",
-            "Weekend (optional): PBS KIDS podcast → retell + act out 1 scene.",
-            "Simple routine: (1) Listen for gist → (2) Listen for details → (3) Note 5 words → (4) Retell."
-          ],
-          whyTopPick: "Consistent structure across varied sources keeps practice predictable and progress measurable.",
-          freeAccess: "All items include free access options (some may show ads).",
-          ageCheck: "Designed for 11–12 with teacher/parent topic selection."
-        }
+          "storynory-audio-stories",
+          "news-in-levels"
+        ]
       },
-
-      // =========================
-      // 11–12 WRITING
-      // =========================
       {
-        age: AGE,
-        skill: "writing",
-        slug: "learnenglishkids-writing-practice",
-        title: "Writing practice — LearnEnglish Kids (British Council) ✅✏️",
-        link: "https://learnenglishkids.britishcouncil.org/read-write/writing-practice",
-        format: "site",
-        description: "Writing models + practice tasks + printables.",
-        focus: "models + structure",
-        level: "A2–B1",
-        details: {
-          type: "Writing models + practice tasks + printables",
-          teaches: "Short text types (messages, descriptions, stories) + structure.",
-          howTo: [
-            "Choose Level 3 for 11–12 (or the level that matches ability).",
-            "Read the example text.",
-            "Copy the structure and write your own version.",
-            "Print a worksheet for extra practice (optional)."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "learnenglishkids-writing-practice",
+        "title": "📝 Writing practice — LearnEnglish Kids (British Council) ✅✏️",
+        "description": "Writing models + practice tasks + printables 📄",
+        "link": "https://learnenglishkids.britishcouncil.org/read-write/writing-practice",
+        "format": "site",
+        "level": "A1–A2",
+        "time": "10–15 min",
+        "focus": "writing, structure",
+        "notes": "",
+        "details": {
+          "type": "Writing models + practice tasks + printables 📄",
+          "teaches": "Short text types (messages, descriptions, stories) + structure 🧱",
+          "howTo": [
+            "🎚️ Choose Level 3 for 11–12 (or level that matches ability)",
+            "👀 Read the example text",
+            "✍️ Copy the structure and write your own version",
+            "✅ Print a worksheet for extra practice"
           ],
-          whyTopPick: "Clear models + guided practice in a kid-safe environment.",
-          freeAccess: "Fully usable free; account only for posting comments.",
-          ageCheck: "Designed for kids; great for 11–12 ESL/EFL (some tasks may feel easy for strong writers)."
+          "whyTopPick": "Clear models + guided practice in a kid-safe environment.",
+          "freeAccess": "Fully usable free; account only for posting comments.",
+          "ageCheck": "Designed for kids; great for 11–12 ESL/EFL (some tasks may feel easy for strong writers)."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "learnenglishteens-a2-writing",
-        title: "A2 Writing — LearnEnglish Teens (British Council) ✅🖊️",
-        link: "https://learnenglishteens.britishcouncil.org/skills/writing/a2-writing",
-        format: "site",
-        description: "Model texts + exercises.",
-        level: "A2",
-        focus: "emails + chats + paragraphs",
-        details: {
-          type: "Model texts + exercises",
-          teaches: "Emails, chats, short paragraphs, basic organization.",
-          howTo: [
-            "Choose a lesson (e.g., “A chat”).",
-            "Do the preparation task.",
-            "Study the model text.",
-            "Write your own version using the same format."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "learnenglishteens-a2-writing",
+        "title": "📘 A2 Writing — LearnEnglish Teens (British Council) ✅🖊️",
+        "description": "Model texts + exercises 🧠",
+        "link": "https://learnenglishteens.britishcouncil.org/skills/writing/a2-writing",
+        "format": "site",
+        "level": "A2",
+        "time": "15–25 min",
+        "focus": "writing, organization",
+        "notes": "",
+        "details": {
+          "type": "Model texts + exercises 🧠",
+          "teaches": "Emails, chats, short paragraphs, basic organization 🧩",
+          "howTo": [
+            "📌 Choose a lesson (e.g., “A chat”)",
+            "🧠 Do the preparation task",
+            "👀 Study the model text",
+            "✍️ Write your own version using the same format"
           ],
-          whyTopPick: "Perfect level match for many 11–12 learners (pre-intermediate).",
-          freeAccess: "Lessons are accessible free; login mainly for commenting.",
-          ageCheck: "Teen site; generally suitable for advanced 11–12 with adult/teacher topic preview."
+          "whyTopPick": "Perfect level match for many 11–12 learners (pre-intermediate).",
+          "freeAccess": "Lessons are accessible free; login mainly for commenting.",
+          "ageCheck": "Teen site; generally suitable for advanced 11–12 with adult/teacher topic preview."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "learnenglishteens-b1-writing",
-        title: "B1 Writing — LearnEnglish Teens (British Council) ✅📝",
-        link: "https://learnenglishteens.britishcouncil.org/skills/writing/b1-writing",
-        format: "site",
-        description: "Intermediate writing lessons + tasks.",
-        level: "B1",
-        focus: "longer connected writing",
-        details: {
-          type: "Intermediate writing lessons + tasks",
-          teaches: "Blogs, CVs, opinions, longer connected writing.",
-          howTo: [
-            "Pick one lesson (e.g., “A blog”).",
-            "Copy 5 useful phrases from the model.",
-            "Write a new text using those phrases.",
-            "Self-check with the task questions."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "learnenglishteens-b1-writing",
+        "title": "🧾 B1 Writing — LearnEnglish Teens (British Council) ✅📝",
+        "description": "Intermediate writing lessons + tasks 📚",
+        "link": "https://learnenglishteens.britishcouncil.org/skills/writing/b1-writing",
+        "format": "site",
+        "level": "B1",
+        "time": "20–30 min",
+        "focus": "writing, connected text",
+        "notes": "",
+        "details": {
+          "type": "Intermediate writing lessons + tasks 📚",
+          "teaches": "Blogs, CVs, opinions, longer connected writing 🧱",
+          "howTo": [
+            "🎯 Pick one lesson (e.g., “A blog”)",
+            "🔎 Copy 5 useful phrases from the model",
+            "✍️ Write a new text using those phrases",
+            "✅ Self-check with the task questions"
           ],
-          whyTopPick: "Strong model-based writing that pushes better students.",
-          freeAccess: "Accessible free; login mainly for commenting.",
-          ageCheck: "Appropriate for advanced 11–12; preview lesson topics."
+          "whyTopPick": "Strong model-based writing that pushes better students.",
+          "freeAccess": "Accessible free; login mainly for commenting.",
+          "ageCheck": "Appropriate for advanced 11–12; preview lesson topics."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "learnenglish-a2-writing",
-        title: "A2 Writing — LearnEnglish (British Council) ✅✍️",
-        link: "https://learnenglish.britishcouncil.org/skills/writing/a2-writing",
-        format: "site",
-        description: "Writing lessons with tips + tasks.",
-        level: "A2",
-        focus: "model → tips → practice",
-        details: {
-          type: "Writing lessons with tips + tasks",
-          teaches: "Notes, messages, profiles, emails; structure + accuracy.",
-          howTo: [
-            "Do the preparation task.",
-            "Read the model + writing tips.",
-            "Write your own version (same topic, new details).",
-            "Use the tasks as a checklist."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "learnenglish-a2-writing",
+        "title": "🎯 A2 Writing — LearnEnglish (British Council) ✅✍️",
+        "description": "Writing lessons with tips + tasks 🧠",
+        "link": "https://learnenglish.britishcouncil.org/skills/writing/a2-writing",
+        "format": "site",
+        "level": "A2",
+        "time": "15–25 min",
+        "focus": "writing, accuracy",
+        "notes": "",
+        "details": {
+          "type": "Writing lessons with tips + tasks 🧠",
+          "teaches": "Notes, messages, profiles, emails; structure + accuracy 🧾",
+          "howTo": [
+            "🧠 Do the preparation task",
+            "👀 Read the model + writing tips",
+            "✍️ Write your own version (same topic, new details)",
+            "✅ Use the tasks as a checklist"
           ],
-          whyTopPick: "Very clear “model → tips → practice” progression.",
-          freeAccess: "Free website practice (no paywall seen).",
-          ageCheck: "General audience; content is typically safe, but adult guidance is recommended."
+          "whyTopPick": "Very clear “model → tips → practice” progression.",
+          "freeAccess": "Free website practice (no paywall seen).",
+          "ageCheck": "General audience; content is typically safe, but adult guidance is recommended."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "write-and-improve",
-        title: "Write & Improve (University of Cambridge) 🧠✍️",
-        link: "https://writeandimprove.com/",
-        format: "site",
-        description: "Auto-feedback writing tool (draft → feedback → revise).",
-        focus: "revision",
-        details: {
-          type: "Auto-feedback writing tool",
-          teaches: "Drafting + revising with feedback; CEFR-linked results.",
-          howTo: [
-            "Choose a task (or make your own).",
-            "Write and submit.",
-            "Fix 3–5 issues and resubmit.",
-            "Save “before vs after” to track improvement."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "write-and-improve",
+        "title": "✅ Write & Improve (University of Cambridge) 🧠✍️",
+        "description": "Auto-feedback writing tool 🖥️",
+        "link": "https://writeandimprove.com/",
+        "format": "site",
+        "level": "A2–B2",
+        "time": "15–30 min",
+        "focus": "revision, feedback",
+        "notes": "Accounts + writing uploads = privacy; supervise.",
+        "details": {
+          "type": "Auto-feedback writing tool 🖥️",
+          "teaches": "Drafting + revising with feedback; CEFR-linked results 🔁",
+          "howTo": [
+            "🗂️ Choose a task (or make your own)",
+            "✍️ Write and submit",
+            "🔁 Fix 3–5 issues and resubmit",
+            "📝 Save “before vs after” to track improvement"
           ],
-          whyTopPick: "Real revision practice (the #1 habit that improves writing).",
-          freeAccess: "Stated as FREE by the site.",
-          ageCheck: "Suitable with teacher/parent supervision (accounts + writing uploads = privacy)."
+          "whyTopPick": "Real revision practice (the #1 habit that improves writing).",
+          "freeAccess": "Stated as FREE by the site.",
+          "ageCheck": "Suitable with teacher/parent supervision (accounts + writing uploads = privacy)."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "quill-grammar",
-        title: "Quill Grammar (Quill.org) ✍️✅",
-        link: "https://www.quill.org/tools/grammar",
-        format: "site",
-        description: "Short sentence-writing activities (about 10 minutes).",
-        time: "10 min",
-        focus: "sentence accuracy",
-        details: {
-          type: "Short sentence-writing activities",
-          teaches: "Sentence accuracy (punctuation, structure) to support better paragraphs.",
-          howTo: [
-            "Run one activity.",
-            "Copy 3 corrected sentences into a notebook.",
-            "Combine them into 1 short paragraph.",
-            "Quick teacher check."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "quill-grammar",
+        "title": "🧑‍🏫 Quill Grammar (Quill.org) ✍️✅",
+        "description": "Short sentence-writing activities (10 min) ⏱️",
+        "link": "https://www.quill.org/tools/grammar",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10 min",
+        "focus": "grammar, sentence accuracy",
+        "notes": "",
+        "details": {
+          "type": "Short sentence-writing activities (10 min) ⏱️",
+          "teaches": "Sentence accuracy (punctuation, structure) to support better paragraphs 🧱",
+          "howTo": [
+            "🧪 Run one activity",
+            "📝 Copy 3 corrected sentences into a notebook",
+            "➕ Combine them into 1 short paragraph",
+            "✅ Quick teacher check"
           ],
-          whyTopPick: "Fast, focused writing accuracy practice (great for ESL).",
-          freeAccess: "Quill describes itself as a free literacy tool; activities accessible via the platform.",
-          ageCheck: "Designed for schools; appropriate for 11–12 with teacher/guardian setup."
+          "whyTopPick": "Fast, focused writing accuracy practice (great for ESL).",
+          "freeAccess": "Quill describes itself as a free literacy tool; activities accessible via the platform.",
+          "ageCheck": "Designed for schools; appropriate for 11–12 with teacher/guardian setup."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "826-digital",
-        title: "826 Digital — Writing prompts & lessons 🧠📝",
-        link: "https://826digital.com/",
-        format: "site",
-        description: "Prompt library + lesson packs (free account).",
-        time: "10–15 min",
-        focus: "ideas + drafting",
-        details: {
-          type: "Prompt library + lesson packs",
-          teaches: "Creative + informational writing (ideas, drafting, voice).",
-          howTo: [
-            "Sign up for a free account.",
-            "Filter by grade and choose a prompt/lesson.",
-            "Write for 10–15 minutes (timer).",
-            "Revise using a checklist (capitalization, punctuation, detail)."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "826-digital-writing-prompts",
+        "title": "✨ 826 Digital — Writing prompts & lessons (free account) 🧠📝",
+        "description": "Prompt library + lesson packs 📚",
+        "link": "https://826digital.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "creative writing, ideas",
+        "notes": "Requires a free account.",
+        "details": {
+          "type": "Prompt library + lesson packs 📚",
+          "teaches": "Creative + informational writing (ideas, drafting, voice) 💡",
+          "howTo": [
+            "🆓 Sign up for a free account",
+            "🔎 Filter by grade and choose a prompt/lesson",
+            "⏱️ Write for 10–15 minutes (timer)",
+            "🔁 Revise using a checklist (capitalization, punctuation, detail)"
           ],
-          whyTopPick: "Huge bank of high-quality prompts that actually make kids want to write.",
-          freeAccess: "Requires a free account; resource library is positioned as free.",
-          ageCheck: "K–12; teacher should preview topics (some themes for older grades exist)."
+          "whyTopPick": "Huge bank of high-quality prompts that actually make kids want to write.",
+          "freeAccess": "Requires a free account; resource library is positioned as free.",
+          "ageCheck": "K–12; teacher should preview topics (some themes for older grades exist)."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "readwritethink-comic-creator",
-        title: "Comic Creator — ReadWriteThink 🎨✍️",
-        link: "https://www.readwritethink.org/classroom-resources/student-interactives/comic-creator",
-        format: "site",
-        description: "Writing tool for dialogue + captions.",
-        focus: "narrative + dialogue",
-        details: {
-          type: "Writing tool (dialogue + captions)",
-          teaches: "Narrative writing, dialogue punctuation, sequencing.",
-          howTo: [
-            "Plan a 6-panel story (beginning → problem → ending).",
-            "Add captions + speech bubbles.",
-            "Check punctuation (quotes, question marks).",
-            "Share/read aloud."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "readwritethink-comic-creator",
+        "title": "💬 Comic Creator — ReadWriteThink 🎨✍️",
+        "description": "Writing tool (dialogue + captions) 🗯️",
+        "link": "https://www.readwritethink.org/classroom-resources/student-interactives/comic-creator",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "15–25 min",
+        "focus": "narrative, dialogue",
+        "notes": "",
+        "details": {
+          "type": "Writing tool (dialogue + captions) 🗯️",
+          "teaches": "Narrative writing, dialogue punctuation, sequencing 📖",
+          "howTo": [
+            "🧠 Plan a 6-panel story (beginning → problem → ending)",
+            "✍️ Add captions + speech bubbles",
+            "✅ Check punctuation (quotes, question marks)",
+            "🎤 Share/read aloud"
           ],
-          whyTopPick: "Low-stress writing that still builds real skills.",
-          freeAccess: "Free web interactive (no paid gate shown).",
-          ageCheck: "Classroom tool for kids; suitable for 11–12."
+          "whyTopPick": "Low-stress writing that still builds real skills.",
+          "freeAccess": "Free web interactive (no paid gate shown).",
+          "ageCheck": "Classroom tool for kids; suitable for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "readwritethink-essay-map",
-        title: "Essay Map — ReadWriteThink 📝✅",
-        link: "https://www.readwritethink.org/classroom-resources/student-interactives/essay",
-        format: "site",
-        description: "Graphic organizer for expository writing.",
-        focus: "structure",
-        details: {
-          type: "Graphic organizer (expository writing)",
-          teaches: "Paragraph/essay structure (intro, ideas, details, conclusion).",
-          howTo: [
-            "Choose topic + 3 main ideas.",
-            "Add 2–3 supporting details each.",
-            "Turn the map into paragraphs.",
-            "Add linking words (first, because, however)."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "readwritethink-essay-map",
+        "title": "🧱 Essay Map — ReadWriteThink 📝✅",
+        "description": "Graphic organizer (expository writing) 🗺️",
+        "link": "https://www.readwritethink.org/classroom-resources/student-interactives/essay-map",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "20–30 min",
+        "focus": "organization, paragraphs",
+        "notes": "",
+        "details": {
+          "type": "Graphic organizer (expository writing) 🗺️",
+          "teaches": "Paragraph/essay structure (intro, ideas, details, conclusion) 🧩",
+          "howTo": [
+            "🎯 Choose topic + 3 main ideas",
+            "🧾 Add 2–3 supporting details each",
+            "✍️ Turn the map into paragraphs",
+            "✅ Add linking words (first, because, however)"
           ],
-          whyTopPick: "Fixes “messy writing” by forcing clear structure.",
-          freeAccess: "Free interactive organizer.",
-          ageCheck: "Suitable for 11–12 (especially strong/advanced)."
+          "whyTopPick": "Fixes “messy writing” by forcing clear structure.",
+          "freeAccess": "Free interactive organizer.",
+          "ageCheck": "Suitable for 11–12 (especially strong/advanced)."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "readwritethink-persuasion-map",
-        title: "Persuasion Map — ReadWriteThink 🗣️✍️",
-        link: "https://www.readwritethink.org/classroom-resources/student-interactives/persuasion",
-        format: "site",
-        description: "Argument organizer for persuasive writing.",
-        focus: "persuasion",
-        details: {
-          type: "Argument organizer (persuasive writing)",
-          teaches: "Claim → reasons → evidence → conclusion.",
-          howTo: [
-            "Write a clear opinion (claim).",
-            "Add 3 reasons + examples.",
-            "Draft 4 paragraphs from the map.",
-            "Check for strong linking words (because, so, therefore)."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "readwritethink-persuasion-map",
+        "title": "⚖️ Persuasion Map — ReadWriteThink 🗣️✍️",
+        "description": "Argument organizer (persuasive writing) 🧠",
+        "link": "https://www.readwritethink.org/classroom-resources/student-interactives/persuasion-map",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "20–30 min",
+        "focus": "persuasion, structure",
+        "notes": "",
+        "details": {
+          "type": "Argument organizer (persuasive writing) 🧠",
+          "teaches": "Claim → reasons → evidence → conclusion 🔍",
+          "howTo": [
+            "🎯 Write a clear opinion (claim)",
+            "🧩 Add 3 reasons + examples",
+            "✍️ Draft 4 paragraphs from the map",
+            "✅ Check for strong linking words (because, so, therefore)"
           ],
-          whyTopPick: "Makes persuasive writing easy and logical.",
-          freeAccess: "Free interactive; can print/email/save output.",
-          ageCheck: "Great for 11–12 debates/opinions; keep topics age-appropriate."
+          "whyTopPick": "Makes persuasive writing easy and logical.",
+          "freeAccess": "Free interactive; can print/email/save output.",
+          "ageCheck": "Great for 11–12 debates/opinions; keep topics age-appropriate."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "readwritethink-letter-generator",
-        title: "Letter Generator — ReadWriteThink 📨✍️",
-        link: "https://www.readwritethink.org/classroom-resources/student-interactives/letter-generator",
-        format: "site",
-        description: "Template-based writing tool (letters).",
-        focus: "real-world formats",
-        details: {
-          type: "Template-based writing tool",
-          teaches: "Friendly/business letter format + clear paragraphs.",
-          howTo: [
-            "Choose friendly letter.",
-            "Fill each part (greeting, body, closing).",
-            "Add 3 detail sentences in the body.",
-            "Print/finalize."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "readwritethink-letter-generator",
+        "title": "✉️ Letter Generator — ReadWriteThink 📨✍️",
+        "description": "Template-based writing tool 🧾",
+        "link": "https://www.readwritethink.org/classroom-resources/student-interactives/letter-generator",
+        "format": "site",
+        "level": "A2",
+        "time": "15–25 min",
+        "focus": "format, paragraphing",
+        "notes": "",
+        "details": {
+          "type": "Template-based writing tool 🧾",
+          "teaches": "Friendly/business letter format + clear paragraphs 🧱",
+          "howTo": [
+            "📌 Choose friendly letter",
+            "✍️ Fill each part (greeting, body, closing)",
+            "✅ Add 3 detail sentences in the body",
+            "🖨️ Print/finalize"
           ],
-          whyTopPick: "Teaches real-world writing formats quickly.",
-          freeAccess: "Free interactive (no paid gate shown).",
-          ageCheck: "Suitable for 11–12; adult support if emailing/saving."
+          "whyTopPick": "Teaches real-world writing formats quickly.",
+          "freeAccess": "Free interactive (no paid gate shown).",
+          "ageCheck": "Suitable for 11–12; adult support if emailing/saving."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "readwritethink-postcard-creator",
-        title: "Postcard Creator — ReadWriteThink 🖼️✍️",
-        link: "https://www.readwritethink.org/classroom-resources/student-interactives/postcard-creator",
-        format: "site",
-        description: "Short-form writing template (postcards).",
-        focus: "short descriptive writing",
-        details: {
-          type: "Short-form writing template",
-          teaches: "Short descriptive writing + correct layout.",
-          howTo: [
-            "Pick a place (real or imaginary).",
-            "Write 4–6 sentences (what you did, what you saw, feelings).",
-            "Add 3 adjectives + 2 past tense verbs.",
-            "Print and share."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "readwritethink-postcard-creator",
+        "title": "🧳 Postcard Creator — ReadWriteThink 🖼️✍️",
+        "description": "Short-form writing template 📨",
+        "link": "https://www.readwritethink.org/classroom-resources/student-interactives/postcard-creator",
+        "format": "site",
+        "level": "A2",
+        "time": "10–15 min",
+        "focus": "describing, past tense",
+        "notes": "",
+        "details": {
+          "type": "Short-form writing template 📨",
+          "teaches": "Short descriptive writing + correct layout 🧾",
+          "howTo": [
+            "🌍 Pick a place (real or imaginary)",
+            "✍️ Write 4–6 sentences (what you did, what you saw, feelings)",
+            "✅ Add 3 adjectives + 2 past tense verbs",
+            "🖨️ Print and share"
           ],
-          whyTopPick: "Perfect length for 11–12 (quick wins).",
-          freeAccess: "Free interactive template.",
-          ageCheck: "Kid-appropriate classroom tool."
+          "whyTopPick": "Perfect length for 11–12 (quick wins).",
+          "freeAccess": "Free interactive template.",
+          "ageCheck": "Kid-appropriate classroom tool."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "purdue-owl-grades-7-12-writing",
-        title: "Purdue OWL — Grades 7–12 Writing Resources 📚✅",
-        link: "https://owl.purdue.edu/owl/resources/writing_instructors/grades_7_12_instructors_and_students/index.html",
-        format: "site",
-        description: "Writing guides + strategies (planning, paragraphs, revision).",
-        focus: "writing strategies",
-        details: {
-          type: "Writing guides + strategies",
-          teaches: "Planning, paragraphs, essays, revision habits.",
-          howTo: [
-            "Pick one skill (e.g., introductions, outlines, revision).",
-            "Apply it to today’s writing task.",
-            "Use the page as a checklist.",
-            "Rewrite 1 paragraph to improve it."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "purdue-owl-grades-7-12-writing",
+        "title": "🧠 Purdue OWL — Grades 7–12 Writing Resources 📚✅",
+        "description": "Writing guides + strategies 📘",
+        "link": "https://owl.purdue.edu/owl/resources/writing_instructors/grades_7_12_instructors_and_students/index.html",
+        "format": "site",
+        "level": "B1+",
+        "time": "10–20 min",
+        "focus": "writing skills, revision",
+        "notes": "",
+        "details": {
+          "type": "Writing guides + strategies 📘",
+          "teaches": "Planning, paragraphs, essays, revision habits 🔁",
+          "howTo": [
+            "🎯 Pick one skill (e.g., introductions, outlines, revision)",
+            "📝 Apply it to today’s writing task",
+            "✅ Use the page as a checklist",
+            "🔁 Rewrite 1 paragraph to improve it"
           ],
-          whyTopPick: "Serious “how to write better” support for stronger 11–12 students.",
-          freeAccess: "Open-access Purdue OWL pages.",
-          ageCheck: "Written for grades 7–12; works well for advanced 11–12 with guidance."
+          "whyTopPick": "Serious “how to write better” support for stronger 11–12 students.",
+          "freeAccess": "Open-access Purdue OWL pages.",
+          "ageCheck": "Written for grades 7–12; works well for advanced 11–12 with guidance."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "teachingenglish-kids-and-writing",
-        title: "Kids and writing — TeachingEnglish (British Council) 🧑‍🏫✍️",
-        link: "https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/kids-and-writing",
-        format: "site",
-        description: "Teacher guide with practical writing activity ideas.",
-        focus: "classroom tasks",
-        details: {
-          type: "Teacher guide (activity ideas)",
-          teaches: "Practical writing tasks (reviews, postcards, instructions, emails).",
-          howTo: [
-            "Choose 1 activity type (postcard / review / instructions).",
-            "Give a simple writing frame (sentence starters).",
-            "Write a first draft.",
-            "Quick edit: capitals, punctuation, 3 “detail words”."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "teachingenglish-kids-and-writing",
+        "title": "🎓 Kids and writing — TeachingEnglish (British Council) 🧑‍🏫✍️",
+        "description": "Teacher guide (activity ideas) 🧩",
+        "link": "https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/kids-and-writing",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "activity ideas, writing frames",
+        "notes": "",
+        "details": {
+          "type": "Teacher guide (activity ideas) 🧩",
+          "teaches": "Practical writing tasks (reviews, postcards, instructions, emails) 🧾",
+          "howTo": [
+            "🗂️ Choose 1 activity type (postcard / review / instructions)",
+            "🧱 Give a simple writing frame (sentence starters)",
+            "✍️ Write a first draft",
+            "✅ Quick edit: capitals, punctuation, 3 “detail words”"
           ],
-          whyTopPick: "Easy-to-run writing activities that fit kids perfectly.",
-          freeAccess: "Free article access.",
-          ageCheck: "Specifically for children; appropriate with adult facilitation."
+          "whyTopPick": "Easy-to-run writing activities that fit kids perfectly.",
+          "freeAccess": "Free article access.",
+          "ageCheck": "Specifically for children; appropriate with adult facilitation."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "test-english-a2-writing",
-        title: "A2 Writing Exercises — Test-English ✍️✅",
-        link: "https://test-english.com/writing/a2/",
-        format: "site",
-        description: "A2 writing tasks + practice pages.",
-        level: "A2",
-        focus: "formats + practice",
-        details: {
-          type: "Writing tasks + practice pages",
-          teaches: "Common A2 formats (emails, postcards, short essays).",
-          howTo: [
-            "Pick one task (e.g., postcard).",
-            "Copy the structure (opening → details → closing).",
-            "Write your version (80–120 words).",
-            "Check: verbs, connectors, punctuation."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "test-english-a2-writing",
+        "title": "🧪 A2 Writing Exercises — Test-English ✍️✅",
+        "description": "Writing tasks + practice pages 🧾",
+        "link": "https://test-english.com/writing/a2/",
+        "format": "site",
+        "level": "A2",
+        "time": "10–20 min",
+        "focus": "formats, structure",
+        "notes": "Ads may exist; supervise browsing.",
+        "details": {
+          "type": "Writing tasks + practice pages 🧾",
+          "teaches": "Common A2 formats (emails, postcards, short essays) 📨",
+          "howTo": [
+            "📌 Pick one task (e.g., postcard)",
+            "🧱 Copy the structure (opening → details → closing)",
+            "✍️ Write your version (80–120 words)",
+            "✅ Check: verbs, connectors, punctuation"
           ],
-          whyTopPick: "Lots of ready-made A2 writing tasks in one place.",
-          freeAccess: "Page is accessible free without login (ads may exist).",
-          ageCheck: "Generally suitable; adult supervision recommended for web browsing/ads."
+          "whyTopPick": "Lots of ready-made A2 writing tasks in one place.",
+          "freeAccess": "Page is accessible free without login (ads may exist).",
+          "ageCheck": "Generally suitable; adult supervision recommended for web browsing/ads."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "google-applied-digital-skills",
-        title: "Applied Digital Skills — Google (middle school+) 💻📝",
-        link: "https://grow.google/applied-digital-skills/",
-        format: "site",
-        description: "Free video-based lessons + projects with real-world writing output.",
-        focus: "functional writing",
-        details: {
-          type: "Free video-based lessons + projects",
-          teaches: "Real-world writing in docs (emails, plans, reports, presentations).",
-          howTo: [
-            "Choose a lesson with writing output (Docs-based).",
-            "Follow steps to create the document.",
-            "Use the rubric/checklist.",
-            "Improve wording for clarity."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "google-applied-digital-skills",
+        "title": "🧰 Applied Digital Skills — Google (middle school+) 💻📝",
+        "description": "Free video-based lessons + projects 🎥",
+        "link": "https://grow.google/applied-digital-skills/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "20–45 min",
+        "focus": "functional writing",
+        "notes": "",
+        "details": {
+          "type": "Free video-based lessons + projects 🎥",
+          "teaches": "Real-world writing in docs (emails, plans, reports, presentations) 🧾",
+          "howTo": [
+            "🎯 Choose a lesson with writing output (Docs-based)",
+            "🧱 Follow steps to create the document",
+            "✅ Use the rubric/checklist",
+            "🔁 Improve wording for clarity"
           ],
-          whyTopPick: "Functional writing that matches school + life skills.",
-          freeAccess: "Described as free of charge.",
-          ageCheck: "Listed as middle school–high school; suitable for 11–12 with adult oversight."
+          "whyTopPick": "Functional writing that matches school + life skills.",
+          "freeAccess": "Described as free of charge.",
+          "ageCheck": "Listed as middle school–high school; suitable for 11–12 with adult oversight."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "languagetool",
-        title: "LanguageTool (basic grammar check) ✅🔎",
-        link: "https://languagetool.org/",
-        format: "site",
-        description: "Grammar/spelling checker for final editing (after drafting).",
-        focus: "editing",
-        details: {
-          type: "Grammar/spelling checker tool",
-          teaches: "Editing habits (fixing errors + improving clarity).",
-          howTo: [
-            "Paste the student paragraph.",
-            "Fix only the “must-fix” errors first (spelling/punctuation).",
-            "Rewrite 2 sentences in simpler English.",
-            "Re-check once."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "languagetool",
+        "title": "🧠 LanguageTool (basic grammar check) ✅🔎",
+        "description": "Grammar/spelling checker tool 🧹",
+        "link": "https://languagetool.org/",
+        "format": "site",
+        "level": "A2–B2",
+        "time": "5–10 min",
+        "focus": "editing, accuracy",
+        "notes": "Use after drafting; don’t paste personal info.",
+        "details": {
+          "type": "Grammar/spelling checker tool 🧹",
+          "teaches": "Editing habits (fixing errors + improving clarity) ✨",
+          "howTo": [
+            "📋 Paste the student paragraph",
+            "✅ Fix only the “must-fix” errors first (spelling/punctuation)",
+            "✍️ Rewrite 2 sentences in simpler English",
+            "🔁 Re-check once"
           ],
-          whyTopPick: "Strong support for editing without building full dependence.",
-          freeAccess: "Free basic use available (advanced features may be paid).",
-          ageCheck: "Use with adult supervision (privacy + data entry)."
+          "whyTopPick": "Strong support for editing without building full dependence.",
+          "freeAccess": "Free basic use available (advanced features may be paid).",
+          "ageCheck": "Use with adult supervision (privacy + data entry)."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "hemingway-editor",
-        title: "Hemingway Editor (web editor) ✂️✅",
-        link: "https://hemingwayapp.com/",
-        format: "site",
-        description: "Clarity/readability editor for shorter, clearer sentences.",
-        focus: "clarity",
-        details: {
-          type: "Clarity/readability editing tool",
-          teaches: "Shorter, clearer sentences; reducing wordiness.",
-          howTo: [
-            "Paste writing into the editor.",
-            "Fix 2–3 “hard to read” sentences.",
-            "Replace 5 weak words with stronger ones.",
-            "Final read aloud."
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "hemingway-editor",
+        "title": "🧾 Hemingway Editor (web editor) ✂️✅",
+        "description": "Clarity/readability editing tool 🧠",
+        "link": "https://hemingwayapp.com/",
+        "format": "site",
+        "level": "A2–B2",
+        "time": "5–10 min",
+        "focus": "clarity, concision",
+        "notes": "Use after drafting; don’t paste personal info.",
+        "details": {
+          "type": "Clarity/readability editing tool 🧠",
+          "teaches": "Shorter, clearer sentences; reducing wordiness ✨",
+          "howTo": [
+            "📋 Paste writing into the editor",
+            "🎯 Fix 2–3 “hard to read” sentences",
+            "✍️ Replace 5 weak words with stronger ones",
+            "✅ Final read aloud"
           ],
-          whyTopPick: "Great for improving clarity fast (especially for ESL).",
-          freeAccess: "Web editor supports pasting and editing directly.",
-          ageCheck: "Suitable with supervision (don’t paste personal info)."
+          "whyTopPick": "Great for improving clarity fast (especially for ESL).",
+          "freeAccess": "Web editor supports pasting and editing directly.",
+          "ageCheck": "Suitable with supervision (don’t paste personal info)."
         }
       },
       {
-        age: AGE,
-        skill: "writing",
-        slug: "best-set-mini-pack-11-12-writing",
-        title: "Best “Set” (11–12 Writing mini-pack) 🎒🗓️",
-        link: "",
-        format: "other",
-        isBestSet: true,
-        description:
-          "Weekly plan (25–35 min/session): model writing + prompt drafting + sentence accuracy + planning tools + revision.",
-        time: "25–35 min/session",
-        focus: "model → draft → revise",
-        bundleItems: [
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "best-set-mini-pack-11-12-writing",
+        "title": "Best “Set” 🎒🗓️ (11–12 Writing mini-pack)",
+        "description": "A simple weekly routine that builds writing through models + revision ✍️✨",
+        "link": "",
+        "format": "other",
+        "level": "A2–B1",
+        "time": "25–35 min/session",
+        "focus": "writing, revision, structure",
+        "notes": "Rotate through model writing + prompts + grammar accuracy + planning + revision.",
+        "details": {
+          "type": "Weekly plan (25–35 min/session) ✍️⏱️",
+          "teaches": "Balanced writing routine: model → draft → accuracy → structure → revise",
+          "howTo": [
+            "Weekly plan (25–35 min/session) ✍️⏱️",
+            "Mon 🟦: LearnEnglish Teens A2 Writing — model text + write your version 🧱",
+            "Tue 🟩: 826 Digital — 10–15 min prompt draft + add 5 detail words 💡 826digital",
+            "Wed 🟨: Quill Grammar — 1 short activity → turn corrected sentences into a paragraph ✅",
+            "Thu 🟧: ReadWriteThink (Essay Map or Persuasion Map) — plan → draft 4 paragraphs 🧩 ReadWriteThink",
+            "Fri 🟥: Write & Improve — submit → revise → resubmit (track improvement) 🔁",
+            "Weekend (optional) 🌈: Postcard Creator — 6–8 sentence “mini writing” (quick win) 📨 ReadWriteThink",
+            "Editing add-on 🧰: Use LanguageTool or Hemingway for a final clean-up (only after drafting). LanguageTool"
+          ],
+          "whyTopPick": "Simple structure that builds skill without overwhelm.",
+          "freeAccess": "Uses free sites listed above.",
+          "ageCheck": "Teacher/parent support recommended for feedback and online tools."
+        },
+        "isBestSet": true,
+        "bundleItems": [
           "learnenglishteens-a2-writing",
-          "826-digital",
+          "826-digital-writing-prompts",
           "quill-grammar",
           "readwritethink-essay-map",
-          "readwritethink-persuasion-map",
-          "write-and-improve",
-          "readwritethink-postcard-creator",
-          "languagetool",
-          "hemingway-editor"
-        ],
-        details: {
-          type: "Weekly mini-pack",
-          teaches: "Clear writing through models, planning, accuracy practice, and revision.",
-          howTo: [
-            "Mon: LearnEnglish Teens A2 Writing — model text + write your version.",
-            "Tue: 826 Digital — 10–15 min prompt draft + add 5 detail words.",
-            "Wed: Quill Grammar — 1 short activity → turn corrected sentences into a paragraph.",
-            "Thu: ReadWriteThink (Essay Map or Persuasion Map) — plan → draft 4 paragraphs.",
-            "Fri: Write & Improve — submit → revise → resubmit (track improvement).",
-            "Weekend (optional): Postcard Creator — 6–8 sentence “mini writing” (quick win).",
-            "Editing add-on: Use LanguageTool or Hemingway for a final clean-up (only after drafting)."
-          ],
-          whyTopPick: "Balanced mix of models, creativity, structure, and revision in a simple weekly rhythm.",
-          freeAccess: "Uses free resources; some tools require a free account.",
-          ageCheck: "Suitable for 11–12 with teacher/parent topic selection and privacy supervision."
-        }
+          "write-and-improve"
+        ]
       },
-
-      // =========================
-      // 11–12 SPEAKING
-      // =========================
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "learnenglishteens-speaking",
-        title: "Speaking (A1–B2) — LearnEnglish Teens (British Council) 🎬✅",
-        link: "https://learnenglishteens.britishcouncil.org/skills/speaking",
-        format: "site",
-        description: "Interactive speaking videos + tasks (levelled).",
-        level: "A1–B2",
-        focus: "real-life speaking",
-        details: {
-          type: "Interactive speaking videos + tasks",
-          teaches: "Real-life speaking (asking, responding, opinions, role-play).",
-          howTo: [
-            "Choose A1/A2/B1 level.",
-            "Watch and repeat key phrases.",
-            "Do the tasks.",
-            "Re-enact the dialogue with a partner."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "learnenglishteens-speaking",
+        "title": "🗣️ Speaking (A1–B2) — LearnEnglish Teens (British Council) 🎬✅",
+        "description": "Interactive speaking videos + tasks 🎥",
+        "link": "https://learnenglishteens.britishcouncil.org/skills/speaking",
+        "format": "video",
+        "level": "A1–B2",
+        "time": "10–20 min",
+        "focus": "fluency, phrases",
+        "notes": "",
+        "details": {
+          "type": "Interactive speaking videos + tasks 🎥",
+          "teaches": "Real-life speaking (asking, responding, opinions, role-play) 🗣️",
+          "howTo": [
+            "🎚️ Choose A1/A2/B1 level",
+            "🎧 Watch and repeat key phrases",
+            "✅ Do the tasks",
+            "🎭 Re-enact the dialogue with a partner"
           ],
-          whyTopPick: "Strong structured speaking practice with clear levels.",
-          freeAccess: "Fully usable free (account mainly for posting comments).",
-          ageCheck: "Teen-safe overall; suitable for advanced 11–12 (preview topics)."
+          "whyTopPick": "Strong structured speaking practice with clear levels.",
+          "freeAccess": "Fully usable free (account mainly for posting comments).",
+          "ageCheck": "Teen-safe overall; suitable for advanced 11–12 (preview topics)."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "americanenglish-everyday-conversations",
-        title: "Everyday Conversations — AmericanEnglish (U.S. State Dept.) 💬📘",
-        link: "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
-        format: "site",
-        description: "Dialogue book for role-play (read + act out).",
-        focus: "dialogue role-play",
-        details: {
-          type: "Dialogue book (read + act out)",
-          teaches: "Practical speaking (introductions, shopping, directions, hobbies, advice).",
-          howTo: [
-            "Pick one dialogue.",
-            "Role-play twice (swap roles).",
-            "Replace details (names/places/prices).",
-            "Perform for another pair."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "americanenglish-everyday-conversations",
+        "title": "🧑‍🏫 Everyday Conversations — AmericanEnglish (U.S. State Dept.) 💬📘",
+        "description": "Dialogue book (read + act out) 🎭",
+        "link": "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
+        "format": "pdf",
+        "level": "A1–A2",
+        "time": "15–25 min",
+        "focus": "role-play, phrases",
+        "notes": "Official resource includes PDF; do not host locally.",
+        "details": {
+          "type": "Dialogue book (read + act out) 🎭",
+          "teaches": "Practical speaking (introductions, shopping, directions, hobbies, advice) 🗺️",
+          "howTo": [
+            "🎭 Pick one dialogue",
+            "🗣️ Role-play twice (swap roles)",
+            "✍️ Replace details (names/places/prices)",
+            "🎤 Perform for another pair"
           ],
-          whyTopPick: "Built specifically for school-age ESL/EFL conversation.",
-          freeAccess: "Fully free official resource (web + PDF).",
-          ageCheck: "Intended for 6th–7th grade—perfect match for 11–12."
+          "whyTopPick": "Built specifically for school-age ESL/EFL conversation.",
+          "freeAccess": "Fully free official resource (web + PDF).",
+          "ageCheck": "Intended for 6th–7th grade—perfect match for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "learnenglishkids-speak-and-spell-speak",
-        title: "Speak and Spell (Speak) — LearnEnglish Kids 🔤🎙️",
-        link: "https://learnenglishkids.britishcouncil.org/speak-spell/speak",
-        format: "site",
-        description: "Pronunciation practice (sounds + stories + games).",
-        focus: "pronunciation",
-        details: {
-          type: "Pronunciation practice (sounds + stories + games)",
-          teaches: "Clear sounds, word pronunciation, confidence speaking aloud.",
-          howTo: [
-            "Watch a short “Sam & Pam” story.",
-            "Repeat target sounds/words.",
-            "Play a speaking game.",
-            "Use 5 words in your own sentences."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "learnenglishkids-speak-and-spell",
+        "title": "🛰️ Speak and spell (Speak) — LearnEnglish Kids (British Council) 🔤🎙️",
+        "description": "Pronunciation practice (sounds + stories + games) 🎮",
+        "link": "https://learnenglishkids.britishcouncil.org/speak-spell/speak",
+        "format": "site",
+        "level": "A1–A2",
+        "time": "10–15 min",
+        "focus": "pronunciation",
+        "notes": "",
+        "details": {
+          "type": "Pronunciation practice (sounds + stories + games) 🎮",
+          "teaches": "Clear sounds, word pronunciation, confidence speaking aloud 🗣️",
+          "howTo": [
+            "▶️ Watch a short “Sam & Pam” story",
+            "🔁 Repeat target sounds/words",
+            "🎮 Play a speaking game",
+            "📝 Use 5 words in your own sentences"
           ],
-          whyTopPick: "Safe, guided pronunciation practice that actually gets kids talking.",
-          freeAccess: "Free access; account optional for comments.",
-          ageCheck: "Slightly younger style, but great for 11–12 pronunciation upgrades."
+          "whyTopPick": "Safe, guided pronunciation practice that actually gets kids talking.",
+          "freeAccess": "Free access; account optional for comments.",
+          "ageCheck": "Slightly “younger” style, but great for 11–12 pronunciation upgrades."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "learnenglishkids-tongue-twisters",
-        title: "Tongue twisters — LearnEnglish Kids 😄🗣️",
-        link: "https://learnenglishkids.britishcouncil.org/fun-games/tongue-twisters",
-        format: "site",
-        description: "Pronunciation speaking game (fluency + tricky sounds).",
-        focus: "fluency + sounds",
-        details: {
-          type: "Pronunciation speaking game",
-          teaches: "Fluency + tricky sounds (TH/R/L blends, etc.).",
-          howTo: [
-            "Listen once.",
-            "Say slowly 3 times.",
-            "Speed up (timer challenge).",
-            "Record best attempt."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "learnenglishkids-tongue-twisters",
+        "title": "👄 Tongue twisters — LearnEnglish Kids (British Council) 😄🗣️",
+        "description": "Pronunciation speaking game 🏃‍♂️",
+        "link": "https://learnenglishkids.britishcouncil.org/fun-games/tongue-twisters",
+        "format": "site",
+        "level": "A1–A2",
+        "time": "5–10 min",
+        "focus": "pronunciation, fluency",
+        "notes": "",
+        "details": {
+          "type": "Pronunciation speaking game 🏃‍♂️",
+          "teaches": "Fluency + tricky sounds (TH/R/L blends, etc.) 🔊",
+          "howTo": [
+            "🎧 Listen once",
+            "🐢 Say slowly 3 times",
+            "🐇 Speed up (timer challenge)",
+            "🎤 Record best attempt"
           ],
-          whyTopPick: "High repetition without boredom; very classroom-friendly.",
-          freeAccess: "Fully free web practice.",
-          ageCheck: "Safe and ideal for 11–12."
+          "whyTopPick": "High repetition without boredom; very classroom-friendly.",
+          "freeAccess": "Fully free web practice.",
+          "ageCheck": "Safe and ideal for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "learnenglish-a1-speaking",
-        title: "Speaking (A1) — LearnEnglish (British Council) 🧩🎥",
-        link: "https://learnenglish.britishcouncil.org/skills/speaking/a1-speaking",
-        format: "site",
-        description: "Speaking lessons with preparation + repeat practice.",
-        level: "A1",
-        focus: "useful phrases",
-        details: {
-          type: "Speaking lessons with preparation + repeat practice",
-          teaches: "Useful phrases for common situations (beginner speaking).",
-          howTo: [
-            "Do the preparation task.",
-            "Watch and repeat phrases.",
-            "Complete the tasks.",
-            "Act it out with a partner."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "learnenglish-a1-speaking",
+        "title": "🗣️ Speaking (A1) — LearnEnglish (British Council) 🧩🎥",
+        "description": "Speaking lessons with preparation + repeat practice ✅",
+        "link": "https://learnenglish.britishcouncil.org/skills/speaking/a1-speaking",
+        "format": "site",
+        "level": "A1",
+        "time": "10–20 min",
+        "focus": "phrases, role-play",
+        "notes": "",
+        "details": {
+          "type": "Speaking lessons with preparation + repeat practice ✅",
+          "teaches": "Useful phrases for common situations (beginner speaking) 🛒",
+          "howTo": [
+            "🧠 Do the preparation task",
+            "🎧 Watch and repeat phrases",
+            "✅ Complete the tasks",
+            "🎭 Act it out with a partner"
           ],
-          whyTopPick: "Clear “repeat + use” structure for real speaking.",
-          freeAccess: "Free website access (no paid gate observed).",
-          ageCheck: "Suitable for 11–12 beginners with guidance."
+          "whyTopPick": "Clear “repeat + use” structure for real speaking.",
+          "freeAccess": "Free website access (no paid gate observed).",
+          "ageCheck": "Suitable for 11–12 beginners with guidance."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "iteslj-conversation-questions",
-        title: "Conversation Questions — The Internet TESL Journal (ITESLJ) ❓🗣️",
-        link: "https://iteslj.org/questions/",
-        format: "site",
-        description: "Conversation question lists (many topics).",
-        focus: "extended answers",
-        details: {
-          type: "Conversation question lists (many topics)",
-          teaches: "Extended answers, follow-up questions, speaking stamina.",
-          howTo: [
-            "Teacher selects a kid-safe topic page.",
-            "Pair students and assign 6 questions.",
-            "2 minutes per question (must ask “Why?”).",
-            "Share best answer to class."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "iteslj-conversation-questions",
+        "title": "💬 Conversation Questions — The Internet TESL Journal (ITESLJ) ❓🗣️",
+        "description": "Conversation question lists (many topics) 📄",
+        "link": "https://iteslj.org/questions/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "extended answers, follow-ups",
+        "notes": "Mixed topics; adult/teacher must pre-select safe pages.",
+        "details": {
+          "type": "Conversation question lists (many topics) 📄",
+          "teaches": "Extended answers, follow-up questions, speaking stamina 🧠",
+          "howTo": [
+            "✅ Teacher selects a kid-safe topic page",
+            "👥 Pair students and assign 6 questions",
+            "⏱️ 2 minutes per question (must ask “Why?”)",
+            "📝 Share best answer to class"
           ],
-          whyTopPick: "Massive bank of ready speaking prompts.",
-          freeAccess: "Fully free web pages.",
-          ageCheck: "Mixed topics (some adult). Adult must pre-select safe pages."
+          "whyTopPick": "Massive bank of ready speaking prompts.",
+          "freeAccess": "Fully free web pages.",
+          "ageCheck": "Mixed topics (some adult). Adult must pre-select safe pages."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "englishclub-small-talk-starters",
-        title: "Small Talk: Conversation Starters — EnglishClub 💬🗣️",
-        link: "https://www.englishclub.com/speaking/small-talk_conversation-starters.php",
-        format: "site",
-        description: "Conversation starter lists for practical speaking openers.",
-        focus: "conversation openers",
-        details: {
-          type: "Conversation starter lists",
-          teaches: "Natural speaking openers + follow-up questions.",
-          howTo: [
-            "Choose a situation (school / events / waiting).",
-            "Practice 5 starters in pairs.",
-            "Add 2 follow-up questions each.",
-            "Role-play for 60 seconds."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "englishclub-small-talk-starters",
+        "title": "🧊 Small Talk: Conversation Starters — EnglishClub 💬🗣️",
+        "description": "Conversation starter lists 📄",
+        "link": "https://www.englishclub.com/speaking/small-talk_conversation-starters.php",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "conversation starters",
+        "notes": "",
+        "details": {
+          "type": "Conversation starter lists 📄",
+          "teaches": "Natural speaking openers + follow-up questions 🤝",
+          "howTo": [
+            "🎯 Choose a situation (school / events / waiting)",
+            "🗣️ Practice 5 starters in pairs",
+            "➕ Add 2 follow-up questions each",
+            "🎭 Role-play for 60 seconds"
           ],
-          whyTopPick: "Simple, practical, zero prep.",
-          freeAccess: "Fully free page access.",
-          ageCheck: "Some contexts skew adult; choose school-appropriate situations."
+          "whyTopPick": "Simple, practical, zero prep.",
+          "freeAccess": "Fully free page access.",
+          "ageCheck": "Some contexts are “adult” (office); choose school-appropriate situations."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "englishclub-talking-point-worksheets",
-        title: "Talking Point Conversation Worksheets — EnglishClub 📝💬",
-        link: "https://www.englishclub.com/esl-worksheets/conversation/",
-        format: "site",
-        description: "Printable conversation worksheets + teacher notes.",
-        focus: "structured discussion",
-        details: {
-          type: "Printable conversation worksheets + teacher notes",
-          teaches: "Fluency speaking with structured questions + vocab support.",
-          howTo: [
-            "Print a worksheet (pick a kid-safe theme).",
-            "Pre-teach 6 key words.",
-            "Students discuss in pairs/groups.",
-            "Each group shares 1 conclusion."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "englishclub-talking-point-worksheets",
+        "title": "🗂️ Talking Point Conversation Worksheets — EnglishClub 📝💬",
+        "description": "Printable conversation worksheets + teacher notes 📄",
+        "link": "https://www.englishclub.com/esl-worksheets/conversation/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "15–25 min",
+        "focus": "fluency, structured speaking",
+        "notes": "Teacher selects suitable topics.",
+        "details": {
+          "type": "Printable conversation worksheets + teacher notes 📄",
+          "teaches": "Fluency speaking with structured questions + vocab support 🧠",
+          "howTo": [
+            "🖨️ Print a worksheet (pick a kid-safe theme)",
+            "🧩 Pre-teach 6 key words",
+            "👥 Students discuss in pairs/groups",
+            "🎤 Each group shares 1 conclusion"
           ],
-          whyTopPick: "Printable speaking lessons that run themselves.",
-          freeAccess: "Free PDF worksheet access on-site.",
-          ageCheck: "Some worksheet topics skew older; teacher selects suitable ones."
+          "whyTopPick": "Printable speaking lessons that run themselves.",
+          "freeAccess": "Free PDF worksheet access on-site.",
+          "ageCheck": "Some worksheet topics may skew older; teacher selects suitable ones."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "teachingenglish-kids-and-speaking",
-        title: "Kids and speaking — TeachingEnglish (British Council) 🧠🎤",
-        link: "https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/kids-and-speaking",
-        format: "site",
-        description: "Teacher guide with speaking activity ideas.",
-        focus: "pair/group speaking",
-        details: {
-          type: "Teacher guide with speaking activity ideas",
-          teaches: "How to run pair/group speaking so kids talk more.",
-          howTo: [
-            "Pick 1 idea (pairwork / small groups / circle games).",
-            "Set sentence frames on the board.",
-            "Run timed speaking rotations.",
-            "Quick feedback + retry."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "teachingenglish-kids-and-speaking",
+        "title": "🧑‍🏫 Kids and speaking — TeachingEnglish (British Council) 🧠🎤",
+        "description": "Teacher guide with speaking activity ideas 🧩",
+        "link": "https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/kids-and-speaking",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–20 min",
+        "focus": "classroom speaking routines",
+        "notes": "",
+        "details": {
+          "type": "Teacher guide with speaking activity ideas 🧩",
+          "teaches": "How to run pair/group speaking so kids talk more 👥",
+          "howTo": [
+            "📌 Pick 1 idea (pairwork / small groups / circle games)",
+            "🗣️ Set sentence frames on the board",
+            "⏱️ Run timed speaking rotations",
+            "✅ Quick feedback + retry"
           ],
-          whyTopPick: "Practical speaking structure for kids (works well for 11–12).",
-          freeAccess: "Free access to the article.",
-          ageCheck: "Designed for children; adult-led classroom/home use."
+          "whyTopPick": "Practical speaking structure for kids (works well for 11–12).",
+          "freeAccess": "Free access to the article.",
+          "ageCheck": "Designed for children; adult-led classroom/home use."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "games4esl-esl-classroom-games",
-        title: "ESL Classroom Games — Games4esl 🧒🗣️",
-        link: "https://games4esl.com/esl-classroom-games/",
-        format: "site",
-        description: "Speaking games list (no-prep).",
-        focus: "speaking games",
-        details: {
-          type: "Speaking games list (no-prep)",
-          teaches: "Speaking speed, question/answer patterns, confidence.",
-          howTo: [
-            "Choose a game (e.g., categories, miming, “find someone who…”).",
-            "Give 2–3 sentence starters.",
-            "Play 8–12 minutes.",
-            "Exit ticket: 3 new sentences."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "games4esl-speaking-games",
+        "title": "🎲 ESL Classroom Games — Games4esl 🧒🗣️",
+        "description": "Speaking games list (no-prep) 🎯",
+        "link": "https://games4esl.com/esl-classroom-games/",
+        "format": "site",
+        "level": "A1–B1",
+        "time": "8–12 min",
+        "focus": "speaking games, confidence",
+        "notes": "",
+        "details": {
+          "type": "Speaking games list (no-prep) 🎯",
+          "teaches": "Speaking speed, question/answer patterns, confidence 🎤",
+          "howTo": [
+            "🎮 Choose a game (e.g., categories, miming, “find someone who…”)",
+            "🧱 Give 2–3 sentence starters",
+            "⏱️ Play 8–12 minutes",
+            "📝 Exit ticket: 3 new sentences"
           ],
-          whyTopPick: "Huge free bank of speaking-friendly games.",
-          freeAccess: "Site states resources are free.",
-          ageCheck: "Kid-focused; excellent for 11–12."
+          "whyTopPick": "Huge free bank of speaking-friendly games.",
+          "freeAccess": "Site states resources are free.",
+          "ageCheck": "Kid-focused; excellent for 11–12."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "games4esl-printables",
-        title: "Free Printables (Flashcards/Board Games) — Games4esl 🖨️🎤",
-        link: "https://games4esl.com/printables/",
-        format: "site",
-        description: "Printables for pairwork speaking (cards, boards).",
-        focus: "controlled → freer speaking",
-        details: {
-          type: "Printables for pairwork speaking (cards, boards)",
-          teaches: "Controlled speaking (sentence frames) → freer speaking.",
-          howTo: [
-            "Print topic cards (food/jobs/etc.).",
-            "Students ask/answer using a frame (“I like… because…”).",
-            "Add a simple board game for repeated speaking.",
-            "Mini-presentations (30 seconds)."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "games4esl-printables",
+        "title": "🃏 Free Printables (Flashcards/Board Games) — Games4esl 🖨️🎤",
+        "description": "Printables for pairwork speaking (cards, boards) 🃏",
+        "link": "https://games4esl.com/printables/",
+        "format": "site",
+        "level": "A1–B1",
+        "time": "10–20 min",
+        "focus": "controlled speaking",
+        "notes": "",
+        "details": {
+          "type": "Printables for pairwork speaking (cards, boards) 🃏",
+          "teaches": "Controlled speaking (sentence frames) → freer speaking 🗣️",
+          "howTo": [
+            "🖨️ Print topic cards (food/jobs/etc.)",
+            "👥 Students ask/answer using a frame (“I like… because…”)",
+            "🎲 Add a simple board game for repeated speaking",
+            "🎤 Mini-presentations (30 seconds)"
           ],
-          whyTopPick: "Easy materials for structured speaking practice.",
-          freeAccess: "Free printable downloads (site claims free resources).",
-          ageCheck: "Very suitable for 11–12 (choose age-appropriate topics)."
+          "whyTopPick": "Easy materials for structured speaking practice.",
+          "freeAccess": "Free printable downloads (site claims free resources).",
+          "ageCheck": "Very suitable for 11–12 (choose age-appropriate topics)."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "baamboozle-speaking-games",
-        title: "Baamboozle — Speaking Games 🧑‍🏫🗣️",
-        link: "https://www.baamboozle.com/games",
-        format: "site",
-        description: "Whole-class speaking games (single screen).",
-        focus: "team speaking",
-        details: {
-          type: "Whole-class speaking games (single screen)",
-          teaches: "Quick speaking prompts, sentence building, fluency under time.",
-          howTo: [
-            "Search “speaking” and open a game.",
-            "Teams take turns answering prompts.",
-            "Require a follow-up sentence (“Tell me more…”).",
-            "Teacher corrects 1–2 key errors only."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "baamboozle-speaking-games",
+        "title": "🎮 Baamboozle — Speaking Games 🧑‍🏫🗣️",
+        "description": "Whole-class speaking games (single screen) 📺",
+        "link": "https://www.baamboozle.com/games",
+        "format": "game",
+        "level": "A1–B1",
+        "time": "10–15 min",
+        "focus": "fluency, prompts",
+        "notes": "User-generated; teacher must preview prompts.",
+        "details": {
+          "type": "Whole-class speaking games (single screen) 📺",
+          "teaches": "Quick speaking prompts, sentence building, fluency under time ⏱️",
+          "howTo": [
+            "🔎 Search “speaking” and open a game",
+            "👥 Teams take turns answering prompts",
+            "➕ Require a follow-up sentence (“Tell me more…”)",
+            "✅ Teacher corrects 1–2 key errors only"
           ],
-          whyTopPick: "High engagement; minimal setup.",
-          freeAccess: "Platform promotes classroom games “for free” (account optional).",
-          ageCheck: "User-generated prompts—teacher must preview for 11–12 safety."
+          "whyTopPick": "High engagement; minimal setup.",
+          "freeAccess": "Platform promotes classroom games “for free” (account optional).",
+          "ageCheck": "User-generated prompts—teacher must preview for 11–12 safety."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "wheel-of-names",
-        title: "Wheel of Names — Random Speaking Prompt Picker 🎡🗣️",
-        link: "https://wheelofnames.com/",
-        format: "site",
-        description: "Random spinner tool for prompts/roles.",
-        focus: "prompt rotation",
-        details: {
-          type: "Random spinner tool (for prompts/roles)",
-          teaches: "Turn-taking, spontaneous speaking, fairness in selection.",
-          howTo: [
-            "Paste speaking prompts (20–40).",
-            "Spin and student speaks for 30–60 seconds.",
-            "Class asks 1 follow-up question.",
-            "Repeat with new spinner result."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "wheel-of-names",
+        "title": "🎡 Wheel of Names — Random Speaking Prompt Picker 🗣️🎯",
+        "description": "Random spinner tool (for prompts/roles) 🎡",
+        "link": "https://wheelofnames.com/",
+        "format": "site",
+        "level": "A1–B2",
+        "time": "5–15 min",
+        "focus": "prompting, turn-taking",
+        "notes": "",
+        "details": {
+          "type": "Random spinner tool (for prompts/roles) 🎡",
+          "teaches": "Turn-taking, spontaneous speaking, fairness in selection 🤝",
+          "howTo": [
+            "✍️ Paste speaking prompts (20–40)",
+            "🎡 Spin and student speaks for 30–60 seconds",
+            "❓ Class asks 1 follow-up question",
+            "🔁 Repeat with new spinner result"
           ],
-          whyTopPick: "Instantly turns any prompt list into a speaking game.",
-          freeAccess: "Free to use on-site.",
-          ageCheck: "Safe—content depends on the prompts you enter."
+          "whyTopPick": "Instantly turns any prompt list into a speaking game.",
+          "freeAccess": "Free to use on-site.",
+          "ageCheck": "Fully safe—content depends on the prompts you enter."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "vocaroo",
-        title: "Vocaroo — Online Voice Recorder 🎙️",
-        link: "https://vocaroo.com/",
-        format: "site",
-        description: "Recording tool for speaking homework (listen and improve).",
-        focus: "self-monitoring",
-        details: {
-          type: "Recording tool (speaking homework)",
-          teaches: "Speaking fluency + self-monitoring (listen and improve).",
-          howTo: [
-            "Record 30–60 seconds on a prompt.",
-            "Listen back and re-record once.",
-            "Submit the share link (teacher/parent).",
-            "Note 2 improvements for next time."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "vocaroo",
+        "title": "🎙️ Vocaroo — Online Voice Recorder 🔊🧾",
+        "description": "Recording tool (speaking homework) 🎤",
+        "link": "https://vocaroo.com/",
+        "format": "site",
+        "level": "A1–B2",
+        "time": "5–10 min",
+        "focus": "fluency, self-monitoring",
+        "notes": "Sharing links = privacy; supervise.",
+        "details": {
+          "type": "Recording tool (speaking homework) 🎤",
+          "teaches": "Speaking fluency + self-monitoring (listen and improve) 🔁",
+          "howTo": [
+            "🎤 Record 30–60 seconds on a prompt",
+            "👂 Listen back and re-record once",
+            "✅ Submit the share link (teacher/parent)",
+            "📝 Note 2 improvements for next time"
           ],
-          whyTopPick: "Fast recording with no complicated setup.",
-          freeAccess: "Free web tool (no paywall observed).",
-          ageCheck: "OK for 11–12 with adult supervision (sharing links = privacy)."
+          "whyTopPick": "Fast recording with no complicated setup.",
+          "freeAccess": "Free web tool (no paywall observed).",
+          "ageCheck": "OK for 11–12 with adult supervision (sharing links = privacy)."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "sounds-right-phonemic-chart",
-        title: "LearnEnglish Sounds Right — British Council Pronunciation Chart 🔤👄",
-        link: "https://learnenglish.britishcouncil.org/apps/learnenglish-sounds-right",
-        format: "site",
-        description: "Interactive phonemic chart (pronunciation support).",
-        focus: "phonemic support",
-        details: {
-          type: "Interactive phonemic chart (pronunciation support)",
-          teaches: "English sounds + clearer speaking accuracy.",
-          howTo: [
-            "Tap a sound and hear it.",
-            "Repeat the sample word 5 times.",
-            "Add 3 words with that sound.",
-            "Use those words in a short sentence."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "sounds-right-phonemic-chart",
+        "title": "🧠 LearnEnglish Sounds Right — British Council Pronunciation Chart 🔤👄",
+        "description": "Interactive phonemic chart (pronunciation support) 🎧",
+        "link": "https://learnenglish.britishcouncil.org/apps/learnenglish-sounds-right",
+        "format": "site",
+        "level": "A1–B2",
+        "time": "5–10 min",
+        "focus": "pronunciation",
+        "notes": "",
+        "details": {
+          "type": "Interactive phonemic chart (pronunciation support) 🎧",
+          "teaches": "English sounds + clearer speaking accuracy 🗣️",
+          "howTo": [
+            "🔤 Tap a sound and hear it",
+            "🔁 Repeat the sample word 5 times",
+            "✍️ Add 3 words with that sound",
+            "🎤 Use those words in a short sentence"
           ],
-          whyTopPick: "Clear, systematic pronunciation support.",
-          freeAccess: "Listed as a free pronunciation chart.",
-          ageCheck: "Suitable for 11–12 (adult-guided recommended)."
+          "whyTopPick": "Clear, systematic pronunciation support.",
+          "freeAccess": "Listed as a free pronunciation chart.",
+          "ageCheck": "Suitable for 11–12 (adult-guided recommended)."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "cambridge-pronunciation-hub",
-        title: "Cambridge Dictionary Pronunciation Hub 📘🎧",
-        link: "https://dictionary.cambridge.org/pronunciation/",
-        format: "site",
-        description: "Word pronunciation audio + phonetics (UK/US).",
-        focus: "word pronunciation",
-        details: {
-          type: "Word pronunciation audio + phonetics",
-          teaches: "Accurate word pronunciation for speaking practice.",
-          howTo: [
-            "Look up 10 words from class.",
-            "Listen to UK/US audio.",
-            "Repeat and record yourself.",
-            "Use each word in a sentence."
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "cambridge-pronunciation-hub",
+        "title": "🔊 Cambridge Dictionary Pronunciation Hub 📘🎧",
+        "description": "Word pronunciation audio + phonetics 🗣️",
+        "link": "https://dictionary.cambridge.org/pronunciation/",
+        "format": "site",
+        "level": "A1–B2",
+        "time": "5–10 min",
+        "focus": "pronunciation",
+        "notes": "",
+        "details": {
+          "type": "Word pronunciation audio + phonetics 🗣️",
+          "teaches": "Accurate word pronunciation for speaking practice ✅",
+          "howTo": [
+            "🔎 Look up 10 words from class",
+            "🎧 Listen to UK/US audio",
+            "🔁 Repeat and record yourself",
+            "🗣️ Use each word in a sentence"
           ],
-          whyTopPick: "Instant pronunciation checking for any vocabulary set.",
-          freeAccess: "Free web access (dictionary pages usable without subscription).",
-          ageCheck: "Safe; supervise web browsing/ads as needed."
+          "whyTopPick": "Instant pronunciation checking for any vocabulary set.",
+          "freeAccess": "Free web access (dictionary pages usable without subscription).",
+          "ageCheck": "Safe; just supervise web browsing/ads as needed."
         }
       },
       {
-        age: AGE,
-        skill: "speaking",
-        slug: "best-set-mini-pack-11-12-speaking",
-        title: "Best “Set” (11–12 Speaking mini-pack) 🎒🎤",
-        link: "",
-        format: "other",
-        isBestSet: true,
-        description: "Weekly routine (about 20 minutes/day): role-play, levelled video speaking, prompt discussion, pronunciation practice, and a speaking game.",
-        time: "~20 min/day",
-        focus: "daily speaking routine",
-        bundleItems: [
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "best-set-mini-pack-11-12-speaking",
+        "title": "Best “Set” 🎒 (11–12 Speaking mini-pack)",
+        "description": "Weekly routine for role-play + fluency + pronunciation 🎤✨",
+        "link": "",
+        "format": "other",
+        "level": "A2–B1",
+        "time": "20 min/day",
+        "focus": "fluency, pronunciation, confidence",
+        "notes": "Short daily routine; preview topics and user-generated games.",
+        "details": {
+          "type": "Weekly routine 🗓️🎤 (20 minutes/day)",
+          "teaches": "Role-play, follow-up questions, pronunciation practice, speaking confidence",
+          "howTo": [
+            "Weekly routine 🗓️🎤 (20 minutes/day):",
+            "Mon 🟦: Everyday Conversations — 1 dialogue role-play + swap roles 🎭 American English",
+            "Tue 🟩: LearnEnglish Teens Speaking — 1 interactive video + act it out 🎬 LearnEnglish Teens",
+            "Wed 🟨: ITESLJ Questions — teacher-chosen safe topic, 6 Qs in pairs 💬 The Internet TESL Journal",
+            "Thu 🟧: Tongue Twisters + Sounds Right — pronunciation focus (10 min + 10 min) 👄 LearnEnglish Kids",
+            "Fri 🟥: Baamboozle Speaking Game — team speaking + follow-up questions 🎮 Baamboozle",
+            "Weekend (optional) 🌈: Vocaroo — 60-second speaking recording + 1 re-record 🎙️ Vocaroo",
+            "Add-on tool 🧰: Wheel of Names to rotate prompts fairly 🎡 Wheel of Names"
+          ],
+          "whyTopPick": "Balanced, engaging routine that builds real speaking habits.",
+          "freeAccess": "Uses free resources listed above.",
+          "ageCheck": "Teacher/parent supervision recommended for topic safety + privacy tools."
+        },
+        "isBestSet": true,
+        "bundleItems": [
           "americanenglish-everyday-conversations",
           "learnenglishteens-speaking",
           "iteslj-conversation-questions",
           "learnenglishkids-tongue-twisters",
-          "sounds-right-phonemic-chart",
           "baamboozle-speaking-games",
-          "vocaroo",
-          "wheel-of-names"
-        ],
-        details: {
-          type: "Weekly mini-pack",
-          teaches: "Fluency + confidence through repeated speaking, better pronunciation, and longer answers with follow-up questions.",
-          howTo: [
-            "Mon: Everyday Conversations — 1 dialogue role-play + swap roles.",
-            "Tue: LearnEnglish Teens Speaking — 1 interactive video + act it out.",
-            "Wed: ITESLJ Questions — teacher-chosen safe topic, 6 questions in pairs (must ask “Why?”).",
-            "Thu: Tongue Twisters + Sounds Right — pronunciation focus (10 min + 10 min).",
-            "Fri: Baamboozle Speaking Game — team speaking + follow-up questions (“Tell me more…”).",
-            "Weekend (optional): Vocaroo — 60-second speaking recording + 1 re-record.",
-            "Add-on tool: Wheel of Names to rotate prompts fairly."
-          ],
-          whyTopPick: "Easy weekly rhythm that mixes structured dialogue, open conversation, pronunciation, and games.",
-          freeAccess: "Uses free resources; some platforms may require an optional account.",
-          ageCheck: "Suitable for 11–12 with teacher/parent topic selection and preview (especially user-generated games)."
-        }
+          "vocaroo"
+        ]
       }
     ]
   };
 
-  // Register into the global store (router lazy-loads this file)
-  if (window.UEAH_RESOURCES_STORE && typeof window.UEAH_RESOURCES_STORE.add === "function") {
-    window.UEAH_RESOURCES_STORE.add(DATA);
-  } else {
-    // Fail softly if store isn't loaded for some reason
-    window.UEAH_RESOURCES_DATA_FALLBACK = DATA;
+  if (!window.UEAH_RESOURCES_STORE || typeof window.UEAH_RESOURCES_STORE.add !== "function") {
+    console.error("UEAH_RESOURCES_STORE is not available. Ensure assets/js/resources-store.js is loaded first.");
+    return;
   }
+
+  window.UEAH_RESOURCES_STORE.add(DATA);
 })();
