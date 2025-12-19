@@ -29,9 +29,35 @@
           "🧰 VOA American Stories (read + listen; theme + retell) 📖🎧",
           "🧰 ReadWriteThink Notetaker (main idea → details → summary paragraph) 📝🗂️"
         ]
+      },
+
+      "13-18/listening": {
+        title: "13–18 Listening 🏆🎧",
+        overview:
+          "🎧 A teen listening resource pack that builds real-life comprehension and exam-style listening through levelled lessons, podcasts, and news/academic listening, with a consistent routine: gist → detail → task → retell/summarize. 🧠✅🔁🗣️📝",
+        objectives: [
+          "🎯 Understand main ideas and key details from short and medium listening texts across levels/topics. ✅🎧",
+          "🎯 Improve listening fluency (including speed control) using graded and multi-speed practice. 🐢🐇📈",
+          "🎯 Build vocabulary through note-taking tasks (keywords, facts, useful phrases). 📝🧩📌",
+          "🎯 Develop speaking output from listening: retell, mini-talk summaries, brief “news briefing” summaries, and reaction recordings. 🗣️🎙️📰"
+        ],
+        materials: [
+          "🧰 LearnEnglish Teens — Listening (British Council) 🎧✅",
+          "🧰 ELLLO (audio/video + transcript + quiz) 🌍🎧🧩",
+          "🧰 VOA Learning English + VOA Podcast 📰🎧📻",
+          "🧰 Randall’s ESL Cyber Listening Lab (ESL-Lab) 🎧🧪",
+          "🧰 Breaking News English (multi-speed listening) ⚡🐢🐇🎧",
+          "🧰 News in Levels (reading + listening) 🗞️🎧",
+          "🧰 TED-Ed lessons (video listening + ideas) 🎬🧠",
+          "🧰 BBC Learning English (6 Minute English + Learning English from the News) ⏲️📰🎧"
+        ]
       }
     },
+
     resources: [
+      // =========================
+      // 13–18 READING 📖✨
+      // =========================
       {
         age: "13-18",
         skill: "reading",
@@ -493,6 +519,398 @@
           "news-in-levels-same-news-in-3-levels",
           "voa-american-stories",
           "readwritethink-notetaker"
+        ]
+      },
+
+      // =========================
+      // 13–18 LISTENING 🏆🎧
+      // =========================
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "learnenglishteens-listening",
+        title: "🎧 LearnEnglish Teens — Listening (British Council) 🎧✅",
+        description: "Interactive listening lessons + exercises 📝",
+        link: "https://learnenglishteens.britishcouncil.org/skills/listening",
+        format: "site",
+        focus: "real-life listening, exam-style comprehension",
+        details: {
+          type: "Interactive listening lessons + exercises 📝🧩",
+          teaches: "Real-life listening + exam-style comprehension (by level) ✅🎯",
+          howTo: [
+            "1️⃣ ✅ Open the Listening page and choose your level/topic 🎚️📌",
+            "2️⃣ 🎧 Listen once (no pausing) for gist 🚫⏸️",
+            "3️⃣ 🔁 Listen again + do the tasks/questions ✅📝",
+            "4️⃣ 🗣️ Check answers, then retell the audio in 3–5 sentences 🧠🗣️"
+          ],
+          whyTopPick: "Teen-focused topics + structured practice by level. ⭐🌟",
+          freeAccess: "Fully free on the site (no payment shown). 🆓✅",
+          ageCheck: "Designed for teens; still preview topics if needed. 🔍✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "elllo-english-listening-lesson-library-online",
+        title: "🌍 ELLLO (English Listening Lesson Library Online) 🎧",
+        description: "Audio/video lessons + transcript + quiz 🧩",
+        link: "https://www.elllo.org/",
+        format: "site",
+        focus: "global accents, conversation, vocab-in-context",
+        details: {
+          type: "Audio/video lessons + transcript + quiz 🎧🧩✅",
+          teaches: "Global accents, everyday conversation, vocabulary in context 🌎🗣️📚",
+          howTo: [
+            "1️⃣ 🔎 Pick a level/topic (or search a keyword) 🎚️🔍",
+            "2️⃣ 🎧 Listen once → then read the transcript 📄",
+            "3️⃣ ✅ Do the quiz + review wrong answers 🔁📝",
+            "4️⃣ 🗣️ Shadow (repeat with the speaker) for 60 seconds ⏱️🔁"
+          ],
+          whyTopPick: "Massive library (3,000+ lessons) with transcripts + quizzes. ⭐📚",
+          freeAccess: "States “free listening lessons” and usable without paying. 🆓✅",
+          ageCheck: "Teen-appropriate overall; preview some topics. 🔍✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "voa-learning-english",
+        title: "📰 VOA Learning English (Voice of America) 🎧",
+        description: "News + audio/video learning programs 🗞️",
+        link: "https://learningenglish.voanews.com/",
+        format: "site",
+        focus: "clear American English listening, vocab, comprehension",
+        details: {
+          type: "News + audio/video learning programs 🗞️🎧🧩",
+          teaches: "Clear American English listening + vocabulary + comprehension 🧠✅",
+          howTo: [
+            "1️⃣ 🧭 Choose a program (news, culture, science, etc.) 🎯",
+            "2️⃣ 🎧 Listen first → then read along (if available) 📄",
+            "3️⃣ ✍️ Write 5 key words + 2 key facts you heard 📝📌",
+            "4️⃣ 🗣️ Summarize out loud in 30–60 seconds 🎙️⏱️"
+          ],
+          whyTopPick: "Authentic, learner-friendly audio at a slower pace. ⭐✅",
+          freeAccess: "Free to access on VOA Learning English site. 🆓✅",
+          ageCheck: "Mostly teen-safe; news topics can be serious—preview when needed. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "voa-learning-english-podcast",
+        title: "🎙️ VOA Learning English Podcast 📻📰",
+        description: "Podcast episodes (news/feature-style) 🧩",
+        link: "https://learningenglish.voanews.com/z/1689",
+        format: "site",
+        focus: "listening fluency, key vocabulary, regular episodes",
+        details: {
+          type: "Podcast episodes (news/feature-style) 📻📰🧩",
+          teaches: "Listening fluency + key vocabulary through regular episodes ✅📈",
+          howTo: [
+            "1️⃣ 🎧 Play today’s episode ▶️",
+            "2️⃣ ✍️ Do a short dictation (write 3–5 sentences you hear) 📝",
+            "3️⃣ 🔁 Replay and fix your spelling/grammar ✅✍️",
+            "4️⃣ 🗣️ Record a 1-minute reaction summary 🎙️⏱️"
+          ],
+          whyTopPick: "Consistent, bite-sized practice with fresh content. ⭐🔁",
+          freeAccess: "Free access via VOA page. 🆓✅",
+          ageCheck: "Fine for teens; preview if a topic is heavy. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "randalls-esl-cyber-listening-lab",
+        title: "🎧 Randall’s ESL Cyber Listening Lab (ESL-Lab) 🧪",
+        description: "Listening quizzes by level 📝",
+        link: "https://www.esl-lab.com/",
+        format: "site",
+        focus: "test-style listening, practical comprehension",
+        details: {
+          type: "Listening quizzes by level 📝🎧🧩",
+          teaches: "Practical listening comprehension + test-style questions ✅🎯",
+          howTo: [
+            "1️⃣ 🎚️ Choose Easy/Intermediate/Difficult 🎯",
+            "2️⃣ 🎧 Listen and answer the quiz questions ✅📝",
+            "3️⃣ ✅ Check answers and replay the tricky parts 🔁",
+            "4️⃣ 🗣️ Practice “repeat + respond” (copy a line, then answer it) 🔁💬"
+          ],
+          whyTopPick: "Clear structure + lots of targeted quiz practice. ⭐🎯",
+          freeAccess: "Site is accessible and lessons are usable without paying. 🆓✅",
+          ageCheck: "Teen-appropriate; preview topics (some are adult-life themes). 🔍✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "breaking-news-english-multi-speed-listening",
+        title: "⚡ Breaking News English — Multi-Speed Listening 🏃‍♂️🎧",
+        description: "News listening at multiple speeds 🧠",
+        link: "https://breakingnewsenglish.com/multi-speed-listening.html",
+        format: "site",
+        focus: "speed control, news vocab, comprehension",
+        details: {
+          type: "News listening at multiple speeds 🐢🐇🎧🧩",
+          teaches: "Listening speed control + news vocabulary + comprehension ✅📈",
+          howTo: [
+            "1️⃣ 🐢 Start at a slower speed to catch key meaning ✅",
+            "2️⃣ 🐇 Increase speed step-by-step (same text) 🔁📈",
+            "3️⃣ ✅ Do the lesson activities/questions 📝",
+            "4️⃣ 🗣️ Debate the topic for 2 minutes (agree/disagree) 💬⏱️"
+          ],
+          whyTopPick: "Same content in 5 speeds—perfect for progression. ⭐📈",
+          freeAccess: "Lessons are accessible; site offers many free materials (also promotes paid extras). 🆓💡",
+          ageCheck: "News topics may include politics/violence—preview recommended. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "news-in-levels-reading-and-listening",
+        title: "🗞️ News in Levels (Reading + Listening) 🎧",
+        description: "News stories at 3 levels with listening 🔊",
+        link: "https://www.newsinlevels.com/",
+        format: "site",
+        focus: "leveled listening, vocab, retell",
+        details: {
+          type: "News at 3 levels with listening 🔊🧩",
+          teaches: "Listening comprehension with leveled vocabulary 📚✅",
+          howTo: [
+            "1️⃣ 🧩 Pick Level 1/2/3 (start easier than you think) 🎚️",
+            "2️⃣ 🎧 Listen first → then read 📄",
+            "3️⃣ ✍️ Note 8–10 new words (only useful ones) 📝",
+            "4️⃣ 🗣️ Tell the story in your own words (30–60 seconds) 🎙️⏱️"
+          ],
+          whyTopPick: "Same news idea across levels = smooth confidence building. ⭐📈",
+          freeAccess: "Site is accessible and usable free (ad-supported). 🆓📢",
+          ageCheck: "Some world news can be sensitive; preview as needed. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "ted-ed-lessons",
+        title: "🎬 TED-Ed Lessons (Video-based listening) 🧠",
+        description: "Short educational videos + lesson format 🎥",
+        link: "https://ed.ted.com/",
+        format: "site",
+        focus: "academic listening, note-taking, key ideas",
+        details: {
+          type: "Short educational videos + lesson format 🎥🧩",
+          teaches: "Academic listening, note-taking, key idea extraction 📝✅",
+          howTo: [
+            "1️⃣ 🎯 Choose a topic teens actually like (science/psych/history) 💡",
+            "2️⃣ 🎧 Watch once (no subtitles) for gist 🚫📝",
+            "3️⃣ 🔁 Watch again with notes (3 key points + 5 keywords) 📝📌",
+            "4️⃣ 🗣️ Give a 60-second mini-talk summary 🎙️⏱️"
+          ],
+          whyTopPick: "High engagement + strong “listen for ideas” practice. ⭐🌟",
+          freeAccess: "Free to watch lessons; account is optional for saving/creating. 🆓✅",
+          ageCheck: "Generally teen-appropriate; preview occasional sensitive themes. 🔍✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "englishclub-listening-quizzes",
+        title: "🧠 EnglishClub — Listening Quizzes 🎧",
+        description: "Listening quizzes + answers ✅",
+        link: "https://www.englishclub.com/esl-quizzes/listening/",
+        format: "site",
+        focus: "listening for detail, quick checks",
+        details: {
+          type: "Listening quizzes + answers ✅🎧🧩",
+          teaches: "Listening for detail + common conversational understanding 🗣️✅",
+          howTo: [
+            "1️⃣ 🎧 Play the audio question 🔊",
+            "2️⃣ ✅ Choose the best answer 📝",
+            "3️⃣ 🔁 Replay and catch the key words you missed 🔍",
+            "4️⃣ ✍️ Write 3 “useful phrases” you heard 📝💡"
+          ],
+          whyTopPick: "Quick, low-prep listening checks (great for warmups). ⭐⏱️",
+          freeAccess: "Free-access quizzes on site (ad-supported). 🆓📢",
+          ageCheck: "Teen-safe; standard web ads—supervision/ad blocker if needed. 🛡️✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "listen-a-minute-60-second-listenings",
+        title: "⏱️ Listen A Minute (60-second listenings) 🎧",
+        description: "Very short MP3 listenings + worksheets/quizzes 📝",
+        link: "https://listenaminute.com/",
+        format: "site",
+        focus: "daily reps, gist/detail, shadowing",
+        details: {
+          type: "Very short MP3 listenings + worksheets/quizzes 📝🎧🧩",
+          teaches: "Speedy practice: gist + detail + pronunciation focus 🔁✅",
+          howTo: [
+            "1️⃣ 🎧 Listen once and guess the main idea 🧠",
+            "2️⃣ 🔁 Listen again and do the quiz ✅📝",
+            "3️⃣ 🗣️ Shadow the audio (copy rhythm and linking) 🔁",
+            "4️⃣ ✍️ Write a 4-sentence opinion response 📝💬"
+          ],
+          whyTopPick: "Perfect for daily “listening reps” without fatigue. ⭐🏋️",
+          freeAccess: "Described as free with downloads + MP3/quizzes. 🆓✅",
+          ageCheck: "Teen-appropriate; some topics may feel easy for advanced learners. 🎚️✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "manythings-voa-special-english-scripts",
+        title: "📻 ManyThings — VOA Special English Text & MP3 🎧",
+        description: "Audio + text scripts (VOA style) 📄",
+        link: "https://www.manythings.org/voa/scripts/",
+        format: "site",
+        focus: "read-along listening, vocab in context",
+        details: {
+          type: "Audio + text scripts (VOA style) 📄🎧🧩",
+          teaches: "Listening + read-along + vocabulary in context 🧠✅",
+          howTo: [
+            "1️⃣ 🎧 Play the MP3 while following the text 📄",
+            "2️⃣ ✍️ Highlight 10 useful words/phrases 📝",
+            "3️⃣ 🔁 Replay and read aloud with the audio 🗣️🔁",
+            "4️⃣ 🗣️ Summarize in 5 bullet points 📝🔹"
+          ],
+          whyTopPick: "Simple read-along listening with clear scripts. ⭐✅",
+          freeAccess: "Page provides text + MP3 access without payment. 🆓✅",
+          ageCheck: "Generally safe; older site style/ads—basic supervision recommended. 🛡️✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "learnenglish-british-council-listening-general",
+        title: "🌍 LearnEnglish (British Council) — Listening (general) 🎧",
+        description: "Listening tasks by level + exercises 📝",
+        link: "https://learnenglish.britishcouncil.org/skills/listening",
+        format: "site",
+        focus: "everyday + academic listening strategies",
+        details: {
+          type: "Listening tasks by level + exercises 📝🎧🧩",
+          teaches: "Everyday + academic listening strategies ✅🧠",
+          howTo: [
+            "1️⃣ 🎯 Pick level and topic 🎚️📌",
+            "2️⃣ 🎧 Listen for gist → then detail 🔁",
+            "3️⃣ ✅ Do exercises and review mistakes 📝✅",
+            "4️⃣ 🗣️ Retell using “First / Then / Finally” 🧩🗣️"
+          ],
+          whyTopPick: "Clean, structured tasks that scale to higher teens. ⭐📈",
+          freeAccess: "Accessible and usable free on site. 🆓✅",
+          ageCheck: "Suitable for older teens; content is generally neutral. ✅🎓"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "bbc-learning-english-6-minute-english-youtube",
+        title: "📺 BBC Learning English — 6 Minute English (YouTube) ⏲️",
+        description: "Short discussion episodes + vocab 🎙️",
+        link:
+          "https://www.youtube.com/playlist?list=PLcetZ6gSk96-FECmH9l7Vlx5VDigvgZpt",
+        format: "video",
+        focus: "topic vocab, opinions/arguments listening",
+        details: {
+          type: "Short discussion episodes + vocab 🎙️🎧🧩",
+          teaches: "Topic vocabulary + listening for opinions/arguments 🧠✅",
+          howTo: [
+            "1️⃣ 🎧 Listen once with no captions 🚫📝",
+            "2️⃣ 🔁 Listen again and write 6 new words/phrases ✍️🧠",
+            "3️⃣ 🗣️ Pause after each speaker and paraphrase their point 🧩",
+            "4️⃣ ✍️ Write a short “Agree/Disagree + why” response 💬📝"
+          ],
+          whyTopPick: "High-quality teen-friendly topics in short time. ⭐⏱️",
+          freeAccess: "Free on YouTube (ads possible). 🆓📢",
+          ageCheck: "Generally teen-safe; preview occasional sensitive topics. 🔍✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "bbc-learning-english-from-the-news-youtube",
+        title: "📰 BBC Learning English — Learning English from the News (YouTube) 🎧",
+        description: "News-based listening + key vocabulary 🗞️",
+        link:
+          "https://www.youtube.com/playlist?list=PLcetZ6gSk96-8vlsfui2jrM0CAJ4MfrMT",
+        format: "video",
+        focus: "news language, headline vocabulary",
+        details: {
+          type: "News-based listening + key vocabulary 🗞️🎧🧩",
+          teaches: "Understanding news language + headline vocabulary ✅🧠",
+          howTo: [
+            "1️⃣ 🎧 Watch once for main idea 🧠",
+            "2️⃣ ✍️ Note headline words + meaning 📝📌",
+            "3️⃣ 🔁 Rewatch and pause to repeat key sentences 🔁🗣️",
+            "4️⃣ 🗣️ Give a 45-second “news briefing” summary 🎙️⏱️"
+          ],
+          whyTopPick: "Great bridge from ESL listening → real-world news English. ⭐🌉",
+          freeAccess: "Free on YouTube (ads possible). 🆓📢",
+          ageCheck: "News can include serious topics—preview recommended. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "bbc-the-english-we-speak-podcast",
+        title: "🗣️ BBC Learning English — The English We Speak (Podcast) 🎙️💬",
+        description: "Short podcast episodes (everyday expressions) ⚡",
+        link:
+          "https://podcasts.apple.com/vn/podcast/the-english-we-speak-dip-your-toe-into/id262026989?i=1000662390532&l=vi",
+        format: "audio",
+        focus: "idioms/phrases, natural pronunciation",
+        details: {
+          type: "Short podcast episodes (everyday expressions) 💬🎙️🧩",
+          teaches: "Real idioms/phrases + natural pronunciation ✅🗣️",
+          howTo: [
+            "1️⃣ 🎧 Listen once and guess the meaning from context 🧠",
+            "2️⃣ 📌 Write the phrase + your own example sentence ✍️",
+            "3️⃣ 🔁 Repeat the episode and shadow key lines 🔁🗣️",
+            "4️⃣ 🗣️ Use the phrase in a 30-second mini-dialogue 🎭⏱️"
+          ],
+          whyTopPick: "Fast, modern phrases teens actually hear online. ⭐⚡",
+          freeAccess: "Free to listen on podcast platforms (Apple Podcasts listing). 🆓✅",
+          ageCheck: "Teen-appropriate; idioms may need explanation. ✅🧠"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "best-set-bundle-13-18-listening",
+        title: "Best “Set” (Recommended Bundle) 🎒✅🎧",
+        description: "A 6-day weekly listening routine (repeat weekly) 🔁🗓️",
+        link: "",
+        format: "other",
+        focus: "gist → detail → task → retell/summarize",
+        notes:
+          "Use the resources above in a weekly rotation: structured lessons, transcript-based practice, news at multiple speeds, and academic listening + mini-talk summaries.",
+        details: {
+          type: "Weekly routine (repeat weekly) 🔁🗓️🎧",
+          teaches:
+            "Real-life comprehension + exam-style listening with a consistent flow: gist → detail → task → retell/summarize ✅🧠🗣️📝",
+          howTo: [
+            "A 6-day weekly listening routine (repeat weekly) 🔁🗓️",
+            "1️⃣ Mon 🎧: LearnEnglish Teens Listening — 1 lesson + exercises ✅",
+            "2️⃣ Tue 🌍: ELLLO — 1 conversation + transcript + quiz + 60s shadowing 🎧📄⏱️",
+            "3️⃣ Wed 📰: VOA Learning English — 1 short program + 5-word summary + 2 facts 📝📌",
+            "4️⃣ Thu ⚡: Breaking News English Multi-Speed — slow→fast progression + discussion question 🐢🐇💬",
+            "5️⃣ Fri 🎬: TED-Ed — 1 video + notes (3 ideas, 5 keywords) + 60s talk 📝🎙️",
+            "6️⃣ Sat 🗞️: News in Levels — listen + retell + vocab review 🎧🗣️📚",
+            "7️⃣ Sun ⏱️ (optional): Listen A Minute — quick listening “reps” + short opinion response 🏋️💬"
+          ],
+          whyTopPick: "Simple rotation that builds confidence + speed control + speaking output. ⭐📈🗣️",
+          freeAccess: "Built from free-access sites listed above (some may be ad-supported / YouTube ads). 🆓📢",
+          ageCheck: "Designed for teens; preview news-heavy topics when needed. ✅⚠️"
+        },
+        isBestSet: true,
+        bundleItems: [
+          "learnenglishteens-listening",
+          "elllo-english-listening-lesson-library-online",
+          "voa-learning-english",
+          "breaking-news-english-multi-speed-listening",
+          "ted-ed-lessons",
+          "news-in-levels-reading-and-listening",
+          "listen-a-minute-60-second-listenings"
         ]
       }
     ]
