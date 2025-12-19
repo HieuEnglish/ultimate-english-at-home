@@ -201,12 +201,16 @@
         ? "home"
         : appPath.startsWith("/resources")
         ? "resources"
-        : appPath.startsWith("/favourites")
-        ? "favourites"
         : appPath.startsWith("/games")
         ? "games"
         : appPath.startsWith("/tests")
         ? "tests"
+        : appPath.startsWith("/profile")
+        ? "profile"
+        : appPath.startsWith("/contact")
+        ? "contact"
+        : appPath.startsWith("/favourites")
+        ? "favourites"
         : "";
 
     navLinks.forEach((el) => {
@@ -601,21 +605,21 @@
           })}
 
           ${card({
-            href: hrefFor("/contact"),
-            title: "Contact",
-            text: "Send a message",
-            icon: iconMail(),
-            ctaText: "",
-            glow: "purple"
-          })}
-
-          ${card({
             href: hrefFor("/favourites"),
             title: "Favourites",
             text: "Save your favourites",
             icon: iconHeart(),
             ctaText: "",
             glow: "pink"
+          })}
+
+          ${card({
+            href: hrefFor("/contact"),
+            title: "Contact",
+            text: "Send a message",
+            icon: iconMail(),
+            ctaText: "",
+            glow: "purple"
           })}
         </div>
       </section>

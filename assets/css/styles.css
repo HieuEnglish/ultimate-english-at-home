@@ -1,4 +1,4 @@
-﻿:root{
+﻿﻿:root{
   --bg: #f6f9ff;
   --bg2:#fff6fb;
   --surface: rgba(255,255,255,.78);
@@ -15,9 +15,26 @@
 
   --radius: 18px;
   --radius2: 22px;
+  /* Layout tuning: a bit wider on desktop so the UI doesn't feel "zoomed out" */
   --max: 1040px;
+  --gutter: 18px;
 
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+/* Wider layout + slightly larger spacing on desktop */
+@media (min-width: 1100px){
+  :root{
+    --max: 1180px;
+    --gutter: 22px;
+  }
+}
+
+@media (min-width: 1500px){
+  :root{
+    --max: 1280px;
+    --gutter: 24px;
+  }
 }
 
 @media (prefers-color-scheme: dark){
@@ -54,7 +71,7 @@ a:hover{text-decoration:none}
 
 .muted{color:var(--muted)}
 
-.container{max-width:var(--max); margin:0 auto; padding:0 18px}
+.container{max-width:var(--max); margin:0 auto; padding:0 var(--gutter)}
 
 .skip-link{
   position:absolute;
@@ -111,6 +128,21 @@ a:hover{text-decoration:none}
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   box-shadow: 0 8px 16px rgba(107,102,255,.25);
 }
+
+/* Heart shape (keeps gradient fill). Falls back to rounded square if mask not supported. */
+@supports ((-webkit-mask-image: url("")) or (mask-image: url(""))){
+  .brand-mark{
+    border-radius:0;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M12%2021.35l-1.45-1.32C5.4%2015.36%202%2012.28%202%208.5%202%205.42%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.09C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.42%2022%208.5c0%203.78-3.4%206.86-8.55%2011.54L12%2021.35z%27/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M12%2021.35l-1.45-1.32C5.4%2015.36%202%2012.28%202%208.5%202%205.42%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.09C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.42%2022%208.5c0%203.78-3.4%206.86-8.55%2011.54L12%2021.35z%27/%3E%3C/svg%3E");
+    -webkit-mask-repeat:no-repeat;
+    mask-repeat:no-repeat;
+    -webkit-mask-position:center;
+    mask-position:center;
+    -webkit-mask-size:contain;
+    mask-size:contain;
+  }
+}
 .brand-text{font-weight:750; letter-spacing:.2px}
 
 .site-nav{
@@ -157,7 +189,7 @@ a:hover{text-decoration:none}
 }
 .hero-title{
   margin:0;
-  font-size: clamp(28px, 4vw, 44px);
+  font-size: clamp(28px, 3.2vw, 54px);
   line-height:1.08;
   letter-spacing:-.6px;
 }
@@ -165,8 +197,12 @@ a:hover{text-decoration:none}
   margin:14px 0 0;
   max-width: 64ch;
   color:var(--muted);
-  font-size: 16px;
+  font-size: clamp(15px, 1.1vw + 12px, 18px);
   line-height:1.6;
+}
+
+@media (min-width: 1100px){
+  .site-main{padding:34px 0 46px}
 }
 
 /* ✅ Responsive grid that auto-adjusts to screen width */
@@ -175,6 +211,14 @@ a:hover{text-decoration:none}
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap:14px;
   margin-top:18px;
+}
+
+/* On wider screens, increase the minimum card width so they grow instead of packing into extra columns */
+@media (min-width: 1100px){
+  .card-grid{
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap:16px;
+  }
 }
 
 /* Single-column safety for very small screens */
@@ -230,6 +274,11 @@ a:hover{text-decoration:none}
   font-weight:700;
   color: var(--muted);
   padding-left: 8px;
+}
+
+@media (min-width: 1100px){
+  .card{padding:18px 18px}
+  .card-title{font-size:19px}
 }
 
 /* -------------------------------------------------
@@ -428,7 +477,7 @@ a:hover{text-decoration:none}
 }
 .page-title{
   margin:0;
-  font-size: clamp(22px, 3.2vw, 32px);
+  font-size: clamp(22px, 2.4vw, 36px);
   letter-spacing:-.4px;
 }
 .page-subtitle{
@@ -491,6 +540,13 @@ a:hover{text-decoration:none}
   margin-top:14px;
 }
 
+@media (min-width: 1100px){
+  .resource-grid{
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap:16px;
+  }
+}
+
 @media (max-width: 360px){
   .resource-grid{ grid-template-columns: 1fr; }
 }
@@ -532,6 +588,11 @@ a:hover{text-decoration:none}
   margin:0;
   color:var(--muted);
   line-height:1.55;
+}
+
+@media (min-width: 1100px){
+  .resource-card{padding:18px 18px}
+  .resource-title{font-size:19px}
 }
 
 .resource-actions{
@@ -584,7 +645,7 @@ a:hover{text-decoration:none}
 }
 .detail-title{
   margin:0;
-  font-size: clamp(22px, 3vw, 30px);
+  font-size: clamp(22px, 2.2vw, 34px);
   letter-spacing:-.4px;
   line-height:1.15;
 }
