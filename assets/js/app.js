@@ -1,6 +1,8 @@
 ﻿/* assets/js/app.js
    UEAH SPA router + UI renderer (GitHub Pages friendly).
-   Uses window.UEAH_RESOURCES_STORE (loaded via assets/js/resources-store.js).
+   Uses:
+   - window.UEAH_RESOURCES_STORE (loaded via assets/js/resources-store.js).
+   - window.UEAH_TESTS_STORE (loaded via assets/js/tests-store.js + data files).
 */
 (function () {
   const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18"];
@@ -17,6 +19,13 @@
   // Resources store (must be loaded before app.js)
   const STORE = (function getStore() {
     const s = window.UEAH_RESOURCES_STORE;
+    if (s && typeof s === "object") return s;
+    return null;
+  })();
+
+  // Tests store (must be loaded before app.js)
+  const TESTS_STORE = (function getTestsStore() {
+    const s = window.UEAH_TESTS_STORE;
     if (s && typeof s === "object") return s;
     return null;
   })();
@@ -69,6 +78,20 @@
 
   function hrefFor(appPath) {
     const p = normalizeAppPath(appPath);
+    return `${basePath}${p}`;
+  }
+
+  // For loading static assets (scripts/css/images) from any route safely.
+  // Always returns an absolute path (with basePath for GitHub Pages project sites).
+  function assetHref(assetPath) {
+    if (!assetPath) return "";
+    const s = String(assetPath);
+
+    // Allow full URLs if ever needed
+    if (s.startsWith("http://") || s.startsWith("https://")) return s;
+
+    let p = s;
+    if (!p.startsWith("/")) p = "/" + p;
     return `${basePath}${p}`;
   }
 
@@ -198,7 +221,7 @@
     try {
       view = await route.view;
     } catch (err) {
-      view = viewError("Something went wrong while loading this page.", err);
+      view = viewError("Something went wrong while loading this page.", err).view;
     }
 
     // Outdated render (navigation happened)
@@ -209,6 +232,13 @@
 
     // Ensure any newly-rendered internal links get basePath applied (GitHub Pages)
     rewriteNavHrefs(appEl);
+
+    // Optional hook for views that need to attach listeners after HTML is injected
+    if (view && typeof view.afterRender === "function") {
+      try {
+        view.afterRender();
+      } catch (_) {}
+    }
 
     const main = document.getElementById("main");
     if (main) main.focus({ preventScroll: true });
@@ -228,7 +258,10 @@
 
     if (parts[0] === "favourites" && parts.length === 1) return { view: Promise.resolve(viewFavourites().view) };
     if (parts[0] === "games" && parts.length === 1) return { view: Promise.resolve(viewGames().view) };
+
     if (parts[0] === "tests" && parts.length === 1) return { view: Promise.resolve(viewTests().view) };
+    if (parts[0] === "tests" && parts.length === 2 && parts[1])
+      return { view: viewTestDetailAsync(parts[1]).then((x) => x.view) };
 
     if (parts[0] !== "resources") return { view: Promise.resolve(viewNotFound(appPath).view) };
     if (parts.length === 1) return { view: Promise.resolve(viewResourcesIndex().view) };
@@ -283,6 +316,28 @@
     return list.find((r) => r && r.slug === slug) || null;
   }
 
+  // Tests helpers
+  function testsGetAll() {
+    if (!TESTS_STORE) return [];
+    if (typeof TESTS_STORE.getAll === "function") return TESTS_STORE.getAll() || [];
+    if (Array.isArray(TESTS_STORE.tests)) return TESTS_STORE.tests.slice();
+    return [];
+  }
+
+  function testsGetTest(slug) {
+    if (!TESTS_STORE) return null;
+    if (typeof TESTS_STORE.getTest === "function") return TESTS_STORE.getTest(slug);
+    const list = testsGetAll();
+    return list.find((t) => t && String(t.slug || "") === String(slug || "")) || null;
+  }
+
+  function testsHasRunner(slug) {
+    if (!TESTS_STORE) return false;
+    if (typeof TESTS_STORE.hasRunner === "function") return !!TESTS_STORE.hasRunner(slug);
+    if (typeof TESTS_STORE.getRunner === "function") return !!TESTS_STORE.getRunner(slug);
+    return false;
+  }
+
   // Keep featured “Best Set” at the end
   function normalizeResourcesList(list) {
     const items = Array.isArray(list) ? list.slice() : [];
@@ -293,6 +348,37 @@
       return String(a && a.title ? a.title : "").localeCompare(String(b && b.title ? b.title : ""));
     });
     return items;
+  }
+
+  // -----------------------------
+  // Script loader (for big tests)
+  // -----------------------------
+
+  const loadedScriptPromises = new Map();
+
+  function loadScriptOnce(src) {
+    const url = assetHref(src);
+    if (!url) return Promise.reject(new Error("Missing script src"));
+    if (loadedScriptPromises.has(url)) return loadedScriptPromises.get(url);
+
+    const p = new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = url;
+      s.defer = true;
+      s.onload = () => resolve(true);
+      s.onerror = () => reject(new Error(`Failed to load script: ${url}`));
+      document.head.appendChild(s);
+    });
+
+    loadedScriptPromises.set(url, p);
+    return p;
+  }
+
+  async function ensureTestRunnerLoaded(test) {
+    if (!test) return;
+    if (testsHasRunner(test.slug)) return;
+    if (!test.module) return;
+    await loadScriptOnce(test.module);
   }
 
   // -----------------------------
@@ -341,6 +427,26 @@
         </div>
         <div class="actions">
           <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+        </div>
+      </section>
+    `;
+    return { view: { title, html } };
+  }
+
+  function viewTestsStoreMissing() {
+    const title = "Tests unavailable — UEAH";
+    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Tests" }]);
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">Tests unavailable</h1>
+        <p class="page-subtitle">The tests store script is not loaded.</p>
+        <div class="note">
+          <strong>Fix:</strong> Ensure <code>assets/js/tests-store.js</code> (and your tests data files) are loaded before <code>assets/js/app.js</code>.
+        </div>
+        <div class="actions">
+          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
         </div>
       </section>
     `;
@@ -488,26 +594,145 @@
   }
 
   function viewTests() {
+    if (!TESTS_STORE) return viewTestsStoreMissing();
+
     const title = "Tests — UEAH";
     const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Tests" }]);
+
+    const tests = testsGetAll();
+    const hasTests = tests.length > 0;
+
+    const cards = hasTests
+      ? tests
+          .map((t) =>
+            card({
+              href: hrefFor(`/tests/${t.slug}`),
+              title: t.title || "Test",
+              text: t.subtitle || "Test your ability",
+              icon: iconSkill(t.skill),
+              ctaText: "",
+              glow: "iels" // special multi-colour glow
+            })
+          )
+          .join("")
+      : "";
 
     const html = `
       <section class="page-top">
         ${breadcrumb}
         <h1 class="page-title">Tests</h1>
-        <p class="page-subtitle">This page is a placeholder for now.</p>
+        <p class="page-subtitle">Choose a test.</p>
 
-        <div class="note">
-          <strong>Coming soon:</strong> quizzes and tests by age group and skill.
-        </div>
+        ${
+          hasTests
+            ? `<div class="card-grid" role="list" aria-label="Tests">${cards}</div>`
+            : `
+              <div class="note">
+                <strong>Coming soon:</strong> tests will appear here.
+              </div>
+            `
+        }
 
         <div class="actions">
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/")}" data-nav>← Back to Home</a>
           <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
+  }
+
+  async function viewTestDetailAsync(slug) {
+    if (!TESTS_STORE) return viewTestsStoreMissing();
+
+    const test = testsGetTest(slug);
+    if (!test) return viewNotFound(`/tests/${slug}`);
+
+    // Lazy-load the test implementation if needed
+    try {
+      await ensureTestRunnerLoaded(test);
+    } catch (err) {
+      return viewError("Could not load this test module.", err);
+    }
+
+    const title = `${test.title || "Test"} — UEAH`;
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/") },
+      { label: "Tests", href: hrefFor("/tests") },
+      { label: test.title || "Test" }
+    ]);
+
+    const ctx = {
+      slug: test.slug,
+      test,
+      hrefFor,
+      assetHref,
+      basePath
+    };
+
+    // Render via store runner if present
+    let runnerOut = null;
+    if (typeof TESTS_STORE.render === "function") {
+      runnerOut = TESTS_STORE.render(test.slug, ctx);
+    } else if (typeof TESTS_STORE.getRunner === "function") {
+      const r = TESTS_STORE.getRunner(test.slug);
+      if (typeof r === "function") runnerOut = { html: r(ctx), afterRender: null };
+      else if (r && typeof r.render === "function") runnerOut = { html: r.render(ctx), afterRender: r.afterRender || null };
+    }
+
+    const runnerHtml =
+      runnerOut && runnerOut.html
+        ? String(runnerOut.html)
+        : `
+          <div class="note">
+            <strong>Coming soon:</strong> this test is not implemented yet.
+          </div>
+        `;
+
+    const html = `
+      <section class="page-top">
+        ${breadcrumb}
+        <h1 class="page-title">${escapeHtml(test.title || "Test")}</h1>
+        <p class="page-subtitle">${escapeHtml(test.subtitle || "Test your ability")}</p>
+
+        <div class="detail-card" role="region" aria-label="Test details">
+          <div style="display:flex; gap:12px; align-items:flex-start">
+            <div class="card-icon" aria-hidden="true" style="width:44px; height:44px">${iconSkill(test.skill)}</div>
+            <div>
+              <h2 class="detail-title" style="font-size:18px; margin:0">Test</h2>
+              <p class="detail-desc" style="margin-top:10px">${escapeHtml(test.subtitle || "Test your ability")}</p>
+            </div>
+          </div>
+
+          <div id="test-root" style="margin-top:14px">
+            ${runnerHtml}
+          </div>
+
+          <div class="actions" style="margin-top:16px">
+            <a class="btn" href="${hrefFor("/tests")}" data-nav>← Back</a>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="${hrefFor("/tests")}" data-nav>← Back to Tests</a>
+          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+        </div>
+      </section>
+    `;
+
+    const afterRender =
+      runnerOut && typeof runnerOut.afterRender === "function"
+        ? function () {
+            const root = document.getElementById("test-root");
+            if (!root) return;
+            try {
+              runnerOut.afterRender(root, ctx);
+            } catch (_) {}
+          }
+        : null;
+
+    return { view: { title, html, afterRender } };
   }
 
   function viewAge(age) {

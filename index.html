@@ -135,8 +135,12 @@
     </div>
   </footer>
 
-  <!-- Load the resources store before app.js (age-group data files are lazy-loaded by the router) -->
+  <!-- Load stores/data BEFORE app.js -->
   <script defer src="assets/js/resources-store.js"></script>
+
+  <script defer src="assets/js/tests-store.js"></script>
+  <script defer src="assets/js/tests/iels.js"></script>
+
   <script defer src="assets/js/app.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ﻿:root{
-  --bg: #f6f7ff;
+  --bg: #f6f9ff;
   --bg2:#fff6fb;
   --surface: rgba(255,255,255,.78);
   --surface2: rgba(255,255,255,.62);
@@ -261,6 +261,35 @@ a:hover{text-decoration:none}
 .card[data-glow="blue"]{ --glow: rgba(90,160,255,.28); --glow-border: rgba(90,160,255,.85); }
 .card[data-glow="pink"]{ --glow: rgba(255,106,179,.26); --glow-border: rgba(255,106,179,.85); }
 
+/* NEW: IELS multi-colour glow */
+.card[data-glow="iels"]{
+  --glow-border: rgba(255,255,255,.26);
+  --glow: rgba(255,255,255,.14);
+}
+.card[data-glow="iels"]:hover,
+.card[data-glow="iels"]:focus-visible{
+  border-color: rgba(255,255,255,.32);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.22),
+    0 0 0 4px rgba(107,102,255,.10),
+    0 0 22px 6px rgba(107,102,255,.22),
+    0 0 28px 10px rgba(0,230,140,.14),
+    0 0 34px 14px rgba(255,230,70,.12),
+    0 0 40px 18px rgba(255,70,90,.12),
+    0 0 46px 22px rgba(255,106,179,.14),
+    var(--shadow);
+}
+
+/* Make IELS cards feel special even at rest */
+.card[data-glow="iels"]{
+  background:
+    radial-gradient(520px 220px at 10% 0%, rgba(0,230,140,.12), transparent 58%),
+    radial-gradient(520px 220px at 90% 0%, rgba(255,230,70,.10), transparent 58%),
+    radial-gradient(520px 240px at 40% 110%, rgba(90,160,255,.14), transparent 60%),
+    radial-gradient(520px 240px at 110% 70%, rgba(255,106,179,.12), transparent 60%),
+    var(--surface);
+}
+
 /* Base icon background on glow cards */
 .card[data-glow] .card-icon{
   background: rgba(255,255,255,.06);
@@ -286,6 +315,17 @@ a:hover{text-decoration:none}
 .card[data-glow="yellow"] .card-icon{
   background: rgba(255,230,70,.12);
   color: rgba(255,230,70,.95);
+}
+
+/* NEW: IELS icon — multi colour, consistent shape */
+.card[data-glow="iels"] .card-icon{
+  background:
+    radial-gradient(18px 18px at 20% 20%, rgba(0,230,140,.22), transparent 60%),
+    radial-gradient(18px 18px at 80% 20%, rgba(255,230,70,.20), transparent 60%),
+    radial-gradient(20px 20px at 30% 90%, rgba(90,160,255,.22), transparent 62%),
+    radial-gradient(20px 20px at 90% 85%, rgba(255,106,179,.20), transparent 62%),
+    rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
 }
 
 /* Keep primary styling consistent */
@@ -324,6 +364,16 @@ a:hover{text-decoration:none}
   .card[data-glow="yellow"] .card-icon{
     background: rgba(255,230,70,.14);
     color: rgba(255,230,70,.95);
+  }
+
+  .card[data-glow="iels"] .card-icon{
+    background:
+      radial-gradient(18px 18px at 20% 20%, rgba(0,230,140,.26), transparent 60%),
+      radial-gradient(18px 18px at 80% 20%, rgba(255,230,70,.24), transparent 60%),
+      radial-gradient(20px 20px at 30% 90%, rgba(90,160,255,.26), transparent 62%),
+      radial-gradient(20px 20px at 90% 85%, rgba(255,106,179,.24), transparent 62%),
+      rgba(255,255,255,.08);
+    color: rgba(255,255,255,.92);
   }
 
   .card.card--primary[data-glow] .card-icon{
