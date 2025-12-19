@@ -65,6 +65,30 @@
           "Optional editing tools (only after drafting): LanguageTool or Hemingway Editor."
         ],
         bestSetSlug: "best-set-mini-pack-11-12-writing"
+      },
+
+      "11-12/speaking": {
+        title: "11–12 Speaking 🎤",
+        overview:
+          "A curated speaking mini-pack for ages 11–12 that builds real-life communication through short daily practice: dialogue role-plays, levelled speaking videos, conversation questions, and pronunciation/fluency games, organized into an easy weekly routine.",
+        objectives: [
+          "Improve confidence and fluency through repeated speaking practice (pair work, role-play, short talks).",
+          "Use practical everyday phrases and complete short dialogues with adapted details (names/places/prices).",
+          "Build stronger pronunciation and clearer speech (target sounds, tongue twisters, phonemic support).",
+          "Develop longer answers and follow-up questions (“Why?” / “Tell me more…”) to extend conversations."
+        ],
+        materials: [
+          "LearnEnglish Teens: Speaking (A1–B2) videos + tasks.",
+          "AmericanEnglish: Everyday Conversations dialogue book (role-play).",
+          "LearnEnglish Kids: Speak and Spell + Tongue Twisters.",
+          "ITESLJ Conversation Questions (topic lists).",
+          "EnglishClub: Small Talk starters + Talking Point worksheets.",
+          "TeachingEnglish (British Council): “Kids and speaking” teacher tips.",
+          "Games4esl: classroom speaking games + printables.",
+          "Baamboozle (speaking games), Wheel of Names (prompt spinner).",
+          "Vocaroo (voice recording), Sounds Right (pronunciation chart), Cambridge pronunciation hub."
+        ],
+        bestSetSlug: "best-set-mini-pack-11-12-speaking"
       }
     },
 
@@ -831,6 +855,7 @@
         format: "site",
         description: "Writing models + practice tasks + printables.",
         focus: "models + structure",
+        level: "A2–B1",
         details: {
           type: "Writing models + practice tasks + printables",
           teaches: "Short text types (messages, descriptions, stories) + structure.",
@@ -843,8 +868,7 @@
           whyTopPick: "Clear models + guided practice in a kid-safe environment.",
           freeAccess: "Fully usable free; account only for posting comments.",
           ageCheck: "Designed for kids; great for 11–12 ESL/EFL (some tasks may feel easy for strong writers)."
-        },
-        level: "A2–B1"
+        }
       },
       {
         age: AGE,
@@ -1251,7 +1275,8 @@
         link: "",
         format: "other",
         isBestSet: true,
-        description: "Weekly plan (25–35 min/session): model writing + prompt drafting + sentence accuracy + planning tools + revision.",
+        description:
+          "Weekly plan (25–35 min/session): model writing + prompt drafting + sentence accuracy + planning tools + revision.",
         time: "25–35 min/session",
         focus: "model → draft → revise",
         bundleItems: [
@@ -1280,6 +1305,418 @@
           whyTopPick: "Balanced mix of models, creativity, structure, and revision in a simple weekly rhythm.",
           freeAccess: "Uses free resources; some tools require a free account.",
           ageCheck: "Suitable for 11–12 with teacher/parent topic selection and privacy supervision."
+        }
+      },
+
+      // =========================
+      // 11–12 SPEAKING
+      // =========================
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "learnenglishteens-speaking",
+        title: "Speaking (A1–B2) — LearnEnglish Teens (British Council) 🎬✅",
+        link: "https://learnenglishteens.britishcouncil.org/skills/speaking",
+        format: "site",
+        description: "Interactive speaking videos + tasks (levelled).",
+        level: "A1–B2",
+        focus: "real-life speaking",
+        details: {
+          type: "Interactive speaking videos + tasks",
+          teaches: "Real-life speaking (asking, responding, opinions, role-play).",
+          howTo: [
+            "Choose A1/A2/B1 level.",
+            "Watch and repeat key phrases.",
+            "Do the tasks.",
+            "Re-enact the dialogue with a partner."
+          ],
+          whyTopPick: "Strong structured speaking practice with clear levels.",
+          freeAccess: "Fully usable free (account mainly for posting comments).",
+          ageCheck: "Teen-safe overall; suitable for advanced 11–12 (preview topics)."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "americanenglish-everyday-conversations",
+        title: "Everyday Conversations — AmericanEnglish (U.S. State Dept.) 💬📘",
+        link: "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
+        format: "site",
+        description: "Dialogue book for role-play (read + act out).",
+        focus: "dialogue role-play",
+        details: {
+          type: "Dialogue book (read + act out)",
+          teaches: "Practical speaking (introductions, shopping, directions, hobbies, advice).",
+          howTo: [
+            "Pick one dialogue.",
+            "Role-play twice (swap roles).",
+            "Replace details (names/places/prices).",
+            "Perform for another pair."
+          ],
+          whyTopPick: "Built specifically for school-age ESL/EFL conversation.",
+          freeAccess: "Fully free official resource (web + PDF).",
+          ageCheck: "Intended for 6th–7th grade—perfect match for 11–12."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "learnenglishkids-speak-and-spell-speak",
+        title: "Speak and Spell (Speak) — LearnEnglish Kids 🔤🎙️",
+        link: "https://learnenglishkids.britishcouncil.org/speak-spell/speak",
+        format: "site",
+        description: "Pronunciation practice (sounds + stories + games).",
+        focus: "pronunciation",
+        details: {
+          type: "Pronunciation practice (sounds + stories + games)",
+          teaches: "Clear sounds, word pronunciation, confidence speaking aloud.",
+          howTo: [
+            "Watch a short “Sam & Pam” story.",
+            "Repeat target sounds/words.",
+            "Play a speaking game.",
+            "Use 5 words in your own sentences."
+          ],
+          whyTopPick: "Safe, guided pronunciation practice that actually gets kids talking.",
+          freeAccess: "Free access; account optional for comments.",
+          ageCheck: "Slightly younger style, but great for 11–12 pronunciation upgrades."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "learnenglishkids-tongue-twisters",
+        title: "Tongue twisters — LearnEnglish Kids 😄🗣️",
+        link: "https://learnenglishkids.britishcouncil.org/fun-games/tongue-twisters",
+        format: "site",
+        description: "Pronunciation speaking game (fluency + tricky sounds).",
+        focus: "fluency + sounds",
+        details: {
+          type: "Pronunciation speaking game",
+          teaches: "Fluency + tricky sounds (TH/R/L blends, etc.).",
+          howTo: [
+            "Listen once.",
+            "Say slowly 3 times.",
+            "Speed up (timer challenge).",
+            "Record best attempt."
+          ],
+          whyTopPick: "High repetition without boredom; very classroom-friendly.",
+          freeAccess: "Fully free web practice.",
+          ageCheck: "Safe and ideal for 11–12."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "learnenglish-a1-speaking",
+        title: "Speaking (A1) — LearnEnglish (British Council) 🧩🎥",
+        link: "https://learnenglish.britishcouncil.org/skills/speaking/a1-speaking",
+        format: "site",
+        description: "Speaking lessons with preparation + repeat practice.",
+        level: "A1",
+        focus: "useful phrases",
+        details: {
+          type: "Speaking lessons with preparation + repeat practice",
+          teaches: "Useful phrases for common situations (beginner speaking).",
+          howTo: [
+            "Do the preparation task.",
+            "Watch and repeat phrases.",
+            "Complete the tasks.",
+            "Act it out with a partner."
+          ],
+          whyTopPick: "Clear “repeat + use” structure for real speaking.",
+          freeAccess: "Free website access (no paid gate observed).",
+          ageCheck: "Suitable for 11–12 beginners with guidance."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "iteslj-conversation-questions",
+        title: "Conversation Questions — The Internet TESL Journal (ITESLJ) ❓🗣️",
+        link: "https://iteslj.org/questions/",
+        format: "site",
+        description: "Conversation question lists (many topics).",
+        focus: "extended answers",
+        details: {
+          type: "Conversation question lists (many topics)",
+          teaches: "Extended answers, follow-up questions, speaking stamina.",
+          howTo: [
+            "Teacher selects a kid-safe topic page.",
+            "Pair students and assign 6 questions.",
+            "2 minutes per question (must ask “Why?”).",
+            "Share best answer to class."
+          ],
+          whyTopPick: "Massive bank of ready speaking prompts.",
+          freeAccess: "Fully free web pages.",
+          ageCheck: "Mixed topics (some adult). Adult must pre-select safe pages."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "englishclub-small-talk-starters",
+        title: "Small Talk: Conversation Starters — EnglishClub 💬🗣️",
+        link: "https://www.englishclub.com/speaking/small-talk_conversation-starters.php",
+        format: "site",
+        description: "Conversation starter lists for practical speaking openers.",
+        focus: "conversation openers",
+        details: {
+          type: "Conversation starter lists",
+          teaches: "Natural speaking openers + follow-up questions.",
+          howTo: [
+            "Choose a situation (school / events / waiting).",
+            "Practice 5 starters in pairs.",
+            "Add 2 follow-up questions each.",
+            "Role-play for 60 seconds."
+          ],
+          whyTopPick: "Simple, practical, zero prep.",
+          freeAccess: "Fully free page access.",
+          ageCheck: "Some contexts skew adult; choose school-appropriate situations."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "englishclub-talking-point-worksheets",
+        title: "Talking Point Conversation Worksheets — EnglishClub 📝💬",
+        link: "https://www.englishclub.com/esl-worksheets/conversation/",
+        format: "site",
+        description: "Printable conversation worksheets + teacher notes.",
+        focus: "structured discussion",
+        details: {
+          type: "Printable conversation worksheets + teacher notes",
+          teaches: "Fluency speaking with structured questions + vocab support.",
+          howTo: [
+            "Print a worksheet (pick a kid-safe theme).",
+            "Pre-teach 6 key words.",
+            "Students discuss in pairs/groups.",
+            "Each group shares 1 conclusion."
+          ],
+          whyTopPick: "Printable speaking lessons that run themselves.",
+          freeAccess: "Free PDF worksheet access on-site.",
+          ageCheck: "Some worksheet topics skew older; teacher selects suitable ones."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "teachingenglish-kids-and-speaking",
+        title: "Kids and speaking — TeachingEnglish (British Council) 🧠🎤",
+        link: "https://www.teachingenglish.org.uk/professional-development/teachers/knowing-subject/kids-and-speaking",
+        format: "site",
+        description: "Teacher guide with speaking activity ideas.",
+        focus: "pair/group speaking",
+        details: {
+          type: "Teacher guide with speaking activity ideas",
+          teaches: "How to run pair/group speaking so kids talk more.",
+          howTo: [
+            "Pick 1 idea (pairwork / small groups / circle games).",
+            "Set sentence frames on the board.",
+            "Run timed speaking rotations.",
+            "Quick feedback + retry."
+          ],
+          whyTopPick: "Practical speaking structure for kids (works well for 11–12).",
+          freeAccess: "Free access to the article.",
+          ageCheck: "Designed for children; adult-led classroom/home use."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "games4esl-esl-classroom-games",
+        title: "ESL Classroom Games — Games4esl 🧒🗣️",
+        link: "https://games4esl.com/esl-classroom-games/",
+        format: "site",
+        description: "Speaking games list (no-prep).",
+        focus: "speaking games",
+        details: {
+          type: "Speaking games list (no-prep)",
+          teaches: "Speaking speed, question/answer patterns, confidence.",
+          howTo: [
+            "Choose a game (e.g., categories, miming, “find someone who…”).",
+            "Give 2–3 sentence starters.",
+            "Play 8–12 minutes.",
+            "Exit ticket: 3 new sentences."
+          ],
+          whyTopPick: "Huge free bank of speaking-friendly games.",
+          freeAccess: "Site states resources are free.",
+          ageCheck: "Kid-focused; excellent for 11–12."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "games4esl-printables",
+        title: "Free Printables (Flashcards/Board Games) — Games4esl 🖨️🎤",
+        link: "https://games4esl.com/printables/",
+        format: "site",
+        description: "Printables for pairwork speaking (cards, boards).",
+        focus: "controlled → freer speaking",
+        details: {
+          type: "Printables for pairwork speaking (cards, boards)",
+          teaches: "Controlled speaking (sentence frames) → freer speaking.",
+          howTo: [
+            "Print topic cards (food/jobs/etc.).",
+            "Students ask/answer using a frame (“I like… because…”).",
+            "Add a simple board game for repeated speaking.",
+            "Mini-presentations (30 seconds)."
+          ],
+          whyTopPick: "Easy materials for structured speaking practice.",
+          freeAccess: "Free printable downloads (site claims free resources).",
+          ageCheck: "Very suitable for 11–12 (choose age-appropriate topics)."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "baamboozle-speaking-games",
+        title: "Baamboozle — Speaking Games 🧑‍🏫🗣️",
+        link: "https://www.baamboozle.com/games",
+        format: "site",
+        description: "Whole-class speaking games (single screen).",
+        focus: "team speaking",
+        details: {
+          type: "Whole-class speaking games (single screen)",
+          teaches: "Quick speaking prompts, sentence building, fluency under time.",
+          howTo: [
+            "Search “speaking” and open a game.",
+            "Teams take turns answering prompts.",
+            "Require a follow-up sentence (“Tell me more…”).",
+            "Teacher corrects 1–2 key errors only."
+          ],
+          whyTopPick: "High engagement; minimal setup.",
+          freeAccess: "Platform promotes classroom games “for free” (account optional).",
+          ageCheck: "User-generated prompts—teacher must preview for 11–12 safety."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "wheel-of-names",
+        title: "Wheel of Names — Random Speaking Prompt Picker 🎡🗣️",
+        link: "https://wheelofnames.com/",
+        format: "site",
+        description: "Random spinner tool for prompts/roles.",
+        focus: "prompt rotation",
+        details: {
+          type: "Random spinner tool (for prompts/roles)",
+          teaches: "Turn-taking, spontaneous speaking, fairness in selection.",
+          howTo: [
+            "Paste speaking prompts (20–40).",
+            "Spin and student speaks for 30–60 seconds.",
+            "Class asks 1 follow-up question.",
+            "Repeat with new spinner result."
+          ],
+          whyTopPick: "Instantly turns any prompt list into a speaking game.",
+          freeAccess: "Free to use on-site.",
+          ageCheck: "Safe—content depends on the prompts you enter."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "vocaroo",
+        title: "Vocaroo — Online Voice Recorder 🎙️",
+        link: "https://vocaroo.com/",
+        format: "site",
+        description: "Recording tool for speaking homework (listen and improve).",
+        focus: "self-monitoring",
+        details: {
+          type: "Recording tool (speaking homework)",
+          teaches: "Speaking fluency + self-monitoring (listen and improve).",
+          howTo: [
+            "Record 30–60 seconds on a prompt.",
+            "Listen back and re-record once.",
+            "Submit the share link (teacher/parent).",
+            "Note 2 improvements for next time."
+          ],
+          whyTopPick: "Fast recording with no complicated setup.",
+          freeAccess: "Free web tool (no paywall observed).",
+          ageCheck: "OK for 11–12 with adult supervision (sharing links = privacy)."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "sounds-right-phonemic-chart",
+        title: "LearnEnglish Sounds Right — British Council Pronunciation Chart 🔤👄",
+        link: "https://learnenglish.britishcouncil.org/apps/learnenglish-sounds-right",
+        format: "site",
+        description: "Interactive phonemic chart (pronunciation support).",
+        focus: "phonemic support",
+        details: {
+          type: "Interactive phonemic chart (pronunciation support)",
+          teaches: "English sounds + clearer speaking accuracy.",
+          howTo: [
+            "Tap a sound and hear it.",
+            "Repeat the sample word 5 times.",
+            "Add 3 words with that sound.",
+            "Use those words in a short sentence."
+          ],
+          whyTopPick: "Clear, systematic pronunciation support.",
+          freeAccess: "Listed as a free pronunciation chart.",
+          ageCheck: "Suitable for 11–12 (adult-guided recommended)."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "cambridge-pronunciation-hub",
+        title: "Cambridge Dictionary Pronunciation Hub 📘🎧",
+        link: "https://dictionary.cambridge.org/pronunciation/",
+        format: "site",
+        description: "Word pronunciation audio + phonetics (UK/US).",
+        focus: "word pronunciation",
+        details: {
+          type: "Word pronunciation audio + phonetics",
+          teaches: "Accurate word pronunciation for speaking practice.",
+          howTo: [
+            "Look up 10 words from class.",
+            "Listen to UK/US audio.",
+            "Repeat and record yourself.",
+            "Use each word in a sentence."
+          ],
+          whyTopPick: "Instant pronunciation checking for any vocabulary set.",
+          freeAccess: "Free web access (dictionary pages usable without subscription).",
+          ageCheck: "Safe; supervise web browsing/ads as needed."
+        }
+      },
+      {
+        age: AGE,
+        skill: "speaking",
+        slug: "best-set-mini-pack-11-12-speaking",
+        title: "Best “Set” (11–12 Speaking mini-pack) 🎒🎤",
+        link: "",
+        format: "other",
+        isBestSet: true,
+        description: "Weekly routine (about 20 minutes/day): role-play, levelled video speaking, prompt discussion, pronunciation practice, and a speaking game.",
+        time: "~20 min/day",
+        focus: "daily speaking routine",
+        bundleItems: [
+          "americanenglish-everyday-conversations",
+          "learnenglishteens-speaking",
+          "iteslj-conversation-questions",
+          "learnenglishkids-tongue-twisters",
+          "sounds-right-phonemic-chart",
+          "baamboozle-speaking-games",
+          "vocaroo",
+          "wheel-of-names"
+        ],
+        details: {
+          type: "Weekly mini-pack",
+          teaches: "Fluency + confidence through repeated speaking, better pronunciation, and longer answers with follow-up questions.",
+          howTo: [
+            "Mon: Everyday Conversations — 1 dialogue role-play + swap roles.",
+            "Tue: LearnEnglish Teens Speaking — 1 interactive video + act it out.",
+            "Wed: ITESLJ Questions — teacher-chosen safe topic, 6 questions in pairs (must ask “Why?”).",
+            "Thu: Tongue Twisters + Sounds Right — pronunciation focus (10 min + 10 min).",
+            "Fri: Baamboozle Speaking Game — team speaking + follow-up questions (“Tell me more…”).",
+            "Weekend (optional): Vocaroo — 60-second speaking recording + 1 re-record.",
+            "Add-on tool: Wheel of Names to rotate prompts fairly."
+          ],
+          whyTopPick: "Easy weekly rhythm that mixes structured dialogue, open conversation, pronunciation, and games.",
+          freeAccess: "Uses free resources; some platforms may require an optional account.",
+          ageCheck: "Suitable for 11–12 with teacher/parent topic selection and preview (especially user-generated games)."
         }
       }
     ]
