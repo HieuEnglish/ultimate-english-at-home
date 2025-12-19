@@ -51,6 +51,25 @@
           "🧰 TED-Ed lessons (video listening + ideas) 🎬🧠",
           "🧰 BBC Learning English (6 Minute English + Learning English from the News) ⏲️📰🎧"
         ]
+      },
+
+      "13-18/writing": {
+        title: "13–18 Writing 🧑‍🎓✍️",
+        overview:
+          "✍️ A teen writing practice pack focused on building clear, organized paragraphs and essays (argument/expository) while improving grammar, style, and self-editing. Activities use short models + planning tools + revision loops so students can write better drafts for school and exams. 🧠🧱🔁✅",
+        objectives: [
+          "🎯 Write clear paragraphs with a topic sentence, support, and conclusion 🧱✅",
+          "🎯 Plan and structure short essays (intro → body → conclusion) 🗺️📝",
+          "🎯 Use stronger academic/functional phrases (linking, comparing, concluding) 🧾📈",
+          "🎯 Improve accuracy (sentence structure, punctuation, verb tense) ✅✍️",
+          "🎯 Revise drafts using feedback tools and checklists 🔁🧰✅",
+          "🎯 Build confidence and speed through regular short writing practice 💪⏱️✍️"
+        ],
+        materials: [
+          "📱💻🌐 Device + internet (phone/tablet/laptop)",
+          "📝📄 Writing notebook or Google Doc / Word doc",
+          "🖨️📑 Optional: printer for planners/checklists"
+        ]
       }
     },
 
@@ -807,8 +826,7 @@
         slug: "bbc-learning-english-6-minute-english-youtube",
         title: "📺 BBC Learning English — 6 Minute English (YouTube) ⏲️",
         description: "Short discussion episodes + vocab 🎙️",
-        link:
-          "https://www.youtube.com/playlist?list=PLcetZ6gSk96-FECmH9l7Vlx5VDigvgZpt",
+        link: "https://www.youtube.com/playlist?list=PLcetZ6gSk96-FECmH9l7Vlx5VDigvgZpt",
         format: "video",
         focus: "topic vocab, opinions/arguments listening",
         details: {
@@ -831,8 +849,7 @@
         slug: "bbc-learning-english-from-the-news-youtube",
         title: "📰 BBC Learning English — Learning English from the News (YouTube) 🎧",
         description: "News-based listening + key vocabulary 🗞️",
-        link:
-          "https://www.youtube.com/playlist?list=PLcetZ6gSk96-8vlsfui2jrM0CAJ4MfrMT",
+        link: "https://www.youtube.com/playlist?list=PLcetZ6gSk96-8vlsfui2jrM0CAJ4MfrMT",
         format: "video",
         focus: "news language, headline vocabulary",
         details: {
@@ -911,6 +928,479 @@
           "ted-ed-lessons",
           "news-in-levels-reading-and-listening",
           "listen-a-minute-60-second-listenings"
+        ]
+      },
+
+      // =========================
+      // 13–18 WRITING 🧑‍🎓✍️
+      // =========================
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "learnenglishteens-writing",
+        title: "BRITISH COUNCIL — LearnEnglish Teens: Writing ✍️🧑‍🎓",
+        description: "Writing lessons + interactive exercises 🖥️",
+        link: "https://learnenglishteens.britishcouncil.org/skills/writing",
+        format: "site",
+        level: "A1–B2",
+        focus: "model texts, school/exam writing",
+        details: {
+          type: "Writing lessons + interactive exercises 🖥️🧩",
+          teaches: "Levelled model texts (A1–B2) + tips for common school/exam writing ✍️🧠",
+          howTo: [
+            "1️⃣ Choose your level ➡️ pick a lesson 📚",
+            "2️⃣ Read the model text 👀 then do the tasks ✅",
+            "3️⃣ Copy 3–5 useful phrases 🧾 and reuse them in your own paragraph ✍️"
+          ],
+          whyTopPick: "Teen-focused, level-banded writing with clear models 🧑‍🎓⭐",
+          freeAccess: "Fully free pages; account only needed to post comments 🆓🔓",
+          ageCheck: "Built for teens; topics are generally teen-safe (preview if needed) 🎯🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "write-and-improve-free",
+        title: "CAMBRIDGE — Write & Improve (Free) ✍️⚡",
+        description: "Auto-feedback writing practice tool 🤖",
+        link: "https://writeandimprove.com/free",
+        format: "site",
+        focus: "draft → feedback → revise loops",
+        details: {
+          type: "Auto-feedback writing practice tool 🤖🛠️",
+          teaches: "Draft → feedback → revise loops + CEFR-linked scoring ✍️✅",
+          howTo: [
+            "1️⃣ Pick a task (or create your own) 🗂️",
+            "2️⃣ Write and submit ✍️📤",
+            "3️⃣ Revise using feedback 🔁 then resubmit ✅"
+          ],
+          whyTopPick: "Fast feedback makes writing practice consistent 🎯⭐",
+          freeAccess: "Free tool + free tasks available (optional advanced test zones exist) 🆓🔓",
+          ageCheck: "Great for 13–18; don’t submit sensitive personal info 🔐✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "quill-interactive-writing-and-grammar",
+        title: "QUILL — Interactive Writing & Grammar 🧠✍️",
+        description: "Sentence/paragraph writing + feedback activities 🖥️",
+        link: "https://www.quill.org/",
+        format: "site",
+        focus: "grammar-in-writing, sentence combining, proofreading",
+        details: {
+          type: "Sentence/paragraph writing + feedback activities 🖥️🧩",
+          teaches: "Grammar-in-writing, sentence combining, proofreading, structured writing practice 🧾✅",
+          howTo: [
+            "1️⃣ Create a free teacher/student account 👤🆓",
+            "2️⃣ Assign a skill set (e.g., transitions, complex sentences) 🧩🎯",
+            "3️⃣ Students write responses and get instant feedback ✅⚡"
+          ],
+          whyTopPick: "Strong for building accuracy and clearer sentences 📈⭐",
+          freeAccess: "“Free forever” sign-up; optional district services exist 🆓🔓",
+          ageCheck: "Designed for middle/high school; teacher control keeps it safe 🛡️✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "commonlit-360-writing-lessons",
+        title: "COMMONLIT 360 — Writing Lessons (Grades 6–12) 📚✍️",
+        description: "Full ELA curriculum with writing lessons 🧑‍🏫",
+        link: "https://www.commonlit.org/ela-curriculum",
+        format: "site",
+        focus: "argument, analysis, evidence-based writing",
+        details: {
+          type: "Full ELA curriculum with writing lessons 🧑‍🏫🧩",
+          teaches: "Argument, analysis, evidence-based writing, structured prompts + scaffolds 🧾✅",
+          howTo: [
+            "1️⃣ Teacher creates a free educator account 👤🆓",
+            "2️⃣ Choose a unit/lesson with a Writing Lesson 🗂️📝",
+            "3️⃣ Assign to students (students can join without email) ✅📌"
+          ],
+          whyTopPick: "Complete, classroom-ready writing lessons with scaffolding 🧰⭐",
+          freeAccess: "Stated as 100% free for teachers/students (core access) 🆓🔓",
+          ageCheck: "Grades 6–12; preview texts for sensitive themes (you choose the content) ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "purdue-owl-grades-7-12-writing-resources",
+        title: "PURDUE OWL — Grades 7–12 Writing Resources 🦉✍️",
+        description: "Writing guides + skill pages 🧠",
+        link:
+          "https://owl.purdue.edu/owl/resources/writing_instructors/grades_7_12_instructors_and_students/index.html",
+        format: "site",
+        focus: "structure, process, research, prewriting",
+        details: {
+          type: "Writing guides + skill pages 📘🧠",
+          teaches: "Prewriting, research writing, creative writing invention, structure and process 🧩✅",
+          howTo: [
+            "1️⃣ Pick a skill (thesis, prewriting, research) 🎯",
+            "2️⃣ Read the tips 📖",
+            "3️⃣ Apply to an assignment: write 1 improved paragraph ✍️✅"
+          ],
+          whyTopPick: "Clear, reliable skill explanations for school writing 🧑‍🎓⭐",
+          freeAccess: "Fully free webpages 🌐🆓",
+          ageCheck: "Appropriate for teens; best with teacher-selected pages 📌✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "readwritethink-essay-map",
+        title: "READWRITETHINK — Essay Map 🗺️✍️",
+        description: "Graphic organizer (interactive) 🖥️",
+        link: "https://www.readwritethink.org/classroom-resources/student-interactives/essay",
+        format: "site",
+        focus: "essay structure: intro → body → conclusion",
+        details: {
+          type: "Graphic organizer (interactive) 🖥️🧩",
+          teaches: "Intro → main ideas → supporting details → conclusion structure 🧱✅",
+          howTo: [
+            "1️⃣ Enter topic + stance/goal 🎯",
+            "2️⃣ Add 3 main points + supports 🧾📌",
+            "3️⃣ Export/print and draft your essay from it 🖨️✍️"
+          ],
+          whyTopPick: "Makes essay structure obvious and repeatable 🔁⭐",
+          freeAccess: "Free interactive tool 🌐🆓",
+          ageCheck: "Works well for 13–18 essays (argument/expository) 🧑‍🎓✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "readwritethink-persuasion-map",
+        title: "READWRITETHINK — Persuasion Map 🗺️🗣️",
+        description: "Persuasive/argument planner 🖥️",
+        link: "https://www.readwritethink.org/classroom-resources/student-interactives/persuasion",
+        format: "site",
+        focus: "argument writing: claim → reasons → evidence",
+        details: {
+          type: "Persuasive/argument planner 🖥️🧩",
+          teaches: "Claim + 3 reasons + evidence + conclusion restatement 🧾✅",
+          howTo: [
+            "1️⃣ Write your claim (thesis) 🎯",
+            "2️⃣ Add reasons + facts/examples 📌",
+            "3️⃣ Turn each reason into a body paragraph ✍️🧱"
+          ],
+          whyTopPick: "Strong scaffold for argument writing 🧠⭐",
+          freeAccess: "Free interactive tool 🌐🆓",
+          ageCheck: "Great for debates/op-eds; teacher picks topics to avoid sensitive issues ⚠️📌"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "readwritethink-notetaker-outline-tool",
+        title: "READWRITETHINK — Notetaker (Outline Tool) 🗂️📝",
+        description: "Outlining + note organisation tool 🧠",
+        link:
+          "https://www.readwritethink.org/classroom-resources/student-interactives/readwritethink-notetaker",
+        format: "site",
+        focus: "planning, grouping ideas, outlining",
+        details: {
+          type: "Outlining + note organisation tool 🧠🧩",
+          teaches: "Planning, grouping ideas, turning notes into an outline 📑✅",
+          howTo: [
+            "1️⃣ Add headings (intro/body points) 🧱",
+            "2️⃣ Paste notes/evidence under each heading 📌",
+            "3️⃣ Use the outline to draft faster ✍️⚡"
+          ],
+          whyTopPick: "Helps teens write longer, clearer, more organised pieces 🧭⭐",
+          freeAccess: "Free web tool 🌐🆓",
+          ageCheck: "Suitable for 13–18 research and essays 📚✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "readwritethink-printing-press",
+        title: "READWRITETHINK — Printing Press (Publish Writing) 📰✍️",
+        description: "Publishing templates (newspapers/brochures/flyers) 🖥️",
+        link: "https://www.readwritethink.org/classroom-resources/student-interactives/printing-press",
+        format: "site",
+        focus: "real-world writing formats, audience clarity",
+        details: {
+          type: "Publishing templates (newspapers/brochures/flyers) 🖥️🧩",
+          teaches: "Real-world writing formats + audience-focused clarity 🎯✅",
+          howTo: [
+            "1️⃣ Choose a template (news/brochure/flyer) 🗂️",
+            "2️⃣ Draft text with headings + short paragraphs 🧱✍️",
+            "3️⃣ Export/print and present to class 🖨️🎤"
+          ],
+          whyTopPick: "Motivating “real product” writing with structure built in 🧰⭐",
+          freeAccess: "Free interactive tool 🌐🆓",
+          ageCheck: "Teen-safe; teacher chooses topics and publishing rules 🛡️✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "manchester-academic-phrasebank",
+        title: "UNIVERSITY OF MANCHESTER — Academic Phrasebank 🧾🎓",
+        description: "Phrase bank + academic writing functions 🧠",
+        link: "https://www.phrasebank.manchester.ac.uk/",
+        format: "site",
+        focus: "academic sentence starters, style",
+        details: {
+          type: "Phrase bank + academic writing functions 📘🧠",
+          teaches: "Useful academic sentence starters (introducing, comparing, concluding, hedging) ✍️✅",
+          howTo: [
+            "1️⃣ Pick the section you’re writing (intro/method/conclusion) 🧭",
+            "2️⃣ Choose 3–5 phrases that fit your meaning 🧩",
+            "3️⃣ Adapt (don’t copy whole sentences) ✍️✅"
+          ],
+          whyTopPick: "Boosts academic style for older teens quickly 📈⭐",
+          freeAccess: "Fully free website 🌐🆓",
+          ageCheck: "Best for 15–18 (more academic); coach against copy-paste plagiarism ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "uefap-academic-writing-eap",
+        title: "UEFAP — Academic Writing (EAP) 🎓✍️",
+        description: "Academic writing guides + exercises 🧠",
+        link: "https://www.uefap.org/writing/",
+        format: "site",
+        focus: "paragraphing, referencing, plagiarism awareness",
+        details: {
+          type: "Academic writing guides + exercises 📘🧠",
+          teaches: "Paragraphing, plagiarism awareness, citing, academic genres 🧾✅",
+          howTo: [
+            "1️⃣ Choose a topic (paragraphs / referencing) 🎯",
+            "2️⃣ Read guidance 📖",
+            "3️⃣ Do 1 exercise + apply it to your current draft ✍️✅"
+          ],
+          whyTopPick: "Practical academic writing support in one place 🧰⭐",
+          freeAccess: "Free site 🌐🆓",
+          ageCheck: "Best for exam/academic tracks; teacher guidance recommended 🧑‍🏫✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "eap-foundation-academic-style",
+        title: "EAP FOUNDATION — Academic Style + Exercises 🧠📘",
+        description: "Explanations + checklists + practice exercises 📝",
+        link: "https://eapfoundation.com/writing/style/",
+        format: "site",
+        focus: "formal tone, clarity, academic style",
+        details: {
+          type: "Explanations + checklists + practice exercises 📝📘",
+          teaches: "Formal tone, clarity, academic style rules + practice tasks ✅🧠",
+          howTo: [
+            "1️⃣ Read the 10 style rules 📋",
+            "2️⃣ Use the checklist on a student draft ✅📝",
+            "3️⃣ Rewrite 5 sentences to sound more academic ✍️📈"
+          ],
+          whyTopPick: "Simple rules + immediate practice = quick improvement ⚡⭐",
+          freeAccess: "Free pages/exercises 🌐🆓",
+          ageCheck: "Good for 14–18 academic writing; keep tasks short to avoid overload 🧩✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "lumen-learning-intro-to-college-composition",
+        title: "LUMEN LEARNING (OER) — Introduction to College Composition 🧱✍️",
+        description: "Free open textbook/course modules 🧠",
+        link: "https://courses.lumenlearning.com/suny-introtocollegecomp/",
+        format: "site",
+        focus: "full writing process, essay structures",
+        details: {
+          type: "Free open textbook/course modules 📚🧠",
+          teaches: "Full writing process (prewrite → draft → revise → proofread) + essay structures 🧾✅",
+          howTo: [
+            "1️⃣ Pick one module (thesis, organizing, revising) 🎯",
+            "2️⃣ Do the “self check” questions ✅",
+            "3️⃣ Apply to a real assignment paragraph ✍️✅"
+          ],
+          whyTopPick: "Deep, structured content for serious skill-building 📈⭐",
+          freeAccess: "Open-access OER webpages 🌐🆓",
+          ageCheck: "Best for older teens (15–18) / advanced classes; teacher selects sections 📌✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "write-the-world-teen-community",
+        title: "WRITE THE WORLD — Teen Writing Community (13–19) 🌍✍️",
+        description: "Writing community + prompts/competitions 🏆",
+        link: "https://writetheworld.org/",
+        format: "site",
+        focus: "creative writing, peer feedback, revision",
+        details: {
+          type: "Community + prompts/competitions 🧑‍🤝‍🧑🏆",
+          teaches: "Creative writing practice, peer feedback, revision habits 🔁✅",
+          howTo: [
+            "1️⃣ Create a teen account 👤",
+            "2️⃣ Choose a prompt/competition 🧩",
+            "3️⃣ Draft → get feedback → revise and repost ✍️🔁✅"
+          ],
+          whyTopPick: "High motivation + authentic audience for teen writers 🎯⭐",
+          freeAccess: "Free community access; optional extras may exist 🆓🔓",
+          ageCheck: "13–19; set safety rules (no personal details, teacher moderation if used in class) 🛡️🔐"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "young-writers-project-teen-community",
+        title: "YOUNG WRITERS PROJECT — Teen Community (13–19) 🧑‍🎨✍️",
+        description: "Community publishing + prompts + mentoring vibe 📰",
+        link: "https://youngwritersproject.org/",
+        format: "site",
+        focus: "writing fluency, voice, publishing confidence",
+        details: {
+          type: "Community publishing + prompts 🧑‍🤝‍🧑📰",
+          teaches: "Writing fluency, voice, sharing work, creative confidence 🌱✅",
+          howTo: [
+            "1️⃣ Sign up for a free account 👤🆓",
+            "2️⃣ Respond to a prompt or post your own piece 🧾✍️",
+            "3️⃣ Read/comment thoughtfully on others (class rules apply) 💬✅"
+          ],
+          whyTopPick: "Supportive teen publishing space + regular inspiration 🧠⭐",
+          freeAccess: "Free to join and use 🆓🔓",
+          ageCheck: "13–19; use school-safe guidelines and privacy reminders 🔐🛡️"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "khan-academy-sat-reading-and-writing",
+        title: "KHAN ACADEMY — SAT Reading & Writing Practice 🧠📚",
+        description: "Skill practice (grammar + rhetoric) 🖥️",
+        link: "https://www.khanacademy.org/test-prep/sat-reading-and-writing",
+        format: "site",
+        focus: "editing skills: punctuation, transitions, concision",
+        details: {
+          type: "Skill practice (grammar + rhetoric) 🖥️🧩",
+          teaches: "Concision, transitions, sentence boundaries, rhetorical effectiveness ✍️✅",
+          howTo: [
+            "1️⃣ Pick a skill set (punctuation, transitions, etc.) 🎯",
+            "2️⃣ Do 10–15 practice questions ✅⏱️",
+            "3️⃣ Transfer the rule into 5 edited sentences from your own writing ✍️🔁"
+          ],
+          whyTopPick: "Strong for accuracy and editing skills teens need for exams 🧪⭐",
+          freeAccess: "Free practice access (account optional but helpful) 🆓🔓",
+          ageCheck: "Ideal for 14–18; exam-focused rather than creative writing 🎓✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "languagetool-free-grammar-checker",
+        title: "LANGUAGETOOL — Free Grammar Checker 🧠✅",
+        description: "Grammar/spelling/punctuation checker ✍️",
+        link: "https://languagetool.org/",
+        format: "site",
+        focus: "self-editing habits, error patterns",
+        details: {
+          type: "Grammar/spelling/punctuation checker 🛠️✍️",
+          teaches: "Self-editing habits (spot errors, fix patterns) 🔁✅",
+          howTo: [
+            "1️⃣ Paste a paragraph into the editor 📋",
+            "2️⃣ Fix only 3 error types at a time (articles/verb tense/commas) 🎯",
+            "3️⃣ Keep an “Error Log” list to track repeat mistakes 📝📌"
+          ],
+          whyTopPick: "Fast feedback for polishing final drafts ⚡⭐",
+          freeAccess: "Free version available; premium shows more suggestions 🆓🔓",
+          ageCheck: "Suitable for teens; don’t paste private info 🔐✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "hemingway-readability-checker",
+        title: "HEMINGWAY — Free Readability Checker 📏✍️",
+        description: "Readability + clarity checker 🧠",
+        link: "https://hemingwayapp.com/readability-checker",
+        format: "site",
+        focus: "clearer sentences, simpler wording",
+        details: {
+          type: "Readability + clarity checker 🛠️🧠",
+          teaches: "Shorter sentences, clearer wording, fewer “hard-to-read” parts ✨✅",
+          howTo: [
+            "1️⃣ Paste your draft 📋",
+            "2️⃣ Identify 3 “hard sentences” and split them ✂️✅",
+            "3️⃣ Replace 5 complex words with simpler synonyms 🧾🔁"
+          ],
+          whyTopPick: "Makes teen writing clearer and easier to read fast ⚡⭐",
+          freeAccess: "Readability checker is free online 🌐🆓",
+          ageCheck: "Teen-appropriate; use for editing, not for “writing it for them” ✅✍️"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "evansville-thesis-statement-handout-pdf",
+        title: "UNIVERSITY OF EVANSVILLE — Thesis Statement Handout 🎯📄",
+        description: "1-page PDF guide 🧠 (thesis rules + examples) ✍️",
+        link: "https://www.evansville.edu/writingcenter/downloads/thesis.pdf",
+        format: "pdf",
+        focus: "thesis statements, essay clarity",
+        details: {
+          type: "1-page PDF guide 🧠📄",
+          teaches: "What a thesis is + do/don’t rules + examples ✍️✅",
+          howTo: [
+            "1️⃣ Read the definition + examples 👀",
+            "2️⃣ Students write 3 thesis options for the same topic ✍️✍️✍️",
+            "3️⃣ Choose the best one and outline 3 supports 🧾📌"
+          ],
+          whyTopPick: "Quick, printable, and directly improves essays 🧰⭐",
+          freeAccess: "Free PDF download 🌐🆓",
+          ageCheck: "Perfect for 13–18 essay classes; teacher checks topic quality 🎯✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "best-set-bundle-13-18-writing",
+        title: "Best “Set” Bundle 🎒✅ (13–18 Writing) 🧩📅",
+        description: "3 writing sessions/week + 2 short editing sessions/week (30–45 min) ⏱️✍️",
+        link: "",
+        format: "other",
+        focus: "paragraphs, essays, revision loops, accuracy",
+        notes:
+          "Goal: 3 writing sessions/week + 2 short editing sessions/week. Use models + planning + revision tools + optional safe publishing.",
+        details: {
+          type: "Weekly flow 🗓️🪜 + bundle picks 🎒✅",
+          teaches:
+            "Clear paragraphs + essay structure + revision habits using models, planners, and feedback tools 🧠🧱🔁✅",
+          howTo: [
+            "Goal 🎯: 3 writing sessions/week + 2 short editing sessions/week (30–45 min each) ⏱️",
+            "1️⃣ LearnEnglish Teens Writing 🧑‍🎓✍️ (models + phrases) 📚",
+            "2️⃣ Write & Improve ⚡✍️ (draft → feedback → revise) 🔁",
+            "3️⃣ ReadWriteThink Essay Map 🗺️🧱 (plan before you write) ✅",
+            "4️⃣ Quill ✅🧠 (sentence-level accuracy) 🎯",
+            "5️⃣ Purdue OWL 🦉📘 (one micro-skill/week) 📌",
+            "6️⃣ LanguageTool 🛠️✅ (final polish) ✨",
+            "7️⃣ One publishing option 📰🌍: Write the World or Young Writers Project (safety rules) 🛡️🔐",
+            "Weekly flow 🗓️🪜:",
+            "• Day 1 🧩: LearnEnglish Teens lesson → copy useful phrases → short paragraph draft ✍️",
+            "• Day 2 ⚡: Put the draft into Write & Improve → revise → resubmit 🔁✅",
+            "• Day 3 🗺️: Plan an essay with Essay Map → write 1 body paragraph 🧱✍️",
+            "• Day 4 ✅ (10–15 min): Quill practice on one error pattern (commas/transitions) 🎯⏱️",
+            "• Day 5 🛠️ (10–15 min): LanguageTool + quick OWL check → final edit ✅✨",
+            "• Weekend 📰 (optional): Post a polished piece to Write the World/YWP (class safety rules) 🛡️"
+          ],
+          whyTopPick: "Balanced: models + planning + feedback + light publishing motivation 🎯⭐",
+          freeAccess: "Uses free-access tools listed above (some optional accounts / premium extras may exist) 🆓🔓",
+          ageCheck: "Teen-focused; use privacy rules for any online publishing or pasted drafts 🔐✅"
+        },
+        isBestSet: true,
+        bundleItems: [
+          "learnenglishteens-writing",
+          "write-and-improve-free",
+          "readwritethink-essay-map",
+          "quill-interactive-writing-and-grammar",
+          "purdue-owl-grades-7-12-writing-resources",
+          "languagetool-free-grammar-checker",
+          "write-the-world-teen-community",
+          "young-writers-project-teen-community"
         ]
       }
     ]
