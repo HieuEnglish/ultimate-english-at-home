@@ -70,6 +70,24 @@
           "📝📄 Writing notebook or Google Doc / Word doc",
           "🖨️📑 Optional: printer for planners/checklists"
         ]
+      },
+
+      "13-18/speaking": {
+        title: "13–18 Speaking 🗣️✨",
+        overview:
+          "🗣️ A curated set of teen-appropriate speaking resources and routines to build real-life communication skills (opinions, advice, everyday situations) plus fluency, pronunciation, and confidence through repeatable practice and short speaking tasks. 🔁🎯🎙️✅",
+        objectives: [
+          "🎯 Improve fluency and longer answers (smoother speaking + better detail). 🗣️📈",
+          "🎯 Build practical speaking for real situations (functional language + common topics). 🛍️🗺️💬",
+          "🎯 Strengthen test-style speaking skills (coherence, structured responses, clear delivery). 🎓✅🧠",
+          "🎯 Develop discussion/debate skills (reasons, counterarguments, polite responses). ⚖️💡🤝",
+          "🎯 Improve pronunciation accuracy with quick daily drills. 🔤🔊⚡"
+        ],
+        materials: [
+          "📱💻🌐 Phone/laptop + internet, headphones, and a microphone (phone mic is fine) 🎧🎙️",
+          "📓 Notebook (new phrases, errors to fix, weekly targets) 📝🎯",
+          "🌐 Core tools/websites: LearnEnglish Teens Speaking, LearnEnglish Speaking, Speak & Improve, Cambridge speaking activities, Kialo Edu, Everyday Conversations, Wheel of Names, Sounds Right phonemic chart 🔁🧠✅"
+        ]
       }
     },
 
@@ -216,7 +234,7 @@
             "4️⃣ 🗣️ 2-minute opinion using 1–2 facts from the text 💬📌"
           ],
           whyTopPick: "“Free lessons in 7 levels” makes differentiation easy. ⭐📈",
-          freeAccess: "Site states it provides free lessons + PDFs/activities. 🆓📄",
+          freeAccess: "Site provides many free lessons + PDFs/activities. 🆓📄",
           ageCheck: "News can be serious; teacher preview recommended. ⚠️🔍"
         }
       },
@@ -521,7 +539,7 @@
             "Tue 🟩: ReadTheory — 10–15 mins adaptive practice + error review 📈🧠",
             "Wed 🟨: Breaking News English — 1 lesson (Level 4–6) + discussion 🗞️💬",
             "Thu 🟧: CommonLit — 1 text + “answer + evidence” responses 🏫📌✅",
-            "Fri 🟥: News in Levels — same routine, focus on fluency + vocab 🌍📰📈",
+            "Fri 🟥: News in Levels — focus on fluency + vocab 🌍📰📈",
             "Weekend 🌈: American Stories (VOA) — story + theme sentence + retell 📖🎧🗣️",
             "Daily add-on (5 mins) 📝: ReadWriteThink Notetaker for summaries ✅🗂️"
           ],
@@ -564,7 +582,7 @@
           ],
           whyTopPick: "Teen-focused topics + structured practice by level. ⭐🌟",
           freeAccess: "Fully free on the site (no payment shown). 🆓✅",
-          ageCheck: "Designed for teens; still preview topics if needed. 🔍✅"
+          ageCheck: "Designed for teens; preview topics if needed. 🔍✅"
         }
       },
       {
@@ -585,7 +603,7 @@
             "3️⃣ ✅ Do the quiz + review wrong answers 🔁📝",
             "4️⃣ 🗣️ Shadow (repeat with the speaker) for 60 seconds ⏱️🔁"
           ],
-          whyTopPick: "Massive library (3,000+ lessons) with transcripts + quizzes. ⭐📚",
+          whyTopPick: "Massive library with transcripts + quizzes. ⭐📚",
           freeAccess: "States “free listening lessons” and usable without paying. 🆓✅",
           ageCheck: "Teen-appropriate overall; preview some topics. 🔍✅"
         }
@@ -651,12 +669,12 @@
           howTo: [
             "1️⃣ 🎚️ Choose Easy/Intermediate/Difficult 🎯",
             "2️⃣ 🎧 Listen and answer the quiz questions ✅📝",
-            "3️⃣ ✅ Check answers and replay the tricky parts 🔁",
-            "4️⃣ 🗣️ Practice “repeat + respond” (copy a line, then answer it) 🔁💬"
+            "3️⃣ ✅ Check answers and replay tricky parts 🔁",
+            "4️⃣ 🗣️ Practice “repeat + respond” 🔁💬"
           ],
-          whyTopPick: "Clear structure + lots of targeted quiz practice. ⭐🎯",
-          freeAccess: "Site is accessible and lessons are usable without paying. 🆓✅",
-          ageCheck: "Teen-appropriate; preview topics (some are adult-life themes). 🔍✅"
+          whyTopPick: "Clear structure + targeted quiz practice. ⭐🎯",
+          freeAccess: "Site is accessible and usable without paying. 🆓✅",
+          ageCheck: "Teen-appropriate; preview themes if needed. 🔍✅"
         }
       },
       {
@@ -672,14 +690,14 @@
           type: "News listening at multiple speeds 🐢🐇🎧🧩",
           teaches: "Listening speed control + news vocabulary + comprehension ✅📈",
           howTo: [
-            "1️⃣ 🐢 Start at a slower speed to catch key meaning ✅",
-            "2️⃣ 🐇 Increase speed step-by-step (same text) 🔁📈",
-            "3️⃣ ✅ Do the lesson activities/questions 📝",
-            "4️⃣ 🗣️ Debate the topic for 2 minutes (agree/disagree) 💬⏱️"
+            "1️⃣ 🐢 Start slower to catch meaning ✅",
+            "2️⃣ 🐇 Increase speed step-by-step 🔁📈",
+            "3️⃣ ✅ Do lesson activities/questions 📝",
+            "4️⃣ 🗣️ 2-minute discussion/debate 💬⏱️"
           ],
-          whyTopPick: "Same content in 5 speeds—perfect for progression. ⭐📈",
-          freeAccess: "Lessons are accessible; site offers many free materials (also promotes paid extras). 🆓💡",
-          ageCheck: "News topics may include politics/violence—preview recommended. ⚠️🔍"
+          whyTopPick: "Same content in multiple speeds—perfect progression. ⭐📈",
+          freeAccess: "Many free materials (also promotes paid extras). 🆓📢",
+          ageCheck: "News can be serious—preview recommended. ⚠️🔍"
         }
       },
       {
@@ -695,14 +713,14 @@
           type: "News at 3 levels with listening 🔊🧩",
           teaches: "Listening comprehension with leveled vocabulary 📚✅",
           howTo: [
-            "1️⃣ 🧩 Pick Level 1/2/3 (start easier than you think) 🎚️",
+            "1️⃣ 🧩 Pick Level 1/2/3 🎚️",
             "2️⃣ 🎧 Listen first → then read 📄",
-            "3️⃣ ✍️ Note 8–10 new words (only useful ones) 📝",
-            "4️⃣ 🗣️ Tell the story in your own words (30–60 seconds) 🎙️⏱️"
+            "3️⃣ ✍️ Note 8–10 useful words 📝",
+            "4️⃣ 🗣️ Retell in 30–60 seconds 🎙️⏱️"
           ],
-          whyTopPick: "Same news idea across levels = smooth confidence building. ⭐📈",
-          freeAccess: "Site is accessible and usable free (ad-supported). 🆓📢",
-          ageCheck: "Some world news can be sensitive; preview as needed. ⚠️🔍"
+          whyTopPick: "Same news idea across levels = confidence building. ⭐📈",
+          freeAccess: "Usable free (ad-supported). 🆓📢",
+          ageCheck: "World news can be sensitive—preview if needed. ⚠️🔍"
         }
       },
       {
@@ -718,14 +736,14 @@
           type: "Short educational videos + lesson format 🎥🧩",
           teaches: "Academic listening, note-taking, key idea extraction 📝✅",
           howTo: [
-            "1️⃣ 🎯 Choose a topic teens actually like (science/psych/history) 💡",
+            "1️⃣ 🎯 Choose a topic teens actually like 💡",
             "2️⃣ 🎧 Watch once (no subtitles) for gist 🚫📝",
             "3️⃣ 🔁 Watch again with notes (3 key points + 5 keywords) 📝📌",
-            "4️⃣ 🗣️ Give a 60-second mini-talk summary 🎙️⏱️"
+            "4️⃣ 🗣️ 60-second mini-talk summary 🎙️⏱️"
           ],
-          whyTopPick: "High engagement + strong “listen for ideas” practice. ⭐🌟",
-          freeAccess: "Free to watch lessons; account is optional for saving/creating. 🆓✅",
-          ageCheck: "Generally teen-appropriate; preview occasional sensitive themes. 🔍✅"
+          whyTopPick: "High engagement + “listen for ideas” practice. ⭐🌟",
+          freeAccess: "Free to watch; account optional. 🆓✅",
+          ageCheck: "Generally teen-appropriate; preview sensitive themes. 🔍✅"
         }
       },
       {
@@ -736,19 +754,19 @@
         description: "Listening quizzes + answers ✅",
         link: "https://www.englishclub.com/esl-quizzes/listening/",
         format: "site",
-        focus: "listening for detail, quick checks",
+        focus: "listening for detail, quick warmups",
         details: {
           type: "Listening quizzes + answers ✅🎧🧩",
           teaches: "Listening for detail + common conversational understanding 🗣️✅",
           howTo: [
-            "1️⃣ 🎧 Play the audio question 🔊",
+            "1️⃣ 🎧 Play the audio 🔊",
             "2️⃣ ✅ Choose the best answer 📝",
-            "3️⃣ 🔁 Replay and catch the key words you missed 🔍",
-            "4️⃣ ✍️ Write 3 “useful phrases” you heard 📝💡"
+            "3️⃣ 🔁 Replay and catch key words 🔍",
+            "4️⃣ ✍️ Write 3 useful phrases 📝💡"
           ],
-          whyTopPick: "Quick, low-prep listening checks (great for warmups). ⭐⏱️",
-          freeAccess: "Free-access quizzes on site (ad-supported). 🆓📢",
-          ageCheck: "Teen-safe; standard web ads—supervision/ad blocker if needed. 🛡️✅"
+          whyTopPick: "Quick, low-prep listening checks. ⭐⏱️",
+          freeAccess: "Free-access quizzes (ad-supported). 🆓📢",
+          ageCheck: "Teen-safe; ads—supervision/ad blocker if needed. 🛡️✅"
         }
       },
       {
@@ -764,14 +782,14 @@
           type: "Very short MP3 listenings + worksheets/quizzes 📝🎧🧩",
           teaches: "Speedy practice: gist + detail + pronunciation focus 🔁✅",
           howTo: [
-            "1️⃣ 🎧 Listen once and guess the main idea 🧠",
-            "2️⃣ 🔁 Listen again and do the quiz ✅📝",
-            "3️⃣ 🗣️ Shadow the audio (copy rhythm and linking) 🔁",
-            "4️⃣ ✍️ Write a 4-sentence opinion response 📝💬"
+            "1️⃣ 🎧 Listen once: main idea 🧠",
+            "2️⃣ 🔁 Listen again + quiz ✅📝",
+            "3️⃣ 🗣️ Shadow rhythm/linking 🔁",
+            "4️⃣ ✍️ 4-sentence opinion response 📝💬"
           ],
-          whyTopPick: "Perfect for daily “listening reps” without fatigue. ⭐🏋️",
+          whyTopPick: "Daily “listening reps” without fatigue. ⭐🏋️",
           freeAccess: "Described as free with downloads + MP3/quizzes. 🆓✅",
-          ageCheck: "Teen-appropriate; some topics may feel easy for advanced learners. 🎚️✅"
+          ageCheck: "Teen-appropriate; may feel easy for advanced learners. 🎚️✅"
         }
       },
       {
@@ -787,14 +805,14 @@
           type: "Audio + text scripts (VOA style) 📄🎧🧩",
           teaches: "Listening + read-along + vocabulary in context 🧠✅",
           howTo: [
-            "1️⃣ 🎧 Play the MP3 while following the text 📄",
+            "1️⃣ 🎧 Play MP3 while reading 📄",
             "2️⃣ ✍️ Highlight 10 useful words/phrases 📝",
-            "3️⃣ 🔁 Replay and read aloud with the audio 🗣️🔁",
-            "4️⃣ 🗣️ Summarize in 5 bullet points 📝🔹"
+            "3️⃣ 🔁 Replay + read aloud with audio 🗣️🔁",
+            "4️⃣ 🗣️ Summarize in 5 bullets 📝🔹"
           ],
           whyTopPick: "Simple read-along listening with clear scripts. ⭐✅",
-          freeAccess: "Page provides text + MP3 access without payment. 🆓✅",
-          ageCheck: "Generally safe; older site style/ads—basic supervision recommended. 🛡️✅"
+          freeAccess: "Text + MP3 access without payment. 🆓✅",
+          ageCheck: "Older site style/ads—basic supervision recommended. 🛡️✅"
         }
       },
       {
@@ -811,13 +829,13 @@
           teaches: "Everyday + academic listening strategies ✅🧠",
           howTo: [
             "1️⃣ 🎯 Pick level and topic 🎚️📌",
-            "2️⃣ 🎧 Listen for gist → then detail 🔁",
-            "3️⃣ ✅ Do exercises and review mistakes 📝✅",
+            "2️⃣ 🎧 Gist → detail 🔁",
+            "3️⃣ ✅ Do exercises + review mistakes 📝✅",
             "4️⃣ 🗣️ Retell using “First / Then / Finally” 🧩🗣️"
           ],
           whyTopPick: "Clean, structured tasks that scale to higher teens. ⭐📈",
           freeAccess: "Accessible and usable free on site. 🆓✅",
-          ageCheck: "Suitable for older teens; content is generally neutral. ✅🎓"
+          ageCheck: "Suitable for older teens; generally neutral. ✅🎓"
         }
       },
       {
@@ -833,14 +851,14 @@
           type: "Short discussion episodes + vocab 🎙️🎧🧩",
           teaches: "Topic vocabulary + listening for opinions/arguments 🧠✅",
           howTo: [
-            "1️⃣ 🎧 Listen once with no captions 🚫📝",
-            "2️⃣ 🔁 Listen again and write 6 new words/phrases ✍️🧠",
-            "3️⃣ 🗣️ Pause after each speaker and paraphrase their point 🧩",
-            "4️⃣ ✍️ Write a short “Agree/Disagree + why” response 💬📝"
+            "1️⃣ 🎧 Listen once (no captions) 🚫📝",
+            "2️⃣ 🔁 Listen again + write 6 new words/phrases ✍️🧠",
+            "3️⃣ 🗣️ Paraphrase each speaker’s point 🧩",
+            "4️⃣ ✍️ Agree/Disagree + why 💬📝"
           ],
-          whyTopPick: "High-quality teen-friendly topics in short time. ⭐⏱️",
+          whyTopPick: "Teen-friendly topics in a short time. ⭐⏱️",
           freeAccess: "Free on YouTube (ads possible). 🆓📢",
-          ageCheck: "Generally teen-safe; preview occasional sensitive topics. 🔍✅"
+          ageCheck: "Generally teen-safe; preview sensitive topics. 🔍✅"
         }
       },
       {
@@ -856,14 +874,14 @@
           type: "News-based listening + key vocabulary 🗞️🎧🧩",
           teaches: "Understanding news language + headline vocabulary ✅🧠",
           howTo: [
-            "1️⃣ 🎧 Watch once for main idea 🧠",
+            "1️⃣ 🎧 Watch once: main idea 🧠",
             "2️⃣ ✍️ Note headline words + meaning 📝📌",
-            "3️⃣ 🔁 Rewatch and pause to repeat key sentences 🔁🗣️",
-            "4️⃣ 🗣️ Give a 45-second “news briefing” summary 🎙️⏱️"
+            "3️⃣ 🔁 Repeat key sentences (pause + copy) 🔁🗣️",
+            "4️⃣ 🗣️ 45-second “news briefing” 🎙️⏱️"
           ],
-          whyTopPick: "Great bridge from ESL listening → real-world news English. ⭐🌉",
+          whyTopPick: "Bridge from ESL listening → real-world news English. ⭐🌉",
           freeAccess: "Free on YouTube (ads possible). 🆓📢",
-          ageCheck: "News can include serious topics—preview recommended. ⚠️🔍"
+          ageCheck: "News can be serious—preview recommended. ⚠️🔍"
         }
       },
       {
@@ -880,13 +898,13 @@
           type: "Short podcast episodes (everyday expressions) 💬🎙️🧩",
           teaches: "Real idioms/phrases + natural pronunciation ✅🗣️",
           howTo: [
-            "1️⃣ 🎧 Listen once and guess the meaning from context 🧠",
-            "2️⃣ 📌 Write the phrase + your own example sentence ✍️",
-            "3️⃣ 🔁 Repeat the episode and shadow key lines 🔁🗣️",
-            "4️⃣ 🗣️ Use the phrase in a 30-second mini-dialogue 🎭⏱️"
+            "1️⃣ 🎧 Guess meaning from context 🧠",
+            "2️⃣ 📌 Write phrase + example sentence ✍️",
+            "3️⃣ 🔁 Shadow key lines 🔁🗣️",
+            "4️⃣ 🗣️ Use in a 30-second mini-dialogue 🎭⏱️"
           ],
-          whyTopPick: "Fast, modern phrases teens actually hear online. ⭐⚡",
-          freeAccess: "Free to listen on podcast platforms (Apple Podcasts listing). 🆓✅",
+          whyTopPick: "Fast, modern phrases teens hear online. ⭐⚡",
+          freeAccess: "Free to listen on podcast platforms. 🆓✅",
           ageCheck: "Teen-appropriate; idioms may need explanation. ✅🧠"
         }
       },
@@ -913,10 +931,10 @@
             "4️⃣ Thu ⚡: Breaking News English Multi-Speed — slow→fast progression + discussion question 🐢🐇💬",
             "5️⃣ Fri 🎬: TED-Ed — 1 video + notes (3 ideas, 5 keywords) + 60s talk 📝🎙️",
             "6️⃣ Sat 🗞️: News in Levels — listen + retell + vocab review 🎧🗣️📚",
-            "7️⃣ Sun ⏱️ (optional): Listen A Minute — quick listening “reps” + short opinion response 🏋️💬"
+            "7️⃣ Sun ⏱️ (optional): Listen A Minute — quick reps + short opinion response 🏋️💬"
           ],
-          whyTopPick: "Simple rotation that builds confidence + speed control + speaking output. ⭐📈🗣️",
-          freeAccess: "Built from free-access sites listed above (some may be ad-supported / YouTube ads). 🆓📢",
+          whyTopPick: "Builds confidence + speed control + speaking output. ⭐📈🗣️",
+          freeAccess: "Free-access sites listed above (some ad-supported / YouTube ads). 🆓📢",
           ageCheck: "Designed for teens; preview news-heavy topics when needed. ✅⚠️"
         },
         isBestSet: true,
@@ -954,7 +972,7 @@
           ],
           whyTopPick: "Teen-focused, level-banded writing with clear models 🧑‍🎓⭐",
           freeAccess: "Fully free pages; account only needed to post comments 🆓🔓",
-          ageCheck: "Built for teens; topics are generally teen-safe (preview if needed) 🎯🔍"
+          ageCheck: "Built for teens; topics generally teen-safe (preview if needed) 🎯🔍"
         }
       },
       {
@@ -969,13 +987,9 @@
         details: {
           type: "Auto-feedback writing practice tool 🤖🛠️",
           teaches: "Draft → feedback → revise loops + CEFR-linked scoring ✍️✅",
-          howTo: [
-            "1️⃣ Pick a task (or create your own) 🗂️",
-            "2️⃣ Write and submit ✍️📤",
-            "3️⃣ Revise using feedback 🔁 then resubmit ✅"
-          ],
+          howTo: ["1️⃣ Pick a task 🗂️", "2️⃣ Write and submit ✍️📤", "3️⃣ Revise + resubmit 🔁✅"],
           whyTopPick: "Fast feedback makes writing practice consistent 🎯⭐",
-          freeAccess: "Free tool + free tasks available (optional advanced test zones exist) 🆓🔓",
+          freeAccess: "Free tool + free tasks available (optional advanced zones exist) 🆓🔓",
           ageCheck: "Great for 13–18; don’t submit sensitive personal info 🔐✅"
         }
       },
@@ -993,12 +1007,12 @@
           teaches: "Grammar-in-writing, sentence combining, proofreading, structured writing practice 🧾✅",
           howTo: [
             "1️⃣ Create a free teacher/student account 👤🆓",
-            "2️⃣ Assign a skill set (e.g., transitions, complex sentences) 🧩🎯",
-            "3️⃣ Students write responses and get instant feedback ✅⚡"
+            "2️⃣ Assign a skill set (transitions/complex sentences) 🧩🎯",
+            "3️⃣ Write responses + get instant feedback ✅⚡"
           ],
           whyTopPick: "Strong for building accuracy and clearer sentences 📈⭐",
-          freeAccess: "“Free forever” sign-up; optional district services exist 🆓🔓",
-          ageCheck: "Designed for middle/high school; teacher control keeps it safe 🛡️✅"
+          freeAccess: "“Free forever” sign-up; optional services exist 🆓🔓",
+          ageCheck: "Middle/high school; teacher control keeps it safe 🛡️✅"
         }
       },
       {
@@ -1015,12 +1029,12 @@
           teaches: "Argument, analysis, evidence-based writing, structured prompts + scaffolds 🧾✅",
           howTo: [
             "1️⃣ Teacher creates a free educator account 👤🆓",
-            "2️⃣ Choose a unit/lesson with a Writing Lesson 🗂️📝",
-            "3️⃣ Assign to students (students can join without email) ✅📌"
+            "2️⃣ Choose unit/lesson with Writing Lesson 🗂️📝",
+            "3️⃣ Assign to students (join without email) ✅📌"
           ],
           whyTopPick: "Complete, classroom-ready writing lessons with scaffolding 🧰⭐",
-          freeAccess: "Stated as 100% free for teachers/students (core access) 🆓🔓",
-          ageCheck: "Grades 6–12; preview texts for sensitive themes (you choose the content) ⚠️🔍"
+          freeAccess: "Core access stated as free for teachers/students 🆓🔓",
+          ageCheck: "Grades 6–12; preview texts for sensitive themes ⚠️🔍"
         }
       },
       {
@@ -1035,15 +1049,11 @@
         focus: "structure, process, research, prewriting",
         details: {
           type: "Writing guides + skill pages 📘🧠",
-          teaches: "Prewriting, research writing, creative writing invention, structure and process 🧩✅",
-          howTo: [
-            "1️⃣ Pick a skill (thesis, prewriting, research) 🎯",
-            "2️⃣ Read the tips 📖",
-            "3️⃣ Apply to an assignment: write 1 improved paragraph ✍️✅"
-          ],
-          whyTopPick: "Clear, reliable skill explanations for school writing 🧑‍🎓⭐",
+          teaches: "Prewriting, research writing, structure and process 🧩✅",
+          howTo: ["1️⃣ Pick a micro-skill 🎯", "2️⃣ Read tips 📖", "3️⃣ Apply to 1 paragraph ✍️✅"],
+          whyTopPick: "Reliable explanations for school writing 🧑‍🎓⭐",
           freeAccess: "Fully free webpages 🌐🆓",
-          ageCheck: "Appropriate for teens; best with teacher-selected pages 📌✅"
+          ageCheck: "Appropriate for teens; teacher-selected pages recommended 📌✅"
         }
       },
       {
@@ -1058,14 +1068,10 @@
         details: {
           type: "Graphic organizer (interactive) 🖥️🧩",
           teaches: "Intro → main ideas → supporting details → conclusion structure 🧱✅",
-          howTo: [
-            "1️⃣ Enter topic + stance/goal 🎯",
-            "2️⃣ Add 3 main points + supports 🧾📌",
-            "3️⃣ Export/print and draft your essay from it 🖨️✍️"
-          ],
-          whyTopPick: "Makes essay structure obvious and repeatable 🔁⭐",
+          howTo: ["1️⃣ Enter topic + stance 🎯", "2️⃣ Add points + supports 🧾📌", "3️⃣ Export/print + draft 🖨️✍️"],
+          whyTopPick: "Makes essay structure repeatable 🔁⭐",
           freeAccess: "Free interactive tool 🌐🆓",
-          ageCheck: "Works well for 13–18 essays (argument/expository) 🧑‍🎓✅"
+          ageCheck: "Works well for 13–18 essays 🧑‍🎓✅"
         }
       },
       {
@@ -1079,15 +1085,11 @@
         focus: "argument writing: claim → reasons → evidence",
         details: {
           type: "Persuasive/argument planner 🖥️🧩",
-          teaches: "Claim + 3 reasons + evidence + conclusion restatement 🧾✅",
-          howTo: [
-            "1️⃣ Write your claim (thesis) 🎯",
-            "2️⃣ Add reasons + facts/examples 📌",
-            "3️⃣ Turn each reason into a body paragraph ✍️🧱"
-          ],
+          teaches: "Claim + reasons + evidence + conclusion restatement 🧾✅",
+          howTo: ["1️⃣ Write claim 🎯", "2️⃣ Add reasons + evidence 📌", "3️⃣ Turn reasons into body paragraphs ✍️🧱"],
           whyTopPick: "Strong scaffold for argument writing 🧠⭐",
           freeAccess: "Free interactive tool 🌐🆓",
-          ageCheck: "Great for debates/op-eds; teacher picks topics to avoid sensitive issues ⚠️📌"
+          ageCheck: "Teen-safe; choose topics carefully ⚠️📌"
         }
       },
       {
@@ -1102,15 +1104,11 @@
         focus: "planning, grouping ideas, outlining",
         details: {
           type: "Outlining + note organisation tool 🧠🧩",
-          teaches: "Planning, grouping ideas, turning notes into an outline 📑✅",
-          howTo: [
-            "1️⃣ Add headings (intro/body points) 🧱",
-            "2️⃣ Paste notes/evidence under each heading 📌",
-            "3️⃣ Use the outline to draft faster ✍️⚡"
-          ],
-          whyTopPick: "Helps teens write longer, clearer, more organised pieces 🧭⭐",
+          teaches: "Planning + organising ideas into an outline 📑✅",
+          howTo: ["1️⃣ Add headings 🧱", "2️⃣ Paste notes/evidence 📌", "3️⃣ Draft faster with the outline ✍️⚡"],
+          whyTopPick: "Helps teens write longer, clearer, organised work 🧭⭐",
           freeAccess: "Free web tool 🌐🆓",
-          ageCheck: "Suitable for 13–18 research and essays 📚✅"
+          ageCheck: "Suitable for teen essays/research 📚✅"
         }
       },
       {
@@ -1125,14 +1123,10 @@
         details: {
           type: "Publishing templates (newspapers/brochures/flyers) 🖥️🧩",
           teaches: "Real-world writing formats + audience-focused clarity 🎯✅",
-          howTo: [
-            "1️⃣ Choose a template (news/brochure/flyer) 🗂️",
-            "2️⃣ Draft text with headings + short paragraphs 🧱✍️",
-            "3️⃣ Export/print and present to class 🖨️🎤"
-          ],
-          whyTopPick: "Motivating “real product” writing with structure built in 🧰⭐",
+          howTo: ["1️⃣ Choose template 🗂️", "2️⃣ Draft with headings + short paragraphs 🧱✍️", "3️⃣ Export/print + present 🖨️🎤"],
+          whyTopPick: "Motivating “real product” writing 🧰⭐",
           freeAccess: "Free interactive tool 🌐🆓",
-          ageCheck: "Teen-safe; teacher chooses topics and publishing rules 🛡️✅"
+          ageCheck: "Teen-safe; teacher sets topic rules 🛡️✅"
         }
       },
       {
@@ -1146,15 +1140,11 @@
         focus: "academic sentence starters, style",
         details: {
           type: "Phrase bank + academic writing functions 📘🧠",
-          teaches: "Useful academic sentence starters (introducing, comparing, concluding, hedging) ✍️✅",
-          howTo: [
-            "1️⃣ Pick the section you’re writing (intro/method/conclusion) 🧭",
-            "2️⃣ Choose 3–5 phrases that fit your meaning 🧩",
-            "3️⃣ Adapt (don’t copy whole sentences) ✍️✅"
-          ],
-          whyTopPick: "Boosts academic style for older teens quickly 📈⭐",
+          teaches: "Academic sentence starters (introducing/comparing/concluding/hedging) ✍️✅",
+          howTo: ["1️⃣ Pick section 🧭", "2️⃣ Choose 3–5 phrases 🧩", "3️⃣ Adapt (don’t copy) ✍️✅"],
+          whyTopPick: "Boosts academic style quickly 📈⭐",
           freeAccess: "Fully free website 🌐🆓",
-          ageCheck: "Best for 15–18 (more academic); coach against copy-paste plagiarism ⚠️🔍"
+          ageCheck: "Best for older teens; coach against copy-paste plagiarism ⚠️🔍"
         }
       },
       {
@@ -1168,15 +1158,11 @@
         focus: "paragraphing, referencing, plagiarism awareness",
         details: {
           type: "Academic writing guides + exercises 📘🧠",
-          teaches: "Paragraphing, plagiarism awareness, citing, academic genres 🧾✅",
-          howTo: [
-            "1️⃣ Choose a topic (paragraphs / referencing) 🎯",
-            "2️⃣ Read guidance 📖",
-            "3️⃣ Do 1 exercise + apply it to your current draft ✍️✅"
-          ],
+          teaches: "Paragraphing, referencing, academic genres + plagiarism awareness 🧾✅",
+          howTo: ["1️⃣ Choose topic 🎯", "2️⃣ Read guidance 📖", "3️⃣ Do 1 exercise + apply to draft ✍️✅"],
           whyTopPick: "Practical academic writing support in one place 🧰⭐",
           freeAccess: "Free site 🌐🆓",
-          ageCheck: "Best for exam/academic tracks; teacher guidance recommended 🧑‍🏫✅"
+          ageCheck: "Best for exam/academic tracks; teacher guidance helps 🧑‍🏫✅"
         }
       },
       {
@@ -1191,14 +1177,10 @@
         details: {
           type: "Explanations + checklists + practice exercises 📝📘",
           teaches: "Formal tone, clarity, academic style rules + practice tasks ✅🧠",
-          howTo: [
-            "1️⃣ Read the 10 style rules 📋",
-            "2️⃣ Use the checklist on a student draft ✅📝",
-            "3️⃣ Rewrite 5 sentences to sound more academic ✍️📈"
-          ],
-          whyTopPick: "Simple rules + immediate practice = quick improvement ⚡⭐",
+          howTo: ["1️⃣ Read 10 style rules 📋", "2️⃣ Use checklist on draft ✅", "3️⃣ Rewrite 5 sentences ✍️📈"],
+          whyTopPick: "Simple rules + immediate practice ⚡⭐",
           freeAccess: "Free pages/exercises 🌐🆓",
-          ageCheck: "Good for 14–18 academic writing; keep tasks short to avoid overload 🧩✅"
+          ageCheck: "Good for 14–18; keep tasks short 🧩✅"
         }
       },
       {
@@ -1212,15 +1194,11 @@
         focus: "full writing process, essay structures",
         details: {
           type: "Free open textbook/course modules 📚🧠",
-          teaches: "Full writing process (prewrite → draft → revise → proofread) + essay structures 🧾✅",
-          howTo: [
-            "1️⃣ Pick one module (thesis, organizing, revising) 🎯",
-            "2️⃣ Do the “self check” questions ✅",
-            "3️⃣ Apply to a real assignment paragraph ✍️✅"
-          ],
-          whyTopPick: "Deep, structured content for serious skill-building 📈⭐",
+          teaches: "Prewrite → draft → revise → proofread + essay structures 🧾✅",
+          howTo: ["1️⃣ Pick module 🎯", "2️⃣ Do self-check ✅", "3️⃣ Apply to assignment paragraph ✍️✅"],
+          whyTopPick: "Deep, structured skill-building 📈⭐",
           freeAccess: "Open-access OER webpages 🌐🆓",
-          ageCheck: "Best for older teens (15–18) / advanced classes; teacher selects sections 📌✅"
+          ageCheck: "Best for older teens/advanced; teacher selects sections 📌✅"
         }
       },
       {
@@ -1234,15 +1212,11 @@
         focus: "creative writing, peer feedback, revision",
         details: {
           type: "Community + prompts/competitions 🧑‍🤝‍🧑🏆",
-          teaches: "Creative writing practice, peer feedback, revision habits 🔁✅",
-          howTo: [
-            "1️⃣ Create a teen account 👤",
-            "2️⃣ Choose a prompt/competition 🧩",
-            "3️⃣ Draft → get feedback → revise and repost ✍️🔁✅"
-          ],
-          whyTopPick: "High motivation + authentic audience for teen writers 🎯⭐",
+          teaches: "Creative writing, peer feedback, revision habits 🔁✅",
+          howTo: ["1️⃣ Create account 👤", "2️⃣ Choose prompt 🧩", "3️⃣ Draft → feedback → revise ✍️🔁✅"],
+          whyTopPick: "Motivation + authentic audience 🎯⭐",
           freeAccess: "Free community access; optional extras may exist 🆓🔓",
-          ageCheck: "13–19; set safety rules (no personal details, teacher moderation if used in class) 🛡️🔐"
+          ageCheck: "13–19; safety rules + no personal details 🛡️🔐"
         }
       },
       {
@@ -1257,14 +1231,10 @@
         details: {
           type: "Community publishing + prompts 🧑‍🤝‍🧑📰",
           teaches: "Writing fluency, voice, sharing work, creative confidence 🌱✅",
-          howTo: [
-            "1️⃣ Sign up for a free account 👤🆓",
-            "2️⃣ Respond to a prompt or post your own piece 🧾✍️",
-            "3️⃣ Read/comment thoughtfully on others (class rules apply) 💬✅"
-          ],
-          whyTopPick: "Supportive teen publishing space + regular inspiration 🧠⭐",
+          howTo: ["1️⃣ Sign up 👤🆓", "2️⃣ Respond/post 🧾✍️", "3️⃣ Comment thoughtfully 💬✅"],
+          whyTopPick: "Supportive teen publishing space + inspiration 🧠⭐",
           freeAccess: "Free to join and use 🆓🔓",
-          ageCheck: "13–19; use school-safe guidelines and privacy reminders 🔐🛡️"
+          ageCheck: "13–19; school-safe guidelines + privacy reminders 🔐🛡️"
         }
       },
       {
@@ -1279,14 +1249,10 @@
         details: {
           type: "Skill practice (grammar + rhetoric) 🖥️🧩",
           teaches: "Concision, transitions, sentence boundaries, rhetorical effectiveness ✍️✅",
-          howTo: [
-            "1️⃣ Pick a skill set (punctuation, transitions, etc.) 🎯",
-            "2️⃣ Do 10–15 practice questions ✅⏱️",
-            "3️⃣ Transfer the rule into 5 edited sentences from your own writing ✍️🔁"
-          ],
-          whyTopPick: "Strong for accuracy and editing skills teens need for exams 🧪⭐",
-          freeAccess: "Free practice access (account optional but helpful) 🆓🔓",
-          ageCheck: "Ideal for 14–18; exam-focused rather than creative writing 🎓✅"
+          howTo: ["1️⃣ Pick skill 🎯", "2️⃣ Do 10–15 questions ✅⏱️", "3️⃣ Apply rule to your writing ✍️🔁"],
+          whyTopPick: "Great for exam editing skills 🧪⭐",
+          freeAccess: "Free practice access (account optional) 🆓🔓",
+          ageCheck: "Ideal for 14–18; exam-focused 🎓✅"
         }
       },
       {
@@ -1301,14 +1267,10 @@
         details: {
           type: "Grammar/spelling/punctuation checker 🛠️✍️",
           teaches: "Self-editing habits (spot errors, fix patterns) 🔁✅",
-          howTo: [
-            "1️⃣ Paste a paragraph into the editor 📋",
-            "2️⃣ Fix only 3 error types at a time (articles/verb tense/commas) 🎯",
-            "3️⃣ Keep an “Error Log” list to track repeat mistakes 📝📌"
-          ],
-          whyTopPick: "Fast feedback for polishing final drafts ⚡⭐",
-          freeAccess: "Free version available; premium shows more suggestions 🆓🔓",
-          ageCheck: "Suitable for teens; don’t paste private info 🔐✅"
+          howTo: ["1️⃣ Paste paragraph 📋", "2️⃣ Fix 3 error types 🎯", "3️⃣ Keep an error log 📝📌"],
+          whyTopPick: "Fast feedback for final drafts ⚡⭐",
+          freeAccess: "Free version available 🆓🔓",
+          ageCheck: "Teen-friendly; don’t paste private info 🔐✅"
         }
       },
       {
@@ -1323,14 +1285,10 @@
         details: {
           type: "Readability + clarity checker 🛠️🧠",
           teaches: "Shorter sentences, clearer wording, fewer “hard-to-read” parts ✨✅",
-          howTo: [
-            "1️⃣ Paste your draft 📋",
-            "2️⃣ Identify 3 “hard sentences” and split them ✂️✅",
-            "3️⃣ Replace 5 complex words with simpler synonyms 🧾🔁"
-          ],
-          whyTopPick: "Makes teen writing clearer and easier to read fast ⚡⭐",
-          freeAccess: "Readability checker is free online 🌐🆓",
-          ageCheck: "Teen-appropriate; use for editing, not for “writing it for them” ✅✍️"
+          howTo: ["1️⃣ Paste draft 📋", "2️⃣ Split 3 hard sentences ✂️✅", "3️⃣ Simplify 5 words 🧾🔁"],
+          whyTopPick: "Improves clarity fast ⚡⭐",
+          freeAccess: "Free readability checker online 🌐🆓",
+          ageCheck: "Use for editing, not writing it for them ✅✍️"
         }
       },
       {
@@ -1345,14 +1303,10 @@
         details: {
           type: "1-page PDF guide 🧠📄",
           teaches: "What a thesis is + do/don’t rules + examples ✍️✅",
-          howTo: [
-            "1️⃣ Read the definition + examples 👀",
-            "2️⃣ Students write 3 thesis options for the same topic ✍️✍️✍️",
-            "3️⃣ Choose the best one and outline 3 supports 🧾📌"
-          ],
-          whyTopPick: "Quick, printable, and directly improves essays 🧰⭐",
+          howTo: ["1️⃣ Read examples 👀", "2️⃣ Write 3 thesis options ✍️✍️✍️", "3️⃣ Choose best + outline supports 🧾📌"],
+          whyTopPick: "Quick, printable, directly improves essays 🧰⭐",
           freeAccess: "Free PDF download 🌐🆓",
-          ageCheck: "Perfect for 13–18 essay classes; teacher checks topic quality 🎯✅"
+          ageCheck: "Perfect for teen essay classes 🎯✅"
         }
       },
       {
@@ -1378,18 +1332,18 @@
             "4️⃣ Quill ✅🧠 (sentence-level accuracy) 🎯",
             "5️⃣ Purdue OWL 🦉📘 (one micro-skill/week) 📌",
             "6️⃣ LanguageTool 🛠️✅ (final polish) ✨",
-            "7️⃣ One publishing option 📰🌍: Write the World or Young Writers Project (safety rules) 🛡️🔐",
+            "7️⃣ Publishing option 📰🌍: Write the World or Young Writers Project (safety rules) 🛡️🔐",
             "Weekly flow 🗓️🪜:",
-            "• Day 1 🧩: LearnEnglish Teens lesson → copy useful phrases → short paragraph draft ✍️",
-            "• Day 2 ⚡: Put the draft into Write & Improve → revise → resubmit 🔁✅",
-            "• Day 3 🗺️: Plan an essay with Essay Map → write 1 body paragraph 🧱✍️",
-            "• Day 4 ✅ (10–15 min): Quill practice on one error pattern (commas/transitions) 🎯⏱️",
-            "• Day 5 🛠️ (10–15 min): LanguageTool + quick OWL check → final edit ✅✨",
-            "• Weekend 📰 (optional): Post a polished piece to Write the World/YWP (class safety rules) 🛡️"
+            "• Day 1 🧩: LearnEnglish Teens lesson → copy phrases → paragraph draft ✍️",
+            "• Day 2 ⚡: Write & Improve → revise → resubmit 🔁✅",
+            "• Day 3 🗺️: Essay Map → write 1 body paragraph 🧱✍️",
+            "• Day 4 ✅ (10–15 min): Quill on one error pattern 🎯⏱️",
+            "• Day 5 🛠️ (10–15 min): LanguageTool + OWL check → final edit ✅✨",
+            "• Weekend 📰 (optional): Post polished piece (class safety rules) 🛡️"
           ],
-          whyTopPick: "Balanced: models + planning + feedback + light publishing motivation 🎯⭐",
-          freeAccess: "Uses free-access tools listed above (some optional accounts / premium extras may exist) 🆓🔓",
-          ageCheck: "Teen-focused; use privacy rules for any online publishing or pasted drafts 🔐✅"
+          whyTopPick: "Balanced: models + planning + feedback + motivation 🎯⭐",
+          freeAccess: "Uses free-access tools above (some optional accounts/premium extras may exist) 🆓🔓",
+          ageCheck: "Teen-focused; follow privacy rules for publishing + pasted drafts 🔐✅"
         },
         isBestSet: true,
         bundleItems: [
@@ -1401,6 +1355,466 @@
           "languagetool-free-grammar-checker",
           "write-the-world-teen-community",
           "young-writers-project-teen-community"
+        ]
+      },
+
+      // =========================
+      // 13–18 SPEAKING 🗣️✨
+      // =========================
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "learnenglishteens-speaking",
+        title: "🧑‍🎓 Speaking — LearnEnglish Teens (British Council) ✅🗣️",
+        description: "Interactive speaking videos + activities (A1–B2) 🎥",
+        link: "https://learnenglishteens.britishcouncil.org/skills/speaking",
+        format: "site",
+        focus: "real-life speaking, fluency, teen topics",
+        details: {
+          type: "Interactive speaking videos + activities 🎥🧩",
+          teaches: "Real-life speaking (shops, advice, opinions) + fluency practice 💬📈",
+          howTo: [
+            "1️⃣ 🎚️ Pick level (A2–B2 fits most teens) ✅",
+            "2️⃣ 👂 Watch and copy key phrases 🔁",
+            "3️⃣ 🗣️ Do the speaking task (record or partner) 🎙️👥",
+            "4️⃣ ✅ Repeat and improve (pronunciation + longer answers) 🔁📈"
+          ],
+          whyTopPick: "Built for teens, levelled, ready-to-use. ⭐🌟",
+          freeAccess: "Accessible free during this check. 🆓✅",
+          ageCheck: "Teen-focused content; generally suitable. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "learnenglish-speaking",
+        title: "🗣️ Speaking — LearnEnglish (British Council) 🎯✅",
+        description: "Situation-based speaking practice + language chunks 🧠",
+        link: "https://learnenglish.britishcouncil.org/skills/speaking",
+        format: "site",
+        focus: "functional English, real situations, exam prep",
+        details: {
+          type: "Situation-based speaking practice + language chunks 🧠🧩",
+          teaches: "Speaking in different situations (functional English) 🛍️🗺️💬",
+          howTo: [
+            "1️⃣ 📌 Choose a topic (e.g., giving opinions) 🎯",
+            "2️⃣ 🧠 Notice useful phrases 🧾",
+            "3️⃣ 🗣️ Do a 60–90 sec talk using 5 phrases 🎙️⏱️",
+            "4️⃣ 🔁 Re-record to improve clarity ✅🔁"
+          ],
+          whyTopPick: "Practical speaking targets for real life + exams. 🎓⭐",
+          freeAccess: "Accessible free during this check. 🆓✅",
+          ageCheck: "Appropriate for teens; general topics. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "speak-and-improve-cambridge",
+        title: "🎤 Speak & Improve (Cambridge) 🤖✅",
+        description: "Automated speaking practice + instant feedback 🧠",
+        link: "https://speakandimprove.com/",
+        format: "site",
+        focus: "fluency, coherence, test-style answers",
+        details: {
+          type: "Automated speaking practice + instant feedback 🤖🎙️",
+          teaches: "Speaking fluency, coherence, and test-style answers 📈🎓",
+          howTo: [
+            "1️⃣ 🎯 Choose a skill or take a full test 🗂️",
+            "2️⃣ 🎙️ Record your answer 🎧",
+            "3️⃣ ✅ Read the feedback/grade 📊",
+            "4️⃣ 🔁 Repeat same prompt aiming +10–20% improvement 📈✅"
+          ],
+          whyTopPick: "Fast feedback loop for confident teen growth. ⚡⭐",
+          freeAccess: "Homepage states it’s free. 🆓✅",
+          ageCheck: "Good for 13–18; no personal info in recordings. 🛡️🔐"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "cambridge-activities-for-learners-speaking",
+        title: "🧪 Cambridge English — Activities for Learners (Speaking) 🎓✅",
+        description: "Short speaking activities by level/time ⏱️",
+        link:
+          "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=speaking",
+        format: "site",
+        focus: "exam-style micro-practice, structured speaking",
+        details: {
+          type: "Short speaking activities by level/time ⏱️🧩",
+          teaches: "Exam-style and skill-based speaking micro-practice 🗣️🎯",
+          howTo: [
+            "1️⃣ 🎚️ Filter by level (B1/B2 for many teens) ✅",
+            "2️⃣ ⏱️ Pick 5–10 minute tasks 🗓️",
+            "3️⃣ 🗣️ Do “answer + reason + example” ✅📌",
+            "4️⃣ 🔁 Swap partners and repeat 👥🔁"
+          ],
+          whyTopPick: "Quick, credible, structured tasks. 🏛️⭐",
+          freeAccess: "Listed as free online activities on Cambridge site. 🆓✅",
+          ageCheck: "Suitable for teens; choose appropriate topics. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "kialo-edu-structured-discussion",
+        title: "🧭 Kialo Edu — Structured Class Discussion 🗣️🧠",
+        description: "Debate/discussion mapping tool (text-based) 🗂️",
+        link: "https://www.kialo-edu.com/",
+        format: "site",
+        focus: "discussion, counterarguments, critical thinking",
+        details: {
+          type: "Debate/discussion mapping tool (text-based) 🗂️🧩",
+          teaches: "Speaking prep (reasons, counterarguments) + critical thinking ⚖️🧠",
+          howTo: [
+            "1️⃣ 🧩 Post a teen-safe discussion question ❓✅",
+            "2️⃣ ➕ Add pros/cons with reasons 📌",
+            "3️⃣ 🗣️ Present strongest branch aloud 🎤",
+            "4️⃣ 🔁 Add one counterargument + response ⚖️🔁"
+          ],
+          whyTopPick: "Makes discussion logical and inclusive (helps shy teens). ✅⭐",
+          freeAccess: "Site states it’s “free and always will be”. 🆓✅",
+          ageCheck: "Great for teens; teacher sets safe topics and rules. 🛡️✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "americanenglish-everyday-conversations",
+        title: "🗨️ Everyday Conversations (AmericanEnglish / U.S. State Dept.) 🇺🇸✅",
+        description: "Dialogues for role-play + small talk 🧑‍🤝‍🧑",
+        link: "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
+        format: "site",
+        focus: "practical conversation, role-play, fluency",
+        details: {
+          type: "Dialogues for role-play + small talk 🧑‍🤝‍🧑🎭",
+          teaches: "Practical conversation skills (shopping, directions, advice) 🛍️🗺️💬",
+          howTo: [
+            "1️⃣ 🎭 Choose a dialogue 📄",
+            "2️⃣ 🗣️ Role-play A/B twice 👥",
+            "3️⃣ 🔁 Swap roles + change 3 details (price/time/place) 💵⏰📍",
+            "4️⃣ 🎙️ Record the improved version 🎧✅"
+          ],
+          whyTopPick: "Clean, classroom-safe everyday speaking. ✅⭐",
+          freeAccess: "Official resource page + free PDF available. 🆓📄",
+          ageCheck: "Middle-school level but great for teens building fluency. 🎯✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "americanenglish-dialogs-for-everyday-use-pdf",
+        title: "📄 Dialogs for Everyday Use (AmericanEnglish PDF) 🗣️✅",
+        description: "Short situational dialogues (printable) 🖨️",
+        link: "https://americanenglish.state.gov/files/ae/resource_files/dialogs_for_everyday_use_508.pdf",
+        format: "pdf",
+        focus: "role-play confidence, repeatable fluency drills",
+        details: {
+          type: "Short situational dialogues (printable) 🖨️📄",
+          teaches: "Real-life speaking patterns + role-play confidence 🎭✅",
+          howTo: [
+            "1️⃣ ✂️ Cut one dialogue into lines ✂️📄",
+            "2️⃣ 🧩 Reorder lines (sequence challenge) 🔁",
+            "3️⃣ 🗣️ Perform + add 2 new lines ✍️🎭",
+            "4️⃣ ✅ Speed round: 30 seconds, clear speaking ⏱️🗣️"
+          ],
+          whyTopPick: "Easy to run + repeatable for fluency. 🔁⭐",
+          freeAccess: "Official AmericanEnglish PDF. 🆓✅",
+          ageCheck: "Teen-appropriate; mostly neutral daily-life topics. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "iteslj-conversation-questions",
+        title: "💬 Conversation Questions (I-TESL-J) ✅🗣️",
+        description: "Topic question banks for speaking circles 🔄",
+        link: "https://iteslj.org/questions/",
+        format: "site",
+        focus: "extended answers, follow-ups, fluency",
+        details: {
+          type: "Topic question banks for speaking circles 🔄🧩",
+          teaches: "Fluency, follow-up questions, extended answers 🎯🗣️",
+          howTo: [
+            "1️⃣ 📌 Pick a teen-appropriate topic ✅",
+            "2️⃣ 🗣️ 1-minute answer each ⏱️",
+            "3️⃣ ❓ Partner asks 2 follow-up questions 🔁",
+            "4️⃣ ✅ Switch partners and repeat 👥🔁"
+          ],
+          whyTopPick: "Huge, simple, no-prep question bank. ⚡⭐",
+          freeAccess: "Publicly accessible question pages. 🆓✅",
+          ageCheck: "Some topics can be adult/controversial—teacher selects. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "englishclub-talking-point-worksheets",
+        title: "🗣️ Conversation Worksheets (EnglishClub “Talking Point”) 📄✅",
+        description: "Discussion worksheets + teacher notes 🧑‍🏫",
+        link: "https://www.englishclub.com/esl-worksheets/conversation/",
+        format: "site",
+        focus: "structured discussion, group speaking",
+        details: {
+          type: "Discussion worksheets + teacher notes 🧑‍🏫📄",
+          teaches: "Fluency through structured discussion questions 🧠🗣️",
+          howTo: [
+            "1️⃣ 📌 Choose a category (Travel/People/Lifestyle etc.) 🗂️",
+            "2️⃣ 🗣️ Small-group discussion (8–10 minutes) ⏱️👥",
+            "3️⃣ 📝 Groups write 3 best ideas 💡💡💡",
+            "4️⃣ 🎤 Group report-out (30 sec each) 🎙️⏱️"
+          ],
+          whyTopPick: "Ready-made speaking lessons with clear prompts. ✅⭐",
+          freeAccess: "Accessible free during this check. 🆓✅",
+          ageCheck: "Includes heavier categories (politics/crime)—curate topics. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "tefl-net-talking-point-pdfs",
+        title: "📥 Talking Point Lesson Plans (TEFL.net) — Free PDFs 🧑‍🏫✅",
+        description: "Discussion-based PDF lesson plans 🗂️",
+        link: "https://www.tefl.net/elt/category/talking-point/",
+        format: "site",
+        focus: "opinion speaking, reasoning, discussion language",
+        details: {
+          type: "Discussion-based PDF lesson plans 🗂️📄",
+          teaches: "Opinion speaking, reasoning, discussion language 💬⚖️",
+          howTo: [
+            "1️⃣ 📥 Download 1 PDF 📄",
+            "2️⃣ 🗣️ Run the discussion stages 🧩",
+            "3️⃣ ✅ Teach polite agree/disagree phrases 🤝",
+            "4️⃣ 🎤 Quick debate: 60 sec per side ⏱️⚖️"
+          ],
+          whyTopPick: "Free PDFs + teacher notes + discussion stages. 📌⭐",
+          freeAccess: "Page states lesson plans are free to download. 🆓✅",
+          ageCheck: "Choose teen-safe topics; preview PDFs. 🔍✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "esl-discussions-topic-bank",
+        title: "🗯️ ESL Discussions (Huge topic bank + handouts) 🗣️✅",
+        description: "Conversation questions + ready handouts 🖨️",
+        link: "https://esldiscussions.com/",
+        format: "site",
+        focus: "longer answers, opinions, follow-ups",
+        details: {
+          type: "Conversation questions + ready handouts 🖨️🧩",
+          teaches: "Longer answers, opinions, follow-up questions 🔁🎯",
+          howTo: [
+            "1️⃣ 📌 Pick a topic 🎯",
+            "2️⃣ 🗣️ Pair discussion (10 minutes) 👥⏱️",
+            "3️⃣ ✅ “Use 3 target phrases” challenge 🧾🎯",
+            "4️⃣ 🎤 Mini-presentation: “My best answer” 🎙️⭐"
+          ],
+          whyTopPick: "Extremely large speaking topic bank. 📚⭐",
+          freeAccess: "Site is accessible during this check. 🆓✅",
+          ageCheck: "Has controversial topics—teacher must filter. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "baamboozle-speaking-games",
+        title: "🎮 Baamboozle — Speaking Games/Prompts 🧩🗣️",
+        description: "Whole-class speaking games (1 screen) 🖥️",
+        link: "https://www.baamboozle.com/games",
+        format: "site",
+        focus: "quick response speaking, fluency under time",
+        details: {
+          type: "Whole-class speaking games (1 screen) 🖥️🎮",
+          teaches: "Quick response speaking + Q/A speed ⚡🗣️",
+          howTo: [
+            "1️⃣ 🔎 Search “teen speaking” / “discussion” 🔍",
+            "2️⃣ 👥 Teams answer aloud (full sentences only) 🗣️✅",
+            "3️⃣ ✅ Rule: “answer + reason” 📌",
+            "4️⃣ 🔁 Replay next week for faster fluency 🔁📈"
+          ],
+          whyTopPick: "Engaging, low-prep speaking practice. 🎯⭐",
+          freeAccess: "Platform states games can be played for free. 🆓✅",
+          ageCheck: "User-generated prompts—preview before class. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "sounds-right-phonemic-chart",
+        title: "🎧 Pronunciation — LearnEnglish Sounds Right (British Council) 🔤✅",
+        description: "Free phonemic chart (tap a sound → hear it) 🔊",
+        link: "https://learnenglish.britishcouncil.org/apps/learnenglish-sounds-right",
+        format: "site",
+        focus: "pronunciation accuracy, sound awareness",
+        details: {
+          type: "Free phonemic chart (tap a sound → hear it) 🔤🔊",
+          teaches: "Clear pronunciation + sound awareness for speaking 🗣️✅",
+          howTo: [
+            "1️⃣ 🔤 Pick 2–3 difficult sounds 🎯",
+            "2️⃣ 🔊 Listen + repeat 10 times 🔁",
+            "3️⃣ 🧾 Make 5 example words + read aloud 🗣️",
+            "4️⃣ 🎙️ Record and compare 🎧✅"
+          ],
+          whyTopPick: "Simple daily drill that improves speaking fast. ⚡⭐",
+          freeAccess: "Described as a free pronunciation chart. 🆓✅",
+          ageCheck: "Fully appropriate for teens. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "englishclub-phonemic-chart",
+        title: "🔤 Pronunciation — Interactive Phonemic Chart (EnglishClub) ✅🔊",
+        description: "Clickable sound chart with example words 🗂️",
+        link: "https://www.englishclub.com/pronunciation/phonemic-chart-ia.php",
+        format: "site",
+        focus: "sound accuracy, quick drills",
+        details: {
+          type: "Clickable sound chart with example words 🗂️🔊",
+          teaches: "Sound accuracy for clearer speaking 🗣️✅",
+          howTo: [
+            "1️⃣ 🎯 Choose 3 sounds to master 🔤",
+            "2️⃣ 🔊 Listen and repeat with example word 🔁",
+            "3️⃣ 🗣️ Put words into short sentences ✍️",
+            "4️⃣ ✅ Speed drill (clear + fast) 🐢🐇"
+          ],
+          whyTopPick: "Instant sound practice—no login. ⚡⭐",
+          freeAccess: "Publicly accessible during this check. 🆓✅",
+          ageCheck: "Appropriate for teens. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "online-voice-recorder-mp3",
+        title: "🎙️ Online Voice Recorder (MP3) — Free Recording Tool 🧑‍💻✅",
+        description: "Browser voice recorder (save MP3) 🎧",
+        link: "https://online-voice-recorder.com/",
+        format: "tool",
+        focus: "self-check fluency, pronunciation, clarity",
+        details: {
+          type: "Browser voice recorder (save MP3) 🎧🎙️",
+          teaches: "Self-check fluency, pronunciation, clarity 🎯✅",
+          howTo: [
+            "1️⃣ 🎙️ Record a 60–90 sec response ⏱️",
+            "2️⃣ ✅ Listen and note 3 fixes (endings/stress/fillers) 📝",
+            "3️⃣ 🔁 Re-record aiming “clearer + longer” 📈",
+            "4️⃣ 📁 Save best version weekly 🗓️✅"
+          ],
+          whyTopPick: "Simple recording workflow for speaking improvement. 🔁⭐",
+          freeAccess: "Site states it’s completely free with no hidden charges. 🆓✅",
+          ageCheck: "Teen-appropriate; no personal info in recordings. 🛡️🔐"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "esl-lounge-b1-speaking-practice",
+        title: "🎯 B1 Speaking Practice (ESL Lounge) — Exam-style 🗣️✅",
+        description: "Example speaking tests (B1 PET-style) 🎓",
+        link: "https://www.esl-lounge.com/student/b1-preliminary-speaking-practice.php",
+        format: "site",
+        focus: "turn-taking, paired speaking, structured answers",
+        details: {
+          type: "Example speaking tests (B1 exam-style) 🎓🧩",
+          teaches: "Turn-taking, paired speaking, structured answers 🧠✅",
+          howTo: [
+            "1️⃣ 👥 Pair students (A/B) 🗣️",
+            "2️⃣ ⏱️ Time each part (short + long turn) ✅",
+            "3️⃣ ✅ Use a simple rubric (fluency/grammar/vocab/pron) 🧾",
+            "4️⃣ 🔁 Repeat same task with improved answers 📈"
+          ],
+          whyTopPick: "Clear exam-format practice for older teens. 🎯⭐",
+          freeAccess: "Page is accessible during this check. 🆓✅",
+          ageCheck: "Exam-style prompts are teen-appropriate. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "teachingenglish-secondary-activities-hub",
+        title: "🧑‍🏫 TeachingEnglish (British Council) — Secondary Activities Hub ✅📚",
+        description: "Teacher-led activities (many for ages 13–17, including speaking) 🗂️",
+        link: "https://www.teachingenglish.org.uk/teaching-resources/teaching-secondary/activities",
+        format: "site",
+        focus: "fluency tasks, classroom speaking routines",
+        details: {
+          type: "Teacher-led secondary activities hub 🗂️🧑‍🏫",
+          teaches: "Fluency tasks, discussion structures, speaking routines 🗣️✅",
+          howTo: [
+            "1️⃣ 🎚️ Filter by level (A2–B2) ✅",
+            "2️⃣ 🗣️ Choose speaking-friendly activities 🎯",
+            "3️⃣ ✅ Run with timing + roles ⏱️🎭",
+            "4️⃣ 🔁 Reuse weekly for measurable fluency growth 📈"
+          ],
+          whyTopPick: "Built around secondary learners; includes age tags. 🏫⭐",
+          freeAccess: "Accessible during this check. 🆓✅",
+          ageCheck: "Activities tagged for ages 13–17. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "wheel-of-names-random-speaker-picker",
+        title: "🎡 Wheel of Names — Random Speaker Picker 🎯✅",
+        description: "Spinner tool for turn-taking & prompt selection 🔄",
+        link: "https://wheelofnames.com/",
+        format: "tool",
+        focus: "participation, fast speaking under time pressure",
+        details: {
+          type: "Spinner tool for turn-taking & prompts 🔄🎡",
+          teaches: "Participation + quick speaking under time pressure ⏱️🗣️",
+          howTo: [
+            "1️⃣ 📝 Add names OR speaking prompts 🗂️",
+            "2️⃣ 🎡 Spin → student speaks 30–60 sec 🎙️⏱️",
+            "3️⃣ ✅ Require “answer + reason + example” 📌",
+            "4️⃣ 🔁 Add a follow-up question and repeat ❓🔁"
+          ],
+          whyTopPick: "Boosts participation fairly and fast. ⚡⭐",
+          freeAccess: "Usable without payment during this check. 🆓✅",
+          ageCheck: "Fully appropriate for teens. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "best-set-bundle-13-18-speaking",
+        title: "Best “Set” (Recommended Bundle) 🎒🗣️✅",
+        description: "Weekly teen speaking plan (20–35 mins/day) 🗓️⏱️",
+        link: "",
+        format: "other",
+        focus: "fluency, functional speaking, debate, pronunciation",
+        notes:
+          "A repeatable weekly plan mixing teen speaking lessons, test-style prompts, structured discussion, role-plays, and daily pronunciation drills.",
+        details: {
+          type: "Weekly teen speaking plan (repeat weekly) 🗓️⏱️🔁",
+          teaches:
+            "Real-life communication + exam-style structure + debate skills + pronunciation through short, repeatable tasks 🗣️🎓⚖️🔤✅",
+          howTo: [
+            "Weekly plan (20–35 mins/day) 🗓️⏱️",
+            "Mon 🟦: LearnEnglish Teens Speaking — 1 lesson + record best answer 🎙️✅",
+            "Tue 🟩: Speak & Improve — 2 prompts + improve score/clarity 🔁📈",
+            "Wed 🟨: EnglishClub Talking Point — small-group discussion + report-out 🎤👥",
+            "Thu 🟧: Cambridge speaking activities — 2 short tasks (5–10 mins) ✅⏱️",
+            "Fri 🟥: Kialo Edu — 1 debate question + “claim + reason + counter” 🧠⚖️",
+            "Weekend 🌈: Everyday Conversations — role-play + change 3 details 🎭🔁",
+            "Daily add-on (5 mins) 🔤: Sounds Right drill (2–3 sounds) 🔊✅"
+          ],
+          whyTopPick: "Balanced routine: talk more + speak clearer + speak smarter. ⭐🎯",
+          freeAccess: "Built from free-access sites/tools above (some optional accounts may exist). 🆓🔓",
+          ageCheck: "Teen-focused; curate topics for debates/discussion pages. ✅⚠️"
+        },
+        isBestSet: true,
+        bundleItems: [
+          "learnenglishteens-speaking",
+          "speak-and-improve-cambridge",
+          "englishclub-talking-point-worksheets",
+          "cambridge-activities-for-learners-speaking",
+          "kialo-edu-structured-discussion",
+          "americanenglish-everyday-conversations",
+          "sounds-right-phonemic-chart",
+          "wheel-of-names-random-speaker-picker"
         ]
       }
     ]
