@@ -1,4 +1,4 @@
-﻿/* assets/js/app.js
+/* assets/js/app.js
    UEAH SPA router + UI renderer (GitHub Pages friendly).
    Uses:
    - window.UEAH_RESOURCES_STORE (loaded via assets/js/resources-store.js).
@@ -7,235 +7,112 @@
    - window.UEAH_PROFILE_STORE (loaded via assets/js/profile-store.js).
    - window.UEAH_CONTACT (loaded via assets/js/contact.js).
 */
-(function () {
-  const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18"];
-  const SKILLS = ["reading", "listening", "writing", "speaking"];
 
+import { AGE_GROUPS, SKILLS } from "./constants.js";
+import {
+  escapeHtml,
+  escapeAttr,
+  capitalize,
+  breadcrumbs,
+  card,
+  renderChips,
+  iconLeaf,
+  iconGamepad,
+  iconClipboard,
+  iconUser,
+  iconHeart,
+  iconMail,
+  iconSkill,
+  iconAge
+} from "./common.js";
+import {
+  detectBasePath,
+  rewriteNavHrefs,
+  normalizeAppPath,
+  hrefFor,
+  navigate,
+  setActiveNav,
+  matchRoute,
+  initRouter
+} from "./router.js";
+import {
+  ensureAgeLoaded,
+  storeGetPack,
+  storeGetResources,
+  storeGetResource,
+  normalizeResourcesList,
+  testsGetAll,
+  testsGetTest,
+  testsHasRunner,
+  ensureTestRunnerLoaded,
+  profileGet,
+  profileSet,
+  profileClear,
+  contactSend,
+  CONTACT_TO
+} from "./store-helpers.js";
+
+(function () {
+  // Grab elements and update dynamic year text.
   const appEl = document.getElementById("app");
   const navLinks = Array.from(document.querySelectorAll("[data-nav-key]"));
   const yearEls = Array.from(document.querySelectorAll("[data-year]"));
-
   yearEls.forEach((el) => (el.textContent = String(new Date().getFullYear())));
 
-  const basePath = detectBasePath();
-
-  // Resources store (must be loaded before app.js)
-  const STORE = (function getStore() {
-    const s = window.UEAH_RESOURCES_STORE;
-    if (s && typeof s === "object") return s;
-    return null;
-  })();
-
-  // Tests store (must be loaded before app.js)
-  const TESTS_STORE = (function getTestsStore() {
-    const s = window.UEAH_TESTS_STORE;
-    if (s && typeof s === "object") return s;
-    return null;
-  })();
-
-  // Optional: Profile store
-  const PROFILE_STORE = (function getProfileStore() {
-    const s = window.UEAH_PROFILE_STORE;
-    if (s && typeof s === "object") return s;
-    return null;
-  })();
-
-  // Optional: Contact helper module
-  const CONTACT = (function getContactHelpers() {
-    const s = window.UEAH_CONTACT;
-    if (s && (typeof s === "object" || typeof s === "function")) return s;
-    return null;
-  })();
-
-  // Make <a href="/resources"> work on GitHub Pages project URLs (prepend basePath)
-  rewriteNavHrefs(document);
-
-  // Support the existing 404 redirect query param (?r=...)
-  restoreRedirectedPath();
-
-  window.addEventListener("popstate", () => render(getAppPath()));
-  document.addEventListener("click", onDocumentClick);
-
-  render(getAppPath());
-
-  function detectBasePath() {
-    const hostname = window.location.hostname || "";
-    const pathname = window.location.pathname || "/";
-    if (hostname.endsWith("github.io")) {
-      const parts = pathname.split("/").filter(Boolean);
-      return parts.length ? `/${parts[0]}` : "";
-    }
-    return "";
+  // Compute the basePath for GitHub Pages project sites and initialise the router.
+  let basePath = detectBasePath();
+  const routerInfo = initRouter({
+    basePath,
+    rewriteRoot: document,
+    onNavigate: render
+  });
+  if (routerInfo && typeof routerInfo.basePath === "string") {
+    basePath = routerInfo.basePath;
   }
 
-  function rewriteNavHrefs(root) {
-    if (!basePath) return;
-    const links = root.querySelectorAll("a[data-nav][href]");
-    links.forEach((a) => {
-      const href = a.getAttribute("href");
-      if (!href) return;
-
-      // Ignore full URLs, mailto/tel, hashes
-      if (
-        href.startsWith("http://") ||
-        href.startsWith("https://") ||
-        href.startsWith("mailto:") ||
-        href.startsWith("tel:") ||
-        href.startsWith("#")
-      ) {
-        return;
-      }
-
-      // Only rewrite absolute site paths
-      if (href.startsWith("/") && !href.startsWith(basePath + "/") && href !== basePath) {
-        a.setAttribute("href", basePath + href);
-      }
-    });
-  }
-
-  function hrefFor(appPath) {
-    const p = normalizeAppPath(appPath);
-    return `${basePath}${p}`;
-  }
-
-  // For loading static assets (scripts/css/images) from any route safely.
-  // Always returns an absolute path (with basePath for GitHub Pages project sites).
+  // Helper to build asset URLs relative to the basePath.
   function assetHref(assetPath) {
     if (!assetPath) return "";
     const s = String(assetPath);
-
-    // Allow full URLs if ever needed
     if (s.startsWith("http://") || s.startsWith("https://")) return s;
-
     let p = s;
     if (!p.startsWith("/")) p = "/" + p;
     return `${basePath}${p}`;
   }
 
-  function getAppPath() {
-    const full = window.location.pathname || "/";
-    let p = full.startsWith(basePath) ? full.slice(basePath.length) : full;
-    if (!p) p = "/";
-    p = normalizeAppPath(p);
-    return p;
-  }
-
-  function normalizeAppPath(p) {
-    if (!p) return "/";
-    let out = String(p);
-
-    // If a full URL is passed, reduce to path
-    try {
-      const u = new URL(out, window.location.origin);
-      if (u.origin === window.location.origin) out = u.pathname;
-    } catch (_) {}
-
-    if (!out.startsWith("/")) out = "/" + out;
-    if (out.length > 1 && out.endsWith("/")) out = out.slice(0, -1);
-    return out;
-  }
-
-  function restoreRedirectedPath() {
-    const url = new URL(window.location.href);
-
-    const r = url.searchParams.get("r");
-    if (!r) return;
-
-    let target = String(r);
-
-    try {
-      const parsed = new URL(target, window.location.origin);
-      target = parsed.pathname + parsed.search + parsed.hash;
-    } catch (_) {}
-
-    if (target.startsWith(basePath)) target = target.slice(basePath.length);
-    target = normalizeAppPath(target);
-
-    history.replaceState({}, "", hrefFor(target));
-  }
-
-  function onDocumentClick(e) {
-    // Support <button data-nav-to="/resources/..."> navigation (resource cards)
-    const navToEl = e.target && e.target.closest ? e.target.closest("[data-nav-to]") : null;
-    if (navToEl) {
-      const to = navToEl.getAttribute("data-nav-to");
-      if (to) {
-        e.preventDefault();
-        navigate(normalizeAppPath(to));
-        return;
-      }
-    }
-
-    const a = e.target && e.target.closest ? e.target.closest("a[data-nav]") : null;
-    if (!a) return;
-
-    if (a.target === "_blank" || a.hasAttribute("download")) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-
-    const href = a.getAttribute("href");
-    if (!href) return;
-
-    const url = new URL(href, window.location.href);
-    if (url.origin !== window.location.origin) return;
-
-    const path = url.pathname || "/";
-    if (basePath && !path.startsWith(basePath)) return;
-
-    e.preventDefault();
-
-    let appPath = basePath ? path.slice(basePath.length) : path;
-    appPath = normalizeAppPath(appPath);
-
-    navigate(appPath);
-  }
-
-  function navigate(appPath) {
-    const p = normalizeAppPath(appPath);
-    history.pushState({}, "", hrefFor(p));
-    render(p);
-  }
-
-  function setActiveNav(appPath) {
-    const key =
-      appPath === "/"
-        ? "home"
-        : appPath.startsWith("/resources")
-        ? "resources"
-        : appPath.startsWith("/games")
-        ? "games"
-        : appPath.startsWith("/tests")
-        ? "tests"
-        : appPath.startsWith("/profile")
-        ? "profile"
-        : appPath.startsWith("/contact")
-        ? "contact"
-        : appPath.startsWith("/favourites")
-        ? "favourites"
-        : "";
-
-    navLinks.forEach((el) => {
-      const isActive = el.getAttribute("data-nav-key") === key;
-      el.classList.toggle("is-active", isActive);
-      if (isActive) el.setAttribute("aria-current", "page");
-      else el.removeAttribute("aria-current");
-    });
-  }
-
   let renderToken = 0;
 
+  // Render the appropriate view for the given app path.
   async function render(appPath) {
     const token = ++renderToken;
     const p = normalizeAppPath(appPath);
-    setActiveNav(p);
+    // Update active nav state.
+    setActiveNav(p, navLinks);
 
-    const route = matchRoute(p);
+    // Match the route using injected dependencies (views).
+    const route = matchRoute(p, {
+      AGE_GROUPS,
+      SKILLS,
+      viewHome,
+      viewProfile,
+      viewContact,
+      viewFavourites,
+      viewGames,
+      viewTests,
+      viewResourcesIndex,
+      viewAge,
+      viewSkillAsync,
+      viewResourceDetailAsync,
+      viewTestDetailAsync,
+      viewNotFound
+    });
 
-    // If view is async, show a quick loading state
+    // Show a quick loading state for async routes.
     const isPromise = route && route.view && typeof route.view.then === "function";
     if (isPromise) {
       document.title = "Loading… — UEAH";
       appEl.innerHTML = loadingViewHtml();
-      rewriteNavHrefs(appEl);
+      rewriteNavHrefs(appEl, basePath);
     }
 
     let view;
@@ -245,25 +122,25 @@
       view = viewError("Something went wrong while loading this page.", err).view;
     }
 
-    // Outdated render (navigation happened)
+    // If a navigation happened while loading, abort.
     if (token !== renderToken) return;
 
     document.title = view.title;
     appEl.innerHTML = view.html;
 
-    // Ensure any newly-rendered internal links get basePath applied (GitHub Pages)
-    rewriteNavHrefs(appEl);
+    // Rewrite internal links in newly rendered content to include basePath.
+    rewriteNavHrefs(appEl, basePath);
 
-    // Optional hook for views that need to attach listeners after HTML is injected
+    // Call afterRender if provided.
     if (view && typeof view.afterRender === "function") {
       try {
         view.afterRender();
       } catch (_) {}
     }
 
+    // Move focus to main and first heading for accessibility.
     const main = document.getElementById("main");
     if (main) main.focus({ preventScroll: true });
-
     const h1 = appEl.querySelector("h1");
     if (h1) {
       h1.setAttribute("tabindex", "-1");
@@ -272,235 +149,28 @@
     }
   }
 
-  function matchRoute(appPath) {
-    const parts = appPath.split("/").filter(Boolean);
-
-    if (parts.length === 0) return { view: Promise.resolve(viewHome().view) };
-
-    // NEW: profile + contact (single pages)
-    if (parts[0] === "profile" && parts.length === 1) return { view: Promise.resolve(viewProfile().view) };
-    if (parts[0] === "contact" && parts.length === 1) return { view: Promise.resolve(viewContact().view) };
-
-    if (parts[0] === "favourites" && parts.length === 1) return { view: Promise.resolve(viewFavourites().view) };
-    if (parts[0] === "games" && parts.length === 1) return { view: Promise.resolve(viewGames().view) };
-
-    if (parts[0] === "tests" && parts.length === 1) return { view: Promise.resolve(viewTests().view) };
-    if (parts[0] === "tests" && parts.length === 2 && parts[1])
-      return { view: viewTestDetailAsync(parts[1]).then((x) => x.view) };
-
-    if (parts[0] !== "resources") return { view: Promise.resolve(viewNotFound(appPath).view) };
-    if (parts.length === 1) return { view: Promise.resolve(viewResourcesIndex().view) };
-
-    const age = parts[1];
-    if (!AGE_GROUPS.includes(age)) return { view: Promise.resolve(viewNotFound(appPath).view) };
-    if (parts.length === 2) return { view: Promise.resolve(viewAge(age).view) };
-
-    const skill = parts[2];
-    if (!SKILLS.includes(skill)) return { view: Promise.resolve(viewNotFound(appPath).view) };
-
-    if (parts.length === 3) return { view: viewSkillAsync(age, skill).then((x) => x.view) };
-
-    const slug = parts[3];
-    if (parts.length === 4 && slug) return { view: viewResourceDetailAsync(age, skill, slug).then((x) => x.view) };
-
-    return { view: Promise.resolve(viewNotFound(appPath).view) };
-  }
-
   // -----------------------------
-  // Store helpers (robust to minor API differences)
+  // Shared view for loading state
   // -----------------------------
-
-  async function ensureAgeLoaded(age) {
-    if (!STORE) return;
-    if (typeof STORE.ensureAgeLoaded === "function") {
-      await STORE.ensureAgeLoaded(age, { basePath });
-    }
-  }
-
-  function storeGetPack(age, skill) {
-    if (!STORE) return null;
-    if (typeof STORE.getPack === "function") return STORE.getPack(age, skill);
-    if (STORE.packs && typeof STORE.packs === "object") {
-      const key = `${age}/${skill}`;
-      return STORE.packs[key] || null;
-    }
-    return null;
-  }
-
-  function storeGetResources(age, skill) {
-    if (!STORE) return [];
-    if (typeof STORE.getResourcesFor === "function") return STORE.getResourcesFor(age, skill) || [];
-    if (Array.isArray(STORE.resources)) return STORE.resources.filter((r) => r && r.age === age && r.skill === skill);
-    return [];
-  }
-
-  function storeGetResource(age, skill, slug) {
-    if (!STORE) return null;
-    if (typeof STORE.getResource === "function") return STORE.getResource(age, skill, slug);
-    const list = storeGetResources(age, skill);
-    return list.find((r) => r && r.slug === slug) || null;
-  }
-
-  // Tests helpers
-  function testsGetAll() {
-    if (!TESTS_STORE) return [];
-    if (typeof TESTS_STORE.getAll === "function") return TESTS_STORE.getAll() || [];
-    if (Array.isArray(TESTS_STORE.tests)) return TESTS_STORE.tests.slice();
-    return [];
-  }
-
-  function testsGetTest(slug) {
-    if (!TESTS_STORE) return null;
-    if (typeof TESTS_STORE.getTest === "function") return TESTS_STORE.getTest(slug);
-    const list = testsGetAll();
-    return list.find((t) => t && String(t.slug || "") === String(slug || "")) || null;
-  }
-
-  function testsHasRunner(slug) {
-    if (!TESTS_STORE) return false;
-    if (typeof TESTS_STORE.hasRunner === "function") return !!TESTS_STORE.hasRunner(slug);
-    if (typeof TESTS_STORE.getRunner === "function") return !!TESTS_STORE.getRunner(slug);
-    return false;
-  }
-
-  // Profile helpers (fallback to localStorage if profile-store.js not loaded yet)
-  const PROFILE_KEY = "UEAH_PROFILE_V1";
-
-  function profileGet() {
-    if (PROFILE_STORE && typeof PROFILE_STORE.get === "function") {
-      try {
-        return PROFILE_STORE.get() || null;
-      } catch (_) {
-        return null;
-      }
-    }
-    try {
-      const raw = localStorage.getItem(PROFILE_KEY);
-      if (!raw) return null;
-      return JSON.parse(raw);
-    } catch (_) {
-      return null;
-    }
-  }
-
-  function profileSet(data) {
-    if (PROFILE_STORE && typeof PROFILE_STORE.set === "function") {
-      try {
-        PROFILE_STORE.set(data);
-        return true;
-      } catch (_) {
-        // fall through
-      }
-    }
-    try {
-      localStorage.setItem(PROFILE_KEY, JSON.stringify(data || {}));
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  function profileClear() {
-    if (PROFILE_STORE && typeof PROFILE_STORE.clear === "function") {
-      try {
-        PROFILE_STORE.clear();
-        return true;
-      } catch (_) {
-        // fall through
-      }
-    }
-    try {
-      localStorage.removeItem(PROFILE_KEY);
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  // Contact helpers (fallback to mailto)
-  const CONTACT_TO = "hieuenglishapps@gmail.com";
-
-  function buildMailto(to, subject, body) {
-    const s = encodeURIComponent(String(subject || ""));
-    const b = encodeURIComponent(String(body || ""));
-    return `mailto:${encodeURIComponent(String(to || ""))}?subject=${s}&body=${b}`;
-  }
-
-  function contactSend(payload) {
-    // If contact.js provides a helper, prefer it
-    // Expected shape: window.UEAH_CONTACT.send({ to, subject, message, fromEmail })
-    if (CONTACT && typeof CONTACT === "object" && typeof CONTACT.send === "function") {
-      return CONTACT.send({ to: CONTACT_TO, ...payload });
-    }
-    // Fallback: mailto
-    const subject = payload && payload.subject ? payload.subject : "UEAH Contact";
-    const message = payload && payload.message ? payload.message : "";
-    const fromEmail = payload && payload.fromEmail ? payload.fromEmail : "";
-    const body = fromEmail ? `From: ${fromEmail}\n\n${message}` : message;
-    window.location.href = buildMailto(CONTACT_TO, subject, body);
-    return true;
-  }
-
-  // Keep featured “Best Set” at the end
-  function normalizeResourcesList(list) {
-    const items = Array.isArray(list) ? list.slice() : [];
-    items.sort((a, b) => {
-      const af = a && a.isBestSet ? 1 : 0;
-      const bf = b && b.isBestSet ? 1 : 0;
-      if (af !== bf) return af - bf;
-      return String(a && a.title ? a.title : "").localeCompare(String(b && b.title ? b.title : ""));
-    });
-    return items;
-  }
-
-  // -----------------------------
-  // Script loader (for big tests)
-  // -----------------------------
-
-  const loadedScriptPromises = new Map();
-
-  function loadScriptOnce(src) {
-    const url = assetHref(src);
-    if (!url) return Promise.reject(new Error("Missing script src"));
-    if (loadedScriptPromises.has(url)) return loadedScriptPromises.get(url);
-
-    const p = new Promise((resolve, reject) => {
-      const s = document.createElement("script");
-      s.src = url;
-      s.defer = true;
-      s.onload = () => resolve(true);
-      s.onerror = () => reject(new Error(`Failed to load script: ${url}`));
-      document.head.appendChild(s);
-    });
-
-    loadedScriptPromises.set(url, p);
-    return p;
-  }
-
-  async function ensureTestRunnerLoaded(test) {
-    if (!test) return;
-    if (testsHasRunner(test.slug)) return;
-    if (!test.module) return;
-    await loadScriptOnce(test.module);
-  }
-
-  // -----------------------------
-  // Views
-  // -----------------------------
-
   function loadingViewHtml() {
     return `
       <section class="page-top">
-        ${breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Loading…" }])}
+        ${breadcrumbs([{ label: "Home", href: hrefFor("/", basePath) }, { label: "Loading…" }])}
         <h1 class="page-title">Loading…</h1>
         <p class="page-subtitle">Please wait a moment.</p>
       </section>
     `;
   }
 
+  // -----------------------------
+  // Error view
+  // -----------------------------
   function viewError(message, err) {
     const title = "Error — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Error" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Error" }
+    ]);
     const detail = err ? `<p class="muted" style="margin-top:10px"><code>${escapeHtml(String(err))}</code></p>` : "";
     const html = `
       <section class="page-top">
@@ -509,8 +179,8 @@
         <p class="page-subtitle">${escapeHtml(message || "An error occurred.")}</p>
         ${detail}
         <div class="actions">
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Resources</a>
         </div>
       </section>
     `;
@@ -519,7 +189,10 @@
 
   function viewStoreMissing() {
     const title = "Resources unavailable — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Resources" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Resources" }
+    ]);
     const html = `
       <section class="page-top">
         ${breadcrumb}
@@ -529,7 +202,7 @@
           <strong>Fix:</strong> Ensure <code>assets/js/resources-store.js</code> is loaded before <code>assets/js/app.js</code>.
         </div>
         <div class="actions">
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
         </div>
       </section>
     `;
@@ -538,7 +211,10 @@
 
   function viewTestsStoreMissing() {
     const title = "Tests unavailable — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Tests" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Tests" }
+    ]);
     const html = `
       <section class="page-top">
         ${breadcrumb}
@@ -548,14 +224,17 @@
           <strong>Fix:</strong> Ensure <code>assets/js/tests-store.js</code> (and your tests data files) are loaded before <code>assets/js/app.js</code>.
         </div>
         <div class="actions">
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Resources</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Home
+  // -----------------------------
   function viewHome() {
     const title = "UEAH — Ultimate English At Home";
     const html = `
@@ -568,7 +247,7 @@
 
         <div class="card-grid" role="list">
           ${card({
-            href: hrefFor("/resources"),
+            href: hrefFor("/resources", basePath),
             title: "Resources",
             text: "Improve a skill",
             icon: iconLeaf(),
@@ -578,7 +257,7 @@
           })}
 
           ${card({
-            href: hrefFor("/games"),
+            href: hrefFor("/games", basePath),
             title: "Games",
             text: "Learn with fun",
             icon: iconGamepad(),
@@ -587,7 +266,7 @@
           })}
 
           ${card({
-            href: hrefFor("/tests"),
+            href: hrefFor("/tests", basePath),
             title: "Tests",
             text: "Test your skills",
             icon: iconClipboard(),
@@ -596,7 +275,7 @@
           })}
 
           ${card({
-            href: hrefFor("/profile"),
+            href: hrefFor("/profile", basePath),
             title: "Profile",
             text: "Save IELS info",
             icon: iconUser(),
@@ -605,7 +284,7 @@
           })}
 
           ${card({
-            href: hrefFor("/favourites"),
+            href: hrefFor("/favourites", basePath),
             title: "Favourites",
             text: "Save your favourites",
             icon: iconHeart(),
@@ -614,7 +293,7 @@
           })}
 
           ${card({
-            href: hrefFor("/contact"),
+            href: hrefFor("/contact", basePath),
             title: "Contact",
             text: "Send a message",
             icon: iconMail(),
@@ -627,9 +306,15 @@
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Profile
+  // -----------------------------
   function viewProfile() {
     const title = "Profile — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Profile" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Profile" }
+    ]);
 
     const html = `
       <section class="page-top">
@@ -664,7 +349,7 @@
             <div class="actions">
               <button class="btn btn--primary" type="submit">Save</button>
               <button class="btn" type="button" id="profile-clear">Clear</button>
-              <a class="btn" href="${hrefFor("/")}" data-nav>Home</a>
+              <a class="btn" href="${hrefFor("/", basePath)}" data-nav>Home</a>
             </div>
 
             <p id="profile-status" class="muted" style="margin:12px 0 0"></p>
@@ -723,9 +408,15 @@
     return { view: { title, html, afterRender } };
   }
 
+  // -----------------------------
+  // Contact
+  // -----------------------------
   function viewContact() {
     const title = "Contact — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Contact" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Contact" }
+    ]);
 
     const html = `
       <section class="page-top">
@@ -736,33 +427,36 @@
         <div class="detail-card" role="region" aria-label="Contact form">
           <form id="contact-form" novalidate>
             <div class="detail-section">
-              <h2>Your email</h2>
+              <label class="label" for="contact-from">Your email (optional)</label>
               <input id="contact-from" name="fromEmail" type="email" autocomplete="email" inputmode="email"
                 style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
-                placeholder="Optional" />
+                placeholder="name@example.com" aria-describedby="contact-from-error" />
+              <div class="field-error" id="contact-from-error" aria-live="polite"></div>
             </div>
 
             <div class="detail-section">
-              <h2>Subject</h2>
+              <label class="label" for="contact-subject">Subject (optional)</label>
               <input id="contact-subject" name="subject" type="text"
                 style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
-                placeholder="What is this about?" />
+                placeholder="What is this about?" aria-describedby="contact-subject-error" />
+              <div class="field-error" id="contact-subject-error" aria-live="polite"></div>
             </div>
 
             <div class="detail-section">
-              <h2>Message</h2>
-              <textarea id="contact-message" name="message" rows="6"
+              <label class="label" for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="6" required
                 style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text); resize:vertical;"
-                placeholder="Write your message..."></textarea>
+                placeholder="Write your message..." aria-describedby="contact-message-error"></textarea>
+              <div class="field-error" id="contact-message-error" aria-live="polite"></div>
               <p class="muted" style="margin:10px 0 0">If email sending isn’t configured yet, this will open your email app.</p>
             </div>
 
             <div class="actions">
               <button class="btn btn--primary" type="submit">Send</button>
-              <a class="btn" href="${hrefFor("/")}" data-nav>Home</a>
+              <a class="btn" href="${hrefFor("/", basePath)}" data-nav>Home</a>
             </div>
 
-            <p id="contact-status" class="muted" style="margin:12px 0 0"></p>
+            <p id="contact-status" class="muted" style="margin:12px 0 0" aria-live="polite"></p>
           </form>
         </div>
       </section>
@@ -770,48 +464,110 @@
 
     const afterRender = function () {
       const form = document.getElementById("contact-form");
+      if (!form) return;
       const fromEl = document.getElementById("contact-from");
       const subjectEl = document.getElementById("contact-subject");
       const messageEl = document.getElementById("contact-message");
       const statusEl = document.getElementById("contact-status");
+      const errFrom = document.getElementById("contact-from-error");
+      const errSubject = document.getElementById("contact-subject-error");
+      const errMessage = document.getElementById("contact-message-error");
 
-      if (!form || !fromEl || !subjectEl || !messageEl || !statusEl) return;
-
+      // Prefill the email field from the profile store if available
       const prof = profileGet() || {};
-      if (prof.email && !fromEl.value) fromEl.value = String(prof.email);
+      if (prof.email && fromEl && !fromEl.value) fromEl.value = String(prof.email);
 
-      function setStatus(msg) {
-        statusEl.textContent = msg || "";
+      function clearErrors() {
+        [fromEl, subjectEl, messageEl].forEach((el) => {
+          if (el) el.removeAttribute("aria-invalid");
+        });
+        [errFrom, errSubject, errMessage].forEach((errEl) => {
+          if (errEl) errEl.textContent = "";
+        });
+        if (statusEl) statusEl.textContent = "";
+      }
+
+      function showError(el, errEl, message) {
+        if (!el || !errEl) return;
+        el.setAttribute("aria-invalid", "true");
+        errEl.textContent = message;
+      }
+
+      function validate() {
+        let valid = true;
+        const emailVal = fromEl ? String(fromEl.value || "").trim() : "";
+        if (emailVal) {
+          const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+          if (!emailOk) {
+            showError(fromEl, errFrom, "Please enter a valid email address.");
+            valid = false;
+          }
+        }
+        const subjVal = subjectEl ? String(subjectEl.value || "") : "";
+        if (subjVal.length > 140) {
+          showError(subjectEl, errSubject, "Subject is too long (max 140 characters).");
+          valid = false;
+        }
+        const msgVal = messageEl ? String(messageEl.value || "").trim() : "";
+        if (!msgVal) {
+          showError(messageEl, errMessage, "Please write a message.");
+          valid = false;
+        } else if (msgVal.length > 4000) {
+          showError(messageEl, errMessage, "Message is too long (max 4000 characters).");
+          valid = false;
+        }
+        return valid;
       }
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-
-        const fromEmail = String(fromEl.value || "").trim();
-        const subject = String(subjectEl.value || "").trim() || "UEAH Contact";
-        const message = String(messageEl.value || "").trim();
-
-        if (!message) {
-          setStatus("Please write a message.");
-          messageEl.focus();
+        clearErrors();
+        const ok = validate();
+        if (!ok) {
+          const firstInvalid = [fromEl, subjectEl, messageEl].find(
+            (el) => el && el.hasAttribute("aria-invalid")
+          );
+          if (firstInvalid && typeof firstInvalid.focus === "function") firstInvalid.focus();
+          if (statusEl) statusEl.textContent = "Please fix the highlighted fields.";
           return;
         }
-
+        const fromEmail = String((fromEl && fromEl.value) || "").trim();
+        const subject = String((subjectEl && subjectEl.value) || "").trim() || "UEAH Contact";
+        const message = String((messageEl && messageEl.value) || "").trim();
         try {
           contactSend({ fromEmail, subject, message });
-          setStatus("Opening email…");
+          if (statusEl) statusEl.textContent = "Opening email…";
         } catch (_) {
-          setStatus("Could not send from this page.");
+          if (statusEl) statusEl.textContent = "Could not send from this page.";
         }
+      });
+
+      [
+        [fromEl, errFrom],
+        [subjectEl, errSubject],
+        [messageEl, errMessage]
+      ].forEach(([el, errEl]) => {
+        if (!el) return;
+        el.addEventListener("input", () => {
+          el.removeAttribute("aria-invalid");
+          if (errEl) errEl.textContent = "";
+          if (statusEl) statusEl.textContent = "";
+        });
       });
     };
 
     return { view: { title, html, afterRender } };
   }
 
+  // -----------------------------
+  // Favourites
+  // -----------------------------
   function viewFavourites() {
     const title = "Favourites — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Favourites" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Favourites" }
+    ]);
 
     const html = `
       <section class="page-top">
@@ -824,17 +580,23 @@
         </div>
 
         <div class="actions">
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Resources</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Resources index
+  // -----------------------------
   function viewResourcesIndex() {
     const title = "Resources — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Resources" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Resources" }
+    ]);
 
     const glowByAge = {
       "0-3": "green",
@@ -844,9 +606,9 @@
       "13-18": "pink"
     };
 
-    const cards = AGE_GROUPS.map((age) =>
+    const cardsHtml = AGE_GROUPS.map((age) =>
       card({
-        href: hrefFor(`/resources/${age}`),
+        href: hrefFor(`/resources/${age}`, basePath),
         title: age,
         text: "Choose a skill area next.",
         icon: iconAge(age),
@@ -862,20 +624,26 @@
         <p class="page-subtitle">Pick an age group to see skill areas.</p>
 
         <div class="card-grid" role="list">
-          ${cards}
+          ${cardsHtml}
         </div>
 
         <div class="actions">
-          <a class="btn" href="${hrefFor("/")}" data-nav>← Back to Home</a>
+          <a class="btn" href="${hrefFor("/", basePath)}" data-nav>← Back to Home</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Games placeholder
+  // -----------------------------
   function viewGames() {
     const title = "Games — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Games" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Games" }
+    ]);
 
     const html = `
       <section class="page-top">
@@ -888,33 +656,42 @@
         </div>
 
         <div class="actions">
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Resources</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Tests
+  // -----------------------------
   function viewTests() {
-    if (!TESTS_STORE) return viewTestsStoreMissing();
+    // If tests store is not loaded, show missing store message.
+    if (!testsGetAll || !testsGetTest) {
+      return viewTestsStoreMissing();
+    }
 
     const title = "Tests — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Tests" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Tests" }
+    ]);
 
     const tests = testsGetAll();
     const hasTests = tests.length > 0;
 
-    const cards = hasTests
+    const cardsHtml = hasTests
       ? tests
           .map((t) =>
             card({
-              href: hrefFor(`/tests/${t.slug}`),
+              href: hrefFor(`/tests/${t.slug}`, basePath),
               title: t.title || "Test",
               text: t.subtitle || "Test your ability",
               icon: iconSkill(t.skill),
               ctaText: "",
-              glow: "iels" // special multi-colour glow
+              glow: "iels"
             })
           )
           .join("")
@@ -928,7 +705,7 @@
 
         ${
           hasTests
-            ? `<div class="card-grid" role="list" aria-label="Tests">${cards}</div>`
+            ? `<div class="card-grid" role="list" aria-label="Tests">${cardsHtml}</div>`
             : `
               <div class="note">
                 <strong>Coming soon:</strong> tests will appear here.
@@ -937,50 +714,57 @@
         }
 
         <div class="actions">
-          <a class="btn" href="${hrefFor("/")}" data-nav>← Back to Home</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+          <a class="btn" href="${hrefFor("/", basePath)}" data-nav>← Back to Home</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Resources</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Test details
+  // -----------------------------
   async function viewTestDetailAsync(slug) {
-    if (!TESTS_STORE) return viewTestsStoreMissing();
+    // If tests store isn't loaded, show missing store message.
+    if (!testsGetTest || !testsHasRunner) return viewTestsStoreMissing();
 
     const test = testsGetTest(slug);
     if (!test) return viewNotFound(`/tests/${slug}`);
 
-    // Lazy-load the test implementation if needed
+    // Lazy-load the test implementation if needed.
     try {
-      await ensureTestRunnerLoaded(test);
+      await ensureTestRunnerLoaded(test, { basePath, assetHref });
     } catch (err) {
       return viewError("Could not load this test module.", err);
     }
 
     const title = `${test.title || "Test"} — UEAH`;
     const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Tests", href: hrefFor("/tests") },
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Tests", href: hrefFor("/tests", basePath) },
       { label: test.title || "Test" }
     ]);
 
     const ctx = {
       slug: test.slug,
       test,
-      hrefFor,
+      hrefFor: (p) => hrefFor(p, basePath),
       assetHref,
       basePath
     };
 
-    // Render via store runner if present
+    // Render via store runner if present.
     let runnerOut = null;
-    if (typeof TESTS_STORE.render === "function") {
-      runnerOut = TESTS_STORE.render(test.slug, ctx);
-    } else if (typeof TESTS_STORE.getRunner === "function") {
-      const r = TESTS_STORE.getRunner(test.slug);
-      if (typeof r === "function") runnerOut = { html: r(ctx), afterRender: null };
-      else if (r && typeof r.render === "function") runnerOut = { html: r.render(ctx), afterRender: r.afterRender || null };
+    if (typeof window.UEAH_TESTS_STORE === "object") {
+      const TESTS_STORE = window.UEAH_TESTS_STORE;
+      if (typeof TESTS_STORE.render === "function") {
+        runnerOut = TESTS_STORE.render(test.slug, ctx);
+      } else if (typeof TESTS_STORE.getRunner === "function") {
+        const r = TESTS_STORE.getRunner(test.slug);
+        if (typeof r === "function") runnerOut = { html: r(ctx), afterRender: null };
+        else if (r && typeof r.render === "function") runnerOut = { html: r.render(ctx), afterRender: r.afterRender || null };
+      }
     }
 
     const runnerHtml =
@@ -1012,14 +796,14 @@
           </div>
 
           <div class="actions" style="margin-top:16px">
-            <a class="btn" href="${hrefFor("/tests")}" data-nav>← Back</a>
+            <a class="btn" href="${hrefFor("/tests", basePath)}" data-nav>← Back</a>
           </div>
         </div>
 
         <div class="actions">
-          <a class="btn" href="${hrefFor("/tests")}" data-nav>← Back to Tests</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/tests", basePath)}" data-nav>← Back to Tests</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Resources</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
         </div>
       </section>
     `;
@@ -1038,11 +822,14 @@
     return { view: { title, html, afterRender } };
   }
 
+  // -----------------------------
+  // View by age group
+  // -----------------------------
   function viewAge(age) {
     const title = `${age} Resources — UEAH`;
     const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Resources", href: hrefFor("/resources") },
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Resources", href: hrefFor("/resources", basePath) },
       { label: age }
     ]);
 
@@ -1053,9 +840,9 @@
       speaking: "red"
     };
 
-    const cards = SKILLS.map((skill) =>
+    const cardsHtml = SKILLS.map((skill) =>
       card({
-        href: hrefFor(`/resources/${age}/${skill}`),
+        href: hrefFor(`/resources/${age}/${skill}`, basePath),
         title: capitalize(skill),
         text: "Open this skill page.",
         icon: iconSkill(skill),
@@ -1071,28 +858,33 @@
         <p class="page-subtitle">Choose a skill area.</p>
 
         <div class="card-grid" role="list">
-          ${cards}
+          ${cardsHtml}
         </div>
 
         <div class="actions">
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>← Back to Age Groups</a>
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>← Back to Age Groups</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // View by skill
+  // -----------------------------
   async function viewSkillAsync(age, skill) {
-    if (!STORE) return viewStoreMissing();
+    // If resources store isn't loaded, show missing store message.
+    if (!ensureAgeLoaded || !storeGetPack || !storeGetResources) return viewStoreMissing();
 
-    await ensureAgeLoaded(age);
+    // Ensure the age group's resources are loaded.
+    await ensureAgeLoaded(age, { basePath });
 
     const title = `${capitalize(skill)} (${age}) — UEAH`;
     const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Resources", href: hrefFor("/resources") },
-      { label: age, href: hrefFor(`/resources/${age}`) },
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Resources", href: hrefFor("/resources", basePath) },
+      { label: age, href: hrefFor(`/resources/${age}`, basePath) },
       { label: capitalize(skill) }
     ]);
 
@@ -1150,8 +942,7 @@
           ${resources
             .map((r) => {
               const detailPath = `/resources/${age}/${skill}/${r.slug}`;
-              const detailHref = hrefFor(detailPath);
-
+              const detailHref = hrefFor(detailPath, basePath);
               const chips = renderChips(r);
               const isFeatured = r.isBestSet ? " is-featured" : "";
               const openBtn = r.link
@@ -1197,7 +988,10 @@
                 <strong>${escapeHtml(best.title)}</strong>
                 <p style="margin:8px 0 0">${escapeHtml(best.description || "")}</p>
                 <div class="actions" style="margin-top:12px">
-                  <a class="btn btn--primary" href="${hrefFor(`/resources/${age}/${skill}/${best.slug}`)}" data-nav>Open Best Set →</a>
+                  <a class="btn btn--primary" href="${hrefFor(
+                    `/resources/${age}/${skill}/${best.slug}`,
+                    basePath
+                  )}" data-nav>Open Best Set →</a>
                 </div>
               </div>
             `;
@@ -1218,29 +1012,33 @@
         ${bestSetNote}
 
         <div class="actions">
-          <a class="btn" href="${hrefFor(`/resources/${age}`)}" data-nav>← Back to Skills</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Age Groups</a>
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Home</a>
+          <a class="btn" href="${hrefFor(`/resources/${age}`, basePath)}" data-nav>← Back to Skills</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Age Groups</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Home</a>
         </div>
       </section>
     `;
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Resource detail view
+  // -----------------------------
   async function viewResourceDetailAsync(age, skill, slug) {
-    if (!STORE) return viewStoreMissing();
+    // If resources store isn't loaded, show missing store message.
+    if (!storeGetResource) return viewStoreMissing();
 
-    await ensureAgeLoaded(age);
+    await ensureAgeLoaded(age, { basePath });
 
     const resource = storeGetResource(age, skill, slug);
     if (!resource) return viewNotFound(`/resources/${age}/${skill}/${slug}`);
 
     const title = `${resource.title} — UEAH`;
     const breadcrumb = breadcrumbs([
-      { label: "Home", href: hrefFor("/") },
-      { label: "Resources", href: hrefFor("/resources") },
-      { label: age, href: hrefFor(`/resources/${age}`) },
-      { label: capitalize(skill), href: hrefFor(`/resources/${age}/${skill}`) },
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Resources", href: hrefFor("/resources", basePath) },
+      { label: age, href: hrefFor(`/resources/${age}`, basePath) },
+      { label: capitalize(skill), href: hrefFor(`/resources/${age}/${skill}`, basePath) },
       { label: resource.title }
     ]);
 
@@ -1283,7 +1081,7 @@
               .map((s) => {
                 const r = storeGetResource(age, skill, s);
                 if (!r) return `<li>${escapeHtml(s)}</li>`;
-                const internalHref = hrefFor(`/resources/${age}/${skill}/${r.slug}`);
+                const internalHref = hrefFor(`/resources/${age}/${skill}/${r.slug}`, basePath);
                 const external = r.link
                   ? ` <a href="${escapeAttr(r.link)}" target="_blank" rel="noopener noreferrer">(Open ↗)</a>`
                   : ` <span class="muted">(MISSING LINK)</span>`;
@@ -1305,7 +1103,7 @@
           ${chips}
 
           <div class="actions" style="margin-top:14px">
-            <a class="btn" href="${hrefFor(`/resources/${age}/${skill}`)}" data-nav>← Back</a>
+            <a class="btn" href="${hrefFor(`/resources/${age}/${skill}`, basePath)}" data-nav>← Back</a>
             ${openBtn}
           </div>
 
@@ -1320,9 +1118,9 @@
         </div>
 
         <div class="actions">
-          <a class="btn" href="${hrefFor(`/resources/${age}/${skill}`)}" data-nav>← Back to ${capitalize(skill)}</a>
-          <a class="btn" href="${hrefFor(`/resources/${age}`)}" data-nav>Skills</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Age Groups</a>
+          <a class="btn" href="${hrefFor(`/resources/${age}/${skill}`, basePath)}" data-nav>← Back to ${capitalize(skill)}</a>
+          <a class="btn" href="${hrefFor(`/resources/${age}`, basePath)}" data-nav>Skills</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Age Groups</a>
         </div>
       </section>
     `;
@@ -1330,9 +1128,15 @@
     return { view: { title, html } };
   }
 
+  // -----------------------------
+  // Not found view
+  // -----------------------------
   function viewNotFound(appPath) {
     const title = "Not Found — UEAH";
-    const breadcrumb = breadcrumbs([{ label: "Home", href: hrefFor("/") }, { label: "Not Found" }]);
+    const breadcrumb = breadcrumbs([
+      { label: "Home", href: hrefFor("/", basePath) },
+      { label: "Not Found" }
+    ]);
 
     const html = `
       <section class="page-top">
@@ -1341,8 +1145,8 @@
         <p class="page-subtitle">We couldn’t find: <code>${escapeHtml(appPath)}</code></p>
 
         <div class="actions">
-          <a class="btn btn--primary" href="${hrefFor("/")}" data-nav>Go Home</a>
-          <a class="btn" href="${hrefFor("/resources")}" data-nav>Resources</a>
+          <a class="btn btn--primary" href="${hrefFor("/", basePath)}" data-nav>Go Home</a>
+          <a class="btn" href="${hrefFor("/resources", basePath)}" data-nav>Resources</a>
         </div>
       </section>
     `;
@@ -1350,27 +1154,8 @@
   }
 
   // -----------------------------
-  // Resource UI helpers
+  // Detail rendering helpers
   // -----------------------------
-
-  function renderChips(resource, showAll) {
-    const chips = [];
-
-    if (resource && resource.format) chips.push({ label: "Format", value: resource.format });
-    if (resource && resource.level) chips.push({ label: "Level", value: resource.level });
-    if (resource && resource.time) chips.push({ label: "Time", value: resource.time });
-    if (resource && resource.focus) chips.push({ label: "Focus", value: resource.focus });
-
-    if (!chips.length && !showAll) return "";
-
-    if (!chips.length && showAll) {
-      return `<div class="chips" aria-label="Metadata"><span class="chip">Not specified</span></div>`;
-    }
-
-    const html = chips.map((c) => `<span class="chip">${escapeHtml(c.label)}: ${escapeHtml(c.value)}</span>`).join("");
-    return `<div class="chips" aria-label="Metadata">${html}</div>`;
-  }
-
   function renderDetailSection(label, value) {
     const safeLabel = escapeHtml(label);
     const body = value ? escapeHtml(value) : '<span class="muted">Not specified</span>';
@@ -1402,222 +1187,5 @@
         </ul>
       </div>
     `;
-  }
-
-  function escapeAttr(s) {
-    return escapeHtml(String(s)).replaceAll("\n", " ");
-  }
-
-  // -----------------------------
-  // UI helpers
-  // -----------------------------
-
-  function breadcrumbs(items) {
-    const li = items
-      .map((it) => {
-        if (it.href) return `<li><a href="${it.href}" data-nav>${escapeHtml(it.label)}</a></li>`;
-        return `<li aria-current="page">${escapeHtml(it.label)}</li>`;
-      })
-      .join("");
-    return `<nav aria-label="Breadcrumb"><ol class="breadcrumbs">${li}</ol></nav>`;
-  }
-
-  function card({ href, title, text, icon, primary, ctaText = "Open →", glow = "" }) {
-    const cls = primary ? "card card--primary" : "card";
-    const glowAttr = glow ? ` data-glow="${escapeHtml(glow)}"` : "";
-    const ctaHtml = ctaText ? `<span class="card-cta" aria-hidden="true">${escapeHtml(ctaText)}</span>` : "";
-
-    return `
-      <a class="${cls}" href="${href}" data-nav role="listitem"${glowAttr}>
-        <div class="card-icon" aria-hidden="true">${icon}</div>
-        <div class="card-body">
-          <h2 class="card-title">${escapeHtml(title)}</h2>
-          <p class="card-text">${escapeHtml(text)}</p>
-        </div>
-        ${ctaHtml}
-      </a>
-    `;
-  }
-
-  // -----------------------------
-  // Icons + utils
-  // -----------------------------
-
-  function iconAge(age) {
-    if (age === "0-3") return iconBabyBottle();
-    if (age === "4-7") return iconTeddy();
-    if (age === "8-10") return iconPencil();
-    if (age === "11-12") return iconHeadphones();
-    return iconGradCap();
-  }
-
-  function iconUser() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M12 12.2a4.4 4.4 0 1 0-4.4-4.4 4.4 4.4 0 0 0 4.4 4.4Z" fill="currentColor" opacity=".18"></path>
-        <path d="M12 11a3.2 3.2 0 1 0-3.2-3.2A3.2 3.2 0 0 0 12 11Z" fill="currentColor"></path>
-        <path d="M4.5 20a7.5 7.5 0 0 1 15 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity=".85"></path>
-      </svg>
-    `;
-  }
-
-  function iconMail() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M5.5 6h13A1.5 1.5 0 0 1 20 7.5v9A1.5 1.5 0 0 1 18.5 18h-13A1.5 1.5 0 0 1 4 16.5v-9A1.5 1.5 0 0 1 5.5 6Z" fill="currentColor" opacity=".18"></path>
-        <path d="M5.8 7.8 12 12.2l6.2-4.4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
-        <path d="M6.2 16.2h11.6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"></path>
-      </svg>
-    `;
-  }
-
-  function iconLeaf() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M12 2c4.6 2.3 7.7 6.2 8 10.5.3 4.4-2.8 8.3-7.2 9.2-2.4.5-4.8.1-6.7-1.1-1.9-1.2-3.2-3.1-3.7-5.2C1.4 11.1 4.5 6 12 2Z" fill="currentColor" opacity=".18"></path>
-        <path d="M12 5c3.7 2 6.2 5 6.3 8.1.2 3.3-2.2 6.3-5.6 7-1.8.4-3.7.1-5.2-.9-1.5-.9-2.5-2.4-2.9-4C3.9 11.7 6.3 8.1 12 5Z" fill="currentColor"></path>
-        <path d="M12 7v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".75"></path>
-        <path d="M12 13c1.2-1.1 2.5-2 4-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"></path>
-        <path d="M12 16c-1.1-.9-2.3-1.6-3.6-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"></path>
-      </svg>
-    `;
-  }
-
-  function iconBabyBottle() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M10 2h4v2h-4V2Z" fill="currentColor" opacity=".25"></path>
-        <path d="M9 4h6v2H9V4Z" fill="currentColor" opacity=".18"></path>
-        <path d="M9 6h6v2.2l-.9.9V19a3 3 0 0 1-6 0V9.1l-.9-.9V6Z" fill="currentColor" opacity=".20"></path>
-        <path d="M10 9h4v10a2 2 0 0 1-4 0V9Z" fill="currentColor"></path>
-        <path d="M11 12h2v1h-2v-1Zm0 3h2v1h-2v-1Z" fill="currentColor" opacity=".55"></path>
-      </svg>
-    `;
-  }
-
-  function iconTeddy() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <circle cx="8" cy="8" r="2" fill="currentColor" opacity=".25"></circle>
-        <circle cx="16" cy="8" r="2" fill="currentColor" opacity=".25"></circle>
-        <circle cx="12" cy="9.5" r="4.5" fill="currentColor" opacity=".18"></circle>
-        <path d="M7.5 20a4.5 4.5 0 0 1 9 0v1H7.5v-1Z" fill="currentColor" opacity=".18"></path>
-        <path d="M9.2 13.2a2.8 2.8 0 0 0 5.6 0" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".9"></path>
-        <circle cx="10.4" cy="9.6" r=".7" fill="currentColor"></circle>
-        <circle cx="13.6" cy="9.6" r=".7" fill="currentColor"></circle>
-        <path d="M11.2 11.2h1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
-      </svg>
-    `;
-  }
-
-  function iconPencil() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M15.7 3.9a2 2 0 0 1 2.8 0l1.6 1.6a2 2 0 0 1 0 2.8L10 18.4 5 19l.6-5 10.1-10.1Z" fill="currentColor" opacity=".18"></path>
-        <path d="M7.2 16.8 16.9 7.1l2 2-9.7 9.7-2.6.3.6-2.3Z" fill="currentColor"></path>
-        <path d="M15.5 5.3 18.7 8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".85"></path>
-      </svg>
-    `;
-  }
-
-  function iconHeadphones() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-7h3v-1Z" fill="currentColor" opacity=".18"></path>
-        <path d="M4 12v1h3v7H6a2 2 0 0 1-2-2v-6Z" fill="currentColor" opacity=".18"></path>
-        <path d="M7 12h2v8H7a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2Z" fill="currentColor"></path>
-        <path d="M15 12h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2v-8Z" fill="currentColor"></path>
-        <path d="M6 12a6 6 0 0 1 12 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity=".85"></path>
-      </svg>
-    `;
-  }
-
-  function iconGradCap() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M12 4 2.5 9 12 14l9.5-5L12 4Z" fill="currentColor" opacity=".18"></path>
-        <path d="M6.5 12v4.2c0 .8 2.6 2.8 5.5 2.8s5.5-2 5.5-2.8V12l-5.5 2.9L6.5 12Z" fill="currentColor"></path>
-        <path d="M21.5 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"></path>
-        <path d="M21.5 15c-1.2.6-2.3 1-3.5 1.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".65"></path>
-      </svg>
-    `;
-  }
-
-  function iconBook() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M4 5.5C4 4.67 4.67 4 5.5 4H19a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5H6.25A2.25 2.25 0 0 0 4 22V5.5Z" fill="currentColor" opacity=".18"></path>
-        <path d="M6.25 20H18.5a.5.5 0 0 0 .5-.5V6H6.5A.5.5 0 0 0 6 6.5V19a1 1 0 0 0 .25 1Z" fill="currentColor"></path>
-      </svg>
-    `;
-  }
-
-  function iconHeart() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M12 21s-7-4.6-9.2-9C1 8.4 3.4 5.5 6.6 5.5c1.7 0 3.1.8 3.9 2 0 0 .8-2 3.5-2 3.2 0 5.6 2.9 3.8 6.5C19 16.4 12 21 12 21Z" fill="currentColor" opacity=".18"></path>
-        <path d="M12 19.6c-1.9-1.3-5.5-4.2-6.8-7C3.7 9.4 5.3 7.5 7.3 7.5c1.5 0 2.6 1.1 3.1 2.1h1.1c.5-1 1.6-2.1 3.1-2.1 2 0 3.6 1.9 2.1 5.1-1.3 2.8-4.9 5.7-6.8 7Z" fill="currentColor"></path>
-      </svg>
-    `;
-  }
-
-  function iconGamepad() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M7 9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6a3 3 0 0 1-3 3h-1l-1.2-1.2a1 1 0 0 0-.7-.3h-1.2a1 1 0 0 0-.7.3L9 18H8a3 3 0 0 1-3-3V9Z" fill="currentColor" opacity=".18"></path>
-        <path d="M10 11H8v2h2v2h2v-2h2v-2h-2V9h-2v2Z" fill="currentColor"></path>
-        <path d="M16.5 11.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill="currentColor"></path>
-        <path d="M17.75 13a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill="currentColor"></path>
-      </svg>
-    `;
-  }
-
-  function iconClipboard() {
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M7 4h7l3 3v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" fill="currentColor" opacity=".18"></path>
-        <path d="M14 4v3a1 1 0 0 0 1 1h3" fill="currentColor"></path>
-        <path d="M8.5 11.5h7v1.5h-7v-1.5Zm0 3h7V16h-7v-1.5Z" fill="currentColor"></path>
-      </svg>
-    `;
-  }
-
-  function iconSkill(skill) {
-    if (skill === "reading") return iconBook();
-    if (skill === "listening")
-      return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M12 3a6 6 0 0 0-6 6v4a4 4 0 0 0 8 0V9a2 2 0 0 0-4 0v4a1 1 0 0 0 2 0V9h2v4a3 3 0 0 1-6 0V9a4 4 0 0 1 8 0v5a5 5 0 0 1-10 0V9H4v5a7 7 0 0 0 14 0V9a6 6 0 0 0-6-6Z" fill="currentColor"></path>
-      </svg>
-    `;
-    if (skill === "writing")
-      return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M4 20h4l10.5-10.5a2 2 0 0 0 0-3L16.5 4.5a2 2 0 0 0-3 0L3 15v5Z" fill="currentColor" opacity=".18"></path>
-        <path d="M14.5 6.5 17.5 9.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"></path>
-        <path d="M6 18h2l9-9-2-2-9 9v2Z" fill="currentColor"></path>
-      </svg>
-    `;
-    return `
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-        <path d="M12 3a4 4 0 0 0-4 4v5a4 4 0 0 0 8 0V7a4 4 0 0 0-4-4Z" fill="currentColor" opacity=".18"></path>
-        <path d="M7 12a5 5 0 0 0 10 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"></path>
-        <path d="M12 17v3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"></path>
-        <path d="M9 20h6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"></path>
-      </svg>
-    `;
-  }
-
-  function capitalize(s) {
-    return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
-  }
-
-  function escapeHtml(s) {
-    return String(s)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
   }
 })();
