@@ -50,11 +50,26 @@ export async function getView(ctx, slug) {
     { label: safeTitle },
   ]);
 
-  const runnerHtml = `
+  // If a runner exists and registers a renderer, render it via the store.
+  // Otherwise fall back to the placeholder.
+  let runnerHtml = `
     <div class="note">
       <strong>Coming soon:</strong> this test is not implemented yet.
     </div>
   `;
+  let afterRender = null;
+
+  try {
+    const rendered = ctx.testsStore?.render?.(slug, ctx);
+    if (rendered?.html) {
+      runnerHtml = rendered.html;
+      if (typeof rendered.afterRender === 'function') {
+        afterRender = rendered.afterRender;
+      }
+    }
+  } catch (_) {
+    // ignore render errors; keep placeholder
+  }
 
   const html = `
     <section class="page-top">
@@ -73,16 +88,16 @@ export async function getView(ctx, slug) {
           ${runnerHtml}
         </div>
         <div class="actions" style="margin-top:16px">
-          <a class="btn" href="${hrefFor('/tests') }" data-nav>← Back</a>
+          <a class="btn" href="${hrefFor('/tests')}" data-nav>← Back</a>
         </div>
       </div>
       <div class="actions">
-        <a class="btn" href="${hrefFor('/tests') }" data-nav>← Back to Tests</a>
-        <a class="btn" href="${hrefFor('/resources') }" data-nav>Resources</a>
-        <a class="btn btn--primary" href="${hrefFor('/') }" data-nav>Home</a>
+        <a class="btn" href="${hrefFor('/tests')}" data-nav>← Back to Tests</a>
+        <a class="btn" href="${hrefFor('/resources')}" data-nav>Resources</a>
+        <a class="btn btn--primary" href="${hrefFor('/')}" data-nav>Home</a>
       </div>
     </section>
   `;
 
-  return { title, description, html };
+  return { title, description, html, afterRender };
 }

@@ -7,7 +7,7 @@
     render(ctx) {
       return `
         <div class="note">
-          <strong>IELS Listening</strong>
+          <strong>IELTS Listening</strong>
           <p style="margin:8px 0 0">Coming soon: interactive listening test.</p>
         </div>
         <div class="actions" style="margin-top:12px">

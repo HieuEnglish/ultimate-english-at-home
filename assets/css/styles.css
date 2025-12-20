@@ -491,6 +491,30 @@ a:hover{text-decoration:none}
 /* If a card has no CTA, don't reserve space (safe either way) */
 .card-cta:empty{display:none}
 
+/* -------------------------------------------------
+   NEW: Tests page grouping (age sections)
+   Used by assets/js/views/tests.js
+-------------------------------------------------- */
+.tests-section{
+  margin-top: 18px;
+}
+.tests-section:first-child{
+  margin-top: 14px;
+}
+
+.section-title{
+  margin: 6px 0 10px;
+  font-size: 16px;
+  letter-spacing: -.2px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+@media (min-width: 1100px){
+  .tests-section{ margin-top: 22px; }
+  .section-title{ font-size: 17px; }
+}
+
 .page-top{margin-top:8px}
 .breadcrumbs{
   list-style:none;
