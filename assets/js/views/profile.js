@@ -9,12 +9,14 @@ import { breadcrumbs } from '../common.js';
 /**
  * Build the profile page view.
  * @param {Object} ctx - context with helpers and store functions
- * @returns {{title: string, html: string, afterRender: Function}}
+ * @returns {{title: string, description: string, html: string, afterRender: Function}}
  */
 export function getView(ctx) {
   const { hrefFor, profileGet, profileSet, profileClear } = ctx;
 
   const title = 'Profile — UEAH';
+  const description = 'Save and review your learning profile.';
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Profile' },
@@ -129,5 +131,5 @@ export function getView(ctx) {
     });
   };
 
-  return { title, html, afterRender };
+  return { title, description, html, afterRender };
 }

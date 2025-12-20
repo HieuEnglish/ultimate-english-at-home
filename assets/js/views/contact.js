@@ -9,12 +9,14 @@ import { CONTACT_TO } from '../store-helpers.js';
 /**
  * Build the contact page view.
  * @param {Object} ctx - context with helpers and store functions
- * @returns {{title: string, html: string, afterRender: Function}}
+ * @returns {{title: string, description: string, html: string, afterRender: Function}}
  */
 export function getView(ctx) {
   const { hrefFor, profileGet, contactSend } = ctx;
 
   const title = 'Contact — UEAH';
+  const description = 'Send feedback or suggestions.';
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Contact' },
@@ -234,12 +236,7 @@ export function getView(ctx) {
       // Use CONTACT_TO directly as requested. (If CONTACT_TO is blank, still degrade safely.)
       const to = String(CONTACT_TO || '').trim();
       const subj = subject || 'UEAH Contact';
-      const bodyLines = [
-        message || '',
-        '',
-        '---',
-        `From: ${fromEmail || 'Not provided'}`,
-      ];
+      const bodyLines = [message || '', '', '---', `From: ${fromEmail || 'Not provided'}`];
       const body = bodyLines.join('\n');
 
       const href =
@@ -279,7 +276,6 @@ export function getView(ctx) {
           contactSend({ fromEmail, subject, message });
           setStatus('Opening email…');
         } else {
-          // If contact.js / contactSend is unavailable, still provide a usable fallback.
           setFallbackMailto(fromEmail, subject, message);
           setStatus('Email sending is not configured here. Use the direct email link.');
         }
@@ -306,5 +302,5 @@ export function getView(ctx) {
     });
   };
 
-  return { title, html, afterRender };
+  return { title, description, html, afterRender };
 }

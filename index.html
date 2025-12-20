@@ -4,18 +4,133 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UEAH — Ultimate English At Home</title>
+
+  <!-- Core SEO -->
   <meta name="description" content="A clean, pastel, responsive English learning hub. Browse resources by age group and skill." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://hieuenglish.github.io/ultimate-english-at-home/" />
+
+  <!-- Theme -->
   <meta name="theme-color" content="#f6f7ff" />
   <meta name="color-scheme" content="light dark" />
 
+  <!-- Open Graph -->
   <meta property="og:title" content="UEAH — Ultimate English At Home" />
   <meta property="og:description" content="Browse resources by age group and skill (Reading, Listening, Writing, Speaking)." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hieuenglish.github.io/ultimate-english-at-home/" />
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
 
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="canonical" href="https://hieuenglish.github.io/ultimate-english-at-home/" />
+
+  <!--
+    Initial per-route SEO (supports GitHub Pages deep-link redirect: /?r=...).
+    This runs early to set canonical + description before the main SPA renders.
+  -->
+  <script type="module">
+    import { detectBasePath, normalizeAppPath } from "./assets/js/router.js";
+    import { applySEO } from "./assets/js/seo.js";
+
+    function getInitialAppPath(basePath) {
+      const url = new URL(window.location.href);
+      const r = url.searchParams.get("r");
+
+      // Deep-link restore from 404.html uses ?r=<requested full path>
+      if (r) {
+        let target = String(r);
+        try {
+          const parsed = new URL(target, window.location.origin);
+          target = parsed.pathname + parsed.search + parsed.hash;
+        } catch (_) {
+          // ignore
+        }
+
+        if (basePath && target.startsWith(basePath)) target = target.slice(basePath.length);
+        return normalizeAppPath(target);
+      }
+
+      // Normal load (non-redirect)
+      let p = window.location.pathname || "/";
+      if (basePath && p.startsWith(basePath)) p = p.slice(basePath.length);
+      return normalizeAppPath(p);
+    }
+
+    function titleCase(s) {
+      const t = String(s || "").trim();
+      return t ? t.charAt(0).toUpperCase() + t.slice(1) : t;
+    }
+
+    // Conservative route mapping for initial load.
+    // main.js will overwrite with more specific per-view descriptions after render.
+    function initialRouteSEO(appPath) {
+      const baseTitle = "UEAH — Ultimate English At Home";
+
+      let title = baseTitle;
+      let description =
+        "A clean, pastel, responsive English learning hub. Browse resources by age group and skill.";
+
+      if (appPath === "/") {
+        title = baseTitle;
+      } else if (appPath.startsWith("/resources")) {
+        const parts = appPath.split("/").filter(Boolean); // e.g. ["resources","8-10","reading","slug"]
+        title = "Resources — UEAH";
+        description = "Browse free English learning resources by age group and skill (Reading, Listening, Writing, Speaking).";
+
+        if (parts.length === 2) {
+          const age = parts[1];
+          title = `Resources (${age}) — UEAH`;
+          description = `Free English resources for ages ${age}. Choose Reading, Listening, Writing, or Speaking.`;
+        } else if (parts.length === 3) {
+          const age = parts[1];
+          const skill = titleCase(parts[2]);
+          title = `${skill} resources (${age}) — UEAH`;
+          description = `Free ${skill.toLowerCase()} resources for ages ${age}.`;
+        } else if (parts.length >= 4) {
+          const age = parts[1];
+          const skill = titleCase(parts[2]);
+          title = `${skill} resource (${age}) — UEAH`;
+          description = `Resource detail page for ${skill.toLowerCase()} practice.`;
+        }
+      } else if (appPath.startsWith("/games")) {
+        title = "Games — UEAH";
+        description = "Play simple English learning games to practice vocabulary, spelling, and listening.";
+      } else if (appPath.startsWith("/tests")) {
+        const parts = appPath.split("/").filter(Boolean); // ["tests", "slug?"]
+        title = parts.length >= 2 ? "Test — UEAH" : "Tests — UEAH";
+        description =
+          parts.length >= 2
+            ? "Test detail page."
+            : "Take free English practice tests for Reading, Listening, Writing, and Speaking.";
+      } else if (appPath.startsWith("/profile")) {
+        title = "Profile — UEAH";
+        description = "Save your learning profile and track progress.";
+      } else if (appPath.startsWith("/favourites")) {
+        title = "Favourites — UEAH";
+        description = "Save and revisit your favourite resources and games.";
+      } else if (appPath.startsWith("/contact")) {
+        title = "Contact — UEAH";
+        description = "Send feedback, report issues, or suggest new resources.";
+      }
+
+      return { title, description };
+    }
+
+    const basePath = detectBasePath();
+    const appPath = getInitialAppPath(basePath);
+    const seo = initialRouteSEO(appPath);
+
+    applySEO(
+      {
+        title: seo.title,
+        description: seo.description,
+        canonicalPath: appPath,
+        robots: "index,follow",
+      },
+      { basePath }
+    );
+  </script>
 </head>
 
 <body>

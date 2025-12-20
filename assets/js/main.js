@@ -30,11 +30,15 @@ import {
   contactSend,
 } from './store-helpers.js';
 import { breadcrumbs } from './common.js';
+import { applySEO } from './seo.js';
 
 // Get references to the root app element and navigation links
 const appEl = document.getElementById('app');
 const navLinks = Array.from(document.querySelectorAll('[data-nav-key]'));
 const yearEls = Array.from(document.querySelectorAll('[data-year]'));
+
+const DEFAULT_SEO_DESCRIPTION =
+  'A clean, pastel, responsive English learning hub. Browse resources by age group and skill.';
 
 // Update year in footer
 yearEls.forEach((el) => (el.textContent = String(new Date().getFullYear())));
@@ -109,17 +113,22 @@ function loadingHtml() {
  */
 async function render(appPath) {
   const token = ++renderToken;
+  const normalizedPath = normalizeAppPath(appPath);
+
   // Highlight the active navigation link
-  setActiveNav(appPath, navLinks);
+  setActiveNav(normalizedPath, navLinks);
+
   // Show loading state while resolving the view
   appEl.innerHTML = loadingHtml();
+
   // Ensure links in loading state respect basePath
   rewriteNavHrefs(appEl, basePath);
 
   // Determine which view module to load
-  const parts = normalizeAppPath(appPath).split('/').filter(Boolean);
+  const parts = normalizedPath.split('/').filter(Boolean);
   let viewModule;
   let viewResult;
+
   try {
     if (parts.length === 0) {
       viewModule = await import('./views/home.js');
@@ -150,7 +159,7 @@ async function render(appPath) {
         const age = parts[1];
         if (!AGE_GROUPS.includes(age)) {
           viewModule = await import('./views/not-found.js');
-          viewResult = viewModule.getView(ctx, normalizeAppPath(appPath));
+          viewResult = viewModule.getView(ctx, normalizedPath);
         } else {
           viewModule = await import('./views/age.js');
           viewResult = viewModule.getView(ctx, age);
@@ -160,7 +169,7 @@ async function render(appPath) {
         const skill = parts[2];
         if (!AGE_GROUPS.includes(age) || !SKILLS.includes(skill)) {
           viewModule = await import('./views/not-found.js');
-          viewResult = viewModule.getView(ctx, normalizeAppPath(appPath));
+          viewResult = viewModule.getView(ctx, normalizedPath);
         } else {
           viewModule = await import('./views/skill.js');
           viewResult = await viewModule.getView(ctx, age, skill);
@@ -171,19 +180,19 @@ async function render(appPath) {
         const slug = parts[3];
         if (!AGE_GROUPS.includes(age) || !SKILLS.includes(skill)) {
           viewModule = await import('./views/not-found.js');
-          viewResult = viewModule.getView(ctx, normalizeAppPath(appPath));
+          viewResult = viewModule.getView(ctx, normalizedPath);
         } else {
           viewModule = await import('./views/resource-detail.js');
           viewResult = await viewModule.getView(ctx, age, skill, slug);
         }
       } else {
         viewModule = await import('./views/not-found.js');
-        viewResult = viewModule.getView(ctx, normalizeAppPath(appPath));
+        viewResult = viewModule.getView(ctx, normalizedPath);
       }
     } else {
       // Unknown route: 404
       viewModule = await import('./views/not-found.js');
-      viewResult = viewModule.getView(ctx, normalizeAppPath(appPath));
+      viewResult = viewModule.getView(ctx, normalizedPath);
     }
   } catch (err) {
     // On error, load the error view
@@ -195,10 +204,24 @@ async function render(appPath) {
   if (token !== renderToken) return;
 
   // Update the page title and content
-  document.title = viewResult.title;
+  document.title = viewResult.title || 'UEAH — Ultimate English At Home';
+
+  // Apply SEO on every navigation (fallbacks if a view doesn't specify description/robots)
+  applySEO(
+    {
+      title: viewResult.title || document.title,
+      description: viewResult.description || DEFAULT_SEO_DESCRIPTION,
+      canonicalPath: normalizedPath,
+      robots: viewResult.robots || 'index,follow',
+    },
+    { basePath }
+  );
+
   appEl.innerHTML = viewResult.html;
+
   // Rewrite internal links in the new content
   rewriteNavHrefs(appEl, basePath);
+
   // Call afterRender hook if provided
   if (viewResult.afterRender && typeof viewResult.afterRender === 'function') {
     try {
@@ -207,6 +230,7 @@ async function render(appPath) {
       // ignore errors in afterRender
     }
   }
+
   // Manage focus for accessibility
   const main = document.getElementById('main');
   if (main) main.focus({ preventScroll: true });

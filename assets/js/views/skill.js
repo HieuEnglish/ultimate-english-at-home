@@ -25,6 +25,7 @@ export async function getView(ctx, age, skill) {
   if (!ctx.resourcesStoreAvailable) {
     return getStoreMissingView(ctx);
   }
+
   // Ensure data for the age group is loaded
   if (typeof ctx.ensureAgeLoaded === 'function') {
     try {
@@ -33,37 +34,55 @@ export async function getView(ctx, age, skill) {
       // ignore; missing packs will be handled below
     }
   }
+
   const pack = typeof ctx.storeGetPack === 'function' ? ctx.storeGetPack(age, skill) : null;
+
   // Retrieve and normalise the list of resources for this age and skill. If the
   // store function is not available, fall back to an empty array. Normalising
   // ensures the "best set" appears last and items are alphabetically sorted.
-  const resources = typeof ctx.storeGetResources === 'function'
-    ? ctx.normalizeResourcesList(ctx.storeGetResources(age, skill) || [])
-    : [];
-  const title = `${capitalize(skill)} (${age}) — UEAH`;
+  const resources =
+    typeof ctx.storeGetResources === 'function'
+      ? ctx.normalizeResourcesList(ctx.storeGetResources(age, skill) || [])
+      : [];
+
+  const skillLabel = capitalize(skill);
+  const title = `${skillLabel} (${age}) — UEAH`;
+  const description = `Free ${skillLabel} resources for ages ${age}.`;
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: ctx.hrefFor('/') },
     { label: 'Resources', href: ctx.hrefFor('/resources') },
     { label: age, href: ctx.hrefFor(`/resources/${age}`) },
-    { label: capitalize(skill) },
+    { label: skillLabel },
   ]);
+
   const heading =
     pack && pack.title
       ? escapeHtml(pack.title)
-      : `${capitalize(skill)} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(age)}</span>`;
+      : `${skillLabel} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(age)}</span>`;
+
   const subtitle =
     pack && pack.overview
       ? escapeHtml(pack.overview)
-      : `Resources for ${capitalize(skill)} — ages ${escapeHtml(age)}.`;
+      : `Resources for ${skillLabel} — ages ${escapeHtml(age)}.`;
+
   // Overview section
   let packHtml = '';
   if (pack) {
-    const objectives = Array.isArray(pack.objectives) && pack.objectives.length
-      ? `<div class="detail-section"><h2>Objectives</h2><ul>${pack.objectives.map((o) => `<li>${escapeHtml(o)}</li>`).join('')}</ul></div>`
-      : '';
-    const materials = Array.isArray(pack.materials) && pack.materials.length
-      ? `<div class="detail-section"><h2>Materials / Resources</h2><ul>${pack.materials.map((m) => `<li>${escapeHtml(m)}</li>`).join('')}</ul></div>`
-      : '';
+    const objectives =
+      Array.isArray(pack.objectives) && pack.objectives.length
+        ? `<div class="detail-section"><h2>Objectives</h2><ul>${pack.objectives
+            .map((o) => `<li>${escapeHtml(o)}</li>`)
+            .join('')}</ul></div>`
+        : '';
+
+    const materials =
+      Array.isArray(pack.materials) && pack.materials.length
+        ? `<div class="detail-section"><h2>Materials / Resources</h2><ul>${pack.materials
+            .map((m) => `<li>${escapeHtml(m)}</li>`)
+            .join('')}</ul></div>`
+        : '';
+
     packHtml = `
       <div class="detail-card" role="region" aria-label="Pack overview">
         <h2 class="detail-title" style="font-size:18px; margin:0">Overview</h2>
@@ -73,6 +92,7 @@ export async function getView(ctx, age, skill) {
       </div>
     `;
   }
+
   // Resources grid
   let gridHtml = '';
   if (resources && resources.length) {
@@ -85,13 +105,21 @@ export async function getView(ctx, age, skill) {
             const chips = renderChips(r);
             const isFeatured = r.isBestSet ? ' is-featured' : '';
             const openBtn = r.link
-              ? `<a class="btn btn--primary btn--small" href="${escapeAttr(r.link)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(r.title)} in a new tab">Open Resource ↗</a>`
+              ? `<a class="btn btn--primary btn--small" href="${escapeAttr(
+                  r.link
+                )}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(
+                  r.title
+                )} in a new tab">Open Resource ↗</a>`
               : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
             return `
               <article class="resource-item${isFeatured}" role="listitem">
-                <button class="resource-card" type="button" data-nav-to="${escapeAttr(detailPath)}" aria-label="View details: ${escapeAttr(r.title)}">
+                <button class="resource-card" type="button" data-nav-to="${escapeAttr(
+                  detailPath
+                )}" aria-label="View details: ${escapeAttr(r.title)}">
                   <h2 class="resource-title">${escapeHtml(r.title)}</h2>
-                  <p class="resource-desc">${escapeHtml(r.description || `Practice resource for ${skill}.`)}</p>
+                  <p class="resource-desc">${escapeHtml(
+                    r.description || `Practice resource for ${skill}.`
+                  )}</p>
                   ${chips}
                 </button>
                 <div class="resource-actions" aria-label="Resource actions">
@@ -107,10 +135,11 @@ export async function getView(ctx, age, skill) {
   } else {
     gridHtml = `
       <div class="note">
-        <strong>Coming soon:</strong> ${capitalize(skill)} resources for ages ${escapeHtml(age)}.
+        <strong>Coming soon:</strong> ${skillLabel} resources for ages ${escapeHtml(age)}.
       </div>
     `;
   }
+
   // Best set note (if defined)
   let bestSetNote = '';
   if (pack && pack.bestSetSlug) {
@@ -121,12 +150,15 @@ export async function getView(ctx, age, skill) {
           <strong>${escapeHtml(best.title)}</strong>
           <p style="margin:8px 0 0">${escapeHtml(best.description || '')}</p>
           <div class="actions" style="margin-top:12px">
-            <a class="btn btn--primary" href="${ctx.hrefFor(`/resources/${age}/${skill}/${best.slug}`)}" data-nav>Open Best Set →</a>
+            <a class="btn btn--primary" href="${ctx.hrefFor(
+              `/resources/${age}/${skill}/${best.slug}`
+            )}" data-nav>Open Best Set →</a>
           </div>
         </div>
       `;
     }
   }
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -143,5 +175,6 @@ export async function getView(ctx, age, skill) {
       </div>
     </section>
   `;
-  return { title, html };
+
+  return { title, description, html };
 }

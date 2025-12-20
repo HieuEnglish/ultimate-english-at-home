@@ -13,10 +13,14 @@ import { breadcrumbs, escapeHtml } from '../common.js';
 export function getStoreMissingView(ctx) {
   const { hrefFor } = ctx;
   const title = 'Resources unavailable — UEAH';
+  const description = 'Resources are currently unavailable.';
+  const robots = 'noindex,follow';
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Resources' },
   ]);
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -30,7 +34,8 @@ export function getStoreMissingView(ctx) {
       </div>
     </section>
   `;
-  return { title, html };
+
+  return { title, description, robots, html };
 }
 
 /**
@@ -40,10 +45,14 @@ export function getStoreMissingView(ctx) {
 export function getTestsMissingView(ctx) {
   const { hrefFor } = ctx;
   const title = 'Tests unavailable — UEAH';
+  const description = 'Tests are currently unavailable.';
+  const robots = 'noindex,follow';
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Tests' },
   ]);
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -58,7 +67,8 @@ export function getTestsMissingView(ctx) {
       </div>
     </section>
   `;
-  return { title, html };
+
+  return { title, description, robots, html };
 }
 
 /**
@@ -70,13 +80,18 @@ export function getTestsMissingView(ctx) {
 export function getErrorView(ctx, message, err) {
   const { hrefFor } = ctx;
   const title = 'Error — UEAH';
+  const description = message ? String(message) : 'An error occurred.';
+  const robots = 'noindex,follow';
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Error' },
   ]);
+
   const detail = err
     ? `<p class="muted" style="margin-top:10px"><code>${escapeHtml(String(err))}</code></p>`
     : '';
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -89,5 +104,6 @@ export function getErrorView(ctx, message, err) {
       </div>
     </section>
   `;
-  return { title, html };
+
+  return { title, description, robots, html };
 }

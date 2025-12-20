@@ -13,6 +13,28 @@ import {
 import { getStoreMissingView } from './error.js';
 import { getView as getNotFoundView } from './not-found.js';
 
+function buildResourceMetaDescription(resource, age, skill) {
+  const parts = [];
+  const title = (resource && resource.title) ? String(resource.title).trim() : '';
+  if (title) parts.push(`${title}.`);
+
+  const baseDesc =
+    (resource && resource.description && String(resource.description).trim()) ||
+    `Practice resource for ${skill}.`;
+  parts.push(baseDesc);
+
+  const metaBits = [];
+  if (resource && resource.focus) metaBits.push(`Focus: ${String(resource.focus).trim()}`);
+  if (resource && resource.format) metaBits.push(`Format: ${String(resource.format).trim()}`);
+  if (resource && resource.time) metaBits.push(`Time: ${String(resource.time).trim()}`);
+  if (resource && resource.level) metaBits.push(`Level: ${String(resource.level).trim()}`);
+  if (metaBits.length) parts.push(metaBits.join('. ') + '.');
+
+  if (age) parts.push(`Ages ${age}.`);
+
+  return parts.join(' ').replace(/\s+/g, ' ').trim();
+}
+
 /**
  * Build the resource detail page.
  * @param {Object} ctx - context with helpers and store functions
@@ -25,6 +47,7 @@ export async function getView(ctx, age, skill, slug) {
   if (!ctx.resourcesStoreAvailable) {
     return getStoreMissingView(ctx);
   }
+
   // Ensure data for the age group is loaded
   if (typeof ctx.ensureAgeLoaded === 'function') {
     try {
@@ -33,12 +56,18 @@ export async function getView(ctx, age, skill, slug) {
       // ignore
     }
   }
-  const resource = typeof ctx.storeGetResource === 'function' ? ctx.storeGetResource(age, skill, slug) : null;
+
+  const resource =
+    typeof ctx.storeGetResource === 'function' ? ctx.storeGetResource(age, skill, slug) : null;
+
   if (!resource) {
     // Delegate to the not-found view with the requested path
     return getNotFoundView(ctx, `/resources/${age}/${skill}/${slug}`);
   }
+
   const title = `${resource.title} — UEAH`;
+  const description = buildResourceMetaDescription(resource, age, skill);
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: ctx.hrefFor('/') },
     { label: 'Resources', href: ctx.hrefFor('/resources') },
@@ -46,12 +75,18 @@ export async function getView(ctx, age, skill, slug) {
     { label: capitalize(skill), href: ctx.hrefFor(`/resources/${age}/${skill}`) },
     { label: resource.title },
   ]);
+
   const chips = renderChips(resource, true);
+
   const openBtn = resource.link
-    ? `<a class="btn btn--primary" href="${escapeAttr(resource.link)}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>`
+    ? `<a class="btn btn--primary" href="${escapeAttr(
+        resource.link
+      )}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>`
     : `<span class="btn btn--primary btn--disabled" aria-disabled="true">MISSING LINK</span>`;
+
   // Detail fields
   const details = resource.details || {};
+
   // Helper to render a simple section
   function renderDetailSection(label, value) {
     const safeLabel = escapeHtml(label);
@@ -63,6 +98,7 @@ export async function getView(ctx, age, skill, slug) {
       </div>
     `;
   }
+
   // Helper to render a list section
   function renderDetailListSection(label, items) {
     const safeLabel = escapeHtml(label);
@@ -84,6 +120,7 @@ export async function getView(ctx, age, skill, slug) {
       </div>
     `;
   }
+
   // Extra links
   const otherLinks = Array.isArray(details.otherLinks) ? details.otherLinks : [];
   const otherLinksHtml = otherLinks.length
@@ -94,13 +131,16 @@ export async function getView(ctx, age, skill, slug) {
           ${otherLinks
             .map(
               (u) =>
-                `<a class="btn btn--small" href="${escapeAttr(u)}" target="_blank" rel="noopener noreferrer">Open extra link ↗</a>`
+                `<a class="btn btn--small" href="${escapeAttr(
+                  u
+                )}" target="_blank" rel="noopener noreferrer">Open extra link ↗</a>`
             )
             .join('')}
         </div>
       </div>
     `
     : '';
+
   // Bundle items
   const bundleItems = Array.isArray(resource.bundleItems) ? resource.bundleItems : [];
   let bundleHtml = '';
@@ -123,6 +163,7 @@ export async function getView(ctx, age, skill, slug) {
       </div>
     `;
   }
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -150,5 +191,6 @@ export async function getView(ctx, age, skill, slug) {
       </div>
     </section>
   `;
-  return { title, html };
+
+  return { title, description, html };
 }

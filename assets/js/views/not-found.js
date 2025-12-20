@@ -12,10 +12,14 @@ import { breadcrumbs, escapeHtml } from '../common.js';
 export function getView(ctx, path) {
   const { hrefFor } = ctx;
   const title = 'Not Found — UEAH';
+  const description = 'Page not found.';
+  const robots = 'noindex,follow';
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Not Found' },
   ]);
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -27,5 +31,6 @@ export function getView(ctx, path) {
       </div>
     </section>
   `;
-  return { title, html };
+
+  return { title, description, robots, html };
 }

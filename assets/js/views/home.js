@@ -1,7 +1,7 @@
 /* assets/js/views/home.js
    Home page view for Ultimate English At Home.
    Exports a getView(ctx) function that returns an object
-   with a title and html string. This view has no afterRender hook.
+   with a title, description, and html string. This view has no afterRender hook.
 */
 
 import {
@@ -25,6 +25,9 @@ import {
 export function getView(ctx) {
   const { hrefFor } = ctx;
   const title = 'UEAH — Ultimate English At Home';
+  const description =
+    'A clean, pastel, responsive English learning hub. Browse resources by age group and skill.';
+
   const html = `
     <section class="hero">
       <p class="eyebrow">Ultimate English At Home</p>
@@ -85,5 +88,5 @@ export function getView(ctx) {
       </div>
     </section>
   `;
-  return { title, html };
+  return { title, description, html };
 }

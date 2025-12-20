@@ -7,10 +7,13 @@ import { breadcrumbs } from '../common.js';
 export function getView(ctx) {
   const { hrefFor } = ctx;
   const title = 'Favourites — UEAH';
+  const description = 'Save your favourite resources and games.';
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Favourites' },
   ]);
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -25,5 +28,6 @@ export function getView(ctx) {
       </div>
     </section>
   `;
-  return { title, html };
+
+  return { title, description, html };
 }

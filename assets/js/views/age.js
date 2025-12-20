@@ -14,17 +14,21 @@ import { breadcrumbs, card, iconSkill, capitalize } from '../common.js';
 export function getView(ctx, age) {
   const { hrefFor } = ctx;
   const title = `${age} Resources — UEAH`;
+  const description = `Resources for ages ${age}. Choose reading, listening, writing, or speaking.`;
+
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Resources', href: hrefFor('/resources') },
     { label: age },
   ]);
+
   const glowBySkill = {
     reading: 'blue',
     listening: 'green',
     writing: 'yellow',
     speaking: 'red',
   };
+
   const cardsHtml = SKILLS.map((skill) =>
     card({
       href: hrefFor(`/resources/${age}/${skill}`),
@@ -35,6 +39,7 @@ export function getView(ctx, age) {
       glow: glowBySkill[skill] || 'green',
     })
   ).join('');
+
   const html = `
     <section class="page-top">
       ${breadcrumb}
@@ -49,5 +54,5 @@ export function getView(ctx, age) {
       </div>
     </section>
   `;
-  return { title, html };
+  return { title, description, html };
 }
