@@ -28,6 +28,15 @@ import {
   profileSet,
   profileClear,
   contactSend,
+  // New: favourites + sync helpers
+  favouritesGetAll,
+  favouritesHas,
+  favouritesToggle,
+  favouritesRemoveByKey,
+  favouritesExportData,
+  favouritesImportData,
+  syncExport,
+  syncImport,
 } from './store-helpers.js';
 import { breadcrumbs } from './common.js';
 import { applySEO } from './seo.js';
@@ -45,6 +54,50 @@ yearEls.forEach((el) => (el.textContent = String(new Date().getFullYear())));
 
 // Detect the basePath for GitHub Pages project sites
 const basePath = detectBasePath();
+
+// -----------------------------
+// Optional nav badge helpers
+// -----------------------------
+
+function setFavBadgeCount(count) {
+  const badge = document.querySelector('[data-fav-badge]');
+  if (!badge) return;
+
+  const n = Number(count);
+  const safe = Number.isFinite(n) && n > 0 ? n : 0;
+
+  if (safe <= 0) {
+    badge.textContent = '0';
+    badge.hidden = true;
+    return;
+  }
+
+  // Cap for UI neatness
+  badge.textContent = safe > 99 ? '99+' : String(safe);
+  badge.hidden = false;
+}
+
+function refreshFavBadge() {
+  try {
+    const items = favouritesGetAll();
+    setFavBadgeCount(Array.isArray(items) ? items.length : 0);
+  } catch (_) {
+    setFavBadgeCount(0);
+  }
+}
+
+// Initialize badge on first load
+refreshFavBadge();
+
+// Listen for changes from favourites-store.js
+window.addEventListener('ueah:favourites-changed', (ev) => {
+  const detail = ev && ev.detail ? ev.detail : null;
+  if (detail && typeof detail.count === 'number') {
+    setFavBadgeCount(detail.count);
+  } else {
+    refreshFavBadge();
+  }
+});
 
 // Shared context passed to all views; functions call store helpers with basePath
 const ctx = {
@@ -65,22 +118,40 @@ const ctx = {
   basePath,
   resourcesStoreAvailable: !!window.UEAH_RESOURCES_STORE,
   testsStoreAvailable: !!window.UEAH_TESTS_STORE,
+
   // Store helpers bound with basePath when needed
   ensureAgeLoaded: (age) => ensureAgeLoaded(age, { basePath }),
   storeGetPack,
   storeGetResources,
   storeGetResource,
   normalizeResourcesList,
+
   testsGetAll,
   testsGetTest,
   testsHasRunner,
   ensureTestRunnerLoaded: (test) => ensureTestRunnerLoaded(test, { basePath }),
+
+  // Profile / contact
   profileGet,
   profileSet,
   profileClear,
   contactSend,
+
+  // New: favourites
+  favouritesGetAll,
+  favouritesHas,
+  favouritesToggle,
+  favouritesRemoveByKey,
+  favouritesExportData,
+  favouritesImportData,
+
+  // New: sync (profile + favourites)
+  syncExport,
+  syncImport,
+
   // Expose the underlying tests store (if any) for advanced views
   testsStore: window.UEAH_TESTS_STORE || null,
+
   AGE_GROUPS,
   SKILLS,
 };

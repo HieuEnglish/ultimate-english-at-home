@@ -149,7 +149,19 @@
         <a class="nav-link" href="/games" data-nav data-nav-key="games">Games</a>
         <a class="nav-link" href="/tests" data-nav data-nav-key="tests">Tests</a>
         <a class="nav-link" href="/profile" data-nav data-nav-key="profile">Profile</a>
-        <a class="nav-link" href="/favourites" data-nav data-nav-key="favourites">Favourites</a>
+
+        <!-- New: favourites badge (updated live via uea:favourites-changed in main.js) -->
+        <a class="nav-link" href="/favourites" data-nav data-nav-key="favourites">
+          Favourites
+          <span
+            class="nav-badge"
+            id="nav-favourites-badge"
+            data-fav-badge
+            aria-label="Favourites count"
+            hidden
+          >0</span>
+        </a>
+
         <a class="nav-link" href="/contact" data-nav data-nav-key="contact">Contact</a>
       </nav>
     </div>
@@ -287,6 +299,9 @@
   <script defer src="assets/js/resources-store.js"></script>
 
   <script defer src="assets/js/tests-store.js"></script>
+
+  <!-- New: favourites store (must load before main.js) -->
+  <script defer src="assets/js/favourites-store.js"></script>
 
   <!-- New: profile + contact helpers (you will create these files) -->
   <script defer src="assets/js/profile-store.js"></script>

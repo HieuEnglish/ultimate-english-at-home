@@ -6,6 +6,7 @@
    - window.UEAH_TESTS_STORE (assets/js/tests-store.js)
    Optional:
    - window.UEAH_PROFILE_STORE (assets/js/profile-store.js)
+   - window.UEAH_FAVOURITES_STORE (assets/js/favourites-store.js)
    - window.UEAH_CONTACT (assets/js/contact.js)
 
    NOTE: This app is static (GitHub Pages) with no build step.
@@ -28,6 +29,11 @@ function getTestsStore() {
 
 function getProfileStore() {
   const s = typeof window !== "undefined" ? window.UEAH_PROFILE_STORE : null;
+  return s && typeof s === "object" ? s : null;
+}
+
+function getFavouritesStore() {
+  const s = typeof window !== "undefined" ? window.UEAH_FAVOURITES_STORE : null;
   return s && typeof s === "object" ? s : null;
 }
 
@@ -259,6 +265,321 @@ export function profileClear() {
   }
 }
 
+function profileExportDataSafe() {
+  const PROFILE_STORE = getProfileStore();
+  if (PROFILE_STORE && typeof PROFILE_STORE.exportData === "function") {
+    try {
+      return PROFILE_STORE.exportData();
+    } catch (_) {
+      // fall through
+    }
+  }
+
+  const p = profileGet() || {};
+  return {
+    schemaVersion: 1,
+    updatedAt: (p && p.updatedAt) || new Date().toISOString(),
+    profile: p
+  };
+}
+
+function profileImportDataSafe(payload, opts = {}) {
+  const PROFILE_STORE = getProfileStore();
+  if (PROFILE_STORE && typeof PROFILE_STORE.importData === "function") {
+    try {
+      return PROFILE_STORE.importData(payload, opts);
+    } catch (_) {
+      // fall through
+    }
+  }
+
+  // Fallback: merge or replace into stored raw object
+  const mode = opts && opts.mode === "replace" ? "replace" : "merge";
+
+  let incoming = payload;
+  if (typeof payload === "string") {
+    try {
+      incoming = JSON.parse(payload);
+    } catch (_) {
+      return { ok: false, reason: "Invalid JSON" };
+    }
+  }
+
+  const incomingProfile =
+    incoming && typeof incoming === "object" && incoming.profile && typeof incoming.profile === "object"
+      ? incoming.profile
+      : incoming;
+
+  const current = profileGet() || {};
+  const next = mode === "replace" ? (incomingProfile || {}) : deepMerge(current, incomingProfile || {});
+  const ok = profileSet(next);
+  return ok ? { ok: true, mode } : { ok: false, reason: "Failed to save profile" };
+}
+
+// -----------------------------
+// Favourites helpers (fallback to localStorage)
+// -----------------------------
+
+export const FAVOURITES_KEY = "UEAH_FAVOURITES_V1";
+
+export function favouritesGetAll() {
+  const FAV_STORE = getFavouritesStore();
+  if (FAV_STORE && typeof FAV_STORE.getAll === "function") {
+    try {
+      return FAV_STORE.getAll() || [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  // Fallback: best-effort read legacy-ish storage
+  try {
+    const raw = localStorage.getItem(FAVOURITES_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!parsed) return [];
+    if (Array.isArray(parsed.items)) return parsed.items.slice();
+    if (parsed.items && typeof parsed.items === "object") return Object.values(parsed.items);
+    return [];
+  } catch (_) {
+    return [];
+  }
+}
+
+export function favouritesHas(age, skill, slug) {
+  const FAV_STORE = getFavouritesStore();
+  if (FAV_STORE && typeof FAV_STORE.has === "function") {
+    try {
+      return !!FAV_STORE.has(age, skill, slug);
+    } catch (_) {
+      return false;
+    }
+  }
+
+  const key = `${String(age || "").trim()}|${String(skill || "").trim()}|${String(slug || "").trim()}`;
+  const list = favouritesGetAll();
+  return list.some((x) => x && String(x.key || "") === key);
+}
+
+export function favouritesToggle(snapshot) {
+  const FAV_STORE = getFavouritesStore();
+  if (FAV_STORE && typeof FAV_STORE.toggle === "function") {
+    try {
+      return FAV_STORE.toggle(snapshot);
+    } catch (_) {
+      return { ok: false, on: false, key: "" };
+    }
+  }
+
+  // Fallback: naive toggle in array storage
+  try {
+    const list = favouritesGetAll();
+    const snap = snapshot && typeof snapshot === "object" ? snapshot : {};
+    const key =
+      String(snap.key || "").trim() ||
+      `${String(snap.age || "").trim()}|${String(snap.skill || "").trim()}|${String(snap.slug || "").trim()}`;
+
+    if (!key || key === "||") return { ok: false, on: false, key: "" };
+
+    const idx = list.findIndex((x) => x && String(x.key || "") === key);
+    if (idx >= 0) list.splice(idx, 1);
+    else list.unshift({ ...snap, key, addedAt: snap.addedAt || new Date().toISOString() });
+
+    localStorage.setItem(
+      FAVOURITES_KEY,
+      JSON.stringify({ schemaVersion: 1, updatedAt: new Date().toISOString(), items: list })
+    );
+
+    try {
+      window.dispatchEvent(
+        new CustomEvent("ueah:favourites-changed", { detail: { count: list.length } })
+      );
+    } catch (_) {
+      // ignore
+    }
+
+    return { ok: true, on: idx < 0, key };
+  } catch (_) {
+    return { ok: false, on: false, key: "" };
+  }
+}
+
+export function favouritesRemoveByKey(key) {
+  const FAV_STORE = getFavouritesStore();
+  if (FAV_STORE && typeof FAV_STORE.removeByKey === "function") {
+    try {
+      return !!FAV_STORE.removeByKey(key);
+    } catch (_) {
+      return false;
+    }
+  }
+
+  try {
+    const list = favouritesGetAll();
+    const k = String(key || "").trim();
+    const next = list.filter((x) => x && String(x.key || "") !== k);
+    localStorage.setItem(
+      FAVOURITES_KEY,
+      JSON.stringify({ schemaVersion: 1, updatedAt: new Date().toISOString(), items: next })
+    );
+
+    try {
+      window.dispatchEvent(
+        new CustomEvent("ueah:favourites-changed", { detail: { count: next.length } })
+      );
+    } catch (_) {
+      // ignore
+    }
+
+    return next.length !== list.length;
+  } catch (_) {
+    return false;
+  }
+}
+
+export function favouritesExportData() {
+  const FAV_STORE = getFavouritesStore();
+  if (FAV_STORE && typeof FAV_STORE.exportData === "function") {
+    try {
+      return FAV_STORE.exportData();
+    } catch (_) {
+      // fall through
+    }
+  }
+
+  const items = favouritesGetAll();
+  return { schemaVersion: 1, updatedAt: new Date().toISOString(), items };
+}
+
+export function favouritesImportData(payload, opts = {}) {
+  const FAV_STORE = getFavouritesStore();
+  if (FAV_STORE && typeof FAV_STORE.importData === "function") {
+    try {
+      return FAV_STORE.importData(payload, opts);
+    } catch (_) {
+      return { ok: false, reason: "Import failed" };
+    }
+  }
+
+  // Fallback: store the exported items array; merge/replace by key
+  const mode = opts && opts.mode === "replace" ? "replace" : "merge";
+
+  let incoming = payload;
+  if (typeof payload === "string") {
+    try {
+      incoming = JSON.parse(payload);
+    } catch (_) {
+      return { ok: false, reason: "Invalid JSON" };
+    }
+  }
+
+  const incomingItems = incoming && typeof incoming === "object" ? incoming.items : null;
+  const list = Array.isArray(incomingItems) ? incomingItems.slice() : [];
+
+  const current = favouritesGetAll();
+  const map = {};
+
+  if (mode === "merge") {
+    current.forEach((x) => {
+      if (x && x.key) map[String(x.key)] = x;
+    });
+  }
+
+  list.forEach((x) => {
+    if (!x) return;
+    const k = String(x.key || "").trim();
+    if (!k) return;
+    map[k] = x;
+  });
+
+  const merged = Object.keys(map).map((k) => map[k]);
+
+  try {
+    localStorage.setItem(
+      FAVOURITES_KEY,
+      JSON.stringify({ schemaVersion: 1, updatedAt: new Date().toISOString(), items: merged })
+    );
+
+    try {
+      window.dispatchEvent(
+        new CustomEvent("ueah:favourites-changed", { detail: { count: merged.length } })
+      );
+    } catch (_) {
+      // ignore
+    }
+
+    return { ok: true, mode, count: merged.length };
+  } catch (_) {
+    return { ok: false, reason: "Failed to save favourites" };
+  }
+}
+
+// -----------------------------
+// Sync helpers (profile + favourites)
+// -----------------------------
+
+function nowIsoSafe() {
+  return new Date().toISOString();
+}
+
+/**
+ * Build a single sync payload (for export to file).
+ * Shape is stable for cross-device import.
+ */
+export function syncExport() {
+  return {
+    app: "UEAH",
+    type: "sync",
+    schemaVersion: 1,
+    exportedAt: nowIsoSafe(),
+    profile: profileExportDataSafe(),
+    favourites: favouritesExportData()
+  };
+}
+
+/**
+ * Validate and import a sync payload.
+ * - mode: "merge" | "replace" (default merge)
+ * - favourites: honours mode (merge union-by-key is recommended)
+ * - profile: merge by default (replace if mode === "replace")
+ */
+export function syncImport(syncJson, opts = {}) {
+  const mode = opts && opts.mode === "replace" ? "replace" : "merge";
+
+  let incoming = syncJson;
+  if (typeof syncJson === "string") {
+    try {
+      incoming = JSON.parse(syncJson);
+    } catch (_) {
+      return { ok: false, reason: "Invalid JSON" };
+    }
+  }
+
+  if (!incoming || typeof incoming !== "object") return { ok: false, reason: "Invalid payload shape" };
+
+  // Soft validation (don’t hard-block older files; just prefer correct metadata)
+  if (incoming.app && String(incoming.app) !== "UEAH") {
+    return { ok: false, reason: "Not a UEAH sync file" };
+  }
+  if (incoming.type && String(incoming.type) !== "sync") {
+    return { ok: false, reason: "Not a sync payload" };
+  }
+
+  const results = { ok: true, mode, profile: null, favourites: null };
+
+  if (incoming.profile) {
+    results.profile = profileImportDataSafe(incoming.profile, { mode });
+    if (!results.profile || results.profile.ok === false) results.ok = false;
+  }
+
+  if (incoming.favourites) {
+    results.favourites = favouritesImportData(incoming.favourites, { mode });
+    if (!results.favourites || results.favourites.ok === false) results.ok = false;
+  }
+
+  return results;
+}
+
 // -----------------------------
 // Contact helpers (fallback to mailto)
 // -----------------------------
@@ -325,4 +646,24 @@ export function contactSend(payload) {
   } catch (_) {
     return false;
   }
+}
+
+// -----------------------------
+// Small shared utility
+// -----------------------------
+
+function isPlainObject(x) {
+  return !!x && typeof x === "object" && !Array.isArray(x);
+}
+
+function deepMerge(target, patch) {
+  if (!isPlainObject(target) || !isPlainObject(patch)) return target;
+  const out = { ...target };
+  Object.keys(patch).forEach((k) => {
+    const tv = out[k];
+    const pv = patch[k];
+    if (isPlainObject(tv) && isPlainObject(pv)) out[k] = deepMerge(tv, pv);
+    else out[k] = pv;
+  });
+  return out;
 }

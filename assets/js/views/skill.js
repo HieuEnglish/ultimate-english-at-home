@@ -66,6 +66,11 @@ export async function getView(ctx, age, skill) {
       ? escapeHtml(pack.overview)
       : `Resources for ${skillLabel} — ages ${escapeHtml(age)}.`;
 
+  const canFav =
+    ctx &&
+    typeof ctx.favouritesToggle === 'function' &&
+    typeof ctx.favouritesHas === 'function';
+
   // Overview section
   let packHtml = '';
   if (pack) {
@@ -104,6 +109,39 @@ export async function getView(ctx, age, skill) {
             const detailHref = ctx.hrefFor(detailPath);
             const chips = renderChips(r);
             const isFeatured = r.isBestSet ? ' is-featured' : '';
+
+            const desc = r.description || `Practice resource for ${skill}.`;
+            const link = r.link || '';
+
+            const favOn = canFav ? !!ctx.favouritesHas(age, skill, r.slug) : false;
+            const favPressed = favOn ? 'true' : 'false';
+            const favClass = favOn ? ' fav-btn is-on' : ' fav-btn';
+            const favText = favOn ? 'Saved' : 'Save';
+            const favAria = favOn
+              ? `Remove ${r.title} from favourites`
+              : `Add ${r.title} to favourites`;
+
+            const favBtn = canFav
+              ? `
+                <button
+                  type="button"
+                  class="btn btn--small btn--icon${favClass}"
+                  data-fav-toggle
+                  aria-pressed="${favPressed}"
+                  aria-label="${escapeAttr(favAria)}"
+                  data-fav-age="${escapeAttr(age)}"
+                  data-fav-skill="${escapeAttr(skill)}"
+                  data-fav-slug="${escapeAttr(r.slug)}"
+                  data-fav-title="${escapeAttr(r.title)}"
+                  data-fav-desc="${escapeAttr(desc)}"
+                  data-fav-link="${escapeAttr(link)}"
+                >
+                  <span aria-hidden="true">♥</span>
+                  <span data-fav-text>${escapeHtml(favText)}</span>
+                </button>
+              `
+              : '';
+
             const openBtn = r.link
               ? `<a class="btn btn--primary btn--small" href="${escapeAttr(
                   r.link
@@ -111,20 +149,20 @@ export async function getView(ctx, age, skill) {
                   r.title
                 )} in a new tab">Open Resource ↗</a>`
               : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
+
             return `
               <article class="resource-item${isFeatured}" role="listitem">
                 <button class="resource-card" type="button" data-nav-to="${escapeAttr(
                   detailPath
                 )}" aria-label="View details: ${escapeAttr(r.title)}">
                   <h2 class="resource-title">${escapeHtml(r.title)}</h2>
-                  <p class="resource-desc">${escapeHtml(
-                    r.description || `Practice resource for ${skill}.`
-                  )}</p>
+                  <p class="resource-desc">${escapeHtml(desc)}</p>
                   ${chips}
                 </button>
                 <div class="resource-actions" aria-label="Resource actions">
                   <a class="btn btn--small" href="${detailHref}" data-nav>Details →</a>
                   ${openBtn}
+                  ${favBtn}
                 </div>
               </article>
             `;
@@ -171,10 +209,50 @@ export async function getView(ctx, age, skill) {
       <div class="actions">
         <a class="btn" href="${ctx.hrefFor(`/resources/${age}`)}" data-nav>← Back to Skills</a>
         <a class="btn" href="${ctx.hrefFor('/resources')}" data-nav>Age Groups</a>
-        <a class="btn btn--primary" href="${ctx.hrefFor('/') }" data-nav>Home</a>
+        <a class="btn btn--primary" href="${ctx.hrefFor('/')}" data-nav>Home</a>
       </div>
     </section>
   `;
 
-  return { title, description, html };
+  function afterRender() {
+    if (!canFav) return;
+
+    const btns = Array.from(document.querySelectorAll('[data-fav-toggle]'));
+    if (!btns.length) return;
+
+    btns.forEach((btn) => {
+      btn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        const d = btn.dataset || {};
+        const snapshot = {
+          age: d.favAge || age,
+          skill: d.favSkill || skill,
+          slug: d.favSlug || '',
+          title: d.favTitle || '',
+          description: d.favDesc || '',
+          link: d.favLink || '',
+        };
+
+        const result = ctx.favouritesToggle(snapshot);
+        const on = !!(result && result.on);
+
+        // Update UI immediately
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.classList.toggle('is-on', on);
+
+        const titleText = snapshot.title || 'resource';
+        btn.setAttribute(
+          'aria-label',
+          on ? `Remove ${titleText} from favourites` : `Add ${titleText} to favourites`
+        );
+
+        const textEl = btn.querySelector('[data-fav-text]');
+        if (textEl) textEl.textContent = on ? 'Saved' : 'Save';
+      });
+    });
+  }
+
+  return { title, description, html, afterRender };
 }

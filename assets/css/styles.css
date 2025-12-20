@@ -171,6 +171,9 @@ a:hover{text-decoration:none}
   padding:10px 12px;
   border-radius:999px;
   border:1px solid transparent;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
 }
 @media (max-width: 560px){
   .nav-link{
@@ -183,6 +186,31 @@ a:hover{text-decoration:none}
   background: var(--surface);
   border-color: var(--border);
   box-shadow: var(--shadow2);
+}
+
+/* -------------------------------------------------
+   NEW: Nav badge (optional favourites count)
+-------------------------------------------------- */
+.nav-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width: 22px;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.10);
+  box-shadow: none;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 800;
+  color: var(--muted);
+}
+@media (prefers-color-scheme: dark){
+  .nav-badge{
+    background: rgba(255,255,255,.06);
+  }
 }
 
 .site-main{padding:26px 0 34px}
@@ -533,6 +561,55 @@ a:hover{text-decoration:none}
   opacity:.6;
   pointer-events:none;
   box-shadow:none;
+}
+
+/* -------------------------------------------------
+   NEW: Icon-like button (favourite toggle)
+-------------------------------------------------- */
+.btn--icon{
+  gap:8px;
+}
+.fav-btn{
+  border-color: rgba(255,106,179,.24);
+}
+.fav-btn span[aria-hidden="true"]{
+  display:inline-block;
+  line-height:1;
+  transform: translateY(0.5px);
+}
+.fav-btn.is-on{
+  border-color: rgba(255,106,179,.55);
+  background:
+    radial-gradient(320px 140px at 20% 0%, rgba(255,106,179,.16), transparent 58%),
+    radial-gradient(320px 140px at 80% 100%, rgba(107,102,255,.12), transparent 60%),
+    var(--surface);
+  box-shadow: var(--shadow2);
+}
+@media (prefers-color-scheme: dark){
+  .fav-btn{
+    border-color: rgba(255,106,179,.22);
+  }
+  .fav-btn.is-on{
+    border-color: rgba(255,106,179,.60);
+  }
+}
+
+/* -------------------------------------------------
+   NEW: File input styling helpers (optional)
+-------------------------------------------------- */
+.file-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.file-input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
 }
 
 /* -------------------------------------------------

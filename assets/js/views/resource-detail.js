@@ -78,6 +78,34 @@ export async function getView(ctx, age, skill, slug) {
 
   const chips = renderChips(resource, true);
 
+  const canFav =
+    ctx &&
+    typeof ctx.favouritesToggle === 'function' &&
+    typeof ctx.favouritesHas === 'function';
+
+  const favOn = canFav ? !!ctx.favouritesHas(age, skill, slug) : false;
+  const favPressed = favOn ? 'true' : 'false';
+  const favClass = favOn ? ' is-on' : '';
+  const favText = favOn ? 'Saved' : 'Save';
+  const favAria = favOn
+    ? `Remove ${resource.title} from favourites`
+    : `Add ${resource.title} to favourites`;
+
+  const favBtn = canFav
+    ? `
+      <button
+        type="button"
+        class="btn btn--small btn--icon fav-btn${favClass}"
+        data-fav-toggle
+        aria-pressed="${favPressed}"
+        aria-label="${escapeAttr(favAria)}"
+      >
+        <span aria-hidden="true">♥</span>
+        <span data-fav-text>${escapeHtml(favText)}</span>
+      </button>
+    `
+    : '';
+
   const openBtn = resource.link
     ? `<a class="btn btn--primary" href="${escapeAttr(
         resource.link
@@ -174,6 +202,7 @@ export async function getView(ctx, age, skill, slug) {
         <div class="actions" style="margin-top:14px">
           <a class="btn" href="${ctx.hrefFor(`/resources/${age}/${skill}`)}" data-nav>← Back</a>
           ${openBtn}
+          ${favBtn}
         </div>
         ${renderDetailSection('Type', details.type)}
         ${renderDetailSection('What it teaches', details.teaches)}
@@ -192,5 +221,38 @@ export async function getView(ctx, age, skill, slug) {
     </section>
   `;
 
-  return { title, description, html };
+  function afterRender() {
+    if (!canFav) return;
+
+    const btn = document.querySelector('[data-fav-toggle]');
+    if (!btn) return;
+
+    btn.addEventListener('click', (ev) => {
+      ev.preventDefault();
+
+      const snapshot = {
+        age,
+        skill,
+        slug,
+        title: resource.title || '',
+        description: resource.description || `Practice resource for ${skill}.`,
+        link: resource.link || '',
+      };
+
+      const result = ctx.favouritesToggle(snapshot);
+      const on = !!(result && result.on);
+
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.classList.toggle('is-on', on);
+      btn.setAttribute(
+        'aria-label',
+        on ? `Remove ${resource.title} from favourites` : `Add ${resource.title} to favourites`
+      );
+
+      const textEl = btn.querySelector('[data-fav-text]');
+      if (textEl) textEl.textContent = on ? 'Saved' : 'Save';
+    });
+  }
+
+  return { title, description, html, afterRender };
 }
