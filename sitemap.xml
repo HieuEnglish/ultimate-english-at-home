@@ -1,15 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/</loc></url>
-  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources</loc></url>
-  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/favourites</loc></url>
 
+  <!-- Top-level pages -->
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/games</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/tests</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/profile</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/favourites</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/contact</loc></url>
+
+  <!-- Tests (known stable slugs) -->
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/tests/iels-reading</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/tests/iels-listening</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/tests/iels-writing</loc></url>
+  <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/tests/iels-speaking</loc></url>
+
+  <!-- Resources: age groups -->
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/0-3</loc></url>
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/4-7</loc></url>
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/8-10</loc></url>
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/11-12</loc></url>
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/13-18</loc></url>
 
+  <!-- Resources: skills per age -->
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/0-3/reading</loc></url>
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/0-3/listening</loc></url>
   <url><loc>https://hieuenglish.github.io/ultimate-english-at-home/resources/0-3/writing</loc></url>
