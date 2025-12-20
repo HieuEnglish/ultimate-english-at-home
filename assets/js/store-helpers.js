@@ -169,7 +169,8 @@ function defaultAssetHref(assetPath, basePath = "") {
  */
 export function loadScriptOnce(src, opts = {}) {
   const basePath = opts.basePath || "";
-  const assetHref = typeof opts.assetHref === "function" ? opts.assetHref : (p) => defaultAssetHref(p, basePath);
+  const assetHref =
+    typeof opts.assetHref === "function" ? opts.assetHref : (p) => defaultAssetHref(p, basePath);
 
   const url = assetHref(src);
   if (!url) return Promise.reject(new Error("Missing script src"));
@@ -265,26 +266,63 @@ export function profileClear() {
 export const CONTACT_TO = "hieuenglishapps@gmail.com";
 
 function buildMailto(to, subject, body) {
-  const s = encodeURIComponent(String(subject || ""));
-  const b = encodeURIComponent(String(body || ""));
-  return `mailto:${encodeURIComponent(String(to || ""))}?subject=${s}&body=${b}`;
+  const _to = encodeURIComponent(String(to || ""));
+  const qs = new URLSearchParams();
+  if (subject) qs.set("subject", String(subject));
+  if (body) qs.set("body", String(body));
+  const query = qs.toString();
+  return query ? `mailto:${_to}?${query}` : `mailto:${_to}`;
 }
 
+function safePageUrl() {
+  try {
+    return typeof window !== "undefined" && window.location ? String(window.location.href || "") : "";
+  } catch (_) {
+    return "";
+  }
+}
+
+/**
+ * Send a contact message.
+ * - Prefers window.UEAH_CONTACT.send if available.
+ * - Falls back to mailto when contact.js is unavailable or errors.
+ *
+ * Payload shape expected by views/contact.js:
+ *   { fromEmail, subject, message }
+ */
 export function contactSend(payload) {
+  const data = payload && typeof payload === "object" ? payload : {};
+  const fromEmail = String(data.fromEmail || "").trim();
+  const subject = String(data.subject || "").trim() || "UEAH Contact";
+  const message = String(data.message || "").trim();
+
   const CONTACT = getContactHelpers();
 
-  // If contact.js provides a helper, prefer it.
-  // Expected shape: window.UEAH_CONTACT.send({ to, subject, message, fromEmail })
+  // Prefer contact.js helper if present.
+  // Expected: window.UEAH_CONTACT.send({ to, fromEmail, subject, message })
   if (CONTACT && typeof CONTACT === "object" && typeof CONTACT.send === "function") {
-    return CONTACT.send({ to: CONTACT_TO, ...payload });
+    try {
+      return CONTACT.send({ to: CONTACT_TO, fromEmail, subject, message });
+    } catch (_) {
+      // Fall back to mailto below.
+    }
   }
 
-  // Fallback: mailto
-  const subject = payload && payload.subject ? payload.subject : "UEAH Contact";
-  const message = payload && payload.message ? payload.message : "";
-  const fromEmail = payload && payload.fromEmail ? payload.fromEmail : "";
-  const body = fromEmail ? `From: ${fromEmail}\n\n${message}` : message;
+  // Fallback: mailto (always usable on static hosting)
+  const url = safePageUrl();
+  const bodyLines = [
+    message || "",
+    "",
+    "---",
+    `From: ${fromEmail || "Not provided"}`,
+  ];
+  if (url) bodyLines.push(`Page: ${url}`);
+  const body = bodyLines.join("\n");
 
-  window.location.href = buildMailto(CONTACT_TO, subject, body);
-  return true;
+  try {
+    window.location.href = buildMailto(CONTACT_TO, subject, body);
+    return true;
+  } catch (_) {
+    return false;
+  }
 }

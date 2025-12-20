@@ -25,33 +25,57 @@ export function getView(ctx) {
       ${breadcrumb}
       <h1 class="page-title">Profile</h1>
       <p class="page-subtitle">Saved on this device.</p>
+
       <div class="detail-card" role="region" aria-label="Profile form">
         <form id="profile-form" novalidate>
           <div class="detail-section">
-            <h2>Email</h2>
-            <p class="muted" style="margin-bottom:10px">Used for score tracking and contact.</p>
-            <input id="profile-email" name="email" type="email" autocomplete="email" inputmode="email"
-              style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
-              placeholder="name@example.com" />
+            <label class="label" for="profile-email">Email</label>
+            <p class="muted" style="margin:8px 0 10px;">Used for score tracking and contact.</p>
+            <input
+              id="profile-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              class="input"
+              placeholder="name@example.com"
+            />
           </div>
+
           <div class="detail-section">
-            <h2>Display name</h2>
-            <input id="profile-name" name="name" type="text" autocomplete="name"
-              style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
-              placeholder="Optional" />
+            <label class="label" for="profile-name">Display name</label>
+            <input
+              id="profile-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              class="input"
+              placeholder="Optional"
+            />
           </div>
+
           <div class="detail-section">
-            <h2>Target IELS score</h2>
-            <input id="profile-target" name="targetScore" type="number" inputmode="decimal" min="0" max="9" step="0.5"
-              style="width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background: var(--surface2); color: var(--text);"
-              placeholder="Optional (e.g., 6.5)" />
+            <label class="label" for="profile-target">Target IELS score</label>
+            <input
+              id="profile-target"
+              name="targetScore"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              max="9"
+              step="0.5"
+              class="input"
+              placeholder="Optional (e.g., 6.5)"
+            />
           </div>
+
           <div class="actions">
             <button class="btn btn--primary" type="submit">Save</button>
             <button class="btn" type="button" id="profile-clear">Clear</button>
             <a class="btn" href="${hrefFor('/')}" data-nav>Home</a>
           </div>
-          <p id="profile-status" class="muted" style="margin:12px 0 0"></p>
+
+          <p id="profile-status" class="muted" style="margin:12px 0 0" aria-live="polite"></p>
         </form>
       </div>
     </section>
@@ -65,29 +89,37 @@ export function getView(ctx) {
     const clearBtn = document.getElementById('profile-clear');
     const statusEl = document.getElementById('profile-status');
     if (!form || !emailEl || !nameEl || !targetEl || !clearBtn || !statusEl) return;
+
     const existing = (typeof profileGet === 'function' && profileGet()) || {};
     emailEl.value = existing.email || '';
     nameEl.value = existing.name || '';
-    targetEl.value = typeof existing.targetScore === 'number'
-      ? String(existing.targetScore)
-      : existing.targetScore || '';
+    targetEl.value =
+      typeof existing.targetScore === 'number'
+        ? String(existing.targetScore)
+        : existing.targetScore || '';
+
     function setStatus(msg) {
       statusEl.textContent = msg || '';
     }
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+
       const email = String(emailEl.value || '').trim();
       const name = String(nameEl.value || '').trim();
       const targetRaw = String(targetEl.value || '').trim();
+
       let targetScore = null;
       if (targetRaw) {
         const n = Number(targetRaw);
         targetScore = Number.isFinite(n) ? n : null;
       }
+
       const data = { email, name, targetScore };
       const ok = typeof profileSet === 'function' ? profileSet(data) : false;
       setStatus(ok ? 'Saved.' : 'Could not save on this device.');
     });
+
     clearBtn.addEventListener('click', () => {
       const ok = typeof profileClear === 'function' ? profileClear() : false;
       emailEl.value = '';
@@ -96,5 +128,6 @@ export function getView(ctx) {
       setStatus(ok ? 'Cleared.' : 'Could not clear on this device.');
     });
   };
+
   return { title, html, afterRender };
 }

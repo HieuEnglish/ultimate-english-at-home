@@ -1,20 +1,23 @@
 /* assets/js/contact.js
-   UEAH Contact helpers
+   UEAH Contact helpers (progressive enhancement)
 
    What this does:
-   - Renders/controls a simple contact form (used by app.js "Contact" route)
-   - Uses a "mailto:" fallback by default (works on GitHub Pages with no backend)
-   - Optional hook points if you later add a serverless endpoint
+   - Provides a safe, dependency-free "mailto:" sender that works on GitHub Pages (no backend)
+   - Exposes a stable API used by the SPA:
+       window.UEAH_CONTACT.send({ to, fromEmail, subject, message })
+   - Also includes optional helpers for rendering/attaching a standalone contact form
+     (kept for backward compatibility, but the SPA view can validate on its own)
 
    IMPORTANT:
    - GitHub Pages cannot send email directly from client-side JS without a backend.
-   - This uses `mailto:hieuenglishapps@gmail.com` which opens the user's email app.
+   - This uses a mailto: fallback which opens the user's email app.
 */
 
 (function () {
   "use strict";
 
   const DEFAULT_TO = "hieuenglishapps@gmail.com";
+
   const MAX_MESSAGE = 4000;
   const MAX_SUBJECT = 140;
   const MAX_NAME = 80;
@@ -31,20 +34,28 @@
     return s ? s.toLowerCase() : "";
   }
 
+  function isValidEmail(email) {
+    // Pragmatic check for client-side UX.
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+  }
+
   function buildMailto({ to, subject, body }) {
-    const _to = to || DEFAULT_TO;
+    const _to = (to || DEFAULT_TO || "").trim();
     const qs = new URLSearchParams();
     if (subject) qs.set("subject", subject);
     if (body) qs.set("body", body);
-    return `mailto:${encodeURIComponent(_to)}?${qs.toString()}`;
+    const query = qs.toString();
+    return query
+      ? `mailto:${encodeURIComponent(_to)}?${query}`
+      : `mailto:${encodeURIComponent(_to)}`;
   }
 
   function composeBody({ name, email, message, pageUrl }) {
     const lines = [];
     lines.push("UEAH Contact Message");
     lines.push("-------------------");
-    lines.push(`Name: ${name || "-"}`);
-    lines.push(`Email: ${email || "-"}`);
+    if (name) lines.push(`Name: ${name}`);
+    if (email) lines.push(`Email: ${email}`);
     if (pageUrl) lines.push(`Page: ${pageUrl}`);
     lines.push("");
     lines.push("Message:");
@@ -54,28 +65,34 @@
     return lines.join("\n");
   }
 
-  function validate({ name, email, message }) {
+  /**
+   * Validation for the helper API (send/attach).
+   * The SPA view may also validate independently; this ensures safety if called directly.
+   */
+  function validateSend({ fromEmail, subject, message }) {
     const errors = {};
+    const email = String(fromEmail || "").trim();
+    const subj = String(subject || "").trim();
+    const msg = String(message || "").trim();
 
-    if (!message || message.trim().length < 3) errors.message = "Please write a message.";
-    if (message && message.length > MAX_MESSAGE) errors.message = `Message is too long (max ${MAX_MESSAGE} characters).`;
+    if (!email) errors.fromEmail = "Email is required.";
+    else if (email.length > MAX_EMAIL) errors.fromEmail = `Email is too long (max ${MAX_EMAIL} characters).`;
+    else if (!isValidEmail(email)) errors.fromEmail = "Please enter a valid email address.";
 
-    // Optional fields, but basic sanity if provided
-    if (name && name.length > MAX_NAME) errors.name = `Name is too long (max ${MAX_NAME} characters).`;
-    if (email && email.length > MAX_EMAIL) errors.email = `Email is too long (max ${MAX_EMAIL} characters).`;
+    if (!subj) errors.subject = "Subject is required.";
+    else if (subj.length > MAX_SUBJECT) errors.subject = `Subject is too long (max ${MAX_SUBJECT} characters).`;
 
-    // Minimal email check (only if user filled it)
-    if (email) {
-      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!ok) errors.email = "That email address doesn’t look valid.";
-    }
+    if (!msg) errors.message = "Message is required.";
+    else if (msg.length > MAX_MESSAGE) errors.message = `Message is too long (max ${MAX_MESSAGE} characters).`;
 
     return errors;
   }
 
   function setFieldError(fieldEl, message) {
     if (!fieldEl) return;
-    fieldEl.setAttribute("aria-invalid", message ? "true" : "false");
+    // Prefer removing aria-invalid when valid; but keep "false" if you rely on it elsewhere.
+    if (message) fieldEl.setAttribute("aria-invalid", "true");
+    else fieldEl.removeAttribute("aria-invalid");
 
     const wrap = fieldEl.closest("[data-field]");
     if (!wrap) return;
@@ -104,13 +121,50 @@
     fields.forEach((f) => setFieldError(f, ""));
   }
 
+  /**
+   * Primary API expected by the SPA (store-helpers.js / views/contact.js).
+   * Opens a mailto link. Throws a descriptive Error if input is invalid.
+   */
+  function send({ to, fromEmail, subject, message } = {}) {
+    const email = sanitizeText(fromEmail, MAX_EMAIL);
+    const subj = sanitizeText(subject, MAX_SUBJECT);
+    const msg = sanitizeText(message, MAX_MESSAGE);
+
+    const errors = validateSend({ fromEmail: email, subject: subj, message: msg });
+    if (Object.keys(errors).length) {
+      const err = new Error("CONTACT_VALIDATION_ERROR");
+      err.code = "CONTACT_VALIDATION_ERROR";
+      err.details = errors;
+      throw err;
+    }
+
+    const pageUrl = window.location && window.location.href ? window.location.href : "";
+    const body = composeBody({
+      name: "",
+      email,
+      message: msg,
+      pageUrl
+    });
+
+    const href = buildMailto({
+      to: String(to || DEFAULT_TO || "").trim(),
+      subject: subj || "UEAH Contact",
+      body
+    });
+
+    window.location.href = href;
+    return true;
+  }
+
+  /**
+   * Optional: attach behavior to a standalone form markup (kept for backward compatibility).
+   * Note: this older form supports name/email optional; your SPA view now enforces required fields.
+   */
   function attach(root, opts) {
     if (!root) return () => {};
 
     const options = {
       to: (opts && opts.to) || DEFAULT_TO,
-      // Optional: for future serverless
-      // endpoint: (opts && opts.endpoint) || "",
       onSent: (opts && opts.onSent) || null
     };
 
@@ -122,38 +176,63 @@
     const subjectEl = form.querySelector("[name='subject']");
     const messageEl = form.querySelector("[name='message']");
 
+    function validateLegacy({ name, email, message, subject }) {
+      const errors = {};
+
+      // Legacy form: name/email/subject optional, but sanity check if provided
+      if (name && name.length > MAX_NAME) errors.name = `Name is too long (max ${MAX_NAME} characters).`;
+
+      if (email && email.length > MAX_EMAIL) errors.email = `Email is too long (max ${MAX_EMAIL} characters).`;
+      if (email && !isValidEmail(email)) errors.email = "That email address doesn’t look valid.";
+
+      if (subject && subject.length > MAX_SUBJECT) errors.subject = `Subject is too long (max ${MAX_SUBJECT} characters).`;
+
+      if (!message || message.trim().length < 3) errors.message = "Please write a message.";
+      if (message && message.length > MAX_MESSAGE) errors.message = `Message is too long (max ${MAX_MESSAGE} characters).`;
+
+      return errors;
+    }
+
     function onSubmit(e) {
       e.preventDefault();
       clearErrors(root);
       setStatus(root, "", "");
 
       const data = readForm(form);
-      const errors = validate(data);
+      const errors = validateLegacy(data);
 
       setFieldError(nameEl, errors.name || "");
       setFieldError(emailEl, errors.email || "");
+      setFieldError(subjectEl, errors.subject || "");
       setFieldError(messageEl, errors.message || "");
 
       const hasErrors = Object.keys(errors).length > 0;
       if (hasErrors) {
         setStatus(root, "Please fix the highlighted fields.", "error");
         const first =
-          (errors.name && nameEl) || (errors.email && emailEl) || (errors.message && messageEl) || null;
+          (errors.name && nameEl) ||
+          (errors.email && emailEl) ||
+          (errors.subject && subjectEl) ||
+          (errors.message && messageEl) ||
+          null;
         if (first && typeof first.focus === "function") first.focus();
         return;
       }
 
       const pageUrl = window.location.href;
       const subject = data.subject || "UEAH Contact";
-      const body = composeBody({ ...data, pageUrl });
+      const body = composeBody({
+        name: data.name,
+        email: data.email,
+        message: data.message,
+        pageUrl
+      });
 
-      // Default behavior: open mail client
       const href = buildMailto({ to: options.to, subject, body });
 
       setStatus(root, "Opening your email app…", "info");
       window.location.href = href;
 
-      // Let caller hook in (optional)
       if (typeof options.onSent === "function") {
         try {
           options.onSent({ ...data, subject, body, to: options.to, mode: "mailto" });
@@ -163,7 +242,6 @@
 
     form.addEventListener("submit", onSubmit);
 
-    // Basic realtime clearing
     function onInput(e) {
       const el = e.target;
       if (!(el instanceof HTMLElement)) return;
@@ -182,7 +260,7 @@
   // Optional helper for app.js to render a consistent form block
   function renderContactFormHtml({ title, subtitle } = {}) {
     const safeTitle = escapeHtml(title || "Contact");
-    const safeSubtitle = escapeHtml(subtitle || "Send a message to hieuenglishapps@gmail.com.");
+    const safeSubtitle = escapeHtml(subtitle || `Send a message to ${DEFAULT_TO}.`);
 
     return `
       <section class="page-top">
@@ -248,9 +326,14 @@
 
   // Expose
   window.UEAH_CONTACT = {
+    // Primary SPA API
+    send,
+
+    // Optional/legacy helpers
     attach,
     renderContactFormHtml,
     buildMailto,
-    composeBody
+    composeBody,
+    validateSend
   };
-})();```
+})();

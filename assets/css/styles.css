@@ -1,4 +1,4 @@
-﻿﻿:root{
+﻿:root{
   --bg: #f6f9ff;
   --bg2:#fff6fb;
   --surface: rgba(255,255,255,.78);
@@ -12,6 +12,9 @@
   --accent:#6b66ff;
   --accent2:#ff6ab3;
   --focus:#2f7cff;
+
+  /* NEW: form error color */
+  --danger:#c0183c;
 
   --radius: 18px;
   --radius2: 22px;
@@ -49,6 +52,9 @@
     --shadow: 0 10px 30px rgba(0,0,0,.35);
     --shadow2: 0 6px 16px rgba(0,0,0,.28);
     --focus:#7ab0ff;
+
+    /* NEW: form error color (dark mode) */
+    --danger:#ff5f86;
   }
 }
 
@@ -527,6 +533,78 @@ a:hover{text-decoration:none}
   opacity:.6;
   pointer-events:none;
   box-shadow:none;
+}
+
+/* -------------------------------------------------
+   NEW: Form system (inputs + accessible errors)
+-------------------------------------------------- */
+
+.label{
+  display:block;
+  font-weight:750;
+  letter-spacing:.1px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* Use these classes where possible; also keep ARIA-based invalid styling for inline-styled inputs. */
+.input,
+.textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+.textarea{resize:vertical}
+
+.field-error{
+  color: var(--danger);
+  font-weight:750;
+  line-height:1.4;
+}
+.field-error:empty{display:none}
+
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:14px;
+}
+
+@media (min-width: 1100px){
+  .form-grid{gap:16px}
+}
+
+/* ARIA-invalid styling (works for both .input/.textarea and inline-styled fields) */
+input[aria-invalid="true"],
+textarea[aria-invalid="true"]{
+  border-color: rgba(192,24,60,.60);
+  box-shadow: 0 0 0 3px rgba(192,24,60,.10);
+}
+
+@media (prefers-color-scheme: dark){
+  input[aria-invalid="true"],
+  textarea[aria-invalid="true"]{
+    border-color: rgba(255,95,134,.70);
+    box-shadow: 0 0 0 3px rgba(255,95,134,.12);
+  }
+}
+
+.contact-status{
+  margin-top:12px;
+  color: var(--muted);
+  line-height:1.5;
+}
+.contact-status[data-kind="error"]{
+  color: var(--danger);
+  font-weight:750;
 }
 
 /* -------------------------------------------------
