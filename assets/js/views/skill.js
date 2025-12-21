@@ -67,10 +67,11 @@ export async function getView(ctx, age, skill) {
           groupLabel
         )}</span>`;
 
+  // Keep the subtitle short; the full pack overview is rendered inside the Overview card.
   const subtitle =
-    pack && pack.overview
-      ? escapeHtml(pack.overview)
-      : `Resources for ${skillLabel} — ${escapeHtml(audience)}.`;
+    pack && pack.subtitle
+      ? escapeHtml(pack.subtitle)
+      : `Free ${skillLabel} resources for ${escapeHtml(audience)}.`;
 
   const canFav =
     ctx &&
@@ -80,6 +81,8 @@ export async function getView(ctx, age, skill) {
   // Overview section
   let packHtml = '';
   if (pack) {
+    const overviewHtml = renderOverviewBlock(pack.overview);
+
     const objectives =
       Array.isArray(pack.objectives) && pack.objectives.length
         ? `<div class="detail-section"><h2>Objectives</h2><ul>${pack.objectives
@@ -97,7 +100,7 @@ export async function getView(ctx, age, skill) {
     packHtml = `
       <div class="detail-card" role="region" aria-label="Pack overview">
         <h2 class="detail-title" style="font-size:18px; margin:0">Overview</h2>
-        <p class="detail-desc" style="margin-top:10px">${escapeHtml(pack.overview || '')}</p>
+        ${overviewHtml}
         ${objectives}
         ${materials}
       </div>
@@ -261,4 +264,74 @@ export async function getView(ctx, age, skill) {
   }
 
   return { title, description, html, afterRender };
+
+  // -----------------------------
+  // Helpers
+  // -----------------------------
+
+  function renderOverviewBlock(overview) {
+    const text = cleanOverviewText(overview);
+    if (!text) {
+      return `<p class="detail-desc" style="margin-top:10px">Not specified.</p>`;
+    }
+
+    const items = splitOverviewIntoItems(text);
+    if (items.length <= 1) {
+      return `<p class="detail-desc" style="margin-top:10px">${escapeHtml(text)}</p>`;
+    }
+
+    return `
+      <ul class="overview-list" style="margin-top:10px">
+        ${items.map((it) => `<li>${escapeHtml(it)}</li>`).join('')}
+      </ul>
+    `;
+  }
+
+  function cleanOverviewText(input) {
+    if (!input) return '';
+
+    // Support either a string overview or an array of lines.
+    if (Array.isArray(input)) {
+      return input
+        .map((x) => String(x || '').trim())
+        .filter(Boolean)
+        .join(' ');
+    }
+
+    let s = String(input);
+
+    // Remove common DOCX conversion artifacts (e.g., "IELTS+1", "Take IELTS+2Take IELTS+2").
+    s = s.replace(/\bTake\s+IELTS\+\d+\b/gi, '');
+    s = s.replace(/\bIELTS\+\d+\b/gi, '');
+    s = s.replace(/IELTS\+\d+/gi, '');
+    s = s.replace(/\bIDP\s+IELTS\s+India\+\d+\b/gi, 'IDP IELTS India');
+    s = s.replace(/\bIDP\s+IELTS\s+India\+\b/gi, 'IDP IELTS India');
+
+    // De-duplicate repeated provider names if they were doubled by conversion.
+    s = s.replace(/\bTake\s+IELTS\s*Take\s+IELTS\b/gi, 'Take IELTS');
+    s = s.replace(/\bIELTS\.org\s*IELTS\.org\b/gi, 'IELTS.org');
+
+    // Collapse whitespace.
+    s = s.replace(/\s+/g, ' ').trim();
+    return s;
+  }
+
+  function splitOverviewIntoItems(text) {
+    const t = String(text || '').trim();
+    if (!t) return [];
+
+    // Insert line breaks before section markers and step markers.
+    let s = t;
+    s = s.replace(/\s(?=(?:🧭|🧾|🧩|🎯|🧠|🪜|✅|⏱️|🔎|⚖️|📈|🧮))/g, '\n');
+    s = s.replace(/\s(?=(?:[0-9]️⃣))/g, '\n');
+
+    const parts = s
+      .split('\n')
+      .map((p) => p.trim())
+      .filter(Boolean);
+
+    // If we accidentally split into too many tiny fragments, fall back to a single paragraph.
+    if (parts.length > 20) return [t];
+    return parts;
+  }
 }

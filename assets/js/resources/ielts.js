@@ -15,23 +15,49 @@
     packs: {
       "ielts/reading": {
         title: "IELTS Reading 📖",
-        overview:
-          "🧭 Overview: IELTS Reading (brief) 📚⏱️ ⏱️ Time: 60 minutes total (includes transfer time) 🕒 IELTS+1 🧩 Structure: 3 sections + 40 questions ✅ IELTS+1 🎯 What it tests: skimming for gist, scanning for details, understanding opinions/attitudes, writer’s views, and locating information quickly 🧠📌 Take IELTS+1 🧑‍🎓 Academic vs General Training: 📘 Academic: texts from books/journals/magazines/newspapers; more academic tone 🧑‍🎓 IELTS+1 🧾 General Training: everyday + workplace texts (notices, ads, handbooks, newspapers) 🏢📰 Take IELTS+1 🧮 Scoring: 1 mark per correct answer, converted to band score 🧾📈 IELTS+1 🧩 Common question types: multiple choice, TF/NG, matching headings, matching information, matching features, matching sentence endings, sentence completion, summary completion (summary/note/table/flow-chart/diagram), short answers 🧠📝 IELTS+1 🧰 Resources & materials write-up (brief) 🔗📝 ✅ Free practice sources (recommended) 🌐📚 🏛️ IELTS.org official sample questions + sample task PDFs (Academic + GT) 📄✅ IELTS+2IELTS+2 🇬🇧 British Council (TakeIELTS) free full Reading practice tests (Academic + GT), timed like the real test ⏱️📝 Take IELTS+2Take IELTS+2 🆔 IDP IELTS free Reading practice sets (Academic/GT) 📘🧾 IDP IELTS India+1 🧾 Materials learners should have 🛠️📌 ⏲️ Timer (strict 60 minutes) 📝 Answer sheet (printable) + pen/pencil ✍️ 📓 Error log (question type → why wrong → fix) 🧠 🗂️ Vocabulary notebook (topic words + paraphrases) 🔁 🖥️ Device + stable browser (some practice tests split across pages—move quickly) 🌐⚡ Take IELTS+1 🪜 How to use these materials (simple loop) 🔁✅ 1️⃣ Do 1 timed passage/task (10–20 min) ⏱️ 2️⃣ Review mistakes by question type (TF/NG, headings, matching, gaps) 🧩 3️⃣ Redo only wrong questions 1–2 days later (no notes) 🔁 4️⃣ Weekly: 1 full 60-minute test + error-log update 📈",
+        subtitle: "60 minutes • 3 sections • 40 questions",
+        overview: [
+          "⏱️ Time: 60 minutes total.",
+          "🧩 Structure: 3 sections, 40 questions.",
+          "🎯 Skills: skimming for gist, scanning for details, opinions/attitudes, writer’s views, locating information quickly.",
+          "🧑‍🎓 Academic: texts from books/journals/magazines/newspapers (more academic tone).",
+          "🧾 General Training: everyday + workplace texts (notices, ads, handbooks, newspapers).",
+          "🧮 Scoring: 1 mark per correct answer, converted to band score.",
+          "🧩 Common question types: multiple choice; TF/NG; matching headings/information/features/sentence endings; sentence/summary completion; short answers.",
+          "🧾 Materials: timer, answer sheet, pen/pencil, error log, vocabulary notebook, stable browser/device.",
+          "🪜 Practice loop: timed passage (10–20 min) → review by question type → redo wrong questions after 1–2 days → weekly full 60-minute test."
+        ],
       },
       "ielts/listening": {
         title: "IELTS Listening 🎧",
-        overview:
-          "🧭 IELTS Listening Overview 🎧📝 Format 🧩: 4 parts, 40 questions, you hear each recording once. IELTS+1 Topics 🔎: conversation + monologue, social → academic. IELTS+1 Timing ⏱️: Recording is ~30 minutes; paper test includes extra time to transfer answers (varies by delivery). IELTS+1 Skills tested 🧠: understanding main ideas, specific information, attitudes/opinion, purpose, following idea development. IDP IELTS India",
+        subtitle: "4 parts • 40 questions • audio once",
+        overview: [
+          "🧩 Format: 4 parts, 40 questions; you hear each recording once.",
+          "🔎 Topics: conversation + monologue (social → academic).",
+          "⏱️ Timing: ~30 minutes audio; paper test includes extra time to transfer answers (varies by delivery).",
+          "🧠 Skills: main ideas, specific information, attitudes/opinion, purpose, following idea development."
+        ],
       },
       "ielts/writing": {
         title: "IELTS Writing ✍️",
-        overview:
-          "🧾 IELTS Writing overview ✍️🕒 (brief) Format 🧩: 2 tasks in 60 minutes (Academic + General Training). Task 2 is worth twice as much as Task 1. IELTS+1 Task 1 🧾: Academic = describe data/diagram/map/process. GT = write a letter. IELTS+1 Task 2 🧠: Essay (opinion/discussion/problem-solution/advantage-disadvantage). IELTS+1 Scoring 📈: Task achievement/response, Coherence & Cohesion, Lexical Resource, Grammar. IELTS+1",
+        subtitle: "2 tasks • 60 minutes • Task 2 counts double",
+        overview: [
+          "🧩 Format: 2 tasks in 60 minutes (Academic + General Training).",
+          "⚖️ Task 2 is worth twice as much as Task 1.",
+          "🧾 Task 1: Academic = describe data/diagram/map/process. General Training = write a letter.",
+          "🧠 Task 2: Essay (opinion/discussion/problem-solution/advantage-disadvantage).",
+          "📈 Scoring: Task achievement/response, Coherence & Cohesion, Lexical Resource, Grammar."
+        ],
       },
       "ielts/speaking": {
         title: "IELTS Speaking 🗣️",
-        overview:
-          "🧭 IELTS Speaking Overview 🗣️🎤 Format 🧩: 3 parts (Part 1 interview, Part 2 long turn, Part 3 discussion). IELTS+1 Time ⏱️: 11–14 minutes total, face-to-face with a certified examiner (recorded). IELTS+1 Scoring ✅: Fluency & Coherence, Lexical Resource, Grammar Range & Accuracy, Pronunciation. IELTS+1 A) Top Picks ✅🗣️ (15 items)",
+        subtitle: "3 parts • 11–14 minutes • face-to-face",
+        overview: [
+          "🧩 Format: 3 parts (Part 1 interview, Part 2 long turn, Part 3 discussion).",
+          "⏱️ Time: 11–14 minutes total; face-to-face with a certified examiner (recorded).",
+          "✅ Scoring: Fluency & Coherence, Lexical Resource, Grammar Range & Accuracy, Pronunciation.",
+          "✅ See the resources below for practice materials."
+        ],
       },
     },
     resources: [
@@ -566,7 +592,11 @@
         format: "site",
         details: {
           teaches: "🎯 Official sample questions + downloadable tasks.",
-          howTo: ["🪜 ✅ Choose Writing samples", "✅ Time yourself", "✅ Check against descriptors"],
+          howTo: [
+            "🪜 ✅ Choose Writing samples",
+            "✅ Time yourself",
+            "✅ Check against descriptors",
+          ],
           whyTopPick: "⭐ Official question bank",
           ageCheck: "👤 Teen/adult",
         },
@@ -582,7 +612,11 @@
         details: {
           type: "🧠 Lesson hub",
           teaches: "🎯 Task 1 structure + language + common mistakes.",
-          howTo: ["🪜 ✅ Read 1 lesson", "✅ Write 1 Task 1 answer", "✅ Fix 3 errors and rewrite"],
+          howTo: [
+            "🪜 ✅ Read 1 lesson",
+            "✅ Write 1 Task 1 answer",
+            "✅ Fix 3 errors and rewrite",
+          ],
           whyTopPick: "⭐ Clear explanations for Task 1 success",
           freeAccess: "💸 Free site content",
           ageCheck: "👤 Teen/adult",
@@ -599,7 +633,11 @@
         details: {
           type: "🧠 Lesson hub",
           teaches: "🎯 Task 2 essay types + structure + vocab/grammar tips.",
-          howTo: ["🪜 ✅ Choose 1 essay type", "✅ Write in 40 minutes", "✅ Rewrite using feedback checklist"],
+          howTo: [
+            "🪜 ✅ Choose 1 essay type",
+            "✅ Write in 40 minutes",
+            "✅ Rewrite using feedback checklist",
+          ],
           whyTopPick: "⭐ Strong fundamentals for Task 2",
           freeAccess: "💸 Free site content",
           ageCheck: "👤 Teen/adult",
@@ -616,7 +654,11 @@
         details: {
           type: "🧠 Strategy page",
           teaches: "🎯 Essay structure templates + strategy.",
-          howTo: ["🪜 ✅ Pick a structure template", "✅ Plan in 5 minutes", "✅ Write in 35 minutes"],
+          howTo: [
+            "🪜 ✅ Pick a structure template",
+            "✅ Plan in 5 minutes",
+            "✅ Write in 35 minutes",
+          ],
           whyTopPick: "⭐ Clear, structured Task 2 guidance",
           freeAccess: "💸 Free webpage access",
           ageCheck: "👤 Teen/adult",
@@ -634,7 +676,9 @@
         details: {
           type: "🧾 Official overview",
           teaches: "🎯 Exact structure + what happens in each part",
-          howTo: ["🪜 ① Read once 📖 ② Note timing per part ⏱️ ③ Use as your “rules checklist” before practice ✅"],
+          howTo: [
+            "🪜 ① Read once 📖 ② Note timing per part ⏱️ ③ Use as your “rules checklist” before practice ✅",
+          ],
           whyTopPick: "⭐ Official and format-accurate",
           freeAccess: "💸 Fully free, no account",
           ageCheck: "👤 18+ safe; exam-focused content",
@@ -651,7 +695,9 @@
         details: {
           type: "📄 Official PDF prompts + sample interaction",
           teaches: "🎯 Realistic Part 1/2/3 style prompts",
-          howTo: ["🪜 ① Choose 1 set ✅ ② Record answers 🎙️ ③ Re-do 48h later for improvement 🔁"],
+          howTo: [
+            "🪜 ① Choose 1 set ✅ ② Record answers 🎙️ ③ Re-do 48h later for improvement 🔁",
+          ],
           whyTopPick: "⭐ Closest to real test phrasing",
           freeAccess: "💸 Fully free PDF",
           ageCheck: "👤 18+ safe",
@@ -668,7 +714,9 @@
         details: {
           type: "🧾 Official article",
           teaches: "🎯 Understanding the exam + how it’s assessed",
-          howTo: ["🪜 ① Read once 📖 ② Note key scoring points ✅ ③ Apply to your next speaking practice 🎙️"],
+          howTo: [
+            "🪜 ① Read once 📖 ② Note key scoring points ✅ ③ Apply to your next speaking practice 🎙️",
+          ],
           whyTopPick: "⭐ Clear explanation from official source",
           freeAccess: "💸 Fully free page",
           ageCheck: "👤 Teen/adult; safe",
@@ -685,7 +733,9 @@
         details: {
           type: "🧠 Lessons hub",
           teaches: "🎯 Strategy + question types + common mistakes",
-          howTo: ["🪜 ① Choose 1 lesson ✅ ② Do 1 speaking topic practice 🎙️ ③ Record + self-check 🔁"],
+          howTo: [
+            "🪜 ① Choose 1 lesson ✅ ② Do 1 speaking topic practice 🎙️ ③ Record + self-check 🔁",
+          ],
           whyTopPick: "⭐ Clear lessons and exam-style guidance",
           freeAccess: "💸 Free site content",
           ageCheck: "👤 Teen/adult",
@@ -702,7 +752,9 @@
         details: {
           type: "🧠 Strategy page",
           teaches: "🎯 Speaking strategy + how to improve band score",
-          howTo: ["🪜 ① Read tips ✅ ② Practice 1 Part 2 talk ⏱️ ③ Re-record with improvements 🔁"],
+          howTo: [
+            "🪜 ① Read tips ✅ ② Practice 1 Part 2 talk ⏱️ ③ Re-record with improvements 🔁",
+          ],
           whyTopPick: "⭐ Clear band-focused advice",
           freeAccess: "💸 Free webpage",
           ageCheck: "👤 Teen/adult",
@@ -719,7 +771,9 @@
         details: {
           type: "🧾 Practice + guidance page",
           teaches: "🎯 Cue card practice + timing habits",
-          howTo: ["🪜 ① Pick 1 cue card ✅ ② Plan for 1 minute 📝 ③ Speak 2 minutes ⏱️ ④ Repeat 3 times 🔁"],
+          howTo: [
+            "🪜 ① Pick 1 cue card ✅ ② Plan for 1 minute 📝 ③ Speak 2 minutes ⏱️ ④ Repeat 3 times 🔁",
+          ],
           whyTopPick: "⭐ Practical Part 2 repetition system",
           freeAccess: "💸 Free webpage access",
           ageCheck: "👤 Teen/adult",
@@ -736,7 +790,9 @@
         details: {
           type: "🧾 Video/explanation page",
           teaches: "🎯 Pronunciation features assessed in IELTS",
-          howTo: ["🪜 ① Watch once 🎥 ② Note 3 pronunciation targets 🎯 ③ Record + compare 🔁"],
+          howTo: [
+            "🪜 ① Watch once 🎥 ② Note 3 pronunciation targets 🎯 ③ Record + compare 🔁",
+          ],
           whyTopPick: "⭐ Clear assessment focus from British Council",
           freeAccess: "💸 Free page",
           ageCheck: "👤 Teen/adult",
