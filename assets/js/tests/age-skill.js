@@ -16,7 +16,6 @@
   }
 
   const AGES = ["0-3", "4-7", "8-10", "11-12", "13-18"];
-
   const SKILLS = [
     { key: "reading", label: "Reading" },
     { key: "listening", label: "Listening" },
@@ -25,7 +24,6 @@
   ];
 
   function displayAge(age) {
-    // 0-3 -> 0–3 (en dash for nicer UI)
     return String(age || "").replace("-", "–");
   }
 
@@ -35,13 +33,50 @@
     const ageLabel = displayAge(age);
 
     SKILLS.forEach((s) => {
+      // Only set a module path when a runner exists.
+      // This avoids network 404s for tests that are still "Coming soon".
+      let module = "";
+
+      // Implemented runners (incrementally add more here)
+      if (age === "0-3" && s.key === "reading") {
+        module = "assets/js/tests/age/0-3-reading.js";
+      }
+
+      if (age === "4-7" && s.key === "reading") {
+        module = "assets/js/tests/age/4-7-reading.js";
+      }
+
+      if (age === "4-7" && s.key === "listening") {
+        module = "assets/js/tests/age/4-7-listening.js";
+      }
+
+      if (age === "4-7" && s.key === "writing") {
+        module = "assets/js/tests/age/4-7-writing.js";
+      }
+
+      if (age === "4-7" && s.key === "speaking") {
+        module = "assets/js/tests/age/4-7-speaking.js";
+      }
+
+      if (age === "0-3" && s.key === "listening") {
+        module = "assets/js/tests/age/0-3-listening.js";
+      }
+
+      if (age === "0-3" && s.key === "writing") {
+        module = "assets/js/tests/age/0-3-writing.js";
+      }
+
+      if (age === "0-3" && s.key === "speaking") {
+        module = "assets/js/tests/age/0-3-speaking.js";
+      }
+
       tests.push({
         slug: `age-${age}-${s.key}`,
         age,
         skill: s.key,
         title: `${s.label} (${ageLabel})`,
-        subtitle: `Ages ${ageLabel} • Practice test`
-        // module: intentionally omitted (not implemented yet)
+        subtitle: `Ages ${ageLabel} • Practice test`,
+        ...(module ? { module } : {})
       });
     });
   });

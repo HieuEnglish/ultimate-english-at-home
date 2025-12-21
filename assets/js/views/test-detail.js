@@ -27,14 +27,13 @@ export async function getView(ctx, slug) {
   }
 
   // Attempt to load the test runner if available.
-  if (typeof ctx.testsHasRunner === 'function' && ctx.testsHasRunner(slug)) {
-    try {
-      if (typeof ctx.ensureTestRunnerLoaded === 'function') {
-        await ctx.ensureTestRunnerLoaded(test);
-      }
-    } catch (_) {
-      // ignore loading errors; we’ll show a placeholder below
+  // Load the runner module if the test declares one. Safe to call even if already loaded.
+  try {
+    if (typeof ctx.ensureTestRunnerLoaded === 'function') {
+      await ctx.ensureTestRunnerLoaded(test);
     }
+  } catch (_) {
+    // ignore loading errors; we’ll show a placeholder below
   }
 
   const { hrefFor } = ctx;
@@ -64,7 +63,16 @@ export async function getView(ctx, slug) {
     if (rendered?.html) {
       runnerHtml = rendered.html;
       if (typeof rendered.afterRender === 'function') {
-        afterRender = rendered.afterRender;
+        // main.js calls view.afterRender() with no args, so we wrap and
+        // pass the runner root element + ctx into the runner hook.
+        afterRender = () => {
+          const root = document.querySelector(`[data-test-runner-root="${slug}"]`);
+          try {
+            rendered.afterRender(root, ctx);
+          } catch (_) {
+            // ignore runner hook errors
+          }
+        };
       }
     }
   } catch (_) {
@@ -85,7 +93,9 @@ export async function getView(ctx, slug) {
           </div>
         </div>
         <div style="margin-top:14px">
-          ${runnerHtml}
+          <div data-test-runner-root="${slug}">
+            ${runnerHtml}
+          </div>
         </div>
         <div class="actions" style="margin-top:16px">
           <a class="btn" href="${hrefFor('/tests')}" data-nav>← Back</a>
