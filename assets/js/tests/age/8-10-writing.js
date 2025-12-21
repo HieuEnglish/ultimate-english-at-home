@@ -79,8 +79,8 @@
         module = "assets/js/tests/age/8-10-listening.js";
       }
 
-      if (age === "8-10" && s.key === "speaking") {
-        module = "assets/js/tests/age/8-10-speaking.js";
+      if (age === "8-10" && s.key === "writing") {
+        module = "assets/js/tests/age/8-10-writing.js";
       }
 
       tests.push({
