@@ -4,7 +4,7 @@
 */
 
 import { AGE_GROUPS } from '../constants.js';
-import { breadcrumbs, card, iconAge } from '../common.js';
+import { breadcrumbs, card, iconAge, ageGroupLabel } from '../common.js';
 
 /**
  * Build the resources index page.
@@ -15,7 +15,7 @@ import { breadcrumbs, card, iconAge } from '../common.js';
 export function getView(ctx) {
   const { hrefFor } = ctx;
   const title = 'Resources — UEAH';
-  const description = 'Browse free English learning resources by age group and skill.';
+  const description = 'Browse free English learning resources by age group and skill, plus IELTS practice.';
 
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
@@ -29,24 +29,27 @@ export function getView(ctx) {
     '8-10': 'red',
     '11-12': 'blue',
     '13-18': 'pink',
+    ielts: 'iels',
   };
 
-  const cardsHtml = AGE_GROUPS.map((age) =>
-    card({
+  const cardsHtml = AGE_GROUPS.map((age) => {
+    const a = String(age || '').trim().toLowerCase();
+    const isIELTS = a === 'ielts';
+    return card({
       href: hrefFor(`/resources/${age}`),
-      title: age,
-      text: 'Choose a skill area next.',
+      title: ageGroupLabel(age),
+      text: isIELTS ? 'Practice by skill for IELTS.' : 'Choose a skill area next.',
       icon: iconAge(age),
       ctaText: '',
-      glow: glowByAge[age] || 'green',
-    })
-  ).join('');
+      glow: glowByAge[a] || glowByAge[age] || 'green',
+    });
+  }).join('');
 
   const html = `
     <section class="page-top">
       ${breadcrumb}
       <h1 class="page-title">Resources</h1>
-      <p class="page-subtitle">Pick an age group to see skill areas.</p>
+      <p class="page-subtitle">Pick a group to see skill areas.</p>
       <div class="card-grid" role="list">
         ${cardsHtml}
       </div>

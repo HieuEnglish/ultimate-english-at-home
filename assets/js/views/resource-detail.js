@@ -9,6 +9,8 @@ import {
   capitalize,
   escapeHtml,
   escapeAttr,
+  ageGroupLabel,
+  ageGroupMetaText,
 } from '../common.js';
 import { getStoreMissingView } from './error.js';
 import { getView as getNotFoundView } from './not-found.js';
@@ -30,7 +32,7 @@ function buildResourceMetaDescription(resource, age, skill) {
   if (resource && resource.level) metaBits.push(`Level: ${String(resource.level).trim()}`);
   if (metaBits.length) parts.push(metaBits.join('. ') + '.');
 
-  if (age) parts.push(`Ages ${age}.`);
+  if (age) parts.push(`${ageGroupMetaText(age)}.`);
 
   return parts.join(' ').replace(/\s+/g, ' ').trim();
 }
@@ -67,11 +69,12 @@ export async function getView(ctx, age, skill, slug) {
 
   const title = `${resource.title} — UEAH`;
   const description = buildResourceMetaDescription(resource, age, skill);
+  const groupLabel = ageGroupLabel(age);
 
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: ctx.hrefFor('/') },
     { label: 'Resources', href: ctx.hrefFor('/resources') },
-    { label: age, href: ctx.hrefFor(`/resources/${age}`) },
+    { label: groupLabel, href: ctx.hrefFor(`/resources/${age}`) },
     { label: capitalize(skill), href: ctx.hrefFor(`/resources/${age}/${skill}`) },
     { label: resource.title },
   ]);
@@ -216,7 +219,7 @@ export async function getView(ctx, age, skill, slug) {
       <div class="actions">
         <a class="btn" href="${ctx.hrefFor(`/resources/${age}/${skill}`)}" data-nav>← Back to ${capitalize(skill)}</a>
         <a class="btn" href="${ctx.hrefFor(`/resources/${age}`)}" data-nav>Skills</a>
-        <a class="btn" href="${ctx.hrefFor('/resources')}" data-nav>Age Groups</a>
+        <a class="btn" href="${ctx.hrefFor('/resources')}" data-nav>Resources</a>
       </div>
     </section>
   `;

@@ -11,6 +11,37 @@ export function capitalize(s) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 }
 
+// -----------------------------
+// Age group helpers
+// -----------------------------
+
+export function ageGroupLabel(age) {
+  const a = String(age || '').trim().toLowerCase();
+  if (a === 'ielts') return 'IELTS';
+  return String(age || '').trim();
+}
+
+export function ageGroupHeading(age) {
+  const a = String(age || '').trim().toLowerCase();
+  if (a === 'ielts') return 'IELTS';
+  const raw = String(age || '').trim();
+  return raw ? `Age ${raw}` : 'Age';
+}
+
+export function ageGroupAudience(age) {
+  const a = String(age || '').trim().toLowerCase();
+  if (a === 'ielts') return 'IELTS';
+  const raw = String(age || '').trim();
+  return raw ? `ages ${raw}` : 'all ages';
+}
+
+export function ageGroupMetaText(age) {
+  const a = String(age || '').trim().toLowerCase();
+  if (a === 'ielts') return 'IELTS';
+  const raw = String(age || '').trim();
+  return raw ? `Ages ${raw}` : 'Ages';
+}
+
 export function escapeHtml(s) {
   return String(s)
     .replaceAll("&", "&amp;")
@@ -80,11 +111,25 @@ export function renderChips(resource, showAll) {
 // -----------------------------
 
 export function iconAge(age) {
-  if (age === "0-3") return iconBabyBottle();
-  if (age === "4-7") return iconTeddy();
-  if (age === "8-10") return iconPencil();
-  if (age === "11-12") return iconHeadphones();
+  const a = String(age || '').trim().toLowerCase();
+  if (a === "ielts") return iconTarget();
+  if (a === "0-3") return iconBabyBottle();
+  if (a === "4-7") return iconTeddy();
+  if (a === "8-10") return iconPencil();
+  if (a === "11-12") return iconHeadphones();
   return iconGradCap();
+}
+
+export function iconTarget() {
+  return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" fill="currentColor" opacity=".14"></circle>
+        <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2" opacity=".65"></circle>
+        <circle cx="12" cy="12" r="2.5" fill="currentColor"></circle>
+        <path d="M20 4 14.7 9.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".9"></path>
+        <path d="M20 4v4.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"></path>
+      </svg>
+    `;
 }
 
 export function iconUser() {

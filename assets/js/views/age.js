@@ -4,7 +4,7 @@
 */
 
 import { SKILLS } from '../constants.js';
-import { breadcrumbs, card, iconSkill, capitalize } from '../common.js';
+import { breadcrumbs, card, iconSkill, capitalize, ageGroupLabel, ageGroupHeading } from '../common.js';
 
 /**
  * Build the page for a specific age group.
@@ -13,13 +13,17 @@ import { breadcrumbs, card, iconSkill, capitalize } from '../common.js';
  */
 export function getView(ctx, age) {
   const { hrefFor } = ctx;
-  const title = `${age} Resources — UEAH`;
-  const description = `Resources for ages ${age}. Choose reading, listening, writing, or speaking.`;
+  const label = ageGroupLabel(age);
+  const heading = ageGroupHeading(age);
+  const title = `${label} Resources — UEAH`;
+  const description = label === 'IELTS'
+    ? 'IELTS practice resources. Choose reading, listening, writing, or speaking.'
+    : `Resources for ages ${age}. Choose reading, listening, writing, or speaking.`;
 
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: hrefFor('/') },
     { label: 'Resources', href: hrefFor('/resources') },
-    { label: age },
+    { label: label },
   ]);
 
   const glowBySkill = {
@@ -43,13 +47,13 @@ export function getView(ctx, age) {
   const html = `
     <section class="page-top">
       ${breadcrumb}
-      <h1 class="page-title">Age ${age}</h1>
+      <h1 class="page-title">${heading}</h1>
       <p class="page-subtitle">Choose a skill area.</p>
       <div class="card-grid" role="list">
         ${cardsHtml}
       </div>
       <div class="actions">
-        <a class="btn" href="${hrefFor('/resources')}" data-nav>← Back to Age Groups</a>
+        <a class="btn" href="${hrefFor('/resources')}" data-nav>← Back to Resources</a>
         <a class="btn btn--primary" href="${hrefFor('/') }" data-nav>Home</a>
       </div>
     </section>

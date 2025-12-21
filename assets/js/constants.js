@@ -5,7 +5,9 @@
 
 // Age groups offered by Ultimate English At Home.
 // Keeping these centralized makes it easy to add or modify groups in one place.
-export const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18"];
+// NOTE: "ielts" is treated as a special (non-age) category that still reuses
+// the existing /resources/:age/:skill pages.
+export const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18", "ielts"];
 
 // Skill areas available for each age group.
 export const SKILLS = ["reading", "listening", "writing", "speaking"];

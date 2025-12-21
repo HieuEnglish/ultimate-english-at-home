@@ -9,6 +9,8 @@ import {
   capitalize,
   escapeHtml,
   escapeAttr,
+  ageGroupLabel,
+  ageGroupAudience,
 } from '../common.js';
 import { getStoreMissingView } from './error.js';
 
@@ -46,25 +48,29 @@ export async function getView(ctx, age, skill) {
       : [];
 
   const skillLabel = capitalize(skill);
-  const title = `${skillLabel} (${age}) — UEAH`;
-  const description = `Free ${skillLabel} resources for ages ${age}.`;
+  const groupLabel = ageGroupLabel(age);
+  const audience = ageGroupAudience(age);
+  const title = `${skillLabel} (${groupLabel}) — UEAH`;
+  const description = `Free ${skillLabel} resources for ${audience}.`;
 
   const breadcrumb = breadcrumbs([
     { label: 'Home', href: ctx.hrefFor('/') },
     { label: 'Resources', href: ctx.hrefFor('/resources') },
-    { label: age, href: ctx.hrefFor(`/resources/${age}`) },
+    { label: groupLabel, href: ctx.hrefFor(`/resources/${age}`) },
     { label: skillLabel },
   ]);
 
   const heading =
     pack && pack.title
       ? escapeHtml(pack.title)
-      : `${skillLabel} <span aria-hidden="true">·</span> <span class="muted">Age ${escapeHtml(age)}</span>`;
+      : `${skillLabel} <span aria-hidden="true">·</span> <span class="muted">${escapeHtml(
+          groupLabel
+        )}</span>`;
 
   const subtitle =
     pack && pack.overview
       ? escapeHtml(pack.overview)
-      : `Resources for ${skillLabel} — ages ${escapeHtml(age)}.`;
+      : `Resources for ${skillLabel} — ${escapeHtml(audience)}.`;
 
   const canFav =
     ctx &&
@@ -173,7 +179,7 @@ export async function getView(ctx, age, skill) {
   } else {
     gridHtml = `
       <div class="note">
-        <strong>Coming soon:</strong> ${skillLabel} resources for ages ${escapeHtml(age)}.
+        <strong>Coming soon:</strong> ${skillLabel} resources for ${escapeHtml(audience)}.
       </div>
     `;
   }
@@ -208,7 +214,7 @@ export async function getView(ctx, age, skill) {
       ${bestSetNote}
       <div class="actions">
         <a class="btn" href="${ctx.hrefFor(`/resources/${age}`)}" data-nav>← Back to Skills</a>
-        <a class="btn" href="${ctx.hrefFor('/resources')}" data-nav>Age Groups</a>
+        <a class="btn" href="${ctx.hrefFor('/resources')}" data-nav>Resources</a>
         <a class="btn btn--primary" href="${ctx.hrefFor('/')}" data-nav>Home</a>
       </div>
     </section>

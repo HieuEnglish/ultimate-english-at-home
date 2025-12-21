@@ -9,6 +9,7 @@ import {
   escapeHtml,
   escapeAttr,
   capitalize,
+  ageGroupHeading,
 } from '../common.js';
 
 function safeNowName() {
@@ -92,6 +93,7 @@ export function getView(ctx) {
           .map((fav) => {
             const r = buildResourceSnapshotForView(fav);
             const safeAge = escapeHtml(r.age || '');
+            const ageHeading = r.age ? ageGroupHeading(r.age) : '';
             const safeSkill = escapeHtml(r.skill || '');
             const skillLabel = r.skill ? capitalize(r.skill) : 'Resource';
             const detailPath =
@@ -123,7 +125,7 @@ export function getView(ctx) {
                   ${
                     safeAge || safeSkill
                       ? `<p class="muted" style="margin:8px 0 0; font-size:13px">
-                          ${safeAge ? `Age ${safeAge}` : ''}
+                          ${ageHeading ? `${escapeHtml(ageHeading)}` : ''}
                           ${safeAge && safeSkill ? ' · ' : ''}
                           ${safeSkill ? `${escapeHtml(skillLabel)}` : ''}
                         </p>`

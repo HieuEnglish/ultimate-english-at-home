@@ -8,7 +8,8 @@
    - No build step; works on GitHub Pages with the existing basePath logic in app.js.
 */
 (function () {
-  const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18"];
+  // Keep in sync with assets/js/constants.js
+  const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18", "ielts"];
 
   const state = {
     packs: {}, // key: "age/skill" => pack meta
