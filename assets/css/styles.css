@@ -346,10 +346,11 @@ a:hover{text-decoration:none}
 .card[data-glow="orange"]{ --glow: rgba(255,160,70,.28); --glow-border: rgba(255,160,70,.88); }
 .card[data-glow="purple"]{ --glow: rgba(170,110,255,.26); --glow-border: rgba(170,110,255,.88); }
 
-/* NEW: IELS multi-colour glow */
+/* NEW: IELS glow (keep glow, use normal card fill) */
 .card[data-glow="iels"]{
   --glow-border: rgba(255,255,255,.26);
   --glow: rgba(255,255,255,.14);
+  background: var(--surface);
 }
 .card[data-glow="iels"]:hover,
 .card[data-glow="iels"]:focus-visible{
@@ -363,16 +364,6 @@ a:hover{text-decoration:none}
     0 0 40px 18px rgba(255,70,90,.12),
     0 0 46px 22px rgba(255,106,179,.14),
     var(--shadow);
-}
-
-/* Make IELS cards feel special even at rest */
-.card[data-glow="iels"]{
-  background:
-    radial-gradient(520px 220px at 10% 0%, rgba(0,230,140,.12), transparent 58%),
-    radial-gradient(520px 220px at 90% 0%, rgba(255,230,70,.10), transparent 58%),
-    radial-gradient(520px 240px at 40% 110%, rgba(90,160,255,.14), transparent 60%),
-    radial-gradient(520px 240px at 110% 70%, rgba(255,106,179,.12), transparent 60%),
-    var(--surface);
 }
 
 /* Base icon background on glow cards */
