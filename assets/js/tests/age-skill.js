@@ -79,6 +79,11 @@
         module = "assets/js/tests/age/8-10-listening.js";
       }
 
+      // ✅ FIX: add missing writing runner for 8–10
+      if (age === "8-10" && s.key === "writing") {
+        module = "assets/js/tests/age/8-10-writing.js";
+      }
+
       if (age === "8-10" && s.key === "speaking") {
         module = "assets/js/tests/age/8-10-speaking.js";
       }
