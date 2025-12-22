@@ -68,9 +68,9 @@ export function getView(ctx) {
 
       <div class="detail-card" role="region" aria-label="Profile form">
         <form id="profile-form" novalidate>
-          <div class="detail-section">
+          <div class="detail-section field">
             <label class="label" for="profile-email">Email</label>
-            <p class="muted" style="margin:8px 0 10px;">Used for score tracking and contact.</p>
+            <p class="muted">Used for score tracking and contact.</p>
             <input
               id="profile-email"
               name="email"
@@ -82,7 +82,7 @@ export function getView(ctx) {
             />
           </div>
 
-          <div class="detail-section">
+          <div class="detail-section field">
             <label class="label" for="profile-name">Display name</label>
             <input
               id="profile-name"
@@ -94,8 +94,8 @@ export function getView(ctx) {
             />
           </div>
 
-          <div class="detail-section">
-            <label class="label" for="profile-target">Target IELS score</label>
+          <div class="detail-section field">
+            <label class="label" for="profile-target">Target IELTS score</label>
             <input
               id="profile-target"
               name="targetScore"
