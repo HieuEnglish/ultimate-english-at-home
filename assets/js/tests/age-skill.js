@@ -83,6 +83,11 @@
         module = "assets/js/tests/age/8-10-speaking.js";
       }
 
+      // Ages 11–12
+      if (age === "11-12" && s.key === "reading") {
+        module = "assets/js/tests/age/11-12-reading.js";
+      }
+
       tests.push({
         slug: `age-${age}-${s.key}`,
         age,
