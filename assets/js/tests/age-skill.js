@@ -37,71 +37,35 @@
       // This avoids network 404s for tests that are still "Coming soon".
       let module = "";
 
-      // Implemented runners (incrementally add more here)
-      if (age === "0-3" && s.key === "reading") {
-        module = "assets/js/tests/age/0-3-reading.js";
-      }
+      // Ages 0–3
+      if (age === "0-3" && s.key === "reading") module = "assets/js/tests/age/0-3-reading.js";
+      if (age === "0-3" && s.key === "listening") module = "assets/js/tests/age/0-3-listening.js";
+      if (age === "0-3" && s.key === "writing") module = "assets/js/tests/age/0-3-writing.js";
+      if (age === "0-3" && s.key === "speaking") module = "assets/js/tests/age/0-3-speaking.js";
 
-      if (age === "4-7" && s.key === "reading") {
-        module = "assets/js/tests/age/4-7-reading.js";
-      }
-
-      if (age === "4-7" && s.key === "listening") {
-        module = "assets/js/tests/age/4-7-listening.js";
-      }
-
-      if (age === "4-7" && s.key === "writing") {
-        module = "assets/js/tests/age/4-7-writing.js";
-      }
-
-      if (age === "4-7" && s.key === "speaking") {
-        module = "assets/js/tests/age/4-7-speaking.js";
-      }
-
-      if (age === "0-3" && s.key === "listening") {
-        module = "assets/js/tests/age/0-3-listening.js";
-      }
-
-      if (age === "0-3" && s.key === "writing") {
-        module = "assets/js/tests/age/0-3-writing.js";
-      }
-
-      if (age === "0-3" && s.key === "speaking") {
-        module = "assets/js/tests/age/0-3-speaking.js";
-      }
+      // Ages 4–7
+      if (age === "4-7" && s.key === "reading") module = "assets/js/tests/age/4-7-reading.js";
+      if (age === "4-7" && s.key === "listening") module = "assets/js/tests/age/4-7-listening.js";
+      if (age === "4-7" && s.key === "writing") module = "assets/js/tests/age/4-7-writing.js";
+      if (age === "4-7" && s.key === "speaking") module = "assets/js/tests/age/4-7-speaking.js";
 
       // Ages 8–10
-      if (age === "8-10" && s.key === "reading") {
-        module = "assets/js/tests/age/8-10-reading.js";
-      }
-
-      if (age === "8-10" && s.key === "listening") {
-        module = "assets/js/tests/age/8-10-listening.js";
-      }
-
-      // ✅ FIX: add missing writing runner for 8–10
-      if (age === "8-10" && s.key === "writing") {
-        module = "assets/js/tests/age/8-10-writing.js";
-      }
-
-      if (age === "8-10" && s.key === "speaking") {
-        module = "assets/js/tests/age/8-10-speaking.js";
-      }
+      if (age === "8-10" && s.key === "reading") module = "assets/js/tests/age/8-10-reading.js";
+      if (age === "8-10" && s.key === "listening") module = "assets/js/tests/age/8-10-listening.js";
+      if (age === "8-10" && s.key === "writing") module = "assets/js/tests/age/8-10-writing.js";
+      if (age === "8-10" && s.key === "speaking") module = "assets/js/tests/age/8-10-speaking.js";
 
       // Ages 11–12
-      if (age === "11-12" && s.key === "reading") {
-        module = "assets/js/tests/age/11-12-reading.js";
-      }
+      if (age === "11-12" && s.key === "reading") module = "assets/js/tests/age/11-12-reading.js";
+      if (age === "11-12" && s.key === "listening") module = "assets/js/tests/age/11-12-listening.js";
+      if (age === "11-12" && s.key === "writing") module = "assets/js/tests/age/11-12-writing.js";
+      if (age === "11-12" && s.key === "speaking") module = "assets/js/tests/age/11-12-speaking.js";
 
-      // Ages 11–12
-      if (age === "11-12" && s.key === "listening") {
-        module = "assets/js/tests/age/11-12-listening.js";
-      }
-
-      // Ages 11–12
-      if (age === "11-12" && s.key === "writing") {
-        module = "assets/js/tests/age/11-12-writing.js";
-      }
+      // Ages 13–18 (add when implemented)
+      // if (age === "13-18" && s.key === "reading") module = "assets/js/tests/age/13-18-reading.js";
+      // if (age === "13-18" && s.key === "listening") module = "assets/js/tests/age/13-18-listening.js";
+      // if (age === "13-18" && s.key === "writing") module = "assets/js/tests/age/13-18-writing.js";
+      // if (age === "13-18" && s.key === "speaking") module = "assets/js/tests/age/13-18-speaking.js";
 
       tests.push({
         slug: `age-${age}-${s.key}`,
