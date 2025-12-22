@@ -65,7 +65,7 @@
       if (age === "13-18" && s.key === "reading") module = "assets/js/tests/age/13-18-reading.js";
       if (age === "13-18" && s.key === "listening") module = "assets/js/tests/age/13-18-listening.js";
       if (age === "13-18" && s.key === "writing") module = "assets/js/tests/age/13-18-writing.js";
-      // if (age === "13-18" && s.key === "speaking") module = "assets/js/tests/age/13-18-speaking.js";
+      if (age === "13-18" && s.key === "speaking") module = "assets/js/tests/age/13-18-speaking.js";
 
       tests.push({
         slug: `age-${age}-${s.key}`,
