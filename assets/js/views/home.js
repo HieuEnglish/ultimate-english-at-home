@@ -33,7 +33,7 @@ export function getView(ctx) {
       <p class="eyebrow">Ultimate English At Home</p>
       <h1 class="hero-title">learning paths — by age and skill</h1>
       <p class="hero-subtitle">
-        Start with Resources, choose an age group, then pick Reading, Listening, Writing, or Speaking.
+        Resources and tests follow age-specific, IELTS-inspired standards — matched to the expected skill level for each age group.
       </p>
       <div class="card-grid" role="list">
         ${card({
@@ -64,7 +64,7 @@ export function getView(ctx) {
         ${card({
           href: hrefFor('/profile'),
           title: 'Profile',
-          text: 'Save IELS info',
+          text: 'Save your IELTS info',
           icon: iconUser(),
           ctaText: '',
           glow: 'orange',
@@ -86,6 +86,10 @@ export function getView(ctx) {
           glow: 'purple',
         })}
       </div>
+
+      <p class="hero-subtitle home-made-with">
+        Made with❤️ for learners, families, and teachers who want FREE English practice at home 🏡📚✨
+      </p>
     </section>
   `;
   return { title, description, html };
