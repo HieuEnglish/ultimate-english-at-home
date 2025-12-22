@@ -61,8 +61,8 @@
       if (age === "11-12" && s.key === "writing") module = "assets/js/tests/age/11-12-writing.js";
       if (age === "11-12" && s.key === "speaking") module = "assets/js/tests/age/11-12-speaking.js";
 
-      // Ages 13–18 (add when implemented)
-      // if (age === "13-18" && s.key === "reading") module = "assets/js/tests/age/13-18-reading.js";
+      // Ages 13–18 (implemented: Reading)
+      if (age === "13-18" && s.key === "reading") module = "assets/js/tests/age/13-18-reading.js";
       // if (age === "13-18" && s.key === "listening") module = "assets/js/tests/age/13-18-listening.js";
       // if (age === "13-18" && s.key === "writing") module = "assets/js/tests/age/13-18-writing.js";
       // if (age === "13-18" && s.key === "speaking") module = "assets/js/tests/age/13-18-speaking.js";
