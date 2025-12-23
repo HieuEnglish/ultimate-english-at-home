@@ -12,6 +12,17 @@
 
    Supported question types:
    - prompt
+
+   Updates (this file):
+   - Ensures every question has a stable id (prevents results overwriting when id missing)
+   - Structured selection:
+     * Fills each section to target count where possible
+     * Avoids duplicates by id
+     * Backfills from leftover questions if any section is short/missing
+   - SpeechSynthesis: Play + Stop; cancels on navigation and between prompts
+   - Robust bank loader (handles existing script; validates bank after load tick)
+   - Summary includes per-section counts + compact review list
+   - Slightly improved UI copy for 8–10 (shorter, clearer guidance)
 */
 
 (function () {
@@ -28,6 +39,8 @@
     { key: "opinion", label: "Opinion", pick: 3 }
   ];
 
+  const TARGET_TOTAL = SECTION_PLAN.reduce((sum, s) => sum + (Number(s.pick) || 0), 0);
+
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") {
     console.warn("[UEAH] tests store not found; runner not registered:", SLUG);
@@ -38,13 +51,17 @@
   // Utilities
   // -----------------------------
 
-  function safeText(s) {
-    return String(s == null ? "" : s)
+  function safeText(v) {
+    return String(v == null ? "" : v)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
-      .replace(/\"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function safeTextWithBreaks(v) {
+    return safeText(v).replace(/\n/g, "<br>");
   }
 
   function shuffleInPlace(arr) {
@@ -59,6 +76,24 @@
 
   function isPlainObject(v) {
     return v && typeof v === "object" && !Array.isArray(v);
+  }
+
+  function normalizeSection(v) {
+    return String(v || "").trim().toLowerCase();
+  }
+
+  function sectionLabelFor(key) {
+    const k = normalizeSection(key);
+    const match = SECTION_PLAN.find((s) => s.key === k);
+    return match ? match.label : "Prompt";
+  }
+
+  function ensureIds(qs) {
+    return qs.map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+      return { ...q, id };
+    });
   }
 
   // -----------------------------
@@ -83,7 +118,14 @@
     try {
       const synth = window.speechSynthesis;
       synth.cancel();
+
+      // best-effort prime voices
+      try {
+        if (typeof synth.getVoices === "function") synth.getVoices();
+      } catch (_) {}
+
       const u = new SpeechSynthesisUtterance(t);
+      u.lang = "en-US";
       u.rate = 0.92;
       u.pitch = 1.0;
       u.volume = 1.0;
@@ -92,223 +134,6 @@
     } catch (_) {
       return false;
     }
-  }
-
-  // -----------------------------
-  // UI render helpers
-  // -----------------------------
-
-  function difficultyBadge(d) {
-    const val = String(d || "").toLowerCase();
-    if (!val) return "";
-    const label = val.charAt(0).toUpperCase() + val.slice(1);
-    return `<span style="padding:4px 10px; border-radius:999px; border:1px solid var(--border); background: var(--surface); font-weight:800; font-size:12px">${safeText(
-      label
-    )}</span>`;
-  }
-
-  function sectionLabelFor(key) {
-    const k = String(key || "").toLowerCase();
-    const match = SECTION_PLAN.find((s) => s.key === k);
-    return match ? match.label : "Prompt";
-  }
-
-  function renderIntro() {
-    const supportsAudio = supportsSpeech();
-    const planList = SECTION_PLAN.map((s) =>
-      `<li><strong>${safeText(s.label)}</strong> (${s.pick} prompts)</li>`
-    ).join("");
-
-    return `
-      <div class="detail-card" role="region" aria-label="Speaking test intro">
-        <h3 style="margin:0">Speaking (Ages 8–10)</h3>
-        <p style="margin:10px 0 0; color: var(--muted)">
-          A short speaking practice with a clear structure. Read the prompt. The learner answers out loud.
-        </p>
-        <div class="note" style="margin-top:12px">
-          <strong>Structure</strong>
-          <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted)">${planList}</ul>
-          <p style="margin:10px 0 0; color: var(--muted)">
-            Tip: Encourage full sentences and reasons using <strong>because</strong>.
-          </p>
-        </div>
-        <p style="margin:10px 0 0; opacity:.92">
-          ${supportsAudio ? "Use <strong>🔊 Play</strong> for a model answer." : "Audio is not available in this browser. Read the model answer out loud."}
-        </p>
-      </div>
-      <div class="actions" style="margin-top:12px">
-        <button class="btn btn--primary" type="button" data-action="start">Start</button>
-      </div>
-    `;
-  }
-
-  function renderLoading() {
-    return `
-      <div class="note" style="margin-top:0">
-        <strong>Loading…</strong>
-        <p style="margin:8px 0 0">Preparing your test.</p>
-      </div>
-    `;
-  }
-
-  function renderError(message) {
-    return `
-      <div class="note" style="margin-top:0">
-        <strong>Could not load this test.</strong>
-        <p style="margin:8px 0 0">${safeText(message || "Unknown error")}</p>
-      </div>
-    `;
-  }
-
-  function renderTargets(q) {
-    const targets = Array.isArray(q && q.targets) ? q.targets : [];
-    if (!targets.length) return "";
-    const items = targets
-      .map((t) => `<li style="margin:6px 0">${safeText(t)}</li>`)
-      .join("");
-    return `
-      <div class="note" style="margin:12px 0 0; padding:10px 12px">
-        <strong>Targets</strong>
-        <ul style="margin:8px 0 0; padding-left:18px; color: var(--muted)">${items}</ul>
-      </div>
-    `;
-  }
-
-  function renderChecks(q) {
-    const rubric = q && q.rubric;
-    if (!isPlainObject(rubric) || !isPlainObject(rubric.checks)) return "";
-    const c = rubric.checks;
-    const checks = [];
-    if (Number.isFinite(Number(c.minSentences))) checks.push(`Aim for ${Number(c.minSentences)}+ sentences`);
-    if (c.encourageBecause) checks.push("Try to include ‘because’ (a reason)");
-    if (!checks.length) return "";
-    const items = checks.map((t) => `<li style="margin:6px 0">${safeText(t)}</li>`).join("");
-    return `
-      <div class="note" style="margin:12px 0 0; padding:10px 12px">
-        <strong>Quick check</strong>
-        <ul style="margin:8px 0 0; padding-left:18px; color: var(--muted)">${items}</ul>
-      </div>
-    `;
-  }
-
-  function renderPromptScreen(state) {
-    const q = state.questions[state.index];
-    const total = state.questions.length;
-    const n = state.index + 1;
-
-    const prompt = safeText(q.question || "Speak!");
-    const model = safeText(q.model || "");
-    const tip = safeText(q.explanation || "Try your best.");
-
-    const sectionLabel = sectionLabelFor(q.section);
-    const hasAudio = supportsSpeech() && String(q.say || "").trim();
-
-    const speechHint = hasAudio
-      ? ""
-      : `
-        <div class="note" style="margin:12px 0 0; padding:10px 12px">
-          <strong>Audio not available</strong>
-          <p style="margin:6px 0 0">Read the model answer out loud and encourage the learner to copy.</p>
-        </div>
-      `;
-
-    return `
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
-        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
-          <div style="font-weight:900; color: var(--muted)">${safeText(sectionLabel)} • Prompt ${n} of ${total}</div>
-          ${difficultyBadge(q.difficulty)}
-        </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" ${hasAudio ? "" : "disabled"} aria-label="Play model audio">🔊 Play</button>
-          <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
-        </div>
-      </div>
-
-      <div style="margin-top:12px">
-        <div style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
-          <div style="font-weight:900; font-size:18px">${prompt}</div>
-          ${model ? `<div style="margin-top:10px; font-size:16px; font-weight:900; letter-spacing:.2px">Example: ${model}</div>` : ""}
-          <p style="margin:10px 0 0; color: var(--muted); font-size:13px">Tip: ${tip}</p>
-
-          ${renderTargets(q)}
-          ${renderChecks(q)}
-
-          <div class="actions" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
-            <button class="btn" type="button" data-action="mark" data-mark="said" aria-label="Mark as said">✅ Said it</button>
-            <button class="btn" type="button" data-action="mark" data-mark="again" aria-label="Mark as try again">🔁 Try again</button>
-            <button class="btn" type="button" data-action="mark" data-mark="skip" aria-label="Skip this prompt">⏭️ Skip</button>
-          </div>
-
-          ${speechHint}
-        </div>
-      </div>
-    `;
-  }
-
-  function renderSummary(state) {
-    let said = 0;
-    let again = 0;
-    let skip = 0;
-
-    state.questions.forEach((q) => {
-      const r = state.results[q.id] || "skip";
-      if (r === "said") said += 1;
-      else if (r === "again") again += 1;
-      else skip += 1;
-    });
-
-    const rows = state.questions
-      .map((q, idx) => {
-        const r = state.results[q.id] || "skip";
-        const status = r === "said" ? "✅ Said" : r === "again" ? "🔁 Try again" : "⏭️ Skipped";
-        const sectionLabel = sectionLabelFor(q.section);
-        return `
-          <tr>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border); color: var(--muted)">${idx + 1}</td>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border); color: var(--muted); font-weight:800">${safeText(sectionLabel)}</td>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border)">${safeText(q.question || "")}</td>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border); font-weight:800">${status}</td>
-          </tr>
-        `;
-      })
-      .join("");
-
-    const encouragement =
-      again > 0
-        ? "Repeat the ‘Try again’ prompts tomorrow. Ask the learner to add one extra detail each time."
-        : "Good work. Restart to get a different set of prompts.";
-
-    return `
-      <div class="detail-card" role="region" aria-label="Speaking test summary">
-        <h3 style="margin:0">Summary</h3>
-        <p style="margin:10px 0 0; color: var(--muted)">
-          Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong>
-        </p>
-
-        <div style="margin-top:14px; overflow:auto; border:1px solid var(--border); border-radius:16px">
-          <table style="width:100%; border-collapse:collapse">
-            <thead>
-              <tr>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">#</th>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">Section</th>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">Prompt</th>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">Result</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>
-
-        <div class="note" style="margin-top:12px">
-          <strong>Next step</strong>
-          <p style="margin:8px 0 0">${safeText(encouragement)}</p>
-        </div>
-      </div>
-
-      <div class="actions" style="margin-top:12px">
-        <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
-      </div>
-    `;
   }
 
   // -----------------------------
@@ -329,13 +154,14 @@
     bankPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
+        // If already injected, resolve on next tick (lets the script run if needed)
         setTimeout(() => resolve(true), 0);
         return;
       }
 
       const s = document.createElement("script");
-      s.src = src;
       s.defer = true;
+      s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
       s.onload = () => resolve(true);
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
@@ -346,14 +172,16 @@
   }
 
   // -----------------------------
-  // Question selection (structured + random)
+  // Selection (structured + random)
   // -----------------------------
 
   function buildStructuredSet(allQuestions) {
-    const qs = Array.isArray(allQuestions) ? allQuestions.slice() : [];
+    const qs = Array.isArray(allQuestions) ? ensureIds(allQuestions.filter(isPlainObject)) : [];
+    if (!qs.length) return [];
+
     const bySection = new Map();
     qs.forEach((q) => {
-      const key = String(q && q.section ? q.section : "").toLowerCase();
+      const key = normalizeSection(q.section);
       if (!bySection.has(key)) bySection.set(key, []);
       bySection.get(key).push(q);
     });
@@ -361,25 +189,279 @@
     const chosen = [];
     const usedIds = new Set();
 
-    SECTION_PLAN.forEach((s) => {
-      const pool = bySection.get(s.key) || [];
-      const shuffled = shuffleInPlace(pool.slice());
-      const take = Math.max(0, Math.min(shuffled.length, Number(s.pick) || 0));
-      for (let i = 0; i < take; i++) {
-        const q = shuffled[i];
+    function takeFrom(pool, count) {
+      const tmp = pool.slice();
+      shuffleInPlace(tmp);
+      for (let i = 0; i < tmp.length && count > 0 && chosen.length < TARGET_TOTAL; i++) {
+        const q = tmp[i];
         if (!q || !q.id) continue;
-        if (usedIds.has(q.id)) continue;
-        usedIds.add(q.id);
+        const id = String(q.id);
+        if (usedIds.has(id)) continue;
+        usedIds.add(id);
         chosen.push(q);
+        count -= 1;
       }
-    });
-
-    // Fallback: if sections were empty, just take a shuffled slice
-    if (!chosen.length) {
-      return shuffleInPlace(qs).slice(0, 12);
+      return count;
     }
 
-    return chosen;
+    // Primary picks by section
+    SECTION_PLAN.forEach((s) => {
+      const pool = bySection.get(s.key) || [];
+      takeFrom(pool, Math.max(0, Number(s.pick) || 0));
+    });
+
+    // Backfill to target length (if any section was short/missing)
+    if (chosen.length < TARGET_TOTAL) {
+      const leftovers = qs.filter((q) => !usedIds.has(String(q.id)));
+      shuffleInPlace(leftovers);
+      for (let i = 0; i < leftovers.length && chosen.length < TARGET_TOTAL; i++) {
+        const q = leftovers[i];
+        if (!q || !q.id) continue;
+        const id = String(q.id);
+        if (usedIds.has(id)) continue;
+        usedIds.add(id);
+        chosen.push(q);
+      }
+    }
+
+    // Final fallback
+    if (!chosen.length) return shuffleInPlace(qs.slice()).slice(0, TARGET_TOTAL);
+
+    return chosen.slice(0, TARGET_TOTAL);
+  }
+
+  // -----------------------------
+  // UI render helpers
+  // -----------------------------
+
+  function difficultyBadge(d) {
+    const val = String(d || "").trim();
+    if (!val) return "";
+    const label = val.charAt(0).toUpperCase() + val.slice(1);
+    return `<span style="padding:4px 10px; border-radius:999px; border:1px solid var(--border); background: var(--surface); font-weight:800; font-size:12px">${safeText(
+      label
+    )}</span>`;
+  }
+
+  function renderIntro() {
+    const supportsAudio = supportsSpeech();
+    const planList = SECTION_PLAN.map((s) => `<li><strong>${safeText(s.label)}</strong> (${s.pick} prompts)</li>`).join("");
+
+    return `
+      <div class="note" style="margin-top:0">
+        <strong>Speaking (Ages 8–10)</strong>
+        <p style="margin:8px 0 0; color: var(--muted)">
+          Read each prompt. The learner answers out loud in full sentences.
+        </p>
+
+        <div class="note" style="margin-top:12px; padding:12px 14px">
+          <strong>Structure</strong>
+          <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted)">${planList}</ul>
+          <p style="margin:10px 0 0; color: var(--muted)">
+            Tip: Ask “Why?” and encourage <strong>because</strong>.
+          </p>
+        </div>
+
+        <p style="margin:10px 0 0; opacity:.92">
+          ${
+            supportsAudio
+              ? "Use <strong>🔊 Play</strong> for a model answer (if included)."
+              : "Audio is not available in this browser. Read the model answer out loud."
+          }
+        </p>
+      </div>
+
+      <div class="actions" style="margin-top:12px">
+        <button class="btn btn--primary" type="button" data-action="start">Start</button>
+      </div>
+    `;
+  }
+
+  function renderLoading() {
+    return `
+      <div class="note" style="margin-top:0">
+        <strong>Loading…</strong>
+        <p style="margin:8px 0 0">Preparing your speaking practice.</p>
+      </div>
+    `;
+  }
+
+  function renderError(message) {
+    return `
+      <div class="note" style="margin-top:0">
+        <strong>Could not start the test</strong>
+        <p style="margin:8px 0 0">${safeText(message || "Unknown error")}</p>
+      </div>
+      <div class="actions" style="margin-top:12px">
+        <button class="btn" type="button" data-action="retry">Try again</button>
+      </div>
+    `;
+  }
+
+  function renderTargets(q) {
+    const targets = Array.isArray(q && q.targets) ? q.targets : [];
+    if (!targets.length) return "";
+    const items = targets.map((t) => `<li style="margin:6px 0">${safeText(t)}</li>`).join("");
+    return `
+      <div class="note" style="margin:12px 0 0; padding:10px 12px">
+        <strong>Targets</strong>
+        <ul style="margin:8px 0 0; padding-left:18px; color: var(--muted)">${items}</ul>
+      </div>
+    `;
+  }
+
+  function renderChecks(q) {
+    const rubric = q && q.rubric;
+    if (!isPlainObject(rubric) || !isPlainObject(rubric.checks)) return "";
+    const c = rubric.checks;
+
+    const checks = [];
+    if (Number.isFinite(Number(c.minSentences))) checks.push(`Aim for ${Number(c.minSentences)}+ sentences`);
+    if (c.encourageBecause) checks.push("Try to include ‘because’ (a reason)");
+    if (!checks.length) return "";
+
+    const items = checks.map((t) => `<li style="margin:6px 0">${safeText(t)}</li>`).join("");
+    return `
+      <div class="note" style="margin:12px 0 0; padding:10px 12px">
+        <strong>Quick check</strong>
+        <ul style="margin:8px 0 0; padding-left:18px; color: var(--muted)">${items}</ul>
+      </div>
+    `;
+  }
+
+  function renderPromptScreen(state) {
+    const q = state.questions[state.index];
+    const total = state.questions.length;
+    const n = state.index + 1;
+
+    const sectionLabel = sectionLabelFor(q.section);
+
+    const prompt = safeTextWithBreaks(q.question || "Speak!");
+    const model = safeTextWithBreaks(q.model || "");
+    const tip = safeText(q.explanation || "Try your best.");
+
+    const audioText = String(q.say || q.model || "").trim();
+    const hasAudio = supportsSpeech() && !!audioText;
+
+    return `
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+          <div style="font-weight:900; color: var(--muted)">${safeText(sectionLabel)} • Prompt ${n} of ${total}</div>
+          ${difficultyBadge(q.difficulty)}
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap">
+          <button class="btn" type="button" data-action="play" ${hasAudio ? "" : "disabled"} aria-label="Play model audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"} aria-label="Stop audio">⏹ Stop</button>
+          <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <div style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
+          <div style="font-weight:900; font-size:18px">${prompt}</div>
+
+          ${model ? `<div style="margin-top:10px; font-size:16px; font-weight:900">Example: ${model}</div>` : ""}
+
+          <p style="margin:10px 0 0; color: var(--muted); font-size:13px">Tip: ${tip}</p>
+
+          ${renderTargets(q)}
+          ${renderChecks(q)}
+
+          <div class="actions" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn" type="button" data-action="mark" data-mark="said" aria-label="Mark as said">✅ Said it</button>
+            <button class="btn" type="button" data-action="mark" data-mark="again" aria-label="Mark as try again">🔁 Try again</button>
+            <button class="btn" type="button" data-action="mark" data-mark="skip" aria-label="Skip this prompt">⏭️ Skip</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderSummary(state) {
+    let said = 0;
+    let again = 0;
+    let skip = 0;
+
+    const sectionCounts = Object.create(null);
+    SECTION_PLAN.forEach((s) => {
+      sectionCounts[s.key] = { said: 0, again: 0, skip: 0 };
+    });
+
+    state.questions.forEach((q) => {
+      const id = q && q.id != null ? String(q.id) : "";
+      const r = (id && state.results[id]) || "skip";
+      const sec = normalizeSection(q && q.section);
+      const bucket = sectionCounts[sec] || { said: 0, again: 0, skip: 0 };
+
+      if (r === "said") {
+        said += 1;
+        bucket.said += 1;
+      } else if (r === "again") {
+        again += 1;
+        bucket.again += 1;
+      } else {
+        skip += 1;
+        bucket.skip += 1;
+      }
+
+      if (sectionCounts[sec]) sectionCounts[sec] = bucket;
+    });
+
+    const sectionLines = SECTION_PLAN.map((s) => {
+      const c = sectionCounts[s.key] || { said: 0, again: 0, skip: 0 };
+      return `<div style="margin-top:6px; color:var(--muted)"><strong>${safeText(s.label)}:</strong> Said ${c.said} • Try again ${c.again} • Skipped ${c.skip}</div>`;
+    }).join("");
+
+    const encouragement =
+      again > 0
+        ? "Repeat the ‘Try again’ prompts tomorrow. Ask one more ‘Why?’ question each time."
+        : "Good work. Restart to get a different set of prompts.";
+
+    const rows = state.questions
+      .map((q, idx) => {
+        const id = q && q.id != null ? String(q.id) : "";
+        const r = (id && state.results[id]) || "skip";
+        const status = r === "said" ? "✅ Said" : r === "again" ? "🔁 Try again" : "⏭️ Skipped";
+        const secLabel = sectionLabelFor(q.section);
+
+        return `
+          <li style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border)">
+            <span aria-hidden="true">${safeText(status.split(" ")[0])}</span>
+            <span style="min-width:0">
+              <b>${idx + 1}.</b> <span style="color:var(--muted); font-weight:800">${safeText(secLabel)}</span><br>
+              ${safeText(q.question || "")}
+              <div style="margin-top:6px; font-weight:800">${status}</div>
+            </span>
+          </li>
+        `;
+      })
+      .join("");
+
+    return `
+      <div class="note" style="margin-top:0">
+        <strong>Summary</strong>
+        <p style="margin:8px 0 0; color: var(--muted)">
+          Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong>
+        </p>
+        ${sectionLines}
+      </div>
+
+      <div class="note" style="margin-top:12px; padding:12px 14px">
+        <strong>Next step</strong>
+        <p style="margin:8px 0 0">${safeText(encouragement)}</p>
+      </div>
+
+      <details style="margin-top:12px">
+        <summary style="cursor:pointer; font-weight:900">Show review</summary>
+        <ul style="list-style:none; padding-left:0; margin:12px 0 0">
+          ${rows}
+        </ul>
+      </details>
+
+      <div class="actions" style="margin-top:12px">
+        <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
+      </div>
+    `;
   }
 
   // -----------------------------
@@ -388,89 +470,137 @@
 
   store.registerRunner(SLUG, {
     render() {
-      return renderLoading();
+      return `
+        <div data-ueah-test="${SLUG}">
+          <div data-stage>
+            ${renderIntro()}
+          </div>
+        </div>
+      `;
     },
 
-    async afterRender(rootEl, ctx) {
+    afterRender(rootEl, ctx) {
       if (!rootEl) return;
 
-      let allQuestions = [];
-      try {
-        await ensureBankLoaded(ctx);
-        allQuestions = (window.UEAH_TEST_BANKS && window.UEAH_TEST_BANKS[SLUG]) || [];
-        if (!Array.isArray(allQuestions) || !allQuestions.length) {
-          throw new Error("Question bank is empty.");
-        }
-      } catch (e) {
-        rootEl.innerHTML = renderError(e && e.message ? e.message : "Failed to load.");
-        return;
-      }
+      const host = rootEl.querySelector(`[data-ueah-test="${SLUG}"]`);
+      if (!host) return;
+
+      if (host.__ueahInited) return;
+      host.__ueahInited = true;
+
+      const stage = host.querySelector("[data-stage]");
+      if (!stage) return;
 
       const state = {
-        mode: "intro", // intro | prompt | summary
+        status: "intro", // intro | loading | prompt | summary | error
         questions: [],
         index: 0,
-        results: {} // id -> said | again | skip
+        results: Object.create(null),
+        lastError: ""
       };
 
       function paint() {
-        if (state.mode === "intro") rootEl.innerHTML = renderIntro();
-        else if (state.mode === "summary") rootEl.innerHTML = renderSummary(state);
-        else rootEl.innerHTML = renderPromptScreen(state);
+        if (state.status === "intro") stage.innerHTML = renderIntro();
+        else if (state.status === "loading") stage.innerHTML = renderLoading();
+        else if (state.status === "prompt") stage.innerHTML = renderPromptScreen(state);
+        else if (state.status === "summary") stage.innerHTML = renderSummary(state);
+        else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
+        else stage.innerHTML = renderIntro();
+
+        if (state.status === "prompt") {
+          setTimeout(() => {
+            try {
+              const el = host.querySelector("button");
+              if (el && typeof el.focus === "function") el.focus();
+            } catch (_) {}
+          }, 0);
+        }
       }
 
-      function start() {
+      async function start() {
         stopSpeech();
-        state.mode = "prompt";
-        state.index = 0;
-        state.results = {};
-        state.questions = buildStructuredSet(allQuestions);
+        state.status = "loading";
+        state.lastError = "";
         paint();
+
+        try {
+          await ensureBankLoaded(ctx);
+
+          const bank =
+            window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])
+              ? window.UEAH_TEST_BANKS[SLUG]
+              : [];
+
+          if (!bank.length) throw new Error("Missing question bank.");
+
+          // Clone and ensure stable ids
+          const prepared = ensureIds(bank.filter(isPlainObject).map((q) => ({ ...q })));
+          const picked = buildStructuredSet(prepared);
+
+          if (!picked.length) throw new Error("Could not build a speaking test from the bank.");
+
+          state.questions = picked;
+          state.index = 0;
+          state.results = Object.create(null);
+
+          state.status = "prompt";
+          paint();
+        } catch (e) {
+          state.status = "error";
+          state.lastError = e && e.message ? e.message : "Could not load the test.";
+          paint();
+        }
       }
 
       function restart() {
         stopSpeech();
-        state.mode = "intro";
-        state.index = 0;
-        state.results = {};
+        state.status = "intro";
         state.questions = [];
+        state.index = 0;
+        state.results = Object.create(null);
+        state.lastError = "";
         paint();
       }
 
       function next() {
         stopSpeech();
         if (state.index + 1 >= state.questions.length) {
-          state.mode = "summary";
+          state.status = "summary";
           paint();
           return;
         }
         state.index += 1;
+        state.status = "prompt";
         paint();
       }
 
       function mark(val) {
         const q = state.questions[state.index];
-        if (!q || !q.id) return;
+        if (!q || q.id == null) return;
+
         const v = String(val || "").toLowerCase();
         if (v !== "said" && v !== "again" && v !== "skip") return;
-        state.results[q.id] = v;
+
+        state.results[String(q.id)] = v;
         next();
       }
 
       function speakCurrent() {
         const q = state.questions[state.index];
         if (!q) return;
-        const t = String(q.say || "").trim() || String(q.model || "").trim();
+        const t = String(q.say || q.model || "").trim();
         if (!t) return;
         speak(t);
       }
 
-      rootEl.addEventListener("click", (ev) => {
+      // Event delegation
+      host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("[data-action]") : null;
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
-        if (action === "start") {
+
+        if (action === "start" || action === "retry") {
           ev.preventDefault();
           start();
         } else if (action === "restart") {
@@ -479,15 +609,21 @@
         } else if (action === "play") {
           ev.preventDefault();
           speakCurrent();
+        } else if (action === "stop") {
+          ev.preventDefault();
+          stopSpeech();
         } else if (action === "mark") {
           ev.preventDefault();
           mark(btn.getAttribute("data-mark"));
         }
       });
 
+      // Cancel audio on navigation (best effort)
       window.addEventListener(
         "popstate",
-        () => stopSpeech(),
+        () => {
+          stopSpeech();
+        },
         { passive: true }
       );
 

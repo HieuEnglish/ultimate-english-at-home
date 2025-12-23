@@ -5,6 +5,14 @@
    - Classroom-friendly: no IELTS band claims.
    - Structured + random: Part 1 + Part 2 cue card + Part 3 discussion.
    - Teacher/learner can mark each prompt as Said / Try again / Skip.
+
+   Updates (this file):
+   - Fixes structured picking bug in original (Part 3 selection logic + topic preference)
+   - Adds stable fallback when sections are missing in the bank
+   - Adds Stop audio + cancels speech/timers on navigation changes
+   - Makes bank-loader resilient (existing script tick)
+   - Improves safety around missing ids/fields; ensures ids exist
+   - Keeps UI consistent with other runners (intro/loading/error/prompt/summary)
 */
 
 (function () {
@@ -25,13 +33,21 @@
     return;
   }
 
-  function safeText(s) {
-    return String(s == null ? "" : s)
+  // -----------------------------
+  // Helpers
+  // -----------------------------
+
+  function safeText(v) {
+    return String(v == null ? "" : v)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
-      .replace(/\"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function safeTextWithBreaks(v) {
+    return safeText(v).replace(/\n/g, "<br>");
   }
 
   function shuffleInPlace(arr) {
@@ -42,6 +58,17 @@
       arr[j] = tmp;
     }
     return arr;
+  }
+
+  function isPlainObject(v) {
+    return v && typeof v === "object" && !Array.isArray(v);
+  }
+
+  function formatTime(sec) {
+    const s = Math.max(0, Math.floor(sec));
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
   }
 
   function supportsSpeech() {
@@ -62,15 +89,31 @@
     try {
       const synth = window.speechSynthesis;
       synth.cancel();
+
+      // best-effort prime voices
+      try {
+        if (typeof synth.getVoices === "function") synth.getVoices();
+      } catch (_) {}
+
       const u = new SpeechSynthesisUtterance(t);
+      u.lang = "en-US";
       u.rate = 0.92;
       u.pitch = 1.0;
       u.volume = 1.0;
+
       synth.speak(u);
       return true;
     } catch (_) {
       return false;
     }
+  }
+
+  function normalizeSection(v) {
+    return String(v || "").trim().toLowerCase();
+  }
+
+  function normalizeTopic(v) {
+    return String(v || "").trim().toLowerCase();
   }
 
   function sectionLabelFor(key) {
@@ -79,27 +122,212 @@
     return match ? match.label : "Prompt";
   }
 
+  function clamp(n, a, b) {
+    const x = Number(n);
+    if (!Number.isFinite(x)) return a;
+    return Math.min(b, Math.max(a, x));
+  }
+
+  // -----------------------------
+  // Bank loader (no build step)
+  // -----------------------------
+
+  let bankPromise = null;
+
+  function ensureBankLoaded(ctx) {
+    if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
+      return Promise.resolve(true);
+    }
+    if (bankPromise) return bankPromise;
+
+    const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
+
+    bankPromise = new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
+      if (existing) {
+        // If it already executed, resolve; otherwise tick once.
+        setTimeout(() => resolve(true), 0);
+        return;
+      }
+
+      const s = document.createElement("script");
+      s.defer = true;
+      s.src = src;
+      s.setAttribute("data-ueah-test-bank", SLUG);
+      s.onload = () => resolve(true);
+      s.onerror = () => reject(new Error(`Failed to load: ${src}`));
+      document.head.appendChild(s);
+    });
+
+    return bankPromise;
+  }
+
+  // -----------------------------
+  // Structured picking
+  // -----------------------------
+
+  function ensureIds(list) {
+    return list.map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      if (q.id != null && String(q.id).trim()) return q;
+      return { ...q, id: `q_${idx}_${Math.random().toString(16).slice(2)}` };
+    });
+  }
+
+  function sampleUnique(pool, n, usedIds) {
+    const out = [];
+    const tmp = pool.slice();
+    shuffleInPlace(tmp);
+
+    for (let i = 0; i < tmp.length && out.length < n; i++) {
+      const q = tmp[i];
+      if (!q || !q.id) continue;
+      const id = String(q.id);
+      if (usedIds.has(id)) continue;
+      usedIds.add(id);
+      out.push(q);
+    }
+    return out;
+  }
+
+  function buildStructuredSet(allQuestions) {
+    const qs = Array.isArray(allQuestions) ? ensureIds(allQuestions.filter(isPlainObject)) : [];
+    if (!qs.length) return [];
+
+    const bySection = new Map();
+    qs.forEach((q) => {
+      const key = normalizeSection(q.section);
+      if (!bySection.has(key)) bySection.set(key, []);
+      bySection.get(key).push(q);
+    });
+
+    const p1Pool = (bySection.get("part1") || []).slice();
+    const p2Pool = (bySection.get("part2") || []).slice();
+    const p3Pool = (bySection.get("part3") || []).slice();
+
+    // If the bank isn't structured, fallback to a random sample.
+    const hasAnyStructured = p1Pool.length || p2Pool.length || p3Pool.length;
+    if (!hasAnyStructured) {
+      const tmp = qs.slice();
+      shuffleInPlace(tmp);
+      return tmp.slice(0, 15);
+    }
+
+    const usedIds = new Set();
+
+    // Pick Part 2 first (topic anchor)
+    shuffleInPlace(p2Pool);
+    const p2 = p2Pool.length ? p2Pool[0] : null;
+    if (p2 && p2.id) usedIds.add(String(p2.id));
+
+    const chosenTopic = p2 ? normalizeTopic(p2.topicId) : "";
+
+    // Part 1: prefer variety by topicId (cap repeats at 2 where topicId exists)
+    const p1Need = (SECTION_PLAN.find((s) => s.key === "part1") || {}).pick || 8;
+    const p1Picked = [];
+    const seenTopics = new Map();
+
+    const p1Tmp = p1Pool.slice();
+    shuffleInPlace(p1Tmp);
+
+    for (let i = 0; i < p1Tmp.length && p1Picked.length < p1Need; i++) {
+      const q = p1Tmp[i];
+      if (!q || !q.id) continue;
+      const id = String(q.id);
+      if (usedIds.has(id)) continue;
+
+      const t = normalizeTopic(q.topicId);
+      const count = t ? seenTopics.get(t) || 0 : 0;
+
+      if (t && count >= 2) continue;
+
+      usedIds.add(id);
+      if (t) seenTopics.set(t, count + 1);
+      p1Picked.push(q);
+    }
+
+    // If still short, fill without topic constraint
+    if (p1Picked.length < p1Need) {
+      const fill = sampleUnique(p1Tmp, p1Need - p1Picked.length, usedIds);
+      Array.prototype.push.apply(p1Picked, fill);
+    }
+
+    // Part 3: prefer same topicId as Part 2; then fill from remaining pool
+    const p3Need = (SECTION_PLAN.find((s) => s.key === "part3") || {}).pick || 6;
+
+    const preferredP3 = chosenTopic
+      ? p3Pool.filter((q) => normalizeTopic(q.topicId) === chosenTopic)
+      : [];
+
+    const p3Picked = [];
+    if (preferredP3.length) {
+      const got = sampleUnique(preferredP3, p3Need, usedIds);
+      Array.prototype.push.apply(p3Picked, got);
+    }
+
+    if (p3Picked.length < p3Need) {
+      const got = sampleUnique(p3Pool, p3Need - p3Picked.length, usedIds);
+      Array.prototype.push.apply(p3Picked, got);
+    }
+
+    // If P2 missing, try to take one from remaining questions (any section) as a cue-style middle prompt.
+    let p2Final = p2;
+    if (!p2Final) {
+      const any = qs.filter((q) => !usedIds.has(String(q.id)));
+      shuffleInPlace(any);
+      p2Final = any.length ? any[0] : null;
+      if (p2Final && p2Final.id) usedIds.add(String(p2Final.id));
+    }
+
+    const final = []
+      .concat(p1Picked)
+      .concat(p2Final ? [p2Final] : [])
+      .concat(p3Picked);
+
+    // Ultimate fallback if somehow empty
+    if (!final.length) {
+      const tmp = qs.slice();
+      shuffleInPlace(tmp);
+      return tmp.slice(0, 15);
+    }
+
+    return final;
+  }
+
+  // -----------------------------
+  // UI renderers
+  // -----------------------------
+
   function renderIntro() {
     const supportsAudio = supportsSpeech();
-    const planList = SECTION_PLAN.map((s) => `<li><strong>${safeText(s.label)}</strong> (${s.pick} prompts)</li>`).join("");
+    const planList = SECTION_PLAN.map(
+      (s) => `<li><strong>${safeText(s.label)}</strong> (${s.pick} prompts)</li>`
+    ).join("");
 
     return `
-      <div class="detail-card" role="region" aria-label="Speaking test intro">
-        <h3 style="margin:0">Speaking (Ages 13–18)</h3>
-        <p style="margin:10px 0 0; color: var(--muted)">
-          Read the prompt. The learner answers out loud. Encourage natural answers with clear reasons and examples. This is IELTS-inspired (simplified).
+      <div class="note" style="margin-top:0">
+        <strong>Speaking (Ages 13–18)</strong>
+        <p style="margin:8px 0 0; opacity:.92">
+          Read the prompt. The learner answers out loud. Encourage clear reasons and examples. This is IELTS-inspired (simplified).
         </p>
-        <div class="note" style="margin-top:12px">
+
+        <div class="note" style="margin-top:12px; padding:12px 14px">
           <strong>Structure</strong>
           <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted)">${planList}</ul>
           <p style="margin:10px 0 0; color: var(--muted)">
             Tip: Use linking words like <strong>because</strong>, <strong>however</strong>, <strong>for example</strong>, and <strong>on the other hand</strong>.
           </p>
         </div>
+
         <p style="margin:10px 0 0; opacity:.92">
-          ${supportsAudio ? "Use <strong>🔊 Play</strong> for a sample answer." : "Audio is not available in this browser. Read the sample answer out loud."}
+          ${
+            supportsAudio
+              ? "Use <strong>🔊 Play</strong> to hear a model answer (if provided)."
+              : "Audio is not available in this browser. Read the model answer out loud."
+          }
         </p>
       </div>
+
       <div class="actions" style="margin-top:12px">
         <button class="btn btn--primary" type="button" data-action="start">Start</button>
       </div>
@@ -118,8 +346,11 @@
   function renderError(message) {
     return `
       <div class="note" style="margin-top:0">
-        <strong>Could not load this test.</strong>
+        <strong>Could not load this test</strong>
         <p style="margin:8px 0 0">${safeText(message || "Unknown error")}</p>
+      </div>
+      <div class="actions" style="margin-top:12px">
+        <button class="btn" type="button" data-action="retry">Try again</button>
       </div>
     `;
   }
@@ -180,26 +411,49 @@
     `;
   }
 
+  function renderPart2Timers(state, q) {
+    if (String(q.section || "").toLowerCase() !== "part2") return "";
+
+    return `
+      <div class="note" style="margin:12px 0 0; padding:10px 12px">
+        <strong>Part 2 timers (optional)</strong>
+        <p style="margin:8px 0 0; opacity:.92">Prep: 01:00 • Speaking: 02:00</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; align-items:center">
+          <button class="btn" type="button" data-action="p2prep">Start prep</button>
+          <button class="btn" type="button" data-action="p2speak">Start speaking</button>
+          <button class="btn" type="button" data-action="p2stop">Stop timer</button>
+          <span class="chip" aria-label="Part 2 timer" style="font-weight:900">${formatTime(state.p2Remaining || 0)}</span>
+        </div>
+      </div>
+    `;
+  }
+
   function renderPromptScreen(state) {
     const q = state.questions[state.index];
     const total = state.questions.length;
     const n = state.index + 1;
 
-    const prompt = safeText(q.question || "Speak!");
-    const sample = safeText(q.model || "");
+    const prompt = safeTextWithBreaks(q.question || "Speak!");
+    const sample = safeTextWithBreaks(q.model || "");
     const tip = safeText(q.explanation || "Try your best.");
 
-    const sectionLabel = sectionLabelFor(q.section);
-    const hasAudio = supportsSpeech() && String(q.say || q.model || "").trim();
+    const sectionKey = normalizeSection(q.section);
+    const sectionLabel = sectionLabelFor(sectionKey);
+
+    const audioText = String(q.say || q.model || "").trim();
+    const hasAudio = supportsSpeech() && !!audioText;
 
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:900; color: var(--muted)">${safeText(sectionLabel)} • Prompt ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" ${hasAudio ? "" : "disabled"} aria-label="Play sample answer audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" ${hasAudio ? "" : "disabled"} aria-label="Play model audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"} aria-label="Stop audio">⏹ Stop</button>
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
         </div>
       </div>
+
+      ${renderPart2Timers(state, q)}
 
       <div style="margin-top:12px">
         <div style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
@@ -229,25 +483,43 @@
     let again = 0;
     let skip = 0;
 
+    const sectionCounts = {
+      part1: { said: 0, again: 0, skip: 0 },
+      part2: { said: 0, again: 0, skip: 0 },
+      part3: { said: 0, again: 0, skip: 0 }
+    };
+
     state.questions.forEach((q) => {
-      const r = state.results[q.id] || "skip";
-      if (r === "said") said += 1;
-      else if (r === "again") again += 1;
-      else skip += 1;
+      const r = state.results[String(q.id)] || "skip";
+      const sec = normalizeSection(q.section) || "part1";
+      const bucket = sectionCounts[sec] || sectionCounts.part1;
+
+      if (r === "said") {
+        said += 1;
+        bucket.said += 1;
+      } else if (r === "again") {
+        again += 1;
+        bucket.again += 1;
+      } else {
+        skip += 1;
+        bucket.skip += 1;
+      }
     });
 
     const rows = state.questions
       .map((q, idx) => {
-        const r = state.results[q.id] || "skip";
+        const r = state.results[String(q.id)] || "skip";
         const status = r === "said" ? "✅ Said" : r === "again" ? "🔁 Try again" : "⏭️ Skipped";
-        const sectionLabel = sectionLabelFor(q.section);
+        const sectionLabel = sectionLabelFor(normalizeSection(q.section));
         return `
-          <tr>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border); color: var(--muted)">${idx + 1}</td>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border); color: var(--muted); font-weight:800">${safeText(sectionLabel)}</td>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border)">${safeText(q.question || "")}</td>
-            <td style="padding:8px 10px; border-bottom:1px solid var(--border); font-weight:800">${status}</td>
-          </tr>
+          <li style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border)">
+            <span aria-hidden="true">${safeText(status.split(" ")[0])}</span>
+            <span style="min-width:0">
+              <b>${idx + 1}.</b> <span style="color:var(--muted); font-weight:800">${safeText(sectionLabel)}</span><br>
+              ${safeText(q.question || "")}
+              <div style="margin-top:6px; font-weight:800">${status}</div>
+            </span>
+          </li>
         `;
       })
       .join("");
@@ -255,34 +527,36 @@
     const encouragement =
       again > 0
         ? "Repeat the ‘Try again’ prompts. In Part 3, push for deeper reasons and comparisons."
-        : "Good work. Restart to get a different set of prompts.";
+        : "Restart to get a different set of prompts.";
+
+    function secLine(key) {
+      const s = sectionCounts[key];
+      if (!s) return "";
+      return `<div style="margin-top:6px; color:var(--muted)"><strong>${safeText(sectionLabelFor(key))}:</strong> Said ${s.said} • Try again ${s.again} • Skipped ${s.skip}</div>`;
+    }
 
     return `
-      <div class="detail-card" role="region" aria-label="Speaking test summary">
-        <h3 style="margin:0">Summary</h3>
-        <p style="margin:10px 0 0; color: var(--muted)">
+      <div class="note" style="margin-top:0">
+        <strong>Summary</strong>
+        <p style="margin:8px 0 0; color: var(--muted)">
           Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong>
         </p>
-
-        <div style="margin-top:14px; overflow:auto; border:1px solid var(--border); border-radius:16px">
-          <table style="width:100%; border-collapse:collapse">
-            <thead>
-              <tr>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">#</th>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">Section</th>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">Prompt</th>
-                <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border); color: var(--muted)">Result</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>
-
-        <div class="note" style="margin-top:12px">
-          <strong>Next step</strong>
-          <p style="margin:8px 0 0">${safeText(encouragement)}</p>
-        </div>
+        ${secLine("part1")}
+        ${secLine("part2")}
+        ${secLine("part3")}
       </div>
+
+      <div class="note" style="margin-top:12px; padding:12px 14px">
+        <strong>Next step</strong>
+        <p style="margin:8px 0 0">${safeText(encouragement)}</p>
+      </div>
+
+      <details style="margin-top:12px">
+        <summary style="cursor:pointer; font-weight:900">Show review</summary>
+        <ul style="list-style:none; padding-left:0; margin:12px 0 0">
+          ${rows}
+        </ul>
+      </details>
 
       <div class="actions" style="margin-top:12px">
         <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
@@ -290,184 +564,209 @@
     `;
   }
 
-  // Bank loader (no build step)
-  let bankPromise = null;
-
-  function ensureBankLoaded(ctx) {
-    if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
-      return Promise.resolve(true);
-    }
-
-    if (bankPromise) return bankPromise;
-
-    const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
-
-    bankPromise = new Promise((resolve, reject) => {
-      const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
-      if (existing) {
-        setTimeout(() => resolve(true), 0);
-        return;
-      }
-
-      const s = document.createElement("script");
-      s.src = src;
-      s.defer = true;
-      s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
-      s.onerror = () => reject(new Error(`Failed to load: ${src}`));
-      document.head.appendChild(s);
-    });
-
-    return bankPromise;
-  }
-
-  function buildStructuredSet(allQuestions) {
-    const qs = Array.isArray(allQuestions) ? allQuestions.slice() : [];
-    const bySection = new Map();
-    qs.forEach((q) => {
-      const key = String(q && q.section ? q.section : "").toLowerCase();
-      if (!bySection.has(key)) bySection.set(key, []);
-      bySection.get(key).push(q);
-    });
-
-    const usedIds = new Set();
-
-    // Pick Part 2 first (so we can prefer the same topic in Part 3)
-    let chosenTopic = "";
-    const part2 = [];
-    const p2Pool = bySection.get("part2") || [];
-    const p2 = shuffleInPlace(p2Pool.slice())[0];
-    if (p2 && p2.id) {
-      part2.push(p2);
-      usedIds.add(p2.id);
-      chosenTopic = String(p2.topicId || "").toLowerCase();
-    }
-
-    // Pick Part 1 (Interview)
-    const part1 = [];
-    const p1Pool = bySection.get("part1") || [];
-    const p1Shuffled = shuffleInPlace(p1Pool.slice());
-    for (let i = 0; i < p1Shuffled.length && part1.length < 8; i++) {
-      const q = p1Shuffled[i];
-      if (!q || !q.id || usedIds.has(q.id)) continue;
-      usedIds.add(q.id);
-      part1.push(q);
-    }
-
-    // Pick Part 3 (Discussion) - prefer same topic as Part 2
-    const part3 = [];
-    const p3Pool = bySection.get("part3") || [];
-    const preferred = chosenTopic
-      ? p3Pool.filter((q) => String(q && q.topicId ? q.topicId : "").toLowerCase() === chosenTopic)
-      : [];
-
-    function takeFrom(pool, need) {
-      const shuffled = shuffleInPlace(pool.slice());
-      for (let i = 0; i < shuffled.length && part3.length < need; i++) {
-        const q = shuffled[i];
-        if (!q || !q.id || usedIds.has(q.id)) continue;
-        usedIds.add(q.id);
-        part3.push(q);
-      }
-    }
-
-    takeFrom(preferred, 6);
-    if (part3.length < 6) takeFrom(p3Pool, 6);
-
-    const out = part1.concat(part2, part3);
-    if (!out.length) return shuffleInPlace(qs).slice(0, 12);
-    return out;
-  }
+  // -----------------------------
+  // Runner registration
+  // -----------------------------
 
   store.registerRunner(SLUG, {
     render() {
-      return renderLoading();
+      return `
+        <div data-ueah-test="${SLUG}">
+          <div data-stage>
+            ${renderIntro()}
+          </div>
+        </div>
+      `;
     },
 
-    async afterRender(rootEl, ctx) {
+    afterRender(rootEl, ctx) {
       if (!rootEl) return;
 
-      let allQuestions = [];
-      try {
-        await ensureBankLoaded(ctx);
-        allQuestions = (window.UEAH_TEST_BANKS && window.UEAH_TEST_BANKS[SLUG]) || [];
-        if (!Array.isArray(allQuestions) || !allQuestions.length) {
-          throw new Error("Question bank is empty.");
-        }
-      } catch (e) {
-        rootEl.innerHTML = renderError(e && e.message ? e.message : "Failed to load.");
-        return;
-      }
+      const host = rootEl.querySelector(`[data-ueah-test="${SLUG}"]`);
+      if (!host) return;
+
+      if (host.__ueahInited) return;
+      host.__ueahInited = true;
+
+      const stage = host.querySelector("[data-stage]");
+      if (!stage) return;
 
       const state = {
-        mode: "intro",
+        status: "intro", // intro | loading | prompt | summary | error
         questions: [],
         index: 0,
-        results: {}
+        results: Object.create(null),
+        lastError: "",
+
+        // Part 2 mini timer (optional)
+        p2TimerId: null,
+        p2Remaining: 0
       };
 
-      function paint() {
-        if (state.mode === "intro") rootEl.innerHTML = renderIntro();
-        else if (state.mode === "summary") rootEl.innerHTML = renderSummary(state);
-        else rootEl.innerHTML = renderPromptScreen(state);
+      function stopP2Timer() {
+        if (state.p2TimerId) {
+          clearInterval(state.p2TimerId);
+          state.p2TimerId = null;
+        }
+        state.p2Remaining = 0;
+        const chip = host.querySelector('[aria-label="Part 2 timer"]');
+        if (chip) chip.textContent = formatTime(state.p2Remaining);
       }
 
-      function start() {
-        stopSpeech();
-        state.mode = "prompt";
-        state.index = 0;
-        state.results = {};
-        state.questions = buildStructuredSet(allQuestions);
+      function startP2Countdown(seconds) {
+        stopP2Timer();
+        state.p2Remaining = clamp(seconds, 0, 60 * 60);
         paint();
+
+        state.p2TimerId = setInterval(() => {
+          state.p2Remaining -= 1;
+          if (state.p2Remaining <= 0) {
+            state.p2Remaining = 0;
+            stopP2Timer();
+            paint();
+            return;
+          }
+          const chip = host.querySelector('[aria-label="Part 2 timer"]');
+          if (chip) chip.textContent = formatTime(state.p2Remaining);
+        }, 1000);
+      }
+
+      function paint() {
+        if (state.status === "intro") stage.innerHTML = renderIntro();
+        else if (state.status === "loading") stage.innerHTML = renderLoading();
+        else if (state.status === "prompt") stage.innerHTML = renderPromptScreen(state);
+        else if (state.status === "summary") stage.innerHTML = renderSummary(state);
+        else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
+        else stage.innerHTML = renderIntro();
+      }
+
+      async function start() {
+        stopSpeech();
+        stopP2Timer();
+
+        state.status = "loading";
+        state.lastError = "";
+        paint();
+
+        try {
+          await ensureBankLoaded(ctx);
+
+          const bank =
+            window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])
+              ? window.UEAH_TEST_BANKS[SLUG]
+              : [];
+
+          if (!bank.length) throw new Error("Missing question bank.");
+
+          const prepared = bank.map((q) => (isPlainObject(q) ? { ...q } : q));
+          const built = buildStructuredSet(prepared);
+
+          if (!built.length) throw new Error("Could not build a speaking test from the bank.");
+
+          state.questions = built;
+          state.index = 0;
+          state.results = Object.create(null);
+          state.status = "prompt";
+          paint();
+        } catch (e) {
+          state.status = "error";
+          state.lastError = e && e.message ? e.message : "Could not load the test.";
+          paint();
+        }
       }
 
       function restart() {
         stopSpeech();
-        state.mode = "intro";
-        state.index = 0;
-        state.results = {};
+        stopP2Timer();
+
+        state.status = "intro";
         state.questions = [];
+        state.index = 0;
+        state.results = Object.create(null);
+        state.lastError = "";
         paint();
       }
 
       function next() {
         stopSpeech();
+        stopP2Timer();
+
         if (state.index + 1 >= state.questions.length) {
-          state.mode = "summary";
+          state.status = "summary";
           paint();
           return;
         }
+
         state.index += 1;
+        state.status = "prompt";
         paint();
       }
 
       function mark(val) {
         const q = state.questions[state.index];
         if (!q || !q.id) return;
+
         const v = String(val || "").toLowerCase();
-        if (v !== "said" && v !== "again" && v !== "skip") return;
-        state.results[q.id] = v;
+        const normalized = v === "said" || v === "again" || v === "skip" ? v : "skip";
+
+        state.results[String(q.id)] = normalized;
         next();
       }
 
       function speakCurrent() {
         const q = state.questions[state.index];
         if (!q) return;
-        speak(q.say || q.model || q.question || "");
+        const t = q.say || q.model || "";
+        speak(t);
       }
 
-      rootEl.addEventListener("click", (ev) => {
+      function stopAudio() {
+        stopSpeech();
+      }
+
+      host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("[data-action]") : null;
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
-        if (!action) return;
 
-        if (action === "start") start();
-        else if (action === "restart") restart();
-        else if (action === "play") speakCurrent();
-        else if (action === "mark") mark(btn.getAttribute("data-mark"));
+        if (action === "start" || action === "retry") {
+          ev.preventDefault();
+          start();
+        } else if (action === "restart") {
+          ev.preventDefault();
+          restart();
+        } else if (action === "play") {
+          ev.preventDefault();
+          speakCurrent();
+        } else if (action === "stop") {
+          ev.preventDefault();
+          stopAudio();
+        } else if (action === "mark") {
+          ev.preventDefault();
+          mark(btn.getAttribute("data-mark"));
+        } else if (action === "p2prep") {
+          ev.preventDefault();
+          startP2Countdown(60);
+        } else if (action === "p2speak") {
+          ev.preventDefault();
+          startP2Countdown(120);
+        } else if (action === "p2stop") {
+          ev.preventDefault();
+          stopP2Timer();
+          paint();
+        }
       });
+
+      // Cancel speech/timers when leaving the page (best effort)
+      window.addEventListener(
+        "popstate",
+        () => {
+          stopSpeech();
+          stopP2Timer();
+        },
+        { passive: true }
+      );
 
       paint();
     }

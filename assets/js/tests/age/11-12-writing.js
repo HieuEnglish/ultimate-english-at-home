@@ -151,6 +151,14 @@
     });
   }
 
+  function scoreWritingFromChecks(checks) {
+    const list = Array.isArray(checks) ? checks : [];
+    if (!list.length) return { earned: 0, possible: 1 };
+    const earned = list.filter((c) => !!c && c.ok).length;
+    const possible = list.length;
+    return { earned, possible };
+  }
+
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -414,16 +422,25 @@
       const met = checks.filter((c) => c.ok).length;
       const totalChecks = checks.length;
 
+      const wp = Number(state.lastWritingPointsPossible || 0);
+      const we = Number(state.lastWritingPointsEarned || 0);
+
       const checksHtml = totalChecks
         ? `
           <div style="margin-top:10px">
-            <div style="font-weight:900">Auto-checks: ${met} / ${totalChecks}</div>
+            <div style="font-weight:900">Auto-score: ${we} / ${wp} (${wp ? Math.round((we / wp) * 100) : 0}%)</div>
+            <div style="margin-top:8px; font-weight:900">Checks met: ${met} / ${totalChecks}</div>
             <ul style="margin:10px 0 0; padding-left:18px">
               ${checks.map((c) => `<li style="margin:4px 0">${c.ok ? "✅" : "❌"} ${safeText(c.label)}</li>`).join("")}
             </ul>
           </div>
         `
-        : "";
+        : `
+          <div style="margin-top:10px">
+            <div style="font-weight:900">Auto-score: ${we} / ${wp} (${wp ? Math.round((we / wp) * 100) : 0}%)</div>
+            <p style="margin:8px 0 0; opacity:.92">No checklist items were provided, so this task is scored as completed.</p>
+          </div>
+        `;
 
       return `
         <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
@@ -433,7 +450,7 @@
 
         <div class="note" style="margin-top:12px" aria-live="polite">
           <strong>✍️ Saved</strong>
-          <p style="margin:8px 0 0">This writing task is not automatically scored, but requirements are checked.</p>
+          <p style="margin:8px 0 0">This writing task is auto-scored using the checklist below.</p>
           ${checksHtml}
         </div>
 
@@ -495,12 +512,21 @@
 
   function renderSummary(state) {
     const total = state.questions.length;
+
+    const earned = state.totalEarnedPoints;
+    const max = state.totalMaxPoints;
+    const pct = max ? Math.round((earned / max) * 100) : 0;
+
     const objectiveTotal = state.objectiveCount;
     const promptTotal = total - objectiveTotal;
 
-    const earned = state.objectiveEarnedPoints;
-    const max = state.objectiveMaxPoints;
-    const pct = max ? Math.round((earned / max) * 100) : 0;
+    const objEarned = state.objectiveEarnedPoints;
+    const objMax = state.objectiveMaxPoints;
+    const objPct = objMax ? Math.round((objEarned / objMax) * 100) : 0;
+
+    const wrEarned = state.writingEarnedPoints;
+    const wrMax = state.writingMaxPoints;
+    const wrPct = wrMax ? Math.round((wrEarned / wrMax) * 100) : 0;
 
     const promptDone = state.promptDoneCount;
 
@@ -511,15 +537,20 @@
 
         let status = "";
         if (r.skipped) status = "⏭️ Skipped";
-        else if (isWritingType(type)) status = "✍️ Done";
+        else if (isWritingType(type)) status = r.pointsPossible > 0 ? "✍️ Scored" : "✍️ Done";
         else status = r.correct ? "✅ Correct" : "❌ Wrong";
 
         let extra = "";
-        if (!isWritingType(type)) {
+        if (r.skipped) {
+          extra = `<div style="margin-top:6px; color: var(--muted)">Points: 0 / ${Number(r.pointsPossible || 0)}</div>`;
+        } else if (!isWritingType(type)) {
           extra = `<div style="margin-top:6px; color: var(--muted)">Points: ${Number(r.pointsEarned || 0)} / ${Number(r.pointsPossible || 0)}</div>`;
-        } else if (Array.isArray(r.checks) && r.checks.length) {
-          const met = r.checks.filter((c) => c.ok).length;
-          extra = `<div style="margin-top:6px; color: var(--muted)">Checks: ${met} / ${r.checks.length}</div>`;
+        } else {
+          extra = `<div style="margin-top:6px; color: var(--muted)">Points: ${Number(r.pointsEarned || 0)} / ${Number(r.pointsPossible || 0)}</div>`;
+          if (Array.isArray(r.checks) && r.checks.length) {
+            const met = r.checks.filter((c) => c.ok).length;
+            extra += `<div style="margin-top:6px; color: var(--muted)">Checks: ${met} / ${r.checks.length}</div>`;
+          }
         }
 
         return `
@@ -536,8 +567,9 @@
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
-        <p style="margin:8px 0 0">Objective score: <strong>${earned}</strong> / ${max} (${pct}%)</p>
-        ${promptTotal ? `<p style="margin:8px 0 0">Writing tasks completed: <strong>${promptDone}</strong> / ${promptTotal}</p>` : ""}
+        <p style="margin:8px 0 0">Total score: <strong>${earned}</strong> / ${max} (${pct}%)</p>
+        <p style="margin:8px 0 0; opacity:.92">Objective score: ${objEarned} / ${objMax} (${objPct}%)</p>
+        ${promptTotal ? `<p style="margin:8px 0 0; opacity:.92">Writing score: ${wrEarned} / ${wrMax} (${wrPct}%) • Tasks completed: <strong>${promptDone}</strong> / ${promptTotal}</p>` : ""}
         <p style="margin:8px 0 0">Tip: Repeat the test to practice again. The question order changes each time.</p>
       </div>
 
@@ -588,6 +620,13 @@
         objectiveCount: 0,
         objectiveMaxPoints: 0,
         objectiveEarnedPoints: 0,
+
+        writingMaxPoints: 0,
+        writingEarnedPoints: 0,
+
+        totalMaxPoints: 0,
+        totalEarnedPoints: 0,
+
         promptDoneCount: 0,
 
         lastChoice: null,
@@ -597,10 +636,20 @@
         lastIsCorrect: false,
         lastWasSkipped: false,
         lastPointsEarned: 0,
+
+        lastWritingPointsPossible: 0,
+        lastWritingPointsEarned: 0,
+
         lastError: "",
 
         responses: {} // q.id -> { user, correct?, skipped?, pointsEarned?, pointsPossible?, checks? }
       };
+
+      function recalcTotals() {
+        state.totalMaxPoints = (Number(state.objectiveMaxPoints) || 0) + (Number(state.writingMaxPoints) || 0);
+        state.totalEarnedPoints =
+          (Number(state.objectiveEarnedPoints) || 0) + (Number(state.writingEarnedPoints) || 0);
+      }
 
       function paint() {
         if (state.status === "intro") stage.innerHTML = renderIntro();
@@ -652,11 +701,26 @@
 
           state.questions = combined;
           state.index = 0;
+
           state.objectiveCount = combined.filter((q) => !isWritingType(q?.type)).length;
           state.objectiveMaxPoints = combined
             .filter((q) => !isWritingType(q?.type))
             .reduce((sum, q) => sum + pointsPossible(q), 0);
           state.objectiveEarnedPoints = 0;
+
+          // Writing max points:
+          // - If rubric.checks exist: max = checks.length
+          // - Else: max = 1 (completion)
+          state.writingMaxPoints = combined
+            .filter((q) => isWritingType(q?.type))
+            .reduce((sum, q) => {
+              const checks = q && q.rubric && Array.isArray(q.rubric.checks) ? q.rubric.checks : [];
+              return sum + (checks.length ? checks.length : 1);
+            }, 0);
+          state.writingEarnedPoints = 0;
+
+          recalcTotals();
+
           state.promptDoneCount = 0;
 
           state.lastChoice = null;
@@ -666,6 +730,8 @@
           state.lastIsCorrect = false;
           state.lastWasSkipped = false;
           state.lastPointsEarned = 0;
+          state.lastWritingPointsPossible = 0;
+          state.lastWritingPointsEarned = 0;
           state.responses = {};
 
           state.status = "question";
@@ -684,10 +750,16 @@
         state.objectiveCount = 0;
         state.objectiveMaxPoints = 0;
         state.objectiveEarnedPoints = 0;
+        state.writingMaxPoints = 0;
+        state.writingEarnedPoints = 0;
+        state.totalMaxPoints = 0;
+        state.totalEarnedPoints = 0;
         state.promptDoneCount = 0;
         state.responses = {};
         state.lastWasSkipped = false;
         state.lastPointsEarned = 0;
+        state.lastWritingPointsPossible = 0;
+        state.lastWritingPointsEarned = 0;
         paint();
       }
 
@@ -695,6 +767,8 @@
         state.lastWasSkipped = false;
         state.lastPointsEarned = 0;
         state.lastChecks = [];
+        state.lastWritingPointsPossible = 0;
+        state.lastWritingPointsEarned = 0;
 
         if (state.index + 1 >= state.questions.length) {
           state.status = "summary";
@@ -711,13 +785,27 @@
         const q = state.questions[state.index];
         const type = String(q?.type || "").toLowerCase();
 
-        state.responses[q.id] = {
-          ...(state.responses[q.id] || {}),
-          skipped: true,
-          type,
-          pointsEarned: 0,
-          pointsPossible: isWritingType(type) ? 0 : pointsPossible(q)
-        };
+        if (isWritingType(type)) {
+          const checks = q && q.rubric && Array.isArray(q.rubric.checks) ? q.rubric.checks : [];
+          const possible = checks.length ? checks.length : 1;
+
+          state.responses[q.id] = {
+            ...(state.responses[q.id] || {}),
+            skipped: true,
+            type,
+            pointsEarned: 0,
+            pointsPossible: possible,
+            checks: []
+          };
+        } else {
+          state.responses[q.id] = {
+            ...(state.responses[q.id] || {}),
+            skipped: true,
+            type,
+            pointsEarned: 0,
+            pointsPossible: pointsPossible(q)
+          };
+        }
 
         state.lastWasSkipped = true;
         state.lastIsCorrect = false;
@@ -726,6 +814,9 @@
         state.lastResponse = "";
         state.lastChecks = [];
         state.lastPointsEarned = 0;
+        state.lastWritingPointsPossible = 0;
+        state.lastWritingPointsEarned = 0;
+
         state.status = "feedback";
         paint();
       }
@@ -751,14 +842,39 @@
         if (isWritingType(type)) {
           const txt = form.querySelector("textarea[name='response']")?.value || "";
           const checks = evaluateChecks(txt, q.rubric);
+
+          // scoring:
+          // - If checks exist: points = passed checks
+          // - Else: completion score (1 if non-empty)
+          let earned = 0;
+          let possible = 1;
+
+          if (checks.length) {
+            const s = scoreWritingFromChecks(checks);
+            earned = s.earned;
+            possible = s.possible;
+          } else {
+            const t = String(txt || "").trim();
+            earned = t ? 1 : 0;
+            possible = 1;
+          }
+
           state.lastResponse = txt;
           state.lastChecks = checks;
+          state.lastWritingPointsEarned = earned;
+          state.lastWritingPointsPossible = possible;
+
           state.promptDoneCount += 1;
+
+          state.writingEarnedPoints += earned;
+          recalcTotals();
 
           state.responses[q.id] = {
             type,
             user: txt,
-            checks
+            checks,
+            pointsEarned: earned,
+            pointsPossible: possible
           };
 
           state.status = "feedback";
@@ -809,6 +925,7 @@
         }
 
         state.objectiveEarnedPoints += earned;
+        recalcTotals();
         state.status = "feedback";
         paint();
       }

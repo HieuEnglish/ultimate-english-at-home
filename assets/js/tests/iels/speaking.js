@@ -19,7 +19,10 @@
   const TIME_LIMIT_SEC = 15 * 60;
 
   const store = window.UEAH_TESTS_STORE;
-  if (!store || typeof store.registerRunner !== "function") return;
+  if (!store || typeof store.registerRunner !== "function") {
+    console.warn("[UEAH] tests store not found; runner not registered:", SLUG);
+    return;
+  }
 
   // -----------------------------
   // Helpers
@@ -69,7 +72,19 @@
   }
 
   function isPart2Cue(q) {
-    return String(q.partId || "").toLowerCase() === "p2" && String(q.kind || "").toLowerCase() === "cue";
+    return String(q && q.partId ? q.partId : "")
+      .toLowerCase() === "p2" &&
+      String(q && q.kind ? q.kind : "").toLowerCase() === "cue";
+  }
+
+  function isPlainObject(v) {
+    return v && typeof v === "object" && !Array.isArray(v);
+  }
+
+  function clamp(n, a, b) {
+    const x = Number(n);
+    if (!Number.isFinite(x)) return a;
+    return Math.min(b, Math.max(a, x));
   }
 
   // -----------------------------
@@ -89,14 +104,18 @@
     bankPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
+        // If already executed, resolve immediately; otherwise tick once.
+        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
+          resolve(true);
+          return;
+        }
+        setTimeout(() => resolve(true), 0);
         return;
       }
 
       const s = document.createElement("script");
-      s.defer = true;
       s.src = src;
+      s.defer = true;
       s.setAttribute("data-ueah-test-bank", SLUG);
       s.onload = () => resolve(true);
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
@@ -156,8 +175,8 @@
     const wc = countWords(t);
 
     const checks = [];
-    const minWords = Number(q.minWords || 0) || 0;
-    if (minWords) {
+    const minWords = Number(q && q.minWords);
+    if (Number.isFinite(minWords) && minWords > 0) {
       checks.push({
         id: "minWords",
         label: `At least ${minWords} words (practice check)`,
@@ -166,7 +185,6 @@
       });
     }
 
-    // Optional keyword cue checks (per item)
     const cue = q && q.cues ? q.cues : null;
     if (cue && Array.isArray(cue.anyOf) && cue.anyOf.length) {
       const ok = includesAny(t, cue.anyOf);
@@ -174,11 +192,12 @@
         id: "cueAny",
         label: cue.label || "Uses at least one helpful speaking phrase",
         ok,
-        detail: ok ? "Cue found" : `Try using: ${cue.anyOf.slice(0, 5).join(", ")}${cue.anyOf.length > 5 ? "…" : ""}`
+        detail: ok
+          ? "Cue found"
+          : `Try using: ${cue.anyOf.slice(0, 5).join(", ")}${cue.anyOf.length > 5 ? "…" : ""}`
       });
     }
 
-    // Part 2: encourage sequencing + examples
     if (isPart2Cue(q)) {
       const seqOk = includesAny(t, ["first", "second", "then", "after that", "finally"]);
       checks.push({
@@ -202,22 +221,60 @@
   }
 
   // -----------------------------
+  // Build a 3-part test from the bank
+  // -----------------------------
+
+  function buildTestFromBank(bank) {
+    const list = Array.isArray(bank) ? bank.filter(isPlainObject) : [];
+    if (!list.length) return { setId: "", setLabel: "", items: [] };
+
+    const setIds = uniq(list.map((x) => String(x.setId || "").trim()).filter(Boolean));
+    if (!setIds.length) return { setId: "", setLabel: "", items: [] };
+
+    const chosenSetId = setIds[Math.floor(Math.random() * setIds.length)];
+    const pool = list.filter((x) => String(x.setId || "") === chosenSetId);
+
+    const first = pool.find(Boolean);
+    const setLabel = first && first.setLabel ? String(first.setLabel) : chosenSetId;
+
+    const p1 = pool.filter((x) => String(x.partId || "").toLowerCase() === "p1");
+    const p2 = pool.filter((x) => String(x.partId || "").toLowerCase() === "p2");
+    const p3 = pool.filter((x) => String(x.partId || "").toLowerCase() === "p3");
+
+    const byOrder = (a, b) => (Number(a.order) || 0) - (Number(b.order) || 0);
+
+    const items = []
+      .concat(p1.slice().sort(byOrder))
+      .concat(p2.slice().sort(byOrder))
+      .concat(p3.slice().sort(byOrder))
+      .map((q, idx) => {
+        // Ensure stable id
+        if (q && !q.id) return { ...q, id: `p_${chosenSetId}_${idx}` };
+        return q;
+      });
+
+    return { setId: chosenSetId, setLabel, items };
+  }
+
+  // -----------------------------
   // UI renderers
   // -----------------------------
 
   function renderIntro() {
     return `
-      <div class="note" style="margin-top:0">
-        <strong>IELTS Speaking</strong>
-        <p style="margin:8px 0 0">
-          3 parts • ~11–14 minutes (practice). This test uses typed responses as a speaking substitute.
+      <div class="detail-card" role="region" aria-label="IELTS speaking intro">
+        <h3 style="margin:0">IELTS Speaking (Practice)</h3>
+        <p style="margin:10px 0 0; color: var(--muted)">
+          3 parts • ~11–14 minutes. This activity uses typed responses as a speaking substitute.
         </p>
-        <p style="margin:8px 0 0; opacity:.92">
-          Recommended: speak aloud first (with a timer), then type a clean version of what you said.
-        </p>
-        <p style="margin:8px 0 0; opacity:.85">
-          Auto-checks are basic (word count + simple phrase cues). Use the rubric for self/teacher scoring.
-        </p>
+        <div class="note" style="margin-top:12px">
+          <strong>How to use</strong>
+          <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted)">
+            <li>Speak aloud first (use a timer), then type what you said.</li>
+            <li>Auto-checks are basic (word count + phrase cues).</li>
+            <li>Use the rubric for self/teacher scoring. No official band claim.</li>
+          </ul>
+        </div>
       </div>
       <div class="actions" style="margin-top:12px">
         <button class="btn btn--primary" type="button" data-action="start">Start</button>
@@ -255,8 +312,8 @@
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
           <div style="font-weight:800; color: var(--muted)">${partLabel(q.partId)} • Item ${n} of ${total}</div>
-          <div class="chip" aria-label="Time remaining" style="font-weight:900">${formatTime(state.timeRemaining)}</div>
-          <div class="chip" style="font-weight:900">Topic set: ${safeText(state.setLabel || "—")}</div>
+          <span class="chip" aria-label="Time remaining" style="font-weight:900">${formatTime(state.timeRemaining)}</span>
+          <span class="chip" style="font-weight:900">Topic set: ${safeText(state.setLabel || "—")}</span>
         </div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
@@ -270,26 +327,29 @@
 
     return `
       <div class="note" style="margin:12px 0 0; padding:10px 12px">
-        <strong>Timers (optional)</strong>
+        <strong>Part 2 timers (optional)</strong>
         <p style="margin:8px 0 0; opacity:.92">
           Prep: 01:00 • Speaking: 02:00
         </p>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; align-items:center">
           <button class="btn" type="button" data-action="p2prep">Start prep</button>
           <button class="btn" type="button" data-action="p2speak">Start speaking</button>
           <button class="btn" type="button" data-action="p2stop">Stop timer</button>
-          <div class="chip" aria-label="Part 2 timer" style="font-weight:900">${formatTime(state.p2Remaining || 0)}</div>
+          <span class="chip" aria-label="Part 2 timer" style="font-weight:900">${formatTime(state.p2Remaining || 0)}</span>
         </div>
       </div>
     `;
   }
 
   function renderPromptBlock(q) {
-    const title = q.title ? `<div style="font-weight:900">${safeText(q.title)}</div>` : "";
-    const question = q.question ? `<div style="margin-top:8px; white-space:pre-wrap">${safeText(q.question)}</div>` : "";
-    const bullets = Array.isArray(q.bullets) && q.bullets.length
-      ? `<ul style="margin:10px 0 0; padding-left:18px">${q.bullets.map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`).join("")}</ul>`
-      : "";
+    const title = q && q.title ? `<div style="font-weight:900">${safeText(q.title)}</div>` : "";
+    const question = q && q.question ? `<div style="margin-top:8px; white-space:pre-wrap">${safeText(q.question)}</div>` : "";
+    const bullets =
+      q && Array.isArray(q.bullets) && q.bullets.length
+        ? `<ul style="margin:10px 0 0; padding-left:18px">${q.bullets
+            .map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`)
+            .join("")}</ul>`
+        : "";
 
     return `
       <div class="note" style="margin:12px 0 0; padding:12px 14px">
@@ -309,7 +369,8 @@
 
     const saved = state.responses[q.id] || "";
     const wc = countWords(saved);
-    const minWords = Number(q.minWords || 0) || 0;
+    const minWords = Number(q && q.minWords);
+    const minWordsOk = Number.isFinite(minWords) && minWords > 0;
 
     const backDisabled = state.index === 0 ? "disabled" : "";
 
@@ -319,11 +380,17 @@
           <legend style="padding:0 8px; font-weight:900">Your response (type what you would say)</legend>
 
           <label for="speak-text" style="display:block; margin-top:10px; font-weight:700">Answer</label>
-          <textarea id="speak-text" name="speakText" rows="${isPart2Cue(q) ? 12 : 8}" style="width:100%; margin-top:8px" placeholder="Speak aloud, then type here...">${safeText(saved)}</textarea>
+          <textarea
+            id="speak-text"
+            name="speakText"
+            rows="${isPart2Cue(q) ? 12 : 8}"
+            style="width:100%; margin-top:8px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface); resize:vertical"
+            placeholder="Speak aloud, then type here..."
+          >${safeText(saved)}</textarea>
 
           <div style="margin-top:10px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
             <div style="opacity:.9">
-              Word count: <strong data-wordcount>${wc}</strong>${minWords ? ` • Practice min: <strong>${minWords}</strong>` : ""}
+              Word count: <strong data-wordcount>${wc}</strong>${minWordsOk ? ` • Practice min: <strong>${minWords}</strong>` : ""}
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap">
               <button class="btn" type="button" data-action="back" ${backDisabled}>Back</button>
@@ -393,13 +460,16 @@
 
         return `
           <details style="border:1px solid var(--border); border-radius:16px; background: var(--surface2); padding:12px 14px">
-            <summary style="cursor:pointer; font-weight:900">${safeText(partLabel(q.partId))} • Item ${idx + 1}</summary>
+            <summary style="cursor:pointer; font-weight:900">${safeText(partLabel(q.partId))} • Item ${idx + 1} — Auto-checks: ${res.passed}/${res.total}</summary>
 
             <div style="margin-top:10px">
               <div style="font-weight:900">Prompt</div>
               <div style="margin-top:8px; white-space:pre-wrap">${safeText(q.question || "")}</div>
-              ${Array.isArray(q.bullets) && q.bullets.length ? `<div style="margin-top:8px"><em>Bullet points:</em></div>` : ""}
-              ${Array.isArray(q.bullets) && q.bullets.length ? `<ul style="margin:6px 0 0; padding-left:18px">${q.bullets.map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`).join("")}</ul>` : ""}
+              ${
+                Array.isArray(q.bullets) && q.bullets.length
+                  ? `<ul style="margin:10px 0 0; padding-left:18px">${q.bullets.map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`).join("")}</ul>`
+                  : ""
+              }
             </div>
 
             <div style="margin-top:12px">
@@ -410,7 +480,7 @@
             </div>
 
             <div style="margin-top:12px">
-              <div style="font-weight:900">Auto-checks (${res.passed}/${res.total})</div>
+              <div style="font-weight:900">Auto-checks</div>
               ${checksHtml}
             </div>
           </details>
@@ -434,7 +504,7 @@
               value="${safeText(val)}"
               data-score-key="${safeText(key)}"
               aria-label="Manual score for ${safeText(c.name)}"
-              style="width:90px"
+              style="width:90px; padding:10px; border:1px solid var(--border); border-radius:12px; background: var(--surface)"
               placeholder="0–9"
             />
           </label>
@@ -511,10 +581,10 @@
       if (!stage) return;
 
       const state = {
-        status: "intro",
+        status: "intro", // intro | loading | task | summary | error
         items: [],
         index: 0,
-        responses: {},
+        responses: Object.create(null),
 
         timeRemaining: TIME_LIMIT_SEC,
         timerId: null,
@@ -528,7 +598,7 @@
         p2TimerId: null,
         p2Remaining: 0,
 
-        manualScores: {} // global::idx => value
+        manualScores: Object.create(null) // global::idx => value
       };
 
       function stopTimer() {
@@ -544,14 +614,12 @@
           state.p2TimerId = null;
         }
         state.p2Remaining = 0;
-        const chip = host.querySelector('[aria-label="Part 2 timer"]');
-        if (chip) chip.textContent = formatTime(state.p2Remaining);
       }
 
       function startOverallTimer() {
         stopTimer();
         state.timerId = setInterval(() => {
-          if (state.status !== "task" && state.status !== "summary") return;
+          if (state.status !== "task") return;
 
           state.timeRemaining -= 1;
 
@@ -572,8 +640,8 @@
 
       function startP2Countdown(seconds) {
         stopP2Timer();
-        state.p2Remaining = seconds;
-        paint(); // refresh chip immediately
+        state.p2Remaining = clamp(seconds, 0, 60 * 60);
+        paint();
 
         state.p2TimerId = setInterval(() => {
           state.p2Remaining -= 1;
@@ -595,31 +663,28 @@
         else if (state.status === "summary") stage.innerHTML = renderSummary(state);
         else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
         else stage.innerHTML = renderIntro();
+
+        if (state.status === "task") {
+          // ensure wordcount shows correct value on initial render
+          updateWordCountLive();
+        }
+
+        if (state.status === "summary") {
+          updateManualSummary();
+        }
       }
 
       function resetRunState() {
         stopTimer();
         stopP2Timer();
-
         state.items = [];
         state.index = 0;
-        state.responses = {};
+        state.responses = Object.create(null);
         state.timeRemaining = TIME_LIMIT_SEC;
         state.lastError = "";
         state.setId = "";
         state.setLabel = "";
-        state.manualScores = {};
-      }
-
-      function pickSet(bank) {
-        const setIds = uniq(bank.map((x) => String(x.setId || "").trim()).filter(Boolean));
-        if (!setIds.length) return { setId: "", setLabel: "" };
-
-        const chosen = setIds[Math.floor(Math.random() * setIds.length)];
-        const first = bank.find((x) => String(x.setId) === chosen);
-        const label = first && first.setLabel ? String(first.setLabel) : chosen;
-
-        return { setId: chosen, setLabel: label };
+        state.manualScores = Object.create(null);
       }
 
       async function start() {
@@ -635,21 +700,23 @@
               : [];
           if (!bank.length) throw new Error("Missing speaking bank.");
 
-          const chosen = pickSet(bank);
-          state.setId = chosen.setId;
-          state.setLabel = chosen.setLabel;
+          const built = buildTestFromBank(bank);
+          if (!built.items.length) throw new Error("Could not build a speaking test from the bank.");
 
-          const items = bank
-            .filter((x) => String(x.setId) === state.setId)
-            .slice()
-            .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
+          state.setId = built.setId;
+          state.setLabel = built.setLabel;
+          state.items = built.items;
 
-          if (!items.length) throw new Error("Could not build a speaking test from the bank.");
-
-          state.items = items;
           state.status = "task";
           paint();
           startOverallTimer();
+
+          setTimeout(() => {
+            try {
+              const ta = host.querySelector("#speak-text");
+              if (ta && typeof ta.focus === "function") ta.focus();
+            } catch (_) {}
+          }, 0);
         } catch (err) {
           state.status = "error";
           state.lastError = err && err.message ? err.message : "Could not load the test.";
@@ -682,15 +749,24 @@
       function goNextOrFinish() {
         saveCurrentText();
         stopP2Timer();
+
         if (state.index + 1 >= state.items.length) {
+          stopTimer();
           state.status = "summary";
           paint();
-          updateManualSummary();
           return;
         }
+
         state.index += 1;
         state.status = "task";
         paint();
+
+        setTimeout(() => {
+          try {
+            const ta = host.querySelector("#speak-text");
+            if (ta && typeof ta.focus === "function") ta.focus();
+          } catch (_) {}
+        }, 0);
       }
 
       function updateWordCountLive() {
@@ -721,20 +797,32 @@
         el.textContent = avg.toFixed(1);
       }
 
-      paint();
-
       host.addEventListener("click", (e) => {
         const btn = e.target && e.target.closest ? e.target.closest("[data-action]") : null;
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
 
-        if (action === "start" || action === "retry") start();
-        else if (action === "restart") restart();
-        else if (action === "back") goBack();
-        else if (action === "p2prep") startP2Countdown(60);
-        else if (action === "p2speak") startP2Countdown(120);
-        else if (action === "p2stop") stopP2Timer();
+        if (action === "start" || action === "retry") {
+          e.preventDefault();
+          start();
+        } else if (action === "restart") {
+          e.preventDefault();
+          restart();
+        } else if (action === "back") {
+          e.preventDefault();
+          goBack();
+        } else if (action === "p2prep") {
+          e.preventDefault();
+          startP2Countdown(60);
+        } else if (action === "p2speak") {
+          e.preventDefault();
+          startP2Countdown(120);
+        } else if (action === "p2stop") {
+          e.preventDefault();
+          stopP2Timer();
+          paint();
+        }
       });
 
       host.addEventListener("submit", (e) => {
@@ -759,6 +847,17 @@
           updateManualSummary();
         }
       });
+
+      window.addEventListener(
+        "popstate",
+        () => {
+          stopTimer();
+          stopP2Timer();
+        },
+        { passive: true }
+      );
+
+      paint();
     }
   });
 })();

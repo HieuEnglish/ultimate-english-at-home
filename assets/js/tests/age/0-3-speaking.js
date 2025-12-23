@@ -5,9 +5,17 @@
    caregiver-led, one-prompt-at-a-time speaking practice.
 
    Features:
-   - Random order every run
+   - Random order every run (limited to MAX_PROMPTS_PER_RUN)
    - Optional model audio using Speech Synthesis (TTS)
    - Caregiver marks each prompt as Said / Try again / Skip
+
+   Updates:
+   - Consistent runner wrapper (data-ueah-test + stage) + init guard
+   - Robust bank loader (waits for existing script load/error; validates bank)
+   - Ensures stable ids (fallback id if missing)
+   - Adds Stop button for TTS
+   - Adds Retry on error
+   - Stops TTS on navigation (popstate)
 */
 
 (function () {
@@ -34,13 +42,17 @@
     return arr;
   }
 
+  function isPlainObject(v) {
+    return v && typeof v === "object" && !Array.isArray(v);
+  }
+
   function safeText(v) {
     return String(v == null ? "" : v)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   // -----------------------------
@@ -61,15 +73,19 @@
     bankPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        // Give it a tick for the script to execute
-        setTimeout(() => resolve(true), 0);
+        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
+          resolve(true);
+          return;
+        }
+        existing.addEventListener("load", () => resolve(true), { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
         return;
       }
 
       const s = document.createElement("script");
       s.src = src;
-      s.async = true;
       s.defer = true;
+      s.async = true;
       s.setAttribute("data-ueah-test-bank", SLUG);
       s.onload = () => resolve(true);
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
@@ -124,16 +140,22 @@
   // -----------------------------
 
   function renderIntro() {
+    const audioOk = supportsSpeech();
     return `
       <div class="note" style="margin-top:0">
         <strong>Ages 0–3 Speaking</strong>
-        <p style="margin:8px 0 0">Caregiver-led. Press <strong>Start</strong> for <strong>${MAX_PROMPTS_PER_RUN}</strong> quick prompts, then encourage your child to copy the word or phrase.</p>
-        <ul style="margin:10px 0 0; padding-left:18px; opacity:.92">
+        <p style="margin:8px 0 0; color: var(--muted)">
+          Caregiver-led. Press <strong>Start</strong> for <strong>${MAX_PROMPTS_PER_RUN}</strong> quick prompts,
+          then encourage your child to copy the word or phrase.
+        </p>
+        <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted)">
           <li>Accept any attempt (sounds, partial words).</li>
           <li>Keep it short (2–5 minutes).</li>
           <li>Repeat easy prompts often—repetition builds confidence.</li>
         </ul>
-        <p style="margin:10px 0 0; opacity:.92">Tip: Use <strong>🔊 Play</strong> to hear a model (if your browser supports audio).</p>
+        <p style="margin:10px 0 0; opacity:.92">
+          ${audioOk ? "Tip: Use <strong>🔊 Play</strong> for a model voice." : "Audio is not available in this browser. Say the model out loud."}
+        </p>
       </div>
       <div class="actions" style="margin-top:12px">
         <button class="btn btn--primary" type="button" data-action="start">Start</button>
@@ -165,7 +187,9 @@
   function difficultyBadge(diff) {
     const d = String(diff || "").trim();
     if (!d) return "";
-    return `<span style="display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid var(--border); color: var(--muted); font-weight:800; font-size:12px">${safeText(d)}</span>`;
+    return `<span style="display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid var(--border); color: var(--muted); font-weight:800; font-size:12px">${safeText(
+      d
+    )}</span>`;
   }
 
   function renderPromptScreen(state) {
@@ -176,16 +200,21 @@
     const prompt = safeText(q.question || "Say it!");
     const model = safeText(q.model || "");
     const tip = safeText(q.explanation || "Keep it playful and short.");
-    const hasAudio = supportsSpeech() && String(q.say || "").trim();
 
-    const speechHint = hasAudio
-      ? ""
-      : `
-        <div class="note" style="margin:12px 0 0; padding:10px 12px">
-          <strong>Audio not available</strong>
-          <p style="margin:6px 0 0">Read the model out loud and encourage copying.</p>
-        </div>
-      `;
+    const audioText = String(q.say || q.model || "").trim();
+    const hasAudio = supportsSpeech() && audioText;
+
+    const speechHint =
+      supportsSpeech() && hasAudio
+        ? ""
+        : `
+          <div class="note" style="margin:12px 0 0; padding:10px 12px">
+            <strong>Model support</strong>
+            <p style="margin:6px 0 0; color: var(--muted)">
+              ${model ? "Read the model out loud and encourage copying." : "Say an example first, then let your child try."}
+            </p>
+          </div>
+        `;
 
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
@@ -195,6 +224,7 @@
         </div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
           <button class="btn" type="button" data-action="play" ${hasAudio ? "" : "disabled"} aria-label="Play model audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"} aria-label="Stop audio">⏹ Stop</button>
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
         </div>
       </div>
@@ -210,10 +240,10 @@
             <button class="btn" type="button" data-action="mark" data-mark="again" aria-label="Mark as try again">🔁 Try again</button>
             <button class="btn" type="button" data-action="mark" data-mark="skip" aria-label="Skip this prompt">⏭️ Skip</button>
           </div>
+
+          ${speechHint}
         </div>
       </div>
-
-      ${speechHint}
     `;
   }
 
@@ -224,7 +254,8 @@
     let skip = 0;
 
     state.questions.forEach((q) => {
-      const r = state.results[q.id] || "skip";
+      const id = q && q.id != null ? String(q.id) : "";
+      const r = (id && state.results[id]) || "skip";
       if (r === "said") said += 1;
       else if (r === "again") again += 1;
       else skip += 1;
@@ -232,7 +263,8 @@
 
     const rows = state.questions
       .map((q, i) => {
-        const r = state.results[q.id] || "skip";
+        const id = q && q.id != null ? String(q.id) : "";
+        const r = (id && state.results[id]) || "skip";
         const icon = r === "said" ? "✅" : r === "again" ? "🔁" : "⏭️";
         const label = r === "said" ? "Said" : r === "again" ? "Try again" : "Skipped";
         return `
@@ -247,8 +279,12 @@
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
-        <p style="margin:8px 0 0">Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong></p>
-        <p style="margin:8px 0 0; opacity:.92">Focus on 2–3 prompts marked <strong>Try again</strong>, repeat them daily for 1–2 minutes.</p>
+        <p style="margin:8px 0 0; color: var(--muted)">
+          Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong>
+        </p>
+        <p style="margin:8px 0 0; opacity:.92">
+          Focus on 2–3 prompts marked <strong>Try again</strong>, repeat them daily for 1–2 minutes.
+        </p>
       </div>
 
       <details style="margin-top:12px">
@@ -284,7 +320,6 @@
       const host = rootEl.querySelector(`[data-ueah-test="${SLUG}"]`);
       if (!host) return;
 
-      // Prevent double-init if the user navigates away/back quickly.
       if (host.__ueahInited) return;
       host.__ueahInited = true;
 
@@ -295,7 +330,7 @@
         status: "intro", // intro | loading | prompt | summary | error
         questions: [],
         index: 0,
-        results: {},
+        results: Object.create(null),
         lastError: "",
         autoSpokenIndex: -1
       };
@@ -307,7 +342,9 @@
       function speakCurrent() {
         const q = currentQuestion();
         if (!q) return false;
-        return speak(q.say || "");
+        const t = String(q.say || q.model || "").trim();
+        if (!t) return false;
+        return speak(t);
       }
 
       function paint() {
@@ -318,7 +355,7 @@
         else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
         else stage.innerHTML = renderIntro();
 
-        // Auto-play once per prompt (best effort)
+        // Auto-play once per prompt (best effort; may be blocked by browser)
         if (state.status === "prompt" && state.autoSpokenIndex !== state.index) {
           state.autoSpokenIndex = state.index;
           setTimeout(() => {
@@ -345,18 +382,19 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.slice();
+          const prepared = bank
+            .filter(isPlainObject)
+            .map((q, idx) => {
+              const id = q.id != null ? String(q.id) : `${SLUG}::idx-${idx}`;
+              return { ...q, id };
+            });
+
           shuffleInPlace(prepared);
 
-          // Keep sessions short for toddlers.
-          const picked = prepared.slice(
-            0,
-            Math.max(1, Math.min(MAX_PROMPTS_PER_RUN, prepared.length))
-          );
-
-          state.questions = picked;
+          const limit = Math.max(1, Math.min(MAX_PROMPTS_PER_RUN, prepared.length));
+          state.questions = prepared.slice(0, limit);
           state.index = 0;
-          state.results = {};
+          state.results = Object.create(null);
           state.status = "prompt";
           state.autoSpokenIndex = -1;
           paint();
@@ -372,7 +410,7 @@
         state.status = "intro";
         state.questions = [];
         state.index = 0;
-        state.results = {};
+        state.results = Object.create(null);
         state.lastError = "";
         state.autoSpokenIndex = -1;
         paint();
@@ -382,9 +420,10 @@
         stopSpeech();
         const q = currentQuestion();
         if (!q) return;
+
         const r = String(result || "").toLowerCase();
         const normalized = r === "said" || r === "again" || r === "skip" ? r : "skip";
-        state.results[q.id] = normalized;
+        state.results[String(q.id)] = normalized;
 
         if (state.index + 1 >= state.questions.length) {
           state.status = "summary";
@@ -397,9 +436,8 @@
         paint();
       }
 
-      // Event delegation (stage content gets re-rendered)
       host.addEventListener("click", (ev) => {
-        const btn = ev.target && ev.target.closest ? ev.target.closest("button") : null;
+        const btn = ev.target && ev.target.closest ? ev.target.closest("[data-action]") : null;
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
@@ -415,13 +453,15 @@
         } else if (action === "play") {
           ev.preventDefault();
           speakCurrent();
+        } else if (action === "stop") {
+          ev.preventDefault();
+          stopSpeech();
         } else if (action === "mark") {
           ev.preventDefault();
           mark(btn.getAttribute("data-mark"));
         }
       });
 
-      // Cancel speech when leaving the page (best effort)
       window.addEventListener(
         "popstate",
         () => {

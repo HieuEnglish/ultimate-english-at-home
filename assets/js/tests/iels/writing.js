@@ -36,7 +36,7 @@
   }
 
   function formatTime(sec) {
-    const s = Math.max(0, Math.floor(sec));
+    const s = Math.max(0, Math.floor(Number(sec) || 0));
     const m = Math.floor(s / 60);
     const r = s % 60;
     return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
@@ -70,6 +70,12 @@
     return n === 1 ? "Task 1" : "Task 2";
   }
 
+  function clamp01(n) {
+    const x = Number(n);
+    if (!Number.isFinite(x)) return 0;
+    return Math.max(0, Math.min(1, x));
+  }
+
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -87,6 +93,10 @@
     bankPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
+        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
+          resolve(true);
+          return;
+        }
         existing.addEventListener("load", () => resolve(true), { once: true });
         existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
           once: true
@@ -107,7 +117,7 @@
   }
 
   // -----------------------------
-  // Auto checks (simple heuristics)
+  // Auto checks (simple heuristics) + auto-score
   // -----------------------------
 
   function runChecks(q, text) {
@@ -141,7 +151,9 @@
         id: "figures",
         label: "Mentions at least 2 figures (numbers/percentages)",
         ok: nums.length >= 2,
-        detail: nums.length ? `Found: ${nums.slice(0, 6).join(", ")}${nums.length > 6 ? "…" : ""}` : "No figures found"
+        detail: nums.length
+          ? `Found: ${nums.slice(0, 6).join(", ")}${nums.length > 6 ? "…" : ""}`
+          : "No figures found"
       });
 
       const compareOk = includesAny(t, [
@@ -195,7 +207,13 @@
         detail: positionOk ? "Position cue found" : "No clear position cue found"
       });
 
-      const conclusionOk = includesAny(t, ["in conclusion", "to conclude", "to sum up", "overall, i believe", "in summary"]);
+      const conclusionOk = includesAny(t, [
+        "in conclusion",
+        "to conclude",
+        "to sum up",
+        "overall, i believe",
+        "in summary"
+      ]);
       checks.push({
         id: "conclusion",
         label: "Includes a conclusion signal (e.g., In conclusion / To sum up)",
@@ -216,6 +234,29 @@
     return { wordCount: wc, checks, passed, total: checks.length };
   }
 
+  function computeAutoScores(questions, responses) {
+    const qs = Array.isArray(questions) ? questions : [];
+    const resp = responses || {};
+
+    const perTask = qs.map((q) => {
+      const text = resp[q.id] || "";
+      const results = runChecks(q, text);
+      const earned = results.passed;
+      const possible = results.total || 1;
+      const pct = possible ? Math.round((earned / possible) * 100) : 0;
+      return { q, text, results, earned, possible, pct };
+    });
+
+    const totalEarned = perTask.reduce((s, x) => s + Number(x.earned || 0), 0);
+    const totalPossible = perTask.reduce((s, x) => s + Number(x.possible || 0), 0);
+    const totalPct = totalPossible ? Math.round((totalEarned / totalPossible) * 100) : 0;
+
+    const t1 = perTask.find((x) => Number(x.q.taskNumber) === 1) || null;
+    const t2 = perTask.find((x) => Number(x.q.taskNumber) === 2) || null;
+
+    return { perTask, totalEarned, totalPossible, totalPct, t1, t2 };
+  }
+
   // -----------------------------
   // UI renderers
   // -----------------------------
@@ -228,7 +269,7 @@
           2 tasks • 60 minutes (practice). Task 1: 20 minutes (150+ words). Task 2: 40 minutes (250+ words).
         </p>
         <p style="margin:8px 0 0; opacity:.92">
-          This is an original practice test (not official IELTS material). The app will check word count and simple structure cues,
+          This is an original practice test (not official IELTS material). The app will auto-score using word count and simple structure cues,
           and show a rubric for self/teacher scoring.
         </p>
       </div>
@@ -285,9 +326,14 @@
       <div class="note" style="margin:12px 0 0; padding:10px 12px">
         <strong>Guidance</strong>
         <p style="margin:8px 0 0">
-          Recommended time: <strong>${rec || (q.taskNumber === 1 ? 20 : 40)} min</strong> • Minimum: <strong>${minWords || (q.taskNumber === 1 ? 150 : 250)} words</strong>
+          Recommended time: <strong>${rec || (q.taskNumber === 1 ? 20 : 40)} min</strong> • Minimum: <strong>${
+      minWords || (q.taskNumber === 1 ? 150 : 250)
+    } words</strong>
         </p>
         ${q.notes ? `<p style="margin:8px 0 0; opacity:.92">${safeText(q.notes)}</p>` : ""}
+        <p style="margin:8px 0 0; opacity:.92">
+          Auto-scoring uses word count + basic structure cues (overview/figures/paragraphs). It is for practice only.
+        </p>
       </div>
     `;
   }
@@ -323,8 +369,12 @@
               Word count: <strong data-wordcount>${wc}</strong>${minWords ? ` • Min: <strong>${minWords}</strong>` : ""}
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap">
-              <button class="btn" type="button" data-action="back" ${state.index === 0 ? "disabled" : ""}>Back</button>
-              <button class="btn btn--primary" type="submit">${state.index + 1 >= state.questions.length ? "Finish" : "Save & Next"}</button>
+              <button class="btn" type="button" data-action="back" ${
+                state.index === 0 ? "disabled" : ""
+              }>Back</button>
+              <button class="btn btn--primary" type="submit">${
+                state.index + 1 >= state.questions.length ? "Finish" : "Save & Next"
+              }</button>
             </div>
           </div>
         </fieldset>
@@ -356,10 +406,20 @@
   }
 
   function renderSummary(state) {
-    const taskBlocks = state.questions
-      .map((q, idx) => {
-        const text = state.responses[q.id] || "";
-        const results = runChecks(q, text);
+    const auto = computeAutoScores(state.questions, state.responses);
+
+    const t1Line = auto.t1
+      ? `Task 1 auto-score: <strong>${auto.t1.earned}</strong> / ${auto.t1.possible} (${auto.t1.pct}%)`
+      : "";
+    const t2Line = auto.t2
+      ? `Task 2 auto-score: <strong>${auto.t2.earned}</strong> / ${auto.t2.possible} (${auto.t2.pct}%)`
+      : "";
+
+    const taskBlocks = auto.perTask
+      .map((item) => {
+        const q = item.q;
+        const text = item.text;
+        const results = item.results;
 
         const checksHtml = results.checks
           .map(
@@ -402,7 +462,9 @@
 
         return `
           <details open style="border:1px solid var(--border); border-radius:16px; background: var(--surface2); padding:12px 14px">
-            <summary style="cursor:pointer; font-weight:900">${taskLabel(q.taskNumber)} — Auto-checks: ${results.passed}/${results.total}</summary>
+            <summary style="cursor:pointer; font-weight:900">
+              ${taskLabel(q.taskNumber)} — Auto-score: ${item.earned}/${item.possible} (${item.pct}%)
+            </summary>
 
             <div style="margin-top:10px">
               <div style="font-weight:900">Your response</div>
@@ -439,8 +501,10 @@
       <div class="note" style="margin-top:0">
         <strong>Finished</strong>
         <p style="margin:8px 0 0; opacity:.92">
-          Auto-checks are complete. You can add optional manual scores below.
+          Auto-score (checks): <strong>${auto.totalEarned}</strong> / ${auto.totalPossible} (${auto.totalPct}%)
         </p>
+        ${t1Line ? `<p style="margin:8px 0 0; opacity:.92">${t1Line}</p>` : ""}
+        ${t2Line ? `<p style="margin:8px 0 0; opacity:.92">${t2Line}</p>` : ""}
         <p style="margin:8px 0 0; opacity:.92">
           Time remaining: <strong>${formatTime(state.timeRemaining)}</strong>
         </p>
@@ -509,6 +573,14 @@
         }
       }
 
+      function saveCurrentText() {
+        const q = state.questions[state.index];
+        if (!q) return;
+        const ta = host.querySelector("#writing-text");
+        const text = ta ? ta.value : "";
+        state.responses[q.id] = text;
+      }
+
       function startTimer() {
         stopTimer();
         state.timerId = setInterval(() => {
@@ -518,6 +590,8 @@
 
           if (state.timeRemaining <= 0) {
             state.timeRemaining = 0;
+            // preserve whatever is currently typed
+            if (state.status === "task") saveCurrentText();
             stopTimer();
             state.status = "summary";
             paint();
@@ -589,15 +663,6 @@
         resetRunState();
         state.status = "intro";
         paint();
-      }
-
-      function saveCurrentText() {
-        const q = state.questions[state.index];
-        if (!q) return;
-
-        const ta = host.querySelector("#writing-text");
-        const text = ta ? ta.value : "";
-        state.responses[q.id] = text;
       }
 
       function goBack() {
