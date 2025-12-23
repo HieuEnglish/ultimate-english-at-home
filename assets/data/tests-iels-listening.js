@@ -420,4 +420,125 @@
       partId: "p3",
       type: "fillInTheBlank",
       say: P3,
-      context: "Part 3: Complete the n
+      context: "Part 3: Complete the notes. Write ONE WORD AND/OR A NUMBER.",
+      question: "They will submit the written report on the ______ of June.",
+      answer: ["2", "2nd", "second"],
+      explanation: "Mina says they’ll submit it on the 2nd of June."
+    },
+
+    // Part 4 (10)
+    {
+      id: "q31",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The process of making learning more stable is called ______.",
+      answer: ["consolidation"],
+      explanation: "The lecturer says: “This process is often called consolidation.”"
+    },
+    {
+      id: "q32",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "According to the lecture, what happens at night?",
+      options: [
+        "The brain forgets most new information",
+        "Some new information is stabilised",
+        "Learning only happens during dreams",
+        "The brain stops working"
+      ],
+      answer: 1,
+      explanation: "The lecturer says some information is stabilised at night."
+    },
+    {
+      id: "q33",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which type of sleep is strongly linked to remembering facts and vocabulary?",
+      options: ["Deep sleep", "Dream (REM) sleep", "Light sleep", "No sleep"],
+      answer: 0,
+      explanation: "Deep sleep is linked to remembering facts and vocabulary."
+    },
+    {
+      id: "q34",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Dream sleep is also known as ______.",
+      answer: ["REM"],
+      explanation: "The lecture calls dream sleep REM."
+    },
+    {
+      id: "q35",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "REM sleep has been associated with ______.",
+      options: ["muscle growth", "creativity and connecting ideas", "memorising phone numbers", "avoiding naps"],
+      answer: 1,
+      explanation: "REM is linked to creativity and connecting ideas."
+    },
+    {
+      id: "q36",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Sleep is not helpful if learners do not practise ______.",
+      answer: ["correctly"],
+      explanation: "The lecturer says correct practice is needed to consolidate useful information."
+    },
+    {
+      id: "q37",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "What may happen if a nap is too long?",
+      options: ["Better memory immediately", "Grogginess", "Increased caffeine tolerance", "No effect"],
+      answer: 1,
+      explanation: "A long nap may cause grogginess, making study less effective afterwards."
+    },
+    {
+      id: "q38",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the advice. Write ONE WORD ONLY.",
+      question: "Students should limit ______ late in the day.",
+      answer: ["caffeine"],
+      explanation: "The lecture advises limiting caffeine late in the day."
+    },
+    {
+      id: "q39",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the advice. Write ONE WORD ONLY.",
+      question: "Students should review key material shortly before ______.",
+      answer: ["bedtime"],
+      explanation: "The lecture says to review shortly before bedtime."
+    },
+    {
+      id: "q40",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the advice. Write ONE WORD ONLY.",
+      question: "Students should prioritise a regular ______.",
+      answer: ["schedule"],
+      explanation: "The lecture recommends a regular schedule."
+    }
+  ];
+
+  // Global export (no build step)
+  window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
+  window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
+})();

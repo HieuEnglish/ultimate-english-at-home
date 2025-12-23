@@ -16,28 +16,28 @@
     tests: [
       {
         slug: "iels-reading",
-        title: "IELS Reading",
+        title: "IELTS Reading",
         subtitle: "Test your ability",
         skill: "reading",
         module: "assets/js/tests/iels/reading.js"
       },
       {
         slug: "iels-speaking",
-        title: "IELS Speaking",
+        title: "IELTS Speaking",
         subtitle: "Test your ability",
         skill: "speaking",
         module: "assets/js/tests/iels/speaking.js"
       },
       {
         slug: "iels-writing",
-        title: "IELS Writing",
+        title: "IELTS Writing",
         subtitle: "Test your ability",
         skill: "writing",
         module: "assets/js/tests/iels/writing.js"
       },
       {
         slug: "iels-listening",
-        title: "IELS Listening",
+        title: "IELTS Listening",
         subtitle: "Test your ability",
         skill: "listening",
         module: "assets/js/tests/iels/listening.js"
