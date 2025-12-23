@@ -46,8 +46,7 @@ export function getView(ctx) {
   }
 
   function safeSkillKey(skill) {
-    const s = String(skill || '').toLowerCase();
-    return s;
+    return String(skill || '').toLowerCase();
   }
 
   function renderTestCard(t, { glow } = {}) {
@@ -84,7 +83,7 @@ export function getView(ctx) {
   });
 
   // Sort each age group by skill order, then title
-  for (const [age, group] of byAge.entries()) {
+  for (const [, group] of byAge.entries()) {
     group.sort((a, b) => {
       const aSkill = safeSkillKey(a.skill);
       const bSkill = safeSkillKey(b.skill);
@@ -153,10 +152,7 @@ export function getView(ctx) {
     // IELTS section last (robust even if load order changes)
     if (ieltsTests.length) {
       const ieltsCards = ieltsTests
-        .map((t) =>
-          // Keep IELTS special glow, but still use the same card() + iconSkill()
-          renderTestCard(t, { glow: 'iels' })
-        )
+        .map((t) => renderTestCard(t, { glow: 'iels' }))
         .join('');
 
       sectionsHtml += `
@@ -169,7 +165,7 @@ export function getView(ctx) {
   }
 
   const html = `
-    <section class="page-top">
+    <section class="page-top tests-page">
       ${breadcrumb}
       <h1 class="page-title">Tests</h1>
       <p class="page-subtitle">Choose a test.</p>

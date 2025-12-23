@@ -80,10 +80,11 @@ export async function getView(ctx, slug) {
   }
 
   const html = `
-    <section class="page-top">
+    <section class="page-top tests-page">
       ${breadcrumb}
       <h1 class="page-title">${escapeHtml(safeTitle)}</h1>
       <p class="page-subtitle">${escapeHtml(safeSubtitle)}</p>
+
       <div class="detail-card" role="region" aria-label="Test details">
         <div style="display:flex; gap:12px; align-items:flex-start">
           <div class="card-icon" aria-hidden="true" style="width:44px; height:44px">${iconSkill(test.skill)}</div>
@@ -92,15 +93,18 @@ export async function getView(ctx, slug) {
             <p class="detail-desc" style="margin-top:10px">${escapeHtml(safeSubtitle)}</p>
           </div>
         </div>
+
         <div style="margin-top:14px">
           <div data-test-runner-root="${slug}">
             ${runnerHtml}
           </div>
         </div>
+
         <div class="actions" style="margin-top:16px">
           <a class="btn" href="${hrefFor('/tests')}" data-nav>← Back</a>
         </div>
       </div>
+
       <div class="actions">
         <a class="btn" href="${hrefFor('/tests')}" data-nav>← Back to Tests</a>
         <a class="btn" href="${hrefFor('/resources')}" data-nav>Resources</a>
