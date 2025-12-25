@@ -4,13 +4,17 @@
    Updates (this file):
    - Ensures every question has a stable id (avoids duplicate/blank ids causing overwrite)
    - Improves structured selection:
-     * Fills each section to target count
-     * If a section is missing, backfills from remaining questions
+     * Fills each section to target count where possible
+     * If a section is missing/short, backfills from remaining questions
      * Ensures "longturn" is included when available (1 cue card)
    - Adds optional Cue Card timers for "longturn" (00:30 prep / 01:30 speaking)
    - SpeechSynthesis: Play + Stop; cancels on navigation and between prompts
    - Bank loader: resilient to existing script; validates bank after load tick
    - Summary includes per-section counts + compact review list
+   - Adds "Save score to Profile" on summary (uses window.UEAH_SAVE_SCORE.save)
+   - Ensures save payload includes (or ensures present):
+     * questions: state.questions
+     * resultsById: state.results
 */
 
 (function () {
@@ -66,12 +70,34 @@
     return v && typeof v === "object" && !Array.isArray(v);
   }
 
+  function normalizeSection(v) {
+    return String(v || "").trim().toLowerCase();
+  }
+
+  function sectionLabelFor(key) {
+    const k = normalizeSection(key);
+    const match = SECTION_PLAN.find((s) => s.key === k);
+    return match ? match.label : "Prompt";
+  }
+
   function formatTime(sec) {
     const s = Math.max(0, Math.floor(sec));
     const m = Math.floor(s / 60);
     const r = s % 60;
     return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
   }
+
+  function ensureIds(qs) {
+    return (Array.isArray(qs) ? qs : []).map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+      return { ...q, id };
+    });
+  }
+
+  // -----------------------------
+  // Speech (TTS)
+  // -----------------------------
 
   function supportsSpeech() {
     return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
@@ -109,16 +135,6 @@
     }
   }
 
-  function normalizeSection(v) {
-    return String(v || "").trim().toLowerCase();
-  }
-
-  function sectionLabelFor(key) {
-    const k = normalizeSection(key);
-    const match = SECTION_PLAN.find((s) => s.key === k);
-    return match ? match.label : "Prompt";
-  }
-
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -134,18 +150,31 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        // If already executed, resolve on next tick
-        setTimeout(() => resolve(true), 0);
+        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
+          resolve(true);
+          return;
+        }
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
+        validate();
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -156,14 +185,6 @@
   // -----------------------------
   // Selection logic
   // -----------------------------
-
-  function ensureIds(qs) {
-    return qs.map((q, idx) => {
-      if (!isPlainObject(q)) return q;
-      const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
-      return { ...q, id };
-    });
-  }
 
   function buildStructuredSet(allQuestions) {
     const qs = Array.isArray(allQuestions) ? ensureIds(allQuestions.filter(isPlainObject)) : [];
@@ -180,7 +201,7 @@
     const usedIds = new Set();
 
     function takeFrom(pool, count) {
-      const tmp = pool.slice();
+      const tmp = Array.isArray(pool) ? pool.slice() : [];
       shuffleInPlace(tmp);
       for (let i = 0; i < tmp.length && count > 0 && chosen.length < TARGET_TOTAL; i++) {
         const q = tmp[i];
@@ -195,10 +216,10 @@
     }
 
     // Prefer to include longturn (cue card) if available
-    const longturnNeed = (SECTION_PLAN.find((s) => s.key === "longturn") || {}).pick || 1;
-    if (longturnNeed > 0) {
+    const longturnPick = Math.max(0, Number((SECTION_PLAN.find((s) => s.key === "longturn") || {}).pick || 0));
+    if (longturnPick > 0) {
       const ltPool = bySection.get("longturn") || [];
-      takeFrom(ltPool, longturnNeed);
+      takeFrom(ltPool, longturnPick);
     }
 
     // Pick remaining sections (excluding longturn since already handled)
@@ -208,19 +229,21 @@
       takeFrom(pool, Math.max(0, Number(s.pick) || 0));
     });
 
-    // If we still have room (e.g. some sections missing), backfill from leftovers
+    // Backfill to target length if any section was short/missing
     if (chosen.length < TARGET_TOTAL) {
-      const leftovers = qs.filter((q) => !usedIds.has(String(q.id)));
+      const leftovers = qs.filter((q) => q && q.id && !usedIds.has(String(q.id)));
       shuffleInPlace(leftovers);
       for (let i = 0; i < leftovers.length && chosen.length < TARGET_TOTAL; i++) {
         const q = leftovers[i];
-        if (!q || !q.id) continue;
         const id = String(q.id);
         if (usedIds.has(id)) continue;
         usedIds.add(id);
         chosen.push(q);
       }
     }
+
+    // Final fallback
+    if (!chosen.length) return shuffleInPlace(qs.slice()).slice(0, TARGET_TOTAL);
 
     return chosen.slice(0, TARGET_TOTAL);
   }
@@ -435,27 +458,28 @@
       if (sectionCounts[sec]) sectionCounts[sec] = bucket;
     });
 
-    const encouragement =
-      again > 0
-        ? "Repeat the ‘Try again’ prompts tomorrow. Ask the learner to add one extra detail each time."
-        : "Good work. Restart to get a different set of prompts.";
-
     const sectionLines = SECTION_PLAN.map((s) => {
       const c = sectionCounts[s.key] || { said: 0, again: 0, skip: 0 };
       return `<div style="margin-top:6px; color:var(--muted)"><strong>${safeText(s.label)}:</strong> Said ${c.said} • Try again ${c.again} • Skipped ${c.skip}</div>`;
     }).join("");
+
+    const encouragement =
+      again > 0
+        ? "Repeat the ‘Try again’ prompts tomorrow. Ask the learner to add one extra detail each time."
+        : "Good work. Restart to get a different set of prompts.";
 
     const rows = state.questions
       .map((q, idx) => {
         const id = q && q.id != null ? String(q.id) : "";
         const r = (id && state.results[id]) || "skip";
         const status = r === "said" ? "✅ Said" : r === "again" ? "🔁 Try again" : "⏭️ Skipped";
-        const sectionLabel = sectionLabelFor(q.section);
+        const secLabel = sectionLabelFor(q.section);
+
         return `
           <li style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border)">
             <span aria-hidden="true">${safeText(status.split(" ")[0])}</span>
             <span style="min-width:0">
-              <b>${idx + 1}.</b> <span style="color:var(--muted); font-weight:800">${safeText(sectionLabel)}</span><br>
+              <b>${idx + 1}.</b> <span style="color:var(--muted); font-weight:800">${safeText(secLabel)}</span><br>
               ${safeText(q.question || "")}
               <div style="margin-top:6px; font-weight:800">${status}</div>
             </span>
@@ -463,6 +487,8 @@
         `;
       })
       .join("");
+
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
 
     return `
       <div class="note" style="margin-top:0">
@@ -485,8 +511,20 @@
         </ul>
       </details>
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
         <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(
+                state.savedMsg
+              )}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -522,8 +560,9 @@
         status: "intro", // intro | loading | prompt | summary | error
         questions: [],
         index: 0,
-        results: Object.create(null),
+        results: Object.create(null), // q.id -> "said" | "again" | "skip"
         lastError: "",
+        savedMsg: "",
 
         // Cue card timer (optional)
         ltTimerId: null,
@@ -565,6 +604,15 @@
         else if (state.status === "summary") stage.innerHTML = renderSummary(state);
         else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
         else stage.innerHTML = renderIntro();
+
+        if (state.status === "prompt") {
+          setTimeout(() => {
+            try {
+              const el = host.querySelector("button");
+              if (el && typeof el.focus === "function") el.focus();
+            } catch (_) {}
+          }, 0);
+        }
       }
 
       async function start() {
@@ -573,6 +621,7 @@
 
         state.status = "loading";
         state.lastError = "";
+        state.savedMsg = "";
         paint();
 
         try {
@@ -593,15 +642,10 @@
           state.questions = picked;
           state.index = 0;
           state.results = Object.create(null);
+          state.savedMsg = "";
+
           state.status = "prompt";
           paint();
-
-          setTimeout(() => {
-            try {
-              const el = host.querySelector("button");
-              if (el && typeof el.focus === "function") el.focus();
-            } catch (_) {}
-          }, 0);
         } catch (e) {
           state.status = "error";
           state.lastError = e && e.message ? e.message : "Could not load the test.";
@@ -618,6 +662,7 @@
         state.index = 0;
         state.results = Object.create(null);
         state.lastError = "";
+        state.savedMsg = "";
         paint();
       }
 
@@ -630,7 +675,6 @@
           paint();
           return;
         }
-
         state.index += 1;
         state.status = "prompt";
         paint();
@@ -650,8 +694,36 @@
       function speakCurrent() {
         const q = state.questions[state.index];
         if (!q) return;
-        const t = q.say || q.model || "";
+        const t = String(q.say || q.model || "").trim();
+        if (!t) return;
         speak(t);
+      }
+
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        if (state.status !== "summary") {
+          state.savedMsg = "Finish the test first.";
+          paint();
+          return;
+        }
+
+        const res = window.UEAH_SAVE_SCORE.save({
+          slug: SLUG,
+          ageGroup: "11-12",
+          skill: "speaking",
+          questions: state.questions,
+          resultsById: state.results
+        });
+
+        if (res && res.ok) state.savedMsg = "Saved to Profile.";
+        else state.savedMsg = "Could not save.";
+
+        paint();
       }
 
       host.addEventListener("click", (ev) => {
@@ -685,6 +757,9 @@
           ev.preventDefault();
           stopLongTurnTimer();
           paint();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 

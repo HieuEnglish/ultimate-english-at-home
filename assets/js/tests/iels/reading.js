@@ -1,11 +1,22 @@
 /* assets/js/tests/iels/reading.js
    Runner: IELTS Reading (Academic-style, original passages)
 
-   - 3 passages (P1–P3), 40 questions total
+   - 3 passages (P1–P3), bank-controlled question count (typically 40)
    - Question types supported:
-     - multipleChoice (incl. True/False/Not Given)
+     - multipleChoice (incl. True/False/Not Given when provided as options)
+     - trueFalse (auto options True/False)
      - fillInTheBlank (incl. sentence/summary completion)
    - Auto-grading + per-question review at the end
+
+   Updates (this file):
+   - Bank loader resilient when script already exists/has executed
+   - Ensures stable ids if missing
+   - Case-insensitive type handling (fillInTheBlank vs fillintheblank, etc.)
+   - Safe option shuffling only when answer is numeric index
+   - True/False support (auto options + boolean/string answers)
+   - Stops timer on navigation changes (best effort)
+   - More robust correct/choice text display
+   - Adds "Save score to Profile" button on results screen (IELTS Practice group)
 */
 
 (function () {
@@ -24,6 +35,10 @@
   // Helpers
   // -----------------------------
 
+  function nowIso() {
+    return new Date().toISOString();
+  }
+
   function shuffleInPlace(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -32,6 +47,10 @@
       arr[j] = tmp;
     }
     return arr;
+  }
+
+  function isPlainObject(v) {
+    return v && typeof v === "object" && !Array.isArray(v);
   }
 
   function safeText(v) {
@@ -43,11 +62,15 @@
       .replaceAll("'", "&#39;");
   }
 
+  function normalizeType(t) {
+    return String(t || "multipleChoice").trim().toLowerCase();
+  }
+
   function normalizeAnswerText(v) {
     return String(v == null ? "" : v)
       .trim()
       .toLowerCase()
-      .replace(/[.,!?;:"'()]/g, "")
+      .replace(/[.,!?;:"'()\[\]{}<>/\\-]/g, "")
       .replace(/\s+/g, "");
   }
 
@@ -56,19 +79,6 @@
     const m = Math.floor(s / 60);
     const r = s % 60;
     return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
-  }
-
-  function cloneQuestionWithShuffledOptions(q) {
-    if (!q || typeof q !== "object" || Array.isArray(q)) return q;
-    if (!Array.isArray(q.options) || typeof q.answer !== "number") return { ...q };
-
-    const pairs = q.options.map((text, idx) => ({ text, idx }));
-    shuffleInPlace(pairs);
-
-    const newOptions = pairs.map((p) => p.text);
-    const newAnswer = pairs.findIndex((p) => p.idx === q.answer);
-
-    return { ...q, options: newOptions, answer: newAnswer };
   }
 
   function passageLabel(passageId) {
@@ -82,6 +92,62 @@
   function pointsFor(q) {
     const p = Number(q && q.points);
     return Number.isFinite(p) && p > 0 ? p : 1;
+  }
+
+  function deriveTrueFalseIndex(answer) {
+    if (typeof answer === "number" && Number.isFinite(answer)) return answer; // 0/1
+    if (typeof answer === "boolean") return answer ? 0 : 1;
+    const s = normalizeAnswerText(answer);
+    if (!s) return null;
+    if (s === "true" || s === "t" || s === "yes" || s === "y") return 0;
+    if (s === "false" || s === "f" || s === "no" || s === "n") return 1;
+    return null;
+  }
+
+  function getOptionsForQuestion(q) {
+    const t = normalizeType(q && q.type);
+    if (Array.isArray(q && q.options) && q.options.length) return q.options;
+    if (t === "truefalse") return ["True", "False"];
+    return [];
+  }
+
+  function optionAt(q, idx) {
+    const opts = getOptionsForQuestion(q);
+    const n = Number(idx);
+    if (!Number.isFinite(n)) return "";
+    return opts[n] == null ? "" : String(opts[n]);
+  }
+
+  function ensureIds(list) {
+    return (Array.isArray(list) ? list : []).map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      if (q.id != null && String(q.id).trim()) return q;
+      const pid = String(q.passageId || "p1").toLowerCase();
+      const t = normalizeType(q.type);
+      const stem = String(q.question || "")
+        .trim()
+        .slice(0, 28)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+      return { ...q, id: `${SLUG}::${pid}::${t}::${idx}::${stem || "q"}` };
+    });
+  }
+
+  function cloneQuestionWithShuffledOptions(q) {
+    if (!isPlainObject(q)) return q;
+
+    // Only shuffle when we can remap safely (numeric index answer)
+    if (!Array.isArray(q.options) || !q.options.length) return { ...q };
+    if (typeof q.answer !== "number") return { ...q };
+
+    const pairs = q.options.map((text, idx) => ({ text, idx }));
+    shuffleInPlace(pairs);
+
+    const newOptions = pairs.map((p) => p.text);
+    const newAnswer = pairs.findIndex((p) => p.idx === q.answer);
+
+    return { ...q, options: newOptions, answer: newAnswer };
   }
 
   // -----------------------------
@@ -99,20 +165,27 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        validate();
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -129,7 +202,7 @@
       <div class="note" style="margin-top:0">
         <strong>IELTS Reading</strong>
         <p style="margin:8px 0 0">
-          3 passages • 40 questions • 60 minutes (practice).
+          3 passages • bank-controlled question count • 60 minutes (practice).
         </p>
         <p style="margin:8px 0 0; opacity:.92">
           Tip: skim for the main idea, then scan for keywords. Answers follow passage order.
@@ -173,7 +246,7 @@
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
-          <div style="font-weight:800; color: var(--muted)">${passageLabel(q.passageId)} • Question ${n} of ${total}</div>
+          <div style="font-weight:800; color: var(--muted)">${safeText(passageLabel(q.passageId))} • Question ${n} of ${total}</div>
           <div class="chip" aria-label="Time remaining" style="font-weight:900">${formatTime(state.timeRemaining)}</div>
         </div>
         <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
@@ -195,15 +268,16 @@
 
   function renderMCQForm(q) {
     const prompt = safeText(q.question || "Question");
-    const options = Array.isArray(q.options) ? q.options : [];
+    const options = getOptionsForQuestion(q);
 
+    const qid = q && q.id ? String(q.id) : "q";
     const optionsHtml = options
       .map((opt, i) => {
-        const id = `opt-${SLUG}-${q.id}-${i}`;
+        const id = `opt-${SLUG}-${qid}-${i}`;
         return `
-          <label for="${id}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
-            <input id="${id}" type="radio" name="choice" value="${i}" required style="margin:0" />
-            <span>${safeText(opt)}</span>
+          <label for="${id}" style="display:flex; align-items:flex-start; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
+            <input id="${id}" type="radio" name="choice" value="${i}" required style="margin-top:3px" />
+            <span style="line-height:1.35">${safeText(opt)}</span>
           </label>
         `;
       })
@@ -214,7 +288,7 @@
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <legend style="padding:0 8px; font-weight:900">${prompt}</legend>
           <div role="radiogroup" aria-label="Answer choices" style="display:grid; gap:10px; margin-top:12px">
-            ${optionsHtml}
+            ${optionsHtml || `<div class="note" style="margin:0; padding:10px 12px"><strong>No options provided</strong></div>`}
           </div>
           <div class="actions" style="margin-top:12px">
             <button class="btn btn--primary" type="submit">Submit</button>
@@ -235,7 +309,17 @@
           ${hint ? `<p style="margin:10px 0 0; opacity:.88">${safeText(hint)}</p>` : ""}
 
           <label style="display:block; margin-top:12px; font-weight:700">Your answer</label>
-          <input type="text" name="blank" required autocomplete="off" style="width:100%; margin-top:8px" placeholder="Type your answer" />
+          <input
+            type="text"
+            name="blank"
+            required
+            autocomplete="off"
+            autocapitalize="none"
+            spellcheck="false"
+            maxlength="64"
+            style="width:100%; margin-top:8px; padding:12px 12px; border:1px solid var(--border); border-radius:14px; background: var(--surface)"
+            placeholder="Type your answer"
+          />
           <div class="actions" style="margin-top:12px">
             <button class="btn btn--primary" type="submit">Submit</button>
           </div>
@@ -248,8 +332,8 @@
     const q = state.questions[state.index];
     if (!q) return renderError("Missing question");
 
-    const type = String(q.type || "multipleChoice");
-    const formHtml = type === "fillInTheBlank" ? renderFillBlankForm(q) : renderMCQForm(q);
+    const type = normalizeType(q.type);
+    const formHtml = type === "fillintheblank" ? renderFillBlankForm(q) : renderMCQForm(q);
 
     return `
       ${renderTopBar(state)}
@@ -258,12 +342,30 @@
     `;
   }
 
+  function correctTextFor(q) {
+    const type = normalizeType(q.type);
+
+    if (type === "fillintheblank") {
+      const ans = q.answer;
+      if (Array.isArray(ans)) return String(ans[0] || "");
+      return String(ans == null ? "" : ans);
+    }
+
+    if (type === "truefalse") {
+      const idx = deriveTrueFalseIndex(q.answer);
+      return optionAt(q, idx);
+    }
+
+    if (typeof q.answer === "number") return optionAt(q, q.answer);
+    return "";
+  }
+
   function renderFeedback(state) {
     const q = state.questions[state.index];
     const ok = !!state.lastIsCorrect;
 
     const userText = state.lastUserText || "";
-    const correctText = state.lastCorrectText || "";
+    const correctText = state.lastCorrectText || correctTextFor(q) || "";
     const expl = q && q.explanation ? String(q.explanation) : "";
 
     return `
@@ -271,7 +373,7 @@
       <div class="note" style="margin-top:12px">
         <strong>${ok ? "Correct" : "Not quite"}</strong>
         <p style="margin:8px 0 0"><span style="font-weight:800">Your answer:</span> ${safeText(userText || "—")}</p>
-        <p style="margin:8px 0 0"><span style="font-weight:800">Correct answer:</span> ${safeText(correctText)}</p>
+        <p style="margin:8px 0 0"><span style="font-weight:800">Correct answer:</span> ${safeText(correctText || "—")}</p>
         ${expl ? `<p style="margin:8px 0 0; opacity:.95">${safeText(expl)}</p>` : ""}
       </div>
       <div class="actions" style="margin-top:12px">
@@ -312,6 +414,10 @@
       })
       .join("");
 
+    const saveDisabled = state.isSaving ? `disabled aria-disabled="true"` : "";
+    const saveLabel = state.isSaving ? "Saving…" : "Save score to Profile";
+    const savedMsg = state.savedMsg ? String(state.savedMsg) : "";
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished</strong>
@@ -321,7 +427,19 @@
         <p style="margin:8px 0 0; opacity:.92">
           Questions completed: ${state.completedCount} / ${totalQs} • Time remaining: ${formatTime(state.timeRemaining)}
         </p>
+        <p style="margin:8px 0 0; opacity:.85">
+          IELTS Practice estimate (not official IELTS).
+        </p>
       </div>
+
+      <div class="actions" style="margin-top:12px; flex-wrap:wrap">
+        <button class="btn btn--primary" type="button" data-action="save" ${saveDisabled}>${saveLabel}</button>
+        <button class="btn" type="button" data-action="restart">Restart</button>
+      </div>
+
+      <p class="muted" data-saved-msg aria-live="polite" role="status" style="margin:10px 0 0">
+        ${safeText(savedMsg)}
+      </p>
 
       <div style="margin-top:12px; display:grid; gap:10px">
         <div class="note" style="margin:0; padding:12px 14px">
@@ -332,10 +450,6 @@
         <div style="display:grid; gap:10px">
           ${reviewHtml}
         </div>
-      </div>
-
-      <div class="actions" style="margin-top:12px">
-        <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
       </div>
     `;
   }
@@ -385,6 +499,10 @@
         // review rows
         review: [],
 
+        // save-to-profile
+        savedMsg: "",
+        isSaving: false,
+
         lastError: ""
       };
 
@@ -427,6 +545,7 @@
 
       function resetRunState() {
         stopTimer();
+
         state.questions = [];
         state.index = 0;
         state.timeRemaining = TIME_LIMIT_SEC;
@@ -441,6 +560,9 @@
 
         state.review = [];
         state.lastError = "";
+
+        state.savedMsg = "";
+        state.isSaving = false;
       }
 
       async function start() {
@@ -458,8 +580,9 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          // Shuffle options only (keeps passage order like IELTS)
-          const prepared = bank.map(cloneQuestionWithShuffledOptions);
+          // Keep question order (IELTS-style), shuffle options only (when safe).
+          const prepared = ensureIds(bank.map(cloneQuestionWithShuffledOptions).filter(isPlainObject));
+          if (!prepared.length) throw new Error("Question bank contained no usable questions.");
 
           state.questions = prepared;
           state.totalPoints = prepared.reduce((sum, q) => sum + pointsFor(q), 0);
@@ -482,7 +605,6 @@
       }
 
       function next() {
-        // Move forward; if finished, show summary
         if (state.index + 1 >= state.questions.length) {
           stopTimer();
           state.status = "summary";
@@ -498,46 +620,121 @@
         paint();
       }
 
-      function gradeMCQ(q, choiceIndex) {
-        const isCorrect = Number(choiceIndex) === Number(q.answer);
-        const userText =
-          Array.isArray(q.options) && q.options[choiceIndex] != null ? String(q.options[choiceIndex]) : "";
-        const correctText =
-          Array.isArray(q.options) && q.options[q.answer] != null ? String(q.options[q.answer]) : "";
+      function countRawCorrect() {
+        return (state.review || []).reduce((sum, r) => sum + (r && r.isCorrect ? 1 : 0), 0);
+      }
 
-        return { isCorrect, userText, correctText };
+      function saveScoreToProfile() {
+        if (state.status !== "summary") return;
+        if (state.isSaving) return;
+
+        const saver = window.UEAH_SAVE_SCORE && window.UEAH_SAVE_SCORE.save;
+        if (typeof saver !== "function") {
+          state.savedMsg = "Save not available (missing save helper).";
+          paint();
+          return;
+        }
+
+        state.isSaving = true;
+        state.savedMsg = "Saving…";
+        paint();
+
+        const rawCorrect = countRawCorrect();
+        const rawTotal = state.questions.length;
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "ielts",
+          skill: "reading",
+          at: nowIso(),
+          questions: state.questions,
+          review: (state.review || []).map((r) => ({ isCorrect: !!(r && r.isCorrect) })),
+          rawCorrect,
+          totalQuestions: rawTotal,
+          percent: state.totalPoints ? Math.round((state.pointsEarned / state.totalPoints) * 100) : 0,
+          pointsEarned: state.pointsEarned,
+          totalPoints: state.totalPoints
+        };
+
+        const res = saver(payload);
+
+        state.isSaving = false;
+
+        if (!res || res.ok === false) {
+          const reason = res && res.reason ? String(res.reason) : "Unknown error";
+          state.savedMsg = `Could not save. (${reason})`;
+          paint();
+          return;
+        }
+
+        const scoreTxt = Number.isFinite(Number(res.normalizedScore)) ? String(Math.round(Number(res.normalizedScore))) : "—";
+        const levelTxt = res.levelTitle ? String(res.levelTitle) : "Saved";
+        state.savedMsg = `Saved to Profile — ${scoreTxt}/100 • ${levelTxt}`;
+        paint();
       }
 
       function gradeBlank(q, blankText) {
-        const userNorm = normalizeAnswerText(blankText);
-        const ans = q.answer;
+        const userRaw = String(blankText || "").trim();
+        const userNorm = normalizeAnswerText(userRaw);
 
-        const ok = Array.isArray(ans)
-          ? ans.some((x) => normalizeAnswerText(x) === userNorm)
-          : normalizeAnswerText(ans) === userNorm;
+        const accepted = [];
+        const ans = q && q.answer;
 
-        const correctText = Array.isArray(ans) ? String(ans[0] || "") : String(ans || "");
-        return { isCorrect: ok, userText: String(blankText || "").trim(), correctText };
+        if (Array.isArray(q && q.acceptedAnswers)) accepted.push(...q.acceptedAnswers);
+        if (Array.isArray(ans)) accepted.push(...ans);
+        else if (ans != null) accepted.push(ans);
+
+        const ok = accepted.some((a) => normalizeAnswerText(a) === userNorm);
+        const correctText = accepted.length ? String(accepted[0] || "") : String(ans == null ? "" : ans);
+
+        return { isCorrect: ok, userText: userRaw, correctText };
+      }
+
+      function gradeChoice(q, choiceIndex) {
+        const type = normalizeType(q.type);
+
+        const chosen = Number(choiceIndex);
+        if (!Number.isFinite(chosen)) return { isCorrect: false, userText: "", correctText: correctTextFor(q) };
+
+        const userText = optionAt(q, chosen);
+        let isCorrect = false;
+
+        if (type === "truefalse") {
+          const correctIdx = deriveTrueFalseIndex(q.answer);
+          isCorrect = correctIdx != null ? chosen === correctIdx : chosen === Number(q.answer);
+          return { isCorrect, userText, correctText: optionAt(q, correctIdx) || correctTextFor(q) };
+        }
+
+        if (typeof q.answer === "number" && Number.isFinite(q.answer)) {
+          isCorrect = chosen === q.answer;
+          return { isCorrect, userText, correctText: optionAt(q, q.answer) };
+        }
+
+        // Fallback: compare chosen option text to string answer.
+        const chosenText = normalizeAnswerText(userText);
+        const ansText = normalizeAnswerText(q.answer);
+        isCorrect = !!chosenText && !!ansText && chosenText === ansText;
+
+        return { isCorrect, userText, correctText: correctTextFor(q) };
       }
 
       function grade(choiceIndex, blankText) {
         const q = state.questions[state.index];
         if (!q) return;
 
-        const type = String(q.type || "multipleChoice");
+        // Prevent double-answering.
+        if (state.status !== "question") return;
+
+        const type = normalizeType(q.type);
         const pts = pointsFor(q);
 
-        let result;
-        if (type === "fillInTheBlank") result = gradeBlank(q, blankText);
-        else result = gradeMCQ(q, choiceIndex);
+        const result = type === "fillintheblank" ? gradeBlank(q, blankText) : gradeChoice(q, choiceIndex);
 
         state.lastIsCorrect = !!result.isCorrect;
-        state.lastUserText = result.userText || "";
-        state.lastCorrectText = result.correctText || "";
+        state.lastUserText = result.userText || "—";
+        state.lastCorrectText = result.correctText || correctTextFor(q) || "—";
 
-        // Only count once per question
         state.completedCount += 1;
-
         if (result.isCorrect) state.pointsEarned += pts;
 
         state.review[state.index] = {
@@ -551,6 +748,15 @@
         paint();
       }
 
+      // Stop timer on navigation changes (best effort)
+      window.addEventListener(
+        "popstate",
+        () => {
+          stopTimer();
+        },
+        { passive: true }
+      );
+
       paint();
 
       host.addEventListener("click", (e) => {
@@ -558,9 +764,19 @@
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
-        if (action === "start" || action === "retry") start();
-        else if (action === "restart") restart();
-        else if (action === "next") next();
+        if (action === "start" || action === "retry") {
+          e.preventDefault();
+          start();
+        } else if (action === "restart") {
+          e.preventDefault();
+          restart();
+        } else if (action === "next") {
+          e.preventDefault();
+          next();
+        } else if (action === "save") {
+          e.preventDefault();
+          saveScoreToProfile();
+        }
       });
 
       host.addEventListener("submit", (e) => {
@@ -571,7 +787,9 @@
         const q = state.questions[state.index];
         if (!q) return;
 
-        if (String(q.type) === "fillInTheBlank") {
+        const type = normalizeType(q.type);
+
+        if (type === "fillintheblank") {
           const input = form.querySelector('input[name="blank"]');
           grade(null, input ? input.value : "");
           return;
@@ -584,4 +802,3 @@
     }
   });
 })();
-

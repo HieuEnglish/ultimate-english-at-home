@@ -10,6 +10,10 @@
 
    Update:
    - Adds a final summary report (per-question review) similar in spirit to 4–7 Speaking.
+   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE).
+   - Save payload now includes:
+     * questions: state.questions
+     * review: state.review
 */
 
 (function () {
@@ -66,6 +70,10 @@
     const n = Number(idx);
     if (!Number.isFinite(n)) return "";
     return q.options[n] == null ? "" : String(q.options[n]);
+  }
+
+  function nowIso() {
+    return new Date().toISOString();
   }
 
   // -----------------------------
@@ -239,11 +247,13 @@
         </div>
       `;
 
+    const playDisabled = supportsSpeech() && String(q && q.say ? q.say : "").trim() ? "" : "disabled";
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" aria-label="Play the word">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" aria-label="Play the word" ${playDisabled}>🔊 Play</button>
           ${showWordBtn}
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
         </div>
@@ -282,11 +292,13 @@
     const nextLabel = n >= total ? "Finish" : "Next";
     const icon = ok ? "✅" : "❌";
 
+    const playDisabled = supportsSpeech() && String(q && q.say ? q.say : "").trim() ? "" : "disabled";
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" aria-label="Play the word again">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" aria-label="Play the word again" ${playDisabled}>🔊 Play</button>
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
         </div>
       </div>
@@ -375,6 +387,8 @@
     const correct = state.correctCount;
     const pct = total ? Math.round((correct / total) * 100) : 0;
 
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
@@ -384,8 +398,20 @@
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(
+                state.savedMsg
+              )}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -426,7 +452,8 @@
         lastError: "",
         revealWord: false,
         autoSpokenIndex: -1,
-        review: [] // per-question report rows
+        review: [], // per-question report rows
+        savedMsg: "" // status text after saving
       };
 
       function currentQuestion() {
@@ -448,6 +475,7 @@
         state.revealWord = false;
         state.autoSpokenIndex = -1;
         state.review = [];
+        state.savedMsg = "";
       }
 
       function paint() {
@@ -477,6 +505,7 @@
         state.revealWord = false;
         state.autoSpokenIndex = -1;
         state.review = [];
+        state.savedMsg = "";
         paint();
 
         try {
@@ -500,6 +529,7 @@
           state.revealWord = false;
           state.autoSpokenIndex = -1;
           state.review = [];
+          state.savedMsg = "";
           state.status = "question";
           paint();
         } catch (err) {
@@ -572,6 +602,36 @@
         paint();
       }
 
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const total = state.questions.length;
+        const correct = state.correctCount;
+        const percent = total ? Math.round((correct / total) * 100) : 0;
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "0-3",
+          skill: "listening",
+          at: nowIso(),
+          rawCorrect: correct,
+          totalQuestions: total,
+          percent,
+          // REQUIRED UPDATE:
+          questions: state.questions,
+          review: state.review
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        state.savedMsg = res && res.ok ? "Saved to Profile." : "Could not save.";
+        paint();
+      }
+
       // Event delegation (stage content gets re-rendered)
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("button") : null;
@@ -596,6 +656,9 @@
         } else if (action === "toggleWord") {
           ev.preventDefault();
           toggleWord();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 

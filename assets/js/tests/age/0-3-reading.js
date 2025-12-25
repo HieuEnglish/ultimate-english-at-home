@@ -6,6 +6,10 @@
 
    Update:
    - Adds a final summary report (per-question review).
+   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE).
+   - Save payload now includes:
+     * questions: state.questions
+     * review: state.review
 */
 
 (function () {
@@ -64,6 +68,10 @@
     return q.options[n] == null ? "" : String(q.options[n]);
   }
 
+  function nowIso() {
+    return new Date().toISOString();
+  }
+
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -93,9 +101,7 @@
 
         // Otherwise, attach listeners (best effort)
         existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
         return;
       }
 
@@ -300,6 +306,8 @@
     const correct = state.correctCount;
     const pct = total ? Math.round((correct / total) * 100) : 0;
 
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
@@ -309,8 +317,20 @@
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(
+                state.savedMsg
+              )}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -349,7 +369,8 @@
         correctCount: 0,
         lastChoice: null,
         lastError: "",
-        review: [] // per-question report rows
+        review: [], // per-question report rows
+        savedMsg: "" // status text after saving
       };
 
       function resetRunState() {
@@ -359,6 +380,7 @@
         state.lastChoice = null;
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
       }
 
       function paint() {
@@ -375,6 +397,7 @@
         state.status = "loading";
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
         paint();
 
         try {
@@ -397,6 +420,7 @@
           state.correctCount = 0;
           state.lastChoice = null;
           state.review = [];
+          state.savedMsg = "";
           state.status = "question";
           paint();
         } catch (err) {
@@ -462,6 +486,36 @@
         paint();
       }
 
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const total = state.questions.length;
+        const correct = state.correctCount;
+        const percent = total ? Math.round((correct / total) * 100) : 0;
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "0-3",
+          skill: "reading",
+          at: nowIso(),
+          rawCorrect: correct,
+          totalQuestions: total,
+          percent,
+          // REQUIRED UPDATE:
+          questions: state.questions,
+          review: state.review
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        state.savedMsg = res && res.ok ? "Saved to Profile." : "Could not save.";
+        paint();
+      }
+
       // Event delegation (stage content gets re-rendered)
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("button") : null;
@@ -480,6 +534,9 @@
         } else if (action === "retry") {
           ev.preventDefault();
           start();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 

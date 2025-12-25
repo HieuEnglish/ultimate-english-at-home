@@ -11,6 +11,7 @@
 
    Update:
    - Adds a final summary report (per-question review).
+   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE).
 */
 
 (function () {
@@ -49,6 +50,10 @@
       .replaceAll("'", "&#39;");
   }
 
+  function nowIso() {
+    return new Date().toISOString();
+  }
+
   function normalizeAnswerText(v) {
     return String(v == null ? "" : v)
       .trim()
@@ -56,8 +61,70 @@
       .replace(/\s+/g, "");
   }
 
+  function normalizeDifficulty(v) {
+    const d = String(v || "").trim().toLowerCase();
+    if (d === "easy" || d === "medium" || d === "hard") return d;
+    return "";
+  }
+
+  function computeDifficultyBreakdown(questions, reviewRows) {
+    const qs = Array.isArray(questions) ? questions : [];
+    const rows = Array.isArray(reviewRows) ? reviewRows : [];
+
+    const byIndex = Object.create(null);
+    rows.forEach((r) => {
+      const n = Number(r && r.number);
+      if (Number.isFinite(n) && n >= 1) byIndex[n - 1] = !!r.isCorrect;
+    });
+
+    const out = {
+      easy: { total: 0, correct: 0 },
+      medium: { total: 0, correct: 0 },
+      hard: { total: 0, correct: 0 },
+      unknown: { total: 0, correct: 0 }
+    };
+
+    qs.forEach((q, idx) => {
+      const d = normalizeDifficulty(q && q.difficulty);
+      const key = d || "unknown";
+      out[key].total += 1;
+      if (byIndex[idx]) out[key].correct += 1;
+    });
+
+    const compact = Object.create(null);
+    Object.keys(out).forEach((k) => {
+      if (out[k].total > 0) compact[k] = out[k];
+    });
+    return compact;
+  }
+
+  function computeTypeBreakdown(questions, reviewRows) {
+    const qs = Array.isArray(questions) ? questions : [];
+    const rows = Array.isArray(reviewRows) ? reviewRows : [];
+
+    const byIndex = Object.create(null);
+    rows.forEach((r) => {
+      const n = Number(r && r.number);
+      if (Number.isFinite(n) && n >= 1) byIndex[n - 1] = !!r.isCorrect;
+    });
+
+    const out = Object.create(null);
+    qs.forEach((q, idx) => {
+      const t = String(q && q.type ? q.type : "unknown").trim() || "unknown";
+      if (!out[t]) out[t] = { total: 0, correct: 0 };
+      out[t].total += 1;
+      if (byIndex[idx]) out[t].correct += 1;
+    });
+
+    return out;
+  }
+
   function cloneQuestionWithShuffledOptions(q) {
     if (!isPlainObject(q)) return q;
+
+    const t = String(q.type || "multipleChoice");
+
+    // Only shuffle options when options+numeric answer exist (MCQ / TF).
     if (!Array.isArray(q.options)) return { ...q };
     if (typeof q.answer !== "number") return { ...q };
 
@@ -67,7 +134,7 @@
     const newOptions = pairs.map((p) => p.text);
     const newAnswer = pairs.findIndex((p) => p.idx === q.answer);
 
-    return { ...q, options: newOptions, answer: newAnswer };
+    return { ...q, type: t, options: newOptions, answer: newAnswer };
   }
 
   function typeLabel(q) {
@@ -197,9 +264,10 @@
     const prompt = safeText(q.question || "Question");
     const options = Array.isArray(q.options) ? q.options : [];
 
+    const qid = q && q.id != null ? String(q.id) : "q";
     const optionsHtml = options
       .map((opt, i) => {
-        const id = `opt-${SLUG}-${q.id}-${i}`;
+        const id = `opt-${SLUG}-${qid}-${i}`;
         return `
           <label for="${id}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
             <input id="${id}" type="radio" name="choice" value="${i}" required style="margin:0" />
@@ -394,6 +462,7 @@
     const total = state.questions.length;
     const correct = state.correctCount;
     const pct = total ? Math.round((correct / total) * 100) : 0;
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
 
     return `
       <div class="note" style="margin-top:0">
@@ -404,8 +473,18 @@
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -446,7 +525,8 @@
         lastBlank: "",
         lastIsCorrect: false,
         lastError: "",
-        review: [] // per-question report rows
+        review: [], // per-question report rows
+        savedMsg: ""
       };
 
       function resetRunState() {
@@ -458,6 +538,7 @@
         state.lastIsCorrect = false;
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
       }
 
       function paint() {
@@ -474,6 +555,7 @@
         state.status = "loading";
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
         paint();
 
         try {
@@ -486,7 +568,7 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          // Randomization:
+          // Randomize:
           // - Shuffle question order
           // - Shuffle options within MCQ/TF questions
           const prepared = bank.map(cloneQuestionWithShuffledOptions);
@@ -499,11 +581,11 @@
           state.lastBlank = "";
           state.lastIsCorrect = false;
           state.review = [];
+          state.savedMsg = "";
 
           state.status = "question";
           paint();
 
-          // Autofocus the first input (best effort)
           setTimeout(() => {
             try {
               const el = host.querySelector("input, button");
@@ -559,6 +641,7 @@
           typeLabel: typeLabel(q),
           question: q && q.question ? String(q.question) : "",
           passage: q && q.passage ? String(q.passage) : "",
+          difficulty: q && q.difficulty ? String(q.difficulty) : "",
           chosenText,
           correctText,
           isCorrect: !!ok
@@ -569,7 +652,7 @@
         const q = state.questions[state.index];
         if (!q) return;
 
-        // Prevent double-answering (e.g., double submit / double click)
+        // Prevent double-answering
         if (state.status !== "question") return;
 
         const t = String(q.type || "multipleChoice");
@@ -583,7 +666,6 @@
           else ok = normalizeAnswerText(ans) === user;
 
           state.lastBlank = blankText != null ? String(blankText) : "";
-
           recordReviewRow(q, ok, null, state.lastBlank);
         } else {
           const chosen = Number(choiceIndex);
@@ -602,7 +684,57 @@
         paint();
       }
 
-      // Event delegation (stage content gets re-rendered)
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const total = state.questions.length;
+        const correct = state.correctCount;
+        const percent = total ? (correct / total) * 100 : 0;
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "4-7",
+          skill: "reading",
+          at: nowIso(),
+
+          // FIX: include scoring inputs for normalization
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          review: Array.isArray(state.review) ? state.review : [],
+
+          rawCorrect: correct,
+          totalQuestions: total,
+          percent: Math.round(percent),
+          difficultyBreakdown: computeDifficultyBreakdown(state.questions, state.review),
+          typeBreakdown: computeTypeBreakdown(state.questions, state.review)
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        if (res && res.ok) {
+          const norm =
+            res.normalizedScore != null
+              ? `${Math.round(Number(res.normalizedScore))}/100`
+              : res.saved && res.saved.normalizedScore != null
+                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                : "";
+          const level =
+            res.levelTitle ||
+            (res.saved && res.saved.levelTitle) ||
+            (res.saved && res.saved.level && res.saved.level.title) ||
+            "";
+          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+        } else {
+          state.savedMsg = "Could not save.";
+        }
+
+        paint();
+      }
+
+      // Event delegation
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("button") : null;
         if (!btn) return;
@@ -620,6 +752,9 @@
         } else if (action === "retry") {
           ev.preventDefault();
           start();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 

@@ -16,7 +16,22 @@
 
    Randomization:
    - Shuffles question order within each passage on start
-   - Shuffles options within MCQ/TF questions (when options exist)
+   - Shuffles options within MCQ questions when explicit options exist
+
+   Updates (this file):
+   - Ensures every question has a stable UNIQUE id (prevents broken label/inputs and review mapping)
+   - More resilient bank loader (handles existing script + validates after a tick)
+   - Better selection: caps per passage AND backfills from leftovers so tests are not tiny if a passage is short
+   - Adds Skip button (records in review; no points)
+   - Stronger grading:
+     * trueFalse supports boolean/number/string answers
+     * fillInTheBlank supports acceptedAnswers + array answers
+     * normalization tuned for numbers/times/spacing
+   - Summary includes per-passage breakdown + expandable review table
+   - Adds “Save score to Profile” on final summary (uses window.UEAH_SAVE_SCORE if available)
+   - Builds a normalized save payload input (commonly p) that includes:
+     • questions: p.questions
+     • review: p.review
 */
 
 (function () {
@@ -25,9 +40,13 @@
   const SLUG = "age-13-18-reading";
   const BANK_SRC = "assets/data/tests-13-18-reading.js";
 
+  const AGE_GROUP = "13-18";
+  const SKILL = "reading";
+
   // Easier than IELTS but similar structure.
   const TIME_LIMIT_SEC = 45 * 60;
   const MAX_PER_PASSAGE = 8;
+  const TARGET_TOTAL = 3 * MAX_PER_PASSAGE;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -35,6 +54,14 @@
   // -----------------------------
   // Helpers
   // -----------------------------
+
+  function nowIso() {
+    try {
+      return new Date().toISOString();
+    } catch (_) {
+      return "";
+    }
+  }
 
   function shuffleInPlace(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -59,12 +86,25 @@
       .replaceAll("'", "&#39;");
   }
 
-  function normalizeAnswerText(v) {
+  function safeTextWithBreaks(v) {
+    return safeText(v).replace(/\n/g, "<br>");
+  }
+
+  function safeDomId(v) {
     return String(v == null ? "" : v)
       .trim()
       .toLowerCase()
-      .replace(/[.,!?;:"'()]/g, "")
-      .replace(/\s+/g, "");
+      .replace(/[^a-z0-9\-_:.]/g, "-")
+      .slice(0, 80);
+  }
+
+  function normalizeAnswerText(v) {
+    // Trim, lowercase, remove punctuation and spaces.
+    // Good for numbers/times: "2:30" vs "2 30" => "230"
+    return String(v == null ? "" : v)
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "");
   }
 
   function formatTime(sec) {
@@ -75,13 +115,13 @@
   }
 
   function getType(q) {
-    return String(q && q.type ? q.type : "multipleChoice");
+    return String((q && q.type) || "multipleChoice").trim();
   }
 
   function passageIdOf(q) {
     const pid = String((q && q.passageId) || "").toLowerCase();
-    if (pid === "p2") return "p2";
-    if (pid === "p3") return "p3";
+    if (pid === "p2" || pid === "part2" || pid === "2") return "p2";
+    if (pid === "p3" || pid === "part3" || pid === "3") return "p3";
     return "p1";
   }
 
@@ -115,23 +155,75 @@
   }
 
   function deriveTrueFalseIndex(answer) {
-    if (typeof answer === "number" && Number.isFinite(answer)) return answer;
+    // Returns 0 for True, 1 for False, or null if unknown.
+    if (typeof answer === "number" && Number.isFinite(answer)) {
+      if (answer === 0 || answer === 1) return answer;
+    }
     if (typeof answer === "boolean") return answer ? 0 : 1;
+
     const s = normalizeAnswerText(answer);
     if (!s) return null;
+
     if (s === "true" || s === "t" || s === "yes" || s === "y") return 0;
     if (s === "false" || s === "f" || s === "no" || s === "n") return 1;
     return null;
   }
 
-  function correctTextForBlank(ans) {
-    if (Array.isArray(ans)) return ans.filter((x) => x != null).map(String).join(" / ");
-    return ans == null ? "" : String(ans);
+  function ensureUniqueIds(qs) {
+    const seen = new Set();
+    return (Array.isArray(qs) ? qs : []).map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+
+      const base =
+        q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+
+      let id = base;
+      if (seen.has(id)) {
+        let n = 2;
+        while (seen.has(`${base}--${n}`)) n += 1;
+        id = `${base}--${n}`;
+      }
+      seen.add(id);
+
+      return { ...q, id };
+    });
+  }
+
+  function collectAcceptedBlankAnswers(q) {
+    const accepted = [];
+    if (q && Array.isArray(q.acceptedAnswers)) accepted.push(...q.acceptedAnswers);
+    const ans = q && q.answer;
+    if (Array.isArray(ans)) accepted.push(...ans);
+    else if (ans != null) accepted.push(ans);
+
+    // de-dup by normalized
+    const uniq = [];
+    const seen = new Set();
+    accepted.forEach((a) => {
+      const s = String(a == null ? "" : a);
+      const k = normalizeAnswerText(s);
+      if (!k) return;
+      if (seen.has(k)) return;
+      seen.add(k);
+      uniq.push(s);
+    });
+
+    return uniq;
+  }
+
+  function correctTextForBlank(q) {
+    const list = collectAcceptedBlankAnswers(q);
+    return list.length ? list.join(" / ") : "";
   }
 
   function cloneQuestionWithShuffledOptions(q) {
     if (!isPlainObject(q)) return q;
-    if (!Array.isArray(q.options)) return { ...q };
+
+    const t = String(getType(q)).toLowerCase();
+
+    // Only shuffle explicit MCQ options (not generated True/False).
+    if (t === "fillintheblank" || t === "truefalse") return { ...q };
+    if (!Array.isArray(q.options) || !q.options.length) return { ...q };
     if (typeof q.answer !== "number") return { ...q };
 
     const pairs = q.options.map((text, idx) => ({ text, idx }));
@@ -158,29 +250,102 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
         if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
           resolve(true);
           return;
         }
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
+        validate();
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
 
     return bankPromise;
+  }
+
+  // -----------------------------
+  // Selection
+  // -----------------------------
+
+  function buildReadingSet(bankRaw) {
+    const base = (Array.isArray(bankRaw) ? bankRaw : []).filter(isPlainObject).map((q) => ({
+      ...q,
+      passageId: passageIdOf(q)
+    }));
+
+    const cleaned = ensureUniqueIds(base);
+    if (!cleaned.length) return [];
+
+    const prepared = cleaned.map(cloneQuestionWithShuffledOptions);
+
+    const byPassage = { p1: [], p2: [], p3: [] };
+    prepared.forEach((q) => {
+      byPassage[passageIdOf(q)].push(q);
+    });
+
+    const chosen = [];
+    const used = new Set();
+    const counts = { p1: 0, p2: 0, p3: 0 };
+
+    // Primary pick: cap per passage
+    ["p1", "p2", "p3"].forEach((pid) => {
+      const arr = (byPassage[pid] || []).slice();
+      shuffleInPlace(arr);
+
+      for (let i = 0; i < arr.length && chosen.length < TARGET_TOTAL; i++) {
+        if (counts[pid] >= MAX_PER_PASSAGE) break;
+
+        const q = arr[i];
+        const id = q && q.id != null ? String(q.id) : "";
+        if (!id || used.has(id)) continue;
+
+        used.add(id);
+        chosen.push(q);
+        counts[pid] += 1;
+      }
+    });
+
+    // Backfill from leftovers across all passages
+    if (chosen.length < TARGET_TOTAL) {
+      const leftovers = prepared.filter((q) => q && q.id != null && !used.has(String(q.id)));
+      shuffleInPlace(leftovers);
+
+      for (let i = 0; i < leftovers.length && chosen.length < TARGET_TOTAL; i++) {
+        const q = leftovers[i];
+        const id = q && q.id != null ? String(q.id) : "";
+        if (!id || used.has(id)) continue;
+
+        used.add(id);
+        chosen.push(q);
+      }
+    }
+
+    // Order by passage (p1->p2->p3) while preserving within-passage chosen order
+    const ordered = [];
+    ["p1", "p2", "p3"].forEach((pid) => {
+      ordered.push(...chosen.filter((q) => passageIdOf(q) === pid));
+    });
+
+    return ordered.length ? ordered : chosen;
   }
 
   // -----------------------------
@@ -233,7 +398,10 @@
           <div style="font-weight:800; color: var(--muted)">${safeText(passageLabel(pid))} • Question ${n} of ${total}</div>
           <div class="chip" aria-label="Time remaining" style="font-weight:900">${formatTime(state.timeRemaining)}</div>
         </div>
-        <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
+        <div style="display:flex; gap:8px; flex-wrap:wrap">
+          <button class="btn" type="button" data-action="skip" aria-label="Skip this question">Skip</button>
+          <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
+        </div>
       </div>
     `;
   }
@@ -244,18 +412,18 @@
     return `
       <div class="note" style="margin:12px 0 0; padding:12px 14px">
         <strong>Read</strong>
-        <p style="margin:8px 0 0">${safeText(p)}</p>
+        <p style="margin:8px 0 0">${safeTextWithBreaks(p)}</p>
       </div>
     `;
   }
 
   function renderMCQForm(q) {
-    const prompt = safeText((q && q.question) || "Question");
+    const prompt = safeTextWithBreaks((q && q.question) || "Question");
     const options = getOptionsForQuestion(q);
 
     const optionsHtml = options
       .map((opt, i) => {
-        const id = `opt-${SLUG}-${q && q.id ? q.id : "q"}-${i}`;
+        const id = `opt-${SLUG}-${safeDomId(q && q.id ? q.id : "q")}-${i}`;
         return `
           <label for="${id}" style="display:flex; align-items:flex-start; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
             <input id="${id}" type="radio" name="choice" value="${i}" required style="margin-top:3px" />
@@ -286,7 +454,7 @@
   }
 
   function renderFillBlankForm(q) {
-    const prompt = safeText((q && q.question) || "Fill in the blank");
+    const prompt = safeTextWithBreaks((q && q.question) || "Fill in the blank");
     return `
       <form data-form="question" style="margin-top:12px">
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
@@ -335,7 +503,7 @@
     if (!q) return renderError("Missing question.");
 
     const ok = !!state.lastIsCorrect;
-    const icon = ok ? "✅" : "❌";
+    const icon = state.lastWasSkipped ? "⏭️" : ok ? "✅" : "❌";
 
     const type = String(getType(q)).toLowerCase();
     const pid = passageIdOf(q);
@@ -344,11 +512,16 @@
     let chosenText = "";
 
     if (type === "fillintheblank") {
-      correctText = correctTextForBlank(q.answer) || "(not set)";
+      correctText = correctTextForBlank(q) || "(not set)";
       chosenText = state.lastBlank != null && String(state.lastBlank).trim() ? String(state.lastBlank) : "(blank)";
     } else {
       const correctIdx =
-        type === "truefalse" ? deriveTrueFalseIndex(q.answer) : typeof q.answer === "number" ? q.answer : null;
+        type === "truefalse"
+          ? deriveTrueFalseIndex(q.answer)
+          : typeof q.answer === "number" && Number.isFinite(q.answer)
+          ? q.answer
+          : null;
+
       correctText = optionAt(q, correctIdx) || "(not set)";
       chosenText = optionAt(q, state.lastChoice) || "(none)";
     }
@@ -361,11 +534,13 @@
       ${renderTopBar(state)}
 
       <div class="note" style="margin-top:12px" aria-live="polite">
-        <strong>${icon} ${ok ? "Correct" : "Not quite"}</strong>
+        <strong>${icon} ${state.lastWasSkipped ? "Skipped" : ok ? "Correct" : "Not quite"}</strong>
         <p style="margin:8px 0 0; opacity:.92">${safeText(passageLabel(pid))} • ${safeText(typeLabel(q))}</p>
         <p style="margin:10px 0 0"><span style="font-weight:900">Correct:</span> ${safeText(correctText)}</p>
         ${
-          ok
+          state.lastWasSkipped
+            ? `<p style="margin:8px 0 0; opacity:.92">No points earned for this question.</p>`
+            : ok
             ? ""
             : `<p style="margin:8px 0 0; opacity:.92"><span style="font-weight:900">You answered:</span> ${safeText(
                 chosenText
@@ -386,7 +561,7 @@
 
     const body = rows
       .map((r) => {
-        const icon = r.isCorrect ? "✅" : "❌";
+        const icon = r.skipped ? "⏭️" : r.isCorrect ? "✅" : "❌";
         return `
           <tr>
             <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:900; white-space:nowrap">${safeText(
@@ -416,9 +591,6 @@
         <summary style="cursor:pointer; font-weight:900">Review answers</summary>
         <div style="margin-top:10px; border:1px solid var(--border); border-radius:16px; overflow:hidden; background: var(--surface2)">
           <table style="width:100%; border-collapse:collapse" aria-label="Answer review table">
-            <caption style="text-align:left; padding:12px 12px 0; font-weight:900; color: var(--muted)">
-              Per-question report
-            </caption>
             <thead>
               <tr>
                 <th scope="col" style="text-align:left; padding:10px 10px; border-top:1px solid var(--border); color: var(--muted)">#</th>
@@ -443,18 +615,54 @@
     const score = state.correctCount;
     const pct = total ? Math.round((score / total) * 100) : 0;
 
+    const per = { p1: { c: 0, t: 0 }, p2: { c: 0, t: 0 }, p3: { c: 0, t: 0 } };
+    (Array.isArray(state.review) ? state.review : []).forEach((r) => {
+      const pid = String(r.passageId || "p1").toLowerCase();
+      if (!per[pid]) per[pid] = { c: 0, t: 0 };
+      per[pid].t += 1;
+      if (!r.skipped && r.isCorrect) per[pid].c += 1;
+    });
+
+    const breakdown = ["p1", "p2", "p3"]
+      .map((pid) => {
+        const x = per[pid] || { c: 0, t: 0 };
+        return `<div style="margin-top:6px; color:var(--muted)"><strong>${safeText(
+          passageLabel(pid)
+        )}:</strong> ${x.c} / ${x.t}</div>`;
+      })
+      .join("");
+
+    const canSave =
+      !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function") && !state.isSaving && !state.savedMsg;
+
+    const savedNote = state.savedMsg
+      ? `
+        <div class="note" style="margin-top:12px">
+          <strong>Saved to Profile</strong>
+          <p style="margin:8px 0 0">${safeText(state.savedMsg)}</p>
+          <p style="margin:8px 0 0; opacity:.9">Open <strong>Profile</strong> to view progress and your certification.</p>
+        </div>
+      `
+      : "";
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished</strong>
         <p style="margin:8px 0 0">Score: <span style="font-weight:900">${score}</span> / ${total} (${pct}%)</p>
         <p style="margin:8px 0 0; opacity:.92">Time remaining: ${formatTime(state.timeRemaining)}</p>
+        ${breakdown}
       </div>
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
         <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
+        <button class="btn" type="button" data-action="save" ${canSave ? "" : "disabled"} aria-label="Save score to Profile">
+          ${state.isSaving ? "Saving…" : "Save score to Profile"}
+        </button>
       </div>
+
+      ${savedNote}
     `;
   }
 
@@ -475,6 +683,7 @@
 
     afterRender(rootEl, ctx) {
       if (!rootEl) return;
+
       const host = rootEl.querySelector(`[data-ueah-test="${SLUG}"]`);
       if (!host) return;
       if (host.__ueahInited) return;
@@ -490,10 +699,17 @@
         correctCount: 0,
         timeRemaining: TIME_LIMIT_SEC,
         timerId: null,
+
         lastIsCorrect: false,
+        lastWasSkipped: false,
         lastChoice: null,
         lastBlank: "",
         lastError: "",
+
+        isSaving: false,
+        savedMsg: "",
+
+        // review rows (UI)
         review: []
       };
 
@@ -519,13 +735,12 @@
             return;
           }
 
-          // Update the timer chip without rerendering the full UI.
           const chip = host.querySelector('[aria-label="Time remaining"]');
           if (chip) chip.textContent = formatTime(state.timeRemaining);
         }, 1000);
       }
 
-      function recordReviewRow(q, ok, chosenIdx, blankText) {
+      function recordReviewRow(q, ok, skipped, chosenIdx, blankText) {
         const t = String(getType(q)).toLowerCase();
         const pid = passageIdOf(q);
 
@@ -534,7 +749,7 @@
 
         if (t === "fillintheblank") {
           chosenText = blankText != null && String(blankText).trim() ? String(blankText) : "(blank)";
-          correctText = correctTextForBlank(q && q.answer) || "(not set)";
+          correctText = correctTextForBlank(q) || "(not set)";
         } else {
           const correctIdx =
             t === "truefalse"
@@ -549,12 +764,14 @@
 
         state.review.push({
           number: state.index + 1,
+          passageId: pid,
           passage: passageLabel(pid),
           typeLabel: typeLabel(q),
           question: q && q.question ? String(q.question) : "",
-          chosenText,
+          chosenText: skipped ? "Skipped" : chosenText,
           correctText,
-          isCorrect: !!ok
+          isCorrect: !!ok,
+          skipped: !!skipped
         });
       }
 
@@ -579,12 +796,17 @@
 
       async function start() {
         stopTimer();
+
         state.status = "loading";
         state.lastError = "";
         state.review = [];
         state.lastChoice = null;
         state.lastBlank = "";
         state.lastIsCorrect = false;
+        state.lastWasSkipped = false;
+        state.isSaving = false;
+        state.savedMsg = "";
+
         paint();
 
         try {
@@ -597,23 +819,7 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.map(cloneQuestionWithShuffledOptions);
-
-          // Group by passage, shuffle within passage, then take a capped subset per passage (p1->p2->p3).
-          const groups = { p1: [], p2: [], p3: [] };
-
-          prepared.forEach((q) => {
-            const pid = passageIdOf(q);
-            groups[pid].push(q);
-          });
-
-          const chosen = [];
-          ["p1", "p2", "p3"].forEach((pid) => {
-            const arr = groups[pid] || [];
-            shuffleInPlace(arr);
-            chosen.push(...arr.slice(0, Math.min(MAX_PER_PASSAGE, arr.length)));
-          });
-
+          const chosen = buildReadingSet(bank);
           if (!chosen.length) throw new Error("No questions were selected from the bank.");
 
           state.questions = chosen;
@@ -621,10 +827,13 @@
           state.correctCount = 0;
           state.timeRemaining = TIME_LIMIT_SEC;
           state.lastIsCorrect = false;
+          state.lastWasSkipped = false;
           state.lastChoice = null;
           state.lastBlank = "";
           state.lastError = "";
           state.review = [];
+          state.isSaving = false;
+          state.savedMsg = "";
 
           state.status = "question";
           paint();
@@ -639,16 +848,21 @@
 
       function restart() {
         stopTimer();
+
         state.status = "intro";
         state.questions = [];
         state.index = 0;
         state.correctCount = 0;
         state.timeRemaining = TIME_LIMIT_SEC;
         state.lastIsCorrect = false;
+        state.lastWasSkipped = false;
         state.lastChoice = null;
         state.lastBlank = "";
         state.lastError = "";
         state.review = [];
+        state.isSaving = false;
+        state.savedMsg = "";
+
         paint();
       }
 
@@ -662,67 +876,128 @@
 
         state.index += 1;
         state.lastIsCorrect = false;
+        state.lastWasSkipped = false;
         state.lastChoice = null;
         state.lastBlank = "";
         state.status = "question";
         paint();
       }
 
-      function grade(choiceIndex, blankText) {
+      function grade(choiceIndex, blankText, isSkip) {
         const q = state.questions[state.index];
         if (!q) return;
 
-        // Prevent double-answering.
+        // prevent double-answering
         if (state.status !== "question") return;
 
         const t = String(getType(q)).toLowerCase();
+        const skipped = !!isSkip;
         let ok = false;
 
         if (t === "fillintheblank") {
           const user = normalizeAnswerText(blankText);
-          const ans = q.answer;
-
-          if (Array.isArray(ans)) ok = ans.some((x) => normalizeAnswerText(x) === user);
-          else ok = normalizeAnswerText(ans) === user;
+          const acceptedNorm = collectAcceptedBlankAnswers(q).map((x) => normalizeAnswerText(x));
+          ok = !skipped && !!user && acceptedNorm.some((a) => a === user);
 
           state.lastBlank = blankText != null ? String(blankText) : "";
-          recordReviewRow(q, ok, null, state.lastBlank);
+          state.lastChoice = null;
+
+          recordReviewRow(q, ok, skipped, null, state.lastBlank);
         } else {
           const chosen = Number(choiceIndex);
-          if (!Number.isFinite(chosen)) return;
+          const hasChoice = Number.isFinite(chosen);
 
-          state.lastChoice = chosen;
+          state.lastChoice = hasChoice ? chosen : null;
+          state.lastBlank = "";
 
-          if (t === "truefalse") {
-            const correctIdx = deriveTrueFalseIndex(q.answer);
-            ok = correctIdx != null ? chosen === correctIdx : chosen === Number(q.answer);
-          } else if (typeof q.answer === "number" && Number.isFinite(q.answer)) {
-            ok = chosen === q.answer;
-          } else {
-            // Fallback: compare chosen option text to string answer (if provided).
-            const chosenText = normalizeAnswerText(optionAt(q, chosen));
-            const ansText = normalizeAnswerText(q.answer);
-            ok = !!chosenText && !!ansText && chosenText === ansText;
+          if (!skipped && hasChoice) {
+            if (t === "truefalse") {
+              const correctIdx = deriveTrueFalseIndex(q.answer);
+              ok = correctIdx != null ? chosen === correctIdx : chosen === Number(q.answer);
+            } else if (typeof q.answer === "number" && Number.isFinite(q.answer)) {
+              ok = chosen === q.answer;
+            } else {
+              const chosenText = normalizeAnswerText(optionAt(q, chosen));
+              const ansText = normalizeAnswerText(q.answer);
+              ok = !!chosenText && !!ansText && chosenText === ansText;
+            }
           }
 
-          recordReviewRow(q, ok, chosen, null);
+          recordReviewRow(q, ok, skipped, hasChoice ? chosen : null, null);
         }
 
+        state.lastWasSkipped = skipped;
         state.lastIsCorrect = ok;
-        if (ok) state.correctCount += 1;
+
+        if (!skipped && ok) state.correctCount += 1;
 
         state.status = "feedback";
         paint();
       }
 
-      // Stop timer when leaving the route (best effort).
-      window.addEventListener(
-        "popstate",
-        () => {
-          stopTimer();
-        },
-        { passive: true }
-      );
+      // -----------------------------
+      // Normalized save payload (commonly "p")
+      // Ensure payload includes:
+      //  • questions: p.questions
+      //  • review: p.review
+      // -----------------------------
+      function buildNormalizedPayload() {
+        const qs = Array.isArray(state.questions) ? state.questions : [];
+
+        // Align review to the questions array order (one entry per question).
+        // Scorers only need {isCorrect}. Skips are treated as incorrect.
+        const review = qs.map((_, idx) => {
+          const r = state.review && state.review[idx] ? state.review[idx] : null;
+          return { isCorrect: !!(r && !r.skipped && r.isCorrect) };
+        });
+
+        const rawCorrect = Number(state.correctCount || 0);
+        const totalQuestions = qs.length;
+        const percent = totalQuestions ? Math.round((rawCorrect / totalQuestions) * 100) : 0;
+
+        // Normalize question points for scoring: 1 point each.
+        const questions = qs.map((q) => (isPlainObject(q) ? { ...q, points: 1 } : q));
+
+        return { questions, review, rawCorrect, totalQuestions, percent };
+      }
+
+      async function saveScoreToProfile() {
+        if (!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function")) {
+          state.savedMsg = "Save is not available.";
+          paint();
+          return;
+        }
+        if (state.isSaving || state.savedMsg) return;
+
+        state.isSaving = true;
+        paint();
+
+        try {
+          const p = buildNormalizedPayload();
+
+          const info = await window.UEAH_SAVE_SCORE.save({
+            slug: SLUG,
+            ageGroup: AGE_GROUP,
+            skill: SKILL,
+            timestamp: nowIso(),
+
+            rawCorrect: p.rawCorrect,
+            totalQuestions: p.totalQuestions,
+            percent: p.percent,
+
+            // Required normalized payload fields:
+            questions: p.questions,
+            review: p.review
+          });
+
+          state.savedMsg = `Saved: ${info.ageLabel} • ${info.skillLabel} — ${info.normalizedScore}/100 (${info.levelTitle})`;
+        } catch (e) {
+          state.savedMsg = `Could not save: ${e && e.message ? e.message : "Unknown error"}`;
+        } finally {
+          state.isSaving = false;
+          paint();
+        }
+      }
 
       // Initial paint
       paint();
@@ -742,6 +1017,12 @@
         } else if (action === "next") {
           e.preventDefault();
           next();
+        } else if (action === "skip") {
+          e.preventDefault();
+          grade(null, "", true);
+        } else if (action === "save") {
+          e.preventDefault();
+          if (state.status === "summary") saveScoreToProfile();
         }
       });
 
@@ -758,15 +1039,34 @@
 
         if (t === "fillintheblank") {
           const input = form.querySelector('input[name="blank"]');
-          grade(null, input ? input.value : "");
+          grade(null, input ? input.value : "", false);
           return;
         }
 
         const checked = form.querySelector('input[name="choice"]:checked');
         if (!checked) return;
 
-        grade(Number(checked.value), "");
+        grade(Number(checked.value), "", false);
       });
+
+      // Best-effort cleanup on navigation
+      if (!host.__ueahNavHooked) {
+        host.__ueahNavHooked = true;
+        window.addEventListener(
+          "popstate",
+          () => {
+            stopTimer();
+          },
+          { passive: true }
+        );
+        window.addEventListener(
+          "pagehide",
+          () => {
+            stopTimer();
+          },
+          { passive: true }
+        );
+      }
     }
   });
 })();

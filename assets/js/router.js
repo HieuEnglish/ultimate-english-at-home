@@ -118,6 +118,8 @@ export function setActiveNav(appPath, navLinks) {
       ? "tests"
       : appPath.startsWith("/profile")
       ? "profile"
+      : appPath.startsWith("/scoring")
+      ? "scoring"
       : appPath.startsWith("/contact")
       ? "contact"
       : appPath.startsWith("/favourites")

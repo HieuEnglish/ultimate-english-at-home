@@ -9,6 +9,15 @@
 
    Bank: assets/data/tests-iels-writing.js
    Global key: window.UEAH_TEST_BANKS["iels-writing"]
+
+   Updates (this file):
+   - More resilient bank loader (handles script already present/executed)
+   - Stable IDs for tasks missing q.id
+   - Safer includesAny / extractNumbers / paragraph detection
+   - Live word count + autosave on navigation and on timeout
+   - Prevents double-submit; focuses textarea after navigation
+   - Manual score summary (Task 1 / Task 2 / overall) updates reliably
+   - Adds "Save score to Profile" button on results screen (IELTS Practice group)
 */
 
 (function () {
@@ -16,7 +25,6 @@
 
   const SLUG = "iels-writing";
   const BANK_SRC = "assets/data/tests-iels-writing.js";
-
   const TIME_LIMIT_SEC = 60 * 60;
 
   const store = window.UEAH_TESTS_STORE;
@@ -25,6 +33,10 @@
   // -----------------------------
   // Helpers
   // -----------------------------
+
+  function nowIso() {
+    return new Date().toISOString();
+  }
 
   function safeText(v) {
     return String(v == null ? "" : v)
@@ -57,23 +69,47 @@
 
   function extractNumbers(text) {
     const t = String(text || "");
-    const matches = t.match(/\d+(\.\d+)?%?/g);
+    const matches = t.match(/\d+(?:\.\d+)?%?/g);
     return matches ? matches : [];
   }
 
   function includesAny(text, phrases) {
     const t = normalize(text);
-    return phrases.some((p) => t.includes(String(p).toLowerCase()));
+    const list = Array.isArray(phrases) ? phrases : [];
+    return list.some((p) => {
+      const needle = String(p == null ? "" : p).toLowerCase().trim();
+      return needle ? t.includes(needle) : false;
+    });
   }
 
   function taskLabel(n) {
-    return n === 1 ? "Task 1" : "Task 2";
+    return Number(n) === 1 ? "Task 1" : "Task 2";
   }
 
-  function clamp01(n) {
-    const x = Number(n);
-    if (!Number.isFinite(x)) return 0;
-    return Math.max(0, Math.min(1, x));
+  function paragraphsCount(text) {
+    const t = String(text || "").trim();
+    if (!t) return 0;
+    // count blocks separated by blank lines; fallback to 1 if any text exists
+    const blocks = t
+      .split(/\n\s*\n/)
+      .map((x) => x.trim())
+      .filter(Boolean);
+    return blocks.length || 1;
+  }
+
+  function isPlainObject(v) {
+    return v && typeof v === "object" && !Array.isArray(v);
+  }
+
+  function makeStableId(q, idx) {
+    const taskNo = Number(q && q.taskNumber) || 0;
+    const stem = String(q && q.question ? q.question : "")
+      .trim()
+      .slice(0, 28)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    return `${SLUG}::t${taskNo || "x"}::${idx}::${stem || "task"}`;
   }
 
   // -----------------------------
@@ -91,24 +127,27 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing writing bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
-          resolve(true);
-          return;
-        }
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        validate();
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -125,7 +164,7 @@
     const wc = countWords(t);
 
     const checks = [];
-    const minWords = Number(q.minWords || 0) || 0;
+    const minWords = Number(q && q.minWords ? q.minWords : 0) || 0;
 
     if (minWords) {
       checks.push({
@@ -136,8 +175,7 @@
       });
     }
 
-    if (q.taskNumber === 1) {
-      // Task 1 heuristics: overview + figures + comparison language + paragraphing
+    if (Number(q && q.taskNumber) === 1) {
       const overviewOk = includesAny(t, ["overall", "in general", "generally", "on the whole"]);
       checks.push({
         id: "overview",
@@ -180,15 +218,14 @@
         detail: compareOk ? "Comparison cue found" : "No clear comparison cue found"
       });
 
-      const paragraphs = t.trim().split(/\n\s*\n/).filter(Boolean).length;
+      const pCount = paragraphsCount(t);
       checks.push({
         id: "paragraphs",
         label: "Uses paragraphs (at least 2)",
-        ok: paragraphs >= 2,
-        detail: `${paragraphs} paragraph(s)`
+        ok: pCount >= 2,
+        detail: `${pCount} paragraph(s)`
       });
     } else {
-      // Task 2 heuristics: position + conclusion + paragraphing
       const positionOk = includesAny(t, [
         "i believe",
         "in my opinion",
@@ -207,13 +244,7 @@
         detail: positionOk ? "Position cue found" : "No clear position cue found"
       });
 
-      const conclusionOk = includesAny(t, [
-        "in conclusion",
-        "to conclude",
-        "to sum up",
-        "overall, i believe",
-        "in summary"
-      ]);
+      const conclusionOk = includesAny(t, ["in conclusion", "to conclude", "to sum up", "overall, i believe", "in summary"]);
       checks.push({
         id: "conclusion",
         label: "Includes a conclusion signal (e.g., In conclusion / To sum up)",
@@ -221,12 +252,12 @@
         detail: conclusionOk ? "Conclusion cue found" : "No clear conclusion cue found"
       });
 
-      const paragraphs = t.trim().split(/\n\s*\n/).filter(Boolean).length;
+      const pCount = paragraphsCount(t);
       checks.push({
         id: "paragraphs",
         label: "Uses paragraphs (at least 3)",
-        ok: paragraphs >= 3,
-        detail: `${paragraphs} paragraph(s)`
+        ok: pCount >= 3,
+        detail: `${pCount} paragraph(s)`
       });
     }
 
@@ -319,20 +350,23 @@
   }
 
   function renderTaskMeta(q) {
-    const minWords = q.minWords ? Number(q.minWords) : 0;
-    const rec = q.recommendedTimeMin ? Number(q.recommendedTimeMin) : 0;
+    const minWords = Number(q && q.minWords ? q.minWords : 0) || 0;
+    const rec = Number(q && q.recommendedTimeMin ? q.recommendedTimeMin : 0) || 0;
+    const fallbackRec = Number(q && q.taskNumber) === 1 ? 20 : 40;
+    const fallbackMin = Number(q && q.taskNumber) === 1 ? 150 : 250;
 
     return `
       <div class="note" style="margin:12px 0 0; padding:10px 12px">
         <strong>Guidance</strong>
         <p style="margin:8px 0 0">
-          Recommended time: <strong>${rec || (q.taskNumber === 1 ? 20 : 40)} min</strong> • Minimum: <strong>${
-      minWords || (q.taskNumber === 1 ? 150 : 250)
-    } words</strong>
+          Recommended time: <strong>${rec || fallbackRec} min</strong> • Minimum: <strong>${minWords || fallbackMin} words</strong>
         </p>
-        ${q.notes ? `<p style="margin:8px 0 0; opacity:.92">${safeText(q.notes)}</p>` : ""}
+        ${q && q.notes ? `<p style="margin:8px 0 0; opacity:.92">${safeText(q.notes)}</p>` : ""}
         <p style="margin:8px 0 0; opacity:.92">
-          Auto-scoring uses word count + basic structure cues (overview/figures/paragraphs). It is for practice only.
+          Auto-scoring uses word count + basic structure cues. It is for practice only.
+        </p>
+        <p style="margin:8px 0 0; opacity:.85">
+          IELTS Practice estimate (not official IELTS).
         </p>
       </div>
     `;
@@ -344,7 +378,7 @@
 
     const saved = state.responses[q.id] || "";
     const wc = countWords(saved);
-    const minWords = Number(q.minWords || 0) || 0;
+    const minWords = Number(q && q.minWords ? q.minWords : 0) || 0;
 
     return `
       ${renderTopBar(state)}
@@ -352,30 +386,29 @@
 
       <div class="note" style="margin:12px 0 0; padding:12px 14px">
         <strong>Task</strong>
-        <div style="margin-top:10px; white-space:pre-wrap">${safeText(q.question || "")}</div>
+        <div style="margin-top:10px; white-space:pre-wrap; line-height:1.4">${safeText(q.question || "")}</div>
       </div>
 
       <form data-form="writing" style="margin-top:12px">
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <legend style="padding:0 8px; font-weight:900">Write your response</legend>
 
-          <label for="writing-text" style="display:block; margin-top:10px; font-weight:700">Answer</label>
-          <textarea id="writing-text" name="writingText" rows="14" style="width:100%; margin-top:8px" placeholder="Write here...">${safeText(
-            saved
-          )}</textarea>
+          <div style="margin-top:8px; opacity:.9">
+            Word count: <strong data-wordcount>${wc}</strong>${minWords ? ` • Min: <strong>${minWords}</strong>` : ""}
+          </div>
 
-          <div style="margin-top:10px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
-            <div style="opacity:.9">
-              Word count: <strong data-wordcount>${wc}</strong>${minWords ? ` • Min: <strong>${minWords}</strong>` : ""}
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap">
-              <button class="btn" type="button" data-action="back" ${
-                state.index === 0 ? "disabled" : ""
-              }>Back</button>
-              <button class="btn btn--primary" type="submit">${
-                state.index + 1 >= state.questions.length ? "Finish" : "Save & Next"
-              }</button>
-            </div>
+          <label for="writing-text" style="display:block; margin-top:10px; font-weight:700">Answer</label>
+          <textarea
+            id="writing-text"
+            name="writingText"
+            rows="${Number(q && q.taskNumber) === 2 ? 16 : 14}"
+            style="width:100%; margin-top:8px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface); resize:vertical"
+            placeholder="Write here..."
+          >${safeText(saved)}</textarea>
+
+          <div class="actions" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+            <button class="btn" type="button" data-action="back" ${state.index === 0 ? "disabled" : ""}>Back</button>
+            <button class="btn btn--primary" type="submit">${state.index + 1 >= state.questions.length ? "Finish" : "Save & Next"}</button>
           </div>
         </fieldset>
       </form>
@@ -421,7 +454,7 @@
         const text = item.text;
         const results = item.results;
 
-        const checksHtml = results.checks
+        const checksHtml = (results.checks || [])
           .map(
             (c) => `
             <li style="margin:6px 0">
@@ -433,9 +466,9 @@
           )
           .join("");
 
-        // Manual scoring inputs (optional)
-        const rubric = q.rubric || null;
+        const rubric = q && q.rubric ? q.rubric : null;
         const criteria = rubric && Array.isArray(rubric.criteria) ? rubric.criteria : [];
+
         const manualRows = criteria
           .map((c, cIdx) => {
             const key = `${q.id}::${cIdx}`;
@@ -452,7 +485,7 @@
                   value="${safeText(val)}"
                   data-score-key="${safeText(key)}"
                   aria-label="Manual score for ${safeText(c.name || `Criterion ${cIdx + 1}`)}"
-                  style="width:90px"
+                  style="width:90px; padding:10px; border:1px solid var(--border); border-radius:12px; background: var(--surface)"
                   placeholder="0–9"
                 />
               </label>
@@ -467,6 +500,11 @@
             </summary>
 
             <div style="margin-top:10px">
+              <div style="font-weight:900">Prompt</div>
+              <div style="margin-top:8px; white-space:pre-wrap; line-height:1.4">${safeText(q.question || "")}</div>
+            </div>
+
+            <div style="margin-top:12px">
               <div style="font-weight:900">Your response</div>
               <pre style="white-space:pre-wrap; margin:10px 0 0; padding:10px 12px; border:1px solid var(--border); border-radius:14px; background: var(--surface);">${safeText(
                 text || ""
@@ -475,12 +513,12 @@
 
             <div style="margin-top:12px">
               <div style="font-weight:900">Auto-checks</div>
-              <ul style="margin:8px 0 0; padding-left:18px">${checksHtml}</ul>
+              <ul style="margin:8px 0 0; padding-left:18px">${checksHtml || `<li>—</li>`}</ul>
             </div>
 
             <div style="margin-top:12px">
               <div style="font-weight:900">Rubric (guidance)</div>
-              ${renderRubric(q.rubric)}
+              ${renderRubric(rubric)}
             </div>
 
             <div style="margin-top:12px">
@@ -497,6 +535,10 @@
       })
       .join("");
 
+    const saveDisabled = state.isSaving ? `disabled aria-disabled="true"` : "";
+    const saveLabel = state.isSaving ? "Saving…" : "Save score to Profile";
+    const savedMsg = state.savedMsg ? String(state.savedMsg) : "";
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished</strong>
@@ -508,20 +550,26 @@
         <p style="margin:8px 0 0; opacity:.92">
           Time remaining: <strong>${formatTime(state.timeRemaining)}</strong>
         </p>
+
         <div style="margin-top:10px">
           <div style="font-weight:900">Manual score summary</div>
           <div style="opacity:.92; margin-top:6px">
             Task 1 average: <strong data-manual-task1>—</strong> • Task 2 average: <strong data-manual-task2>—</strong> • Overall average: <strong data-manual-overall>—</strong>
           </div>
         </div>
+
+        <div class="actions" style="margin-top:12px; flex-wrap:wrap">
+          <button class="btn btn--primary" type="button" data-action="save" ${saveDisabled}>${saveLabel}</button>
+          <button class="btn" type="button" data-action="restart">Restart</button>
+        </div>
+
+        <p class="muted" data-saved-msg aria-live="polite" role="status" style="margin:10px 0 0">
+          ${safeText(savedMsg)}
+        </p>
       </div>
 
       <div style="margin-top:12px; display:grid; gap:10px">
         ${taskBlocks}
-      </div>
-
-      <div class="actions" style="margin-top:12px">
-        <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
       </div>
     `;
   }
@@ -552,18 +600,25 @@
       if (!stage) return;
 
       const state = {
-        status: "intro",
+        status: "intro", // intro | loading | task | summary | error
         questions: [],
         index: 0,
 
-        responses: {},
+        // writing responses map (qid -> text)
+        responses: Object.create(null),
 
         timeRemaining: TIME_LIMIT_SEC,
         timerId: null,
 
         lastError: "",
 
-        manualScores: {} // key: `${questionId}::${criterionIndex}` => number/string
+        manualScores: Object.create(null),
+
+        submitLock: false,
+
+        // save-to-profile
+        savedMsg: "",
+        isSaving: false
       };
 
       function stopTimer() {
@@ -573,29 +628,65 @@
         }
       }
 
+      function paint() {
+        if (state.status === "intro") stage.innerHTML = renderIntro();
+        else if (state.status === "loading") stage.innerHTML = renderLoading();
+        else if (state.status === "task") stage.innerHTML = renderQuestionScreen(state);
+        else if (state.status === "summary") stage.innerHTML = renderSummary(state);
+        else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
+        else stage.innerHTML = renderIntro();
+
+        if (state.status === "task") {
+          updateWordCountLive();
+          focusTextareaSoon();
+        }
+        if (state.status === "summary") {
+          updateManualSummary();
+        }
+      }
+
+      function resetRunState() {
+        stopTimer();
+        state.questions = [];
+        state.index = 0;
+        state.responses = Object.create(null);
+        state.timeRemaining = TIME_LIMIT_SEC;
+        state.lastError = "";
+        state.manualScores = Object.create(null);
+        state.submitLock = false;
+        state.savedMsg = "";
+        state.isSaving = false;
+      }
+
+      function focusTextareaSoon() {
+        setTimeout(() => {
+          try {
+            const ta = host.querySelector("#writing-text");
+            if (ta && typeof ta.focus === "function") ta.focus();
+          } catch (_) {}
+        }, 0);
+      }
+
       function saveCurrentText() {
         const q = state.questions[state.index];
-        if (!q) return;
+        if (!q || !q.id) return;
         const ta = host.querySelector("#writing-text");
-        const text = ta ? ta.value : "";
-        state.responses[q.id] = text;
+        state.responses[q.id] = ta ? ta.value : "";
       }
 
       function startTimer() {
         stopTimer();
         state.timerId = setInterval(() => {
-          if (state.status !== "task" && state.status !== "summary") return;
+          if (state.status !== "task") return;
 
           state.timeRemaining -= 1;
 
           if (state.timeRemaining <= 0) {
             state.timeRemaining = 0;
-            // preserve whatever is currently typed
-            if (state.status === "task") saveCurrentText();
+            saveCurrentText();
             stopTimer();
             state.status = "summary";
             paint();
-            updateManualSummary();
             return;
           }
 
@@ -604,33 +695,37 @@
         }, 1000);
       }
 
-      function paint() {
-        if (state.status === "intro") stage.innerHTML = renderIntro();
-        else if (state.status === "loading") stage.innerHTML = renderLoading();
-        else if (state.status === "task") stage.innerHTML = renderQuestionScreen(state);
-        else if (state.status === "summary") stage.innerHTML = renderSummary(state);
-        else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
-        else stage.innerHTML = renderIntro();
-      }
+      function ensureTaskHasDefaults(q) {
+        const taskNo = Number(q && q.taskNumber) || 0;
+        const out = { ...(q || {}) };
 
-      function resetRunState() {
-        stopTimer();
-        state.questions = [];
-        state.index = 0;
-        state.responses = {};
-        state.timeRemaining = TIME_LIMIT_SEC;
-        state.lastError = "";
-        state.manualScores = {};
+        out.taskNumber = taskNo || out.taskNumber || 0;
+
+        const fallbackMin = taskNo === 1 ? 150 : 250;
+        const fallbackRec = taskNo === 1 ? 20 : 40;
+
+        if (!Number(out.minWords)) out.minWords = fallbackMin;
+        if (!Number(out.recommendedTimeMin)) out.recommendedTimeMin = fallbackRec;
+
+        if (!out.id) out.id = makeStableId(out, 0);
+
+        return out;
       }
 
       function chooseTasks(bank) {
-        const t1 = bank.filter((q) => Number(q.taskNumber) === 1);
-        const t2 = bank.filter((q) => Number(q.taskNumber) === 2);
+        const list = Array.isArray(bank) ? bank.filter(isPlainObject) : [];
+        const t1 = list.filter((q) => Number(q.taskNumber) === 1);
+        const t2 = list.filter((q) => Number(q.taskNumber) === 2);
         if (!t1.length || !t2.length) return [];
 
-        const pick1 = t1[Math.floor(Math.random() * t1.length)];
-        const pick2 = t2[Math.floor(Math.random() * t2.length)];
-        return [pick1, pick2];
+        const pick1 = { ...t1[Math.floor(Math.random() * t1.length)] };
+        const pick2 = { ...t2[Math.floor(Math.random() * t2.length)] };
+
+        // Ensure stable ids even if bank forgot them
+        if (!pick1.id) pick1.id = makeStableId(pick1, 0);
+        if (!pick2.id) pick2.id = makeStableId(pick2, 1);
+
+        return [ensureTaskHasDefaults(pick1), ensureTaskHasDefaults(pick2)];
       }
 
       async function start() {
@@ -640,14 +735,17 @@
 
         try {
           await ensureBankLoaded(ctx);
+
           const bank =
             window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])
               ? window.UEAH_TEST_BANKS[SLUG]
               : [];
           if (!bank.length) throw new Error("Missing writing bank.");
 
-          state.questions = chooseTasks(bank);
-          if (state.questions.length !== 2) throw new Error("Writing bank is missing Task 1 or Task 2.");
+          const chosen = chooseTasks(bank);
+          if (chosen.length !== 2) throw new Error("Writing bank is missing Task 1 or Task 2.");
+
+          state.questions = chosen;
 
           state.status = "task";
           paint();
@@ -674,16 +772,26 @@
       }
 
       function goNextOrFinish() {
+        if (state.submitLock) return;
+        state.submitLock = true;
+
         saveCurrentText();
+
         if (state.index + 1 >= state.questions.length) {
+          stopTimer();
           state.status = "summary";
           paint();
-          updateManualSummary();
+          state.submitLock = false;
           return;
         }
+
         state.index += 1;
         state.status = "task";
         paint();
+
+        setTimeout(() => {
+          state.submitLock = false;
+        }, 0);
       }
 
       function updateWordCountLive() {
@@ -731,6 +839,59 @@
         if (allEl) allEl.textContent = overall == null ? "—" : overall.toFixed(1);
       }
 
+      function saveScoreToProfile() {
+        if (state.status !== "summary") return;
+        if (state.isSaving) return;
+
+        const saver = window.UEAH_SAVE_SCORE && window.UEAH_SAVE_SCORE.save;
+        if (typeof saver !== "function") {
+          state.savedMsg = "Save not available (missing save helper).";
+          paint();
+          return;
+        }
+
+        state.isSaving = true;
+        state.savedMsg = "Saving…";
+        paint();
+
+        const auto = computeAutoScores(state.questions, state.responses);
+        const rawCorrect = Number(auto.totalEarned);
+        const totalQuestions = Number(auto.totalPossible);
+        const percent = Number(auto.totalPct);
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "ielts",
+          skill: "writing",
+          at: nowIso(),
+          questions: state.questions,
+          // writing responses map (qid -> text). save-score/scoring supports object-shaped review.
+          review: state.responses,
+          rawCorrect,
+          totalQuestions,
+          percent
+        };
+
+        const res = saver(payload);
+
+        state.isSaving = false;
+
+        if (!res || res.ok === false) {
+          const reason = res && res.reason ? String(res.reason) : "Unknown error";
+          state.savedMsg = `Could not save. (${reason})`;
+          paint();
+          return;
+        }
+
+        const scoreTxt = Number.isFinite(Number(res.normalizedScore))
+          ? String(Math.round(Number(res.normalizedScore)))
+          : "—";
+        const levelTxt = res.levelTitle ? String(res.levelTitle) : "Saved";
+        state.savedMsg = `Saved to Profile — ${scoreTxt}/100 • ${levelTxt}`;
+        paint();
+      }
+
+      // Initial render
       paint();
 
       host.addEventListener("click", (e) => {
@@ -738,28 +899,37 @@
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
-        if (action === "start" || action === "retry") start();
-        else if (action === "restart") restart();
-        else if (action === "back") goBack();
+        if (action === "start" || action === "retry") {
+          e.preventDefault();
+          start();
+        } else if (action === "restart") {
+          e.preventDefault();
+          restart();
+        } else if (action === "back") {
+          e.preventDefault();
+          goBack();
+        } else if (action === "save") {
+          e.preventDefault();
+          saveScoreToProfile();
+        }
       });
 
       host.addEventListener("submit", (e) => {
         const form = e.target;
         if (!form || !form.matches || !form.matches('[data-form="writing"]')) return;
         e.preventDefault();
+        if (state.status !== "task") return;
         goNextOrFinish();
       });
 
       host.addEventListener("input", (e) => {
         const el = e.target;
 
-        // Live word count
         if (el && el.id === "writing-text") {
           updateWordCountLive();
           return;
         }
 
-        // Manual scoring
         if (el && el.matches && el.matches("[data-score-key]")) {
           const key = el.getAttribute("data-score-key");
           if (!key) return;
@@ -767,6 +937,18 @@
           updateManualSummary();
         }
       });
+
+      // Best-effort autosave on navigation away
+      window.addEventListener(
+        "popstate",
+        () => {
+          try {
+            saveCurrentText();
+          } catch (_) {}
+          stopTimer();
+        },
+        { passive: true }
+      );
     }
   });
 })();

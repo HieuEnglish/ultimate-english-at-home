@@ -6,7 +6,7 @@
 
    Audio approach (no assets needed):
    - Uses the browser's Speech Synthesis (TTS) to read "say".
-   - Includes a "🔊 Play" button and a "Show transcript" fallback.
+   - Includes "🔊 Play" and "⏹ Stop" buttons and a "Show transcript" fallback.
 
    Supported question types:
    - listenChoice
@@ -17,8 +17,15 @@
    - Shuffles question order on start
    - Shuffles options within listenChoice questions
 
-   Update:
-   - Adds a final summary report (per-question review).
+   Updates:
+   - Ensures stable ids (fallback id if missing)
+   - Robust bank loader (handles existing script + validates after load tick)
+   - Adds Stop button for TTS
+   - Adds Retry on error
+   - Stops TTS on navigation (popstate) and when changing screens
+   - Prevents double-submit grading
+   - Adds a final summary report (per-question review)
+   - Optional "Save score to Profile" via window.UEAH_SAVE_SCORE.save (if available)
 */
 
 (function () {
@@ -51,47 +58,33 @@
 
   function safeText(v) {
     return String(v == null ? "" : v)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function nowIso() {
+    return new Date().toISOString();
   }
 
   function normalizeAnswerText(v) {
-    // Trim, collapse spaces, lowercase, and strip trailing punctuation.
+    // Trim, collapse spaces, lowercase, strip trailing punctuation.
     return String(v == null ? "" : v)
       .trim()
       .toLowerCase()
-      .replace(/\s+/g, " ")
       .replace(/[\s\u00A0]+/g, " ")
       .replace(/[\.\!\?\,\;\:\)\]\}\"\']+$/g, "")
       .trim();
   }
 
-  function cloneQuestionWithShuffledOptions(q) {
-    if (!isPlainObject(q)) return q;
-
-    const t = String(q.type || "").toLowerCase();
-    if (t !== "listenchoice") return { ...q };
-
-    if (!Array.isArray(q.options)) return { ...q };
-    if (typeof q.answer !== "number") return { ...q };
-
-    const pairs = q.options.map((text, idx) => ({ text, idx }));
-    shuffleInPlace(pairs);
-
-    const newOptions = pairs.map((p) => p.text);
-    const newAnswer = pairs.findIndex((p) => p.idx === q.answer);
-
-    return { ...q, options: newOptions, answer: newAnswer };
-  }
-
-  function questionTypeLabel(q) {
-    const t = String(q && q.type ? q.type : "").toLowerCase();
-    if (t === "listenfillintheblank") return "Fill in the blank";
-    if (t === "listentruefalse") return "True / False";
-    return "Multiple choice";
+  function ensureIds(qs) {
+    return qs.map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+      return { ...q, id };
+    });
   }
 
   function optionAt(q, idx) {
@@ -106,6 +99,80 @@
     return ans == null ? "" : String(ans);
   }
 
+  function typeLower(q) {
+    return String(q && q.type ? q.type : "").toLowerCase();
+  }
+
+  function questionTypeLabel(q) {
+    const t = typeLower(q);
+    if (t === "listenfillintheblank") return "Fill in the blank";
+    if (t === "listentruefalse") return "True / False";
+    return "Multiple choice";
+  }
+
+  function coerceTrueFalseOptions(q) {
+    // Bank may omit options for TF; normalize to ["True","False"]
+    if (!isPlainObject(q)) return q;
+    const t = typeLower(q);
+    if (t !== "listentruefalse") return q;
+
+    const opts = Array.isArray(q.options) && q.options.length ? q.options : ["True", "False"];
+
+    // Normalize answer to index (0 True, 1 False) if it's boolean/string
+    let ans = q.answer;
+    if (typeof ans === "boolean") ans = ans ? 0 : 1;
+    else if (typeof ans === "string") {
+      const s = ans.trim().toLowerCase();
+      if (s === "true") ans = 0;
+      else if (s === "false") ans = 1;
+    }
+    // If already number, keep.
+
+    return { ...q, options: opts, answer: ans };
+  }
+
+  function cloneQuestionWithShuffledOptions(q) {
+    if (!isPlainObject(q)) return q;
+
+    const t = typeLower(q);
+    const base = coerceTrueFalseOptions({ ...q });
+
+    if (t !== "listenchoice") return base;
+
+    if (!Array.isArray(base.options)) return base;
+    if (typeof base.answer !== "number") return base;
+
+    const pairs = base.options.map((text, idx) => ({ text, idx }));
+    shuffleInPlace(pairs);
+
+    const newOptions = pairs.map((p) => p.text);
+    const newAnswer = pairs.findIndex((p) => p.idx === base.answer);
+
+    return { ...base, options: newOptions, answer: newAnswer };
+  }
+
+  function computeDifficultyBreakdown(questions, reviewRows) {
+    // Optional: if q.difficulty exists, aggregate correctness counts.
+    const out = Object.create(null);
+    const qs = Array.isArray(questions) ? questions : [];
+    const rows = Array.isArray(reviewRows) ? reviewRows : [];
+
+    qs.forEach((q, i) => {
+      const d = String(q && q.difficulty ? q.difficulty : "")
+        .trim()
+        .toLowerCase();
+      if (!d) return;
+
+      if (!out[d]) out[d] = { correct: 0, total: 0 };
+      out[d].total += 1;
+
+      const r = rows[i];
+      if (r && r.isCorrect) out[d].correct += 1;
+    });
+
+    return out;
+  }
+
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -113,12 +180,10 @@
   let bankPromise = null;
 
   function ensureBankLoaded(ctx) {
-    // Already loaded?
     if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
       return Promise.resolve(true);
     }
 
-    // In-flight?
     if (bankPromise) return bankPromise;
 
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
@@ -126,20 +191,14 @@
     bankPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
-          resolve(true);
-          return;
-        }
-
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        // If already injected, resolve on next tick (lets the script run if needed)
+        setTimeout(() => resolve(true), 0);
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
       s.onload = () => resolve(true);
@@ -195,11 +254,18 @@
   // -----------------------------
 
   function renderIntro() {
+    const audioOk = supportsSpeech();
     return `
       <div class="note" style="margin-top:0">
         <strong>Ages 8–10 Listening</strong>
         <p style="margin:8px 0 0">Listen and answer questions about details, numbers, and meaning.</p>
-        <p style="margin:8px 0 0; opacity:.92">Tip: You can press <strong>🔊 Play</strong> to repeat the audio, and <strong>Show transcript</strong> if needed.</p>
+        <p style="margin:8px 0 0; opacity:.92">
+          ${
+            audioOk
+              ? 'Tip: Press <strong>🔊 Play</strong> to repeat. Use <strong>Show transcript</strong> if needed.'
+              : 'Audio is not available in this browser. Use <strong>Show transcript</strong> and read it out loud.'
+          }
+        </p>
       </div>
       <div class="actions" style="margin-top:12px">
         <button class="btn btn--primary" type="button" data-action="start">Start</button>
@@ -232,25 +298,21 @@
     const total = state.questions.length;
     const n = Math.min(state.index + 1, total);
 
+    const q = state.questions[state.index];
+    const sayText = q && q.say ? String(q.say).trim() : "";
+    const canPlay = supportsSpeech() && !!sayText;
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" aria-label="Play the audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" ${canPlay ? "" : "disabled"} aria-label="Play the audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"} aria-label="Stop audio">⏹ Stop</button>
           <button class="btn" type="button" data-action="toggleTranscript" aria-pressed="${state.showTranscript ? "true" : "false"}">
             ${state.showTranscript ? "Hide transcript" : "Show transcript"}
           </button>
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
         </div>
-      </div>
-    `;
-  }
-
-  function renderNoAudioHint() {
-    return `
-      <div class="note" style="margin:12px 0 0; padding:10px 12px">
-        <strong>Audio not available</strong>
-        <p style="margin:6px 0 0">Use <strong>Show transcript</strong> and read it out loud.</p>
       </div>
     `;
   }
@@ -272,9 +334,7 @@
     return `
       <div class="note" style="margin:12px 0 0; padding:12px 14px">
         <strong>Look</strong>
-        <div style="font-size:52px; line-height:1.1; margin-top:10px" aria-label="Picture">${safeText(
-          p
-        )}</div>
+        <div style="font-size:52px; line-height:1.1; margin-top:10px" aria-label="Picture">${safeText(p)}</div>
       </div>
     `;
   }
@@ -360,7 +420,7 @@
 
   function renderQuestionScreen(state) {
     const q = state.questions[state.index];
-    const t = String(q && q.type ? q.type : "").toLowerCase();
+    const t = typeLower(q);
 
     const top = renderTopBar(state);
     const context = renderContext(q);
@@ -374,7 +434,6 @@
       ${context}
       ${picture}
       ${form}
-      ${supportsSpeech() ? "" : renderNoAudioHint()}
       ${transcript}
     `;
   }
@@ -388,7 +447,7 @@
     const icon = ok ? "✅" : "❌";
     const nextLabel = n >= total ? "Finish" : "Next";
 
-    const t = String(q && q.type ? q.type : "").toLowerCase();
+    const t = typeLower(q);
 
     let detailHtml = "";
 
@@ -431,11 +490,15 @@
       ? `<p style="margin:8px 0 0; opacity:.92"><strong>Transcript:</strong> ${safeText(q.say)}</p>`
       : "";
 
+    const sayText = q && q.say ? String(q.say).trim() : "";
+    const canPlay = supportsSpeech() && !!sayText;
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" aria-label="Play the audio again">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" ${canPlay ? "" : "disabled"} aria-label="Play the audio again">🔊 Play</button>
+          <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"} aria-label="Stop audio">⏹ Stop</button>
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
         </div>
       </div>
@@ -528,6 +591,8 @@
     const correct = state.correctCount;
     const pct = total ? Math.round((correct / total) * 100) : 0;
 
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
@@ -537,8 +602,18 @@
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -560,10 +635,10 @@
 
     afterRender(rootEl, ctx) {
       if (!rootEl) return;
+
       const host = rootEl.querySelector(`[data-ueah-test="${SLUG}"]`);
       if (!host) return;
 
-      // Prevent double-init if the user navigates away/back quickly.
       if (host.__ueahInited) return;
       host.__ueahInited = true;
 
@@ -581,7 +656,9 @@
         lastError: "",
         showTranscript: false,
         autoSpokenIndex: -1,
-        review: [] // per-question report rows
+        review: [],
+        savedMsg: "",
+        isGrading: false
       };
 
       function currentQuestion() {
@@ -605,6 +682,8 @@
         state.showTranscript = false;
         state.autoSpokenIndex = -1;
         state.review = [];
+        state.savedMsg = "";
+        state.isGrading = false;
       }
 
       function paint() {
@@ -625,6 +704,16 @@
             } catch (_) {}
           }, 0);
         }
+
+        // Focus (best effort)
+        if (state.status === "question") {
+          setTimeout(() => {
+            try {
+              const el = host.querySelector("input, button");
+              if (el && typeof el.focus === "function") el.focus();
+            } catch (_) {}
+          }, 0);
+        }
       }
 
       async function start() {
@@ -634,6 +723,8 @@
         state.showTranscript = false;
         state.autoSpokenIndex = -1;
         state.review = [];
+        state.savedMsg = "";
+        state.isGrading = false;
         paint();
 
         try {
@@ -646,10 +737,9 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.map(cloneQuestionWithShuffledOptions);
+          const prepared = ensureIds(bank.filter(isPlainObject).map(cloneQuestionWithShuffledOptions));
           shuffleInPlace(prepared);
 
-          // Take a random subset for variety (order already shuffled)
           const subset = prepared.slice(0, Math.min(MAX_QUESTIONS, prepared.length));
 
           state.questions = subset;
@@ -662,16 +752,10 @@
           state.showTranscript = false;
           state.autoSpokenIndex = -1;
           state.review = [];
+          state.isGrading = false;
 
           state.status = "question";
           paint();
-
-          setTimeout(() => {
-            try {
-              const el = host.querySelector("input, button");
-              if (el && typeof el.focus === "function") el.focus();
-            } catch (_) {}
-          }, 0);
         } catch (err) {
           state.status = "error";
           state.lastError = err && err.message ? err.message : "Could not load the test.";
@@ -688,6 +772,8 @@
 
       function next() {
         stopSpeech();
+        state.isGrading = false;
+
         const total = state.questions.length;
         if (state.index + 1 >= total) {
           state.status = "summary";
@@ -704,7 +790,7 @@
       }
 
       function recordReviewRow(q, ok, chosenIdx, blankText) {
-        const t = String(q && q.type ? q.type : "").toLowerCase();
+        const t = typeLower(q);
 
         let chosenText = "";
         let correctText = "";
@@ -719,7 +805,7 @@
         }
 
         state.review.push({
-          number: state.index + 1,
+          number: state.review.length + 1,
           typeLabel: questionTypeLabel(q),
           question: q && q.question ? String(q.question) : "",
           context: q && q.context ? String(q.context) : "",
@@ -732,14 +818,14 @@
       }
 
       function grade(choiceIndex, blankText) {
-        // Prevent double-answering.
-        if (state.status !== "question") return;
+        if (state.status !== "question" || state.isGrading) return;
 
         const q = state.questions[state.index];
         if (!q) return;
 
-        const t = String(q && q.type ? q.type : "").toLowerCase();
+        state.isGrading = true;
 
+        const t = typeLower(q);
         let ok = false;
 
         if (t === "listenfillintheblank") {
@@ -750,14 +836,26 @@
           else ok = normalizeAnswerText(ans) === user;
 
           state.lastBlank = blankText != null ? String(blankText) : "";
-
           recordReviewRow(q, ok, null, state.lastBlank);
         } else {
           const chosen = Number(choiceIndex);
-          if (!Number.isFinite(chosen)) return;
+          if (!Number.isFinite(chosen)) {
+            state.isGrading = false;
+            return;
+          }
 
           state.lastChoice = chosen;
-          ok = chosen === Number(q.answer);
+
+          // For TF, answer might still be boolean/string; clone step tries to normalize, but keep safe:
+          let ansIdx = q.answer;
+          if (typeof ansIdx === "boolean") ansIdx = ansIdx ? 0 : 1;
+          else if (typeof ansIdx === "string") {
+            const s = ansIdx.trim().toLowerCase();
+            if (s === "true") ansIdx = 0;
+            else if (s === "false") ansIdx = 1;
+          }
+
+          ok = chosen === Number(ansIdx);
 
           recordReviewRow(q, ok, chosen, null);
         }
@@ -769,31 +867,103 @@
         paint();
       }
 
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const total = state.questions.length;
+        const correct = state.correctCount;
+        const percent = total ? Math.round((correct / total) * 100) : 0;
+
+        // UPDATE: include questions + review for downstream scoring/normalization
+        const payload = {
+          slug: SLUG,
+          ageGroup: "8-10",
+          skill: "listening",
+          at: nowIso(),
+
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          review: Array.isArray(state.review) ? state.review : [],
+
+          rawCorrect: correct,
+          totalQuestions: total,
+          percent,
+          difficultyBreakdown: computeDifficultyBreakdown(state.questions, state.review)
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        if (res && res.ok) {
+          const norm =
+            res.normalizedScore != null
+              ? `${Math.round(Number(res.normalizedScore))}/100`
+              : res.saved && res.saved.normalizedScore != null
+                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                : "";
+          const level =
+            res.levelTitle ||
+            (res.saved && res.saved.levelTitle) ||
+            (res.saved && res.saved.level && res.saved.level.title) ||
+            "";
+          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+        } else {
+          state.savedMsg = "Could not save.";
+        }
+
+        paint();
+      }
+
+      // Event delegation
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("button") : null;
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
 
-        if (action === "start") {
+        if (action === "start" || action === "retry") {
           ev.preventDefault();
           start();
-        } else if (action === "restart") {
+          return;
+        }
+
+        if (action === "restart") {
           ev.preventDefault();
           restart();
-        } else if (action === "next") {
+          return;
+        }
+
+        if (action === "next") {
           ev.preventDefault();
           next();
-        } else if (action === "retry") {
-          ev.preventDefault();
-          start();
-        } else if (action === "play") {
+          return;
+        }
+
+        if (action === "play") {
           ev.preventDefault();
           speakCurrent();
-        } else if (action === "toggleTranscript") {
+          return;
+        }
+
+        if (action === "stop") {
+          ev.preventDefault();
+          stopSpeech();
+          return;
+        }
+
+        if (action === "toggleTranscript") {
           ev.preventDefault();
           state.showTranscript = !state.showTranscript;
           paint();
+          return;
+        }
+
+        if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
+          return;
         }
       });
 
@@ -804,7 +974,9 @@
         ev.preventDefault();
 
         const q = state.questions[state.index];
-        const t = String(q && q.type ? q.type : "").toLowerCase();
+        if (!q) return;
+
+        const t = typeLower(q);
 
         if (t === "listenfillintheblank") {
           const input = form.querySelector('input[name="blank"]');
@@ -818,7 +990,15 @@
         grade(val, null);
       });
 
-      // Initial render
+      // Stop TTS on navigation (best effort)
+      window.addEventListener(
+        "popstate",
+        () => {
+          stopSpeech();
+        },
+        { passive: true }
+      );
+
       paint();
     }
   });

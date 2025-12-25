@@ -7,12 +7,14 @@
    - Teacher/learner can mark each prompt as Said / Try again / Skip.
 
    Updates (this file):
-   - Fixes structured picking bug in original (Part 3 selection logic + topic preference)
+   - Fixes structured picking bugs (Part 3 selection + topic anchoring + duplicate ids)
    - Adds stable fallback when sections are missing in the bank
    - Adds Stop audio + cancels speech/timers on navigation changes
-   - Makes bank-loader resilient (existing script tick)
-   - Improves safety around missing ids/fields; ensures ids exist
+   - Makes bank-loader resilient (existing script + validation tick; handles already-loaded script)
+   - Improves safety around missing ids/fields; ensures stable UNIQUE ids
    - Keeps UI consistent with other runners (intro/loading/error/prompt/summary)
+   - Adds optional Part 2 timers (1:00 prep / 2:00 speaking)
+   - Adds “Save completion to Profile” on summary (uses window.UEAH_SAVE_SCORE if available)
 */
 
 (function () {
@@ -21,6 +23,9 @@
   const SLUG = "age-13-18-speaking";
   const BANK_SRC = "assets/data/tests-13-18-speaking.js";
 
+  const AGE_GROUP = "13-18";
+  const SKILL = "speaking";
+
   const SECTION_PLAN = [
     { key: "part1", label: "Part 1 (Interview)", pick: 8 },
     { key: "part2", label: "Part 2 (Cue card)", pick: 1 },
@@ -28,14 +33,19 @@
   ];
 
   const store = window.UEAH_TESTS_STORE;
-  if (!store || typeof store.registerRunner !== "function") {
-    console.warn("[UEAH] tests store not found; runner not registered:", SLUG);
-    return;
-  }
+  if (!store || typeof store.registerRunner !== "function") return;
 
   // -----------------------------
   // Helpers
   // -----------------------------
+
+  function nowIso() {
+    try {
+      return new Date().toISOString();
+    } catch (_) {
+      return "";
+    }
+  }
 
   function safeText(v) {
     return String(v == null ? "" : v)
@@ -48,6 +58,14 @@
 
   function safeTextWithBreaks(v) {
     return safeText(v).replace(/\n/g, "<br>");
+  }
+
+  function safeDomId(v) {
+    return String(v == null ? "" : v)
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9\-_:.]/g, "-")
+      .slice(0, 80);
   }
 
   function shuffleInPlace(arr) {
@@ -90,7 +108,6 @@
       const synth = window.speechSynthesis;
       synth.cancel();
 
-      // best-effort prime voices
       try {
         if (typeof synth.getVoices === "function") synth.getVoices();
       } catch (_) {}
@@ -128,6 +145,43 @@
     return Math.min(b, Math.max(a, x));
   }
 
+  function deriveFallbackId(q, idx) {
+    const sec = normalizeSection(q.section) || "x";
+    const top = normalizeTopic(q.topicId) || "t";
+    const stem = String(q.question || q.prompt || "")
+      .trim()
+      .slice(0, 24)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    return `${SLUG}::${sec}::${top}::${idx}::${stem || "q"}`;
+  }
+
+  function ensureUniqueIds(list) {
+    const seen = new Set();
+    return (Array.isArray(list) ? list : []).map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+
+      const base =
+        q.id != null && String(q.id).trim() ? String(q.id).trim() : deriveFallbackId(q, idx);
+
+      let id = base;
+      if (seen.has(id)) {
+        let n = 2;
+        while (seen.has(`${base}--${n}`)) n += 1;
+        id = `${base}--${n}`;
+      }
+      seen.add(id);
+
+      return { ...q, id };
+    });
+  }
+
+  function asTextLines(v) {
+    if (Array.isArray(v)) return v.filter((x) => x != null).map(String).join("\n");
+    return String(v == null ? "" : v);
+  }
+
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -143,18 +197,32 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        // If it already executed, resolve; otherwise tick once.
-        setTimeout(() => resolve(true), 0);
+        // If already loaded, resolve immediately.
+        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
+          resolve(true);
+          return;
+        }
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
+        validate();
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -166,17 +234,9 @@
   // Structured picking
   // -----------------------------
 
-  function ensureIds(list) {
-    return list.map((q, idx) => {
-      if (!isPlainObject(q)) return q;
-      if (q.id != null && String(q.id).trim()) return q;
-      return { ...q, id: `q_${idx}_${Math.random().toString(16).slice(2)}` };
-    });
-  }
-
   function sampleUnique(pool, n, usedIds) {
     const out = [];
-    const tmp = pool.slice();
+    const tmp = (Array.isArray(pool) ? pool : []).slice();
     shuffleInPlace(tmp);
 
     for (let i = 0; i < tmp.length && out.length < n; i++) {
@@ -190,8 +250,16 @@
     return out;
   }
 
+  function buildFallbackSet(qs, totalTarget) {
+    const tmp = (Array.isArray(qs) ? qs : []).slice();
+    shuffleInPlace(tmp);
+    return tmp.slice(0, Math.max(1, totalTarget || 15));
+  }
+
   function buildStructuredSet(allQuestions) {
-    const qs = Array.isArray(allQuestions) ? ensureIds(allQuestions.filter(isPlainObject)) : [];
+    const raw = (Array.isArray(allQuestions) ? allQuestions : []).filter(isPlainObject).map((q) => ({ ...q }));
+
+    const qs = ensureUniqueIds(raw);
     if (!qs.length) return [];
 
     const bySection = new Map();
@@ -205,27 +273,24 @@
     const p2Pool = (bySection.get("part2") || []).slice();
     const p3Pool = (bySection.get("part3") || []).slice();
 
-    // If the bank isn't structured, fallback to a random sample.
+    const targetTotal = SECTION_PLAN.reduce((a, s) => a + (s.pick || 0), 0) || 15;
+
+    // If the bank isn't structured at all, fallback.
     const hasAnyStructured = p1Pool.length || p2Pool.length || p3Pool.length;
-    if (!hasAnyStructured) {
-      const tmp = qs.slice();
-      shuffleInPlace(tmp);
-      return tmp.slice(0, 15);
-    }
+    if (!hasAnyStructured) return buildFallbackSet(qs, targetTotal);
 
     const usedIds = new Set();
 
-    // Pick Part 2 first (topic anchor)
+    // 1) Pick Part 2 first (topic anchor)
     shuffleInPlace(p2Pool);
     const p2 = p2Pool.length ? p2Pool[0] : null;
     if (p2 && p2.id) usedIds.add(String(p2.id));
+    const anchorTopic = p2 ? normalizeTopic(p2.topicId) : "";
 
-    const chosenTopic = p2 ? normalizeTopic(p2.topicId) : "";
-
-    // Part 1: prefer variety by topicId (cap repeats at 2 where topicId exists)
+    // 2) Part 1: prefer topic variety; if topicId missing, treat as unique
     const p1Need = (SECTION_PLAN.find((s) => s.key === "part1") || {}).pick || 8;
     const p1Picked = [];
-    const seenTopics = new Map();
+    const topicCounts = new Map();
 
     const p1Tmp = p1Pool.slice();
     shuffleInPlace(p1Tmp);
@@ -233,65 +298,67 @@
     for (let i = 0; i < p1Tmp.length && p1Picked.length < p1Need; i++) {
       const q = p1Tmp[i];
       if (!q || !q.id) continue;
+
       const id = String(q.id);
       if (usedIds.has(id)) continue;
 
       const t = normalizeTopic(q.topicId);
-      const count = t ? seenTopics.get(t) || 0 : 0;
+      const count = t ? topicCounts.get(t) || 0 : 0;
 
+      // cap repeats when topic exists
       if (t && count >= 2) continue;
 
       usedIds.add(id);
-      if (t) seenTopics.set(t, count + 1);
+      if (t) topicCounts.set(t, count + 1);
       p1Picked.push(q);
     }
 
-    // If still short, fill without topic constraint
     if (p1Picked.length < p1Need) {
       const fill = sampleUnique(p1Tmp, p1Need - p1Picked.length, usedIds);
       Array.prototype.push.apply(p1Picked, fill);
     }
 
-    // Part 3: prefer same topicId as Part 2; then fill from remaining pool
+    // 3) Part 3: prefer anchorTopic, then fill from remaining
     const p3Need = (SECTION_PLAN.find((s) => s.key === "part3") || {}).pick || 6;
 
-    const preferredP3 = chosenTopic
-      ? p3Pool.filter((q) => normalizeTopic(q.topicId) === chosenTopic)
-      : [];
-
     const p3Picked = [];
-    if (preferredP3.length) {
-      const got = sampleUnique(preferredP3, p3Need, usedIds);
-      Array.prototype.push.apply(p3Picked, got);
+    const p3Tmp = p3Pool.slice();
+    shuffleInPlace(p3Tmp);
+
+    if (anchorTopic) {
+      const pref = p3Tmp.filter((q) => normalizeTopic(q.topicId) === anchorTopic);
+      const gotPref = sampleUnique(pref, p3Need, usedIds);
+      Array.prototype.push.apply(p3Picked, gotPref);
     }
 
     if (p3Picked.length < p3Need) {
-      const got = sampleUnique(p3Pool, p3Need - p3Picked.length, usedIds);
+      const got = sampleUnique(p3Tmp, p3Need - p3Picked.length, usedIds);
       Array.prototype.push.apply(p3Picked, got);
     }
 
-    // If P2 missing, try to take one from remaining questions (any section) as a cue-style middle prompt.
+    // If P2 missing, attempt a cue-style middle prompt from remaining.
     let p2Final = p2;
     if (!p2Final) {
-      const any = qs.filter((q) => !usedIds.has(String(q.id)));
-      shuffleInPlace(any);
-      p2Final = any.length ? any[0] : null;
+      const remaining = qs.filter((q) => q && q.id && !usedIds.has(String(q.id)));
+      shuffleInPlace(remaining);
+      p2Final = remaining.length ? remaining[0] : null;
       if (p2Final && p2Final.id) usedIds.add(String(p2Final.id));
     }
 
+    // Build final in section order.
     const final = []
       .concat(p1Picked)
       .concat(p2Final ? [p2Final] : [])
       .concat(p3Picked);
 
-    // Ultimate fallback if somehow empty
-    if (!final.length) {
-      const tmp = qs.slice();
-      shuffleInPlace(tmp);
-      return tmp.slice(0, 15);
+    // If still too small (missing sections), backfill from remaining questions.
+    if (final.length < targetTotal) {
+      const remaining = qs.filter((q) => q && q.id && !usedIds.has(String(q.id)));
+      const back = sampleUnique(remaining, targetTotal - final.length, usedIds);
+      Array.prototype.push.apply(final, back);
     }
 
-    return final;
+    return final.length ? final : buildFallbackSet(qs, targetTotal);
   }
 
   // -----------------------------
@@ -323,7 +390,7 @@
           ${
             supportsAudio
               ? "Use <strong>🔊 Play</strong> to hear a model answer (if provided)."
-              : "Audio is not available in this browser. Read the model answer out loud."
+              : "Audio is not available in this browser. Read the sample out loud."
           }
         </p>
       </div>
@@ -338,7 +405,7 @@
     return `
       <div class="note" style="margin-top:0">
         <strong>Loading…</strong>
-        <p style="margin:8px 0 0">Preparing your test.</p>
+        <p style="margin:8px 0 0">Preparing your speaking prompts.</p>
       </div>
     `;
   }
@@ -412,7 +479,7 @@
   }
 
   function renderPart2Timers(state, q) {
-    if (String(q.section || "").toLowerCase() !== "part2") return "";
+    if (normalizeSection(q.section) !== "part2") return "";
 
     return `
       <div class="note" style="margin:12px 0 0; padding:10px 12px">
@@ -433,19 +500,21 @@
     const total = state.questions.length;
     const n = state.index + 1;
 
-    const prompt = safeTextWithBreaks(q.question || "Speak!");
-    const sample = safeTextWithBreaks(q.model || "");
+    const prompt = safeTextWithBreaks(q.question || q.prompt || "Speak!");
+    const sample = safeTextWithBreaks(asTextLines(q.model || ""));
     const tip = safeText(q.explanation || "Try your best.");
 
     const sectionKey = normalizeSection(q.section);
     const sectionLabel = sectionLabelFor(sectionKey);
 
-    const audioText = String(q.say || q.model || "").trim();
+    const audioText = asTextLines(q.say || q.model || "").trim();
     const hasAudio = supportsSpeech() && !!audioText;
+
+    const topicText = q.topicId ? ` • Topic: ${safeText(q.topicId)}` : "";
 
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
-        <div style="font-weight:900; color: var(--muted)">${safeText(sectionLabel)} • Prompt ${n} of ${total}</div>
+        <div style="font-weight:900; color: var(--muted)">${safeText(sectionLabel)} • Prompt ${n} of ${total}${topicText}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
           <button class="btn" type="button" data-action="play" ${hasAudio ? "" : "disabled"} aria-label="Play model audio">🔊 Play</button>
           <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"} aria-label="Stop audio">⏹ Stop</button>
@@ -459,7 +528,14 @@
         <div style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <div style="font-weight:900; font-size:18px">${prompt}</div>
 
-          ${sample ? `<div style="margin-top:10px; font-size:16px; font-weight:900">Sample: ${sample}</div>` : ""}
+          ${
+            sample
+              ? `<div style="margin-top:10px">
+                  <div style="font-weight:900">Sample (optional)</div>
+                  <div style="margin-top:6px; line-height:1.5">${sample}</div>
+                </div>`
+              : ""
+          }
 
           <p style="margin:10px 0 0; color: var(--muted); font-size:13px">Tip: ${tip}</p>
 
@@ -516,7 +592,7 @@
             <span aria-hidden="true">${safeText(status.split(" ")[0])}</span>
             <span style="min-width:0">
               <b>${idx + 1}.</b> <span style="color:var(--muted); font-weight:800">${safeText(sectionLabel)}</span><br>
-              ${safeText(q.question || "")}
+              ${safeText(q.question || q.prompt || "")}
               <div style="margin-top:6px; font-weight:800">${status}</div>
             </span>
           </li>
@@ -534,6 +610,19 @@
       if (!s) return "";
       return `<div style="margin-top:6px; color:var(--muted)"><strong>${safeText(sectionLabelFor(key))}:</strong> Said ${s.said} • Try again ${s.again} • Skipped ${s.skip}</div>`;
     }
+
+    const canSave =
+      !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function") && !state.isSaving && !state.savedMsg;
+
+    const savedNote = state.savedMsg
+      ? `
+        <div class="note" style="margin-top:12px">
+          <strong>Saved to Profile</strong>
+          <p style="margin:8px 0 0">${safeText(state.savedMsg)}</p>
+          <p style="margin:8px 0 0; opacity:.9">Open <strong>Profile</strong> to view progress and your certification.</p>
+        </div>
+      `
+      : "";
 
     return `
       <div class="note" style="margin-top:0">
@@ -558,9 +647,14 @@
         </ul>
       </details>
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
         <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
+        <button class="btn" type="button" data-action="save" ${canSave ? "" : "disabled"} aria-label="Save completion to Profile">
+          ${state.isSaving ? "Saving…" : "Save completion to Profile"}
+        </button>
       </div>
+
+      ${savedNote}
     `;
   }
 
@@ -600,7 +694,11 @@
 
         // Part 2 mini timer (optional)
         p2TimerId: null,
-        p2Remaining: 0
+        p2Remaining: 0,
+
+        // Save to Profile
+        isSaving: false,
+        savedMsg: ""
       };
 
       function stopP2Timer() {
@@ -619,6 +717,9 @@
         paint();
 
         state.p2TimerId = setInterval(() => {
+          // Only tick while on prompt screen
+          if (state.status !== "prompt") return;
+
           state.p2Remaining -= 1;
           if (state.p2Remaining <= 0) {
             state.p2Remaining = 0;
@@ -626,9 +727,15 @@
             paint();
             return;
           }
+
           const chip = host.querySelector('[aria-label="Part 2 timer"]');
           if (chip) chip.textContent = formatTime(state.p2Remaining);
         }, 1000);
+      }
+
+      function cleanup() {
+        stopSpeech();
+        stopP2Timer();
       }
 
       function paint() {
@@ -638,14 +745,24 @@
         else if (state.status === "summary") stage.innerHTML = renderSummary(state);
         else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
         else stage.innerHTML = renderIntro();
+
+        if (state.status === "prompt") {
+          setTimeout(() => {
+            try {
+              const el = host.querySelector("button");
+              if (el && typeof el.focus === "function") el.focus();
+            } catch (_) {}
+          }, 0);
+        }
       }
 
       async function start() {
-        stopSpeech();
-        stopP2Timer();
+        cleanup();
 
         state.status = "loading";
         state.lastError = "";
+        state.isSaving = false;
+        state.savedMsg = "";
         paint();
 
         try {
@@ -658,8 +775,7 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.map((q) => (isPlainObject(q) ? { ...q } : q));
-          const built = buildStructuredSet(prepared);
+          const built = buildStructuredSet(bank);
 
           if (!built.length) throw new Error("Could not build a speaking test from the bank.");
 
@@ -676,20 +792,20 @@
       }
 
       function restart() {
-        stopSpeech();
-        stopP2Timer();
+        cleanup();
 
         state.status = "intro";
         state.questions = [];
         state.index = 0;
         state.results = Object.create(null);
         state.lastError = "";
+        state.isSaving = false;
+        state.savedMsg = "";
         paint();
       }
 
       function next() {
-        stopSpeech();
-        stopP2Timer();
+        cleanup();
 
         if (state.index + 1 >= state.questions.length) {
           state.status = "summary";
@@ -716,13 +832,69 @@
       function speakCurrent() {
         const q = state.questions[state.index];
         if (!q) return;
-        const t = q.say || q.model || "";
+
+        const t = asTextLines(q.say || q.model || "").trim();
         speak(t);
       }
 
-      function stopAudio() {
-        stopSpeech();
+      function buildSavePayload() {
+        // Speaking is completion-marked, not auto-scored.
+        // Convert Said/TryAgain/Skip into a simple percent so the profile can show progress consistently:
+        // Said=1, Again=0.5, Skip=0.
+        const qs = Array.isArray(state.questions) ? state.questions : [];
+        let earned = 0;
+
+        const review = qs.map((q) => {
+          const r = state.results[String(q.id)] || "skip";
+          const w = r === "said" ? 1 : r === "again" ? 0.5 : 0;
+          earned += w;
+          return { mark: r, weight: w };
+        });
+
+        const total = qs.length || 1;
+        const percent = Math.round((earned / total) * 100);
+
+        return { totalPrompts: qs.length, earned, percent, review };
       }
+
+      async function saveCompletionToProfile() {
+        if (!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function")) {
+          state.savedMsg = "Save is not available.";
+          paint();
+          return;
+        }
+        if (state.isSaving || state.savedMsg) return;
+
+        state.isSaving = true;
+        paint();
+
+        try {
+          const p = buildSavePayload();
+          const info = await window.UEAH_SAVE_SCORE.save({
+            slug: SLUG,
+            ageGroup: AGE_GROUP,
+            skill: SKILL,
+            timestamp: nowIso(),
+            // speaking uses a derived percent
+            rawCorrect: p.earned, // not really "correct", but stored for reference
+            totalQuestions: p.totalPrompts,
+            percent: p.percent,
+            // Provide prompts as "questions" so the profile can store completion items if it wants.
+            questions: (Array.isArray(state.questions) ? state.questions : []).map((q) => ({ ...q, points: 1 })),
+            review: p.review
+          });
+
+          state.savedMsg = `Saved: ${info.ageLabel} • ${info.skillLabel} — ${info.normalizedScore}/100 (${info.levelTitle})`;
+        } catch (e) {
+          state.savedMsg = `Could not save: ${e && e.message ? e.message : "Unknown error"}`;
+        } finally {
+          state.isSaving = false;
+          paint();
+        }
+      }
+
+      // Initial render
+      paint();
 
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("[data-action]") : null;
@@ -741,7 +913,7 @@
           speakCurrent();
         } else if (action === "stop") {
           ev.preventDefault();
-          stopAudio();
+          stopSpeech();
         } else if (action === "mark") {
           ev.preventDefault();
           mark(btn.getAttribute("data-mark"));
@@ -755,20 +927,30 @@
           ev.preventDefault();
           stopP2Timer();
           paint();
+        } else if (action === "save") {
+          ev.preventDefault();
+          if (state.status === "summary") saveCompletionToProfile();
         }
       });
 
       // Cancel speech/timers when leaving the page (best effort)
-      window.addEventListener(
-        "popstate",
-        () => {
-          stopSpeech();
-          stopP2Timer();
-        },
-        { passive: true }
-      );
-
-      paint();
+      if (!host.__ueahNavHooked) {
+        host.__ueahNavHooked = true;
+        window.addEventListener(
+          "popstate",
+          () => {
+            cleanup();
+          },
+          { passive: true }
+        );
+        window.addEventListener(
+          "pagehide",
+          () => {
+            cleanup();
+          },
+          { passive: true }
+        );
+      }
     }
   });
 })();

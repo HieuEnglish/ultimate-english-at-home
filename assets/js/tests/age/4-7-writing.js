@@ -15,7 +15,13 @@
      (minWords, minLetters, mustIncludeAny groups). If no rubric exists, any non-empty
      response earns 1 point.
 
-   Note: For ages 4–7, prompts are very short. A caregiver can help with spelling.
+   Updates:
+   - Consistent runner wrapper (data-ueah-test + stage) + init guard
+   - Robust bank loader (waits for existing script load/error; validates bank)
+   - Ensures stable ids (fallback id if missing)
+   - Prevents double-submit grading
+   - Adds a final summary report (per-question review)
+   - Adds "Save score to Profile" using shared helper (window.UEAH_SAVE_SCORE) when available
 */
 
 (function () {
@@ -25,10 +31,7 @@
   const BANK_SRC = "assets/data/tests-4-7-writing.js";
 
   const store = window.UEAH_TESTS_STORE;
-  if (!store || typeof store.registerRunner !== "function") {
-    console.warn("[UEAH] tests store not found; runner not registered:", SLUG);
-    return;
-  }
+  if (!store || typeof store.registerRunner !== "function") return;
 
   // -----------------------------
   // Small helpers
@@ -50,15 +53,19 @@
 
   function safeText(v) {
     return String(v == null ? "" : v)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   function safeTextWithBreaks(v) {
     return safeText(v).replace(/\n/g, "<br>");
+  }
+
+  function nowIso() {
+    return new Date().toISOString();
   }
 
   function normalizeAnswerText(v) {
@@ -91,8 +98,20 @@
     return String(t || "").toLowerCase() === "prompt";
   }
 
+  function ensureIds(qs) {
+    return qs.map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+      return { ...q, id };
+    });
+  }
+
   function cloneQuestionWithShuffledOptions(q) {
     if (!isPlainObject(q)) return q;
+
+    const type = String(q.type || "multipleChoice").toLowerCase();
+    if (type === "prompt" || type === "fillintheblank") return { ...q };
+
     if (!Array.isArray(q.options)) return { ...q };
     if (typeof q.answer !== "number") return { ...q };
 
@@ -112,14 +131,12 @@
     if (rubric && Number.isFinite(Number(rubric.minWords))) n += 1;
     if (rubric && Number.isFinite(Number(rubric.minLetters))) n += 1;
 
-    // mustIncludeAny: array of groups (each group is an array of words)
     if (rubric && Array.isArray(rubric.mustIncludeAny)) {
       rubric.mustIncludeAny.forEach((group) => {
         if (Array.isArray(group) && group.length) n += 1;
       });
     }
 
-    // If no explicit checks exist, any non-empty response can still earn 1.
     return n > 0 ? n : 1;
   }
 
@@ -158,7 +175,6 @@
   }
 
   function getFillBlankAcceptedAnswers(q) {
-    // Bank format supports string or array; allow a couple of common alternates too.
     const a = q && q.answer;
     if (Array.isArray(a)) return a;
     if (a != null) return [a];
@@ -176,6 +192,39 @@
 
     const ok = !!userNorm && accepted.includes(userNorm);
     return { ok, userNorm, acceptedNorm: accepted };
+  }
+
+  function computeDifficultyBreakdown(questions, responses) {
+    const out = Object.create(null);
+    const qs = Array.isArray(questions) ? questions : [];
+
+    qs.forEach((q) => {
+      const d = String(q && q.difficulty ? q.difficulty : "").trim().toLowerCase() || "unknown";
+      if (!out[d]) out[d] = { earned: 0, possible: 0, count: 0 };
+
+      const r = (q && q.id && responses && responses[q.id]) || null;
+      const earned = r ? Number(r.pointsEarned || 0) : 0;
+      const possible = r ? Number(r.pointsPossible || 0) : 0;
+
+      out[d].earned += earned;
+      out[d].possible += possible;
+      out[d].count += 1;
+    });
+
+    return out;
+  }
+
+  function normalizeResponsesForSave(responses) {
+    // state.responses is created with null-prototype; convert to a plain object for JSON + downstream scoring.
+    const src = responses && typeof responses === "object" ? responses : null;
+    if (!src) return {};
+    const out = {};
+    Object.keys(src).forEach((k) => {
+      const v = src[k];
+      if (v && typeof v === "object") out[k] = { ...v };
+      else out[k] = v;
+    });
+    return out;
   }
 
   // -----------------------------
@@ -200,18 +249,16 @@
           resolve(true);
           return;
         }
-
         existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener(
-          "error",
-          () => reject(new Error("Failed to load test bank")),
-          { once: true }
-        );
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
+          once: true
+        });
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
       s.onload = () => resolve(true);
@@ -264,9 +311,19 @@
     const total = state.questions.length;
     const n = Math.min(state.index + 1, total);
 
+    const type = state.questions[state.index] ? String(state.questions[state.index].type || "") : "";
+    const points = state.questions[state.index]
+      ? (isPromptType(type) ? promptPointsPossible(state.questions[state.index]) : pointsPossible(state.questions[state.index]))
+      : 0;
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
-        <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+          <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
+          <span style="display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid var(--border); color: var(--muted); font-weight:800; font-size:12px">+${safeText(
+            points
+          )} pt</span>
+        </div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
           <button class="btn" type="button" data-action="skip" aria-label="Skip this question">Skip</button>
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
@@ -397,7 +454,7 @@
 
           <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:10px">
             <div style="color:var(--muted); font-weight:800">Words: <span data-word-count>0</span> • Letters: <span data-letter-count>0</span></div>
-            <div style="color:var(--muted)">Short is OK.</div>
+            <div style="color: var(--muted)">Short is OK.</div>
           </div>
 
           <label style="display:block; margin-top:12px">
@@ -557,6 +614,78 @@
     `;
   }
 
+  function renderReview(state) {
+    const rows = Array.isArray(state.review) ? state.review : [];
+    if (!rows.length) {
+      return `
+        <div class="note" style="margin-top:12px; padding:10px 12px">
+          <strong>Review</strong>
+          <p style="margin:6px 0 0">No answers recorded.</p>
+        </div>
+      `;
+    }
+
+    const body = rows
+      .map((r) => {
+        const icon = r.skipped ? "⏭️" : r.isCorrect ? "✅" : r.type === "prompt" ? "✍️" : "❌";
+        const extra = `<div style="opacity:.9; margin-top:6px">Points: ${safeText(r.pointsEarned)} / ${safeText(
+          r.pointsPossible
+        )}</div>`;
+
+        const wrote =
+          r.type === "prompt" && r.userText
+            ? `<div style="opacity:.9; margin-top:6px; white-space:pre-wrap">${safeText(r.userText)}</div>`
+            : "";
+
+        return `
+          <tr>
+            <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:800; white-space:nowrap">${safeText(
+              r.number
+            )}</td>
+            <td style="padding:10px 10px; border-top:1px solid var(--border)">
+              <div style="font-weight:900">${safeText(r.typeLabel)}</div>
+              <div style="margin-top:6px">${safeText(r.question || "")}</div>
+              ${wrote}
+              ${extra}
+            </td>
+            <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:800">${safeText(
+              r.chosenText || ""
+            )}</td>
+            <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:800">${safeText(
+              r.correctText || ""
+            )}</td>
+            <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:900; white-space:nowrap">${icon}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    return `
+      <details style="margin-top:12px">
+        <summary style="cursor:pointer; font-weight:900">Review answers</summary>
+        <div style="margin-top:10px; border:1px solid var(--border); border-radius:16px; overflow:hidden; background: var(--surface2)">
+          <table style="width:100%; border-collapse:collapse" aria-label="Answer review table">
+            <caption style="text-align:left; padding:12px 12px 0; font-weight:900; color: var(--muted)">
+              Per-question report
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" style="text-align:left; padding:10px 10px; border-top:1px solid var(--border); color: var(--muted)">#</th>
+                <th scope="col" style="text-align:left; padding:10px 10px; border-top:1px solid var(--border); color: var(--muted)">Prompt</th>
+                <th scope="col" style="text-align:left; padding:10px 10px; border-top:1px solid var(--border); color: var(--muted)">Your answer</th>
+                <th scope="col" style="text-align:left; padding:10px 10px; border-top:1px solid var(--border); color: var(--muted)">Correct</th>
+                <th scope="col" style="text-align:left; padding:10px 10px; border-top:1px solid var(--border); color: var(--muted)">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${body}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    `;
+  }
+
   function renderSummary(state) {
     const objEarned = state.objectiveEarnedPoints;
     const objMax = state.objectiveMaxPoints;
@@ -570,36 +699,7 @@
     const allMax = objMax + wrMax;
     const allPct = allMax ? Math.round((allEarned / allMax) * 100) : 0;
 
-    const rows = state.questions
-      .map((q, i) => {
-        const r = state.responses[q.id] || {};
-        const type = String(q.type || "").toLowerCase();
-
-        let status = "";
-        if (r.skipped) status = "⏭️ Skipped";
-        else if (type === "prompt") status = "✍️ Scored";
-        else status = r.correct ? "✅ Correct" : "❌ Wrong";
-
-        const earned = Number(r.pointsEarned || 0);
-        const possible = Number(r.pointsPossible || 0);
-
-        let extra = `<div style="margin-top:6px; color: var(--muted)">Points: ${earned} / ${possible}</div>`;
-
-        if (type === "prompt" && Array.isArray(r.checks) && r.checks.length) {
-          const met = r.checks.filter((c) => c.ok).length;
-          extra += `<div style="margin-top:6px; color: var(--muted)">Checklist: ${met} / ${r.checks.length}</div>`;
-        }
-
-        return `
-          <li style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border)">
-            <span aria-hidden="true">${safeText(status.split(" ")[0])}</span>
-            <span style="min-width:0"><b>Q${i + 1}:</b> ${safeText(q.question || "")}
-              ${extra}
-            </span>
-          </li>
-        `;
-      })
-      .join("");
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
 
     return `
       <div class="note" style="margin-top:0">
@@ -610,15 +710,20 @@
         <p style="margin:8px 0 0">Tip: Repeat the test to practice again. The question order changes each time.</p>
       </div>
 
-      <details style="margin-top:12px">
-        <summary style="cursor:pointer; font-weight:900">Show review</summary>
-        <ul style="list-style:none; padding-left:0; margin:12px 0 0">
-          ${rows}
-        </ul>
-      </details>
+      ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -659,10 +764,6 @@
         promptMaxPoints: 0,
         promptEarnedPoints: 0,
 
-        correctCount: 0, // kept for compatibility with older summary messaging
-        objectiveTotal: 0,
-        promptDoneCount: 0,
-
         lastChoice: null,
         lastBlank: "",
         lastResponse: "",
@@ -672,9 +773,87 @@
         lastPointsEarned: 0,
         lastPointsPossible: 0,
         lastError: "",
+        savedMsg: "",
 
-        responses: {} // q.id -> { user, correct?, skipped?, checks?, pointsEarned, pointsPossible }
+        responses: Object.create(null), // q.id -> { ... }
+        review: [], // per-question rows
+        isGrading: false
       };
+
+      function resetRunState() {
+        state.questions = [];
+        state.index = 0;
+
+        state.objectiveMaxPoints = 0;
+        state.objectiveEarnedPoints = 0;
+        state.promptMaxPoints = 0;
+        state.promptEarnedPoints = 0;
+
+        state.lastChoice = null;
+        state.lastBlank = "";
+        state.lastResponse = "";
+        state.lastChecks = [];
+        state.lastIsCorrect = false;
+        state.lastWasSkipped = false;
+        state.lastPointsEarned = 0;
+        state.lastPointsPossible = 0;
+        state.lastError = "";
+        state.savedMsg = "";
+
+        state.responses = Object.create(null);
+        state.review = [];
+        state.isGrading = false;
+      }
+
+      function typeLabel(q) {
+        const t = String(q && q.type ? q.type : "multipleChoice").toLowerCase();
+        if (t === "prompt") return "Writing prompt";
+        if (t === "fillintheblank") return "Fill in the blank";
+        return "Multiple choice";
+      }
+
+      function optionAt(q, idx) {
+        if (!q || !Array.isArray(q.options)) return "";
+        const n = Number(idx);
+        if (!Number.isFinite(n)) return "";
+        return q.options[n] == null ? "" : String(q.options[n]);
+      }
+
+      function recordReviewRow(q, r) {
+        const t = String(q && q.type ? q.type : "multipleChoice").toLowerCase();
+
+        let chosenText = "";
+        let correctText = "";
+
+        if (r && r.skipped) {
+          chosenText = "(skipped)";
+          correctText = "";
+        } else if (t === "prompt") {
+          chosenText = "(written)";
+          correctText = "(rubric)";
+        } else if (t === "fillintheblank") {
+          chosenText = r && r.user != null && String(r.user).trim() ? String(r.user) : "(blank)";
+          const acc = getFillBlankAcceptedAnswers(q).map((x) => String(x == null ? "" : x)).filter(Boolean);
+          correctText = acc.length ? acc.slice(0, 4).join(" / ") : "(not set)";
+        } else {
+          chosenText = optionAt(q, r ? r.user : null) || "(none)";
+          correctText = optionAt(q, q ? q.answer : null) || "(not set)";
+        }
+
+        state.review.push({
+          number: state.index + 1,
+          type: t,
+          typeLabel: typeLabel(q),
+          question: q && q.question ? String(q.question) : "",
+          userText: t === "prompt" && r && r.user != null ? String(r.user) : "",
+          chosenText,
+          correctText,
+          isCorrect: !!(r && r.correct),
+          skipped: !!(r && r.skipped),
+          pointsEarned: r ? Number(r.pointsEarned || 0) : 0,
+          pointsPossible: r ? Number(r.pointsPossible || 0) : 0
+        });
+      }
 
       function paint() {
         if (state.status === "intro") stage.innerHTML = renderIntro();
@@ -697,12 +876,20 @@
             textarea.addEventListener("input", update);
             update();
           }
+
+          setTimeout(() => {
+            try {
+              const el = host.querySelector("input, textarea, button");
+              if (el && typeof el.focus === "function") el.focus();
+            } catch (_) {}
+          }, 0);
         }
       }
 
       async function start() {
         state.status = "loading";
         state.lastError = "";
+        state.savedMsg = "";
         paint();
 
         try {
@@ -715,25 +902,20 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.map(cloneQuestionWithShuffledOptions);
+          const prepared = ensureIds(bank.filter(isPlainObject).map(cloneQuestionWithShuffledOptions));
           shuffleInPlace(prepared);
-
-          state.questions = prepared;
-          state.index = 0;
 
           const objectiveQs = prepared.filter((q) => !isPromptType(q && q.type));
           const promptQs = prepared.filter((q) => isPromptType(q && q.type));
 
-          state.objectiveTotal = objectiveQs.length;
-          state.promptDoneCount = 0;
+          state.questions = prepared;
+          state.index = 0;
 
           state.objectiveMaxPoints = objectiveQs.reduce((sum, q) => sum + pointsPossible(q), 0);
           state.objectiveEarnedPoints = 0;
 
           state.promptMaxPoints = promptQs.reduce((sum, q) => sum + promptPointsPossible(q), 0);
           state.promptEarnedPoints = 0;
-
-          state.correctCount = 0;
 
           state.lastChoice = null;
           state.lastBlank = "";
@@ -743,17 +925,13 @@
           state.lastWasSkipped = false;
           state.lastPointsEarned = 0;
           state.lastPointsPossible = 0;
-          state.responses = {};
+
+          state.responses = Object.create(null);
+          state.review = [];
+          state.isGrading = false;
 
           state.status = "question";
           paint();
-
-          setTimeout(() => {
-            try {
-              const el = host.querySelector("input, textarea, button");
-              if (el && typeof el.focus === "function") el.focus();
-            } catch (_) {}
-          }, 0);
         } catch (err) {
           state.status = "error";
           state.lastError = err && err.message ? err.message : "Could not load the test.";
@@ -763,61 +941,34 @@
 
       function restart() {
         state.status = "intro";
-        state.questions = [];
-        state.index = 0;
-
-        state.objectiveMaxPoints = 0;
-        state.objectiveEarnedPoints = 0;
-        state.promptMaxPoints = 0;
-        state.promptEarnedPoints = 0;
-
-        state.correctCount = 0;
-        state.objectiveTotal = 0;
-        state.promptDoneCount = 0;
-
-        state.lastChoice = null;
-        state.lastBlank = "";
-        state.lastResponse = "";
-        state.lastChecks = [];
-        state.lastIsCorrect = false;
-        state.lastWasSkipped = false;
-        state.lastPointsEarned = 0;
-        state.lastPointsPossible = 0;
-        state.lastError = "";
-        state.responses = {};
+        resetRunState();
         paint();
       }
 
-      function next() {
+      function toNextScreenAfterFeedback() {
+        state.isGrading = false;
         state.lastWasSkipped = false;
         state.lastChecks = [];
         state.lastPointsEarned = 0;
         state.lastPointsPossible = 0;
 
-        if (state.index + 1 >= state.questions.length) {
-          state.status = "summary";
-        } else {
+        if (state.index + 1 >= state.questions.length) state.status = "summary";
+        else {
           state.index += 1;
           state.status = "question";
         }
-
         paint();
-
-        if (state.status === "question") {
-          setTimeout(() => {
-            try {
-              const el = host.querySelector("input, textarea, button");
-              if (el && typeof el.focus === "function") el.focus();
-            } catch (_) {}
-          }, 0);
-        }
       }
 
       function skip() {
+        if (state.status !== "question" || state.isGrading) return;
+
         const q = state.questions[state.index];
         if (!q) return;
 
-        const type = String(q.type || "").toLowerCase();
+        state.isGrading = true;
+
+        const type = String(q.type || "multipleChoice").toLowerCase();
         const possible = isPromptType(type) ? promptPointsPossible(q) : pointsPossible(q);
 
         state.lastWasSkipped = true;
@@ -826,12 +977,16 @@
         state.lastPointsEarned = 0;
         state.lastPointsPossible = possible;
 
-        state.responses[q.id] = {
+        const r = {
+          type,
           skipped: true,
+          correct: false,
           pointsEarned: 0,
-          pointsPossible: possible,
-          type
+          pointsPossible: possible
         };
+
+        state.responses[q.id] = r;
+        recordReviewRow(q, r);
 
         state.status = "feedback";
         paint();
@@ -839,6 +994,8 @@
 
       function handleMCQSubmit(q, choice) {
         const chosen = Number(choice);
+        if (!Number.isFinite(chosen)) return;
+
         const ok = chosen === Number(q.answer);
         const possible = pointsPossible(q);
         const earned = ok ? possible : 0;
@@ -848,17 +1005,19 @@
         state.lastPointsEarned = earned;
         state.lastPointsPossible = possible;
 
-        if (ok) state.correctCount += 1;
         state.objectiveEarnedPoints += earned;
 
-        state.responses[q.id] = {
+        const r = {
           type: "multiplechoice",
-          correct: ok,
           user: chosen,
+          correct: ok,
           skipped: false,
           pointsEarned: earned,
           pointsPossible: possible
         };
+
+        state.responses[q.id] = r;
+        recordReviewRow(q, r);
 
         state.status = "feedback";
         paint();
@@ -876,17 +1035,19 @@
         state.lastPointsEarned = earned;
         state.lastPointsPossible = possible;
 
-        if (ok) state.correctCount += 1;
         state.objectiveEarnedPoints += earned;
 
-        state.responses[q.id] = {
+        const r = {
           type: "fillintheblank",
-          correct: ok,
           user: value,
+          correct: ok,
           skipped: false,
           pointsEarned: earned,
           pointsPossible: possible
         };
+
+        state.responses[q.id] = r;
+        recordReviewRow(q, r);
 
         state.status = "feedback";
         paint();
@@ -907,72 +1068,144 @@
         state.lastPointsEarned = earned;
         state.lastPointsPossible = possible;
 
-        state.promptDoneCount += 1;
         state.promptEarnedPoints += earned;
 
-        state.responses[q.id] = {
+        const r = {
           type: "prompt",
           user: raw,
           checks,
+          correct: true, // prompts are not right/wrong; keep true to indicate "completed"
           skipped: false,
           pointsEarned: earned,
           pointsPossible: possible
         };
 
+        state.responses[q.id] = r;
+        recordReviewRow(q, r);
+
         state.status = "feedback";
         paint();
       }
 
-      function onClick(e) {
-        const btn = e.target && e.target.closest ? e.target.closest("button[data-action]") : null;
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const earned = Number(state.objectiveEarnedPoints || 0) + Number(state.promptEarnedPoints || 0);
+        const possible = Number(state.objectiveMaxPoints || 0) + Number(state.promptMaxPoints || 0);
+        const percent = possible ? Math.round((earned / possible) * 100) : 0;
+
+        // FIX: include scoring inputs used for normalization
+        const reviewMap = normalizeResponsesForSave(state.responses);
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "4-7",
+          skill: "writing",
+          at: nowIso(),
+
+          // scoring inputs for normalization
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          review: reviewMap, // id -> { pointsEarned, pointsPossible, ... }
+
+          rawCorrect: earned,
+          totalQuestions: possible, // treat as "total points" for writing
+          percent,
+          rubric: {
+            scoring: "points",
+            objectiveMaxPoints: Number(state.objectiveMaxPoints || 0),
+            promptMaxPoints: Number(state.promptMaxPoints || 0)
+          },
+          difficultyBreakdown: computeDifficultyBreakdown(state.questions, state.responses)
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        if (res && res.ok) {
+          const norm =
+            res.normalizedScore != null
+              ? `${Math.round(Number(res.normalizedScore))}/100`
+              : res.saved && res.saved.normalizedScore != null
+                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                : "";
+          const level =
+            res.levelTitle ||
+            (res.saved && res.saved.levelTitle) ||
+            (res.saved && res.saved.level && res.saved.level.title) ||
+            "";
+          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+        } else {
+          state.savedMsg = "Could not save.";
+        }
+
+        paint();
+      }
+
+      // Event delegation
+      host.addEventListener("click", (ev) => {
+        const btn = ev.target && ev.target.closest ? ev.target.closest("[data-action]") : null;
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
-        if (!action) return;
 
-        if (action === "start") {
-          e.preventDefault();
+        if (action === "start" || action === "retry") {
+          ev.preventDefault();
           start();
         } else if (action === "restart") {
-          e.preventDefault();
+          ev.preventDefault();
           restart();
-        } else if (action === "retry") {
-          e.preventDefault();
-          start();
         } else if (action === "next") {
-          e.preventDefault();
-          next();
+          ev.preventDefault();
+          toNextScreenAfterFeedback();
         } else if (action === "skip") {
-          e.preventDefault();
+          ev.preventDefault();
           skip();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
-      }
+      });
 
-      function onSubmit(e) {
-        const form = e.target;
-        if (!form || !form.matches || !form.matches("form[data-form='question']")) return;
+      host.addEventListener("submit", (ev) => {
+        const form = ev.target;
+        if (!form || form.getAttribute("data-form") !== "question") return;
 
-        e.preventDefault();
+        ev.preventDefault();
+        if (state.status !== "question" || state.isGrading) return;
 
         const q = state.questions[state.index];
         if (!q) return;
 
-        const qtype = form.getAttribute("data-qtype");
-        if (qtype === "multipleChoice") {
-          const choiceInput = form.querySelector("input[name='choice']:checked");
-          if (choiceInput) handleMCQSubmit(q, choiceInput.value);
-        } else if (qtype === "fillInTheBlank") {
-          const blank = form.querySelector("input[name='blank']");
-          if (blank) handleBlankSubmit(q, blank.value);
-        } else if (qtype === "prompt") {
-          const area = form.querySelector("textarea[name='response']");
-          const text = area ? area.value : "";
-          handlePromptSubmit(q, text);
-        }
-      }
+        state.isGrading = true;
 
-      host.addEventListener("click", onClick);
-      host.addEventListener("submit", onSubmit);
+        const qtype = String(form.getAttribute("data-qtype") || "").toLowerCase();
+
+        try {
+          if (qtype === "prompt") {
+            const area = form.querySelector("textarea[name='response']");
+            const text = area ? area.value : "";
+            handlePromptSubmit(q, text);
+            return;
+          }
+
+          if (qtype === "fillintheblank") {
+            const input = form.querySelector("input[name='blank']");
+            const value = input ? input.value : "";
+            handleBlankSubmit(q, value);
+            return;
+          }
+
+          // multipleChoice
+          const checked = form.querySelector("input[name='choice']:checked");
+          const val = checked ? checked.value : null;
+          handleMCQSubmit(q, val);
+        } catch (_) {
+          state.isGrading = false;
+        }
+      });
 
       paint();
     }

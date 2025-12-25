@@ -207,6 +207,10 @@ async function render(appPath) {
     } else if (parts[0] === 'profile' && parts.length === 1) {
       viewModule = await import('./views/profile.js');
       viewResult = viewModule.getView(ctx);
+    } else if (parts[0] === 'scoring' && parts.length === 1) {
+      // NEW: scoring plan page (/scoring)
+      viewModule = await import('./views/scoring.js');
+      viewResult = viewModule.getView(ctx);
     } else if (parts[0] === 'contact' && parts.length === 1) {
       viewModule = await import('./views/contact.js');
       viewResult = viewModule.getView(ctx);

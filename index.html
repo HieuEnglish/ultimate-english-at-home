@@ -1,4 +1,4 @@
-﻿﻿﻿<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -106,6 +106,9 @@
       } else if (appPath.startsWith("/profile")) {
         title = "Profile — UEAH";
         description = "Save your learning profile and track progress.";
+      } else if (appPath.startsWith("/scoring")) {
+        title = "Scoring plan — UEAH";
+        description = "Understand the practice scoring levels and certifications by age group and skill.";
       } else if (appPath.startsWith("/favourites")) {
         title = "Favourites — UEAH";
         description = "Save and revisit your favourite resources and games.";
@@ -149,6 +152,9 @@
         <a class="nav-link" href="/games" data-nav data-nav-key="games">Games</a>
         <a class="nav-link" href="/tests" data-nav data-nav-key="tests">Tests</a>
         <a class="nav-link" href="/profile" data-nav data-nav-key="profile">Profile</a>
+
+        <!-- New: scoring plan -->
+        <a class="nav-link" href="/scoring" data-nav data-nav-key="scoring">Scoring</a>
 
         <!-- New: favourites badge (updated live via uea:favourites-changed in main.js) -->
         <a class="nav-link" href="/favourites" data-nav data-nav-key="favourites">
@@ -300,28 +306,35 @@
     </div>
   </footer>
 
-  <!-- Load stores/data BEFORE app.js -->
+  <!-- Load stores/data BEFORE main.js -->
   <script defer src="assets/js/resources-store.js"></script>
 
   <script defer src="assets/js/tests-store.js"></script>
 
-  <!-- New: age + skill test registry (must load after tests-store.js, before any test modules) -->
+  <!-- Age-group test registry (must load after tests-store.js) -->
   <script defer src="assets/js/tests/age-skill.js"></script>
 
-  <!-- New: favourites store (must load before main.js) -->
+  <!-- IELTS test registry (metadata + lazy loader module paths) -->
+  <script defer src="assets/js/tests/iels.js"></script>
+
+  <!-- Favourites store (must load before main.js) -->
   <script defer src="assets/js/favourites-store.js"></script>
 
-  <!-- New: profile + contact helpers (you will create these files) -->
+  <!-- Profile store (localStorage) -->
   <script defer src="assets/js/profile-store.js"></script>
+
+  <!-- Shared scoring helpers -->
+  <script defer src="assets/js/scoring.js"></script>
+
+  <!-- Scoring plan data (used by /scoring view) -->
+  <script defer src="assets/js/scoring-plan.js"></script>
+
+  <!-- Save-score helper (used by "Save to profile" buttons in test runners) -->
+  <script defer src="assets/js/tests/save-score.js"></script>
+
   <script defer src="assets/js/contact.js"></script>
 
-  <!-- Tests (IELS) modules/data files -->
-  <script defer src="assets/js/tests/iels/reading.js"></script>
-  <script defer src="assets/js/tests/iels/listening.js"></script>
-  <script defer src="assets/js/tests/iels/writing.js"></script>
-  <script defer src="assets/js/tests/iels/speaking.js"></script>
-
-  <!-- Load the new modular entrypoint as an ES module -->
+  <!-- Load the modular entrypoint as an ES module -->
   <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

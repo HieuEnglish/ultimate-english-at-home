@@ -12,13 +12,14 @@
    Supported question types:
    - prompt
 
-   Updates (this file):
+   Updates:
    - Ensures stable ids (fallback id if missing)
    - Robust bank loader (handles existing script + validates after load tick)
    - Adds Stop button for TTS
    - Adds Retry on error
    - Stops TTS on navigation (popstate) and when changing screens
    - Summary includes per-section counts if `section` exists in the bank, otherwise totals only
+   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE)
 */
 
 (function () {
@@ -28,10 +29,7 @@
   const BANK_SRC = "assets/data/tests-4-7-speaking.js";
 
   const store = window.UEAH_TESTS_STORE;
-  if (!store || typeof store.registerRunner !== "function") {
-    console.warn("[UEAH] tests store not found; runner not registered:", SLUG);
-    return;
-  }
+  if (!store || typeof store.registerRunner !== "function") return;
 
   // -----------------------------
   // Utilities
@@ -64,6 +62,10 @@
     return v && typeof v === "object" && !Array.isArray(v);
   }
 
+  function nowIso() {
+    return new Date().toISOString();
+  }
+
   function normalizeSection(v) {
     return String(v || "").trim().toLowerCase();
   }
@@ -74,6 +76,79 @@
       const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
       return { ...q, id };
     });
+  }
+
+  function normalizeDifficulty(v) {
+    const d = String(v || "").trim().toLowerCase();
+    if (d === "easy" || d === "medium" || d === "hard") return d;
+    return "";
+  }
+
+  function computeSectionCounts(questions, results) {
+    const out = Object.create(null);
+    const qs = Array.isArray(questions) ? questions : [];
+    qs.forEach((q) => {
+      const sec = normalizeSection(q && q.section);
+      if (!sec) return;
+      if (!out[sec]) out[sec] = { said: 0, again: 0, skip: 0, total: 0 };
+      const id = q && q.id != null ? String(q.id) : "";
+      const r = (id && results && results[id]) || "skip";
+      out[sec].total += 1;
+      if (r === "said") out[sec].said += 1;
+      else if (r === "again") out[sec].again += 1;
+      else out[sec].skip += 1;
+    });
+    return out;
+  }
+
+  function computeDifficultyCounts(questions, results) {
+    const out = {
+      easy: { said: 0, again: 0, skip: 0, total: 0 },
+      medium: { said: 0, again: 0, skip: 0, total: 0 },
+      hard: { said: 0, again: 0, skip: 0, total: 0 },
+      unknown: { said: 0, again: 0, skip: 0, total: 0 }
+    };
+
+    const qs = Array.isArray(questions) ? questions : [];
+    qs.forEach((q) => {
+      const d = normalizeDifficulty(q && q.difficulty);
+      const key = d || "unknown";
+      const id = q && q.id != null ? String(q.id) : "";
+      const r = (id && results && results[id]) || "skip";
+
+      out[key].total += 1;
+      if (r === "said") out[key].said += 1;
+      else if (r === "again") out[key].again += 1;
+      else out[key].skip += 1;
+    });
+
+    const compact = Object.create(null);
+    Object.keys(out).forEach((k) => {
+      if (out[k].total > 0) compact[k] = out[k];
+    });
+    return compact;
+  }
+
+  function computeOverallScoreFromSpeaking(results, questions) {
+    // Map: said=1, again=0, skip=0. Percent = said/total.
+    const qs = Array.isArray(questions) ? questions : [];
+    if (!qs.length) return { said: 0, again: 0, skip: 0, total: 0, percent: 0 };
+
+    let said = 0;
+    let again = 0;
+    let skip = 0;
+
+    qs.forEach((q) => {
+      const id = q && q.id != null ? String(q.id) : "";
+      const r = (id && results && results[id]) || "skip";
+      if (r === "said") said += 1;
+      else if (r === "again") again += 1;
+      else skip += 1;
+    });
+
+    const total = qs.length;
+    const percent = total ? Math.round((said / total) * 100) : 0;
+    return { said, again, skip, total, percent };
   }
 
   // -----------------------------
@@ -196,7 +271,11 @@
           <div class="note" style="margin:12px 0 0; padding:10px 12px">
             <strong>Model support</strong>
             <p style="margin:6px 0 0; color: var(--muted)">
-              ${model ? "Read the example out loud, then let the learner copy." : "Say a simple example first, then let the learner try."}
+              ${
+                model
+                  ? "Read the example out loud, then let the learner copy."
+                  : "Say a simple example first, then let the learner try."
+              }
             </p>
           </div>
         `;
@@ -206,6 +285,13 @@
         <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
           <div style="font-weight:900; color: var(--muted)">Prompt ${n} of ${total}</div>
           ${difficultyBadge(q.difficulty)}
+          ${
+            q.section != null && String(q.section).trim()
+              ? `<span style="padding:4px 10px; border-radius:999px; border:1px solid var(--border); color: var(--muted); font-weight:800; font-size:12px">${safeText(
+                  String(q.section).trim()
+                )}</span>`
+              : ""
+          }
         </div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
           <button class="btn" type="button" data-action="play" ${hasAudio ? "" : "disabled"} aria-label="Play model audio">🔊 Play</button>
@@ -233,30 +319,10 @@
   }
 
   function renderSummary(state) {
-    let said = 0;
-    let again = 0;
-    let skip = 0;
+    const overall = computeOverallScoreFromSpeaking(state.results, state.questions);
 
-    // Optional per-section counts (only if section exists)
     const hasAnySection = state.questions.some((q) => q && q.section != null && String(q.section).trim());
-    const sectionCounts = Object.create(null);
-
-    state.questions.forEach((q) => {
-      const id = q && q.id != null ? String(q.id) : "";
-      const r = (id && state.results[id]) || "skip";
-
-      if (r === "said") said += 1;
-      else if (r === "again") again += 1;
-      else skip += 1;
-
-      if (hasAnySection) {
-        const sec = normalizeSection(q && q.section);
-        if (!sectionCounts[sec]) sectionCounts[sec] = { said: 0, again: 0, skip: 0 };
-        if (r === "said") sectionCounts[sec].said += 1;
-        else if (r === "again") sectionCounts[sec].again += 1;
-        else sectionCounts[sec].skip += 1;
-      }
-    });
+    const sectionCounts = hasAnySection ? computeSectionCounts(state.questions, state.results) : null;
 
     const sectionLines = hasAnySection
       ? Object.keys(sectionCounts)
@@ -275,13 +341,15 @@
       .map((q, idx) => {
         const id = q && q.id != null ? String(q.id) : "";
         const r = (id && state.results[id]) || "skip";
-        const status = r === "said" ? "✅ Said" : r === "again" ? "🔁 Try again" : "⏭️ Skipped";
+        const icon = r === "said" ? "✅" : r === "again" ? "🔁" : "⏭️";
+        const label = r === "said" ? "Said" : r === "again" ? "Try again" : "Skipped";
+        const sec = q && q.section != null && String(q.section).trim() ? ` • ${safeText(String(q.section).trim())}` : "";
         return `
           <li style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border)">
-            <span aria-hidden="true">${safeText(status.split(" ")[0])}</span>
+            <span aria-hidden="true">${icon}</span>
             <span style="min-width:0">
               <b>${idx + 1}.</b> ${safeText(q.question || "")}
-              <div style="margin-top:6px; font-weight:800">${status}</div>
+              <div style="margin-top:6px; font-weight:800; opacity:.92">${label}${sec}</div>
             </span>
           </li>
         `;
@@ -289,15 +357,17 @@
       .join("");
 
     const encouragement =
-      again > 0
+      overall.again > 0
         ? "Repeat the “Try again” prompts tomorrow. Short, happy practice works best."
         : "Great work. Try again later for a different order.";
+
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
 
     return `
       <div class="note" style="margin-top:0">
         <strong>Summary</strong>
         <p style="margin:8px 0 0; color: var(--muted)">
-          Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong>
+          Said: <strong>${overall.said}</strong> • Try again: <strong>${overall.again}</strong> • Skipped: <strong>${overall.skip}</strong>
         </p>
         ${sectionLines}
       </div>
@@ -314,8 +384,18 @@
         </ul>
       </details>
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -336,10 +416,18 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        // If already injected, resolve on next tick (lets the script run if needed)
-        setTimeout(() => resolve(true), 0);
+        validate();
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
         return;
       }
 
@@ -347,7 +435,7 @@
       s.defer = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -386,8 +474,9 @@
         status: "intro", // intro | loading | prompt | summary | error
         questions: [],
         index: 0,
-        results: Object.create(null),
-        lastError: ""
+        results: Object.create(null), // id -> "said" | "again" | "skip"
+        lastError: "",
+        savedMsg: ""
       };
 
       function paint() {
@@ -412,6 +501,7 @@
         stopSpeech();
         state.status = "loading";
         state.lastError = "";
+        state.savedMsg = "";
         paint();
 
         try {
@@ -446,6 +536,7 @@
         state.index = 0;
         state.results = Object.create(null);
         state.lastError = "";
+        state.savedMsg = "";
         paint();
       }
 
@@ -466,18 +557,74 @@
         if (!q || q.id == null) return;
 
         const v = String(val || "").toLowerCase();
-        if (v !== "said" && v !== "again" && v !== "skip") return;
+        const normalized = v === "said" || v === "again" || v === "skip" ? v : "skip";
 
-        state.results[String(q.id)] = v;
+        state.results[String(q.id)] = normalized;
         next();
       }
 
       function speakCurrent() {
         const q = state.questions[state.index];
         if (!q) return;
-        const t = String(q.say || q.model || q.question || "").trim();
+        const t = String(q.say || q.model || "").trim();
         if (!t) return;
         speak(t);
+      }
+
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const overall = computeOverallScoreFromSpeaking(state.results, state.questions);
+
+        // Ensure plain object for serialization (state.results has null prototype)
+        const resultsById = Object.assign({}, state.results);
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "4-7",
+          skill: "speaking",
+          at: nowIso(),
+
+          // FIX: include scoring inputs used for normalization
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          resultsById,
+
+          // speaking is observational: store "said" as rawCorrect to keep consistency
+          rawCorrect: overall.said,
+          totalQuestions: overall.total,
+          percent: overall.percent,
+          rubric: {
+            scoring: "observational",
+            mapping: { said: 1, again: 0, skip: 0 }
+          },
+          sectionBreakdown: computeSectionCounts(state.questions, state.results),
+          difficultyBreakdown: computeDifficultyCounts(state.questions, state.results)
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        if (res && res.ok) {
+          const norm =
+            res.normalizedScore != null
+              ? `${Math.round(Number(res.normalizedScore))}/100`
+              : res.saved && res.saved.normalizedScore != null
+                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                : "";
+          const level =
+            res.levelTitle ||
+            (res.saved && res.saved.levelTitle) ||
+            (res.saved && res.saved.level && res.saved.level.title) ||
+            "";
+          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+        } else {
+          state.savedMsg = "Could not save.";
+        }
+
+        paint();
       }
 
       // Event delegation
@@ -514,6 +661,12 @@
         if (action === "mark") {
           ev.preventDefault();
           mark(btn.getAttribute("data-mark"));
+          return;
+        }
+
+        if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
           return;
         }
       });

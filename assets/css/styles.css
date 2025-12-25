@@ -21,6 +21,14 @@
   /* NEW: form error color */
   --danger:#c0183c;
 
+  /* NEW: status/chip tokens (subtle, theme-safe) */
+  --success: rgba(0, 200, 83, 1);
+  --warning: rgba(255, 193, 7, 1);
+  --chip-bg: rgba(255,255,255,.12);
+  --chip-bg-strong: rgba(255,255,255,.18);
+  --status-bg: rgba(107,102,255,.08);
+  --status-border: rgba(107,102,255,.18);
+
   --radius: 18px;
   --radius2: 22px;
   /* Layout tuning: a bit wider on desktop so the UI doesn't feel "zoomed out" */
@@ -65,6 +73,12 @@
 
     /* NEW: form error color (dark mode) */
     --danger:#ff5f86;
+
+    /* NEW: status/chip tokens (dark mode tweaks) */
+    --chip-bg: rgba(255,255,255,.06);
+    --chip-bg-strong: rgba(255,255,255,.10);
+    --status-bg: rgba(107,102,255,.10);
+    --status-border: rgba(122,176,255,.22);
   }
 }
 
@@ -801,23 +815,88 @@ textarea[aria-invalid="true"]{
   gap:8px;
   margin-top:12px;
 }
+
+/* -------------------------------------------------
+   NEW: Chip / status polish (used by profile + tests)
+-------------------------------------------------- */
 .chip{
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
-  padding:7px 10px;
+  min-height: 28px;
+  padding:7px 12px;
   border-radius:999px;
   border:1px solid var(--border);
-  background: rgba(255,255,255,.10);
+  background: var(--chip-bg);
   color: var(--muted);
   font-size:13px;
   line-height:1;
+  font-weight: 850;
+  letter-spacing: .1px;
+  user-select:none;
+}
+.chip:empty{display:none}
+
+/* Optional variants (safe even if unused) */
+.chip--ok{
+  border-color: rgba(0,200,83,.35);
+  background: rgba(0,200,83,.10);
+  color: var(--text);
+}
+.chip--warn{
+  border-color: rgba(255,193,7,.35);
+  background: rgba(255,193,7,.10);
+  color: var(--text);
+}
+.chip--error{
+  border-color: rgba(192,24,60,.35);
+  background: rgba(192,24,60,.10);
+  color: var(--text);
 }
 
 @media (prefers-color-scheme: dark){
-  .chip{
-    background: rgba(255,255,255,.06);
+  .chip--ok{
+    border-color: rgba(0,255,136,.38);
+    background: rgba(0,255,136,.12);
+    color: var(--text);
   }
+  .chip--warn{
+    border-color: rgba(255,230,70,.34);
+    background: rgba(255,230,70,.10);
+    color: var(--text);
+  }
+  .chip--error{
+    border-color: rgba(255,95,134,.38);
+    background: rgba(255,95,134,.12);
+    color: var(--text);
+  }
+}
+
+/* -------------------------------------------------
+   NEW: Status regions (ARIA live) — subtle “chip/status” look
+   Applies to: <p role="status">…</p> and aria-live blocks inside cards.
+-------------------------------------------------- */
+.detail-card [role="status"],
+.detail-card [aria-live="polite"],
+.detail-card [aria-live="assertive"]{
+  display:block;
+  padding:10px 12px;
+  border-radius: 16px;
+  border:1px dashed var(--border);
+  background: var(--status-bg);
+  color: var(--muted);
+}
+.detail-card [role="status"]:empty,
+.detail-card [aria-live="polite"]:empty,
+.detail-card [aria-live="assertive"]:empty{
+  display:none;
+}
+
+/* Keep existing muted text behavior inside status blocks */
+.detail-card [role="status"].muted,
+.detail-card [aria-live].muted{
+  color: var(--muted);
 }
 
 /* Featured (Best Set) styling: subtle highlight, still consistent */
@@ -872,6 +951,38 @@ textarea[aria-invalid="true"]{
   gap:10px;
   flex-wrap:wrap;
   margin-top:8px;
+}
+
+/* -------------------------------------------------
+   NEW: Progress element polish (profile progress bars)
+-------------------------------------------------- */
+progress{
+  width:100%;
+  height:14px;
+  border-radius: 999px;
+  overflow:hidden;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.08);
+}
+progress::-webkit-progress-bar{
+  background: rgba(255,255,255,.08);
+  border-radius: 999px;
+}
+progress::-webkit-progress-value{
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(107,102,255,.85), rgba(255,106,179,.75));
+}
+progress::-moz-progress-bar{
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(107,102,255,.85), rgba(255,106,179,.75));
+}
+@media (prefers-color-scheme: dark){
+  progress{
+    background: rgba(255,255,255,.06);
+  }
+  progress::-webkit-progress-bar{
+    background: rgba(255,255,255,.06);
+  }
 }
 
 .site-footer{

@@ -13,8 +13,17 @@
    - Shuffles question order on start
    - Shuffles options within MCQ/TF questions
 
-   Update:
-   - Adds a final summary report (per-question review).
+   Updates (this file):
+   - Robust bank loader (handles existing script; validates bank on next tick)
+   - Ensures stable ids for every question (prevents overwriting review rows)
+   - True/False supports boolean / string / numeric answers; defaults options to ["True","False"]
+   - Better fill-in grading: supports q.acceptedAnswers / q.answers / q.acceptAnyOf / q.answer (string|array)
+   - More resilient type parsing (case/format variations)
+   - Final summary includes per-question review table
+   - Adds "Save score to Profile" using shared helper (window.UEAH_SAVE_SCORE) when available
+   - Save payload now includes (or ensures present):
+     * questions: state.questions
+     * review: state.review
 */
 
 (function () {
@@ -54,27 +63,63 @@
       .replaceAll("'", "&#39;");
   }
 
+  function safeTextWithBreaks(v) {
+    return safeText(v).replace(/\n/g, "<br>");
+  }
+
+  function normalizeType(v) {
+    return String(v || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z]/g, "");
+  }
+
   function normalizeAnswerText(v) {
     return String(v == null ? "" : v)
       .trim()
       .toLowerCase()
       .replace(/[.,!?;:"'()]/g, "")
+      .replace(/[\u00A0]/g, " ")
+      .replace(/\s+/g, " ")
       .replace(/\s+/g, "");
   }
 
+  function ensureIds(qs) {
+    const arr = Array.isArray(qs) ? qs : [];
+    return arr.map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+      return { ...q, id };
+    });
+  }
+
   function getType(q) {
-    return String(q && q.type ? q.type : "multipleChoice");
+    const t = normalizeType(q && q.type ? q.type : "");
+    if (t === "fillintheblank") return "fillintheblank";
+    if (t === "truefalse") return "truefalse";
+    if (t === "multiplechoice") return "multiplechoice";
+    return t || "multiplechoice";
   }
 
   function typeLabel(q) {
-    const t = String(getType(q)).toLowerCase();
+    const t = getType(q);
     if (t === "fillintheblank") return "Fill in the blank";
     if (t === "truefalse") return "True / False";
     return "Multiple choice";
   }
 
+  function coerceTrueFalseAnswerToIndex(ans) {
+    if (typeof ans === "boolean") return ans ? 0 : 1;
+    const s = String(ans == null ? "" : ans).trim().toLowerCase();
+    if (s === "true" || s === "t" || s === "yes" || s === "y") return 0;
+    if (s === "false" || s === "f" || s === "no" || s === "n") return 1;
+    const n = Number(ans);
+    if (Number.isFinite(n)) return n;
+    return null;
+  }
+
   function getOptionsForQuestion(q) {
-    const t = String(getType(q)).toLowerCase();
+    const t = getType(q);
     if (Array.isArray(q && q.options) && q.options.length) return q.options;
     if (t === "truefalse") return ["True", "False"];
     return [];
@@ -92,9 +137,38 @@
     return ans == null ? "" : String(ans);
   }
 
+  function getAcceptedBlankAnswers(q) {
+    const out = [];
+    if (!q) return out;
+
+    if (Array.isArray(q.acceptedAnswers)) out.push(...q.acceptedAnswers);
+    if (Array.isArray(q.acceptAnyOf)) out.push(...q.acceptAnyOf);
+    if (Array.isArray(q.answers)) out.push(...q.answers);
+
+    const a = q.answer;
+    if (Array.isArray(a)) out.push(...a);
+    else if (a != null) out.push(a);
+
+    return out
+      .map((x) => String(x == null ? "" : x))
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  function gradeBlank(q, userText) {
+    const user = normalizeAnswerText(userText);
+    const acceptedRaw = getAcceptedBlankAnswers(q);
+    const acceptedNorm = acceptedRaw.map(normalizeAnswerText).filter(Boolean);
+    const ok = !!user && acceptedNorm.includes(user);
+    return { ok, acceptedRaw };
+  }
+
   function cloneQuestionWithShuffledOptions(q) {
     if (!isPlainObject(q)) return q;
+
     if (!Array.isArray(q.options)) return { ...q };
+
+    // Shuffle for MCQ + TF where answer is an index
     if (typeof q.answer !== "number") return { ...q };
 
     const pairs = q.options.map((text, idx) => ({ text, idx }));
@@ -122,6 +196,13 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
         if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
@@ -129,18 +210,18 @@
           return;
         }
 
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
+        validate();
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -205,22 +286,22 @@
     return `
       <div class="note" style="margin:12px 0 0; padding:12px 14px">
         <strong>Read</strong>
-        <p style="margin:8px 0 0">${safeText(p)}</p>
+        <p style="margin:8px 0 0">${safeTextWithBreaks(p)}</p>
       </div>
     `;
   }
 
   function renderMCQForm(q) {
-    const prompt = safeText(q.question || "Question");
+    const prompt = safeTextWithBreaks(q.question || "Question");
     const options = getOptionsForQuestion(q);
 
     const optionsHtml = options
       .map((opt, i) => {
         const id = `opt-${SLUG}-${q.id}-${i}`;
         return `
-          <label for="${id}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
-            <input id="${id}" type="radio" name="choice" value="${i}" required style="margin:0" />
-            <span>${safeText(opt)}</span>
+          <label for="${id}" style="display:flex; align-items:flex-start; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
+            <input id="${id}" type="radio" name="choice" value="${i}" required style="margin-top:3px" />
+            <span style="line-height:1.35">${safeText(opt)}</span>
           </label>
         `;
       })
@@ -244,7 +325,7 @@
   }
 
   function renderFillBlankForm(q) {
-    const prompt = safeText(q.question || "Fill in the blank");
+    const prompt = safeTextWithBreaks(q.question || "Fill in the blank");
 
     return `
       <form data-form="question" style="margin-top:12px">
@@ -260,7 +341,7 @@
               autocomplete="off"
               autocapitalize="none"
               spellcheck="false"
-              maxlength="48"
+              maxlength="64"
               required
               style="width:100%; padding:12px 12px; border:1px solid var(--border); border-radius:14px; background: var(--surface)"
               placeholder="Type your answer"
@@ -281,8 +362,8 @@
     const top = renderTopBar(state);
     const passage = renderPassage(q);
 
-    const type = String(getType(q));
-    const form = String(type).toLowerCase() === "fillintheblank" ? renderFillBlankForm(q) : renderMCQForm(q);
+    const type = getType(q);
+    const form = type === "fillintheblank" ? renderFillBlankForm(q) : renderMCQForm(q);
 
     return `${top}${passage}${form}`;
   }
@@ -298,26 +379,34 @@
 
     let detailHtml = "";
 
-    const type = String(getType(q)).toLowerCase();
+    const type = getType(q);
 
     if (type === "fillintheblank") {
       const chosenText = state.lastBlank != null ? String(state.lastBlank) : "";
-      const correctText = correctTextForBlank(q && q.answer);
+      const correctText =
+        state.lastAcceptedAnswers && state.lastAcceptedAnswers.length
+          ? state.lastAcceptedAnswers.slice(0, 4).join(" / ")
+          : correctTextForBlank(q && q.answer);
 
       detailHtml = ok
         ? `<p style="margin:8px 0 0">Correct.</p>`
-        : `<p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText)}</strong></p>
+        : `<p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText || "(not set)")}</strong></p>
            <p style="margin:8px 0 0; opacity:.92">You typed: <strong>${safeText(chosenText || "(blank)")}</strong></p>`;
     } else {
-      const correctIdx = Number(q && q.answer);
       const chosenIdx = Number(state.lastChoice);
+
+      let correctIdx = Number(q && q.answer);
+      if (type === "truefalse" && typeof q.answer !== "number") {
+        const coerced = coerceTrueFalseAnswerToIndex(q.answer);
+        if (Number.isFinite(Number(coerced))) correctIdx = Number(coerced);
+      }
 
       const correctText = optionAt(q, correctIdx);
       const chosenText = optionAt(q, chosenIdx);
 
       detailHtml = ok
         ? `<p style="margin:8px 0 0">Correct.</p>`
-        : `<p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText)}</strong></p>
+        : `<p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText || "(not set)")}</strong></p>
            <p style="margin:8px 0 0; opacity:.92">You chose: <strong>${safeText(chosenText || "(none)")}</strong></p>`;
     }
 
@@ -359,7 +448,7 @@
       .map((r) => {
         const icon = r.isCorrect ? "✅" : "❌";
         const passage = r.passage
-          ? `<div style="margin-top:6px; opacity:.95"><strong>Passage:</strong> ${safeText(r.passage)}</div>`
+          ? `<div style="margin-top:6px; opacity:.95"><strong>Passage:</strong> ${safeTextWithBreaks(r.passage)}</div>`
           : "";
         return `
           <tr>
@@ -368,7 +457,7 @@
             )}</td>
             <td style="padding:10px 10px; border-top:1px solid var(--border)">
               <div style="font-weight:900">${safeText(r.typeLabel)}</div>
-              <div style="margin-top:6px">${safeText(r.question || "")}</div>
+              <div style="margin-top:6px">${safeTextWithBreaks(r.question || "")}</div>
               ${passage}
             </td>
             <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:800">${safeText(
@@ -413,6 +502,7 @@
     const total = state.questions.length;
     const correct = state.correctCount;
     const pct = total ? Math.round((correct / total) * 100) : 0;
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
 
     return `
       <div class="note" style="margin-top:0">
@@ -423,8 +513,18 @@
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -462,9 +562,11 @@
         correctCount: 0,
         lastChoice: null,
         lastBlank: "",
+        lastAcceptedAnswers: [],
         lastIsCorrect: false,
         lastError: "",
-        review: [] // per-question report rows
+        review: [], // per-question report rows
+        savedMsg: ""
       };
 
       function resetRunState() {
@@ -473,23 +575,52 @@
         state.correctCount = 0;
         state.lastChoice = null;
         state.lastBlank = "";
+        state.lastAcceptedAnswers = [];
         state.lastIsCorrect = false;
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
       }
 
-      function recordReviewRow(q, ok, chosenIdx, blankText) {
-        const t = String(getType(q)).toLowerCase();
+      function paint() {
+        if (state.status === "intro") stage.innerHTML = renderIntro();
+        else if (state.status === "loading") stage.innerHTML = renderLoading();
+        else if (state.status === "question") stage.innerHTML = renderQuestionScreen(state);
+        else if (state.status === "feedback") stage.innerHTML = renderFeedback(state);
+        else if (state.status === "summary") stage.innerHTML = renderSummary(state);
+        else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
+        else stage.innerHTML = renderIntro();
+
+        if (state.status === "question") {
+          setTimeout(() => {
+            try {
+              const el = host.querySelector("input, button");
+              if (el && typeof el.focus === "function") el.focus();
+            } catch (_) {}
+          }, 0);
+        }
+      }
+
+      function recordReviewRow(q, ok, chosenIdx, blankText, acceptedRaw) {
+        const t = getType(q);
 
         let chosenText = "";
         let correctText = "";
 
         if (t === "fillintheblank") {
           chosenText = blankText != null && String(blankText).trim() ? String(blankText) : "(blank)";
-          correctText = correctTextForBlank(q && q.answer) || "(not set)";
+          const raw = Array.isArray(acceptedRaw) && acceptedRaw.length ? acceptedRaw : getAcceptedBlankAnswers(q);
+          correctText = raw.length ? raw.slice(0, 4).join(" / ") : "(not set)";
         } else {
           chosenText = optionAt(q, chosenIdx) || "(none)";
-          correctText = optionAt(q, Number(q && q.answer)) || "(not set)";
+
+          let correctIdx = Number(q && q.answer);
+          if (t === "truefalse" && typeof q.answer !== "number") {
+            const coerced = coerceTrueFalseAnswerToIndex(q.answer);
+            if (Number.isFinite(Number(coerced))) correctIdx = Number(coerced);
+          }
+
+          correctText = optionAt(q, correctIdx) || "(not set)";
         }
 
         state.review.push({
@@ -503,36 +634,39 @@
         });
       }
 
-      function paint() {
-        if (state.status === "intro") stage.innerHTML = renderIntro();
-        else if (state.status === "loading") stage.innerHTML = renderLoading();
-        else if (state.status === "question") stage.innerHTML = renderQuestionScreen(state);
-        else if (state.status === "feedback") stage.innerHTML = renderFeedback(state);
-        else if (state.status === "summary") stage.innerHTML = renderSummary(state);
-        else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
-        else stage.innerHTML = renderIntro();
-      }
-
       async function start() {
         state.status = "loading";
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
         paint();
 
         try {
           await ensureBankLoaded(ctx);
 
-          const bank =
+          const rawBank =
             window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])
               ? window.UEAH_TEST_BANKS[SLUG]
               : [];
 
-          if (!bank.length) throw new Error("Missing question bank.");
+          if (!rawBank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.map(cloneQuestionWithShuffledOptions);
+          const withIds = ensureIds(rawBank.filter(isPlainObject).map((q) => ({ ...q })));
+
+          // Normalize TF questions (ensure options + numeric answer index)
+          const normalized = withIds.map((q) => {
+            const t = getType(q);
+            if (t !== "truefalse") return q;
+
+            const opts = Array.isArray(q.options) && q.options.length ? q.options.slice() : ["True", "False"];
+            const idx = typeof q.answer === "number" ? q.answer : coerceTrueFalseAnswerToIndex(q.answer);
+
+            return { ...q, options: opts, answer: Number.isFinite(Number(idx)) ? Number(idx) : 0 };
+          });
+
+          const prepared = normalized.map(cloneQuestionWithShuffledOptions);
           shuffleInPlace(prepared);
 
-          // Take a random subset for variety (order already shuffled)
           const subset = prepared.slice(0, Math.min(MAX_QUESTIONS, prepared.length));
 
           state.questions = subset;
@@ -540,19 +674,14 @@
           state.correctCount = 0;
           state.lastChoice = null;
           state.lastBlank = "";
+          state.lastAcceptedAnswers = [];
           state.lastIsCorrect = false;
           state.lastError = "";
           state.review = [];
+          state.savedMsg = "";
 
           state.status = "question";
           paint();
-
-          setTimeout(() => {
-            try {
-              const el = host.querySelector("input, button");
-              if (el && typeof el.focus === "function") el.focus();
-            } catch (_) {}
-          }, 0);
         } catch (err) {
           state.status = "error";
           state.lastError = err && err.message ? err.message : "Could not load the test.";
@@ -577,6 +706,7 @@
         state.index += 1;
         state.lastChoice = null;
         state.lastBlank = "";
+        state.lastAcceptedAnswers = [];
         state.lastIsCorrect = false;
         state.status = "question";
         paint();
@@ -586,36 +716,60 @@
         const q = state.questions[state.index];
         if (!q) return;
 
-        // Prevent double-answering.
         if (state.status !== "question") return;
 
-        const type = String(getType(q)).toLowerCase();
+        const type = getType(q);
 
         let ok = false;
 
         if (type === "fillintheblank") {
-          const user = normalizeAnswerText(blankText);
-          const ans = q.answer;
-
-          if (Array.isArray(ans)) ok = ans.some((a) => normalizeAnswerText(a) === user);
-          else ok = normalizeAnswerText(ans) === user;
+          const graded = gradeBlank(q, blankText);
+          ok = graded.ok;
 
           state.lastBlank = blankText != null ? String(blankText) : "";
-          recordReviewRow(q, ok, null, state.lastBlank);
+          state.lastAcceptedAnswers = graded.acceptedRaw || [];
+
+          recordReviewRow(q, ok, null, state.lastBlank, state.lastAcceptedAnswers);
         } else {
           const chosen = Number(choiceIndex);
           if (!Number.isFinite(chosen)) return;
 
           state.lastChoice = chosen;
-          ok = chosen === Number(q.answer);
 
-          recordReviewRow(q, ok, chosen, null);
+          let correctIdx = Number(q.answer);
+          if (type === "truefalse" && typeof q.answer !== "number") {
+            const coerced = coerceTrueFalseAnswerToIndex(q.answer);
+            if (Number.isFinite(Number(coerced))) correctIdx = Number(coerced);
+          }
+
+          ok = chosen === Number(correctIdx);
+
+          recordReviewRow(q, ok, chosen, null, null);
         }
 
         state.lastIsCorrect = ok;
         if (ok) state.correctCount += 1;
 
         state.status = "feedback";
+        paint();
+      }
+
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const res = window.UEAH_SAVE_SCORE.save({
+          slug: SLUG,
+          ageGroup: "11-12",
+          skill: "reading",
+          questions: state.questions,
+          review: state.review
+        });
+
+        state.savedMsg = res && res.ok ? "Saved to Profile." : "Could not save.";
         paint();
       }
 
@@ -636,6 +790,9 @@
         } else if (action === "retry") {
           ev.preventDefault();
           start();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 
@@ -646,7 +803,7 @@
         ev.preventDefault();
 
         const q = state.questions[state.index];
-        const type = String(getType(q)).toLowerCase();
+        const type = getType(q);
 
         if (type === "fillintheblank") {
           const input = form.querySelector('input[name="blank"]');

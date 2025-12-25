@@ -2,13 +2,23 @@
    Runner: IELTS Speaking (original prompts)
 
    - 3 parts (P1–P3)
-   - Randomly selects 1 topic set each run (keeps Part 3 linked to Part 2 topic)
+   - Randomly selects 1 topic set each run (keeps Part 3 linked to Part 2 topic via setId)
    - Collects typed responses (practice substitute for speaking)
    - Auto-checks: min word count + simple keyword cues (per prompt)
    - Shows rubric guidance + optional manual scoring (0–9 per criterion). No official IELTS band claim.
 
    Bank: assets/data/tests-iels-speaking.js
    Global key: window.UEAH_TEST_BANKS["iels-speaking"] (array of prompt objects)
+
+   Updates (this file):
+   - Resilient bank loader (works if script already exists / executed)
+   - Ensures stable ids for prompts missing ids
+   - Robust set selection (handles missing setId/setLabel and missing parts)
+   - Adds global timer + optional Part 2 prep/speaking timer
+   - Prevents double-submit; saves answers on navigation
+   - Live word-count updates + better safety around null fields
+   - Stops timers on navigation changes (best effort)
+   - Adds "Save score to Profile" on results screen (IELTS group)
 */
 
 (function () {
@@ -28,6 +38,10 @@
   // Helpers
   // -----------------------------
 
+  function nowIso() {
+    return new Date().toISOString();
+  }
+
   function safeText(v) {
     return String(v == null ? "" : v)
       .replaceAll("&", "&amp;")
@@ -38,7 +52,7 @@
   }
 
   function formatTime(sec) {
-    const s = Math.max(0, Math.floor(sec));
+    const s = Math.max(0, Math.floor(Number(sec) || 0));
     const m = Math.floor(s / 60);
     const r = s % 60;
     return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
@@ -56,7 +70,11 @@
 
   function includesAny(text, phrases) {
     const t = norm(text);
-    return (phrases || []).some((p) => t.includes(String(p).toLowerCase()));
+    const list = Array.isArray(phrases) ? phrases : [];
+    return list.some((p) => {
+      const needle = String(p == null ? "" : p).toLowerCase().trim();
+      return needle ? t.includes(needle) : false;
+    });
   }
 
   function uniq(arr) {
@@ -72,9 +90,10 @@
   }
 
   function isPart2Cue(q) {
-    return String(q && q.partId ? q.partId : "")
-      .toLowerCase() === "p2" &&
-      String(q && q.kind ? q.kind : "").toLowerCase() === "cue";
+    return (
+      String(q && q.partId ? q.partId : "").toLowerCase() === "p2" &&
+      String(q && q.kind ? q.kind : "").toLowerCase() === "cue"
+    );
   }
 
   function isPlainObject(v) {
@@ -85,6 +104,27 @@
     const x = Number(n);
     if (!Number.isFinite(x)) return a;
     return Math.min(b, Math.max(a, x));
+  }
+
+  function normalizeSetId(v) {
+    const s = String(v == null ? "" : v).trim();
+    return s || "";
+  }
+
+  function normalizePartId(v) {
+    return String(v == null ? "" : v).trim().toLowerCase();
+  }
+
+  function makeStableId(q, idx, chosenSetId) {
+    const pid = normalizePartId(q && q.partId) || "p1";
+    const kind = String(q && q.kind ? q.kind : "").trim().toLowerCase() || "prompt";
+    const stem = String(q && q.question ? q.question : "")
+      .trim()
+      .slice(0, 28)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    return `${SLUG}::${chosenSetId || "set"}::${pid}::${kind}::${idx}::${stem || "item"}`;
   }
 
   // -----------------------------
@@ -102,22 +142,27 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        // If already executed, resolve immediately; otherwise tick once.
-        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
-          resolve(true);
-          return;
-        }
-        setTimeout(() => resolve(true), 0);
+        validate();
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
         return;
       }
 
       const s = document.createElement("script");
       s.src = src;
       s.defer = true;
+      s.async = true;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -228,29 +273,38 @@
     const list = Array.isArray(bank) ? bank.filter(isPlainObject) : [];
     if (!list.length) return { setId: "", setLabel: "", items: [] };
 
-    const setIds = uniq(list.map((x) => String(x.setId || "").trim()).filter(Boolean));
-    if (!setIds.length) return { setId: "", setLabel: "", items: [] };
+    const setIds = uniq(list.map((x) => normalizeSetId(x.setId)).filter(Boolean));
 
-    const chosenSetId = setIds[Math.floor(Math.random() * setIds.length)];
-    const pool = list.filter((x) => String(x.setId || "") === chosenSetId);
+    // If setId is missing in bank, treat entire bank as one set.
+    const chosenSetId = setIds.length ? setIds[Math.floor(Math.random() * setIds.length)] : "default";
+
+    const pool = setIds.length ? list.filter((x) => normalizeSetId(x.setId) === chosenSetId) : list.slice();
 
     const first = pool.find(Boolean);
-    const setLabel = first && first.setLabel ? String(first.setLabel) : chosenSetId;
+    const setLabel =
+      (first && first.setLabel ? String(first.setLabel) : "") ||
+      (chosenSetId === "default" ? "Default set" : chosenSetId);
 
-    const p1 = pool.filter((x) => String(x.partId || "").toLowerCase() === "p1");
-    const p2 = pool.filter((x) => String(x.partId || "").toLowerCase() === "p2");
-    const p3 = pool.filter((x) => String(x.partId || "").toLowerCase() === "p3");
+    const p1 = pool.filter((x) => normalizePartId(x.partId) === "p1");
+    const p2 = pool.filter((x) => normalizePartId(x.partId) === "p2");
+    const p3 = pool.filter((x) => normalizePartId(x.partId) === "p3");
 
     const byOrder = (a, b) => (Number(a.order) || 0) - (Number(b.order) || 0);
 
+    // Fallbacks if parts are missing
+    const p1Final = p1.length ? p1.slice().sort(byOrder) : pool.slice(0, Math.min(6, pool.length));
+    const p2Final = p2.length ? p2.slice().sort(byOrder) : pool.slice(Math.min(6, pool.length), Math.min(8, pool.length));
+    const p3Final = p3.length ? p3.slice().sort(byOrder) : pool.slice(Math.min(8, pool.length));
+
     const items = []
-      .concat(p1.slice().sort(byOrder))
-      .concat(p2.slice().sort(byOrder))
-      .concat(p3.slice().sort(byOrder))
+      .concat(p1Final)
+      .concat(p2Final)
+      .concat(p3Final)
+      .filter(Boolean)
       .map((q, idx) => {
-        // Ensure stable id
-        if (q && !q.id) return { ...q, id: `p_${chosenSetId}_${idx}` };
-        return q;
+        const qid = q && q.id ? String(q.id).trim() : "";
+        if (qid) return q;
+        return { ...q, id: makeStableId(q, idx, chosenSetId) };
       });
 
     return { setId: chosenSetId, setLabel, items };
@@ -311,7 +365,7 @@
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
-          <div style="font-weight:800; color: var(--muted)">${partLabel(q.partId)} • Item ${n} of ${total}</div>
+          <div style="font-weight:800; color: var(--muted)">${safeText(partLabel(q.partId))} • Item ${n} of ${total}</div>
           <span class="chip" aria-label="Time remaining" style="font-weight:900">${formatTime(state.timeRemaining)}</span>
           <span class="chip" style="font-weight:900">Topic set: ${safeText(state.setLabel || "—")}</span>
         </div>
@@ -343,12 +397,15 @@
 
   function renderPromptBlock(q) {
     const title = q && q.title ? `<div style="font-weight:900">${safeText(q.title)}</div>` : "";
-    const question = q && q.question ? `<div style="margin-top:8px; white-space:pre-wrap">${safeText(q.question)}</div>` : "";
+    const question =
+      q && q.question
+        ? `<div style="margin-top:8px; white-space:pre-wrap; line-height:1.4">${safeText(q.question)}</div>`
+        : "";
     const bullets =
       q && Array.isArray(q.bullets) && q.bullets.length
-        ? `<ul style="margin:10px 0 0; padding-left:18px">${q.bullets
-            .map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`)
-            .join("")}</ul>`
+        ? `<ul style="margin:10px 0 0; padding-left:18px">
+            ${q.bullets.map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`).join("")}
+          </ul>`
         : "";
 
     return `
@@ -379,23 +436,28 @@
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <legend style="padding:0 8px; font-weight:900">Your response (type what you would say)</legend>
 
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:8px">
+            <div style="opacity:.9">
+              Word count: <strong data-wordcount>${wc}</strong>${minWordsOk ? ` • Practice min: <strong>${minWords}</strong>` : ""}
+            </div>
+            <div style="opacity:.85">Speak aloud first, then type.</div>
+          </div>
+
           <label for="speak-text" style="display:block; margin-top:10px; font-weight:700">Answer</label>
           <textarea
             id="speak-text"
             name="speakText"
             rows="${isPart2Cue(q) ? 12 : 8}"
             style="width:100%; margin-top:8px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface); resize:vertical"
-            placeholder="Speak aloud, then type here..."
+            placeholder="Type here..."
+            required
           >${safeText(saved)}</textarea>
 
-          <div style="margin-top:10px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
-            <div style="opacity:.9">
-              Word count: <strong data-wordcount>${wc}</strong>${minWordsOk ? ` • Practice min: <strong>${minWords}</strong>` : ""}
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap">
-              <button class="btn" type="button" data-action="back" ${backDisabled}>Back</button>
-              <button class="btn btn--primary" type="submit">${state.index + 1 >= state.items.length ? "Finish" : "Save & Next"}</button>
-            </div>
+          <div class="actions" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+            <button class="btn" type="button" data-action="back" ${backDisabled}>Back</button>
+            <button class="btn btn--primary" type="submit" data-action="saveNext">
+              ${state.index + 1 >= state.items.length ? "Finish" : "Save & Next"}
+            </button>
           </div>
         </fieldset>
       </form>
@@ -438,6 +500,12 @@
   }
 
   function renderSummary(state) {
+    const totalQuestions = state.items.length;
+    const rawCorrect = Array.isArray(state.review)
+      ? state.review.filter((r) => r && r.isCorrect).length
+      : 0;
+    const percent = totalQuestions ? Math.round((rawCorrect / totalQuestions) * 100) : 0;
+
     const reviewHtml = state.items
       .map((q, idx) => {
         const text = state.responses[q.id] || "";
@@ -464,10 +532,12 @@
 
             <div style="margin-top:10px">
               <div style="font-weight:900">Prompt</div>
-              <div style="margin-top:8px; white-space:pre-wrap">${safeText(q.question || "")}</div>
+              <div style="margin-top:8px; white-space:pre-wrap; line-height:1.4">${safeText(q.question || "")}</div>
               ${
                 Array.isArray(q.bullets) && q.bullets.length
-                  ? `<ul style="margin:10px 0 0; padding-left:18px">${q.bullets.map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`).join("")}</ul>`
+                  ? `<ul style="margin:10px 0 0; padding-left:18px">${q.bullets
+                      .map((b) => `<li style="margin:6px 0">${safeText(b)}</li>`)
+                      .join("")}</ul>`
                   : ""
               }
             </div>
@@ -512,11 +582,15 @@
       })
       .join("");
 
+    const saveDisabled = state.isSaving ? `disabled aria-disabled="true"` : "";
+    const saveLabel = state.isSaving ? "Saving…" : "Save score to Profile";
+    const savedMsg = state.savedMsg ? String(state.savedMsg) : "";
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished</strong>
         <p style="margin:8px 0 0; opacity:.92">
-          Auto-checks completed. Use the rubric and optional manual scoring below.
+          Practice score: <strong>${rawCorrect}</strong> / ${totalQuestions} (${percent}%)
         </p>
         <p style="margin:8px 0 0; opacity:.92">
           Time remaining: <strong>${formatTime(state.timeRemaining)}</strong>
@@ -528,6 +602,15 @@
             Average (0–9): <strong data-manual-overall>—</strong>
           </div>
         </div>
+
+        <div class="actions" style="margin-top:12px; flex-wrap:wrap">
+          <button class="btn btn--primary" type="button" data-action="save" ${saveDisabled}>${saveLabel}</button>
+          <button class="btn" type="button" data-action="restart">Restart</button>
+        </div>
+
+        <p class="muted" data-saved-msg aria-live="polite" role="status" style="margin:10px 0 0">
+          ${safeText(savedMsg)}
+        </p>
       </div>
 
       <div class="note" style="margin-top:12px; padding:12px 14px">
@@ -547,10 +630,6 @@
 
       <div style="margin-top:12px; display:grid; gap:10px">
         ${reviewHtml}
-      </div>
-
-      <div class="actions" style="margin-top:12px">
-        <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
       </div>
     `;
   }
@@ -586,6 +665,9 @@
         index: 0,
         responses: Object.create(null),
 
+        // computed at finish (aligned to items)
+        review: [],
+
         timeRemaining: TIME_LIMIT_SEC,
         timerId: null,
 
@@ -598,7 +680,13 @@
         p2TimerId: null,
         p2Remaining: 0,
 
-        manualScores: Object.create(null) // global::idx => value
+        manualScores: Object.create(null), // global::idx => value
+
+        submitLock: false,
+
+        // save-to-profile
+        savedMsg: "",
+        isSaving: false
       };
 
       function stopTimer() {
@@ -616,6 +704,22 @@
         state.p2Remaining = 0;
       }
 
+      function buildReview() {
+        const items = Array.isArray(state.items) ? state.items : [];
+        state.review = items.map((q) => {
+          const text = state.responses[q && q.id ? q.id : ""] || "";
+          const res = runChecks(q, text);
+          const isCorrect = res.total ? res.passed === res.total : true;
+          return { isCorrect: !!isCorrect };
+        });
+
+        const totalQuestions = items.length;
+        const rawCorrect = state.review.filter((r) => r && r.isCorrect).length;
+        const percent = totalQuestions ? Math.round((rawCorrect / totalQuestions) * 100) : 0;
+
+        return { rawCorrect, totalQuestions, percent };
+      }
+
       function startOverallTimer() {
         stopTimer();
         state.timerId = setInterval(() => {
@@ -625,8 +729,10 @@
 
           if (state.timeRemaining <= 0) {
             state.timeRemaining = 0;
+            saveCurrentText();
             stopTimer();
             stopP2Timer();
+            buildReview();
             state.status = "summary";
             paint();
             updateManualSummary();
@@ -664,27 +770,30 @@
         else if (state.status === "error") stage.innerHTML = renderError(state.lastError);
         else stage.innerHTML = renderIntro();
 
-        if (state.status === "task") {
-          // ensure wordcount shows correct value on initial render
-          updateWordCountLive();
-        }
-
-        if (state.status === "summary") {
-          updateManualSummary();
-        }
+        if (state.status === "task") updateWordCountLive();
+        if (state.status === "summary") updateManualSummary();
       }
 
       function resetRunState() {
         stopTimer();
         stopP2Timer();
+
         state.items = [];
         state.index = 0;
         state.responses = Object.create(null);
+        state.review = [];
+
         state.timeRemaining = TIME_LIMIT_SEC;
         state.lastError = "";
+
         state.setId = "";
         state.setLabel = "";
+
         state.manualScores = Object.create(null);
+        state.submitLock = false;
+
+        state.savedMsg = "";
+        state.isSaving = false;
       }
 
       async function start() {
@@ -694,6 +803,7 @@
 
         try {
           await ensureBankLoaded(ctx);
+
           const bank =
             window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])
               ? window.UEAH_TEST_BANKS[SLUG]
@@ -732,7 +842,7 @@
 
       function saveCurrentText() {
         const q = state.items[state.index];
-        if (!q) return;
+        if (!q || !q.id) return;
         const ta = host.querySelector("#speak-text");
         state.responses[q.id] = ta ? ta.value : "";
       }
@@ -747,13 +857,18 @@
       }
 
       function goNextOrFinish() {
+        if (state.submitLock) return;
+        state.submitLock = true;
+
         saveCurrentText();
         stopP2Timer();
 
         if (state.index + 1 >= state.items.length) {
           stopTimer();
+          buildReview();
           state.status = "summary";
           paint();
+          state.submitLock = false;
           return;
         }
 
@@ -766,6 +881,7 @@
             const ta = host.querySelector("#speak-text");
             if (ta && typeof ta.focus === "function") ta.focus();
           } catch (_) {}
+          state.submitLock = false;
         }, 0);
       }
 
@@ -797,6 +913,63 @@
         el.textContent = avg.toFixed(1);
       }
 
+      function saveScoreToProfile() {
+        if (state.status !== "summary") return;
+        if (state.isSaving) return;
+
+        const saver = window.UEAH_SAVE_SCORE && window.UEAH_SAVE_SCORE.save;
+        if (typeof saver !== "function") {
+          state.savedMsg = "Save not available (missing save helper).";
+          paint();
+          return;
+        }
+
+        state.isSaving = true;
+        state.savedMsg = "Saving…";
+        paint();
+
+        const score = buildReview();
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "ielts",
+          skill: "speaking",
+          at: nowIso(),
+          questions: state.items, // stable ids ensured in buildTestFromBank
+          review: state.review, // aligned to questions; isCorrect boolean sufficient
+          rawCorrect: score.rawCorrect,
+          totalQuestions: score.totalQuestions,
+          percent: score.percent
+        };
+
+        Promise.resolve()
+          .then(() => saver(payload))
+          .then((res) => {
+            if (!res || res.ok === false) {
+              const reason = res && res.reason ? String(res.reason) : "Unknown error";
+              state.savedMsg = `Could not save. (${reason})`;
+              return;
+            }
+
+            const scoreTxt = Number.isFinite(Number(res.normalizedScore))
+              ? String(Math.round(Number(res.normalizedScore)))
+              : "—";
+            const levelTxt = res.levelTitle ? String(res.levelTitle) : "Saved";
+            state.savedMsg = `Saved to Profile — ${scoreTxt}/100 • ${levelTxt}`;
+          })
+          .catch((err) => {
+            const msg = err && err.message ? String(err.message) : "Unknown error";
+            state.savedMsg = `Could not save. (${msg})`;
+          })
+          .finally(() => {
+            state.isSaving = false;
+            paint();
+          });
+      }
+
+      // Initial render
+      paint();
+
       host.addEventListener("click", (e) => {
         const btn = e.target && e.target.closest ? e.target.closest("[data-action]") : null;
         if (!btn) return;
@@ -822,6 +995,9 @@
           e.preventDefault();
           stopP2Timer();
           paint();
+        } else if (action === "save") {
+          e.preventDefault();
+          saveScoreToProfile();
         }
       });
 
@@ -829,6 +1005,7 @@
         const form = e.target;
         if (!form || !form.matches || !form.matches('[data-form="speaking"]')) return;
         e.preventDefault();
+        if (state.status !== "task") return;
         goNextOrFinish();
       });
 
@@ -848,16 +1025,18 @@
         }
       });
 
+      // Stop timers + save current text on navigation changes (best effort)
       window.addEventListener(
         "popstate",
         () => {
+          try {
+            saveCurrentText();
+          } catch (_) {}
           stopTimer();
           stopP2Timer();
         },
         { passive: true }
       );
-
-      paint();
     }
   });
 })();

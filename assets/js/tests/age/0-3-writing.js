@@ -10,7 +10,13 @@
    - Caregiver marks each prompt as Done or Skip
    - Saves per-task status + optional notes (non-scored)
 
-   No build step: runs directly in the browser.
+   Updates:
+   - Ensures stable ids (fallback id if missing) so results/notes map reliably
+   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE)
+   - Save payload now includes (or ensures present):
+     * questions: state.questions
+     * resultsById: state.results
+     * notesById: state.notes
 */
 
 (function () {
@@ -73,18 +79,27 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
         if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
           resolve(true);
           return;
         }
-        existing.addEventListener("load", () => resolve(true), { once: true });
+        existing.addEventListener("load", validate, { once: true });
         existing.addEventListener(
           "error",
           () => reject(new Error("Failed to load question bank.")),
           { once: true }
         );
+        // in case it loaded before listeners:
+        validate();
         return;
       }
 
@@ -92,7 +107,7 @@
       s.src = src;
       s.defer = true;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -164,7 +179,7 @@
       ? `<span style="display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid var(--border); color: var(--muted); font-weight:800; font-size:12px">${diff}</span>`
       : "";
 
-    const id = q && q.id ? q.id : "";
+    const id = q && q.id ? String(q.id) : "";
     const savedNote = id ? state.notes[id] || "" : "";
 
     return `
@@ -233,10 +248,11 @@
     const total = state.questions.length;
     const done = state.doneCount;
     const skipped = total - done;
+    const pct = total ? Math.round((done / total) * 100) : 0;
 
     const rows = state.questions
       .map((q, i) => {
-        const id = q && q.id ? q.id : "";
+        const id = q && q.id ? String(q.id) : "";
         const status = id ? state.results[id] || "skip" : "skip";
         const icon = status === "done" ? "✅" : "⏭️";
         const note = id && state.notes[id] ? String(state.notes[id]) : "";
@@ -252,11 +268,13 @@
       })
       .join("");
 
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
+
     return `
       <div class="detail-card" role="region" aria-label="Results summary">
         <h3 style="margin:0; font-size:18px">Finished</h3>
         <p style="margin:10px 0 0; color: var(--muted)">
-          Done: <b>${done}</b> / ${total} • Skipped: <b>${skipped}</b>
+          Done: <b>${done}</b> / ${total} (${pct}%) • Skipped: <b>${skipped}</b>
         </p>
 
         <div style="margin-top:12px; border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
@@ -277,6 +295,18 @@
 
         <div class="actions" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
           <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
+          ${
+            canSave
+              ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+              : ""
+          }
+          ${
+            state.savedMsg
+              ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(
+                  state.savedMsg
+                )}</span>`
+              : ""
+          }
         </div>
       </div>
     `;
@@ -296,7 +326,6 @@
     const ctx = canvas.getContext("2d");
     if (!ctx) return { canvas: null, ctx: null, destroy: null, clear: null };
 
-    // Fit internal pixels to CSS size for crisp drawing
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     const w = Math.max(240, Math.floor(rect.width));
@@ -402,7 +431,8 @@
         doneCount: 0,
         results: Object.create(null), // q.id -> "done" | "skip"
         notes: Object.create(null), // q.id -> string
-        lastError: ""
+        lastError: "",
+        savedMsg: ""
       };
 
       let canvasApi = { destroy: null, clear: null };
@@ -435,7 +465,7 @@
 
       function currentQuestionId() {
         const q = currentQuestion();
-        return q && q.id ? q.id : "";
+        return q && q.id ? String(q.id) : "";
       }
 
       function saveNoteFromUI() {
@@ -451,6 +481,7 @@
       async function start() {
         state.status = "loading";
         state.lastError = "";
+        state.savedMsg = "";
         paint();
 
         try {
@@ -463,7 +494,16 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.map((q) => (isPlainObject(q) ? { ...q } : q));
+          const prepared = bank
+            .map((q, idx) => {
+              if (!isPlainObject(q)) return null;
+              const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+              return { ...q, id };
+            })
+            .filter(Boolean);
+
+          if (!prepared.length) throw new Error("Question bank is invalid.");
+
           shuffleInPlace(prepared);
 
           state.questions = prepared;
@@ -471,6 +511,7 @@
           state.doneCount = 0;
           state.results = Object.create(null);
           state.notes = Object.create(null);
+          state.savedMsg = "";
 
           state.status = "prompt";
           paint();
@@ -489,6 +530,7 @@
         state.results = Object.create(null);
         state.notes = Object.create(null);
         state.lastError = "";
+        state.savedMsg = "";
         paint();
       }
 
@@ -496,7 +538,7 @@
         const q = currentQuestion();
         if (q && q.id) {
           saveNoteFromUI();
-          state.results[q.id] = status;
+          state.results[String(q.id)] = status;
           if (status === "done") state.doneCount += 1;
         }
 
@@ -508,6 +550,30 @@
 
         state.index += 1;
         state.status = "prompt";
+        paint();
+      }
+
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        // REQUIRED fields for this runner family:
+        // - questions: state.questions
+        // - resultsById: state.results
+        // - notesById: state.notes
+        const res = window.UEAH_SAVE_SCORE.save({
+          slug: SLUG,
+          ageGroup: "0-3",
+          skill: "writing",
+          questions: state.questions,
+          resultsById: state.results,
+          notesById: state.notes
+        });
+
+        state.savedMsg = res && res.ok ? "Saved to Profile." : "Could not save.";
         paint();
       }
 
@@ -536,6 +602,9 @@
         } else if (action === "clear") {
           ev.preventDefault();
           if (canvasApi && typeof canvasApi.clear === "function") canvasApi.clear();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 

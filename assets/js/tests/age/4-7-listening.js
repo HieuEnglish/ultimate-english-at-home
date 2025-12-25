@@ -14,6 +14,7 @@
 
    Update:
    - Adds a final summary report (per-question review).
+   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE).
 */
 
 (function () {
@@ -52,6 +53,10 @@
       .replaceAll("'", "&#39;");
   }
 
+  function nowIso() {
+    return new Date().toISOString();
+  }
+
   function cloneQuestionWithShuffledOptions(q) {
     if (!isPlainObject(q)) return q;
 
@@ -79,6 +84,64 @@
     const n = Number(idx);
     if (!Number.isFinite(n)) return "";
     return q.options[n] == null ? "" : String(q.options[n]);
+  }
+
+  function normalizeDifficulty(v) {
+    const d = String(v || "").trim().toLowerCase();
+    if (d === "easy" || d === "medium" || d === "hard") return d;
+    return "";
+  }
+
+  function computeDifficultyBreakdown(questions, reviewRows) {
+    const qs = Array.isArray(questions) ? questions : [];
+    const rows = Array.isArray(reviewRows) ? reviewRows : [];
+
+    const byIndex = Object.create(null);
+    rows.forEach((r) => {
+      const n = Number(r && r.number);
+      if (Number.isFinite(n) && n >= 1) byIndex[n - 1] = !!r.isCorrect;
+    });
+
+    const out = {
+      easy: { total: 0, correct: 0 },
+      medium: { total: 0, correct: 0 },
+      hard: { total: 0, correct: 0 },
+      unknown: { total: 0, correct: 0 }
+    };
+
+    qs.forEach((q, idx) => {
+      const d = normalizeDifficulty(q && q.difficulty);
+      const key = d || "unknown";
+      out[key].total += 1;
+      if (byIndex[idx]) out[key].correct += 1;
+    });
+
+    // Only return categories that actually appear (keeps payload small)
+    const compact = Object.create(null);
+    Object.keys(out).forEach((k) => {
+      if (out[k].total > 0) compact[k] = out[k];
+    });
+    return compact;
+  }
+
+  function computeTypeBreakdown(questions, reviewRows) {
+    const qs = Array.isArray(questions) ? questions : [];
+    const rows = Array.isArray(reviewRows) ? reviewRows : [];
+
+    const byIndex = Object.create(null);
+    rows.forEach((r) => {
+      const n = Number(r && r.number);
+      if (Number.isFinite(n) && n >= 1) byIndex[n - 1] = !!r.isCorrect;
+    });
+
+    const out = Object.create(null);
+    qs.forEach((q, idx) => {
+      const t = String(q && q.type ? q.type : "unknown").trim() || "unknown";
+      if (!out[t]) out[t] = { total: 0, correct: 0 };
+      out[t].total += 1;
+      if (byIndex[idx]) out[t].correct += 1;
+    });
+    return out;
   }
 
   // -----------------------------
@@ -450,6 +513,7 @@
     const total = state.questions.length;
     const correct = state.correctCount;
     const pct = total ? Math.round((correct / total) * 100) : 0;
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
 
     return `
       <div class="note" style="margin-top:0">
@@ -460,8 +524,18 @@
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -502,7 +576,8 @@
         lastError: "",
         showWords: false,
         autoSpokenIndex: -1,
-        review: [] // per-question report rows
+        review: [], // per-question report rows
+        savedMsg: ""
       };
 
       function currentQuestion() {
@@ -524,6 +599,7 @@
         state.showWords = false;
         state.autoSpokenIndex = -1;
         state.review = [];
+        state.savedMsg = "";
       }
 
       function paint() {
@@ -553,6 +629,7 @@
         state.showWords = false;
         state.autoSpokenIndex = -1;
         state.review = [];
+        state.savedMsg = "";
         paint();
 
         try {
@@ -577,6 +654,7 @@
           state.showWords = false;
           state.autoSpokenIndex = -1;
           state.review = [];
+          state.savedMsg = "";
           state.status = "question";
           paint();
         } catch (err) {
@@ -618,6 +696,7 @@
           typeLabel: questionTypeLabel(q),
           say: q && q.say ? String(q.say) : "",
           picture: q && q.picture ? String(q.picture) : "",
+          difficulty: q && q.difficulty ? String(q.difficulty) : "",
           chosenText: optionAt(q, chosen) || "(none)",
           correctText: optionAt(q, correctIdx) || "(not set)",
           isCorrect
@@ -650,6 +729,57 @@
         paint();
       }
 
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const total = state.questions.length;
+        const correct = state.correctCount;
+        const percent = total ? (correct / total) * 100 : 0;
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "4-7",
+          skill: "listening",
+          at: nowIso(),
+
+          // FIX: include scoring inputs for normalization
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          review: Array.isArray(state.review) ? state.review : [],
+
+          rawCorrect: correct,
+          totalQuestions: total,
+          percent: Math.round(percent),
+          difficultyBreakdown: computeDifficultyBreakdown(state.questions, state.review),
+          typeBreakdown: computeTypeBreakdown(state.questions, state.review)
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        if (res && res.ok) {
+          // Try to show something informative if helper returns details, otherwise generic.
+          const norm =
+            res.normalizedScore != null
+              ? `${Math.round(Number(res.normalizedScore))}/100`
+              : res.saved && res.saved.normalizedScore != null
+                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                : "";
+          const level =
+            res.levelTitle ||
+            (res.saved && res.saved.levelTitle) ||
+            (res.saved && res.saved.level && res.saved.level.title) ||
+            "";
+          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+        } else {
+          state.savedMsg = "Could not save.";
+        }
+
+        paint();
+      }
+
       // Event delegation (stage content gets re-rendered)
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("button") : null;
@@ -674,6 +804,9 @@
         } else if (action === "toggleWords") {
           ev.preventDefault();
           toggleWords();
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 

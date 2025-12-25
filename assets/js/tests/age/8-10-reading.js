@@ -13,8 +13,13 @@
    - Shuffles question order on start
    - Shuffles options within MCQ/TF questions
 
-   Update:
-   - Adds a final summary report (per-question review).
+   Updates:
+   - Ensures stable ids (fallback id if missing)
+   - Robust bank loader (handles existing script + validates after load tick)
+   - Adds Retry on error
+   - Prevents double-submit grading
+   - Adds a final summary report (per-question review)
+   - Optional "Save score to Profile" via window.UEAH_SAVE_SCORE.save (if available)
 */
 
 (function () {
@@ -47,32 +52,31 @@
 
   function safeText(v) {
     return String(v == null ? "" : v)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function nowIso() {
+    return new Date().toISOString();
   }
 
   function normalizeAnswerText(v) {
     return String(v == null ? "" : v)
       .trim()
       .toLowerCase()
-      .replace(/\s+/g, "");
+      .replace(/\s+/g, "")
+      .replace(/[.!,?;:]/g, "");
   }
 
-  function cloneQuestionWithShuffledOptions(q) {
-    if (!isPlainObject(q)) return q;
-    if (!Array.isArray(q.options)) return { ...q };
-    if (typeof q.answer !== "number") return { ...q };
-
-    const pairs = q.options.map((text, idx) => ({ text, idx }));
-    shuffleInPlace(pairs);
-
-    const newOptions = pairs.map((p) => p.text);
-    const newAnswer = pairs.findIndex((p) => p.idx === q.answer);
-
-    return { ...q, options: newOptions, answer: newAnswer };
+  function ensureIds(qs) {
+    return qs.map((q, idx) => {
+      if (!isPlainObject(q)) return q;
+      const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
+      return { ...q, id };
+    });
   }
 
   function answerTextForBlank(ans) {
@@ -88,10 +92,68 @@
   }
 
   function questionTypeLabel(q) {
-    const t = String(q && q.type ? q.type : "multipleChoice");
-    if (t === "fillInTheBlank") return "Fill in the blank";
-    if (t === "trueFalse") return "True / False";
+    const t = String(q && q.type ? q.type : "multipleChoice").toLowerCase();
+    if (t === "fillintheblank") return "Fill in the blank";
+    if (t === "truefalse") return "True / False";
     return "Multiple choice";
+  }
+
+  function coerceTrueFalse(q) {
+    // Ensure TF has options + numeric answer index
+    if (!isPlainObject(q)) return q;
+    const t = String(q.type || "").toLowerCase();
+    if (t !== "truefalse") return q;
+
+    const options = Array.isArray(q.options) && q.options.length ? q.options : ["True", "False"];
+
+    let ans = q.answer;
+    if (typeof ans === "boolean") ans = ans ? 0 : 1;
+    else if (typeof ans === "string") {
+      const s = ans.trim().toLowerCase();
+      if (s === "true") ans = 0;
+      else if (s === "false") ans = 1;
+    }
+
+    return { ...q, options, answer: ans };
+  }
+
+  function cloneQuestionWithShuffledOptions(q) {
+    if (!isPlainObject(q)) return q;
+
+    const base = coerceTrueFalse({ ...q });
+
+    if (!Array.isArray(base.options)) return base;
+    if (typeof base.answer !== "number") return base;
+
+    const pairs = base.options.map((text, idx) => ({ text, idx }));
+    shuffleInPlace(pairs);
+
+    const newOptions = pairs.map((p) => p.text);
+    const newAnswer = pairs.findIndex((p) => p.idx === base.answer);
+
+    return { ...base, options: newOptions, answer: newAnswer };
+  }
+
+  function computeDifficultyBreakdown(questions, reviewRows) {
+    // Optional: if q.difficulty exists, aggregate correctness counts.
+    const out = Object.create(null);
+    const qs = Array.isArray(questions) ? questions : [];
+    const rows = Array.isArray(reviewRows) ? reviewRows : [];
+
+    qs.forEach((q, i) => {
+      const d = String(q && q.difficulty ? q.difficulty : "")
+        .trim()
+        .toLowerCase();
+      if (!d) return;
+
+      if (!out[d]) out[d] = { correct: 0, total: 0 };
+      out[d].total += 1;
+
+      const r = rows[i];
+      if (r && r.isCorrect) out[d].correct += 1;
+    });
+
+    return out;
   }
 
   // -----------------------------
@@ -112,23 +174,25 @@
     bankPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
-          resolve(true);
-          return;
-        }
-
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        // Let already-present script execute (best-effort), then validate.
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -269,8 +333,8 @@
     const top = renderTopBar(state);
     const passage = renderPassage(q);
 
-    const type = String(q.type || "multipleChoice");
-    const form = type === "fillInTheBlank" ? renderFillBlankForm(q) : renderMCQForm(q);
+    const type = String(q.type || "multipleChoice").toLowerCase();
+    const form = type === "fillintheblank" ? renderFillBlankForm(q) : renderMCQForm(q);
 
     return `${top}${passage}${form}`;
   }
@@ -286,9 +350,9 @@
 
     let detailHtml = "";
 
-    const type = String(q.type || "multipleChoice");
+    const type = String(q.type || "multipleChoice").toLowerCase();
 
-    if (type === "fillInTheBlank") {
+    if (type === "fillintheblank") {
       const correctText = answerTextForBlank(q.answer);
       const chosenText = state.lastBlank != null ? String(state.lastBlank) : "";
 
@@ -297,8 +361,18 @@
         : `<p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText)}</strong></p>
            <p style="margin:8px 0 0; opacity:.92">You typed: <strong>${safeText(chosenText || "(blank)")}</strong></p>`;
     } else {
-      const correctIdx = Number(q.answer);
       const chosenIdx = Number(state.lastChoice);
+
+      // Handle TF where answer could still be boolean/string (should be normalized in start)
+      let ansIdx = q.answer;
+      if (typeof ansIdx === "boolean") ansIdx = ansIdx ? 0 : 1;
+      else if (typeof ansIdx === "string") {
+        const s = ansIdx.trim().toLowerCase();
+        if (s === "true") ansIdx = 0;
+        else if (s === "false") ansIdx = 1;
+      }
+
+      const correctIdx = Number(ansIdx);
 
       const correctText = optionAt(q, correctIdx);
       const chosenText = optionAt(q, chosenIdx);
@@ -400,6 +474,8 @@
     const correct = state.correctCount;
     const pct = total ? Math.round((correct / total) * 100) : 0;
 
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
@@ -409,8 +485,18 @@
 
       ${renderReview(state)}
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -432,6 +518,7 @@
 
     afterRender(rootEl, ctx) {
       if (!rootEl) return;
+
       const host = rootEl.querySelector(`[data-ueah-test="${SLUG}"]`);
       if (!host) return;
 
@@ -450,7 +537,9 @@
         lastBlank: "",
         lastIsCorrect: false,
         lastError: "",
-        review: [] // per-question report rows
+        review: [],
+        savedMsg: "",
+        isGrading: false
       };
 
       function resetRunState() {
@@ -462,6 +551,8 @@
         state.lastIsCorrect = false;
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
+        state.isGrading = false;
       }
 
       function paint() {
@@ -478,6 +569,8 @@
         state.status = "loading";
         state.lastError = "";
         state.review = [];
+        state.savedMsg = "";
+        state.isGrading = false;
         paint();
 
         try {
@@ -490,10 +583,10 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = bank.map(cloneQuestionWithShuffledOptions);
+          const prepared = ensureIds(bank.filter(isPlainObject).map(cloneQuestionWithShuffledOptions));
           shuffleInPlace(prepared);
 
-          // Take a random subset for variety (order already shuffled)
+          // Random subset for variety (order already shuffled)
           const subset = prepared.slice(0, Math.min(MAX_QUESTIONS, prepared.length));
 
           state.questions = subset;
@@ -503,6 +596,8 @@
           state.lastBlank = "";
           state.lastIsCorrect = false;
           state.review = [];
+          state.savedMsg = "";
+          state.isGrading = false;
 
           state.status = "question";
           paint();
@@ -527,6 +622,8 @@
       }
 
       function next() {
+        state.isGrading = false;
+
         const total = state.questions.length;
         if (state.index + 1 >= total) {
           state.status = "summary";
@@ -543,22 +640,31 @@
       }
 
       function recordReviewRow(q, ok, chosenIdx, blankText) {
-        const type = String(q && q.type ? q.type : "multipleChoice");
+        const type = String(q && q.type ? q.type : "multipleChoice").toLowerCase();
 
         let chosenText = "";
         let correctText = "";
 
-        if (type === "fillInTheBlank") {
+        if (type === "fillintheblank") {
           chosenText = blankText != null && String(blankText).trim() ? String(blankText) : "(blank)";
           correctText = answerTextForBlank(q ? q.answer : "");
         } else {
-          const correctIdx = Number(q && q.answer);
+          // Normalize TF answers if needed
+          let ansIdx = q && q.answer;
+          if (typeof ansIdx === "boolean") ansIdx = ansIdx ? 0 : 1;
+          else if (typeof ansIdx === "string") {
+            const s = ansIdx.trim().toLowerCase();
+            if (s === "true") ansIdx = 0;
+            else if (s === "false") ansIdx = 1;
+          }
+
+          const correctIdx = Number(ansIdx);
           chosenText = optionAt(q, chosenIdx) || "(none)";
           correctText = optionAt(q, correctIdx) || "(not set)";
         }
 
         state.review.push({
-          number: state.index + 1,
+          number: state.review.length + 1,
           typeLabel: questionTypeLabel(q),
           question: q && q.question ? String(q.question) : "",
           passage: q && q.passage ? String(q.passage) : "",
@@ -569,17 +675,17 @@
       }
 
       function grade(choiceIndex, blankText) {
+        if (state.status !== "question" || state.isGrading) return;
+
         const q = state.questions[state.index];
         if (!q) return;
 
-        // Prevent double-answering.
-        if (state.status !== "question") return;
+        state.isGrading = true;
 
-        const type = String(q.type || "multipleChoice");
-
+        const type = String(q.type || "multipleChoice").toLowerCase();
         let ok = false;
 
-        if (type === "fillInTheBlank") {
+        if (type === "fillintheblank") {
           const user = normalizeAnswerText(blankText);
           const ans = q.answer;
 
@@ -587,14 +693,25 @@
           else ok = normalizeAnswerText(ans) === user;
 
           state.lastBlank = blankText != null ? String(blankText) : "";
-
           recordReviewRow(q, ok, null, state.lastBlank);
         } else {
           const chosen = Number(choiceIndex);
-          if (!Number.isFinite(chosen)) return;
+          if (!Number.isFinite(chosen)) {
+            state.isGrading = false;
+            return;
+          }
 
           state.lastChoice = chosen;
-          ok = chosen === Number(q.answer);
+
+          let ansIdx = q.answer;
+          if (typeof ansIdx === "boolean") ansIdx = ansIdx ? 0 : 1;
+          else if (typeof ansIdx === "string") {
+            const s = ansIdx.trim().toLowerCase();
+            if (s === "true") ansIdx = 0;
+            else if (s === "false") ansIdx = 1;
+          }
+
+          ok = chosen === Number(ansIdx);
 
           recordReviewRow(q, ok, chosen, null);
         }
@@ -606,23 +723,85 @@
         paint();
       }
 
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const total = state.questions.length;
+        const correct = state.correctCount;
+        const percent = total ? Math.round((correct / total) * 100) : 0;
+
+        // UPDATE: include questions + review for downstream scoring/normalization
+        const payload = {
+          slug: SLUG,
+          ageGroup: "8-10",
+          skill: "reading",
+          at: nowIso(),
+
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          review: Array.isArray(state.review) ? state.review : [],
+
+          rawCorrect: correct,
+          totalQuestions: total,
+          percent,
+          difficultyBreakdown: computeDifficultyBreakdown(state.questions, state.review)
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        if (res && res.ok) {
+          const norm =
+            res.normalizedScore != null
+              ? `${Math.round(Number(res.normalizedScore))}/100`
+              : res.saved && res.saved.normalizedScore != null
+                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                : "";
+          const level =
+            res.levelTitle ||
+            (res.saved && res.saved.levelTitle) ||
+            (res.saved && res.saved.level && res.saved.level.title) ||
+            "";
+          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+        } else {
+          state.savedMsg = "Could not save.";
+        }
+
+        paint();
+      }
+
+      // Event delegation
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("button") : null;
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
-        if (action === "start") {
+        if (!action) return;
+
+        if (action === "start" || action === "retry") {
           ev.preventDefault();
           start();
-        } else if (action === "restart") {
+          return;
+        }
+
+        if (action === "restart") {
           ev.preventDefault();
           restart();
-        } else if (action === "next") {
+          return;
+        }
+
+        if (action === "next") {
           ev.preventDefault();
           next();
-        } else if (action === "retry") {
+          return;
+        }
+
+        if (action === "save-score") {
           ev.preventDefault();
-          start();
+          saveScoreToProfile();
+          return;
         }
       });
 
@@ -633,9 +812,11 @@
         ev.preventDefault();
 
         const q = state.questions[state.index];
-        const type = String(q.type || "multipleChoice");
+        if (!q) return;
 
-        if (type === "fillInTheBlank") {
+        const type = String(q.type || "multipleChoice").toLowerCase();
+
+        if (type === "fillintheblank") {
           const input = form.querySelector('input[name="blank"]');
           const value = input ? input.value : "";
           grade(null, value);

@@ -1,11 +1,18 @@
 /* assets/js/views/profile.js
    Profile view for Ultimate English At Home.
-   Allows users to save their email, display name and target score on this device.
-   Uses ctx.profileGet, profileSet and profileClear to persist data.
-   Includes Sync export/import for cross-device persistence.
+
+   - Saves personal info (email, display name, target score) on this device.
+   - Shows test progress by age group using profile.resultsByAge:
+     • completion per skill (R/L/W/S)
+     • last saved score per skill (score + level title + timestamp)
+     • overall certification when all 4 skills are present (computed by profile-store)
+     • reset per age group + reset all saved scores
+   - Uses ctx.profileGet, profileSet and profileClear to persist data.
+   - Includes Sync export/import for cross-device persistence.
 */
 
-import { breadcrumbs, escapeHtml } from '../common.js';
+import { AGE_GROUPS, SKILLS } from '../constants.js';
+import { breadcrumbs } from '../common.js';
 
 function safeNowName() {
   const d = new Date();
@@ -42,6 +49,126 @@ function readFileAsText(file) {
   });
 }
 
+function isPlainObject(v) {
+  return v && typeof v === 'object' && !Array.isArray(v);
+}
+
+function safeText(v) {
+  return String(v == null ? '' : v)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function formatScore(v) {
+  const n = Number(v);
+  if (!Number.isFinite(n)) return '—';
+  const isInt = Math.abs(n - Math.round(n)) < 1e-9;
+  if (isInt) return String(Math.round(n));
+  const isHalf = Math.abs(n * 2 - Math.round(n * 2)) < 1e-9;
+  if (isHalf) return n.toFixed(1);
+  return n.toFixed(2);
+}
+
+function parseDateMaybe(v) {
+  if (!v) return null;
+  const d = new Date(v);
+  return Number.isFinite(d.getTime()) ? d : null;
+}
+
+function formatDateTime(v) {
+  const d = parseDateMaybe(v);
+  if (!d) return '';
+  try {
+    return d.toLocaleString();
+  } catch (_) {
+    return d.toISOString();
+  }
+}
+
+function titleCase(s) {
+  const t = String(s || '').trim();
+  return t ? t.charAt(0).toUpperCase() + t.slice(1) : t;
+}
+
+function ageLabelFor(age) {
+  const a = String(age || '').trim().toLowerCase();
+  if (a === 'ielts') return 'IELTS Practice';
+  if (a === '0-3') return 'Ages 0–3';
+  if (a === '4-7') return 'Ages 4–7';
+  if (a === '8-10') return 'Ages 8–10';
+  if (a === '11-12') return 'Ages 11–12';
+  if (a === '13-18') return 'Ages 13–18';
+  return a || 'Age group';
+}
+
+function isIeltsLikeAge(age) {
+  const a = String(age || '').trim().toLowerCase();
+  return a === '13-18' || a === 'ielts';
+}
+
+function focusForA11y(el) {
+  if (!el) return;
+  try {
+    const hadTabindex = el.hasAttribute('tabindex');
+    if (!hadTabindex) el.setAttribute('tabindex', '-1');
+    requestAnimationFrame(() => {
+      try {
+        el.focus({ preventScroll: false });
+      } catch (_) {
+        el.focus();
+      }
+      if (!hadTabindex) {
+        // keep focusable for subsequent announcements (status regions)
+      }
+    });
+  } catch (_) {}
+}
+
+function getResultsByAge(profile) {
+  const p = isPlainObject(profile) ? profile : {};
+  return isPlainObject(p.resultsByAge) ? p.resultsByAge : {};
+}
+
+function getLastScore(resultsByAge, age, skill) {
+  const byAge = isPlainObject(resultsByAge) ? resultsByAge : {};
+  const bucket = isPlainObject(byAge[age]) ? byAge[age] : null;
+  if (!bucket) return null;
+
+  const sk = isPlainObject(bucket[skill]) ? bucket[skill] : null;
+  const last = sk && isPlainObject(sk.lastScore) ? sk.lastScore : null;
+
+  if (!last) return null;
+  const score = Number(last.score);
+  if (!Number.isFinite(score)) return null;
+
+  return {
+    score,
+    levelTitle: String(last.levelTitle || ''),
+    at: String(last.at || ''),
+  };
+}
+
+function getOverall(resultsByAge, age) {
+  const byAge = isPlainObject(resultsByAge) ? resultsByAge : {};
+  const bucket = isPlainObject(byAge[age]) ? byAge[age] : null;
+  if (!bucket) return null;
+
+  const ov = isPlainObject(bucket.overall) ? bucket.overall : null;
+  if (!ov) return null;
+
+  const score = Number(ov.score);
+  if (!Number.isFinite(score)) return null;
+
+  return {
+    score,
+    title: String(ov.title || ''),
+    at: String(ov.at || ''),
+  };
+}
+
 /**
  * Build the profile page view.
  * @param {Object} ctx - context with helpers and store functions
@@ -70,7 +197,7 @@ export function getView(ctx) {
         <form id="profile-form" novalidate>
           <div class="detail-section field">
             <label class="label" for="profile-email">Email</label>
-            <p class="muted">Used for score tracking and contact.</p>
+            <p class="muted" id="profile-email-help">Used for score tracking and contact.</p>
             <input
               id="profile-email"
               name="email"
@@ -79,6 +206,7 @@ export function getView(ctx) {
               inputmode="email"
               class="input"
               placeholder="name@example.com"
+              aria-describedby="profile-email-help"
             />
           </div>
 
@@ -96,6 +224,7 @@ export function getView(ctx) {
 
           <div class="detail-section field">
             <label class="label" for="profile-target">Target IELTS score</label>
+            <p class="muted" id="profile-target-help">For Ages 13–18 and IELTS Practice only (practice).</p>
             <input
               id="profile-target"
               name="targetScore"
@@ -106,17 +235,38 @@ export function getView(ctx) {
               step="0.5"
               class="input"
               placeholder="Optional (e.g., 6.5)"
+              aria-describedby="profile-target-help"
             />
           </div>
 
           <div class="actions">
-            <button class="btn btn--primary" type="submit">Save</button>
-            <button class="btn" type="button" id="profile-clear">Clear</button>
+            <button class="btn btn--primary" type="submit" aria-label="Save profile">Save</button>
+            <button class="btn" type="button" id="profile-clear" aria-label="Reset profile on this device">Reset profile</button>
+            <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">Scoring plan</a>
             <a class="btn" href="${hrefFor('/')}" data-nav>Home</a>
           </div>
 
-          <p id="profile-status" class="muted" style="margin:12px 0 0" aria-live="polite"></p>
+          <p id="profile-status" class="muted" style="margin:12px 0 0" aria-live="polite" role="status"></p>
         </form>
+      </div>
+
+      <div class="detail-card" style="margin-top:18px" role="region" aria-labelledby="progress-title">
+        <h2 class="detail-title" id="progress-title" style="font-size:18px; margin:0">Progress & certifications</h2>
+        <p class="detail-desc" id="progress-desc" style="margin-top:10px">
+          Save scores from skill tests to track progress by age group (Reading / Listening / Writing / Speaking).
+        </p>
+
+        <div id="profile-progress" style="margin-top:12px" aria-describedby="progress-desc"></div>
+
+        <div class="actions" style="margin-top:12px; flex-wrap:wrap">
+          <button type="button" class="btn" id="progress-reset-all" aria-controls="profile-progress">
+            Reset all saved scores
+          </button>
+          <a class="btn" href="${hrefFor('/tests')}" data-nav>Go to Tests</a>
+          <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">Scoring plan</a>
+        </div>
+
+        <p class="muted" id="progress-status" aria-live="polite" role="status" style="margin:10px 0 0"></p>
       </div>
 
       <div class="detail-card" style="margin-top:18px" role="region" aria-label="Sync profile and favourites">
@@ -144,12 +294,12 @@ export function getView(ctx) {
                   />
                 </label>
 
-                <button type="button" class="btn btn--small" data-sync-mode>
+                <button type="button" class="btn btn--small" data-sync-mode aria-pressed="false">
                   Import mode: Merge
                 </button>
               </div>
 
-              <p class="muted" id="sync-status" aria-live="polite" style="margin:10px 0 0"></p>
+              <p class="muted" id="sync-status" aria-live="polite" role="status" style="margin:10px 0 0"></p>
             `
             : `
               <div class="note" style="margin-top:12px">
@@ -162,6 +312,7 @@ export function getView(ctx) {
 
       <div class="actions">
         <a class="btn" href="${hrefFor('/favourites')}" data-nav>Favourites</a>
+        <a class="btn" href="${hrefFor('/scoring')}" data-nav>Scoring plan</a>
         <a class="btn" href="${hrefFor('/resources')}" data-nav>Resources</a>
       </div>
     </section>
@@ -175,20 +326,203 @@ export function getView(ctx) {
     const clearBtn = document.getElementById('profile-clear');
     const statusEl = document.getElementById('profile-status');
 
-    if (!form || !emailEl || !nameEl || !targetEl || !clearBtn || !statusEl) return;
+    const progressHost = document.getElementById('profile-progress');
+    const progressStatusEl = document.getElementById('progress-status');
+    const resetAllBtn = document.getElementById('progress-reset-all');
 
-    const existing = (typeof profileGet === 'function' && profileGet()) || {};
-    emailEl.value = existing.email || '';
-    nameEl.value = existing.name || '';
-    targetEl.value =
-      typeof existing.targetScore === 'number'
-        ? String(existing.targetScore)
-        : existing.targetScore || '';
+    if (!form || !emailEl || !nameEl || !targetEl || !clearBtn || !statusEl || !progressHost) return;
 
-    function setStatus(msg) {
-      statusEl.textContent = msg || '';
+    function getProfile() {
+      return (typeof profileGet === 'function' && profileGet()) || {};
     }
 
+    function setProfile(next) {
+      return typeof profileSet === 'function' ? profileSet(next) : false;
+    }
+
+    function setStatus(msg, moveFocus) {
+      statusEl.textContent = String(msg || '');
+      if (moveFocus) focusForA11y(statusEl);
+    }
+
+    function setProgressStatus(msg, moveFocus) {
+      if (!progressStatusEl) return;
+      progressStatusEl.textContent = String(msg || '');
+      if (moveFocus) focusForA11y(progressStatusEl);
+    }
+
+    function loadPersonalFields(profile) {
+      const p = profile || {};
+      emailEl.value = p.email || '';
+      nameEl.value = p.name || '';
+      targetEl.value = typeof p.targetScore === 'number' ? String(p.targetScore) : p.targetScore || '';
+    }
+
+    function renderProgress(profile) {
+      const p = profile || {};
+      const resultsByAge = getResultsByAge(p);
+
+      const anySaved = AGE_GROUPS.some((age) =>
+        SKILLS.some((skill) => !!getLastScore(resultsByAge, age, skill))
+      );
+
+      if (!anySaved) {
+        progressHost.innerHTML = `
+          <div class="note" style="margin-top:0">
+            <strong>No saved scores yet</strong>
+            <p style="margin:8px 0 0; opacity:.92">
+              Complete a skill test and click <strong>Save score to Profile</strong> to track progress here.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      const cards = AGE_GROUPS.map((age) => {
+        const label = ageLabelFor(age);
+
+        const savedSkills = SKILLS.map((skill) => ({
+          skill,
+          last: getLastScore(resultsByAge, age, skill),
+        }));
+
+        const completedCount = savedSkills.filter((x) => !!x.last).length;
+
+        const overall = completedCount === SKILLS.length ? getOverall(resultsByAge, age) : null;
+        const overallWhen = overall && overall.at ? formatDateTime(overall.at) : '';
+
+        const skillGrid = savedSkills
+          .map(({ skill, last }) => {
+            const skLabel = titleCase(skill);
+
+            if (last) {
+              const when = last.at ? formatDateTime(last.at) : '';
+              const levelLine = last.levelTitle ? ` • <span style="opacity:.92">${safeText(last.levelTitle)}</span>` : '';
+              const aria = `${skLabel} saved. Score ${formatScore(last.score)} out of 100.`;
+
+              return `
+                <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
+                  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
+                    <div>
+                      <div style="font-weight:900">${safeText(skLabel)}</div>
+                      <div style="margin-top:6px; opacity:.92">
+                        Score: <strong>${safeText(formatScore(last.score))}</strong>/100
+                        ${levelLine}
+                      </div>
+                      ${
+                        when
+                          ? `<div class="muted" style="margin-top:4px">${safeText(when)}</div>`
+                          : `<div class="muted" style="margin-top:4px">Saved</div>`
+                      }
+                    </div>
+                    <span class="chip" style="font-weight:900" aria-label="${safeText(aria)}" title="${safeText(aria)}">✓</span>
+                  </div>
+                </div>
+              `;
+            }
+
+            const aria = `${skLabel} not saved.`;
+            return `
+              <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
+                <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
+                  <div>
+                    <div style="font-weight:900">${safeText(skLabel)}</div>
+                    <div class="muted" style="margin-top:6px">No score saved yet</div>
+                  </div>
+                  <span class="chip" style="font-weight:900" aria-label="${safeText(aria)}" title="${safeText(aria)}">—</span>
+                </div>
+                <div style="margin-top:10px">
+                  <a class="btn btn--small" href="${hrefFor('/tests')}" data-nav aria-label="Go to tests">
+                    Go to tests
+                  </a>
+                </div>
+              </div>
+            `;
+          })
+          .join('');
+
+        const progressLabel = `Completion for ${label}: ${completedCount} of ${SKILLS.length} skills.`;
+
+        const overallBlock = overall
+          ? `
+            <div class="note" style="margin:12px 0 0; padding:10px 12px">
+              <strong>Certification</strong>
+              <p style="margin:8px 0 0; opacity:.92">
+                Overall score: <strong>${safeText(formatScore(overall.score))}</strong>/100
+                ${overall.title ? ` • <span style="opacity:.92">${safeText(overall.title)}</span>` : ''}
+              </p>
+              ${
+                isIeltsLikeAge(age)
+                  ? `<p class="muted" style="margin:8px 0 0">Bands shown are practice estimates (not official IELTS).</p>`
+                  : ''
+              }
+              ${overallWhen ? `<p class="muted" style="margin:8px 0 0">Last updated: ${safeText(overallWhen)}</p>` : ''}
+            </div>
+          `
+          : `
+            <div class="note" style="margin:12px 0 0; padding:10px 12px">
+              <strong>Certification</strong>
+              <p style="margin:8px 0 0; opacity:.92">
+                Complete all 4 skills to unlock an overall score for this group.
+              </p>
+            </div>
+          `;
+
+        return `
+          <div class="detail-card" style="margin-top:12px" data-age-card="${safeText(age)}" role="region" aria-label="${safeText(label)} progress">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap">
+              <div>
+                <div style="font-weight:900">${safeText(label)}</div>
+                <div class="muted" style="margin-top:4px">Completed: ${completedCount} / ${SKILLS.length}</div>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap">
+                <a class="btn btn--small" href="${hrefFor(`/resources/${age}`)}" data-nav aria-label="Open resources for ${safeText(label)}">Open resources</a>
+                <button
+                  type="button"
+                  class="btn btn--small"
+                  data-action="reset-age"
+                  data-age="${safeText(age)}"
+                  aria-label="Reset saved scores for ${safeText(label)}"
+                >
+                  Reset this age group
+                </button>
+              </div>
+            </div>
+
+            <div style="margin-top:10px">
+              <progress value="${completedCount}" max="${SKILLS.length}" style="width:100%; height:14px" aria-label="${safeText(progressLabel)}"></progress>
+            </div>
+
+            <div style="margin-top:12px; display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))">
+              ${skillGrid}
+            </div>
+
+            ${overallBlock}
+          </div>
+        `;
+      }).join('');
+
+      progressHost.innerHTML = cards;
+    }
+
+    function refreshAll(msgPersonal, msgProgress, focusTarget) {
+      const p = getProfile();
+      loadPersonalFields(p);
+      renderProgress(p);
+
+      if (msgPersonal) setStatus(msgPersonal, focusTarget === 'profile');
+      if (msgProgress) setProgressStatus(msgProgress, focusTarget === 'progress');
+    }
+
+    // Initial load
+    refreshAll('', '');
+
+    // Live updates when profile-store dispatches changes (e.g., Save score from tests)
+    window.addEventListener('ueah:profile-changed', () => {
+      refreshAll('', '', '');
+    });
+
+    // Save personal fields (preserve resultsByAge and any other fields)
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -202,18 +536,86 @@ export function getView(ctx) {
         targetScore = Number.isFinite(n) ? n : '';
       }
 
-      const data = { email, name, targetScore };
-      const ok = typeof profileSet === 'function' ? profileSet(data) : false;
-      setStatus(ok ? 'Saved.' : 'Could not save on this device.');
+      const existing = getProfile();
+      const next = { ...existing, email, name, targetScore };
+
+      const ok = setProfile(next);
+      refreshAll(ok ? 'Saved.' : 'Could not save on this device.', '', 'profile');
     });
 
+    // Reset entire profile (personal + saved scores)
     clearBtn.addEventListener('click', () => {
-      const ok = typeof profileClear === 'function' ? profileClear() : false;
+      const confirmReset = window.confirm
+        ? window.confirm('Reset your profile on this device? This clears personal info and saved scores.')
+        : true;
+
+      if (!confirmReset) return;
+
+      const ok = typeof profileClear === 'function' ? profileClear() : setProfile({});
+
       emailEl.value = '';
       nameEl.value = '';
       targetEl.value = '';
-      setStatus(ok ? 'Cleared.' : 'Could not clear on this device.');
+
+      refreshAll(ok ? 'Reset.' : 'Could not reset on this device.', ok ? 'Saved scores cleared.' : '', 'profile');
     });
+
+    // Reset this age group (resultsByAge only)
+    progressHost.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('[data-action="reset-age"]') : null;
+      if (!btn) return;
+
+      const age = String(btn.getAttribute('data-age') || '').trim();
+      if (!age) return;
+
+      const confirmReset = window.confirm
+        ? window.confirm(`Reset saved scores for ${ageLabelFor(age)}?`)
+        : true;
+
+      if (!confirmReset) return;
+
+      const STORE = window.UEAH_PROFILE_STORE;
+      if (STORE && typeof STORE.clearAgeResults === 'function') {
+        STORE.clearAgeResults(age);
+        refreshAll('', `Reset scores for ${ageLabelFor(age)}.`, 'progress');
+        return;
+      }
+
+      // Fallback (should not be needed if profile-store.js is loaded)
+      const existing = getProfile();
+      const next = { ...(existing || {}) };
+      if (isPlainObject(next.resultsByAge)) {
+        const r = { ...next.resultsByAge };
+        delete r[age];
+        next.resultsByAge = r;
+      }
+      const ok = setProfile(next);
+      refreshAll('', ok ? `Reset scores for ${ageLabelFor(age)}.` : 'Could not reset scores on this device.', 'progress');
+    });
+
+    // Reset all saved scores (resultsByAge only)
+    if (resetAllBtn) {
+      resetAllBtn.addEventListener('click', () => {
+        const confirmReset = window.confirm
+          ? window.confirm('Reset all saved test scores on this device? (Personal info is kept.)')
+          : true;
+
+        if (!confirmReset) return;
+
+        const STORE = window.UEAH_PROFILE_STORE;
+        if (STORE && typeof STORE.clearAgeResults === 'function') {
+          STORE.clearAgeResults();
+          refreshAll('', 'All saved scores were reset.', 'progress');
+          return;
+        }
+
+        // Fallback
+        const existing = getProfile();
+        const next = { ...(existing || {}), resultsByAge: {} };
+        const ok = setProfile(next);
+        refreshAll('', ok ? 'All saved scores were reset.' : 'Could not reset scores on this device.', 'progress');
+      });
+    }
 
     // Sync wiring
     const syncStatusEl = document.getElementById('sync-status');
@@ -221,9 +623,8 @@ export function getView(ctx) {
     const importInput = document.querySelector('[data-sync-import]');
     const modeBtn = document.querySelector('[data-sync-mode]');
 
-    if (!syncStatusEl || !canSync) return;
-
     function setSyncStatus(msg) {
+      if (!syncStatusEl) return;
       syncStatusEl.textContent = String(msg || '');
     }
 
@@ -231,10 +632,11 @@ export function getView(ctx) {
     function updateModeUi() {
       if (!modeBtn) return;
       modeBtn.textContent = importMode === 'replace' ? 'Import mode: Replace' : 'Import mode: Merge';
+      modeBtn.setAttribute('aria-pressed', importMode === 'replace' ? 'true' : 'false');
     }
     updateModeUi();
 
-    if (modeBtn) {
+    if (canSync && modeBtn) {
       modeBtn.addEventListener('click', (ev) => {
         ev.preventDefault();
         importMode = importMode === 'merge' ? 'replace' : 'merge';
@@ -242,20 +644,22 @@ export function getView(ctx) {
       });
     }
 
-    if (exportBtn) {
+    if (canSync && exportBtn) {
       exportBtn.addEventListener('click', (ev) => {
         ev.preventDefault();
         try {
           const payload = syncExport();
           downloadJsonFile(payload, safeNowName());
           setSyncStatus('Exported sync file.');
+          focusForA11y(syncStatusEl);
         } catch (_) {
           setSyncStatus('Export failed.');
+          focusForA11y(syncStatusEl);
         }
       });
     }
 
-    if (importInput) {
+    if (canSync && importInput) {
       importInput.addEventListener('change', async () => {
         const file = importInput.files && importInput.files[0] ? importInput.files[0] : null;
         if (!file) return;
@@ -267,12 +671,17 @@ export function getView(ctx) {
           const result = syncImport(text, { mode: importMode });
 
           if (!result || result.ok === false) {
-            setSyncStatus(result && result.reason ? `Import failed: ${escapeHtml(result.reason)}` : 'Import failed.');
+            const reason = result && result.reason ? String(result.reason) : '';
+            setSyncStatus(reason ? `Import failed: ${reason}` : 'Import failed.');
+            focusForA11y(syncStatusEl);
           } else {
             setSyncStatus('Import complete. Your profile and favourites were updated.');
+            refreshAll('', 'Imported profile data.', 'progress');
+            focusForA11y(syncStatusEl);
           }
         } catch (_) {
           setSyncStatus('Import failed (could not read or parse file).');
+          focusForA11y(syncStatusEl);
         } finally {
           importInput.value = '';
         }

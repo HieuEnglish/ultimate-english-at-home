@@ -22,6 +22,7 @@
    - SpeechSynthesis: Play + Stop; cancels on navigation and between prompts
    - Robust bank loader (handles existing script; validates bank after load tick)
    - Summary includes per-section counts + compact review list
+   - Optional "Save score to Profile" via window.UEAH_SAVE_SCORE.save (if available)
    - Slightly improved UI copy for 8–10 (shorter, clearer guidance)
 */
 
@@ -78,12 +79,18 @@
     return v && typeof v === "object" && !Array.isArray(v);
   }
 
-  function normalizeSection(v) {
-    return String(v || "").trim().toLowerCase();
+  // Normalize section keys:
+  // - lowercases
+  // - removes spaces/hyphens/underscores and other non-alphanumerics
+  function normalizeSectionKey(v) {
+    return String(v || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "");
   }
 
   function sectionLabelFor(key) {
-    const k = normalizeSection(key);
+    const k = normalizeSectionKey(key);
     const match = SECTION_PLAN.find((s) => s.key === k);
     return match ? match.label : "Prompt";
   }
@@ -94,6 +101,10 @@
       const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
       return { ...q, id };
     });
+  }
+
+  function nowIso() {
+    return new Date().toISOString();
   }
 
   // -----------------------------
@@ -119,7 +130,7 @@
       const synth = window.speechSynthesis;
       synth.cancel();
 
-      // best-effort prime voices
+      // Best-effort prime voices
       try {
         if (typeof synth.getVoices === "function") synth.getVoices();
       } catch (_) {}
@@ -152,18 +163,35 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        // If already injected, resolve on next tick (lets the script run if needed)
-        setTimeout(() => resolve(true), 0);
+        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
+          resolve(true);
+          return;
+        }
+
+        // If already present but not yet executed/loaded, listen for load/error.
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
+
+        // In case load already happened before listeners attached, validate on next tick.
+        validate();
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -181,7 +209,7 @@
 
     const bySection = new Map();
     qs.forEach((q) => {
-      const key = normalizeSection(q.section);
+      const key = normalizeSectionKey(q.section);
       if (!bySection.has(key)) bySection.set(key, []);
       bySection.get(key).push(q);
     });
@@ -192,6 +220,7 @@
     function takeFrom(pool, count) {
       const tmp = pool.slice();
       shuffleInPlace(tmp);
+
       for (let i = 0; i < tmp.length && count > 0 && chosen.length < TARGET_TOTAL; i++) {
         const q = tmp[i];
         if (!q || !q.id) continue;
@@ -212,8 +241,9 @@
 
     // Backfill to target length (if any section was short/missing)
     if (chosen.length < TARGET_TOTAL) {
-      const leftovers = qs.filter((q) => !usedIds.has(String(q.id)));
+      const leftovers = qs.filter((q) => q && q.id && !usedIds.has(String(q.id)));
       shuffleInPlace(leftovers);
+
       for (let i = 0; i < leftovers.length && chosen.length < TARGET_TOTAL; i++) {
         const q = leftovers[i];
         if (!q || !q.id) continue;
@@ -257,9 +287,7 @@
         <div class="note" style="margin-top:12px; padding:12px 14px">
           <strong>Structure</strong>
           <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted)">${planList}</ul>
-          <p style="margin:10px 0 0; color: var(--muted)">
-            Tip: Ask “Why?” and encourage <strong>because</strong>.
-          </p>
+          <p style="margin:10px 0 0; color: var(--muted)">Tip: Ask one follow-up: <strong>Why?</strong></p>
         </div>
 
         <p style="margin:10px 0 0; opacity:.92">
@@ -340,7 +368,7 @@
     const model = safeTextWithBreaks(q.model || "");
     const tip = safeText(q.explanation || "Try your best.");
 
-    const audioText = String(q.say || q.model || "").trim();
+    const audioText = String(q.say || q.model || q.question || "").trim();
     const hasAudio = supportsSpeech() && !!audioText;
 
     return `
@@ -377,7 +405,7 @@
     `;
   }
 
-  function renderSummary(state) {
+  function computeCounts(state) {
     let said = 0;
     let again = 0;
     let skip = 0;
@@ -390,22 +418,24 @@
     state.questions.forEach((q) => {
       const id = q && q.id != null ? String(q.id) : "";
       const r = (id && state.results[id]) || "skip";
-      const sec = normalizeSection(q && q.section);
-      const bucket = sectionCounts[sec] || { said: 0, again: 0, skip: 0 };
+      const sec = normalizeSectionKey(q && q.section);
 
-      if (r === "said") {
-        said += 1;
-        bucket.said += 1;
-      } else if (r === "again") {
-        again += 1;
-        bucket.again += 1;
-      } else {
-        skip += 1;
-        bucket.skip += 1;
-      }
+      if (r === "said") said += 1;
+      else if (r === "again") again += 1;
+      else skip += 1;
 
-      if (sectionCounts[sec]) sectionCounts[sec] = bucket;
+      if (!sectionCounts[sec]) sectionCounts[sec] = { said: 0, again: 0, skip: 0 };
+      if (r === "said") sectionCounts[sec].said += 1;
+      else if (r === "again") sectionCounts[sec].again += 1;
+      else sectionCounts[sec].skip += 1;
     });
+
+    return { said, again, skip, sectionCounts };
+  }
+
+  function renderSummary(state) {
+    const { said, again, skip, sectionCounts } = computeCounts(state);
+    const total = state.questions.length;
 
     const sectionLines = SECTION_PLAN.map((s) => {
       const c = sectionCounts[s.key] || { said: 0, again: 0, skip: 0 };
@@ -437,11 +467,13 @@
       })
       .join("");
 
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Summary</strong>
         <p style="margin:8px 0 0; color: var(--muted)">
-          Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong>
+          Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong> • Total: <strong>${total}</strong>
         </p>
         ${sectionLines}
       </div>
@@ -458,8 +490,10 @@
         </ul>
       </details>
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
+        ${canSave ? `<button class="btn" type="button" data-action="save-score">Save score to Profile</button>` : ""}
+        ${state.savedMsg ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>` : ""}
       </div>
     `;
   }
@@ -496,7 +530,8 @@
         questions: [],
         index: 0,
         results: Object.create(null),
-        lastError: ""
+        lastError: "",
+        savedMsg: ""
       };
 
       function paint() {
@@ -521,6 +556,7 @@
         stopSpeech();
         state.status = "loading";
         state.lastError = "";
+        state.savedMsg = "";
         paint();
 
         try {
@@ -559,6 +595,7 @@
         state.index = 0;
         state.results = Object.create(null);
         state.lastError = "";
+        state.savedMsg = "";
         paint();
       }
 
@@ -588,9 +625,64 @@
       function speakCurrent() {
         const q = state.questions[state.index];
         if (!q) return;
-        const t = String(q.say || q.model || "").trim();
+        const t = String(q.say || q.model || q.question || "").trim();
         if (!t) return;
         speak(t);
+      }
+
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        const { said, again, skip, sectionCounts } = computeCounts(state);
+        const total = state.questions.length;
+
+        // Simple speaking score model:
+        // Said = 1.0, Try again = 0.5, Skipped = 0
+        const raw = total ? (said + again * 0.5) / total : 0;
+        const percent = Math.max(0, Math.min(100, Math.round(raw * 100)));
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "8-10",
+          skill: "speaking",
+          at: nowIso(),
+
+          // UPDATE: include questions + resultsById for downstream use
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          resultsById: state.results && typeof state.results === "object" ? state.results : Object.create(null),
+
+          totalPrompts: total,
+          said,
+          again,
+          skip,
+          percent,
+          sectionCounts
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        if (res && res.ok) {
+          const norm =
+            res.normalizedScore != null
+              ? `${Math.round(Number(res.normalizedScore))}/100`
+              : res.saved && res.saved.normalizedScore != null
+                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                : "";
+          const level =
+            res.levelTitle ||
+            (res.saved && res.saved.levelTitle) ||
+            (res.saved && res.saved.level && res.saved.level.title) ||
+            "";
+          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+        } else {
+          state.savedMsg = "Could not save.";
+        }
+
+        paint();
       }
 
       // Event delegation
@@ -603,24 +695,51 @@
         if (action === "start" || action === "retry") {
           ev.preventDefault();
           start();
-        } else if (action === "restart") {
+          return;
+        }
+
+        if (action === "restart") {
           ev.preventDefault();
           restart();
-        } else if (action === "play") {
+          return;
+        }
+
+        if (action === "play") {
           ev.preventDefault();
           speakCurrent();
-        } else if (action === "stop") {
+          return;
+        }
+
+        if (action === "stop") {
           ev.preventDefault();
           stopSpeech();
-        } else if (action === "mark") {
+          return;
+        }
+
+        if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
+          return;
+        }
+
+        if (action === "mark") {
           ev.preventDefault();
           mark(btn.getAttribute("data-mark"));
+          return;
         }
       });
 
-      // Cancel audio on navigation (best effort)
+      // Cancel audio on navigation/unload (best effort)
       window.addEventListener(
         "popstate",
+        () => {
+          stopSpeech();
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        "pagehide",
         () => {
           stopSpeech();
         },

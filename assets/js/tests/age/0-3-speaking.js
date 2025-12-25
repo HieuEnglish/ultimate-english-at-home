@@ -16,6 +16,10 @@
    - Adds Stop button for TTS
    - Adds Retry on error
    - Stops TTS on navigation (popstate)
+   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE)
+   - Save payload now includes:
+     * questions: state.questions
+     * resultsById: state.results
 */
 
 (function () {
@@ -55,6 +59,10 @@
       .replace(/'/g, "&#39;");
   }
 
+  function nowIso() {
+    return new Date().toISOString();
+  }
+
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -71,14 +79,28 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
         if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
           resolve(true);
           return;
         }
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener(
+          "error",
+          () => reject(new Error("Failed to load test bank")),
+          { once: true }
+        );
+
+        // In case load already happened before listeners attached:
+        validate();
         return;
       }
 
@@ -87,7 +109,7 @@
       s.defer = true;
       s.async = true;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -154,7 +176,11 @@
           <li>Repeat easy prompts often—repetition builds confidence.</li>
         </ul>
         <p style="margin:10px 0 0; opacity:.92">
-          ${audioOk ? "Tip: Use <strong>🔊 Play</strong> for a model voice." : "Audio is not available in this browser. Say the model out loud."}
+          ${
+            audioOk
+              ? "Tip: Use <strong>🔊 Play</strong> for a model voice."
+              : "Audio is not available in this browser. Say the model out loud."
+          }
         </p>
       </div>
       <div class="actions" style="margin-top:12px">
@@ -211,7 +237,11 @@
           <div class="note" style="margin:12px 0 0; padding:10px 12px">
             <strong>Model support</strong>
             <p style="margin:6px 0 0; color: var(--muted)">
-              ${model ? "Read the model out loud and encourage copying." : "Say an example first, then let your child try."}
+              ${
+                model
+                  ? "Read the model out loud and encourage copying."
+                  : "Say an example first, then let your child try."
+              }
             </p>
           </div>
         `;
@@ -276,6 +306,8 @@
       })
       .join("");
 
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
+
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
@@ -294,8 +326,20 @@
         </ul>
       </details>
 
-      <div class="actions" style="margin-top:12px">
+      <div class="actions" style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
         <button class="btn btn--primary" type="button" data-action="restart">Play again</button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
+            : ""
+        }
+        ${
+          state.savedMsg
+            ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(
+                state.savedMsg
+              )}</span>`
+            : ""
+        }
       </div>
     `;
   }
@@ -330,9 +374,10 @@
         status: "intro", // intro | loading | prompt | summary | error
         questions: [],
         index: 0,
-        results: Object.create(null),
+        results: Object.create(null), // per-id results map
         lastError: "",
-        autoSpokenIndex: -1
+        autoSpokenIndex: -1,
+        savedMsg: ""
       };
 
       function currentQuestion() {
@@ -371,6 +416,7 @@
         state.status = "loading";
         state.lastError = "";
         state.autoSpokenIndex = -1;
+        state.savedMsg = "";
         paint();
 
         try {
@@ -385,7 +431,7 @@
           const prepared = bank
             .filter(isPlainObject)
             .map((q, idx) => {
-              const id = q.id != null ? String(q.id) : `${SLUG}::idx-${idx}`;
+              const id = q.id != null && String(q.id).trim() ? String(q.id).trim() : `${SLUG}::idx-${idx}`;
               return { ...q, id };
             });
 
@@ -397,6 +443,7 @@
           state.results = Object.create(null);
           state.status = "prompt";
           state.autoSpokenIndex = -1;
+          state.savedMsg = "";
           paint();
         } catch (err) {
           state.status = "error";
@@ -413,6 +460,7 @@
         state.results = Object.create(null);
         state.lastError = "";
         state.autoSpokenIndex = -1;
+        state.savedMsg = "";
         paint();
       }
 
@@ -433,6 +481,47 @@
 
         state.index += 1;
         state.status = "prompt";
+        paint();
+      }
+
+      function saveScoreToProfile() {
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
+          paint();
+          return;
+        }
+
+        // Optional: include simple summary numbers (safe for storage)
+        const total = state.questions.length;
+        let said = 0;
+        let again = 0;
+        let skip = 0;
+
+        state.questions.forEach((q) => {
+          const id = q && q.id != null ? String(q.id) : "";
+          const r = (id && state.results[id]) || "skip";
+          if (r === "said") said += 1;
+          else if (r === "again") again += 1;
+          else skip += 1;
+        });
+
+        const payload = {
+          slug: SLUG,
+          ageGroup: "0-3",
+          skill: "speaking",
+          at: nowIso(),
+          totalPrompts: total,
+          said,
+          again,
+          skip,
+          // REQUIRED UPDATE:
+          questions: state.questions,
+          resultsById: state.results
+        };
+
+        const res = window.UEAH_SAVE_SCORE.save(payload);
+
+        state.savedMsg = res && res.ok ? "Saved to Profile." : "Could not save.";
         paint();
       }
 
@@ -459,11 +548,22 @@
         } else if (action === "mark") {
           ev.preventDefault();
           mark(btn.getAttribute("data-mark"));
+        } else if (action === "save-score") {
+          ev.preventDefault();
+          saveScoreToProfile();
         }
       });
 
       window.addEventListener(
         "popstate",
+        () => {
+          stopSpeech();
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        "pagehide",
         () => {
           stopSpeech();
         },
