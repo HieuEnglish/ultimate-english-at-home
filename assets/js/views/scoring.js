@@ -5,7 +5,7 @@
    This is an ES module view (no build step).
 */
 
-import { breadcrumbs, escapeHtml, iconAge } from "../common.js";
+import { breadcrumbs, escapeHtml } from "../common.js";
 
 const AGE_ORDER = ["0-3", "4-7", "8-10", "11-12", "13-18", "ielts"];
 
@@ -29,13 +29,82 @@ function getPlanApi() {
 function renderQuickNav(plan) {
   const links = AGE_ORDER.map((age) => {
     const label = age === "ielts" ? "IELTS" : String(age).replace("-", "–");
-    return `<a class="btn btn--small" href="#age-${escapeHtml(age)}">${escapeHtml(label)}</a>`;
+    const id = `age-${String(age)}`;
+    const aria = age === "ielts" ? "Jump to IELTS scoring" : `Jump to ages ${String(age)} scoring`;
+    return `<a class="btn btn--small scoring-age-btn" data-age-jump href="#${escapeHtml(id)}" aria-label="${escapeHtml(
+      aria
+    )}">${escapeHtml(label)}</a>`;
   }).join("");
 
   return `
-    <div class="actions" aria-label="Jump to age group">
+    <div class="actions scoring-age-nav" aria-label="Jump to age group">
       ${links}
     </div>
+  `;
+}
+
+function prefersReducedMotion() {
+  try {
+    return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  } catch (_) {
+    return false;
+  }
+}
+
+function scrollToId(id, behavior) {
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return false;
+
+  const useBehavior = behavior || (prefersReducedMotion() ? "auto" : "smooth");
+
+  try {
+    target.scrollIntoView({ behavior: useBehavior, block: "start" });
+  } catch (_) {
+    // Older browsers: just jump
+    target.scrollIntoView(true);
+  }
+
+  // Keep the URL hash in sync without adding extra history entries.
+  try {
+    const url = new URL(window.location.href);
+    url.hash = `#${id}`;
+    history.replaceState(history.state, "", url.toString());
+  } catch (_) {
+    // Fallback
+    try {
+      window.location.hash = `#${id}`;
+    } catch (_) {}
+  }
+
+  return true;
+}
+
+function renderScoringPageStyles() {
+  // Kept inline so the scoring page can ship small, self-contained enhancements
+  // without changing the global stylesheet.
+  return `
+    <style>
+      .scoring-page a[data-age-jump]:hover,
+      .scoring-page a[data-age-jump]:focus-visible{
+        box-shadow:
+          0 0 0 3px rgba(47, 124, 255, .16),
+          0 0 22px rgba(47, 124, 255, .30),
+          var(--shadow);
+        border-color: rgba(47, 124, 255, .52);
+      }
+      /* Ensure anchored sections aren't hidden under the sticky header */
+      .scoring-page .tests-section{ scroll-margin-top: 96px; }
+      @media (prefers-color-scheme: dark){
+        .scoring-page a[data-age-jump]:hover,
+        .scoring-page a[data-age-jump]:focus-visible{
+          box-shadow:
+            0 0 0 3px rgba(122, 176, 255, .18),
+            0 0 22px rgba(122, 176, 255, .28),
+            var(--shadow);
+          border-color: rgba(122, 176, 255, .58);
+        }
+      }
+    </style>
   `;
 }
 
@@ -159,7 +228,8 @@ export function getView(ctx) {
   const api = getPlanApi();
   if (!api) {
     const html = `
-      <section class="page-top">
+      <section class="page-top scoring-page">
+        ${renderScoringPageStyles()}
         ${breadcrumb}
         <h1 class="page-title">Scoring plan</h1>
 
@@ -180,10 +250,9 @@ export function getView(ctx) {
   const plan = api.getPlan();
   const sections = AGE_ORDER.map((age) => api.getAgePlan(age)).filter(Boolean);
 
-  const heroIcon = iconAge("ielts");
-
   const html = `
-    <section class="page-top">
+    <section class="page-top scoring-page">
+      ${renderScoringPageStyles()}
       ${breadcrumb}
 
       <h1 class="page-title">Scoring plan</h1>
@@ -218,5 +287,33 @@ export function getView(ctx) {
     </section>
   `;
 
-  return { title, description, html };
+  const afterRender = () => {
+    const root = document.querySelector(".scoring-page");
+    if (!root) return;
+
+    // Intercept age jump links so they work reliably within the SPA and
+    // can apply smooth scrolling without breaking deep links.
+    const jumpLinks = Array.from(root.querySelectorAll("a[data-age-jump][href^='#']"));
+    jumpLinks.forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const href = a.getAttribute("href") || "";
+        const id = href.replace(/^#/, "");
+        if (!id) return;
+
+        const ok = scrollToId(id);
+        if (ok) e.preventDefault();
+      });
+    });
+
+    // Support loading /scoring#age-... (initial hash) by scrolling after the
+    // SPA renders the DOM.
+    const initialHash = window.location.hash || "";
+    if (initialHash.startsWith("#age-")) {
+      const id = initialHash.replace(/^#/, "");
+      // Wait one frame so layout is ready.
+      requestAnimationFrame(() => scrollToId(id, prefersReducedMotion() ? "auto" : "smooth"));
+    }
+  };
+
+  return { title, description, html, afterRender };
 }
