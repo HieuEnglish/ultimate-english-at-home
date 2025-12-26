@@ -188,7 +188,7 @@ export function getView(ctx) {
   const canSync = typeof syncExport === 'function' && typeof syncImport === 'function';
 
   const html = `
-    <section class="page-top">
+    <section class="page-top profile-page">
       ${breadcrumb}
       <h1 class="page-title">Profile</h1>
       <p class="page-subtitle">Saved on this device.</p>

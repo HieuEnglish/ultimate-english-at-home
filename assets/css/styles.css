@@ -18,6 +18,11 @@
   --test-glow-border: rgba(0, 200, 83, .42);
   --test-glow-ring: rgba(0, 200, 83, .16);
 
+  /* NEW: profile button glow (orange) */
+  --profile-glow: rgba(255, 160, 70, .30);
+  --profile-glow-border: rgba(255, 160, 70, .52);
+  --profile-glow-ring: rgba(255, 160, 70, .16);
+
   /* NEW: form error color */
   --danger:#c0183c;
 
@@ -70,6 +75,11 @@
     --test-glow: rgba(0, 255, 136, .34);
     --test-glow-border: rgba(0, 255, 136, .46);
     --test-glow-ring: rgba(0, 255, 136, .18);
+
+    /* NEW: profile button glow (orange, dark mode tweaks) */
+    --profile-glow: rgba(255, 160, 70, .28);
+    --profile-glow-border: rgba(255, 160, 70, .58);
+    --profile-glow-ring: rgba(255, 160, 70, .18);
 
     /* NEW: form error color (dark mode) */
     --danger:#ff5f86;
@@ -605,6 +615,19 @@ a:hover{text-decoration:none}
   border-color: var(--test-glow-border);
 }
 
+/* -------------------------------------------------
+   NEW: Profile page buttons glow orange on hover/focus
+   Apply to any .btn inside a .profile-page wrapper
+-------------------------------------------------- */
+.profile-page .btn:hover,
+.profile-page .btn:focus-visible{
+  box-shadow:
+    0 0 0 3px var(--profile-glow-ring),
+    0 0 22px var(--profile-glow),
+    var(--shadow);
+  border-color: var(--profile-glow-border);
+}
+
 /* NEW: small + disabled buttons (used on resource cards) */
 .btn--small{
   padding:8px 12px;
@@ -1018,4 +1041,6 @@ progress::-moz-progress-bar{
   .card:hover,.btn:hover,.resource-card:hover{transform:none !important}
   .tests-page .btn:hover,
   .tests-page .btn:focus-visible{box-shadow: var(--shadow2) !important}
+  .profile-page .btn:hover,
+  .profile-page .btn:focus-visible{box-shadow: var(--shadow2) !important}
 }
