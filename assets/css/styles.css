@@ -865,7 +865,7 @@ textarea[aria-invalid="true"]{
 .chip--ok{
   border-color: rgba(0,200,83,.35);
   background: rgba(0,200,83,.10);
-  color: var(--text);
+  color: var(--success);
 }
 .chip--warn{
   border-color: rgba(255,193,7,.35);
@@ -882,7 +882,7 @@ textarea[aria-invalid="true"]{
   .chip--ok{
     border-color: rgba(0,255,136,.38);
     background: rgba(0,255,136,.12);
-    color: var(--text);
+    color: var(--success);
   }
   .chip--warn{
     border-color: rgba(255,230,70,.34);

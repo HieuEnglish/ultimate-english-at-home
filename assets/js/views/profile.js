@@ -426,7 +426,7 @@ export function getView(ctx) {
                           : `<div class="muted" style="margin-top:4px">Saved</div>`
                       }
                     </div>
-                    <span class="chip" style="font-weight:900" aria-label="${safeText(aria)}" title="${safeText(aria)}">✓</span>
+                    <span class="chip chip--ok" style="font-weight:900" aria-label="${safeText(aria)}" title="${safeText(aria)}">✓</span>
                   </div>
                 </div>
               `;
