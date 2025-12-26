@@ -168,7 +168,9 @@ export function getView(ctx) {
     <section class="page-top tests-page">
       ${breadcrumb}
       <h1 class="page-title">Tests</h1>
-      <p class="page-subtitle">Choose a test.</p>
+      <p class="page-subtitle">
+        Tests match the expected level for each age group. Complete all four skill tests for an age group to get an overall score in your profile.
+      </p>
 
       ${
         hasTests
