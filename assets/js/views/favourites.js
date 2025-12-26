@@ -167,30 +167,30 @@ export function getView(ctx) {
 
       ${listHtml}
 
-      <div class="detail-card" style="margin-top:18px" role="region" aria-label="Export and import">
-        <h2 class="detail-title" style="font-size:18px; margin:0">Export / Import</h2>
+      <div class="detail-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
+        <h2 class="detail-title" style="font-size:18px; margin:0">Move to another device</h2>
         <p class="detail-desc" style="margin-top:10px">
-          Export your <strong>Profile + Favourites</strong> to a JSON file, then import it on another device.
+          Save your <strong>Profile + Favourites</strong> to a file. On your other device, load the file to copy them.
         </p>
 
         <div class="actions" style="margin-top:12px; flex-wrap:wrap">
           <button type="button" class="btn btn--primary" data-sync-export>
-            Export profile + favourites
+            Save to file
           </button>
 
           <label class="btn" style="position:relative; overflow:hidden">
-            Import from JSON
+            Load from file
             <input
               type="file"
-              accept="application/json"
+              accept=".json,application/json"
               data-sync-import
               style="position:absolute; inset:0; opacity:0; cursor:pointer"
-              aria-label="Import profile and favourites from a JSON file"
+              aria-label="Load a saved file to copy your profile and favourites"
             />
           </label>
 
-          <button type="button" class="btn btn--small" data-sync-import-merge>
-            Import mode: Merge
+          <button type="button" class="btn btn--small" data-sync-import-merge aria-pressed="false">
+            Load option: Add (keep current)
           </button>
         </div>
 
@@ -237,18 +237,31 @@ export function getView(ctx) {
       exportBtn.addEventListener('click', (ev) => {
         ev.preventDefault();
         if (!ctx || typeof ctx.syncExport !== 'function') {
-          setStatus('Export not available.');
+          setStatus('Save not available.');
           return;
         }
 
         try {
           const payload = ctx.syncExport();
           downloadJsonFile(payload, safeNowName());
-          setStatus('Exported sync file.');
+          setStatus('File saved. Use it on your other device.');
         } catch (_) {
-          setStatus('Export failed.');
+          setStatus('Could not save file.');
         }
       });
+    }
+
+    function friendlySyncError(reason) {
+      const r = String(reason || '').trim();
+      const low = r.toLowerCase();
+
+      if (!r) return 'Could not load this file.';
+      if (low.includes('not a ueah')) return 'This file is not from UEAH.';
+      if (low.includes('invalid json') || low.includes('payload') || low.includes('shape')) {
+        return 'This file is not supported.';
+      }
+      if (low.includes('failed to save')) return 'Could not save on this device.';
+      return 'Could not load this file.';
     }
 
     // Import mode toggle (merge/replace)
@@ -256,7 +269,9 @@ export function getView(ctx) {
     const modeBtn = document.querySelector('[data-sync-import-merge]');
     function updateModeUi() {
       if (!modeBtn) return;
-      modeBtn.textContent = importMode === 'replace' ? 'Import mode: Replace' : 'Import mode: Merge';
+      modeBtn.textContent =
+        importMode === 'replace' ? 'Load option: Replace (overwrite)' : 'Load option: Add (keep current)';
+      modeBtn.setAttribute('aria-pressed', importMode === 'replace' ? 'true' : 'false');
     }
     updateModeUi();
 
@@ -276,26 +291,27 @@ export function getView(ctx) {
         if (!file) return;
 
         if (!ctx || typeof ctx.syncImport !== 'function') {
-          setStatus('Import not available.');
+          setStatus('Load not available.');
           fileInput.value = '';
           return;
         }
 
-        setStatus('Importing…');
+        setStatus('Loading file…');
 
         try {
           const text = await readFileAsText(file);
           const result = ctx.syncImport(text, { mode: importMode });
 
           if (!result || result.ok === false) {
-            setStatus(result && result.reason ? `Import failed: ${result.reason}` : 'Import failed.');
+            const reason = result && result.reason ? String(result.reason) : '';
+            setStatus(friendlySyncError(reason));
           } else {
-            setStatus('Import complete. Your favourites and profile were updated.');
+            setStatus('Done. Your profile and favourites are now on this device.');
             // Re-render list
             window.dispatchEvent(new CustomEvent('ueah:navigate', { detail: { path: '/favourites' } }));
           }
         } catch (_) {
-          setStatus('Import failed (could not read or parse file).');
+          setStatus('Could not load this file.');
         } finally {
           // Allow importing the same file again
           fileInput.value = '';

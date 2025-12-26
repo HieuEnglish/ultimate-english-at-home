@@ -269,10 +269,10 @@ export function getView(ctx) {
         <p class="muted" id="progress-status" aria-live="polite" role="status" style="margin:10px 0 0"></p>
       </div>
 
-      <div class="detail-card" style="margin-top:18px" role="region" aria-label="Sync profile and favourites">
-        <h2 class="detail-title" style="font-size:18px; margin:0">Sync</h2>
+      <div class="detail-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
+        <h2 class="detail-title" style="font-size:18px; margin:0">Move to another device</h2>
         <p class="detail-desc" style="margin-top:10px">
-          Export your <strong>Profile + Favourites</strong> to a JSON file, then import it on another device.
+          Save your <strong>Profile + Favourites</strong> to a file. On your other device, load the file to copy them.
         </p>
 
         ${
@@ -280,22 +280,22 @@ export function getView(ctx) {
             ? `
               <div class="actions" style="margin-top:12px; flex-wrap:wrap">
                 <button type="button" class="btn btn--primary" data-sync-export>
-                  Export profile + favourites
+                  Save to file
                 </button>
 
                 <label class="btn" style="position:relative; overflow:hidden">
-                  Import from JSON
+                  Load from file
                   <input
                     type="file"
-                    accept="application/json"
+                    accept=".json,application/json"
                     data-sync-import
                     style="position:absolute; inset:0; opacity:0; cursor:pointer"
-                    aria-label="Import profile and favourites from a JSON file"
+                    aria-label="Load a saved file to copy your profile and favourites"
                   />
                 </label>
 
                 <button type="button" class="btn btn--small" data-sync-mode aria-pressed="false">
-                  Import mode: Merge
+                  Load option: Add (keep current)
                 </button>
               </div>
 
@@ -303,8 +303,8 @@ export function getView(ctx) {
             `
             : `
               <div class="note" style="margin-top:12px">
-                <strong>Sync not available.</strong>
-                <p style="margin:8px 0 0">This build does not include sync helpers yet.</p>
+                <strong>Not available.</strong>
+                <p style="margin:8px 0 0">This feature is not available in this build.</p>
               </div>
             `
         }
@@ -628,10 +628,24 @@ export function getView(ctx) {
       syncStatusEl.textContent = String(msg || '');
     }
 
+    function friendlySyncError(reason) {
+      const r = String(reason || '').trim();
+      const low = r.toLowerCase();
+
+      if (!r) return 'Could not load this file.';
+      if (low.includes('not a ueah')) return 'This file is not from UEAH.';
+      if (low.includes('invalid json') || low.includes('payload') || low.includes('shape')) {
+        return 'This file is not supported.';
+      }
+      if (low.includes('failed to save')) return 'Could not save on this device.';
+      return 'Could not load this file.';
+    }
+
     let importMode = 'merge';
     function updateModeUi() {
       if (!modeBtn) return;
-      modeBtn.textContent = importMode === 'replace' ? 'Import mode: Replace' : 'Import mode: Merge';
+      modeBtn.textContent =
+        importMode === 'replace' ? 'Load option: Replace (overwrite)' : 'Load option: Add (keep current)';
       modeBtn.setAttribute('aria-pressed', importMode === 'replace' ? 'true' : 'false');
     }
     updateModeUi();
@@ -650,10 +664,10 @@ export function getView(ctx) {
         try {
           const payload = syncExport();
           downloadJsonFile(payload, safeNowName());
-          setSyncStatus('Exported sync file.');
+          setSyncStatus('File saved. Use it on your other device.');
           focusForA11y(syncStatusEl);
         } catch (_) {
-          setSyncStatus('Export failed.');
+          setSyncStatus('Could not save file.');
           focusForA11y(syncStatusEl);
         }
       });
@@ -664,7 +678,7 @@ export function getView(ctx) {
         const file = importInput.files && importInput.files[0] ? importInput.files[0] : null;
         if (!file) return;
 
-        setSyncStatus('Importing…');
+        setSyncStatus('Loading file…');
 
         try {
           const text = await readFileAsText(file);
@@ -672,15 +686,15 @@ export function getView(ctx) {
 
           if (!result || result.ok === false) {
             const reason = result && result.reason ? String(result.reason) : '';
-            setSyncStatus(reason ? `Import failed: ${reason}` : 'Import failed.');
+            setSyncStatus(friendlySyncError(reason));
             focusForA11y(syncStatusEl);
           } else {
-            setSyncStatus('Import complete. Your profile and favourites were updated.');
+            setSyncStatus('Done. Your profile and favourites are now on this device.');
             refreshAll('', 'Imported profile data.', 'progress');
             focusForA11y(syncStatusEl);
           }
         } catch (_) {
-          setSyncStatus('Import failed (could not read or parse file).');
+          setSyncStatus('Could not load this file.');
           focusForA11y(syncStatusEl);
         } finally {
           importInput.value = '';
