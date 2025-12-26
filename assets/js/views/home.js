@@ -65,7 +65,7 @@ export function getView(ctx) {
         ${card({
           href: hrefFor('/profile'),
           title: 'Profile',
-          text: 'Save your IELTS info',
+          text: 'Save your progress',
           icon: iconUser(),
           ctaText: '',
           glow: 'orange',
