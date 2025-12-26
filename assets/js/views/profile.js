@@ -104,6 +104,17 @@ function ageLabelFor(age) {
   return a || 'Age group';
 }
 
+function testSlugFor(age, skill) {
+  const a = String(age || '').trim().toLowerCase();
+  const s = String(skill || '').trim().toLowerCase();
+  if (!a || !s) return '';
+
+  // "ielts" is a special category that uses the dedicated IELTS test slugs.
+  if (a === 'ielts') return `iels-${s}`;
+
+  return `age-${a}-${s}`;
+}
+
 function isIeltsLikeAge(age) {
   const a = String(age || '').trim().toLowerCase();
   return a === '13-18' || a === 'ielts';
@@ -422,6 +433,9 @@ export function getView(ctx) {
             }
 
             const aria = `${skLabel} not saved.`;
+            const testSlug = testSlugFor(age, skill);
+            const testPath = testSlug ? `/tests/${testSlug}` : '/tests';
+            const testAria = testSlug ? `Go to ${skLabel} test for ${label}` : 'Go to tests';
             return `
               <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
                 <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
@@ -432,7 +446,7 @@ export function getView(ctx) {
                   <span class="chip" style="font-weight:900" aria-label="${safeText(aria)}" title="${safeText(aria)}">—</span>
                 </div>
                 <div style="margin-top:10px">
-                  <a class="btn btn--small" href="${hrefFor('/tests')}" data-nav aria-label="Go to tests">
+                  <a class="btn btn--small" href="${hrefFor(testPath)}" data-nav aria-label="${safeText(testAria)}">
                     Go to tests
                   </a>
                 </div>
