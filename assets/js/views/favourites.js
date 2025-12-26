@@ -73,6 +73,84 @@ function buildResourceSnapshotForView(f) {
   return r;
 }
 
+function renderFavouritesList(items, hrefFor) {
+  const safeItems = Array.isArray(items) ? items : [];
+
+  if (!safeItems.length) {
+    return `
+      <div class="note">
+        <strong>No favourites yet.</strong>
+        <p style="margin:8px 0 0">Go to Resources and tap <span aria-hidden="true">♥</span> Save on anything you want to keep.</p>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="resource-grid" role="list" aria-label="Favourites">
+      ${safeItems
+        .map((fav) => {
+          const r = buildResourceSnapshotForView(fav);
+          const safeAge = escapeHtml(r.age || '');
+          const ageHeading = r.age ? ageGroupHeading(r.age) : '';
+          const safeSkill = escapeHtml(r.skill || '');
+          const skillLabel = r.skill ? capitalize(r.skill) : 'Resource';
+          const detailPath = r.age && r.skill && r.slug ? `/resources/${r.age}/${r.skill}/${r.slug}` : '';
+          const detailHref = detailPath ? hrefFor(detailPath) : '';
+
+          const desc = r.description || (r.skill ? `Practice resource for ${r.skill}.` : 'Practice resource.');
+          const chips = renderChips(r);
+
+          const openBtn = r.link
+            ? `<a class="btn btn--primary btn--small" href="${escapeAttr(
+                r.link
+              )}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(
+                r.title
+              )} in a new tab">Open Resource ↗</a>`
+            : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
+
+          const detailsBtn = detailHref
+            ? `<a class="btn btn--small" href="${detailHref}" data-nav>Details →</a>`
+            : `<span class="btn btn--small btn--disabled" aria-disabled="true">No details</span>`;
+
+          const key = String(fav && fav.key ? fav.key : '');
+
+          return `
+            <article class="resource-item" role="listitem" data-fav-item="${escapeAttr(key)}">
+              <div class="resource-card" role="group" aria-label="${escapeAttr(r.title)}">
+                <h2 class="resource-title">${escapeHtml(r.title)}</h2>
+                <p class="resource-desc">${escapeHtml(desc)}</p>
+                ${
+                  safeAge || safeSkill
+                    ? `<p class="muted" style="margin:8px 0 0; font-size:13px">
+                        ${ageHeading ? `${escapeHtml(ageHeading)}` : ''}
+                        ${safeAge && safeSkill ? ' · ' : ''}
+                        ${safeSkill ? `${escapeHtml(skillLabel)}` : ''}
+                      </p>`
+                    : ''
+                }
+                ${chips}
+              </div>
+              <div class="resource-actions" aria-label="Favourite actions">
+                ${detailsBtn}
+                ${openBtn}
+                <button
+                  type="button"
+                  class="btn btn--small"
+                  data-fav-remove
+                  data-fav-key="${escapeAttr(key)}"
+                  aria-label="Remove ${escapeAttr(r.title)} from favourites"
+                >
+                  Remove
+                </button>
+              </div>
+            </article>
+          `;
+        })
+        .join('')}
+    </div>
+  `;
+}
+
 export function getView(ctx) {
   const { hrefFor } = ctx;
   const title = 'Favourites — UEAH';
@@ -86,78 +164,7 @@ export function getView(ctx) {
   const items =
     ctx && typeof ctx.favouritesGetAll === 'function' ? (ctx.favouritesGetAll() || []) : [];
 
-  const listHtml = items.length
-    ? `
-      <div class="resource-grid" role="list" aria-label="Favourites">
-        ${items
-          .map((fav) => {
-            const r = buildResourceSnapshotForView(fav);
-            const safeAge = escapeHtml(r.age || '');
-            const ageHeading = r.age ? ageGroupHeading(r.age) : '';
-            const safeSkill = escapeHtml(r.skill || '');
-            const skillLabel = r.skill ? capitalize(r.skill) : 'Resource';
-            const detailPath =
-              r.age && r.skill && r.slug ? `/resources/${r.age}/${r.skill}/${r.slug}` : '';
-            const detailHref = detailPath ? hrefFor(detailPath) : '';
-
-            const desc = r.description || (r.skill ? `Practice resource for ${r.skill}.` : 'Practice resource.');
-            const chips = renderChips(r);
-
-            const openBtn = r.link
-              ? `<a class="btn btn--primary btn--small" href="${escapeAttr(
-                  r.link
-                )}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(
-                  r.title
-                )} in a new tab">Open Resource ↗</a>`
-              : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
-
-            const detailsBtn = detailHref
-              ? `<a class="btn btn--small" href="${detailHref}" data-nav>Details →</a>`
-              : `<span class="btn btn--small btn--disabled" aria-disabled="true">No details</span>`;
-
-            const key = String(fav && fav.key ? fav.key : '');
-
-            return `
-              <article class="resource-item" role="listitem">
-                <div class="resource-card" role="group" aria-label="${escapeAttr(r.title)}">
-                  <h2 class="resource-title">${escapeHtml(r.title)}</h2>
-                  <p class="resource-desc">${escapeHtml(desc)}</p>
-                  ${
-                    safeAge || safeSkill
-                      ? `<p class="muted" style="margin:8px 0 0; font-size:13px">
-                          ${ageHeading ? `${escapeHtml(ageHeading)}` : ''}
-                          ${safeAge && safeSkill ? ' · ' : ''}
-                          ${safeSkill ? `${escapeHtml(skillLabel)}` : ''}
-                        </p>`
-                      : ''
-                  }
-                  ${chips}
-                </div>
-                <div class="resource-actions" aria-label="Favourite actions">
-                  ${detailsBtn}
-                  ${openBtn}
-                  <button
-                    type="button"
-                    class="btn btn--small"
-                    data-fav-remove
-                    data-fav-key="${escapeAttr(key)}"
-                    aria-label="Remove ${escapeAttr(r.title)} from favourites"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </article>
-            `;
-          })
-          .join('')}
-      </div>
-    `
-    : `
-      <div class="note">
-        <strong>No favourites yet.</strong>
-        <p style="margin:8px 0 0">Go to Resources and tap <span aria-hidden="true">♥</span> Save on anything you want to keep.</p>
-      </div>
-    `;
+  const listHtml = renderFavouritesList(items, hrefFor);
 
   const html = `
     <section class="page-top">
@@ -165,7 +172,9 @@ export function getView(ctx) {
       <h1 class="page-title">Favourites</h1>
       <p class="page-subtitle">Your saved resources (stored on this device).</p>
 
-      ${listHtml}
+      <div id="favourites-list">
+        ${listHtml}
+      </div>
 
       <div class="detail-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
         <h2 class="detail-title" style="font-size:18px; margin:0">Move to another device</h2>
@@ -207,29 +216,42 @@ export function getView(ctx) {
 
   function afterRender() {
     const statusEl = document.getElementById('sync-status');
+    const listRoot = document.getElementById('favourites-list');
 
     function setStatus(msg) {
       if (!statusEl) return;
       statusEl.textContent = String(msg || '');
     }
 
-    // Remove buttons
-    const removeBtns = Array.from(document.querySelectorAll('[data-fav-remove]'));
-    removeBtns.forEach((btn) => {
-      btn.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        const key = String(btn.getAttribute('data-fav-key') || '').trim();
-        if (!key) return;
+    function getItems() {
+      return ctx && typeof ctx.favouritesGetAll === 'function' ? (ctx.favouritesGetAll() || []) : [];
+    }
 
-        if (ctx && typeof ctx.favouritesRemoveByKey === 'function') {
-          const ok = ctx.favouritesRemoveByKey(key);
-          if (ok) {
-            // Re-render by navigating to same route (cheap + consistent in this SPA)
-            window.dispatchEvent(new CustomEvent('ueah:navigate', { detail: { path: '/favourites' } }));
+    function renderList() {
+      if (!listRoot) return;
+      listRoot.innerHTML = renderFavouritesList(getItems(), hrefFor);
+      bindRemoveButtons();
+    }
+
+    function bindRemoveButtons() {
+      if (!listRoot) return;
+      const removeBtns = Array.from(listRoot.querySelectorAll('[data-fav-remove]'));
+      removeBtns.forEach((btn) => {
+        btn.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          const key = String(btn.getAttribute('data-fav-key') || '').trim();
+          if (!key) return;
+
+          if (ctx && typeof ctx.favouritesRemoveByKey === 'function') {
+            const ok = ctx.favouritesRemoveByKey(key);
+            if (ok) renderList();
           }
-        }
+        });
       });
-    });
+    }
+
+    // Initial bind
+    bindRemoveButtons();
 
     // Export
     const exportBtn = document.querySelector('[data-sync-export]');
@@ -308,7 +330,7 @@ export function getView(ctx) {
           } else {
             setStatus('Done. Your profile and favourites are now on this device.');
             // Re-render list
-            window.dispatchEvent(new CustomEvent('ueah:navigate', { detail: { path: '/favourites' } }));
+            renderList();
           }
         } catch (_) {
           setStatus('Could not load this file.');
