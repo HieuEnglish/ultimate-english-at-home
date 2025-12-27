@@ -308,4 +308,286 @@
 
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = bank;
+
+  // =========================================================
+  // SET D — Education / Learning
+  // =========================================================
+
+  const setD = { id: "set-d", label: "A learning experience that helped you" };
+
+  // Part 1 (Interview) — 10 items
+  [
+    "Do you prefer studying alone or with other people? Why?",
+    "Which school subject did you enjoy most when you were younger?",
+    "Do you think exams are a good way to measure ability?",
+    "How often do you read for pleasure?",
+    "What helps you remember new vocabulary best?",
+    "Do you like learning from videos or from books? Why?",
+    "Have you ever taken an online course?",
+    "What is the most difficult skill to learn in English: reading, writing, listening, or speaking?",
+    "Do you think teachers should give homework every day?",
+    "What do you usually do when you don't understand something in class?"
+  ].forEach((q, i) => {
+    add({
+      id: `d-p1-${i + 1}`,
+      type: "prompt",
+      setId: setD.id,
+      setLabel: setD.label,
+      order: 10 + i,
+      partId: "p1",
+      kind: "interview",
+      question: q,
+      minWords: 25,
+      cues: { label: "Use a reason phrase (because / so / therefore)", anyOf: ["because", "so", "therefore"] }
+    });
+  });
+
+  // Part 2 (Cue card)
+  add({
+    id: "d-p2-1",
+    type: "prompt",
+    setId: setD.id,
+    setLabel: setD.label,
+    order: 200,
+    partId: "p2",
+    kind: "cue",
+    title: "Describe a learning experience that helped you.",
+    question:
+      "You should say:\n" +
+      "• what you tried to learn\n" +
+      "• why it was difficult at first\n" +
+      "• what you did to improve\n" +
+      "and explain what you learned from this experience.",
+    bullets: [
+      "Aim for 2 minutes of speaking.",
+      "Mention at least two strategies you used.",
+      "Use reflection language: what you realised or learned."
+    ],
+    minWords: 140,
+    cues: { label: "Use reflection language (I realised / I learned / It taught me)", anyOf: ["I realised", "I learned", "it taught me"] }
+  });
+
+  // Part 2 follow-up
+  add({
+    id: "d-p2-2",
+    type: "prompt",
+    setId: setD.id,
+    setLabel: setD.label,
+    order: 210,
+    partId: "p2",
+    kind: "followup",
+    question: "Do you think people learn better when they make mistakes? Why / why not?",
+    minWords: 40,
+    cues: { label: "Balance ideas (however / although / on the other hand)", anyOf: ["however", "although", "on the other hand"] }
+  });
+
+  // Part 3 (Discussion) — 6 items
+  [
+    "What are the advantages and disadvantages of standardised tests?",
+    "How has online learning changed education in recent years?",
+    "Should schools focus more on creativity or on academic knowledge?",
+    "What role do parents play in children's education?",
+    "Do you think universities should offer more practical courses?",
+    "How might education change in the next 20 years?"
+  ].forEach((q, i) => {
+    add({
+      id: `d-p3-${i + 1}`,
+      type: "prompt",
+      setId: setD.id,
+      setLabel: setD.label,
+      order: 300 + i,
+      partId: "p3",
+      kind: "discussion",
+      question: q,
+      minWords: 70,
+      cues: { label: "Use a linking phrase (however / moreover / for example)", anyOf: ["however", "moreover", "for example"] }
+    });
+  });
+
+  // =========================================================
+  // SET E — Environment / Everyday habits
+  // =========================================================
+
+  const setE = { id: "set-e", label: "An environmentally friendly change" };
+
+  // Part 1 (Interview) — 10 items
+  [
+    "How often do you recycle at home?",
+    "Do you try to reduce plastic use? How?",
+    "What environmental problems are most serious in your area?",
+    "Do you prefer using public transport, cycling, or driving? Why?",
+    "Have you ever bought second-hand items?",
+    "Do you think individuals can make a difference to the environment?",
+    "What do you do to save energy at home?",
+    "Are you interested in news about climate change?",
+    "Do you think companies should be responsible for packaging waste?",
+    "Would you pay more for environmentally friendly products?"
+  ].forEach((q, i) => {
+    add({
+      id: `e-p1-${i + 1}`,
+      type: "prompt",
+      setId: setE.id,
+      setLabel: setE.label,
+      order: 10 + i,
+      partId: "p1",
+      kind: "interview",
+      question: q,
+      minWords: 25,
+      cues: { label: "Add detail (for example / especially / in particular)", anyOf: ["for example", "especially", "in particular"] }
+    });
+  });
+
+  // Part 2 (Cue card)
+  add({
+    id: "e-p2-1",
+    type: "prompt",
+    setId: setE.id,
+    setLabel: setE.label,
+    order: 200,
+    partId: "p2",
+    kind: "cue",
+    title: "Describe a change you made to be more environmentally friendly.",
+    question:
+      "You should say:\n" +
+      "• what the change was\n" +
+      "• why you decided to do it\n" +
+      "• how you managed to keep the change\n" +
+      "and explain whether it was easy or difficult to continue.",
+    bullets: [
+      "Aim for 2 minutes of speaking.",
+      "Mention one result (what improved).",
+      "Include one difficulty and how you solved it."
+    ],
+    minWords: 140,
+    cues: { label: "Use a result phrase (as a result / therefore / consequently)", anyOf: ["as a result", "therefore", "consequently"] }
+  });
+
+  // Part 2 follow-up
+  add({
+    id: "e-p2-2",
+    type: "prompt",
+    setId: setE.id,
+    setLabel: setE.label,
+    order: 210,
+    partId: "p2",
+    kind: "followup",
+    question: "Do you think governments should punish people who damage the environment? Why / why not?",
+    minWords: 40,
+    cues: { label: "Balance ideas (however / although / on the other hand)", anyOf: ["however", "although", "on the other hand"] }
+  });
+
+  // Part 3 (Discussion) — 6 items
+  [
+    "Why do some people ignore environmental problems even when they know about them?",
+    "What are the most effective ways to reduce waste in cities?",
+    "Should governments ban single-use plastics? What could be the consequences?",
+    "How can businesses reduce their environmental impact without losing customers?",
+    "Do you think environmental education should be a compulsory subject at school?",
+    "In the future, will people live in a more sustainable way? Why / why not?"
+  ].forEach((q, i) => {
+    add({
+      id: `e-p3-${i + 1}`,
+      type: "prompt",
+      setId: setE.id,
+      setLabel: setE.label,
+      order: 300 + i,
+      partId: "p3",
+      kind: "discussion",
+      question: q,
+      minWords: 70,
+      cues: { label: "Use a cause/effect phrase (as a result / leads to / results in)", anyOf: ["as a result", "leads to", "results in"] }
+    });
+  });
+
+  // =========================================================
+  // SET F — Work / Career
+  // =========================================================
+
+  const setF = { id: "set-f", label: "Work and career choices" };
+
+  // Part 1 (Interview) — 10 items
+  [
+    "What kind of job would you like to do in the future?",
+    "Do you think it's better to work for a large company or a small company?",
+    "What skills are most important for getting a good job today?",
+    "Do you think people should change jobs often, or stay in one job for a long time?",
+    "How important is work-life balance to you?",
+    "Have you ever done part-time work or volunteering?",
+    "Do you prefer working in a team or working independently?",
+    "What job would you never want to do? Why?",
+    "Do you think salary is the most important factor when choosing a job?",
+    "How might technology change jobs in the future?"
+  ].forEach((q, i) => {
+    add({
+      id: `f-p1-${i + 1}`,
+      type: "prompt",
+      setId: setF.id,
+      setLabel: setF.label,
+      order: 10 + i,
+      partId: "p1",
+      kind: "interview",
+      question: q,
+      minWords: 25,
+      cues: { label: "Use a reason phrase (because / since / so)", anyOf: ["because", "since", "so"] }
+    });
+  });
+
+  // Part 2 (Cue card)
+  add({
+    id: "f-p2-1",
+    type: "prompt",
+    setId: setF.id,
+    setLabel: setF.label,
+    order: 200,
+    partId: "p2",
+    kind: "cue",
+    title: "Describe a job or role that taught you something valuable.",
+    question:
+      "You should say:\n" +
+      "• what the job or role was\n" +
+      "• what responsibilities you had\n" +
+      "• what you learned from it\n" +
+      "and explain how this experience could help you in the future.",
+    bullets: [
+      "Aim for 2 minutes of speaking.",
+      "Include a specific example of a task you did.",
+      "Finish with a clear lesson you learned."
+    ],
+    minWords: 140,
+    cues: { label: "Use an example phrase (for example / such as)", anyOf: ["for example", "for instance", "such as"] }
+  });
+
+  // Part 2 follow-up
+  add({
+    id: "f-p2-2",
+    type: "prompt",
+    setId: setF.id,
+    setLabel: setF.label,
+    order: 210,
+    partId: "p2",
+    kind: "followup",
+    question: "Would you like to work in another country one day? Why / why not?",
+    minWords: 40,
+    cues: { label: "Compare options (on the one hand / on the other hand)", anyOf: ["on the one hand", "on the other hand"] }
+  });
+
+  // Part 3 (Discussion) — 2 items
+  [
+    "Will automation and AI create more opportunities or more unemployment overall? Why?",
+    "How can governments help young people prepare for the job market?"
+  ].forEach((q, i) => {
+    add({
+      id: `f-p3-${i + 1}`,
+      type: "prompt",
+      setId: setF.id,
+      setLabel: setF.label,
+      order: 300 + i,
+      partId: "p3",
+      kind: "discussion",
+      question: q,
+      minWords: 70,
+      cues: { label: "Use a future phrase (in the long run / likely / might)", anyOf: ["in the long run", "likely", "might"] }
+    });
+  });
+
 })();

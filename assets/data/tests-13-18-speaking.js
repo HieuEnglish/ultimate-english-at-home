@@ -905,6 +905,738 @@
       targets: ["Risks", "Opportunities", "Solution"],
       rubric: RUBRIC_P3
     }
+    ,
+
+    // -------------------------
+    // PART 1 (INTERVIEW) — additional prompts
+    // -------------------------
+    {
+      id: "p1-25",
+      type: "prompt",
+      section: "part1",
+      question: "How do you usually celebrate your birthday?",
+      model: "I usually celebrate my birthday with my family, and we have a simple meal together. Sometimes my friends send messages or we meet for dessert. I like it because it feels relaxed and personal.",
+      say: "I usually celebrate my birthday with my family, and we have a simple meal together. Sometimes my friends send messages or we meet for dessert. I like it because it feels relaxed and personal.",
+      difficulty: "easy",
+      explanation: "Describe what you do and add one reason you enjoy it.",
+      targets: ["2–4 sentences", "Reason"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-26",
+      type: "prompt",
+      section: "part1",
+      question: "What local food would you recommend to a visitor? Why?",
+      model: "I would recommend a popular local noodle dish because it is tasty and not too expensive. It also shows local flavours and ingredients. Visitors can try it at small restaurants to get the best experience.",
+      say: "I would recommend a popular local noodle dish because it is tasty and not too expensive. It also shows local flavours and ingredients. Visitors can try it at small restaurants to get the best experience.",
+      difficulty: "medium",
+      explanation: "Name one food, explain why, and add a practical detail.",
+      targets: ["Recommendation", "Reason + detail"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-27",
+      type: "prompt",
+      section: "part1",
+      question: "Do you prefer group activities or doing things alone? Why?",
+      model: "I prefer group activities because I feel more motivated when I share goals with others. For example, studying with a friend helps me stay focused. However, I still enjoy doing some hobbies alone when I need quiet time.",
+      say: "I prefer group activities because I feel more motivated when I share goals with others. For example, studying with a friend helps me stay focused. However, I still enjoy doing some hobbies alone when I need quiet time.",
+      difficulty: "medium",
+      explanation: "Give your preference, a reason, and one contrast using 'however'.",
+      targets: ["Because", "However", "Example"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-28",
+      type: "prompt",
+      section: "part1",
+      question: "Is there a school subject you find difficult? What do you do about it?",
+      model: "I find mathematics difficult sometimes because the problems can be complex and I make small mistakes. To improve, I practise a little every day and review my errors carefully. If I still don’t understand, I ask my teacher or a friend for help.",
+      say: "I find mathematics difficult sometimes because the problems can be complex and I make small mistakes. To improve, I practise a little every day and review my errors carefully. If I still don’t understand, I ask my teacher or a friend for help.",
+      difficulty: "hard",
+      explanation: "Describe the difficulty and give 2 strategies you use.",
+      targets: ["Challenge", "2 strategies"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-29",
+      type: "prompt",
+      section: "part1",
+      question: "How do you stay healthy during a busy week?",
+      model: "During busy weeks, I try to sleep enough and drink plenty of water. I also do short exercise, like stretching or a quick walk, because it helps my energy. If I plan my meals, it is easier to avoid unhealthy snacks.",
+      say: "During busy weeks, I try to sleep enough and drink plenty of water. I also do short exercise, like stretching or a quick walk, because it helps my energy. If I plan my meals, it is easier to avoid unhealthy snacks.",
+      difficulty: "medium",
+      explanation: "Give 2–3 habits and one short example.",
+      targets: ["2–3 habits", "Example"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-30",
+      type: "prompt",
+      section: "part1",
+      question: "Do you enjoy art or creative activities? Why/why not?",
+      model: "Yes, I enjoy creative activities because they help me relax and express ideas. For example, I like simple drawing or design tasks when I have free time. Even if I’m not perfect, the process feels satisfying.",
+      say: "Yes, I enjoy creative activities because they help me relax and express ideas. For example, I like simple drawing or design tasks when I have free time. Even if I’m not perfect, the process feels satisfying.",
+      difficulty: "easy",
+      explanation: "Give your view, a reason, and one example activity.",
+      targets: ["Reason", "Example"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-31",
+      type: "prompt",
+      section: "part1",
+      question: "How often do you use public transport? What do you think of it?",
+      model: "I use public transport several times a week because it is convenient and cheaper than taxis. In general, it is reliable, but it can be crowded at rush hour. I think it would be better if the schedule was more frequent.",
+      say: "I use public transport several times a week because it is convenient and cheaper than taxis. In general, it is reliable, but it can be crowded at rush hour. I think it would be better if the schedule was more frequent.",
+      difficulty: "hard",
+      explanation: "Give frequency, one positive point, one negative point, and a suggestion.",
+      targets: ["Frequency", "Pros/cons", "Suggestion"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-32",
+      type: "prompt",
+      section: "part1",
+      question: "What do you like to do on weekends?",
+      model: "On weekends, I usually catch up on rest and spend time with friends or family. If I have homework, I try to finish it early so I can relax later. Sometimes I also go for a walk to clear my mind.",
+      say: "On weekends, I usually catch up on rest and spend time with friends or family. If I have homework, I try to finish it early so I can relax later. Sometimes I also go for a walk to clear my mind.",
+      difficulty: "easy",
+      explanation: "Use 'usually' and add one extra detail.",
+      targets: ["Routine language", "Extra detail"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-33",
+      type: "prompt",
+      section: "part1",
+      question: "What is a small goal you have for the next month?",
+      model: "A small goal I have is to improve my time management. I want to start assignments earlier so I don’t rush at the last minute. To do that, I will make a simple weekly plan and follow it.",
+      say: "A small goal I have is to improve my time management. I want to start assignments earlier so I don’t rush at the last minute. To do that, I will make a simple weekly plan and follow it.",
+      difficulty: "medium",
+      explanation: "State the goal, explain why, and add a clear plan.",
+      targets: ["Goal", "Reason", "Plan"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-34",
+      type: "prompt",
+      section: "part1",
+      question: "Do you enjoy learning about history? Why/why not?",
+      model: "I enjoy history because it helps me understand how societies change over time. It also explains why certain traditions and rules exist today. If the lessons include stories and real examples, it becomes much more interesting.",
+      say: "I enjoy history because it helps me understand how societies change over time. It also explains why certain traditions and rules exist today. If the lessons include stories and real examples, it becomes much more interesting.",
+      difficulty: "medium",
+      explanation: "Give your view and 1–2 reasons. Add a condition if possible.",
+      targets: ["Opinion", "Reasons", "Condition"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-35",
+      type: "prompt",
+      section: "part1",
+      question: "What do you do to save money?",
+      model: "To save money, I try to track my spending and avoid buying things impulsively. For example, I compare prices online and wait a day before deciding. I also set a small weekly budget for snacks and entertainment.",
+      say: "To save money, I try to track my spending and avoid buying things impulsively. For example, I compare prices online and wait a day before deciding. I also set a small weekly budget for snacks and entertainment.",
+      difficulty: "hard",
+      explanation: "Give 2 strategies and one concrete example.",
+      targets: ["2 strategies", "Example"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-36",
+      type: "prompt",
+      section: "part1",
+      question: "Do you prefer sending messages or making phone calls? Why?",
+      model: "I prefer sending messages because it is quick and I can reply when I’m free. Phone calls are useful for urgent problems, but they can interrupt people. So I choose messages for most situations.",
+      say: "I prefer sending messages because it is quick and I can reply when I’m free. Phone calls are useful for urgent problems, but they can interrupt people. So I choose messages for most situations.",
+      difficulty: "medium",
+      explanation: "Give a preference, a reason, and one exception.",
+      targets: ["Preference", "Reason", "Exception"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-37",
+      type: "prompt",
+      section: "part1",
+      question: "What is your favourite festival or holiday? Why do you like it?",
+      model: "My favourite holiday is the new year celebration because it brings families together. I like it because the atmosphere feels hopeful and people share good wishes. It’s also a chance to rest and set new goals.",
+      say: "My favourite holiday is the new year celebration because it brings families together. I like it because the atmosphere feels hopeful and people share good wishes. It’s also a chance to rest and set new goals.",
+      difficulty: "easy",
+      explanation: "Name the festival/holiday and give 2 reasons.",
+      targets: ["2 reasons", "Personal detail"],
+      rubric: RUBRIC_P1
+    },
+    {
+      id: "p1-38",
+      type: "prompt",
+      section: "part1",
+      question: "Do you think your city is a good place for young people? Why/why not?",
+      model: "I think it is mostly a good place for young people because there are many schools, cafés, and activities. However, it can be expensive, and traffic can be stressful. If the city improved public spaces and transport, it would be even better.",
+      say: "I think it is mostly a good place for young people because there are many schools, cafés, and activities. However, it can be expensive, and traffic can be stressful. If the city improved public spaces and transport, it would be even better.",
+      difficulty: "hard",
+      explanation: "Give a balanced view with 1 advantage, 1 disadvantage, and one suggestion.",
+      targets: ["Balanced view", "Suggestion"],
+      rubric: RUBRIC_P1
+    },
+
+    // -------------------------
+    // PART 2 (CUE CARD) — new topics
+    // -------------------------
+    {
+      id: "p2-health-01",
+      type: "prompt",
+      section: "part2",
+      topicId: "health",
+      question: "Describe a healthy habit you have developed.",
+      cue: ["What the habit is", "When you started it", "Why you decided to do it", "What results you have noticed"],
+      model:
+        "A healthy habit I have developed is going for a short walk every day. I started it a few months ago when I realised I was sitting for too long. I decided to do it because it is simple, free, and it improves my mood. Usually I walk for about twenty minutes after dinner, and I try to leave my phone in my pocket. At first it felt boring, but I began to notice small benefits quickly. For example, I sleep more easily and my mind feels clearer when I study. It also gives me time to think about my day and reduce stress. Overall, it is an easy habit that has a surprisingly positive effect.",
+      say:
+        "A healthy habit I have developed is going for a short walk every day. I started it a few months ago when I realised I was sitting for too long. I decided to do it because it is simple, free, and it improves my mood. Usually I walk for about twenty minutes after dinner, and I try to leave my phone in my pocket. At first it felt boring, but I began to notice small benefits quickly. For example, I sleep more easily and my mind feels clearer when I study. It also gives me time to think about my day and reduce stress. Overall, it is an easy habit that has a surprisingly positive effect.",
+      difficulty: "medium",
+      explanation: "Speak for 1–2 minutes: explain the habit, your reasons, and the results.",
+      targets: ["8+ sentences", "Reasons + results"],
+      rubric: RUBRIC_P2
+    },
+    {
+      id: "p2-culture-01",
+      type: "prompt",
+      section: "part2",
+      topicId: "culture",
+      question: "Describe a cultural event you attended or would like to attend.",
+      cue: ["What the event is", "Where and when it happens", "What people do there", "Why it is meaningful"],
+      model:
+        "A cultural event I would like to attend is a traditional lantern festival. It usually happens in the evening in a historic area where the streets are decorated with colourful lights. People walk around, take photos, and buy local snacks while listening to music. I would like to go because it feels different from everyday life and it shows local traditions in a beautiful way. Another reason is that it brings the community together, including families and tourists. I think events like this help people feel proud of their culture. They also support small businesses because many local shops get more customers. If I had the chance, I would go with friends so we could explore and learn more about the history behind it.",
+      say:
+        "A cultural event I would like to attend is a traditional lantern festival. It usually happens in the evening in a historic area where the streets are decorated with colourful lights. People walk around, take photos, and buy local snacks while listening to music. I would like to go because it feels different from everyday life and it shows local traditions in a beautiful way. Another reason is that it brings the community together, including families and tourists. I think events like this help people feel proud of their culture. They also support small businesses because many local shops get more customers. If I had the chance, I would go with friends so we could explore and learn more about the history behind it.",
+      difficulty: "medium",
+      explanation: "Describe the event clearly and explain why it matters to people.",
+      targets: ["8+ sentences", "Description + meaning"],
+      rubric: RUBRIC_P2
+    },
+    {
+      id: "p2-transport-01",
+      type: "prompt",
+      section: "part2",
+      topicId: "transport",
+      question: "Describe a memorable journey you have taken.",
+      cue: ["Where you went", "How you travelled", "What happened during the trip", "Why you remember it"],
+      model:
+        "A memorable journey I took was a weekend trip to a coastal town with my family. We travelled by train, which was comfortable and gave us a nice view of the countryside. During the trip, we talked, listened to music, and planned what we would do when we arrived. When we reached the town, the weather was sunny and the sea looked amazing. We tried local seafood and walked along the beach in the late afternoon. What I remember most is the feeling of freedom because the schedule was relaxed and we were not rushing. I also enjoyed the train ride because it felt safer and less stressful than driving in traffic. Overall, it was memorable because it combined a pleasant journey with quality time together.",
+      say:
+        "A memorable journey I took was a weekend trip to a coastal town with my family. We travelled by train, which was comfortable and gave us a nice view of the countryside. During the trip, we talked, listened to music, and planned what we would do when we arrived. When we reached the town, the weather was sunny and the sea looked amazing. We tried local seafood and walked along the beach in the late afternoon. What I remember most is the feeling of freedom because the schedule was relaxed and we were not rushing. I also enjoyed the train ride because it felt safer and less stressful than driving in traffic. Overall, it was memorable because it combined a pleasant journey with quality time together.",
+      difficulty: "easy",
+      explanation: "Tell the story in order and explain why it stayed in your memory.",
+      targets: ["8+ sentences", "Sequencing", "Reason"],
+      rubric: RUBRIC_P2
+    },
+    {
+      id: "p2-community-01",
+      type: "prompt",
+      section: "part2",
+      topicId: "community",
+      question: "Describe a place in your community where people like to meet.",
+      cue: ["What the place is", "Who goes there", "What people do there", "Why it is important"],
+      model:
+        "A place in my community where people like to meet is a small neighbourhood café. People of different ages go there, including students, office workers, and families. Some people meet friends to chat, while others study or work quietly on laptops. In the evenings, it becomes more social and you can hear conversations and laughter. I think it is important because it gives people a comfortable space outside home and school. It also helps the neighbourhood feel friendly because you often see familiar faces. In addition, local cafés support small businesses and create jobs. For me, it is a useful place to relax and feel connected to the community.",
+      say:
+        "A place in my community where people like to meet is a small neighbourhood café. People of different ages go there, including students, office workers, and families. Some people meet friends to chat, while others study or work quietly on laptops. In the evenings, it becomes more social and you can hear conversations and laughter. I think it is important because it gives people a comfortable space outside home and school. It also helps the neighbourhood feel friendly because you often see familiar faces. In addition, local cafés support small businesses and create jobs. For me, it is a useful place to relax and feel connected to the community.",
+      difficulty: "hard",
+      explanation: "Describe the place, then explain why it matters to the community.",
+      targets: ["8+ sentences", "Description + importance"],
+      rubric: RUBRIC_P2
+    },
+
+    // -------------------------
+    // PART 3 (DISCUSSION) — new topicId groups
+    // -------------------------
+    // Health
+    {
+      id: "p3-health-01",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "Why do some teenagers find it difficult to maintain a healthy lifestyle?",
+      model:
+        "Many teenagers find it difficult because they have busy schedules with school, homework, and activities. In addition, fast food is cheap and convenient, so it is an easy choice. Another factor is sleep, because screens and stress can reduce rest. To be healthier, teenagers often need better routines and support from family and schools.",
+      say:
+        "Many teenagers find it difficult because they have busy schedules with school, homework, and activities. In addition, fast food is cheap and convenient, so it is an easy choice. Another factor is sleep, because screens and stress can reduce rest. To be healthier, teenagers often need better routines and support from family and schools.",
+      difficulty: "medium",
+      explanation: "Give several causes and suggest one improvement.",
+      targets: ["Causes", "Suggestion"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-health-02",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "Do you think schools should provide more health education? Why?",
+      model:
+        "Yes, because health education helps students make informed decisions about food, exercise, and mental wellbeing. For example, students could learn how to read nutrition labels and manage stress. However, schools should keep it practical and age-appropriate. If students understand the reasons behind healthy habits, they are more likely to follow them.",
+      say:
+        "Yes, because health education helps students make informed decisions about food, exercise, and mental wellbeing. For example, students could learn how to read nutrition labels and manage stress. However, schools should keep it practical and age-appropriate. If students understand the reasons behind healthy habits, they are more likely to follow them.",
+      difficulty: "hard",
+      explanation: "Give reasons, an example, and one condition.",
+      targets: ["Reason", "Example", "Condition"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-health-03",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "How important is sleep compared to diet and exercise?",
+      model:
+        "Sleep is extremely important because it affects mood, memory, and concentration. Even if someone eats well and exercises, lack of sleep can reduce performance and increase stress. Diet and exercise are still essential, but sleep often supports both because it helps the body recover. In my view, the best approach is balance, but teenagers especially need enough sleep.",
+      say:
+        "Sleep is extremely important because it affects mood, memory, and concentration. Even if someone eats well and exercises, lack of sleep can reduce performance and increase stress. Diet and exercise are still essential, but sleep often supports both because it helps the body recover. In my view, the best approach is balance, but teenagers especially need enough sleep.",
+      difficulty: "hard",
+      explanation: "Compare the three factors and give your view.",
+      targets: ["Comparison", "Opinion"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-health-04",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "What can families do to encourage healthier eating at home?",
+      model:
+        "Families can encourage healthier eating by planning simple meals and keeping healthy snacks available. Cooking together can also teach teenagers useful skills and make them more interested in food. Another step is limiting sugary drinks at home. Of course, it is important not to be too strict, but consistent habits can make a big difference.",
+      say:
+        "Families can encourage healthier eating by planning simple meals and keeping healthy snacks available. Cooking together can also teach teenagers useful skills and make them more interested in food. Another step is limiting sugary drinks at home. Of course, it is important not to be too strict, but consistent habits can make a big difference.",
+      difficulty: "medium",
+      explanation: "Give 2–3 actions and a balanced comment.",
+      targets: ["Actions", "Balance"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-health-05",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "How can people manage stress more effectively?",
+      model:
+        "People can manage stress by organising tasks and setting realistic goals, so problems feel more controllable. Exercise and sleep also help because they improve mood and energy. In addition, talking to someone you trust can reduce pressure. If stress becomes serious, professional support is important because long-term stress can affect health.",
+      say:
+        "People can manage stress by organising tasks and setting realistic goals, so problems feel more controllable. Exercise and sleep also help because they improve mood and energy. In addition, talking to someone you trust can reduce pressure. If stress becomes serious, professional support is important because long-term stress can affect health.",
+      difficulty: "hard",
+      explanation: "Give strategies and mention when extra support is needed.",
+      targets: ["Strategies", "Support"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-health-06",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "Should governments regulate advertising for unhealthy food aimed at young people?",
+      model:
+        "Some regulation makes sense because advertising can influence young people’s choices, especially when it uses attractive images and celebrity marketing. If the goal is public health, governments can limit ads during children’s programs or require clear warnings. However, companies will argue about freedom and profit, so rules need to be fair and realistic. In my opinion, protecting young consumers is more important than allowing unlimited marketing.",
+      say:
+        "Some regulation makes sense because advertising can influence young people’s choices, especially when it uses attractive images and celebrity marketing. If the goal is public health, governments can limit ads during children’s programs or require clear warnings. However, companies will argue about freedom and profit, so rules need to be fair and realistic. In my opinion, protecting young consumers is more important than allowing unlimited marketing.",
+      difficulty: "hard",
+      explanation: "Discuss both sides and give a clear opinion.",
+      targets: ["Both sides", "Opinion"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-health-07",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "What is the best way to encourage teenagers to exercise more?",
+      model:
+        "The best way is to make exercise enjoyable and social, rather than forcing it. For example, team sports, dance classes, or walking with friends can feel fun. Schools can also offer more choices instead of only one sport. When teenagers find an activity they like, they are more likely to continue.",
+      say:
+        "The best way is to make exercise enjoyable and social, rather than forcing it. For example, team sports, dance classes, or walking with friends can feel fun. Schools can also offer more choices instead of only one sport. When teenagers find an activity they like, they are more likely to continue.",
+      difficulty: "medium",
+      explanation: "Give an approach, examples, and a reason it works.",
+      targets: ["Approach", "Examples", "Reason"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-health-08",
+      type: "prompt",
+      section: "part3",
+      topicId: "health",
+      question: "How might technology both help and harm people’s health?",
+      model:
+        "Technology can help health through fitness trackers, online medical advice, and educational content. For example, an app can remind people to drink water or move regularly. However, it can also harm health by increasing screen time and reducing sleep. In addition, too much online information can cause worry. So the benefits are real, but people need good habits and limits.",
+      say:
+        "Technology can help health through fitness trackers, online medical advice, and educational content. For example, an app can remind people to drink water or move regularly. However, it can also harm health by increasing screen time and reducing sleep. In addition, too much online information can cause worry. So the benefits are real, but people need good habits and limits.",
+      difficulty: "hard",
+      explanation: "Give benefits and drawbacks with an example, then conclude.",
+      targets: ["Pros/cons", "Example", "Conclusion"],
+      rubric: RUBRIC_P3
+    },
+
+    // Culture
+    {
+      id: "p3-culture-01",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "Why is it important to preserve traditional culture?",
+      model:
+        "Preserving traditional culture is important because it gives people a sense of identity and history. It also helps communities feel connected across generations. For example, traditional music or festivals can teach values and stories. Without preservation, culture can become weaker and people may feel less connected to their roots.",
+      say:
+        "Preserving traditional culture is important because it gives people a sense of identity and history. It also helps communities feel connected across generations. For example, traditional music or festivals can teach values and stories. Without preservation, culture can become weaker and people may feel less connected to their roots.",
+      difficulty: "medium",
+      explanation: "Explain importance and give one example.",
+      targets: ["Reasons", "Example"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-culture-02",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "How does globalisation influence local culture?",
+      model:
+        "Globalisation influences local culture by spreading international music, fashion, and food quickly. This can be positive because people learn from each other and have more choices. However, it can also reduce local traditions if young people only follow global trends. A balanced approach is to enjoy global culture while still protecting local languages and customs.",
+      say:
+        "Globalisation influences local culture by spreading international music, fashion, and food quickly. This can be positive because people learn from each other and have more choices. However, it can also reduce local traditions if young people only follow global trends. A balanced approach is to enjoy global culture while still protecting local languages and customs.",
+      difficulty: "hard",
+      explanation: "Discuss positives and negatives and propose balance.",
+      targets: ["Pros/cons", "Balanced view"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-culture-03",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "Do you think young people are less interested in traditional events than in the past?",
+      model:
+        "In some cases, yes, because young people have many modern entertainment options and busy schedules. Social media also changes how they spend free time. However, if traditional events are presented in an engaging way, young people can still enjoy them. For example, festivals that include interactive activities and modern elements often attract more teenagers.",
+      say:
+        "In some cases, yes, because young people have many modern entertainment options and busy schedules. Social media also changes how they spend free time. However, if traditional events are presented in an engaging way, young people can still enjoy them. For example, festivals that include interactive activities and modern elements often attract more teenagers.",
+      difficulty: "hard",
+      explanation: "Give a trend, reasons, and one solution.",
+      targets: ["Trend", "Reasons", "Solution"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-culture-04",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "What can schools do to help students understand culture better?",
+      model:
+        "Schools can help by including cultural topics in language and history classes. They can also organise events such as cultural days, performances, or museum visits. Another idea is project work where students research traditions and present them. Practical experiences make culture easier to understand than only reading about it.",
+      say:
+        "Schools can help by including cultural topics in language and history classes. They can also organise events such as cultural days, performances, or museum visits. Another idea is project work where students research traditions and present them. Practical experiences make culture easier to understand than only reading about it.",
+      difficulty: "medium",
+      explanation: "Provide 2–3 actions and explain why they help.",
+      targets: ["Actions", "Reason"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-culture-05",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "Are museums still important in the modern world? Why/why not?",
+      model:
+        "Museums are still important because they protect historical objects and teach people about the past. They also offer experiences that online information cannot fully replace, such as seeing real artefacts. However, museums need to be interactive and accessible to attract young visitors. If they use technology and good storytelling, they can stay relevant.",
+      say:
+        "Museums are still important because they protect historical objects and teach people about the past. They also offer experiences that online information cannot fully replace, such as seeing real artefacts. However, museums need to be interactive and accessible to attract young visitors. If they use technology and good storytelling, they can stay relevant.",
+      difficulty: "medium",
+      explanation: "Give reasons and one suggestion for improvement.",
+      targets: ["Reasons", "Suggestion"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-culture-06",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "How can social media change the way culture is shared?",
+      model:
+        "Social media can share culture quickly because people post videos of festivals, food, and daily life. This can increase interest and tourism. However, it can also create a shallow image if people only show the most attractive parts. To share culture responsibly, creators should add context and respect traditions rather than only chasing views.",
+      say:
+        "Social media can share culture quickly because people post videos of festivals, food, and daily life. This can increase interest and tourism. However, it can also create a shallow image if people only show the most attractive parts. To share culture responsibly, creators should add context and respect traditions rather than only chasing views.",
+      difficulty: "hard",
+      explanation: "Mention benefits, risks, and responsible behaviour.",
+      targets: ["Benefits", "Risks", "Advice"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-culture-07",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "Should governments spend public money on arts and culture?",
+      model:
+        "Governments should spend some public money on arts and culture because it improves quality of life and protects national identity. Cultural events can also bring economic benefits through tourism. However, budgets are limited, so spending should be balanced with essential services like healthcare and education. In my opinion, moderate funding with clear goals is reasonable.",
+      say:
+        "Governments should spend some public money on arts and culture because it improves quality of life and protects national identity. Cultural events can also bring economic benefits through tourism. However, budgets are limited, so spending should be balanced with essential services like healthcare and education. In my opinion, moderate funding with clear goals is reasonable.",
+      difficulty: "hard",
+      explanation: "Discuss benefits, limits, and give an opinion.",
+      targets: ["Benefits", "Limits", "Opinion"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-culture-08",
+      type: "prompt",
+      section: "part3",
+      topicId: "culture",
+      question: "How can people avoid cultural stereotypes when meeting foreigners?",
+      model:
+        "People can avoid stereotypes by treating individuals as unique instead of assuming they are the same as a group. Asking respectful questions and listening carefully can help. It is also useful to learn basic facts, but we should stay open-minded. When people travel or study abroad, real conversations usually break stereotypes quickly.",
+      say:
+        "People can avoid stereotypes by treating individuals as unique instead of assuming they are the same as a group. Asking respectful questions and listening carefully can help. It is also useful to learn basic facts, but we should stay open-minded. When people travel or study abroad, real conversations usually break stereotypes quickly.",
+      difficulty: "medium",
+      explanation: "Give strategies and one real-life example.",
+      targets: ["Strategies", "Example"],
+      rubric: RUBRIC_P3
+    },
+
+    // Transport
+    {
+      id: "p3-transport-01",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "Why do many people still prefer private cars in cities?",
+      model:
+        "Many people prefer private cars because they feel more comfortable and flexible. They can travel directly without waiting, and they can carry bags easily. In addition, some public transport systems are crowded or unreliable. However, car use creates congestion, so better public options could change behaviour.",
+      say:
+        "Many people prefer private cars because they feel more comfortable and flexible. They can travel directly without waiting, and they can carry bags easily. In addition, some public transport systems are crowded or unreliable. However, car use creates congestion, so better public options could change behaviour.",
+      difficulty: "medium",
+      explanation: "Give reasons and mention one consequence.",
+      targets: ["Reasons", "Consequence"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-transport-02",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "What are the best ways to reduce traffic congestion?",
+      model:
+        "To reduce congestion, cities can improve public transport so it is fast, clean, and frequent. They can also encourage cycling by building safe lanes. Another method is pricing, such as charging cars to enter the city centre. A combination of these strategies is usually more effective than only one.",
+      say:
+        "To reduce congestion, cities can improve public transport so it is fast, clean, and frequent. They can also encourage cycling by building safe lanes. Another method is pricing, such as charging cars to enter the city centre. A combination of these strategies is usually more effective than only one.",
+      difficulty: "hard",
+      explanation: "Give 2–3 solutions and explain why a mix is best.",
+      targets: ["Solutions", "Explanation"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-transport-03",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "Do you think cycling should be encouraged more in cities? Why?",
+      model:
+        "Yes, because cycling reduces pollution and can improve public health. It can also save space compared to cars. However, it is only realistic if the city provides safe cycle lanes and good road design. Without safety, many people will not feel confident to cycle.",
+      say:
+        "Yes, because cycling reduces pollution and can improve public health. It can also save space compared to cars. However, it is only realistic if the city provides safe cycle lanes and good road design. Without safety, many people will not feel confident to cycle.",
+      difficulty: "medium",
+      explanation: "Give reasons and one condition.",
+      targets: ["Reasons", "Condition"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-transport-04",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "How might electric vehicles change transport in the future?",
+      model:
+        "Electric vehicles could reduce air pollution in cities because they produce fewer emissions while driving. They may also reduce noise, which improves quality of life. However, the benefits depend on how electricity is produced and whether charging stations are available. Over time, costs may fall and EVs may become more common.",
+      say:
+        "Electric vehicles could reduce air pollution in cities because they produce fewer emissions while driving. They may also reduce noise, which improves quality of life. However, the benefits depend on how electricity is produced and whether charging stations are available. Over time, costs may fall and EVs may become more common.",
+      difficulty: "hard",
+      explanation: "Mention advantages and limitations.",
+      targets: ["Advantages", "Limitations"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-transport-05",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "Should city centres have more car-free zones?",
+      model:
+        "Car-free zones can be very positive because they reduce pollution and make streets safer for walking. They also create more space for cafés, parks, and community events. However, some businesses worry about deliveries and access for older people. A good plan would include public transport, delivery times, and disabled access.",
+      say:
+        "Car-free zones can be very positive because they reduce pollution and make streets safer for walking. They also create more space for cafés, parks, and community events. However, some businesses worry about deliveries and access for older people. A good plan would include public transport, delivery times, and disabled access.",
+      difficulty: "hard",
+      explanation: "Discuss pros/cons and suggest practical solutions.",
+      targets: ["Pros/cons", "Solutions"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-transport-06",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "How does transport affect people’s opportunities in life?",
+      model:
+        "Transport affects opportunities because it determines how easily people can reach schools, jobs, and services. If transport is cheap and reliable, people have more choices and can save time. On the other hand, poor transport can limit education and work options, especially for low-income communities. So transport is not only about travel, but also about equality.",
+      say:
+        "Transport affects opportunities because it determines how easily people can reach schools, jobs, and services. If transport is cheap and reliable, people have more choices and can save time. On the other hand, poor transport can limit education and work options, especially for low-income communities. So transport is not only about travel, but also about equality.",
+      difficulty: "hard",
+      explanation: "Explain cause-and-effect and include a fairness point.",
+      targets: ["Cause/effect", "Fairness"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-transport-07",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "What problems can crowded public transport cause?",
+      model:
+        "Crowded public transport can cause discomfort and stress, especially during hot weather or long trips. It can also reduce safety and make delays worse when people cannot board easily. For students and workers, this can lead to tiredness and lateness. Improving frequency and management could reduce these problems.",
+      say:
+        "Crowded public transport can cause discomfort and stress, especially during hot weather or long trips. It can also reduce safety and make delays worse when people cannot board easily. For students and workers, this can lead to tiredness and lateness. Improving frequency and management could reduce these problems.",
+      difficulty: "medium",
+      explanation: "Mention problems, impact, and one improvement.",
+      targets: ["Problems", "Impact", "Improvement"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-transport-08",
+      type: "prompt",
+      section: "part3",
+      topicId: "transport",
+      question: "How might remote work change transport patterns?",
+      model:
+        "Remote work could reduce commuting because fewer people need to travel every day. This may lower congestion and pollution during peak hours. However, people might still travel for meetings or choose to live further from city centres, which could create new patterns. Overall, remote work may make transport demand more flexible.",
+      say:
+        "Remote work could reduce commuting because fewer people need to travel every day. This may lower congestion and pollution during peak hours. However, people might still travel for meetings or choose to live further from city centres, which could create new patterns. Overall, remote work may make transport demand more flexible.",
+      difficulty: "medium",
+      explanation: "Make 2 points and include a possible drawback.",
+      targets: ["2 points", "Possible drawback"],
+      rubric: RUBRIC_P3
+    },
+
+    // Community
+    {
+      id: "p3-community-01",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "Why are community spaces important in modern cities?",
+      model:
+        "Community spaces are important because they help people connect and reduce loneliness. They also provide safe areas for young people to study, exercise, or join activities. For example, libraries and parks can support learning and wellbeing. In crowded cities, shared spaces can improve social life and make neighbourhoods friendlier.",
+      say:
+        "Community spaces are important because they help people connect and reduce loneliness. They also provide safe areas for young people to study, exercise, or join activities. For example, libraries and parks can support learning and wellbeing. In crowded cities, shared spaces can improve social life and make neighbourhoods friendlier.",
+      difficulty: "medium",
+      explanation: "Explain benefits and give an example.",
+      targets: ["Benefits", "Example"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-02",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "How can young people contribute to their local community?",
+      model:
+        "Young people can contribute by volunteering, joining clean-up events, or helping older neighbours. They can also participate in clubs that organise community projects. In addition, young people can share ideas through school or local meetings. Even small actions, when done regularly, can improve the community.",
+      say:
+        "Young people can contribute by volunteering, joining clean-up events, or helping older neighbours. They can also participate in clubs that organise community projects. In addition, young people can share ideas through school or local meetings. Even small actions, when done regularly, can improve the community.",
+      difficulty: "medium",
+      explanation: "Give 2–3 examples and a concluding idea.",
+      targets: ["Examples", "Conclusion"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-03",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "What can local governments do to improve safety in neighbourhoods?",
+      model:
+        "Local governments can improve safety by improving lighting and maintaining public areas. They can also support community policing and quick reporting systems. Another approach is creating safe public spaces where people feel comfortable. When residents trust the system, they are more likely to cooperate and prevent problems.",
+      say:
+        "Local governments can improve safety by improving lighting and maintaining public areas. They can also support community policing and quick reporting systems. Another approach is creating safe public spaces where people feel comfortable. When residents trust the system, they are more likely to cooperate and prevent problems.",
+      difficulty: "hard",
+      explanation: "Give practical methods and explain why trust matters.",
+      targets: ["Methods", "Explanation"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-04",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "Do you think people are becoming more isolated today? Why?",
+      model:
+        "In some ways, yes, because many interactions happen online and people are busy with work and study. This can reduce face-to-face communication and weaken neighbourhood relationships. However, isolation is not unavoidable because communities can organise events and shared activities. If people make small efforts to connect, social life can improve.",
+      say:
+        "In some ways, yes, because many interactions happen online and people are busy with work and study. This can reduce face-to-face communication and weaken neighbourhood relationships. However, isolation is not unavoidable because communities can organise events and shared activities. If people make small efforts to connect, social life can improve.",
+      difficulty: "hard",
+      explanation: "Explain causes and give a solution.",
+      targets: ["Causes", "Solution"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-05",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "What kinds of community events are most beneficial?",
+      model:
+        "Events that bring different groups together are usually most beneficial, such as clean-up days, sports tournaments, or cultural festivals. These events build relationships and make people feel proud of their area. They can also support local businesses if shops and cafés participate. The most important thing is that events are inclusive and affordable.",
+      say:
+        "Events that bring different groups together are usually most beneficial, such as clean-up days, sports tournaments, or cultural festivals. These events build relationships and make people feel proud of their area. They can also support local businesses if shops and cafés participate. The most important thing is that events are inclusive and affordable.",
+      difficulty: "medium",
+      explanation: "Give examples and explain what makes them effective.",
+      targets: ["Examples", "Effectiveness"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-06",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "Should schools require students to do community service?",
+      model:
+        "Community service can be valuable because it teaches responsibility and empathy. If it is required, it ensures that all students experience it, not only those who already volunteer. However, forcing people can reduce motivation, so schools should offer choices and explain the purpose. In my opinion, a flexible requirement with options is a good compromise.",
+      say:
+        "Community service can be valuable because it teaches responsibility and empathy. If it is required, it ensures that all students experience it, not only those who already volunteer. However, forcing people can reduce motivation, so schools should offer choices and explain the purpose. In my opinion, a flexible requirement with options is a good compromise.",
+      difficulty: "hard",
+      explanation: "Discuss pros/cons and give a balanced recommendation.",
+      targets: ["Pros/cons", "Recommendation"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-07",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "How can communities support people during emergencies?",
+      model:
+        "Communities can support people by sharing information quickly and helping vulnerable residents, such as older people or families with small children. Local groups can organise supplies and safe shelters. Schools and community centres can also become support points. Clear communication and cooperation are essential because emergencies require fast action.",
+      say:
+        "Communities can support people by sharing information quickly and helping vulnerable residents, such as older people or families with small children. Local groups can organise supplies and safe shelters. Schools and community centres can also become support points. Clear communication and cooperation are essential because emergencies require fast action.",
+      difficulty: "hard",
+      explanation: "Give examples and explain the importance of coordination.",
+      targets: ["Examples", "Coordination"],
+      rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-08",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "Are online communities as valuable as local communities?",
+      model:
+        "Online communities can be valuable because they connect people with similar interests across distance. They can provide support and information, especially for niche hobbies or learning. However, local communities are important for practical help and real-life connection. In my view, online communities are a useful addition, but they cannot fully replace local relationships.",
+      say:
+        "Online communities can be valuable because they connect people with similar interests across distance. They can provide support and information, especially for niche hobbies or learning. However, local communities are important for practical help and real-life connection. In my view, online communities are a useful addition, but they cannot fully replace local relationships.",
+      difficulty: "medium",
+      explanation: "Compare both types and give a clear conclusion.",
+      targets: ["Comparison", "Conclusion"],
+      rubric: RUBRIC_P3
+    }
   ];
 
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};

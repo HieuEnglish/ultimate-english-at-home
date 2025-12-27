@@ -349,6 +349,658 @@
       difficulty: "hard",
       explanation: "The passage presents repair as useful but not sufficient on its own."
     }
+    ,
+
+    // Added questions (append-only): q25–q74
+
+    // Passage 1 (p1) — additional
+    {
+      id: "q25",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Matching headings: Which heading best matches Paragraph C?",
+      options: [
+        "Why early results may not prove long-term success",
+        "A guide to choosing the best school timetable",
+        "An argument for removing all city trees",
+        "How to replace parks with parking spaces"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph C warns that quick success stories do not automatically prove long-term value."
+    },
+    {
+      id: "q26",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Matching headings: Which heading best matches Paragraph D?",
+      options: [
+        "Community involvement as a key factor",
+        "Why lawns are better than trees",
+        "The history of composting in Europe",
+        "How to grow imported plants indoors"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph D focuses on residents planting, labelling species, monitoring growth, and protecting the site."
+    },
+    {
+      id: "q27",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "In which paragraph is compost mentioned?",
+      options: ["A", "B", "C", "D"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "Paragraph B mentions improving the soil with compost."
+    },
+    {
+      id: "q28",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Choose the correct option (True / False / Not Given): Micro-forests are planted with many saplings close together.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph B says planners plant many saplings close together."
+    },
+    {
+      id: "q29",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Choose the correct option (True / False / Not Given): The passage claims that planting a few dense patches is the same as restoring a large woodland.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Paragraph C states that dense patches are not the same as restoring a large woodland."
+    },
+    {
+      id: "q30",
+      passageId: "p1",
+      type: "fillInTheBlank",
+      passage: P1,
+      question: "Sentence completion: Micro-forests can fit into leftover spaces such as road corners or unused ______ grounds.",
+      answer: "school",
+      difficulty: "easy",
+      explanation: "Paragraph A mentions unused school grounds as an example."
+    },
+    {
+      id: "q31",
+      passageId: "p1",
+      type: "fillInTheBlank",
+      passage: P1,
+      question: "Sentence completion: The area is protected while ______ establish.",
+      answer: ["roots", "the roots"],
+      difficulty: "easy",
+      explanation: "Paragraph B explains the area is protected while roots establish."
+    },
+    {
+      id: "q32",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "In Paragraph B, the phrase 'roots establish' most nearly means roots _____.",
+      options: [
+        "become strong and settled",
+        "are removed from the soil",
+        "change into flowers",
+        "stop growing completely"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The context suggests roots need time to take hold and grow effectively."
+    },
+    {
+      id: "q33",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Why does the writer say a micro-forest works best as part of a wider plan?",
+      options: [
+        "Because it should be combined with clean transport and other cooling measures",
+        "Because micro-forests cannot survive without imported trees",
+        "Because residents are not allowed to visit parks",
+        "Because watering is never required in cities"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph D says micro-forests work best as part of a wider plan including clean transport and urban cooling."
+    },
+    {
+      id: "q34",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Which factor is NOT mentioned as affecting whether a micro-forest thrives?",
+      options: [
+        "Local heat",
+        "Soil quality",
+        "Ongoing care",
+        "The phase of the moon"
+      ],
+      answer: 3,
+      difficulty: "easy",
+      explanation: "Paragraph C mentions heat, soil quality, and ongoing care, but not the moon."
+    },
+    {
+      id: "q35",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "According to Paragraph D, what is one benefit of residents helping to label species and monitor growth?",
+      options: [
+        "They are more likely to protect the site and report problems early",
+        "They can legally remove trees for firewood",
+        "They no longer need any watering during dry seasons",
+        "They guarantee that all insects will disappear"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph D links community involvement to protection and early problem reporting."
+    },
+    {
+      id: "q36",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "In which paragraph does the writer mention reporting problems early?",
+      options: ["A", "B", "C", "D"],
+      answer: 3,
+      difficulty: "medium",
+      explanation: "Paragraph D mentions residents reporting problems early."
+    },
+    {
+      id: "q37",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Choose the correct option (True / False / Not Given): The passage suggests that micro-forests can provide habitat for insects.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph C mentions insects returning, and Paragraph A mentions habitat as part of the ecosystem idea."
+    },
+    {
+      id: "q38",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "What do critics mainly emphasise about early 'impressive' reports?",
+      options: [
+        "They do not automatically prove long-term value",
+        "They show micro-forests always fail",
+        "They prove micro-forests are identical to parks",
+        "They demonstrate that lawns are better"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph C warns that quick success stories are not the same as long-term evidence."
+    },
+    {
+      id: "q39",
+      passageId: "p1",
+      type: "fillInTheBlank",
+      passage: P1,
+      question: "Sentence completion: During the first dry season, careful ______ is essential.",
+      answer: "watering",
+      difficulty: "easy",
+      explanation: "Paragraph B says careful watering is essential during the first dry season."
+    },
+    {
+      id: "q40",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Choose the correct option (True / False / Not Given): The passage provides a list of specific cities where micro-forests have been most successful.",
+      options: ["True", "False", "Not Given"],
+      answer: 2,
+      difficulty: "hard",
+      explanation: "No city list is provided; the passage stays general."
+    },
+    {
+      id: "q41",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Why are residents who help plant more likely to protect the micro-forest site?",
+      options: [
+        "Their involvement creates a sense of responsibility and ownership",
+        "They are paid to guard the site every night",
+        "They receive free public transport tickets",
+        "They are required to plant trees for school grades"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph D suggests involvement makes residents more likely to protect the site and act when issues appear."
+    },
+    {
+      id: "q42",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "In which paragraph is the idea that the goal is 'not decoration' mentioned?",
+      options: ["A", "B", "C", "D"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph A says the goal is not decoration but creating a tiny ecosystem."
+    },
+
+    // Passage 2 (p2) — additional
+    {
+      id: "q43",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Matching headings: Which heading best matches Paragraph B?",
+      options: [
+        "How sleep helps the brain store learning",
+        "Why teenagers need less sleep than adults",
+        "How to replace homework with naps",
+        "The history of school uniforms"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph B explains how deep sleep and REM sleep support memory and processing."
+    },
+    {
+      id: "q44",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Matching headings: Which heading best matches Paragraph C?",
+      options: [
+        "Practical habits that support sleep and learning",
+        "Why morning classes should be cancelled",
+        "How to drink more caffeine safely",
+        "Why screens improve sleep quality"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph C lists strategies such as spaced review, steady wake-up times, and careful naps."
+    },
+    {
+      id: "q45",
+      passageId: "p2",
+      type: "fillInTheBlank",
+      passage: P2,
+      question: "Sentence completion: Deep sleep supports the strengthening of facts and ______.",
+      answer: "skills",
+      difficulty: "easy",
+      explanation: "Paragraph B says deep sleep supports strengthening of facts and skills."
+    },
+    {
+      id: "q46",
+      passageId: "p2",
+      type: "fillInTheBlank",
+      passage: P2,
+      question: "Sentence completion: REM sleep is linked to processing emotions and making ______.",
+      answer: ["connections", "links"],
+      difficulty: "medium",
+      explanation: "Paragraph B connects REM sleep with making connections."
+    },
+    {
+      id: "q47",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Choose the correct option (True / False / Not Given): The passage suggests late-night alertness in teenagers is only a habit.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "Paragraph A says this is not only a habit; the body clock often shifts later."
+    },
+    {
+      id: "q48",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "In which paragraph does the writer advise using short naps carefully?",
+      options: ["A", "B", "C", "D"],
+      answer: 2,
+      difficulty: "easy",
+      explanation: "Paragraph C discusses naps and warns that long naps can leave someone groggy."
+    },
+    {
+      id: "q49",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "According to Paragraph C, what can happen if a nap is too long?",
+      options: [
+        "It can leave someone feeling groggy",
+        "It guarantees perfect memory for exams",
+        "It makes wake-up times unnecessary",
+        "It stops the body clock from changing"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph C warns that a nap that is too long can leave someone groggy."
+    },
+    {
+      id: "q50",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Choose the correct option (True / False / Not Given): Caffeine late in the day can delay sleepiness for some people.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph C states that caffeine late in the day can delay sleepiness for some people."
+    },
+    {
+      id: "q51",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Which study strategy is recommended by researchers in the passage?",
+      options: [
+        "Review in shorter sessions across several days",
+        "Study only once, the night before the test",
+        "Skip review and rely on naps",
+        "Change wake-up times every day"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph C recommends reviewing in shorter sessions across several days."
+    },
+    {
+      id: "q52",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "What does Paragraph B suggest about cramming late into the night?",
+      options: [
+        "It may reduce how much information becomes stable",
+        "It always improves long-term memory",
+        "It replaces the need for sleep",
+        "It is better than reviewing over several days"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph B suggests late cramming can reduce how much information becomes stable."
+    },
+    {
+      id: "q53",
+      passageId: "p2",
+      type: "fillInTheBlank",
+      passage: P2,
+      question: "Sentence completion: When school starts early, students can build up sleep ______.",
+      answer: "debt",
+      difficulty: "easy",
+      explanation: "Paragraph A uses the phrase 'sleep debt'."
+    },
+    {
+      id: "q54",
+      passageId: "p2",
+      type: "fillInTheBlank",
+      passage: P2,
+      question: "Sentence completion: Supporters of later start times argue it improves ______.",
+      answer: "attendance",
+      difficulty: "medium",
+      explanation: "Paragraph D says supporters argue it improves attendance."
+    },
+    {
+      id: "q55",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Choose the correct option (True / False / Not Given): The passage states that later start times solve all school scheduling problems.",
+      options: ["True", "False", "Not Given"],
+      answer: 2,
+      difficulty: "hard",
+      explanation: "The passage notes obstacles, but does not claim the change solves all problems."
+    },
+    {
+      id: "q56",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "In which paragraph does the writer emphasise that research findings must fit real lives and local systems?",
+      options: ["A", "B", "C", "D"],
+      answer: 3,
+      difficulty: "medium",
+      explanation: "Paragraph D says scientific findings do not automatically become policy and must fit local systems."
+    },
+    {
+      id: "q57",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "In Paragraph A, the word 'motivation' is closest in meaning to",
+      options: [
+        "the desire to do something",
+        "the temperature of a room",
+        "the time shown on a clock",
+        "a type of screen"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "In context, motivation refers to willingness or drive to work and learn."
+    },
+    {
+      id: "q58",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Which statement best describes the purpose of Passage 2?",
+      options: [
+        "To explain teen sleep patterns and discuss habits and policy choices",
+        "To argue that sleep has no connection to learning",
+        "To prove that caffeine is always harmful",
+        "To show that school debates are never influenced by science"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The passage explains biological patterns, learning effects, strategies, and the debate about start times."
+    },
+    {
+      id: "q59",
+      passageId: "p2",
+      type: "fillInTheBlank",
+      passage: P2,
+      question: "Sentence completion: Bright screens close to bedtime can delay ______ for some people.",
+      answer: "sleepiness",
+      difficulty: "easy",
+      explanation: "Paragraph C says bright screens close to bedtime can delay sleepiness."
+    },
+    {
+      id: "q60",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Choose the correct option (True / False / Not Given): The passage says study is useless without perfect sleep.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "hard",
+      explanation: "Paragraph B says this does not mean study is useless without perfect sleep."
+    },
+
+    // Passage 3 (p3) — additional
+    {
+      id: "q61",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: At a repair cafe, the atmosphere is practical and ______.",
+      answer: "friendly",
+      difficulty: "easy",
+      explanation: "Paragraph A describes the atmosphere as practical and friendly."
+    },
+    {
+      id: "q62",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: The goal is learning as much as saving ______.",
+      answer: "money",
+      difficulty: "easy",
+      explanation: "Paragraph A says the goal is learning as much as saving money."
+    },
+    {
+      id: "q63",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which item is specifically mentioned as being brought to a repair cafe in Paragraph A?",
+      options: [
+        "A bicycle with a broken chain",
+        "A toaster that no longer heats",
+        "A laptop with a missing keyboard",
+        "A television with a cracked screen"
+      ],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "Paragraph A lists examples including toasters that no longer heat."
+    },
+    {
+      id: "q64",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Choose the correct option (True / False / Not Given): Visitors come to repair cafes only to save money.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Paragraph A says the goal is learning as much as saving money, not only saving money."
+    },
+    {
+      id: "q65",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: Campaigners want access to affordable ______ so owners can fix what they buy.",
+      answer: "parts",
+      difficulty: "medium",
+      explanation: "Paragraph C says campaigners want access to affordable parts."
+    },
+    {
+      id: "q66",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Choose the correct option (True / False / Not Given): Some manufacturers worry that sharing detailed designs may reveal protected information.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph C mentions concerns about revealing protected information."
+    },
+    {
+      id: "q67",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: The passage suggests the environmental cost can be higher than the ______ suggests.",
+      answer: "price",
+      difficulty: "medium",
+      explanation: "Paragraph B contrasts environmental cost with the low price of very cheap new products."
+    },
+    {
+      id: "q68",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "According to Paragraph C, laws in different places try to balance",
+      options: [
+        "safety, competition, and consumer rights",
+        "sports schedules, homework, and uniforms",
+        "weather forecasts, transport, and holidays",
+        "tree planting, composting, and watering"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph C says laws try to balance safety, competition, and consumer rights."
+    },
+    {
+      id: "q69",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which design choice would most directly make products easier to open and maintain, according to Paragraph D?",
+      options: [
+        "Using standard screws",
+        "Sealing devices permanently with glue",
+        "Requiring unique tools for each brand",
+        "Removing manuals from the internet"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph D mentions standard screws as a design choice that supports repair."
+    },
+    {
+      id: "q70",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Choose the correct option (True / False / Not Given): The passage suggests repair cafes alone can transform an economy.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Paragraph D states that repair cafes alone cannot transform an economy."
+    },
+    {
+      id: "q71",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "In Paragraph B, the word 'irrational' most nearly means",
+      options: [
+        "not sensible",
+        "very fashionable",
+        "extremely loud",
+        "completely invisible"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "In context, repair can seem irrational when it does not seem like a sensible choice."
+    },
+    {
+      id: "q72",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: Designers talk about ______ phones and standard screws.",
+      answer: "modular",
+      difficulty: "easy",
+      explanation: "Paragraph D mentions modular phones as an example."
+    },
+    {
+      id: "q73",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "What is the main aim of the 'right to repair' movement in the passage?",
+      options: [
+        "To give owners access to parts, manuals, and tools to fix products",
+        "To prevent anyone from opening a device",
+        "To replace all repair work with recycling",
+        "To make products cheaper by removing safety checks"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph C explains that campaigners want access to parts, manuals, and software tools so owners can repair."
+    },
+    {
+      id: "q74",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "What broader idea do repair cafes highlight in Paragraph D?",
+      options: [
+        "Materials should stay in circulation for longer",
+        "Broken items should always be thrown away",
+        "Repair is only useful for old technologies",
+        "Cities should stop using community halls"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph D says repair cafes highlight the idea that materials should stay in circulation for longer."
+    }
+
   ];
 
   // Global export (no build step)

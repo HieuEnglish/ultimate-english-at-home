@@ -565,6 +565,546 @@
       difficulty: "easy",
       explanation: "⏰ represents a clock/alarm."
     }
+    ,
+
+    // -----------------------------
+    // Part 5: Mixed practice (extra questions)
+    // -----------------------------
+    {
+      id: "q49",
+      type: "listenChoice",
+      context: "Two classmates are arranging a place to work on a poster.",
+      question: "Listen. Where will they meet?",
+      say: "Noah: Let's meet in the computer lab after lunch. Ava: Okay, I'll save a seat near the printers.",
+      options: ["In the computer lab", "In the library", "In the gym", "In the music room"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "They agree to meet in the computer lab."
+    },
+    {
+      id: "q50",
+      type: "listenChoice",
+      context: "A teacher explains what will be on a quiz.",
+      question: "Listen. What will the quiz cover?",
+      say: "Tomorrow's geography quiz covers rivers and mountains, not the climate section.",
+      options: ["Rivers and mountains", "Only climate", "Famous explorers", "Map symbols only"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The teacher says it covers rivers and mountains."
+    },
+    {
+      id: "q51",
+      type: "listenFillInTheBlank",
+      context: "A student reads an after-school notice.",
+      question: "Type the time: The debate club starts at _____.",
+      say: "Debate club begins at four fifty in the hall, and it ends at five forty.",
+      answer: ["4:50", "4.50", "four fifty", "four fifty pm", "four fifty p.m."],
+      difficulty: "medium",
+      explanation: "Four fifty = 4:50."
+    },
+    {
+      id: "q52",
+      type: "listenChoice",
+      context: "A student asks to borrow something.",
+      question: "Listen. What does the student want to borrow?",
+      say: "Could I borrow your stapler for a minute? I need to attach these pages.",
+      options: ["A stapler", "A ruler", "A calculator", "A marker"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The student asks to borrow a stapler."
+    },
+    {
+      id: "q53",
+      type: "listenChoice",
+      context: "A parent leaves a message for the school.",
+      question: "Listen. Why will Mei miss first period?",
+      say: "Hello, this is Mei's dad. She won't be in first period because she has a dentist appointment.",
+      options: ["She has a dentist appointment", "She missed the bus", "She is on a holiday", "She forgot her timetable"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The reason is a dentist appointment."
+    },
+    {
+      id: "q54",
+      type: "listenFillInTheBlank",
+      context: "A music teacher gives practice information.",
+      question: "Type the day: The rehearsal is on _____.",
+      say: "The choir rehearsal is on Tuesday after school in the music room.",
+      answer: ["tuesday"],
+      difficulty: "easy",
+      explanation: "The rehearsal is on Tuesday."
+    },
+    {
+      id: "q55",
+      type: "listenChoice",
+      context: "A student describes a presentation problem.",
+      question: "Listen. What can you infer?",
+      say: "The projector kept flickering, so we presented without any slides.",
+      options: ["The projector wasn't working properly", "The class had no electricity all day", "The students forgot to make slides", "The teacher cancelled the presentation"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "If they presented without slides because it flickered, the projector had a problem."
+    },
+    {
+      id: "q56",
+      type: "listenChoice",
+      context: "A shop clerk explains a discount.",
+      question: "Listen. How much do students pay?",
+      say: "The workbook costs twelve dollars, but students pay ten with the discount.",
+      options: ["$10", "$12", "$8", "$14"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "With the discount, students pay ten dollars."
+    },
+    {
+      id: "q57",
+      type: "listenFillInTheBlank",
+      context: "A school office introduces a tutor.",
+      question: "Type the surname: The tutor is Mr _____.",
+      say: "Your new tutor is Mr Harris. That's H-A-R-R-I-S.",
+      answer: ["harris"],
+      difficulty: "medium",
+      explanation: "The surname spelled out is Harris."
+    },
+    {
+      id: "q58",
+      type: "listenChoice",
+      context: "Two friends talk about bus stops.",
+      question: "Listen. Where should Mina get off?",
+      say: "Mina: Should I get off at the museum? Theo: No, get off at the Central Park stop. It's closer.",
+      options: ["Central Park stop", "Museum stop", "Station stop", "School stop"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Theo says the Central Park stop is closer."
+    },
+    {
+      id: "q59",
+      type: "listenChoice",
+      context: "A hallway reminder.",
+      question: "Listen. Which behaviour is not allowed?",
+      say: "Please walk in the corridors. Running near the stairs is not allowed.",
+      options: ["Running in the corridors", "Walking in the corridors", "Holding the handrail", "Speaking quietly"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Running near the stairs is not allowed."
+    },
+    {
+      id: "q60",
+      type: "listenFillInTheBlank",
+      context: "A teacher gives writing instructions.",
+      question: "Type the number: Write _____ sentences in your summary.",
+      say: "Write three sentences in your summary, not a whole paragraph.",
+      answer: ["3", "three"],
+      difficulty: "easy",
+      explanation: "The teacher asks for three sentences."
+    },
+    {
+      id: "q61",
+      type: "listenChoice",
+      context: "A teacher talks about optional homework.",
+      question: "Choose the correct option (True / False / Not Given). The speaker says the homework is required.",
+      say: "Homework is optional this week. Do it if you want extra practice.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "If homework is optional, it is not required."
+    },
+    {
+      id: "q62",
+      type: "listenChoice",
+      context: "Two students discuss printing.",
+      question: "Listen. Which option is cheaper?",
+      say: "We can print the posters in colour, but black and white is cheaper.",
+      options: ["Black and white printing", "Colour printing", "Laminating the posters", "Printing nothing"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The speaker says black and white is cheaper."
+    },
+    {
+      id: "q63",
+      type: "listenFillInTheBlank",
+      context: "A morning announcement.",
+      question: "Type the time: Assembly begins at _____.",
+      say: "Assembly begins at eight forty, so please be seated by eight thirty-five.",
+      answer: ["8:40", "8.40", "eight forty", "eight forty am", "eight forty a.m."],
+      difficulty: "medium",
+      explanation: "Eight forty = 8:40."
+    },
+    {
+      id: "q64",
+      type: "listenFillInTheBlank",
+      context: "A student remembers a locker code.",
+      question: "Type the code: The locker code is _____.",
+      say: "My locker code is seven two nine.",
+      answer: ["729", "7 2 9", "seven two nine", "seven-two-nine"],
+      difficulty: "medium",
+      explanation: "Seven two nine = 729."
+    },
+    {
+      id: "q65",
+      type: "listenChoice",
+      context: "A teacher explains how to submit homework.",
+      question: "Listen. Where should students submit the assignment?",
+      say: "Please submit your assignment on Google Classroom by six p.m., not by email.",
+      options: ["On Google Classroom", "By email", "On paper only", "By phone message"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The teacher says to submit it on Google Classroom."
+    },
+    {
+      id: "q66",
+      type: "listenChoice",
+      context: "A station announcement.",
+      question: "Listen. How long is the delay?",
+      say: "Attention passengers: the train is delayed by twenty minutes due to a signal problem.",
+      options: ["20 minutes", "2 minutes", "12 minutes", "30 minutes"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The announcement says twenty minutes."
+    },
+    {
+      id: "q67",
+      type: "listenFillInTheBlank",
+      context: "A sports notice.",
+      question: "Type the date: The tournament is on the _____ of June.",
+      say: "The basketball tournament is on the fourteenth of June.",
+      answer: ["14", "14th", "fourteenth"],
+      difficulty: "medium",
+      explanation: "The date mentioned is the fourteenth (14th)."
+    },
+    {
+      id: "q68",
+      type: "listenChoice",
+      context: "A coach gives an update.",
+      question: "Listen. Why is the match cancelled?",
+      say: "Today's football match is cancelled because the field is too wet to play on safely.",
+      options: ["The field is too wet", "Not enough players arrived", "The referee is late", "The goals are missing"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "It is cancelled because the field is too wet."
+    },
+    {
+      id: "q69",
+      type: "listenChoice",
+      context: "A quick café order.",
+      question: "Listen. What is the total cost?",
+      say: "Two muffins are two dollars each, so altogether that's four dollars.",
+      options: ["$4", "$2", "$6", "$8"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Two dollars plus two dollars equals four."
+    },
+    {
+      id: "q70",
+      type: "listenChoice",
+      context: "A field trip reminder.",
+      question: "Listen. What should students bring?",
+      say: "Bring a reusable water bottle for the trip. There will be refill stations, but no plastic cups.",
+      options: ["A reusable water bottle", "A plastic cup", "A football", "A sleeping bag"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Students should bring a reusable water bottle."
+    },
+    {
+      id: "q71",
+      type: "listenChoice",
+      context: "A short inference statement.",
+      question: "Listen. What is most likely true?",
+      say: "I turned the handle, but the door wouldn't move at all. I think it's locked.",
+      options: ["The door is locked", "The door is made of glass", "The handle is brand new", "The speaker is outdoors in a storm"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "If the door won't move and they think it's locked, it is likely locked."
+    },
+    {
+      id: "q72",
+      type: "listenFillInTheBlank",
+      context: "A safety instruction about meeting points.",
+      question: "Type the place: Meet at the _____.",
+      say: "If we get separated, meet at the main entrance.",
+      answer: ["main entrance", "the main entrance", "entrance"],
+      difficulty: "medium",
+      explanation: "The meeting point is the main entrance."
+    },
+    {
+      id: "q73",
+      type: "listenChoice",
+      context: "A teacher gives note-taking advice.",
+      question: "Listen. Which tip is given?",
+      say: "Use headings and bullet points. It helps you find information later.",
+      options: ["Use headings and bullet points", "Write every word exactly", "Only draw pictures", "Use full paragraphs only"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The teacher recommends headings and bullet points."
+    },
+    {
+      id: "q74",
+      type: "listenChoice",
+      context: "A library rule is explained.",
+      question: "Listen. How long can students borrow a book?",
+      say: "You can borrow a book for two weeks. If you need longer, renew it online.",
+      options: ["Two weeks", "Two days", "One month", "One year"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The rule is two weeks."
+    },
+    {
+      id: "q75",
+      type: "listenFillInTheBlank",
+      context: "More library rules.",
+      question: "Type the number: You can borrow up to _____ books at once.",
+      say: "Students can borrow up to five books at once.",
+      answer: ["5", "five"],
+      difficulty: "easy",
+      explanation: "The maximum is five books."
+    },
+    {
+      id: "q76",
+      type: "listenChoice",
+      context: "Ticket information is announced.",
+      question: "Choose the correct option (True / False / Not Given). The speaker says the event is free.",
+      say: "Tickets are five dollars at the door, or four dollars if you buy online.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "If tickets cost money, the event is not free."
+    },
+    {
+      id: "q77",
+      type: "listenChoice",
+      context: "An energy-saving announcement at school.",
+      question: "Listen. What does the speaker suggest?",
+      say: "Before you leave the classroom, switch off the lights and close the windows.",
+      options: ["Switch off lights and close windows", "Turn on every light", "Open all doors and leave them", "Leave computers running overnight"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The speaker suggests switching off lights and closing windows."
+    },
+    {
+      id: "q78",
+      type: "listenChoice",
+      context: "A voice message from a friend.",
+      question: "Listen. When should the listener call back?",
+      say: "Hi! I can't talk right now. Please call me back after seven o'clock.",
+      options: ["After 7:00", "Before 7:00", "At exactly 6:00", "Tomorrow morning only"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "They say to call back after seven o'clock."
+    },
+    {
+      id: "q79",
+      type: "listenFillInTheBlank",
+      context: "The same voice message.",
+      question: "Type the hour: Call back after _____.",
+      say: "Call me back after seven, please.",
+      answer: ["7", "7pm", "7 p.m.", "seven", "seven o'clock", "after seven"],
+      difficulty: "medium",
+      explanation: "The message says after seven."
+    },
+    {
+      id: "q80",
+      type: "listenChoice",
+      context: "Directions are given in town.",
+      question: "Listen. Where should the person turn?",
+      say: "Cross the bridge, then take the second right. The café is on the corner.",
+      options: ["Take the second right after the bridge", "Take the first left before the bridge", "Turn back at the bridge", "Go straight past two bridges"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The instruction is to take the second right after crossing the bridge."
+    },
+    {
+      id: "q81",
+      type: "listenChoice",
+      context: "A station announcement about a coach.",
+      question: "Listen. Which platform is the coach leaving from?",
+      say: "The coach to Lakeside will depart from platform four in five minutes.",
+      options: ["Platform 4", "Platform 2", "Platform 14", "Platform 40"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "It says platform four."
+    },
+    {
+      id: "q82",
+      type: "listenFillInTheBlank",
+      context: "The same announcement is repeated.",
+      question: "Type the platform number: Platform _____.",
+      say: "Please go to platform four for the coach to Lakeside.",
+      answer: ["4", "four"],
+      difficulty: "easy",
+      explanation: "Platform four = 4."
+    },
+    {
+      id: "q83",
+      type: "listenChoice",
+      context: "Recycling instructions are explained.",
+      question: "Listen. Where should glass bottles go?",
+      say: "Glass bottles go in the green bin. Plastic bottles go in the yellow bin.",
+      options: ["In the green bin", "In the yellow bin", "In the paper bin", "In general waste"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Glass bottles go in the green bin."
+    },
+    {
+      id: "q84",
+      type: "listenChoice",
+      context: "A short story about oversleeping.",
+      question: "Listen. Why was the speaker late?",
+      say: "I set three alarms, but I turned them off in my sleep and overslept.",
+      options: ["They turned off the alarms and overslept", "The bus left early", "They forgot their shoes", "Their phone was stolen"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "They overslept because they turned off the alarms."
+    },
+    {
+      id: "q85",
+      type: "listenChoice",
+      context: "Customer service explains a word.",
+      question: "Listen. What does 'refund' mean?",
+      say: "If the shirt doesn't fit, you can return it for a refund, which means you get your money back.",
+      options: ["You get your money back", "You pay extra money", "You keep the item forever", "You exchange your name"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "A refund means your money is returned."
+    },
+    {
+      id: "q86",
+      type: "listenChoice",
+      context: "A sports coach gives advice.",
+      question: "Listen. What is the coach's main message?",
+      say: "Always warm up before you run. It helps prevent injuries.",
+      options: ["Warm up to prevent injuries", "Run as fast as possible immediately", "Skip stretching every time", "Drink no water during sports"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The coach says warming up helps prevent injuries."
+    },
+    {
+      id: "q87",
+      type: "listenFillInTheBlank",
+      context: "A school sports schedule is announced.",
+      question: "Type the month: The race is in _____.",
+      say: "The cross-country race is in October, when the weather is cooler.",
+      answer: ["october"],
+      difficulty: "easy",
+      explanation: "The month mentioned is October."
+    },
+    {
+      id: "q88",
+      type: "listenChoice",
+      context: "Shop opening hours are announced.",
+      question: "Choose the correct option (True / False / Not Given). The speaker says the shop opens at 9:00.",
+      say: "We open at nine thirty and close at six.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "If it opens at 9:30, it does not open at 9:00."
+    },
+    {
+      id: "q89",
+      type: "listenFillInTheBlank",
+      context: "The same shop hours.",
+      question: "Type the opening time: The shop opens at _____.",
+      say: "The shop opens at nine thirty.",
+      answer: ["9:30", "9.30", "nine thirty", "half past nine", "nine thirty am", "nine thirty a.m."],
+      difficulty: "medium",
+      explanation: "Nine thirty = 9:30."
+    },
+    {
+      id: "q90",
+      type: "listenChoice",
+      context: "An outdoor trip safety reminder.",
+      question: "Listen. What should students bring?",
+      say: "For the outdoor trip, bring a hat and sunscreen. We'll be outside for most of the day.",
+      options: ["A hat and sunscreen", "A winter coat and gloves", "A skateboard", "A candle and matches"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "They should bring a hat and sunscreen."
+    },
+    {
+      id: "q91",
+      type: "listenChoice",
+      context: "A meeting point is clarified.",
+      question: "Listen. Which gate will they meet at?",
+      say: "Let's meet at Gate B, not Gate A. Gate A is for arrivals.",
+      options: ["Gate B", "Gate A", "Gate C", "Gate D"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "They will meet at Gate B."
+    },
+    {
+      id: "q92",
+      type: "listenFillInTheBlank",
+      context: "The same meeting point is repeated.",
+      question: "Type the letter: Meet at Gate _____.",
+      say: "Meet me at Gate B.",
+      answer: ["b", "B"],
+      difficulty: "easy",
+      explanation: "The gate letter is B."
+    },
+    {
+      id: "q93",
+      type: "listenTrueFalse",
+      picture: "🎻",
+      question: "Look. Listen. True or False?",
+      say: "This is a violin.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "🎻 represents a violin."
+    },
+    {
+      id: "q94",
+      type: "listenTrueFalse",
+      picture: "🍎",
+      question: "Look. Listen. True or False?",
+      say: "This is a banana.",
+      options: ["True", "False"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "🍎 is an apple, not a banana."
+    },
+    {
+      id: "q95",
+      type: "listenTrueFalse",
+      picture: "🧭",
+      question: "Look. Listen. True or False?",
+      say: "This is a compass.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "🧭 represents a compass."
+    },
+    {
+      id: "q96",
+      type: "listenTrueFalse",
+      picture: "🧯",
+      question: "Look. Listen. True or False?",
+      say: "This is a fire extinguisher.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "🧯 represents a fire extinguisher."
+    },
+    {
+      id: "q97",
+      type: "listenChoice",
+      context: "A student talks about catching the last bus.",
+      question: "Listen. What is most likely true?",
+      say: "It's six oh five, the last bus leaves at six ten, and I'm still ten minutes away.",
+      options: ["They will miss the last bus", "They will catch the last bus easily", "The last bus leaves at six fifty", "They are already on the bus"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "If the bus leaves in 5 minutes and they need 10 minutes, they will miss it."
+    },
+    {
+      id: "q98",
+      type: "listenFillInTheBlank",
+      context: "Travel information is given.",
+      question: "Type the time: The last bus leaves at _____.",
+      say: "The last bus leaves at six ten.",
+      answer: ["6:10", "6.10", "six ten", "six ten pm", "six ten p.m."],
+      difficulty: "medium",
+      explanation: "Six ten = 6:10."
+    }
   ];
 
   // Global export (no build step)

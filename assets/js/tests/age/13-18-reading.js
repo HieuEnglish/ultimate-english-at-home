@@ -16,7 +16,9 @@
 
    Randomization:
    - Shuffles question order within each passage on start
+   - Randomizes passage block order (so the test can start on p2/p3)
    - Shuffles options within MCQ questions when explicit options exist
+   - Uses crypto.getRandomValues when available (fallback to Math.random)
 
    Updates (this file):
    - Ensures every question has a stable UNIQUE id (prevents broken label/inputs and review mapping)
@@ -63,9 +65,33 @@
     }
   }
 
+  function randomInt(maxExclusive) {
+    const max = Math.floor(Number(maxExclusive));
+    if (!Number.isFinite(max) || max <= 0) return 0;
+
+    try {
+      if (typeof crypto !== "undefined" && crypto && typeof crypto.getRandomValues === "function") {
+        // Rejection sampling to avoid modulo bias
+        const range = 0x100000000; // 2^32
+        const limit = range - (range % max);
+        const buf = new Uint32Array(1);
+        let x = 0;
+
+        do {
+          crypto.getRandomValues(buf);
+          x = buf[0] >>> 0;
+        } while (x >= limit);
+
+        return x % max;
+      }
+    } catch (_) {}
+
+    return Math.floor(Math.random() * max);
+  }
+
   function shuffleInPlace(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = randomInt(i + 1);
       const tmp = arr[i];
       arr[i] = arr[j];
       arr[j] = tmp;
@@ -339,9 +365,13 @@
       }
     }
 
-    // Order by passage (p1->p2->p3) while preserving within-passage chosen order
+    // Keep questions grouped by passage, but randomize passage block order each run
+    // so the test clearly feels different every time.
+    const passageOrder = ["p1", "p2", "p3"].filter((pid) => chosen.some((q) => passageIdOf(q) === pid));
+    shuffleInPlace(passageOrder);
+
     const ordered = [];
-    ["p1", "p2", "p3"].forEach((pid) => {
+    passageOrder.forEach((pid) => {
       ordered.push(...chosen.filter((q) => passageIdOf(q) === pid));
     });
 

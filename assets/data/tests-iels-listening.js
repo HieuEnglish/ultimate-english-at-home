@@ -537,6 +537,537 @@
       explanation: "The lecture recommends a regular schedule."
     }
   ];
+  // -----------------------------
+  // Added questions (50)
+  // -----------------------------
+
+  QUESTIONS.push(
+    {
+      id: "q41",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Many people assume that learning happens only while we are ______.",
+      answer: ["awake", "Awake"],
+      explanation: "The lecturer says people assume learning happens only while we are awake."
+    },
+    {
+      id: "q42",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "What idea does the lecturer challenge at the start of the talk?",
+      options: ["Learning happens only while we are awake", "Deep sleep is the same as REM sleep", "Naps always make study less effective", "Caffeine improves memory during sleep"],
+      answer: 0,
+      explanation: "The talk begins by challenging the idea that learning happens only when we are awake."
+    },
+    {
+      id: "q43",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The lecturer says sleep plays a ______ role in learning.",
+      answer: ["major", "Major"],
+      explanation: "He states that sleep plays a major role in learning."
+    },
+    {
+      id: "q44",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "During the day, the brain ______ new information.",
+      answer: ["collects", "Collects"],
+      explanation: "The lecture says the brain collects new information during the day."
+    },
+    {
+      id: "q45",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "According to the lecturer, sleep supports learning mainly by:",
+      options: ["stabilising new information and replaying patterns of activity", "replacing the need to practise during the day", "stopping the brain from processing any information", "making caffeine more effective for studying"],
+      answer: 0,
+      explanation: "The lecture mentions stabilising information and replaying patterns of activity during sleep."
+    },
+    {
+      id: "q46",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "At night, some of the day's information is ______, which helps it last longer.",
+      answer: ["stabilised", "stabilized"],
+      explanation: "The lecturer says some information is stabilised at night."
+    },
+    {
+      id: "q47",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Why does stabilising information matter, according to the lecturer?",
+      options: ["It helps learning last longer", "It prevents any new learning the next day", "It guarantees high test scores", "It eliminates the need for revision"],
+      answer: 0,
+      explanation: "He says stabilisation helps information last longer."
+    },
+    {
+      id: "q48",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Stabilising information helps it last ______.",
+      answer: ["longer", "Longer"],
+      explanation: "The lecturer explains that stabilisation helps learning last longer."
+    },
+    {
+      id: "q49",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "One reason sleep helps learning is that the brain:",
+      options: ["replays patterns of activity linked to earlier learning", "stores all information only in REM sleep", "forgets most of what was learned during the day", "works best only when caffeine is consumed late"],
+      answer: 0,
+      explanation: "The lecture says the brain replays patterns of activity linked to what was learned."
+    },
+    {
+      id: "q50",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The brain replays ______ of activity linked to what was learned earlier.",
+      answer: ["patterns", "Patterns"],
+      explanation: "He says the brain replays patterns of activity."
+    },
+    {
+      id: "q51",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The brain replays patterns of ______ linked to earlier learning.",
+      answer: ["activity", "Activity"],
+      explanation: "The phrase in the talk is “patterns of activity”."
+    },
+    {
+      id: "q52",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which statement matches the lecturer's description of different sleep stages?",
+      options: ["Deep sleep is linked to facts and vocabulary, while REM is linked to creativity", "REM sleep is linked to facts and vocabulary, while deep sleep is linked to creativity", "All sleep stages have exactly the same effect on learning", "Only short naps, not night sleep, support learning"],
+      answer: 0,
+      explanation: "Deep sleep is linked to remembering facts/vocabulary, while REM is linked to creativity and connecting ideas."
+    },
+    {
+      id: "q53",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Deep sleep is strongly linked to remembering ______.",
+      answer: ["facts", "Facts"],
+      explanation: "The lecturer says deep sleep is strongly linked to remembering facts and vocabulary."
+    },
+    {
+      id: "q54",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Deep sleep is strongly linked to remembering facts and ______.",
+      answer: ["vocabulary", "Vocabulary"],
+      explanation: "He pairs “facts and vocabulary” when describing deep sleep."
+    },
+    {
+      id: "q55",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which outcome is linked to REM (dream) sleep rather than deep sleep?",
+      options: ["Creativity and connecting ideas", "Remembering facts and vocabulary", "Becoming fully alert immediately after a long nap", "Eliminating the need to practise correctly"],
+      answer: 0,
+      explanation: "The lecture links REM sleep to creativity and connecting ideas."
+    },
+    {
+      id: "q56",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The lecturer says sleep is not a ______ solution for learning.",
+      answer: ["magic", "Magic"],
+      explanation: "He states that sleep is not a magic solution."
+    },
+    {
+      id: "q57",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Why does the lecturer say sleep is not a “magic solution”?",
+      options: ["Without correct practice, there is little useful information to consolidate", "Because the brain stops working during sleep", "Because naps always damage memory", "Because REM sleep prevents consolidation"],
+      answer: 0,
+      explanation: "The lecturer says practice quality matters; otherwise there is little useful information to consolidate."
+    },
+    {
+      id: "q58",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "If learners do not practise correctly, there is little useful information to ______.",
+      answer: ["consolidate", "Consolidate"],
+      explanation: "The lecture says there is little useful information to consolidate without correct practice."
+    },
+    {
+      id: "q59",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "What does the lecturer imply about practice and sleep?",
+      options: ["Sleep helps most when learners practise correctly", "Sleep helps even if learners practise incorrectly", "Practice is unnecessary if learners sleep deeply", "Practice matters only for creativity, not memory"],
+      answer: 0,
+      explanation: "He notes that correct practice is needed for sleep to consolidate useful information."
+    },
+    {
+      id: "q60",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The lecturer says another important factor is ______.",
+      answer: ["timing", "Timing"],
+      explanation: "He introduces timing as another factor affecting learning outcomes."
+    },
+    {
+      id: "q61",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which topic does the lecturer use to explain the importance of timing?",
+      options: ["Naps", "Fish migration", "Museum opening hours", "Online payments"],
+      answer: 0,
+      explanation: "He discusses short naps and long naps to illustrate timing effects."
+    },
+    {
+      id: "q62",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Short ______ can improve alertness.",
+      answer: ["naps", "nap", "Naps", "Nap"],
+      explanation: "The lecture says short naps can improve alertness."
+    },
+    {
+      id: "q63",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "What benefit of short naps does the lecturer mention?",
+      options: ["They can improve alertness", "They guarantee high exam results", "They replace the need for sleep at night", "They always increase creativity immediately"],
+      answer: 0,
+      explanation: "He says short naps can improve alertness."
+    },
+    {
+      id: "q64",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Short naps can improve ______.",
+      answer: ["alertness", "Alertness"],
+      explanation: "Alertness is the benefit mentioned for short naps."
+    },
+    {
+      id: "q65",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which option best summarises what the lecturer says about naps?",
+      options: ["Short naps can help, but very long naps may cause grogginess", "All naps are harmful for learning", "Only long naps improve learning", "Naps are unrelated to alertness"],
+      answer: 0,
+      explanation: "He contrasts short naps (alertness) with too-long naps (grogginess)."
+    },
+    {
+      id: "q66",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "A nap that is too long may cause ______.",
+      answer: ["grogginess", "Grogginess"],
+      explanation: "The lecturer warns that a nap that is too long may cause grogginess."
+    },
+    {
+      id: "q67",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Why can grogginess make studying less effective?",
+      options: ["It can make study less effective afterwards", "It prevents the brain from collecting information during the day", "It improves vocabulary recall too much", "It guarantees high scores without revision"],
+      answer: 0,
+      explanation: "He says grogginess makes study less effective afterwards."
+    },
+    {
+      id: "q68",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "Grogginess can make study less ______ afterwards.",
+      answer: ["effective", "Effective"],
+      explanation: "The lecture says grogginess can make study less effective afterwards."
+    },
+    {
+      id: "q69",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which set of recommendations is mentioned in the lecture?",
+      options: ["Keep a regular schedule, limit caffeine late in the day, and review key material before bedtime", "Avoid all naps, drink caffeine at midnight, and skip revision", "Study only in the morning and never review vocabulary", "Change sleep times daily to train flexibility"],
+      answer: 0,
+      explanation: "He recommends a regular schedule, limiting late caffeine, and reviewing key material shortly before bedtime."
+    },
+    {
+      id: "q70",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the advice. Write ONE WORD ONLY.",
+      question: "Students should prioritise a ______ schedule.",
+      answer: ["regular", "Regular"],
+      explanation: "The advice includes prioritising a regular schedule."
+    },
+    {
+      id: "q71",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "What does the lecturer advise students to limit late in the day?",
+      options: ["Caffeine", "Water", "Fruits", "Exercise"],
+      answer: 0,
+      explanation: "He advises limiting caffeine late in the day."
+    },
+    {
+      id: "q72",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the advice. Write ONE WORD ONLY.",
+      question: "Students should limit caffeine ______ in the day.",
+      answer: ["late", "Late"],
+      explanation: "The lecture says to limit caffeine late in the day."
+    },
+    {
+      id: "q73",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "When does the lecturer suggest reviewing key material?",
+      options: ["Shortly before bedtime", "Immediately after waking up", "Only at lunchtime", "During a very long nap"],
+      answer: 0,
+      explanation: "He suggests reviewing key material shortly before bedtime."
+    },
+    {
+      id: "q74",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the advice. Write ONE WORD ONLY.",
+      question: "Students should review ______ material shortly before bedtime.",
+      answer: ["key", "Key"],
+      explanation: "The phrase used is “review key material shortly before bedtime”."
+    },
+    {
+      id: "q75",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "What does the lecturer say these habits will NOT do?",
+      options: ["Guarantee high scores", "Support the brain's ability to store learning", "Help organise learning over time", "Reduce the negative effects of poor timing"],
+      answer: 0,
+      explanation: "He says these habits do not guarantee high scores."
+    },
+    {
+      id: "q76",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "These habits do not guarantee high ______.",
+      answer: ["scores", "Scores"],
+      explanation: "The lecturer says the habits do not guarantee high scores."
+    },
+    {
+      id: "q77",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "According to the lecturer, these habits can support the brain's ability to:",
+      options: ["store and organise learning over time", "learn without any practice", "avoid needing sleep completely", "replace all revision with caffeine"],
+      answer: 0,
+      explanation: "He concludes that the habits can support storing and organising learning over time."
+    },
+    {
+      id: "q78",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "They can support the brain's ability to store and ______ learning.",
+      answer: ["organise", "organize", "Organise", "Organize"],
+      explanation: "The final sentence mentions the ability to store and organise learning over time."
+    },
+    {
+      id: "q79",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The lecturer says these habits can support learning over ______.",
+      answer: ["time", "Time"],
+      explanation: "He says the brain can store and organise learning over time."
+    },
+    {
+      id: "q80",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which statement is closest to the lecturer's main message?",
+      options: ["Sleep can support learning, but it works best alongside good practice and sensible habits", "Sleep alone is enough to guarantee excellent exam results", "Only naps matter for learning; night sleep is irrelevant", "Learning happens only when people are awake"],
+      answer: 0,
+      explanation: "He explains that sleep supports learning, but practice and habits still matter."
+    },
+    {
+      id: "q81",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "When does the lecturer say the brain collects new information?",
+      options: ["During the day", "Only during REM sleep", "Only during deep sleep", "Only during naps"],
+      answer: 0,
+      explanation: "He states: “During the day, the brain collects new information.”"
+    },
+    {
+      id: "q82",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which of the following is NOT mentioned as advice in the lecture?",
+      options: ["Prioritise a regular schedule", "Limit caffeine late in the day", "Review key material shortly before bedtime", "Do intense exercise immediately before sleeping"],
+      answer: 3,
+      explanation: "The lecture mentions schedule, caffeine, and reviewing material, but not intense exercise before sleeping."
+    },
+    {
+      id: "q83",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "What does the lecturer mean by saying “not all sleep is the same”?",
+      options: ["Different sleep stages are linked to different learning outcomes", "Sleep has no effect on learning at all", "Only REM sleep exists", "All sleep stages have identical effects"],
+      answer: 0,
+      explanation: "He contrasts deep sleep (facts/vocabulary) with REM (creativity/connecting ideas)."
+    },
+    {
+      id: "q84",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which pairing is supported by the lecture?",
+      options: ["Deep sleep → facts and vocabulary; REM sleep → creativity", "Deep sleep → creativity; REM sleep → facts and vocabulary", "Deep sleep → grogginess; REM sleep → alertness", "Deep sleep → caffeine tolerance; REM sleep → no learning"],
+      answer: 0,
+      explanation: "The lecture links deep sleep to facts/vocabulary and REM to creativity."
+    },
+    {
+      id: "q85",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The lecturer says the brain ______ patterns of activity linked to earlier learning.",
+      answer: ["replays", "Replays"],
+      explanation: "He says the brain replays patterns of activity linked to what was learned earlier."
+    },
+    {
+      id: "q86",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which title best fits the lecture segment in Part 4?",
+      options: ["How sleep supports learning and memory", "How to book a sports court online", "Museum rules for visitors with children", "Choosing a topic for a sociology project"],
+      answer: 0,
+      explanation: "The lecture focuses on sleep, consolidation, and study habits."
+    },
+    {
+      id: "q87",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "These habits can support the brain's ability to ______ learning over time.",
+      answer: ["store", "Store"],
+      explanation: "The lecturer says the habits can support the brain’s ability to store and organise learning over time."
+    },
+    {
+      id: "q88",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "In the final sentence, “over time” most nearly suggests that learning is stored and organised:",
+      options: ["gradually across days and weeks", "instantly within seconds", "only during one long nap", "only if caffeine is avoided completely"],
+      answer: 0,
+      explanation: "“Over time” implies a gradual process rather than an instant result."
+    },
+    {
+      id: "q89",
+      partId: "p4",
+      type: "multipleChoice",
+      say: P4,
+      context: "Part 4: Choose the correct answer.",
+      question: "Which situation does the lecturer suggest could reduce how effective studying is after resting?",
+      options: ["Taking a nap that is too long and feeling groggy afterwards", "Taking a short nap that improves alertness", "Keeping a regular sleep schedule", "Reviewing key material before bedtime"],
+      answer: 0,
+      explanation: "A too-long nap may cause grogginess, making study less effective afterwards."
+    },
+    {
+      id: "q90",
+      partId: "p4",
+      type: "fillInTheBlank",
+      say: P4,
+      context: "Part 4: Complete the notes. Write ONE WORD ONLY.",
+      question: "The lecturer says that at ______, some new information is stabilised.",
+      answer: ["night", "Night"],
+      explanation: "He says that at night, some information is stabilised."
+    }
+  );
 
   // Global export (no build step)
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
