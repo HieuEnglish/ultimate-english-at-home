@@ -14,8 +14,7 @@
 
    Content notes:
    - Short dialogues and announcements.
-   - Everyday topics: school, hobbies, weather, directions, numbers.
-   - Mix of easy/medium/hard for Ages 8–10.
+   - Ages 8–10: short, clear, age-appropriate.
 */
 
 (function () {
@@ -29,44 +28,32 @@
       id: "q1",
       type: "listenChoice",
       question: "Listen. What should the students do?",
-      say: "Please close your books and look at the board.",
-      options: [
-        "Close books and look at the board",
-        "Open books and start reading",
-        "Go outside for break",
-        "Draw a picture in your notebook"
-      ],
-      answer: 0,
+      say: "Teacher: Please open your books and sit quietly.",
+      options: ["Close your books", "Open your books", "Stand up", "Run outside"],
+      answer: 1,
       difficulty: "easy",
-      explanation: "The speaker says: close your books and look at the board."
+      explanation: "The teacher says: open your books."
     },
     {
       id: "q2",
       type: "listenChoice",
       question: "Listen. Which page should they turn to?",
-      say: "Turn to page thirty, please.",
-      options: ["Page 13", "Page 30", "Page 3", "Page 40"],
-      answer: 1,
+      say: "Teacher: Turn to page twelve, please.",
+      options: ["Page 10", "Page 11", "Page 12", "Page 13"],
+      answer: 2,
       difficulty: "easy",
-      explanation: "Thirty = 30."
+      explanation: "The teacher says: page twelve."
     },
     {
       id: "q3",
       type: "listenChoice",
       question: "Listen. What is the rule?",
-      say: "Please don't run in the hallway.",
-      options: [
-        "Don't run in the hallway",
-        "Don't talk in class",
-        "Don't eat lunch",
-        "Don't open the window"
-      ],
-      answer: 0,
+      say: "Teacher: No talking during the test.",
+      options: ["No writing", "No talking", "No reading", "No listening"],
+      answer: 1,
       difficulty: "easy",
-      explanation: "The speaker says: don't run in the hallway."
+      explanation: "The rule is: no talking."
     },
-
-    // --- Easy: times and days ---
     {
       id: "q4",
       type: "listenChoice",
@@ -82,125 +69,115 @@
       type: "listenChoice",
       question: "Listen. When is Ben's project due?",
       say: "Ben has a science project due on Monday.",
-      options: ["Friday", "Sunday", "Monday", "Tuesday"],
-      answer: 2,
+      options: ["Monday", "Tuesday", "Wednesday", "Friday"],
+      answer: 0,
       difficulty: "easy",
-      explanation: "Due on Monday means the deadline is Monday."
+      explanation: "Ben says it is due on Monday."
     },
-
-    // --- Easy: numbers ---
     {
       id: "q6",
       type: "listenChoice",
       question: "Listen. How many apples are there?",
-      say: "There are three apples in the bag.",
+      say: "There are three apples on the table.",
       options: ["Two", "Three", "Four", "Five"],
       answer: 1,
       difficulty: "easy",
-      explanation: "Three apples = 3."
+      explanation: "The speaker says: three apples."
     },
-
-    // --- Medium: simple dialogues ---
     {
       id: "q7",
       type: "listenChoice",
       question: "Listen. Who forgot their lunch?",
-      say: "I forgot my lunch. Can I share yours?",
-      options: ["The speaker", "The teacher", "A friend", "No one"],
+      say: "Teacher: Anna forgot her lunch today.",
+      options: ["Anna", "Ben", "Tom", "Mia"],
       answer: 0,
-      difficulty: "medium",
-      explanation: "The speaker says: I forgot my lunch."
+      difficulty: "easy",
+      explanation: "The teacher says Anna forgot her lunch."
     },
     {
       id: "q8",
       type: "listenChoice",
       question: "Listen. What does Alex prefer?",
-      say: "Tina: Do you like carrots? Alex: No, I prefer peas.",
-      options: ["Carrots", "Peas", "Potatoes", "Tomatoes"],
+      say: "Alex: I prefer tea, not coffee.",
+      options: ["Coffee", "Tea", "Juice", "Milk"],
       answer: 1,
-      difficulty: "medium",
-      explanation: "Alex says: I prefer peas."
+      difficulty: "easy",
+      explanation: "Alex says he prefers tea."
     },
     {
       id: "q9",
       type: "listenChoice",
       question: "Listen. Why should the window be closed?",
-      say: "Please close the window. It's cold.",
-      options: ["Because it's cold", "Because it's noisy", "Because it's dark", "Because it's hot"],
-      answer: 0,
+      say: "Please close the window because it is cold outside.",
+      options: ["It is hot outside", "It is cold outside", "It is noisy inside", "It is dark inside"],
+      answer: 1,
       difficulty: "medium",
-      explanation: "The speaker says it is cold."
+      explanation: "The speaker says it is cold outside."
     },
-
-    // --- Medium: short announcements ---
     {
       id: "q10",
       type: "listenChoice",
       question: "Listen. What should students bring on the trip?",
-      say: "Our class trip is on Friday. Bring a hat and some water.",
-      options: ["A hat and water", "A phone and headphones", "A toy and candy", "A ball and gloves"],
-      answer: 0,
-      difficulty: "medium",
-      explanation: "The speaker says: bring a hat and some water."
+      say: "Bring a hat and a bottle of water for the trip.",
+      options: ["A video game", "A hat and water", "A TV", "A pillow"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "The speaker says: bring a hat and water."
     },
+
+    // --- Medium: short dialogues and simple reasoning ---
     {
       id: "q11",
       type: "listenChoice",
       question: "Listen. What is the weather like?",
-      say: "The weather will be sunny this afternoon.",
-      options: ["Sunny", "Rainy", "Snowy", "Windy"],
-      answer: 0,
+      say: "It is raining, so take an umbrella.",
+      options: ["Sunny", "Snowy", "Raining", "Windy"],
+      answer: 2,
       difficulty: "easy",
-      explanation: "Sunny means there will be sun."
+      explanation: "The speaker says it is raining."
     },
-
-    // --- Medium: directions/places ---
     {
       id: "q12",
       type: "listenChoice",
       question: "Listen. Where is the library?",
-      say: "The library is next to the park.",
-      options: ["Next to the park", "Behind the school", "Across from the hospital", "Inside the mall"],
+      say: "The library is next to the cafeteria.",
+      options: ["Next to the cafeteria", "Behind the gym", "Across from the park", "Near the bus stop"],
       answer: 0,
       difficulty: "medium",
-      explanation: "Next to = beside."
+      explanation: "The speaker says it is next to the cafeteria."
     },
     {
       id: "q13",
       type: "listenChoice",
       question: "Listen. Where should they meet?",
-      say: "Let's meet at the gate at ten.",
-      options: ["At the gate", "At the bus stop", "At the classroom", "At the café"],
+      say: "Let's meet at the front gate after school.",
+      options: ["Front gate", "Classroom", "Cafeteria", "Library"],
       answer: 0,
-      difficulty: "medium",
-      explanation: "The speaker says: meet at the gate."
+      difficulty: "easy",
+      explanation: "They should meet at the front gate."
     },
-
-    // --- Medium: comparisons ---
     {
       id: "q14",
       type: "listenChoice",
       question: "Listen. Which jacket is cheaper?",
-      say: "The red jacket is cheaper than the blue one.",
-      options: ["The red jacket", "The blue jacket", "They are the same price", "It doesn't say"],
-      answer: 0,
+      say: "The red jacket is twenty dollars. The blue jacket is fifteen dollars.",
+      options: ["Red jacket", "Blue jacket", "They are the same price", "Not enough information"],
+      answer: 1,
       difficulty: "medium",
-      explanation: "Cheaper than means it costs less."
+      explanation: "Fifteen dollars is cheaper than twenty dollars."
     },
-
-    // --- Hard: short story comprehension ---
     {
       id: "q15",
       type: "listenChoice",
       question: "Listen. Where were the keys?",
-      say: "Ava couldn't find her keys. She looked in her bag and on the table. Finally, she found them under the sofa.",
-      options: ["In her bag", "On the table", "Under the sofa", "In the kitchen"],
-      answer: 2,
-      difficulty: "hard",
-      explanation: "The last sentence says she found them under the sofa."
+      say: "I found the keys under the sofa.",
+      options: ["On the table", "Under the sofa", "In the fridge", "In the bag"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The keys were under the sofa."
     },
 
-    // --- True/False with simple picture context ---
+    // --- True/False with pictures ---
     {
       id: "q16",
       type: "listenTrueFalse",
@@ -217,11 +194,11 @@
       type: "listenTrueFalse",
       question: "Look. Listen. True or False?",
       picture: "🍌",
-      say: "This is an apple.",
+      say: "This is an orange.",
       options: ["True", "False"],
       answer: 1,
       difficulty: "easy",
-      explanation: "🍌 is a banana, not an apple."
+      explanation: "🍌 is a banana, not an orange."
     },
     {
       id: "q18",
@@ -238,15 +215,15 @@
       id: "q19",
       type: "listenTrueFalse",
       question: "Look. Listen. True or False?",
-      picture: "🧊",
-      say: "Ice is cold.",
+      picture: "🐢",
+      say: "This is a turtle.",
       options: ["True", "False"],
       answer: 0,
       difficulty: "easy",
-      explanation: "Ice is cold."
+      explanation: "🐢 is a turtle."
     },
 
-    // --- Fill in the blank (spelling + numbers) ---
+    // --- Fill in the blank (short) ---
     {
       id: "q20",
       type: "listenFillInTheBlank",
@@ -275,85 +252,75 @@
       explanation: "Quietly means not loudly."
     },
 
-    // --- More listening comprehension ---
+    // --- Medium: short situations ---
     {
       id: "q23",
       type: "listenChoice",
       question: "Listen. What should you do when you finish?",
-      say: "When you finish, put your name at the top of the page.",
-      options: [
-        "Write your name at the top",
-        "Draw a picture on the page",
-        "Fold the page in half",
-        "Give the page to a friend"
-      ],
-      answer: 0,
-      difficulty: "easy",
-      explanation: "The speaker says: put your name at the top of the page."
+      say: "When you finish your work, put your paper on my desk.",
+      options: ["Throw it away", "Put it on the teacher's desk", "Hide it", "Take it home"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The teacher says: put it on my desk."
     },
     {
       id: "q24",
       type: "listenChoice",
       question: "Listen. Why did the person drink water?",
-      say: "I was thirsty, so I drank some water.",
-      options: ["They were thirsty", "They were sleepy", "They were cold", "They were late"],
-      answer: 0,
+      say: "I drank water because I was thirsty.",
+      options: ["Because I was hungry", "Because I was thirsty", "Because I was bored", "Because I was sleepy"],
+      answer: 1,
       difficulty: "easy",
-      explanation: "Thirsty means you need a drink."
+      explanation: "The speaker says they were thirsty."
     },
     {
       id: "q25",
       type: "listenChoice",
       question: "Listen. Where should the milk go?",
-      say: "Put the milk in the fridge, not in the cupboard.",
-      options: ["In the fridge", "In the cupboard", "On the table", "In the sink"],
+      say: "Please put the milk in the refrigerator.",
+      options: ["In the refrigerator", "On the counter", "In the drawer", "In the oven"],
       answer: 0,
-     difficulty: "easy",
-      explanation: "Fridge keeps milk cold."
+      difficulty: "easy",
+      explanation: "Milk should go in the refrigerator."
     },
     {
       id: "q26",
       type: "listenChoice",
       question: "Listen. How many sentences should the homework have?",
-      say: "For homework, write three sentences about your favourite animal.",
-      options: ["One", "Two", "Three", "Four"],
+      say: "Write five sentences for homework.",
+      options: ["Three", "Four", "Five", "Six"],
       answer: 2,
       difficulty: "medium",
-      explanation: "The speaker says: write three sentences."
+      explanation: "The teacher says: five sentences."
     },
     {
       id: "q27",
       type: "listenChoice",
       question: "Listen. What did Maya buy?",
-      say: "Maya bought two notebooks and one ruler.",
-      options: [
-        "Two notebooks and one ruler",
-        "One notebook and two rulers",
-        "Two rulers and one notebook",
-        "One notebook and one ruler"
-      ],
+      say: "Maya bought a new notebook at the store.",
+      options: ["A new notebook", "A new phone", "A new bike", "A new hat"],
       answer: 0,
-      difficulty: "medium",
-      explanation: "Two notebooks + one ruler."
+      difficulty: "easy",
+      explanation: "Maya bought a new notebook."
     },
     {
       id: "q28",
       type: "listenChoice",
       question: "Listen. When will they visit grandma?",
-      say: "Dad said, 'We will visit grandma after dinner.'",
-      options: ["Before school", "After dinner", "At midnight", "During lunch"],
+      say: "We will visit grandma on Saturday morning.",
+      options: ["Friday night", "Saturday morning", "Sunday afternoon", "Monday morning"],
       answer: 1,
       difficulty: "medium",
-      explanation: "After dinner is the time."
+      explanation: "They will visit on Saturday morning."
     },
     {
       id: "q29",
       type: "listenChoice",
       question: "Listen. What should you do first?",
-      say: "First, wash your hands. Then, you can eat.",
-      options: ["Wash your hands", "Start eating", "Go outside", "Do your homework"],
-      answer: 0,
-      difficulty: "easy",
+      say: "First, wash your hands. Then eat your snack.",
+      options: ["Eat your snack first", "Wash your hands first", "Run outside first", "Call your friend first"],
+      answer: 1,
+      difficulty: "medium",
       explanation: "The speaker says: first, wash your hands."
     },
     {
@@ -386,6 +353,510 @@
       explanation: "The speaker says: five minutes."
     }
   ];
+
+  // Added questions (append-only)
+  QUESTIONS.push(
+    {
+      id: "q33",
+      type: "listenChoice",
+      question: "Listen. What should the students write at the top of the page?",
+      say: "Teacher: Before you start, please write your name at the top of the page.",
+      options: ["The date", "Their name", "Their address", "A phone number"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "The teacher says to write your name at the top."
+    },
+    {
+      id: "q34",
+      type: "listenChoice",
+      question: "Listen. What time does art club start?",
+      say: "Nina: Does art club start at three? Coach: No, it starts at three thirty.",
+      options: ["3:00", "3:15", "3:30", "4:00"],
+      answer: 2,
+      difficulty: "easy",
+      explanation: "The coach says it starts at three thirty."
+    },
+    {
+      id: "q35",
+      type: "listenChoice",
+      question: "Listen. Which bus should they take?",
+      say: "Dad: We need to go to the stadium. Take bus twelve, not bus twenty.",
+      options: ["Bus 2", "Bus 12", "Bus 20", "Bus 22"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The speaker says bus twelve."
+    },
+    {
+      id: "q36",
+      type: "listenChoice",
+      question: "Listen. How much is one ticket?",
+      say: "Clerk: One ticket is five dollars. Two tickets are ten dollars.",
+      options: ["$2", "$4", "$5", "$10"],
+      answer: 2,
+      difficulty: "easy",
+      explanation: "One ticket costs five dollars."
+    },
+    {
+      id: "q37",
+      type: "listenChoice",
+      question: "Listen. When does the library close today?",
+      say: "Announcement: The library will close at five o'clock today.",
+      options: ["4:00", "4:30", "5:00", "6:00"],
+      answer: 2,
+      difficulty: "easy",
+      explanation: "The announcement says it closes at five o'clock."
+    },
+    {
+      id: "q38",
+      type: "listenChoice",
+      question: "Listen. How long should they read?",
+      say: "Teacher: Please read quietly for ten minutes, then answer the questions.",
+      options: ["5 minutes", "10 minutes", "15 minutes", "20 minutes"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "The teacher says: ten minutes."
+    },
+    {
+      id: "q39",
+      type: "listenChoice",
+      question: "Listen. Where did they see the lost dog?",
+      say: "Boy: Have you seen the lost dog? Girl: Yes, I saw it near the river.",
+      options: ["Near the river", "At the mall", "Behind the school", "On the bus"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The girl says she saw it near the river."
+    },
+    {
+      id: "q40",
+      type: "listenChoice",
+      question: "Listen. Which fruit does Alex choose?",
+      say: "Alex: Should I get an apple or an orange? Mom: Choose one. Alex: I'll take an orange.",
+      options: ["Apple", "Orange", "Banana", "Grapes"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "Alex says he will take an orange."
+    },
+    {
+      id: "q41",
+      type: "listenChoice",
+      question: "Listen. What should the students bring?",
+      say: "Teacher: For the test, bring two pencils and an eraser.",
+      options: ["One pencil", "Two pencils and an eraser", "A ruler only", "A notebook"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "The teacher says: two pencils and an eraser."
+    },
+    {
+      id: "q42",
+      type: "listenChoice",
+      question: "Listen. What day is the meeting now?",
+      say: "Text message: The meeting is moved from Monday to Tuesday.",
+      options: ["Monday", "Tuesday", "Wednesday", "Friday"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "It is moved to Tuesday."
+    },
+    {
+      id: "q43",
+      type: "listenChoice",
+      question: "Listen. Why will practice be indoors?",
+      say: "Coach: It might rain after school, so practice will be indoors today.",
+      options: ["Because it is too hot", "Because it might rain", "Because the field is new", "Because everyone is late"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Practice is indoors because it might rain."
+    },
+    {
+      id: "q44",
+      type: "listenChoice",
+      question: "Listen. Where will the student sit?",
+      say: "Teacher: Where would you like to sit? Student: I will sit in the front row.",
+      options: ["In the front row", "In the last row", "Outside the room", "On the floor"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The student says: in the front row."
+    },
+    {
+      id: "q45",
+      type: "listenChoice",
+      question: "Listen. What should they use to go upstairs?",
+      say: "Mom: The elevator is busy. Let's take the stairs.",
+      options: ["The stairs", "A bicycle", "A car", "A skateboard"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Mom says to take the stairs."
+    },
+    {
+      id: "q46",
+      type: "listenChoice",
+      question: "Listen. What time does the museum open?",
+      say: "Guide: The museum opens at nine thirty and closes at four.",
+      options: ["9:00", "9:30", "4:00", "4:30"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The guide says it opens at nine thirty."
+    },
+    {
+      id: "q47",
+      type: "listenChoice",
+      question: "Listen. Where should the ice cream go?",
+      say: "Dad: Put the ice cream in the freezer, please.",
+      options: ["In the freezer", "On the table", "In the backpack", "Under the sink"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Ice cream goes in the freezer."
+    },
+    {
+      id: "q48",
+      type: "listenChoice",
+      question: "Listen. What should you do before leaving the room?",
+      say: "Teacher: Before you leave, turn off the lights and close the door.",
+      options: ["Open the window", "Turn off the lights", "Move the desks", "Start a new page"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The teacher says to turn off the lights (and close the door)."
+    },
+    {
+      id: "q49",
+      type: "listenChoice",
+      question: "Listen. How long until the game starts?",
+      say: "Announcer: The game will start in twenty minutes.",
+      options: ["In 2 minutes", "In 10 minutes", "In 20 minutes", "Tomorrow"],
+      answer: 2,
+      difficulty: "easy",
+      explanation: "The announcer says: twenty minutes."
+    },
+    {
+      id: "q50",
+      type: "listenChoice",
+      question: "Listen. Which animal are they talking about?",
+      say: "Girl: I saw an animal with a very long neck and spots. Boy: That sounds like a giraffe.",
+      options: ["Tiger", "Giraffe", "Rabbit", "Duck"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "A long neck and spots describes a giraffe."
+    },
+    {
+      id: "q51",
+      type: "listenChoice",
+      question: "Listen. What should you do if you don't understand?",
+      say: "Teacher: If you don't understand the question, raise your hand and ask me.",
+      options: ["Close your book", "Raise your hand and ask", "Leave the room", "Skip every question"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The teacher says to raise your hand and ask."
+    },
+    {
+      id: "q52",
+      type: "listenChoice",
+      question: "Listen. How many cookies are left?",
+      say: "Dad: We had eight cookies. Now there are six cookies left.",
+      options: ["6", "7", "8", "10"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The speaker says there are six cookies left."
+    },
+    {
+      id: "q53",
+      type: "listenChoice",
+      question: "Listen. What did Sara buy?",
+      say: "Sara: I went to the shop after school. I bought a notebook for my new class.",
+      options: ["A notebook", "A football", "A sandwich", "A jacket"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Sara says she bought a notebook."
+    },
+    {
+      id: "q54",
+      type: "listenChoice",
+      question: "Listen. Where is the homework?",
+      say: "Ben: I can't find my homework. Mom: Check your backpack pocket. Ben: Oh, it's there!",
+      options: ["In the backpack pocket", "On the kitchen table", "In the bathroom", "At the library"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Mom tells Ben to check the backpack pocket."
+    },
+    {
+      id: "q55",
+      type: "listenChoice",
+      question: "Listen. Which platform should they use?",
+      say: "Speaker: The train to Green City will leave from platform two.",
+      options: ["Platform 1", "Platform 2", "Platform 3", "Platform 4"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The speaker says platform two."
+    },
+    {
+      id: "q56",
+      type: "listenChoice",
+      question: "Listen. Which way should they turn?",
+      say: "Dad: We are almost there. Turn left at the pharmacy.",
+      options: ["Turn left", "Turn right", "Go back", "Stop and wait"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Dad says: turn left at the pharmacy."
+    },
+    {
+      id: "q57",
+      type: "listenChoice",
+      question: "Listen. What is the classroom rule?",
+      say: "Teacher: Remember, there is no food in the classroom.",
+      options: ["No homework", "No food in the classroom", "No books allowed", "No talking at all times"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "The rule is: no food in the classroom."
+    },
+    {
+      id: "q58",
+      type: "listenChoice",
+      question: "Listen. Why does he bring a jacket?",
+      say: "Brother: Why are you bringing a jacket? Sister: Because it will be cold tonight.",
+      options: ["Because it will be cold", "Because it will be sunny", "Because it is too small", "Because it is new"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "She brings a jacket because it will be cold tonight."
+    },
+    {
+      id: "q59",
+      type: "listenChoice",
+      question: "Listen. What time should they wake up?",
+      say: "Mom: Tomorrow, wake up at seven fifteen. We leave at eight.",
+      options: ["7:05", "7:15", "7:50", "8:15"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Mom says: seven fifteen."
+    },
+    {
+      id: "q60",
+      type: "listenChoice",
+      question: "Listen. What are they planning?",
+      say: "Liam: Should we bring sandwiches? Ava: Yes, for our class picnic on Friday.",
+      options: ["A class picnic", "A music concert", "A football match", "A spelling test"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "They are planning a class picnic."
+    },
+    {
+      id: "q61",
+      type: "listenChoice",
+      question: "Listen. Which fruit is cheaper?",
+      say: "Shopkeeper: Apples are two dollars. Grapes are three dollars.",
+      options: ["Apples", "Grapes", "They cost the same", "The shopkeeper didn't say"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Two dollars is cheaper than three dollars, so apples are cheaper."
+    },
+    {
+      id: "q62",
+      type: "listenChoice",
+      question: "Listen. What did the student forget?",
+      say: "Teacher: Do you have your homework? Student: Oh no, I left it on my desk at home.",
+      options: ["A pencil", "Homework", "A coat", "Lunch money"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The student says they left homework at home."
+    },
+    {
+      id: "q63",
+      type: "listenChoice",
+      question: "Listen. What should you do before crossing the road?",
+      say: "Adult: Before you cross, look left and right for cars.",
+      options: ["Close your eyes", "Look left and right", "Run as fast as you can", "Walk backward"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "You should look left and right before crossing."
+    },
+    {
+      id: "q64",
+      type: "listenChoice",
+      question: "Listen. What subject is next?",
+      say: "Student: What's next after math? Teacher: Science is next period.",
+      options: ["Math", "Science", "Art", "Music"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "The teacher says science is next."
+    },
+    {
+      id: "q65",
+      type: "listenChoice",
+      question: "Listen. What should you do first?",
+      say: "Cooking teacher: First, wash the rice. Then add water.",
+      options: ["Add sugar", "Wash the rice", "Turn on music", "Eat the rice"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "The teacher says: first, wash the rice."
+    },
+    {
+      id: "q66",
+      type: "listenChoice",
+      question: "Listen. What did the girl lose?",
+      say: "Girl: I can't find my scarf. Boy: Did you leave it on the chair? Girl: Yes, that's where I left it.",
+      options: ["Her scarf", "Her shoes", "Her glasses", "Her book"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "She says she can't find her scarf."
+    },
+    {
+      id: "q67",
+      type: "listenChoice",
+      question: "Listen. Where should the class line up?",
+      say: "Teacher: Class, line up by the blue door, please.",
+      options: ["By the blue door", "By the red door", "By the window", "By the teacher's desk"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The teacher says: by the blue door."
+    },
+    {
+      id: "q68",
+      type: "listenChoice",
+      question: "Listen. What will they bring to the party?",
+      say: "Maya: What should we bring to the party? Sam: Let's bring a card and some balloons.",
+      options: ["A card and balloons", "Only a book", "Nothing", "A bicycle"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Sam suggests bringing a card and balloons."
+    },
+    {
+      id: "q69",
+      type: "listenChoice",
+      question: "Listen. Where is the cat sleeping?",
+      say: "Boy: Where is the cat? Girl: It's sleeping on the sofa.",
+      options: ["On the sofa", "Under the bed", "In the garden", "In the car"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The girl says the cat is sleeping on the sofa."
+    },
+    {
+      id: "q70",
+      type: "listenChoice",
+      question: "Listen. What should students underline?",
+      say: "Teacher: In this paragraph, underline the topic sentence, not every detail.",
+      options: ["Every detail", "The topic sentence", "All the commas", "The last word only"],
+      answer: 1,
+      difficulty: "hard",
+      explanation: "The teacher says to underline the topic sentence."
+    },
+    {
+      id: "q71",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🍓",
+      say: "This is a strawberry.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "🍓 is a strawberry."
+    },
+    {
+      id: "q72",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🦁",
+      say: "This is a tiger.",
+      options: ["True", "False"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "🦁 is a lion, not a tiger."
+    },
+    {
+      id: "q73",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🐧",
+      say: "This is a penguin.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "🐧 is a penguin."
+    },
+    {
+      id: "q74",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🥕",
+      say: "This is a potato.",
+      options: ["True", "False"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "🥕 is a carrot."
+    },
+    {
+      id: "q75",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🌙",
+      say: "This is the sun.",
+      options: ["True", "False"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "🌙 is the moon, not the sun."
+    },
+    {
+      id: "q76",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "⛄",
+      say: "This is a snowman.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "⛄ is a snowman."
+    },
+    {
+      id: "q77",
+      type: "listenFillInTheBlank",
+      question: "Type the missing word: Please sit _____.",
+      say: "Please sit down.",
+      answer: ["down"],
+      difficulty: "easy",
+      explanation: "The missing word is down."
+    },
+    {
+      id: "q78",
+      type: "listenFillInTheBlank",
+      question: "Type the number you hear: There are _____ minutes in an hour.",
+      say: "There are sixty minutes in an hour.",
+      answer: ["60", "sixty"],
+      difficulty: "hard",
+      explanation: "Sixty = 60."
+    },
+    {
+      id: "q79",
+      type: "listenFillInTheBlank",
+      question: "Type the missing word: I will _____ my hands before I eat.",
+      say: "I will wash my hands before I eat.",
+      answer: ["wash"],
+      difficulty: "easy",
+      explanation: "The missing word is wash."
+    },
+    {
+      id: "q80",
+      type: "listenFillInTheBlank",
+      question: "Type the missing word: The dog is _____ the table.",
+      say: "The dog is under the table.",
+      answer: ["under"],
+      difficulty: "medium",
+      explanation: "The missing word is under."
+    },
+    {
+      id: "q81",
+      type: "listenFillInTheBlank",
+      question: "Type the number you hear: We need _____ batteries.",
+      say: "We need two batteries.",
+      answer: ["2", "two"],
+      difficulty: "medium",
+      explanation: "Two = 2."
+    },
+    {
+      id: "q82",
+      type: "listenFillInTheBlank",
+      question: "Type the missing word: Please work _____ during the test.",
+      say: "Please work silently during the test.",
+      answer: ["silently"],
+      difficulty: "hard",
+      explanation: "Silently means without talking."
+    }
+  );
 
   // Global export (no build step)
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
