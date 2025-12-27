@@ -102,6 +102,36 @@
     return Math.min(Math.max(v, lo), hi);
   }
 
+  function parseIsoMs(s) {
+    if (!s) return NaN;
+    const ms = Date.parse(String(s));
+    return Number.isFinite(ms) ? ms : NaN;
+  }
+
+  function latestIso(a, b) {
+    const am = parseIsoMs(a);
+    const bm = parseIsoMs(b);
+
+    if (Number.isFinite(am) && Number.isFinite(bm)) return bm >= am ? String(b) : String(a);
+    if (Number.isFinite(am)) return String(a);
+    if (Number.isFinite(bm)) return String(b);
+
+    // Fallback: ISO 8601 strings are lexicographically sortable.
+    const as = a ? String(a) : "";
+    const bs = b ? String(b) : "";
+    return bs > as ? bs : as;
+  }
+
+  function maxIso(list) {
+    const arr = Array.isArray(list) ? list : [];
+    let best = "";
+    for (let i = 0; i < arr.length; i++) {
+      if (!arr[i]) continue;
+      best = best ? latestIso(best, arr[i]) : String(arr[i]);
+    }
+    return best || "";
+  }
+
   function sanitizeScoreEntry(entry) {
     if (!isPlainObject(entry)) return null;
 
@@ -183,6 +213,129 @@
       level,
       at
     };
+  }
+
+  // -----------------------------
+  // Overall score synchronization
+  // -----------------------------
+
+  function getSkillScoreFromBucket(bucket, skillKey) {
+    if (!bucket || !skillKey) return null;
+    const sk = bucket[skillKey];
+    const last = sk && isPlainObject(sk.lastScore) ? sk.lastScore : null;
+    const n = numberOrNull(last && last.score);
+    return n === null ? null : clampInt(n, 0, 100);
+  }
+
+  function getSkillAtFromBucket(bucket, skillKey) {
+    if (!bucket || !skillKey) return "";
+    const sk = bucket[skillKey];
+    const last = sk && isPlainObject(sk.lastScore) ? sk.lastScore : null;
+    return last && last.at ? String(last.at) : "";
+  }
+
+  function computeOverallSnapshot(ageGroup, bucket) {
+    const reading = getSkillScoreFromBucket(bucket, "reading");
+    const listening = getSkillScoreFromBucket(bucket, "listening");
+    const writing = getSkillScoreFromBucket(bucket, "writing");
+    const speaking = getSkillScoreFromBucket(bucket, "speaking");
+
+    if (
+      reading === null ||
+      listening === null ||
+      writing === null ||
+      speaking === null
+    ) {
+      return null;
+    }
+
+    const at =
+      maxIso([
+        getSkillAtFromBucket(bucket, "reading"),
+        getSkillAtFromBucket(bucket, "listening"),
+        getSkillAtFromBucket(bucket, "writing"),
+        getSkillAtFromBucket(bucket, "speaking")
+      ]) || nowIso();
+
+    const scoring = window.UEAH_SCORING;
+    if (scoring && typeof scoring.computeOverall === "function") {
+      try {
+        const res = scoring.computeOverall(ageGroup, { reading, listening, writing, speaking });
+        if (res && res.complete) {
+          return {
+            score: clampInt(res.score, 0, 100),
+            title: res.title ? sanitizeText(res.title, 80) : "",
+            level: typeof res.band === "number" && Number.isFinite(res.band) ? res.band : null,
+            at
+          };
+        }
+      } catch (_) {
+        // fall through to simple average
+      }
+    }
+
+    const avg = Math.round((reading + listening + writing + speaking) / 4);
+    return {
+      score: clampInt(avg, 0, 100),
+      title: "",
+      level: null,
+      at
+    };
+  }
+
+  function overallCoreEqual(a, b) {
+    const A = sanitizeOverallEntry(a);
+    const B = sanitizeOverallEntry(b);
+    if (!A || !B) return false;
+
+    const aLevel = numberOrNull(A.level);
+    const bLevel = numberOrNull(B.level);
+
+    return A.score === B.score && String(A.title || "") === String(B.title || "") && aLevel === bLevel;
+  }
+
+  function syncAgeBucketOverall(ageGroup, bucket) {
+    const b = isPlainObject(bucket) ? bucket : defaultAgeBucket();
+    const computed = computeOverallSnapshot(ageGroup, b);
+    const existing = sanitizeOverallEntry(b.overall);
+
+    if (!computed) {
+      if (existing) {
+        return { bucket: { ...b, overall: null }, changed: true };
+      }
+      return { bucket: { ...b, overall: null }, changed: false };
+    }
+
+    // If core fields haven't changed, only bump "at" to reflect newest underlying skill score.
+    if (existing && overallCoreEqual(existing, computed)) {
+      const exAt = existing.at || "";
+      const nextAt = computed.at || exAt || nowIso();
+
+      if (nextAt && nextAt !== exAt) {
+        return { bucket: { ...b, overall: { ...existing, at: nextAt } }, changed: true };
+      }
+
+      return { bucket: { ...b, overall: existing }, changed: false };
+    }
+
+    // Core fields changed (score/title/band) — update overall.
+    const cleaned = sanitizeOverallEntry(computed);
+    return { bucket: { ...b, overall: cleaned }, changed: true };
+  }
+
+  function syncAllOveralls(resultsByAge) {
+    const src = isPlainObject(resultsByAge) ? resultsByAge : {};
+    const out = { ...src };
+    let changed = false;
+
+    Object.keys(out).forEach((age) => {
+      const bucket = isPlainObject(out[age]) ? out[age] : defaultAgeBucket();
+      const s = syncAgeBucketOverall(age, bucket);
+      out[age] = s.bucket;
+      if (s.changed) changed = true;
+    });
+
+    return { resultsByAge: out, changed };
   }
 
   function loadRaw() {
@@ -335,6 +488,15 @@
     // New: resultsByAge
     out.resultsByAge = isPlainObject(data.resultsByAge) ? ensureResultsByAgeShape(data.resultsByAge) : {};
 
+    // Keep overall score in sync with the latest saved skill scores.
+    // This fixes legacy/stale overalls and ensures re-takes update certification consistently.
+    const synced = syncAllOveralls(out.resultsByAge);
+    out.resultsByAge = synced.resultsByAge;
+    if (synced.changed) {
+      // Persist silently (avoid UI loops) so exports reflect corrected data.
+      persist(out, false);
+    }
+
     // Sanitize
     out.name = sanitizeText(out.name, 80);
     out.email = normalizeEmail(out.email);
@@ -376,7 +538,8 @@
     out.iels.lastScore = isPlainObject(out.iels.lastScore) ? out.iels.lastScore : null;
 
     // resultsByAge
-    out.resultsByAge = isPlainObject(p.resultsByAge) ? ensureResultsByAgeShape(p.resultsByAge) : {};
+    const shaped = isPlainObject(p.resultsByAge) ? ensureResultsByAgeShape(p.resultsByAge) : {};
+    out.resultsByAge = syncAllOveralls(shaped).resultsByAge;
 
     const dispatch = !(opts && opts.dispatch === false);
     persist(out, dispatch);
@@ -546,7 +709,8 @@
     const skillBucket = isPlainObject(bucket[sk]) ? bucket[sk] : { lastScore: null, history: [] };
     const history = Array.isArray(skillBucket.history) ? skillBucket.history.slice() : [];
 
-    // Dedupe: if lastScore is identical (score+rawCorrect+rawTotal+slug), do nothing
+    // Dedupe: if lastScore is identical (score+rawCorrect+rawTotal+slug),
+    // keep overall synchronized but avoid writing a duplicate history entry.
     const last = skillBucket.lastScore;
     if (
       last &&
@@ -555,6 +719,14 @@
       last.rawTotal === cleaned.rawTotal &&
       String(last.slug || "") === String(cleaned.slug || "")
     ) {
+      const syncedExisting = syncAgeBucketOverall(age, bucket);
+      if (syncedExisting.changed) {
+        resultsByAge[age] = syncedExisting.bucket;
+        return save({
+          ...current,
+          resultsByAge
+        });
+      }
       return current;
     }
 
@@ -563,7 +735,7 @@
     const MAX = 50;
     const trimmed = history.slice(0, MAX);
 
-    const nextBucket = {
+    let nextBucket = {
       ...bucket,
       [sk]: {
         lastScore: cleaned,
@@ -571,9 +743,8 @@
       }
     };
 
-    // Recompute overall if complete
-    const overall = computeOverallIfComplete(age, nextBucket);
-    nextBucket.overall = sanitizeOverallEntry(overall) || null;
+    // Keep overall score in sync with the latest saved skill scores.
+    nextBucket = syncAgeBucketOverall(age, nextBucket).bucket;
 
     resultsByAge[age] = nextBucket;
 
