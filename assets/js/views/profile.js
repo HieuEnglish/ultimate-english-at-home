@@ -389,29 +389,32 @@ export function getView(ctx) {
         return;
       }
 
-      const cards = AGE_GROUPS.map((age) => {
-        const label = ageLabelFor(age);
+      const cards = AGE_GROUPS
+        .map((age) => {
+          const label = ageLabelFor(age);
 
-        const savedSkills = SKILLS.map((skill) => ({
-          skill,
-          last: getLastScore(resultsByAge, age, skill),
-        }));
+          const savedSkills = SKILLS.map((skill) => ({
+            skill,
+            last: getLastScore(resultsByAge, age, skill),
+          }));
 
-        const completedCount = savedSkills.filter((x) => !!x.last).length;
+          const completedCount = savedSkills.filter((x) => !!x.last).length;
 
-        const overall = completedCount === SKILLS.length ? getOverall(resultsByAge, age) : null;
-        const overallWhen = overall && overall.at ? formatDateTime(overall.at) : '';
+          const overall = completedCount === SKILLS.length ? getOverall(resultsByAge, age) : null;
+          const overallWhen = overall && overall.at ? formatDateTime(overall.at) : '';
 
-        const skillGrid = savedSkills
-          .map(({ skill, last }) => {
-            const skLabel = titleCase(skill);
+          const skillGrid = savedSkills
+            .map(({ skill, last }) => {
+              const skLabel = titleCase(skill);
 
-            if (last) {
-              const when = last.at ? formatDateTime(last.at) : '';
-              const levelLine = last.levelTitle ? ` • <span style="opacity:.92">${safeText(last.levelTitle)}</span>` : '';
-              const aria = `${skLabel} saved. Score ${formatScore(last.score)} out of 100.`;
+              if (last) {
+                const when = last.at ? formatDateTime(last.at) : '';
+                const levelLine = last.levelTitle
+                  ? ` • <span style="opacity:.92">${safeText(last.levelTitle)}</span>`
+                  : '';
+                const aria = `${skLabel} saved. Score ${formatScore(last.score)} out of 100.`;
 
-              return `
+                return `
                 <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
                   <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
                     <div>
@@ -426,39 +429,46 @@ export function getView(ctx) {
                           : `<div class="muted" style="margin-top:4px">Saved</div>`
                       }
                     </div>
-                    <span class="chip chip--ok" style="font-weight:900" aria-label="${safeText(aria)}" title="${safeText(aria)}">✓</span>
+                    <span class="chip chip--ok" style="font-weight:900" aria-label="${safeText(
+                      aria
+                    )}" title="${safeText(aria)}">✓</span>
                   </div>
                 </div>
               `;
-            }
+              }
 
-            const aria = `${skLabel} not saved.`;
-            const testSlug = testSlugFor(age, skill);
-            const testPath = testSlug ? `/tests/${testSlug}` : '/tests';
-            const testAria = testSlug ? `Go to ${skLabel} test for ${label}` : 'Go to tests';
-            return `
+              const aria = `${skLabel} not saved.`;
+              const testSlug = testSlugFor(age, skill);
+              const testPath = testSlug ? `/tests/${testSlug}` : '/tests';
+              const testAria = testSlug ? `Go to ${skLabel} test for ${label}` : 'Go to test';
+
+              return `
               <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
                 <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
                   <div>
                     <div style="font-weight:900">${safeText(skLabel)}</div>
                     <div class="muted" style="margin-top:6px">No score saved yet</div>
                   </div>
-                  <span class="chip" style="font-weight:900" aria-label="${safeText(aria)}" title="${safeText(aria)}">—</span>
+                  <span class="chip" style="font-weight:900" aria-label="${safeText(
+                    aria
+                  )}" title="${safeText(aria)}">—</span>
                 </div>
                 <div style="margin-top:10px">
-                  <a class="btn btn--small" href="${hrefFor(testPath)}" data-nav aria-label="${safeText(testAria)}">
-                    Go to tests
+                  <a class="btn btn--small" href="${hrefFor(
+                    testPath
+                  )}" data-nav aria-label="${safeText(testAria)}">
+                    Go to test
                   </a>
                 </div>
               </div>
             `;
-          })
-          .join('');
+            })
+            .join('');
 
-        const progressLabel = `Completion for ${label}: ${completedCount} of ${SKILLS.length} skills.`;
+          const progressLabel = `Completion for ${label}: ${completedCount} of ${SKILLS.length} skills.`;
 
-        const overallBlock = overall
-          ? `
+          const overallBlock = overall
+            ? `
             <div class="note" style="margin:12px 0 0; padding:10px 12px">
               <strong>Certification</strong>
               <p style="margin:8px 0 0; opacity:.92">
@@ -473,7 +483,7 @@ export function getView(ctx) {
               ${overallWhen ? `<p class="muted" style="margin:8px 0 0">Last updated: ${safeText(overallWhen)}</p>` : ''}
             </div>
           `
-          : `
+            : `
             <div class="note" style="margin:12px 0 0; padding:10px 12px">
               <strong>Certification</strong>
               <p style="margin:8px 0 0; opacity:.92">
@@ -482,15 +492,19 @@ export function getView(ctx) {
             </div>
           `;
 
-        return `
-          <div class="detail-card" style="margin-top:12px" data-age-card="${safeText(age)}" role="region" aria-label="${safeText(label)} progress">
+          return `
+          <div class="detail-card" style="margin-top:12px" data-age-card="${safeText(
+            age
+          )}" role="region" aria-label="${safeText(label)} progress">
             <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap">
               <div>
                 <div style="font-weight:900">${safeText(label)}</div>
                 <div class="muted" style="margin-top:4px">Completed: ${completedCount} / ${SKILLS.length}</div>
               </div>
               <div style="display:flex; gap:8px; flex-wrap:wrap">
-                <a class="btn btn--small" href="${hrefFor(`/resources/${age}`)}" data-nav aria-label="Open resources for ${safeText(label)}">Open resources</a>
+                <a class="btn btn--small" href="${hrefFor(
+                  `/resources/${age}`
+                )}" data-nav aria-label="Open resources for ${safeText(label)}">Open resources</a>
                 <button
                   type="button"
                   class="btn btn--small"
@@ -504,7 +518,9 @@ export function getView(ctx) {
             </div>
 
             <div style="margin-top:10px">
-              <progress value="${completedCount}" max="${SKILLS.length}" style="width:100%; height:14px" aria-label="${safeText(progressLabel)}"></progress>
+              <progress value="${completedCount}" max="${SKILLS.length}" style="width:100%; height:14px" aria-label="${safeText(
+            progressLabel
+          )}"></progress>
             </div>
 
             <div style="margin-top:12px; display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))">
@@ -514,7 +530,8 @@ export function getView(ctx) {
             ${overallBlock}
           </div>
         `;
-      }).join('');
+        })
+        .join('');
 
       progressHost.innerHTML = cards;
     }
@@ -582,9 +599,7 @@ export function getView(ctx) {
       const age = String(btn.getAttribute('data-age') || '').trim();
       if (!age) return;
 
-      const confirmReset = window.confirm
-        ? window.confirm(`Reset saved scores for ${ageLabelFor(age)}?`)
-        : true;
+      const confirmReset = window.confirm ? window.confirm(`Reset saved scores for ${ageLabelFor(age)}?`) : true;
 
       if (!confirmReset) return;
 
@@ -658,8 +673,7 @@ export function getView(ctx) {
     let importMode = 'merge';
     function updateModeUi() {
       if (!modeBtn) return;
-      modeBtn.textContent =
-        importMode === 'replace' ? 'Load option: Replace (overwrite)' : 'Load option: Add (keep current)';
+      modeBtn.textContent = importMode === 'replace' ? 'Load option: Replace (overwrite)' : 'Load option: Add (keep current)';
       modeBtn.setAttribute('aria-pressed', importMode === 'replace' ? 'true' : 'false');
     }
     updateModeUi();
