@@ -22,13 +22,13 @@
   const SLUG = "age-4-7-listening";
 
   const QUESTIONS = [
-    // --- Easy: single words ---
+    // --- Easy: single words (objects/animals) ---
     {
       id: "q1",
       type: "listenChoice",
       question: "Listen. Choose the picture.",
       say: "cat",
-      options: ["🐱", "🐶", "🐰", "🐻"],
+      options: ["🐱", "🐶", "🐰", "🦊"],
       answer: 0,
       difficulty: "easy",
       explanation: "Cat = 🐱"
@@ -58,10 +58,10 @@
       type: "listenChoice",
       question: "Listen. Choose the picture.",
       say: "pencil",
-      options: ["✏️", "📚", "🧽", "🧃"],
+      options: ["✏️", "📚", "🧸", "🎈"],
       answer: 0,
       difficulty: "easy",
-      explanation: "A pencil is ✏️"
+      explanation: "Pencil = ✏️"
     },
     {
       id: "q5",
@@ -90,8 +90,8 @@
       type: "listenChoice",
       question: "Listen. Choose the best answer.",
       say: "blue car",
-      options: ["🔴🚗", "🔵🚗", "🔴🚲", "🔵🚲"],
-      answer: 1,
+      options: ["🔵🚗", "🔴🚗", "🔵⚽", "🔴⚽"],
+      answer: 0,
       difficulty: "medium",
       explanation: "Blue car = 🔵🚗"
     },
@@ -100,7 +100,7 @@
       type: "listenChoice",
       question: "Listen. Choose the best answer.",
       say: "green apple",
-      options: ["🍏", "🍎", "🍌", "🍓"],
+      options: ["🍏", "🍎", "🍌", "🍊"],
       answer: 0,
       difficulty: "medium",
       explanation: "Green apple = 🍏"
@@ -110,19 +110,19 @@
       type: "listenChoice",
       question: "Listen. Choose the best answer.",
       say: "yellow banana",
-      options: ["🍎", "🍌", "🍇", "🥝"],
-      answer: 1,
+      options: ["🍌", "🍎", "🍇", "🍉"],
+      answer: 0,
       difficulty: "medium",
-      explanation: "Banana = 🍌"
+      explanation: "Yellow banana = 🍌"
     },
 
-    // --- Medium: simple actions ---
+    // --- Medium: actions (single verbs) ---
     {
       id: "q10",
       type: "listenChoice",
       question: "Listen. Choose the action.",
       say: "clap your hands",
-      options: ["👏", "🛌", "🍽️", "🏃"],
+      options: ["👏", "👋", "🤫", "🫶"],
       answer: 0,
       difficulty: "medium",
       explanation: "Clap = 👏"
@@ -132,9 +132,9 @@
       type: "listenChoice",
       question: "Listen. Choose the action.",
       say: "run",
-      options: ["🏃", "😴", "📖", "🧼"],
+      options: ["🏃", "🧍", "🛌", "🧘"],
       answer: 0,
-      difficulty: "easy",
+      difficulty: "medium",
       explanation: "Run = 🏃"
     },
     {
@@ -142,45 +142,47 @@
       type: "listenChoice",
       question: "Listen. Choose the action.",
       say: "sleep",
-      options: ["😴", "🏃", "🧃", "✏️"],
+      options: ["💤", "🏃", "👏", "🎤"],
       answer: 0,
-      difficulty: "easy",
-      explanation: "Sleep = 😴"
+      difficulty: "medium",
+      explanation: "Sleep = 💤"
     },
 
-    // --- Medium: short sentences (choose picture-like option) ---
+    // --- Hard: short sentences (feelings/needs) ---
     {
       id: "q13",
       type: "listenChoice",
       question: "Listen. Choose the best answer.",
       say: "I am hungry.",
-      options: ["😋🍽️", "😴🛌", "😊🎈", "😢💧"],
+      options: ["🍽️", "😴", "🧊", "🎈"],
       answer: 0,
-      difficulty: "medium",
-      explanation: "Hungry = want food."
+      difficulty: "hard",
+      explanation: "Hungry → food 🍽️"
     },
     {
       id: "q14",
       type: "listenChoice",
       question: "Listen. Choose the best answer.",
       say: "I am happy.",
-      options: ["😊🎈", "😢💧", "😴🛌", "😋🍽️"],
+      options: ["😄", "😢", "😡", "😴"],
       answer: 0,
-      difficulty: "medium",
-      explanation: "Happy = 😊"
+      difficulty: "hard",
+      explanation: "Happy = 😄"
     },
+
+    // --- Hard: classroom instructions ---
     {
       id: "q15",
       type: "listenChoice",
       question: "Listen. Choose the best answer.",
       say: "Open the book.",
-      options: ["📖✅", "📕❌", "🧼👐", "🍎✅"],
+      options: ["📖", "✏️", "🧸", "🖍️"],
       answer: 0,
-      difficulty: "medium",
-      explanation: "Open book = 📖"
+      difficulty: "hard",
+      explanation: "Open the book = 📖"
     },
 
-    // --- Hard: True/False with a picture context ---
+    // --- Hard: listen + True/False (picture + sentence) ---
     {
       id: "q16",
       type: "listenTrueFalse",
@@ -218,12 +220,12 @@
       id: "q19",
       type: "listenTrueFalse",
       question: "Look. Listen. True or False?",
-      picture: "🚌",
+      picture: "🚗",
       say: "This is a car.",
       options: ["True", "False"],
-      answer: 1,
+      answer: 0,
       difficulty: "hard",
-      explanation: "🚌 is a bus, not a car."
+      explanation: "🚗 is a car."
     },
     {
       id: "q20",
@@ -235,6 +237,521 @@
       answer: 0,
       difficulty: "hard",
       explanation: "🐟 is a fish."
+    },
+
+    // --- Easy: more familiar words (single words) ---
+    {
+      id: "q21",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "dog",
+      options: ["🐶", "🐱", "🐰", "🦊"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Dog = 🐶"
+    },
+    {
+      id: "q22",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "bird",
+      options: ["🐦", "🐟", "🐭", "🐸"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Bird = 🐦"
+    },
+    {
+      id: "q23",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "frog",
+      options: ["🐸", "🐍", "🦋", "🐢"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Frog = 🐸"
+    },
+    {
+      id: "q24",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "lion",
+      options: ["🦁", "🐯", "🐵", "🐶"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Lion = 🦁"
+    },
+    {
+      id: "q25",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "elephant",
+      options: ["🐘", "🦒", "🐴", "🐄"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Elephant = 🐘"
+    },
+    {
+      id: "q26",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "house",
+      options: ["🏠", "🏫", "🏥", "🏪"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "House = 🏠"
+    },
+    {
+      id: "q27",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "school",
+      options: ["🏫", "🏠", "🏥", "🏨"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "School = 🏫"
+    },
+    {
+      id: "q28",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "milk",
+      options: ["🥛", "🧃", "☕", "🍵"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Milk = 🥛"
+    },
+    {
+      id: "q29",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "water",
+      options: ["🚰", "🥤", "🍵", "🥛"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Water = 🚰"
+    },
+    {
+      id: "q30",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "shoes",
+      options: ["👟", "🧦", "🧢", "🧤"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Shoes = 👟"
+    },
+    {
+      id: "q31",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "hat",
+      options: ["🧢", "👟", "🧣", "🧤"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Hat = 🧢"
+    },
+    {
+      id: "q32",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "kite",
+      options: ["🪁", "🎈", "🧸", "🚗"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Kite = 🪁"
+    },
+    {
+      id: "q33",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "ice cream",
+      options: ["🍦", "🍪", "🍉", "🍎"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Ice cream = 🍦"
+    },
+    {
+      id: "q34",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "bed",
+      options: ["🛏️", "🪑", "🚽", "🛁"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Bed = 🛏️"
+    },
+    {
+      id: "q35",
+      type: "listenChoice",
+      question: "Listen. Choose the picture.",
+      say: "star",
+      options: ["⭐", "🌙", "☀️", "🌧️"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Star = ⭐"
+    },
+
+    // --- Medium: colours + simple phrases ---
+    {
+      id: "q36",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "pink flower",
+      options: ["🌸", "🌼", "🌹", "🌻"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Pink flower = 🌸"
+    },
+    {
+      id: "q37",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "yellow flower",
+      options: ["🌸", "🌼", "🌹", "🌻"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Yellow flower = 🌼"
+    },
+    {
+      id: "q38",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "red heart",
+      options: ["❤️", "💙", "💚", "💛"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Red heart = ❤️"
+    },
+    {
+      id: "q39",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "blue heart",
+      options: ["❤️", "💙", "💚", "💛"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Blue heart = 💙"
+    },
+    {
+      id: "q40",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "green heart",
+      options: ["❤️", "💙", "💚", "💛"],
+      answer: 2,
+      difficulty: "medium",
+      explanation: "Green heart = 💚"
+    },
+    {
+      id: "q41",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "yellow heart",
+      options: ["❤️", "💙", "💚", "💛"],
+      answer: 3,
+      difficulty: "medium",
+      explanation: "Yellow heart = 💛"
+    },
+    {
+      id: "q42",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "blue fish",
+      options: ["🔵🐟", "🔴🐟", "🔵🐱", "🔴🐱"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Blue fish = 🔵🐟"
+    },
+    {
+      id: "q43",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "green frog",
+      options: ["🟢🐸", "🔴🐸", "🟢🐶", "🔴🐶"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Green frog = 🟢🐸"
+    },
+    {
+      id: "q44",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "yellow duck",
+      options: ["🟡🦆", "🔵🦆", "🟡🐸", "🔵🐸"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Yellow duck = 🟡🦆"
+    },
+    {
+      id: "q45",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "red ladybug",
+      options: ["🔴🐞", "🔵🐞", "🔴🦋", "🔵🦋"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Red ladybug = 🔴🐞"
+    },
+    {
+      id: "q46",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "green tree",
+      options: ["🟢🌳", "🔴🌳", "🟢🌵", "🔴🌵"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Green tree = 🟢🌳"
+    },
+    {
+      id: "q47",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "blue boat",
+      options: ["🔵⛵", "🔴⛵", "🔵🚗", "🔴🚗"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Blue boat = 🔵⛵"
+    },
+    {
+      id: "q48",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "yellow star",
+      options: ["🟡⭐", "🔵⭐", "🟡🌙", "🔵🌙"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Yellow star = 🟡⭐"
+    },
+    {
+      id: "q49",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "red balloon",
+      options: ["🔴🎈", "🔵🎈", "🔴🪁", "🔵🪁"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Red balloon = 🔴🎈"
+    },
+    {
+      id: "q50",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "two apples",
+      options: ["🍎🍎", "🍎", "🍎🍎🍎", "🍏🍏"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Two apples = 🍎🍎"
+    },
+
+    // --- Medium: actions + classroom commands ---
+    {
+      id: "q51",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "swim",
+      options: ["🏊", "💃", "🚴", "🧘"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Swim = 🏊"
+    },
+    {
+      id: "q52",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "dance",
+      options: ["💃", "🏊", "🚴", "🧘"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Dance = 💃"
+    },
+    {
+      id: "q53",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "sing",
+      options: ["🎤", "📖", "✍️", "🍽️"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Sing = 🎤"
+    },
+    {
+      id: "q54",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "read",
+      options: ["📖", "✍️", "🎤", "🍽️"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Read = 📖"
+    },
+    {
+      id: "q55",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "write",
+      options: ["✍️", "📖", "🎤", "🏊"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Write = ✍️"
+    },
+    {
+      id: "q56",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "eat",
+      options: ["🍽️", "🥤", "🛌", "📖"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Eat = 🍽️"
+    },
+    {
+      id: "q57",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "drink",
+      options: ["🥤", "🍽️", "🛌", "🚲"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Drink = 🥤"
+    },
+    {
+      id: "q58",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "wash your hands",
+      options: ["🧼👐", "🍽️", "🛏️", "📖"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Wash your hands = 🧼👐"
+    },
+    {
+      id: "q59",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "open the door",
+      options: ["🚪➡️", "🪟", "📕", "🧸"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Open the door = 🚪➡️"
+    },
+    {
+      id: "q60",
+      type: "listenChoice",
+      question: "Listen. Choose the action.",
+      say: "close your eyes",
+      options: ["🙈", "👀", "👂", "👄"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Close your eyes = 🙈"
+    },
+
+    // --- Hard: feelings + short sentences ---
+    {
+      id: "q61",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "I am sad.",
+      options: ["😢", "😄", "😡", "😴"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Sad = 😢"
+    },
+    {
+      id: "q62",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "I am tired.",
+      options: ["😴", "😄", "😡", "😢"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Tired = 😴"
+    },
+    {
+      id: "q63",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "I am angry.",
+      options: ["😡", "😄", "😢", "😴"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Angry = 😡"
+    },
+    {
+      id: "q64",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "I am scared.",
+      options: ["😱", "😄", "😢", "😡"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Scared = 😱"
+    },
+    {
+      id: "q65",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "I like ice cream.",
+      options: ["🍦", "🍕", "🥗", "🍎"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Ice cream = 🍦"
+    },
+
+    // --- Hard: True / False ---
+    {
+      id: "q66",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🐶",
+      say: "This is a dog.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "🐶 is a dog."
+    },
+    {
+      id: "q67",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🐱",
+      say: "This is a dog.",
+      options: ["True", "False"],
+      answer: 1,
+      difficulty: "hard",
+      explanation: "🐱 is a cat, not a dog."
+    },
+    {
+      id: "q68",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🍌",
+      say: "This is a banana.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "🍌 is a banana."
+    },
+    {
+      id: "q69",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🍉",
+      say: "This is an apple.",
+      options: ["True", "False"],
+      answer: 1,
+      difficulty: "hard",
+      explanation: "🍉 is a watermelon, not an apple."
+    },
+    {
+      id: "q70",
+      type: "listenTrueFalse",
+      question: "Look. Listen. True or False?",
+      picture: "🚲",
+      say: "This is a bike.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "🚲 is a bike."
     }
   ];
 

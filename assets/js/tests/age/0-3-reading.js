@@ -17,6 +17,8 @@
 
   const SLUG = "age-0-3-reading";
   const BANK_SRC = "assets/data/tests-0-3-reading.js";
+  // Keep each run short, even if the bank grows over time.
+  const MAX_QUESTIONS = 14;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -415,7 +417,10 @@
           const prepared = bank.map(cloneQuestionWithShuffledOptions);
           shuffleInPlace(prepared);
 
-          state.questions = prepared;
+          // Use a random subset so the test stays a reasonable length.
+          const subset = prepared.slice(0, Math.min(MAX_QUESTIONS, prepared.length));
+
+          state.questions = subset;
           state.index = 0;
           state.correctCount = 0;
           state.lastChoice = null;
