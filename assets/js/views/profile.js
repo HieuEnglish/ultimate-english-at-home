@@ -93,6 +93,21 @@ function titleCase(s) {
   return t ? t.charAt(0).toUpperCase() + t.slice(1) : t;
 }
 
+function emojiSpan(e) {
+  const t = String(e || '').trim();
+  if (!t) return '';
+  return `<span aria-hidden="true">${safeText(t)}</span>`;
+}
+
+function skillEmoji(skill) {
+  const s = String(skill || '').trim().toLowerCase();
+  if (s === 'reading') return '📖';
+  if (s === 'listening') return '🎧';
+  if (s === 'writing') return '✍️';
+  if (s === 'speaking') return '🗣️';
+  return '';
+}
+
 function ageLabelFor(age) {
   const a = String(age || '').trim().toLowerCase();
   if (a === 'ielts') return 'IELTS Practice';
@@ -201,13 +216,13 @@ export function getView(ctx) {
   const html = `
     <section class="page-top profile-page">
       ${breadcrumb}
-      <h1 class="page-title">Profile</h1>
-      <p class="page-subtitle">Saved on this device.</p>
+      <h1 class="page-title">${emojiSpan('👤')} Profile</h1>
+      <p class="page-subtitle">${emojiSpan('📱')} Saved on this device.</p>
 
       <div class="detail-card" role="region" aria-label="Profile form">
         <form id="profile-form" novalidate>
           <div class="detail-section field">
-            <label class="label" for="profile-email">Email</label>
+            <label class="label" for="profile-email">${emojiSpan('📧')} Email</label>
             <p class="muted" id="profile-email-help">Used for score tracking and contact.</p>
             <input
               id="profile-email"
@@ -222,7 +237,7 @@ export function getView(ctx) {
           </div>
 
           <div class="detail-section field">
-            <label class="label" for="profile-name">Display name</label>
+            <label class="label" for="profile-name">${emojiSpan('🏷️')} Display name</label>
             <input
               id="profile-name"
               name="name"
@@ -234,7 +249,7 @@ export function getView(ctx) {
           </div>
 
           <div class="detail-section field">
-            <label class="label" for="profile-target">Target IELTS score</label>
+            <label class="label" for="profile-target">${emojiSpan('🎯')} Target IELTS score</label>
             <p class="muted" id="profile-target-help">For Ages 13–18 and IELTS Practice only (practice).</p>
             <input
               id="profile-target"
@@ -251,10 +266,10 @@ export function getView(ctx) {
           </div>
 
           <div class="actions">
-            <button class="btn btn--primary" type="submit" aria-label="Save profile">Save</button>
-            <button class="btn" type="button" id="profile-clear" aria-label="Reset profile on this device">Reset profile</button>
-            <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">Scoring plan</a>
-            <a class="btn" href="${hrefFor('/')}" data-nav>Home</a>
+            <button class="btn btn--primary" type="submit" aria-label="Save profile">${emojiSpan('💾')} Save</button>
+            <button class="btn" type="button" id="profile-clear" aria-label="Reset profile on this device">${emojiSpan('🔄')} Reset profile</button>
+            <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">${emojiSpan('📋')} Scoring plan</a>
+            <a class="btn" href="${hrefFor('/')}" data-nav>${emojiSpan('🏠')} Home</a>
           </div>
 
           <p id="profile-status" class="muted" style="margin:12px 0 0" aria-live="polite" role="status"></p>
@@ -262,26 +277,26 @@ export function getView(ctx) {
       </div>
 
       <div class="detail-card" style="margin-top:18px" role="region" aria-labelledby="progress-title">
-        <h2 class="detail-title" id="progress-title" style="font-size:18px; margin:0">Progress & certifications</h2>
+        <h2 class="detail-title" id="progress-title" style="font-size:18px; margin:0">${emojiSpan('📈')} Progress & certifications</h2>
         <p class="detail-desc" id="progress-desc" style="margin-top:10px">
-          Save scores from skill tests to track progress by age group (Reading / Listening / Writing / Speaking).
+          Save scores from skill tests to track progress by age group (${emojiSpan('📖')} Reading / ${emojiSpan('🎧')} Listening / ${emojiSpan('✍️')} Writing / ${emojiSpan('🗣️')} Speaking).
         </p>
 
         <div id="profile-progress" style="margin-top:12px" aria-describedby="progress-desc"></div>
 
         <div class="actions" style="margin-top:12px; flex-wrap:wrap">
           <button type="button" class="btn" id="progress-reset-all" aria-controls="profile-progress">
-            Reset all saved scores
+            ${emojiSpan('🧹')} Reset all saved scores
           </button>
-          <a class="btn" href="${hrefFor('/tests')}" data-nav>Go to Tests</a>
-          <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">Scoring plan</a>
+          <a class="btn" href="${hrefFor('/tests')}" data-nav>${emojiSpan('🧪')} Go to Tests</a>
+          <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">${emojiSpan('📋')} Scoring plan</a>
         </div>
 
         <p class="muted" id="progress-status" aria-live="polite" role="status" style="margin:10px 0 0"></p>
       </div>
 
       <div class="detail-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
-        <h2 class="detail-title" style="font-size:18px; margin:0">Move to another device</h2>
+        <h2 class="detail-title" style="font-size:18px; margin:0">${emojiSpan('🔁')} Move to another device</h2>
         <p class="detail-desc" style="margin-top:10px">
           Save your <strong>Profile + Favourites</strong> to a file. On your other device, load the file to copy them.
         </p>
@@ -291,11 +306,11 @@ export function getView(ctx) {
             ? `
               <div class="actions" style="margin-top:12px; flex-wrap:wrap">
                 <button type="button" class="btn btn--primary" data-sync-export>
-                  Save to file
+                  ${emojiSpan('📤')} Save to file
                 </button>
 
                 <label class="btn" style="position:relative; overflow:hidden">
-                  Load from file
+                  ${emojiSpan('📥')} Load from file
                   <input
                     type="file"
                     accept=".json,application/json"
@@ -306,7 +321,7 @@ export function getView(ctx) {
                 </label>
 
                 <button type="button" class="btn btn--small" data-sync-mode aria-pressed="false">
-                  Load option: Add (keep current)
+                  ${emojiSpan('⚙️')} Load option: Add (keep current)
                 </button>
               </div>
 
@@ -322,9 +337,9 @@ export function getView(ctx) {
       </div>
 
       <div class="actions">
-        <a class="btn" href="${hrefFor('/favourites')}" data-nav>Favourites</a>
-        <a class="btn" href="${hrefFor('/scoring')}" data-nav>Scoring plan</a>
-        <a class="btn" href="${hrefFor('/resources')}" data-nav>Resources</a>
+        <a class="btn" href="${hrefFor('/favourites')}" data-nav>${emojiSpan('⭐')} Favourites</a>
+        <a class="btn" href="${hrefFor('/scoring')}" data-nav>${emojiSpan('📋')} Scoring plan</a>
+        <a class="btn" href="${hrefFor('/resources')}" data-nav>${emojiSpan('📚')} Resources</a>
       </div>
     </section>
   `;
@@ -380,7 +395,7 @@ export function getView(ctx) {
       if (!anySaved) {
         progressHost.innerHTML = `
           <div class="note" style="margin-top:0">
-            <strong>No saved scores yet</strong>
+            <strong>${emojiSpan('📝')} No saved scores yet</strong>
             <p style="margin:8px 0 0; opacity:.92">
               Complete a skill test and click <strong>Save score to Profile</strong> to track progress here.
             </p>
@@ -405,20 +420,22 @@ export function getView(ctx) {
 
           const skillGrid = savedSkills
             .map(({ skill, last }) => {
-              const skLabel = titleCase(skill);
+              const skLabelPlain = titleCase(skill);
+              const skIcon = skillEmoji(skill);
+              const skLabelDisplay = skIcon ? `${skIcon} ${skLabelPlain}` : skLabelPlain;
 
               if (last) {
                 const when = last.at ? formatDateTime(last.at) : '';
                 const levelLine = last.levelTitle
                   ? ` • <span style="opacity:.92">${safeText(last.levelTitle)}</span>`
                   : '';
-                const aria = `${skLabel} saved. Score ${formatScore(last.score)} out of 100.`;
+                const aria = `${skLabelPlain} saved. Score ${formatScore(last.score)} out of 100.`;
 
                 return `
                 <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
                   <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
                     <div>
-                      <div style="font-weight:900">${safeText(skLabel)}</div>
+                      <div style="font-weight:900">${safeText(skLabelDisplay)}</div>
                       <div style="margin-top:6px; opacity:.92">
                         Score: <strong>${safeText(formatScore(last.score))}</strong>/100
                         ${levelLine}
@@ -437,16 +454,16 @@ export function getView(ctx) {
               `;
               }
 
-              const aria = `${skLabel} not saved.`;
+              const aria = `${skLabelPlain} not saved.`;
               const testSlug = testSlugFor(age, skill);
               const testPath = testSlug ? `/tests/${testSlug}` : '/tests';
-              const testAria = testSlug ? `Go to ${skLabel} test for ${label}` : 'Go to test';
+              const testAria = testSlug ? `Go to ${skLabelPlain} test for ${label}` : 'Go to test';
 
               return `
               <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
                 <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
                   <div>
-                    <div style="font-weight:900">${safeText(skLabel)}</div>
+                    <div style="font-weight:900">${safeText(skLabelDisplay)}</div>
                     <div class="muted" style="margin-top:6px">No score saved yet</div>
                   </div>
                   <span class="chip" style="font-weight:900" aria-label="${safeText(
@@ -457,7 +474,7 @@ export function getView(ctx) {
                   <a class="btn btn--small" href="${hrefFor(
                     testPath
                   )}" data-nav aria-label="${safeText(testAria)}">
-                    Go to test
+                    ${emojiSpan('🧪')} Go to test
                   </a>
                 </div>
               </div>
@@ -470,7 +487,7 @@ export function getView(ctx) {
           const overallBlock = overall
             ? `
             <div class="note" style="margin:12px 0 0; padding:10px 12px">
-              <strong>Certification</strong>
+              <strong>${emojiSpan('🏆')} Certification</strong>
               <p style="margin:8px 0 0; opacity:.92">
                 Overall score: <strong>${safeText(formatScore(overall.score))}</strong>/100
                 ${overall.title ? ` • <span style="opacity:.92">${safeText(overall.title)}</span>` : ''}
@@ -485,7 +502,7 @@ export function getView(ctx) {
           `
             : `
             <div class="note" style="margin:12px 0 0; padding:10px 12px">
-              <strong>Certification</strong>
+              <strong>${emojiSpan('🏆')} Certification</strong>
               <p style="margin:8px 0 0; opacity:.92">
                 Complete all 4 skills to unlock an overall score for this group.
               </p>
@@ -504,7 +521,7 @@ export function getView(ctx) {
               <div style="display:flex; gap:8px; flex-wrap:wrap">
                 <a class="btn btn--small" href="${hrefFor(
                   `/resources/${age}`
-                )}" data-nav aria-label="Open resources for ${safeText(label)}">Open resources</a>
+                )}" data-nav aria-label="Open resources for ${safeText(label)}">${emojiSpan('📚')} Open resources</a>
                 <button
                   type="button"
                   class="btn btn--small"
@@ -512,7 +529,7 @@ export function getView(ctx) {
                   data-age="${safeText(age)}"
                   aria-label="Reset saved scores for ${safeText(label)}"
                 >
-                  Reset this age group
+                  ${emojiSpan('🔄')} Reset this age group
                 </button>
               </div>
             </div>
@@ -673,7 +690,10 @@ export function getView(ctx) {
     let importMode = 'merge';
     function updateModeUi() {
       if (!modeBtn) return;
-      modeBtn.textContent = importMode === 'replace' ? 'Load option: Replace (overwrite)' : 'Load option: Add (keep current)';
+      modeBtn.textContent =
+        importMode === 'replace'
+          ? '⚙️ Load option: Replace (overwrite)'
+          : '⚙️ Load option: Add (keep current)';
       modeBtn.setAttribute('aria-pressed', importMode === 'replace' ? 'true' : 'false');
     }
     updateModeUi();

@@ -111,6 +111,38 @@ a:hover{text-decoration:none}
 
 .muted{color:var(--muted)}
 
+/* -------------------------------------------------
+   NEW: Emoji helpers (consistent alignment + spacing)
+-------------------------------------------------- */
+.emoji{
+  display:inline-block;
+  line-height:1;
+  vertical-align:-0.12em;
+  font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",emoji;
+}
+
+/* Covers emojis inserted without the .emoji class (e.g., profile view strings) */
+.nav-link span[aria-hidden="true"],
+.btn span[aria-hidden="true"],
+.label span[aria-hidden="true"],
+.page-title span[aria-hidden="true"],
+.page-subtitle span[aria-hidden="true"],
+.detail-title span[aria-hidden="true"],
+.card-title span[aria-hidden="true"],
+.eyebrow span[aria-hidden="true"],
+.hero-title span[aria-hidden="true"],
+.hero-subtitle span[aria-hidden="true"]{
+  display:inline-block;
+  line-height:1;
+  vertical-align:-0.12em;
+  transform: translateY(0.5px);
+}
+
+/* If using <small class="emoji">…</small> */
+small.emoji{
+  font-size:.95em;
+}
+
 .container{max-width:var(--max); margin:0 auto; padding:0 var(--gutter)}
 
 .skip-link{
