@@ -1178,6 +1178,407 @@
     }
   );
 
+  // -----------------------------
+  // Passage 3 (additional 30 questions) — q91–q120 (to reach bank size 120 for Run=40)
+  // -----------------------------
+  QUESTIONS.push(
+    // Multiple choice (12)
+    {
+      id: "q91",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Why are engineers and ecologists increasingly considering dam removal?",
+      options: [
+        "Many dams are aging and some provide less benefit than before",
+        "Most dams are newly built and highly efficient",
+        "Rivers cannot carry sediment without dams",
+        "Fish ladders have completely solved migration problems"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph A mentions aging structures and reduced benefits as key drivers."
+    },
+    {
+      id: "q92",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which list correctly identifies materials included in river sediment in Paragraph B?",
+      options: [
+        "sand, gravel, and organic material",
+        "salt, clay, and plastic",
+        "water, oxygen, and carbon dioxide",
+        "plants, fish, and insects"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph B defines sediment as sand, gravel, and organic material."
+    },
+    {
+      id: "q93",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "What is one consequence of sediment being trapped behind a dam?",
+      options: [
+        "The reservoir may lose storage capacity over time",
+        "The downstream river always becomes deeper and wider",
+        "Fish ladders become unnecessary",
+        "Water quality downstream always improves immediately"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph B says trapped material can reduce storage capacity."
+    },
+    {
+      id: "q94",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "According to Paragraph C, water released from the bottom of a deep reservoir can be:",
+      options: [
+        "colder and lower in oxygen",
+        "warmer and higher in oxygen",
+        "identical in temperature and oxygen to a free-flowing river",
+        "saltier because of reverse osmosis"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph C states bottom releases can be colder and lower in oxygen."
+    },
+    {
+      id: "q95",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "What short-term effect may occur after a dam is removed?",
+      options: [
+        "Increased turbidity for months",
+        "Immediate elimination of all sediment downstream",
+        "Instantly clearer water for towns downstream",
+        "Permanent prevention of erosion below the former dam site"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph D says turbidity may increase for months."
+    },
+    {
+      id: "q96",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which option best describes the purpose of phased removal or sediment management in Paragraph D?",
+      options: [
+        "To reduce the shock of sudden sediment movement downstream",
+        "To guarantee that turbidity will never increase",
+        "To increase boating revenue during removal",
+        "To replace turbines with fish ladders"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph D says planning includes these methods to reduce the shock."
+    },
+    {
+      id: "q97",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which benefit is mentioned as a reason some communities welcome dam removal?",
+      options: [
+        "Restored fisheries",
+        "Higher reservoir walls",
+        "More trapped sediment for construction",
+        "Guaranteed identical restoration to the pre-dam river"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph E lists restored fisheries among the welcomed benefits."
+    },
+    {
+      id: "q98",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "What does Paragraph E suggest about conflicts over dam removal?",
+      options: [
+        "Conflicts are common and outcomes depend on local priorities",
+        "Conflicts are rare because priorities are the same everywhere",
+        "Conflicts happen only when fish ladders are missing",
+        "Conflicts disappear once turbidity is measured"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph E explicitly says conflicts are common and outcomes vary with priorities."
+    },
+    {
+      id: "q99",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which modification is specifically mentioned as an alternative to removal in Paragraph F?",
+      options: [
+        "Upgrading turbines",
+        "Building a reservoir behind the dam",
+        "Installing reverse osmosis systems in the river",
+        "Removing all sediment from the watershed"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph F mentions turbine upgrades as one modification."
+    },
+    {
+      id: "q100",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which factor is NOT listed in Paragraph F as a reason removal might be the most practical choice?",
+      options: [
+        "The dam is unsafe",
+        "The dam is too costly to repair",
+        "The dam delivers minimal services",
+        "The dam provides excellent benefits and is cheap to maintain"
+      ],
+      answer: 3,
+      difficulty: "medium",
+      explanation: "Paragraph F gives the first three as reasons; the last option contradicts that list."
+    },
+    {
+      id: "q101",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which pair of features does Paragraph G say the river may re-form after restoration?",
+      options: [
+        "pools and gravel beds",
+        "reservoirs and turbines",
+        "fish ladders and floodgates",
+        "pipes and filtration barriers"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph G mentions pools and gravel beds."
+    },
+    {
+      id: "q102",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which statement best matches Paragraph G’s view of a restored river system?",
+      options: [
+        "It may regain many natural functions even if it is not identical to the pre-dam river",
+        "It will quickly become identical in every detail to the pre-dam river",
+        "It cannot regain any natural functions once a dam has existed",
+        "It will always lose fish returns for decades"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph G says the restored system is rarely identical but can regain many functions."
+    },
+
+    // True / False / Not Given (10)
+    {
+      id: "q103",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: The passage states that many dams were built during the twentieth century.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph A begins: “During the twentieth century, dams were built...”"
+    },
+    {
+      id: "q104",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: Many dams now provide more benefit than they once did.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Paragraph A says some provide less benefit than they once did."
+    },
+    {
+      id: "q105",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: The passage claims that dam removal is instantly beneficial.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "Paragraph D states removal is not instantly beneficial."
+    },
+    {
+      id: "q106",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: Sediment released after removal may reduce water quality for towns downstream.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph D says turbidity can reduce water quality for towns downstream."
+    },
+    {
+      id: "q107",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: The passage says phased removal guarantees there will be no turbidity increase.",
+      options: ["True", "False", "Not Given"],
+      answer: 2,
+      difficulty: "hard",
+      explanation: "Paragraph D says phased removal can reduce the shock; it does not guarantee no turbidity."
+    },
+    {
+      id: "q108",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: Reservoirs can provide boating opportunities.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph E says reservoirs provide boating."
+    },
+    {
+      id: "q109",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: All communities prefer restored rivers to reservoirs.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "easy",
+      explanation: "Paragraph E shows different preferences; some worry about losing reservoir benefits."
+    },
+    {
+      id: "q110",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: The passage says habitat projects can improve conditions downstream of a dam.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph F states habitat projects can improve conditions downstream."
+    },
+    {
+      id: "q111",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: If a dam is unsafe, the passage says it must be removed in every case.",
+      options: ["True", "False", "Not Given"],
+      answer: 2,
+      difficulty: "hard",
+      explanation: "Paragraph F lists unsafe dams as a reason removal can be practical, but does not say it must happen in every case."
+    },
+    {
+      id: "q112",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "True / False / Not Given: The passage states that scientists measure restoration success only by counting fish.",
+      options: ["True", "False", "Not Given"],
+      answer: 1,
+      difficulty: "medium",
+      explanation: "Paragraph G lists multiple measures (vegetation, temperature, channel changes, etc.)."
+    },
+
+    // Fill in the blank (8)
+    {
+      id: "q113",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: Dams were built to control ______.",
+      hint: "Write ONE word from the passage.",
+      answer: ["floods"],
+      difficulty: "easy",
+      explanation: "Paragraph A lists controlling floods."
+    },
+    {
+      id: "q114",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: A dam can trap sediment in a ______.",
+      hint: "Write ONE word from the passage.",
+      answer: ["reservoir"],
+      difficulty: "easy",
+      explanation: "Paragraph B says sediment is often trapped in a reservoir."
+    },
+    {
+      id: "q115",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: The sediment-starved river below a dam may erode its banks and ______.",
+      hint: "Write ONE word from the passage.",
+      answer: ["riverbed"],
+      difficulty: "medium",
+      explanation: "Paragraph B mentions erosion of banks and riverbed."
+    },
+    {
+      id: "q116",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: Water released from the bottom of a deep reservoir can be colder and lower in ______.",
+      hint: "Write ONE word from the passage.",
+      answer: ["oxygen"],
+      difficulty: "easy",
+      explanation: "Paragraph C uses the phrase “lower in oxygen”."
+    },
+    {
+      id: "q117",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: After removal, sediment may move downstream, increasing ______ for months.",
+      hint: "Write ONE word from the passage.",
+      answer: ["turbidity"],
+      difficulty: "medium",
+      explanation: "Paragraph D states turbidity may increase for months."
+    },
+    {
+      id: "q118",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: Others welcome new recreation along a natural river ______.",
+      hint: "Write ONE word from the passage.",
+      answer: ["corridor"],
+      difficulty: "medium",
+      explanation: "Paragraph E mentions a natural river corridor."
+    },
+    {
+      id: "q119",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: Turbines can be ______.",
+      hint: "Write ONE word from the passage.",
+      answer: ["upgraded"],
+      difficulty: "easy",
+      explanation: "Paragraph F says turbines can be upgraded."
+    },
+    {
+      id: "q120",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: The river may re-form pools and gravel ______.",
+      hint: "Write ONE word from the passage.",
+      answer: ["beds"],
+      difficulty: "easy",
+      explanation: "Paragraph G mentions pools and gravel beds."
+    }
+  );
+
   // Global export (no build step)
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

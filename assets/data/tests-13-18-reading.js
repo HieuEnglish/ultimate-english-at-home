@@ -348,8 +348,7 @@
       answer: 0,
       difficulty: "hard",
       explanation: "The passage presents repair as useful but not sufficient on its own."
-    }
-    ,
+    },
 
     // Added questions (append-only): q25–q74
 
@@ -477,12 +476,7 @@
       type: "multipleChoice",
       passage: P1,
       question: "Which factor is NOT mentioned as affecting whether a micro-forest thrives?",
-      options: [
-        "Local heat",
-        "Soil quality",
-        "Ongoing care",
-        "The phase of the moon"
-      ],
+      options: ["Local heat", "Soil quality", "Ongoing care", "The phase of the moon"],
       answer: 3,
       difficulty: "easy",
       explanation: "Paragraph C mentions heat, soil quality, and ongoing care, but not the moon."
@@ -948,12 +942,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "In Paragraph B, the word 'irrational' most nearly means",
-      options: [
-        "not sensible",
-        "very fashionable",
-        "extremely loud",
-        "completely invisible"
-      ],
+      options: ["not sensible", "very fashionable", "extremely loud", "completely invisible"],
       answer: 0,
       difficulty: "medium",
       explanation: "In context, repair can seem irrational when it does not seem like a sensible choice."
@@ -999,8 +988,227 @@
       answer: 0,
       difficulty: "hard",
       explanation: "Paragraph D says repair cafes highlight the idea that materials should stay in circulation for longer."
-    }
+    },
 
+    // Added questions (append-only): q75–q90 (to reach bank size 90 for Run=30)
+
+    // Passage 1 (p1) — additional
+    {
+      id: "q75",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "What does the passage give as an example of a 'leftover space' for a micro-forest?",
+      options: ["A road corner", "A large stadium field", "A mountain valley", "A shopping mall roof"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph A mentions leftover spaces such as road corners (and unused school grounds)."
+    },
+    {
+      id: "q76",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "Choose the correct option (True / False / Not Given): The area is protected while the roots establish.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph B states the area is protected while roots establish."
+    },
+    {
+      id: "q77",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "According to Paragraph A, supporters say micro-forests can offer",
+      options: [
+        "shade, habitat, and a calmer feeling",
+        "free sports equipment for residents",
+        "guaranteed lower rent for nearby homes",
+        "a replacement for all city parks"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph A lists shade, habitat, and a calmer feeling as benefits."
+    },
+    {
+      id: "q78",
+      passageId: "p1",
+      type: "multipleChoice",
+      passage: P1,
+      question: "In Paragraph C, which factors are mentioned as affecting whether a micro-forest thrives?",
+      options: [
+        "Heat, soil quality, and ongoing care",
+        "Rainfall only",
+        "The age of nearby buildings only",
+        "The number of tourists in the area"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph C says success may vary depending on heat, soil quality, and ongoing care."
+    },
+    {
+      id: "q79",
+      passageId: "p1",
+      type: "fillInTheBlank",
+      passage: P1,
+      question: "Sentence completion: Supporters say the goal is creating a tiny ______.",
+      answer: ["ecosystem", "an ecosystem"],
+      difficulty: "easy",
+      explanation: "Paragraph A describes creating a tiny ecosystem."
+    },
+
+    // Passage 2 (p2) — additional
+    {
+      id: "q80",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "According to Paragraph A, sleep debt may affect",
+      options: [
+        "mood, attention, and motivation",
+        "height, eyesight, and hair colour",
+        "language ability only",
+        "handwriting only"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph A lists mood, attention, and motivation."
+    },
+    {
+      id: "q81",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "Choose the correct option (True / False / Not Given): REM sleep is linked to processing emotions.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph B says REM sleep is linked to processing emotions."
+    },
+    {
+      id: "q82",
+      passageId: "p2",
+      type: "fillInTheBlank",
+      passage: P2,
+      question: "Sentence completion: During adolescence, the body clock often shifts so that sleepiness arrives ______.",
+      answer: "later",
+      difficulty: "easy",
+      explanation: "Paragraph A states that sleepiness arrives later during adolescence."
+    },
+    {
+      id: "q83",
+      passageId: "p2",
+      type: "multipleChoice",
+      passage: P2,
+      question: "What does the writer suggest about turning scientific findings into school policy?",
+      options: [
+        "They must fit real lives and local systems",
+        "They should be ignored if they are inconvenient",
+        "They should be applied in exactly the same way everywhere",
+        "They automatically solve timetable problems"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph D says findings do not automatically become policy and must fit local realities."
+    },
+    {
+      id: "q84",
+      passageId: "p2",
+      type: "fillInTheBlank",
+      passage: P2,
+      question: "Sentence completion: A short nap can refresh ______.",
+      answer: "attention",
+      difficulty: "medium",
+      explanation: "Paragraph C says a short nap can refresh attention."
+    },
+
+    // Passage 3 (p3) — additional
+    {
+      id: "q85",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Which item is NOT mentioned as being brought to a repair cafe in Paragraph A?",
+      options: [
+        "Headphones with loose wires",
+        "Toasters that no longer heat",
+        "Backpacks with torn straps",
+        "Phones with cracked screens"
+      ],
+      answer: 3,
+      difficulty: "easy",
+      explanation: "Paragraph A mentions headphones, toasters, and backpacks, but not phones with cracked screens."
+    },
+    {
+      id: "q86",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "What is one stated goal of a repair cafe in Paragraph A?",
+      options: [
+        "Learning as much as saving money",
+        "Selling brand-new products",
+        "Preventing visitors from touching tools",
+        "Replacing all manufacturers"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph A says the goal is learning as much as saving money."
+    },
+    {
+      id: "q87",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "Choose the correct option (True / False / Not Given): Modern products can be glued shut.",
+      options: ["True", "False", "Not Given"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph B states that modern products can be glued shut."
+    },
+    {
+      id: "q88",
+      passageId: "p3",
+      type: "fillInTheBlank",
+      passage: P3,
+      question: "Sentence completion: Some manufacturers respond that uncontrolled repairs could be ______.",
+      answer: ["unsafe", "dangerous"],
+      difficulty: "medium",
+      explanation: "Paragraph C mentions safety concerns about uncontrolled repairs."
+    },
+    {
+      id: "q89",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "In Paragraph D, what does a repairability score reward?",
+      options: [
+        "Products that are easy to open and maintain",
+        "Products that are impossible to repair",
+        "Products that use glue instead of screws",
+        "Products that are thrown away quickly"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph D says a repairability score rewards products that are easy to open and maintain."
+    },
+    {
+      id: "q90",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "According to Paragraph B, why can repair seem irrational sometimes?",
+      options: [
+        "Because very cheap new products make repair seem unnecessary",
+        "Because volunteers refuse to share tools",
+        "Because repair always costs more than the environmental impact",
+        "Because laws prohibit repairing household items"
+      ],
+      answer: 0,
+      difficulty: "hard",
+      explanation: "Paragraph B says very cheap new products can make repair seem irrational."
+    }
   ];
 
   // Global export (no build step)

@@ -537,8 +537,9 @@
       explanation: "The lecture recommends a regular schedule."
     }
   ];
+
   // -----------------------------
-  // Added questions (50)
+  // Added questions (50) — q41–q90
   // -----------------------------
 
   QUESTIONS.push(
@@ -559,7 +560,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "What idea does the lecturer challenge at the start of the talk?",
-      options: ["Learning happens only while we are awake", "Deep sleep is the same as REM sleep", "Naps always make study less effective", "Caffeine improves memory during sleep"],
+      options: [
+        "Learning happens only while we are awake",
+        "Deep sleep is the same as REM sleep",
+        "Naps always make study less effective",
+        "Caffeine improves memory during sleep"
+      ],
       answer: 0,
       explanation: "The talk begins by challenging the idea that learning happens only when we are awake."
     },
@@ -590,7 +596,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "According to the lecturer, sleep supports learning mainly by:",
-      options: ["stabilising new information and replaying patterns of activity", "replacing the need to practise during the day", "stopping the brain from processing any information", "making caffeine more effective for studying"],
+      options: [
+        "stabilising new information and replaying patterns of activity",
+        "replacing the need to practise during the day",
+        "stopping the brain from processing any information",
+        "making caffeine more effective for studying"
+      ],
       answer: 0,
       explanation: "The lecture mentions stabilising information and replaying patterns of activity during sleep."
     },
@@ -632,7 +643,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "One reason sleep helps learning is that the brain:",
-      options: ["replays patterns of activity linked to earlier learning", "stores all information only in REM sleep", "forgets most of what was learned during the day", "works best only when caffeine is consumed late"],
+      options: [
+        "replays patterns of activity linked to earlier learning",
+        "stores all information only in REM sleep",
+        "forgets most of what was learned during the day",
+        "works best only when caffeine is consumed late"
+      ],
       answer: 0,
       explanation: "The lecture says the brain replays patterns of activity linked to what was learned."
     },
@@ -663,7 +679,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which statement matches the lecturer's description of different sleep stages?",
-      options: ["Deep sleep is linked to facts and vocabulary, while REM is linked to creativity", "REM sleep is linked to facts and vocabulary, while deep sleep is linked to creativity", "All sleep stages have exactly the same effect on learning", "Only short naps, not night sleep, support learning"],
+      options: [
+        "Deep sleep is linked to facts and vocabulary, while REM is linked to creativity",
+        "REM sleep is linked to facts and vocabulary, while deep sleep is linked to creativity",
+        "All sleep stages have exactly the same effect on learning",
+        "Only short naps, not night sleep, support learning"
+      ],
       answer: 0,
       explanation: "Deep sleep is linked to remembering facts/vocabulary, while REM is linked to creativity and connecting ideas."
     },
@@ -694,7 +715,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which outcome is linked to REM (dream) sleep rather than deep sleep?",
-      options: ["Creativity and connecting ideas", "Remembering facts and vocabulary", "Becoming fully alert immediately after a long nap", "Eliminating the need to practise correctly"],
+      options: [
+        "Creativity and connecting ideas",
+        "Remembering facts and vocabulary",
+        "Becoming fully alert immediately after a long nap",
+        "Eliminating the need to practise correctly"
+      ],
       answer: 0,
       explanation: "The lecture links REM sleep to creativity and connecting ideas."
     },
@@ -715,7 +741,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Why does the lecturer say sleep is not a “magic solution”?",
-      options: ["Without correct practice, there is little useful information to consolidate", "Because the brain stops working during sleep", "Because naps always damage memory", "Because REM sleep prevents consolidation"],
+      options: [
+        "Without correct practice, there is little useful information to consolidate",
+        "Because the brain stops working during sleep",
+        "Because naps always damage memory",
+        "Because REM sleep prevents consolidation"
+      ],
       answer: 0,
       explanation: "The lecturer says practice quality matters; otherwise there is little useful information to consolidate."
     },
@@ -736,7 +767,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "What does the lecturer imply about practice and sleep?",
-      options: ["Sleep helps most when learners practise correctly", "Sleep helps even if learners practise incorrectly", "Practice is unnecessary if learners sleep deeply", "Practice matters only for creativity, not memory"],
+      options: [
+        "Sleep helps most when learners practise correctly",
+        "Sleep helps even if learners practise incorrectly",
+        "Practice is unnecessary if learners sleep deeply",
+        "Practice matters only for creativity, not memory"
+      ],
       answer: 0,
       explanation: "He notes that correct practice is needed for sleep to consolidate useful information."
     },
@@ -778,7 +814,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "What benefit of short naps does the lecturer mention?",
-      options: ["They can improve alertness", "They guarantee high exam results", "They replace the need for sleep at night", "They always increase creativity immediately"],
+      options: [
+        "They can improve alertness",
+        "They guarantee high exam results",
+        "They replace the need for sleep at night",
+        "They always increase creativity immediately"
+      ],
       answer: 0,
       explanation: "He says short naps can improve alertness."
     },
@@ -799,7 +840,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which option best summarises what the lecturer says about naps?",
-      options: ["Short naps can help, but very long naps may cause grogginess", "All naps are harmful for learning", "Only long naps improve learning", "Naps are unrelated to alertness"],
+      options: [
+        "Short naps can help, but very long naps may cause grogginess",
+        "All naps are harmful for learning",
+        "Only long naps improve learning",
+        "Naps are unrelated to alertness"
+      ],
       answer: 0,
       explanation: "He contrasts short naps (alertness) with too-long naps (grogginess)."
     },
@@ -820,7 +866,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Why can grogginess make studying less effective?",
-      options: ["It can make study less effective afterwards", "It prevents the brain from collecting information during the day", "It improves vocabulary recall too much", "It guarantees high scores without revision"],
+      options: [
+        "It can make study less effective afterwards",
+        "It prevents the brain from collecting information during the day",
+        "It improves vocabulary recall too much",
+        "It guarantees high scores without revision"
+      ],
       answer: 0,
       explanation: "He says grogginess makes study less effective afterwards."
     },
@@ -841,7 +892,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which set of recommendations is mentioned in the lecture?",
-      options: ["Keep a regular schedule, limit caffeine late in the day, and review key material before bedtime", "Avoid all naps, drink caffeine at midnight, and skip revision", "Study only in the morning and never review vocabulary", "Change sleep times daily to train flexibility"],
+      options: [
+        "Keep a regular schedule, limit caffeine late in the day, and review key material before bedtime",
+        "Avoid all naps, drink caffeine at midnight, and skip revision",
+        "Study only in the morning and never review vocabulary",
+        "Change sleep times daily to train flexibility"
+      ],
       answer: 0,
       explanation: "He recommends a regular schedule, limiting late caffeine, and reviewing key material shortly before bedtime."
     },
@@ -956,7 +1012,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which statement is closest to the lecturer's main message?",
-      options: ["Sleep can support learning, but it works best alongside good practice and sensible habits", "Sleep alone is enough to guarantee excellent exam results", "Only naps matter for learning; night sleep is irrelevant", "Learning happens only when people are awake"],
+      options: [
+        "Sleep can support learning, but it works best alongside good practice and sensible habits",
+        "Sleep alone is enough to guarantee excellent exam results",
+        "Only naps matter for learning; night sleep is irrelevant",
+        "Learning happens only when people are awake"
+      ],
       answer: 0,
       explanation: "He explains that sleep supports learning, but practice and habits still matter."
     },
@@ -978,7 +1039,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which of the following is NOT mentioned as advice in the lecture?",
-      options: ["Prioritise a regular schedule", "Limit caffeine late in the day", "Review key material shortly before bedtime", "Do intense exercise immediately before sleeping"],
+      options: [
+        "Prioritise a regular schedule",
+        "Limit caffeine late in the day",
+        "Review key material shortly before bedtime",
+        "Do intense exercise immediately before sleeping"
+      ],
       answer: 3,
       explanation: "The lecture mentions schedule, caffeine, and reviewing material, but not intense exercise before sleeping."
     },
@@ -989,7 +1055,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "What does the lecturer mean by saying “not all sleep is the same”?",
-      options: ["Different sleep stages are linked to different learning outcomes", "Sleep has no effect on learning at all", "Only REM sleep exists", "All sleep stages have identical effects"],
+      options: [
+        "Different sleep stages are linked to different learning outcomes",
+        "Sleep has no effect on learning at all",
+        "Only REM sleep exists",
+        "All sleep stages have identical effects"
+      ],
       answer: 0,
       explanation: "He contrasts deep sleep (facts/vocabulary) with REM (creativity/connecting ideas)."
     },
@@ -1000,7 +1071,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which pairing is supported by the lecture?",
-      options: ["Deep sleep → facts and vocabulary; REM sleep → creativity", "Deep sleep → creativity; REM sleep → facts and vocabulary", "Deep sleep → grogginess; REM sleep → alertness", "Deep sleep → caffeine tolerance; REM sleep → no learning"],
+      options: [
+        "Deep sleep → facts and vocabulary; REM sleep → creativity",
+        "Deep sleep → creativity; REM sleep → facts and vocabulary",
+        "Deep sleep → grogginess; REM sleep → alertness",
+        "Deep sleep → caffeine tolerance; REM sleep → no learning"
+      ],
       answer: 0,
       explanation: "The lecture links deep sleep to facts/vocabulary and REM to creativity."
     },
@@ -1021,7 +1097,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which title best fits the lecture segment in Part 4?",
-      options: ["How sleep supports learning and memory", "How to book a sports court online", "Museum rules for visitors with children", "Choosing a topic for a sociology project"],
+      options: [
+        "How sleep supports learning and memory",
+        "How to book a sports court online",
+        "Museum rules for visitors with children",
+        "Choosing a topic for a sociology project"
+      ],
       answer: 0,
       explanation: "The lecture focuses on sleep, consolidation, and study habits."
     },
@@ -1042,7 +1123,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "In the final sentence, “over time” most nearly suggests that learning is stored and organised:",
-      options: ["gradually across days and weeks", "instantly within seconds", "only during one long nap", "only if caffeine is avoided completely"],
+      options: [
+        "gradually across days and weeks",
+        "instantly within seconds",
+        "only during one long nap",
+        "only if caffeine is avoided completely"
+      ],
       answer: 0,
       explanation: "“Over time” implies a gradual process rather than an instant result."
     },
@@ -1053,7 +1139,12 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which situation does the lecturer suggest could reduce how effective studying is after resting?",
-      options: ["Taking a nap that is too long and feeling groggy afterwards", "Taking a short nap that improves alertness", "Keeping a regular sleep schedule", "Reviewing key material before bedtime"],
+      options: [
+        "Taking a nap that is too long and feeling groggy afterwards",
+        "Taking a short nap that improves alertness",
+        "Keeping a regular sleep schedule",
+        "Reviewing key material before bedtime"
+      ],
       answer: 0,
       explanation: "A too-long nap may cause grogginess, making study less effective afterwards."
     },
@@ -1066,6 +1157,363 @@
       question: "The lecturer says that at ______, some new information is stabilised.",
       answer: ["night", "Night"],
       explanation: "He says that at night, some information is stabilised."
+    }
+  );
+
+  // -----------------------------
+  // Added questions (30) — q91–q120 (to reach bank size 120 for Run=40)
+  // -----------------------------
+
+  QUESTIONS.push(
+    // Part 1 — additional (10)
+    {
+      id: "q91",
+      partId: "p1",
+      type: "multipleChoice",
+      say: P1,
+      context: "Part 1: Choose the correct answer.",
+      question: "What does the caller want to book?",
+      options: ["A swimming lesson", "A badminton court", "A tennis coach", "A fitness class"],
+      answer: 1,
+      explanation: "The caller says he wants to book a badminton court."
+    },
+    {
+      id: "q92",
+      partId: "p1",
+      type: "fillInTheBlank",
+      say: P1,
+      context: "Part 1: Complete the booking details. Write ONE WORD ONLY.",
+      question: "The name of the sports centre is ______ Sports Centre.",
+      answer: ["Northgate", "NORTHGATE"],
+      explanation: "The assistant answers: “Northgate Sports Centre, bookings desk.”"
+    },
+    {
+      id: "q93",
+      partId: "p1",
+      type: "multipleChoice",
+      say: P1,
+      context: "Part 1: Choose the correct answer.",
+      question: "Which department does the assistant mention?",
+      options: ["Customer service", "Bookings desk", "First aid desk", "Equipment hire"],
+      answer: 1,
+      explanation: "The assistant says: “bookings desk.”"
+    },
+    {
+      id: "q94",
+      partId: "p1",
+      type: "multipleChoice",
+      say: P1,
+      context: "Part 1: Choose the correct answer.",
+      question: "How long is the booking?",
+      options: ["30 minutes", "One hour", "Two hours", "Three hours"],
+      answer: 1,
+      explanation: "They agree it is just one hour."
+    },
+    {
+      id: "q95",
+      partId: "p1",
+      type: "multipleChoice",
+      say: P1,
+      context: "Part 1: Choose the correct answer.",
+      question: "What other time is available besides 7 p.m.?",
+      options: ["5 p.m.", "6 p.m.", "8 p.m.", "9 p.m."],
+      answer: 1,
+      explanation: "The assistant offers 6 p.m. or 7 p.m."
+    },
+    {
+      id: "q96",
+      partId: "p1",
+      type: "fillInTheBlank",
+      say: P1,
+      context: "Part 1: Complete the booking details. Write ONE WORD AND/OR A NUMBER.",
+      question: "The assistant also offers Court ______ as an option.",
+      answer: ["2", "two"],
+      explanation: "The assistant asks: Court 2 or Court 4?"
+    },
+    {
+      id: "q97",
+      partId: "p1",
+      type: "multipleChoice",
+      say: P1,
+      context: "Part 1: Choose the correct answer.",
+      question: "What is mentioned as an alternative to paying online?",
+      options: ["Pay by cheque", "Pay at reception when he arrives", "Pay by bank transfer", "Pay in advance by phone"],
+      answer: 1,
+      explanation: "The assistant says he can pay online, or at reception when he arrives."
+    },
+    {
+      id: "q98",
+      partId: "p1",
+      type: "fillInTheBlank",
+      say: P1,
+      context: "Part 1: Complete the booking details. Write ONE WORD ONLY.",
+      question: "He should collect the key card from ______.",
+      answer: ["reception", "Reception"],
+      explanation: "The assistant says to collect the key card from reception."
+    },
+    {
+      id: "q99",
+      partId: "p1",
+      type: "multipleChoice",
+      say: P1,
+      context: "Part 1: Choose the correct answer.",
+      question: "Why does the assistant ask the caller to arrive early?",
+      options: ["To warm up on the court", "To collect the key card", "To meet the coach", "To complete a fitness test"],
+      answer: 1,
+      explanation: "He must arrive early to collect the key card from reception."
+    },
+    {
+      id: "q100",
+      partId: "p1",
+      type: "fillInTheBlank",
+      say: P1,
+      context: "Part 1: Complete the booking details. Write ONE WORD AND/OR A NUMBER.",
+      question: "The booking starts at ______ p.m.",
+      answer: ["7", "7pm", "7 p.m.", "seven"],
+      explanation: "They confirm 7 to 8 p.m."
+    },
+
+    // Part 2 — additional (10)
+    {
+      id: "q101",
+      partId: "p2",
+      type: "multipleChoice",
+      say: P2,
+      context: "Part 2: Choose the correct answer.",
+      question: "Where is the ticket desk located?",
+      options: ["Outside the building", "Directly inside the front doors", "Upstairs beside the café", "In Gallery One"],
+      answer: 1,
+      explanation: "The guide says the ticket desk is directly inside the front doors."
+    },
+    {
+      id: "q102",
+      partId: "p2",
+      type: "fillInTheBlank",
+      say: P2,
+      context: "Part 2: Complete the information. Write ONE WORD ONLY.",
+      question: "Visitors with a backpack should use the ______.",
+      answer: ["lockers", "Lockers"],
+      explanation: "The guide asks visitors with backpacks to use the lockers."
+    },
+    {
+      id: "q103",
+      partId: "p2",
+      type: "multipleChoice",
+      say: P2,
+      context: "Part 2: Choose the correct answer.",
+      question: "Where can you collect an audio guide?",
+      options: [
+        "From the café on the first floor",
+        "From the information counter beside the gift shop",
+        "From the lockers area",
+        "From the large map in Gallery One"
+      ],
+      answer: 1,
+      explanation: "The guide says to collect an audio guide from the information counter beside the gift shop."
+    },
+    {
+      id: "q104",
+      partId: "p2",
+      type: "fillInTheBlank",
+      say: P2,
+      context: "Part 2: Complete the information. Write ONE WORD ONLY.",
+      question: "The free tour begins at the large ______ in Gallery One.",
+      answer: ["map", "Map"],
+      explanation: "The guide says it starts at the large map in Gallery One."
+    },
+    {
+      id: "q105",
+      partId: "p2",
+      type: "multipleChoice",
+      say: P2,
+      context: "Part 2: Choose the correct answer.",
+      question: "In an emergency, what is the nearest exit from Gallery Two?",
+      options: [
+        "Through the main entrance on River Road",
+        "Through the side corridor marked in green",
+        "Up the café stairs to the first floor",
+        "Through the ship model gallery"
+      ],
+      answer: 1,
+      explanation: "The guide mentions the nearest exit is through the side corridor marked in green."
+    },
+    {
+      id: "q106",
+      partId: "p2",
+      type: "fillInTheBlank",
+      say: P2,
+      context: "Part 2: Complete the information. Write ONE WORD ONLY.",
+      question: "The emergency corridor is marked in ______.",
+      answer: ["green", "Green"],
+      explanation: "The guide says the corridor is marked in green."
+    },
+    {
+      id: "q107",
+      partId: "p2",
+      type: "multipleChoice",
+      say: P2,
+      context: "Part 2: Choose the correct answer.",
+      question: "Where is the reading area mentioned in the talk?",
+      options: [
+        "Next to the café on the first floor",
+        "Behind the ticket desk",
+        "Inside the ship model gallery",
+        "Outside the main entrance"
+      ],
+      answer: 0,
+      explanation: "The guide says the café is upstairs on the first floor next to the reading area."
+    },
+    {
+      id: "q108",
+      partId: "p2",
+      type: "fillInTheBlank",
+      say: P2,
+      context: "Part 2: Complete the information. Write ONE WORD ONLY.",
+      question: "The café is on the ______ floor.",
+      answer: ["first", "First"],
+      explanation: "The guide says the café is upstairs on the first floor."
+    },
+    {
+      id: "q109",
+      partId: "p2",
+      type: "fillInTheBlank",
+      say: P2,
+      context: "Part 2: Complete the information. Write ONE WORD ONLY.",
+      question: "The activity room is behind the café ______.",
+      answer: ["stairs", "Stairs"],
+      explanation: "The guide says the activity room is behind the café stairs."
+    },
+    {
+      id: "q110",
+      partId: "p2",
+      type: "fillInTheBlank",
+      say: P2,
+      context: "Part 2: Complete the information. Write ONE WORD ONLY.",
+      question: "The main entrance is on River ______.",
+      answer: ["Road", "road"],
+      explanation: "The guide says the main entrance is on River Road."
+    },
+
+    // Part 3 — additional (10)
+    {
+      id: "q111",
+      partId: "p3",
+      type: "fillInTheBlank",
+      say: P3,
+      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
+      question: "Mina and Owen are discussing a ______ project.",
+      answer: ["sociology", "Sociology"],
+      explanation: "Mina says: “the sociology project.”"
+    },
+    {
+      id: "q112",
+      partId: "p3",
+      type: "multipleChoice",
+      say: P3,
+      context: "Part 3: Choose the correct answer.",
+      question: "What topic does Owen mention first?",
+      options: ["Co-working spaces", "Remote work", "City museums", "Sleep and learning"],
+      answer: 1,
+      explanation: "Owen says he was thinking about remote work."
+    },
+    {
+      id: "q113",
+      partId: "p3",
+      type: "fillInTheBlank",
+      say: P3,
+      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
+      question: "They could focus on one area of the ______.",
+      answer: ["city", "City"],
+      explanation: "Mina suggests focusing on one area of the city."
+    },
+    {
+      id: "q114",
+      partId: "p3",
+      type: "multipleChoice",
+      say: P3,
+      context: "Part 3: Choose the correct answer.",
+      question: "What two methods do they plan to use for data collection?",
+      options: [
+        "Short interviews and a questionnaire",
+        "A laboratory experiment and a quiz",
+        "A debate and a poster",
+        "Online payments and a timetable"
+      ],
+      answer: 0,
+      explanation: "Mina suggests short interviews and a simple questionnaire."
+    },
+    {
+      id: "q115",
+      partId: "p3",
+      type: "fillInTheBlank",
+      say: P3,
+      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
+      question: "They decide to go to the Central ______ co-working space.",
+      answer: ["Hub", "hub"],
+      explanation: "Mina says: “the Central Hub co-working space.”"
+    },
+    {
+      id: "q116",
+      partId: "p3",
+      type: "multipleChoice",
+      say: P3,
+      context: "Part 3: Choose the correct answer.",
+      question: "Where will they meet?",
+      options: ["Inside the library", "Outside the main entrance", "At the café upstairs", "In Gallery Two"],
+      answer: 1,
+      explanation: "They agree to meet outside the main entrance."
+    },
+    {
+      id: "q117",
+      partId: "p3",
+      type: "fillInTheBlank",
+      say: P3,
+      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
+      question: "Owen says he will draft the questionnaire ______.",
+      answer: ["tonight", "Tonight"],
+      explanation: "Owen says: “I’ll draft the questionnaire tonight.”"
+    },
+    {
+      id: "q118",
+      partId: "p3",
+      type: "multipleChoice",
+      say: P3,
+      context: "Part 3: Choose the correct answer.",
+      question: "What do they say they need for the final report?",
+      options: [
+        "A short summary and a chart",
+        "A long essay and a video",
+        "A map of the museum",
+        "A payment receipt"
+      ],
+      answer: 0,
+      explanation: "Owen says they need a short summary and a chart."
+    },
+    {
+      id: "q119",
+      partId: "p3",
+      type: "multipleChoice",
+      say: P3,
+      context: "Part 3: Choose the correct answer.",
+      question: "What will their bar chart show?",
+      options: [
+        "How often people use the space each week",
+        "How much the museum tickets cost",
+        "How many hours of sleep students get",
+        "How many courts the sports centre has"
+      ],
+      answer: 0,
+      explanation: "Mina suggests a bar chart showing how often people use the space each week."
+    },
+    {
+      id: "q120",
+      partId: "p3",
+      type: "fillInTheBlank",
+      say: P3,
+      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
+      question: "Mina says they can ______ the questions together.",
+      answer: ["review", "Review"],
+      explanation: "Mina says they can review them together."
     }
   );
 

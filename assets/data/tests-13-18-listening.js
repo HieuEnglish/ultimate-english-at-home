@@ -64,6 +64,42 @@
     "but they are heavier and cost more to maintain. Finally, transport choices matter: reducing traffic can cut heat from engines and lower air pollution, " +
     "which sometimes traps heat. The best plans combine several measures rather than relying on only one.";
 
+  // Additional transcripts (still mapped to parts via partId)
+  const P1B =
+    "Receptionist: Good afternoon, Greenhill Language School. How can I help? " +
+    "Student: Hi, I'd like to book a place on the IELTS listening workshop. " +
+    "Receptionist: Of course. What's your full name? " +
+    "Student: Daniel Wong. That's W-O-N-G. " +
+    "Receptionist: Thanks. What's the best phone number to reach you? " +
+    "Student: 0981 552 990. " +
+    "Receptionist: Great. The workshop is on Saturday the 21st of April, from 9:00 a.m. to 12:00 noon, in Room 6B. " +
+    "The fee is 250,000 dong and it includes a practice booklet. " +
+    "Student: Great. Do I need to bring anything? " +
+    "Receptionist: Yes, please bring headphones.";
+
+  const P2B =
+    "Attention passengers on the CityBus network. From Monday, route 5 will be diverted because of roadworks on Bridge Avenue. " +
+    "The stop outside Central Park will be closed; please use the temporary stop on Hill Street, beside the post office. " +
+    "Buses will run every 12 minutes during the day, and the last service leaves the terminal at 10:40 p.m. " +
+    "Tickets can still be bought with a bank card on board.";
+
+  const P3B =
+    "Jack: We still need a topic for our class presentation. " +
+    "Mia: Let's do online privacy, like how apps collect data. " +
+    "Jack: Good. We can use examples from social media and school websites. " +
+    "Mia: When should we meet to plan? " +
+    "Jack: Thursday at 4:45 in the computer room. " +
+    "Mia: Okay. I'll collect examples, and you can write the summary. " +
+    "Jack: Deal. Let's keep the presentation to six minutes.";
+
+  const P4B =
+    "In this mini-lecture, we'll discuss how sleep supports learning. " +
+    "When you review new information, your brain stores it temporarily, but during deep sleep it strengthens connections, " +
+    "a process called consolidation. Short naps can also help, especially if they include slow-wave sleep. " +
+    "However, using bright screens late at night can delay the release of melatonin, making it harder to fall asleep. " +
+    "Caffeine is another factor: because it stays in the body for hours, coffee after 4 p.m. may reduce sleep quality. " +
+    "For best results before exams, study earlier, keep a consistent bedtime, and aim for at least eight hours.";
+
   const QUESTIONS = [
     // -----------------------------
     // Part 1 (p1) — booking / form completion
@@ -193,12 +229,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum.",
       question: "Where are the lockers?",
-      options: [
-        "Opposite the ticket desk",
-        "Behind the café",
-        "Inside the special exhibition",
-        "Next to the main entrance"
-      ],
+      options: ["Opposite the ticket desk", "Behind the café", "Inside the special exhibition", "Next to the main entrance"],
       answer: 0,
       difficulty: "medium",
       explanation: "Lockers are opposite the ticket desk."
@@ -284,12 +315,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "Why do they change the interview day?",
-      options: [
-        "Friday might be too busy",
-        "The station is closed on Friday",
-        "They have an exam on Saturday",
-        "The manager asks them to wait"
-      ],
+      options: ["Friday might be too busy", "The station is closed on Friday", "They have an exam on Saturday", "The manager asks them to wait"],
       answer: 0,
       difficulty: "medium",
       explanation: "Liam says Friday might be too busy."
@@ -384,12 +410,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Which is mentioned as a main reason cities are warmer?",
-      options: [
-        "Dark surfaces absorb heat and buildings reduce airflow",
-        "Cities are always closer to the sun",
-        "Rural areas produce more engine heat",
-        "Trees make air hotter"
-      ],
+      options: ["Dark surfaces absorb heat and buildings reduce airflow", "Cities are always closer to the sun", "Rural areas produce more engine heat", "Trees make air hotter"],
       answer: 0,
       difficulty: "medium",
       explanation: "The lecture mentions absorption by dark surfaces and reduced airflow."
@@ -435,12 +456,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "What is one drawback of green roofs?",
-      options: [
-        "They are heavier and cost more to maintain",
-        "They stop all rainfall",
-        "They cannot reduce indoor temperatures",
-        "They increase traffic"
-      ],
+      options: ["They are heavier and cost more to maintain", "They stop all rainfall", "They cannot reduce indoor temperatures", "They increase traffic"],
       answer: 0,
       difficulty: "medium",
       explanation: "The lecture says green roofs are heavier and cost more to maintain."
@@ -463,12 +479,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "According to the lecture, the best plans…",
-      options: [
-        "combine several measures",
-        "rely on only one measure",
-        "avoid all trees in cities",
-        "use only dark surfaces"
-      ],
+      options: ["combine several measures", "rely on only one measure", "avoid all trees in cities", "use only dark surfaces"],
       answer: 0,
       difficulty: "easy",
       explanation: "The lecturer says the best plans combine several measures."
@@ -491,12 +502,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Which course does Maya want to register for?",
-      options: [
-        "The evening presentation skills course",
-        "The weekend photography course",
-        "The morning debate workshop",
-        "The afternoon business course"
-      ],
+      options: ["The evening presentation skills course", "The weekend photography course", "The morning debate workshop", "The afternoon business course"],
       answer: 0,
       difficulty: "easy",
       explanation: "She says she wants the evening presentation skills course."
@@ -530,12 +536,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Which floor is the classroom on?",
-      options: [
-        "The first floor",
-        "The second floor",
-        "The ground floor",
-        "The basement"
-      ],
+      options: ["The first floor", "The second floor", "The ground floor", "The basement"],
       answer: 0,
       difficulty: "medium",
       explanation: "The receptionist says it is in Room 14 on the first floor."
@@ -547,12 +548,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "How can the student pay the fee?",
-      options: [
-        "Online or at the front desk",
-        "Only in cash on the first night",
-        "Only by bank transfer",
-        "Only by cheque"
-      ],
+      options: ["Online or at the front desk", "Only in cash on the first night", "Only by bank transfer", "Only by cheque"],
       answer: 0,
       difficulty: "easy",
       explanation: "The receptionist says payment can be online or at the front desk."
@@ -564,10 +560,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Maya plans to pay at the front desk.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 1,
       difficulty: "easy",
       explanation: "Maya says: \"I'll pay online.\""
@@ -590,12 +583,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "How many sessions are in the course?",
-      options: [
-        "Four",
-        "Six",
-        "Eight",
-        "Ten"
-      ],
+      options: ["Four", "Six", "Eight", "Ten"],
       answer: 0,
       difficulty: "easy",
       explanation: "It runs for four Tuesdays (four sessions)."
@@ -607,12 +595,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "After taking the full name, what does the receptionist ask for?",
-      options: [
-        "A contact number",
-        "A home address",
-        "An email address",
-        "A passport number"
-      ],
+      options: ["A contact number", "A home address", "An email address", "A passport number"],
       answer: 0,
       difficulty: "medium",
       explanation: "The receptionist asks for a contact number."
@@ -635,12 +618,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Approximately how long is each session?",
-      options: [
-        "1 hour 30 minutes",
-        "2 hours",
-        "45 minutes",
-        "3 hours"
-      ],
+      options: ["1 hour 30 minutes", "2 hours", "45 minutes", "3 hours"],
       answer: 0,
       difficulty: "hard",
       explanation: "From 6:30 to 8:00 is 1 hour 30 minutes."
@@ -663,12 +641,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Where is the café?",
-      options: [
-        "Next to the lobby",
-        "Opposite the ticket desk",
-        "On the second floor",
-        "Outside the main entrance"
-      ],
+      options: ["Next to the lobby", "Opposite the ticket desk", "On the second floor", "Outside the main entrance"],
       answer: 0,
       difficulty: "easy",
       explanation: "The speaker says the café is next to the lobby."
@@ -691,10 +664,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Photography without flash is allowed in most galleries.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 0,
       difficulty: "medium",
       explanation: "The speaker says photography is allowed without flash in most galleries."
@@ -706,10 +676,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Visitors may use flash photography in most galleries.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 1,
       difficulty: "hard",
       explanation: "The announcement allows photography without flash, so flash is not permitted."
@@ -743,12 +710,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Where should bus passengers get off?",
-      options: [
-        "Market Square",
-        "King Street",
-        "River Road",
-        "Museum Gate"
-      ],
+      options: ["Market Square", "King Street", "River Road", "Museum Gate"],
       answer: 0,
       difficulty: "easy",
       explanation: "The speaker says to get off at Market Square."
@@ -788,12 +750,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "A student visits on Wednesday at 6:30 p.m. What is true?",
-      options: [
-        "The museum is closed",
-        "The museum is open until 8 p.m.",
-        "Guided tours start at 6:30 p.m.",
-        "The café is open but galleries are closed"
-      ],
+      options: ["The museum is closed", "The museum is open until 8 p.m.", "Guided tours start at 6:30 p.m.", "The café is open but galleries are closed"],
       answer: 0,
       difficulty: "hard",
       explanation: "On other days the museum closes at 6 p.m."
@@ -805,12 +762,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Which statement about the special exhibition is correct?",
-      options: [
-        "Photography is not allowed there",
-        "It is on the ground floor",
-        "It is next to the lockers",
-        "It is open only on Saturdays"
-      ],
+      options: ["Photography is not allowed there", "It is on the ground floor", "It is next to the lockers", "It is open only on Saturdays"],
       answer: 0,
       difficulty: "medium",
       explanation: "The speaker says photography is not allowed in the special exhibition."
@@ -833,12 +785,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "How much less do students pay than adults?",
-      options: [
-        "3 dollars",
-        "2 dollars",
-        "4 dollars",
-        "5 dollars"
-      ],
+      options: ["3 dollars", "2 dollars", "4 dollars", "5 dollars"],
       answer: 0,
       difficulty: "medium",
       explanation: "Adults pay 9 dollars and students pay 6, a difference of 3."
@@ -850,12 +797,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "Who first suggests the project idea?",
-      options: [
-        "Nora",
-        "Liam",
-        "Their teacher",
-        "The café manager"
-      ],
+      options: ["Nora", "Liam", "Their teacher", "The café manager"],
       answer: 0,
       difficulty: "medium",
       explanation: "Nora suggests the idea at the start of the discussion."
@@ -878,12 +820,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "What do they plan to compare?",
-      options: [
-        "Two local brands",
-        "Two train stations",
-        "Two school clubs",
-        "Two sports teams"
-      ],
+      options: ["Two local brands", "Two train stations", "Two school clubs", "Two sports teams"],
       answer: 0,
       difficulty: "easy",
       explanation: "They say they could compare two local brands."
@@ -906,12 +843,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "Why do they want to email the café manager?",
-      options: [
-        "To ask about costs",
-        "To ask about museum tickets",
-        "To book a bus route",
-        "To cancel the project"
-      ],
+      options: ["To ask about costs", "To ask about museum tickets", "To book a bus route", "To cancel the project"],
       answer: 0,
       difficulty: "medium",
       explanation: "They want to ask about costs."
@@ -923,12 +855,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "For the final presentation, what do they choose?",
-      options: [
-        "Slides",
-        "A poster",
-        "A video",
-        "A leaflet"
-      ],
+      options: ["Slides", "A poster", "A video", "A leaflet"],
       answer: 0,
       difficulty: "easy",
       explanation: "They decide that slides are safer than a poster."
@@ -937,15 +864,11 @@
       id: "q65",
       partId: "p3",
       type: "listenChoice",
-      say: "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
+      say:
+        "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "What do Eva and Ben decide to compare?",
-      options: [
-        "Music subscription services",
-        "Football training plans",
-        "Bus routes to school",
-        "Museum ticket types"
-      ],
+      options: ["Music subscription services", "Football training plans", "Bus routes to school", "Museum ticket types"],
       answer: 0,
       difficulty: "easy",
       explanation: "Eva suggests comparing music subscription services."
@@ -954,7 +877,8 @@
       id: "q66",
       partId: "p3",
       type: "listenFillInTheBlank",
-      say: "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
+      say:
+        "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "They plan to survey ______ students.",
       answer: ["60", "sixty"],
@@ -965,7 +889,8 @@
       id: "q67",
       partId: "p3",
       type: "listenFillInTheBlank",
-      say: "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
+      say:
+        "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "They want to collect responses by ______ night.",
       answer: ["Monday", "monday"],
@@ -976,15 +901,11 @@
       id: "q68",
       partId: "p3",
       type: "listenChoice",
-      say: "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
+      say:
+        "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "Who will analyse the results in Excel?",
-      options: [
-        "Eva",
-        "Ben",
-        "Their teacher",
-        "A volunteer"
-      ],
+      options: ["Eva", "Ben", "Their teacher", "A volunteer"],
       answer: 1,
       difficulty: "easy",
       explanation: "Eva says Ben can analyse the results in Excel."
@@ -993,7 +914,8 @@
       id: "q69",
       partId: "p3",
       type: "listenFillInTheBlank",
-      say: "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
+      say:
+        "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "The meeting time is ______.",
       answer: ["5:15", "515", "five fifteen", "fivefifteen"],
@@ -1004,7 +926,8 @@
       id: "q70",
       partId: "p3",
       type: "listenFillInTheBlank",
-      say: "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
+      say:
+        "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "They need at least one ______ for the report.",
       answer: ["graph", "a graph"],
@@ -1029,10 +952,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Cities can be several degrees warmer than nearby rural areas.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 0,
       difficulty: "easy",
       explanation: "The lecturer says cities can be several degrees warmer."
@@ -1055,12 +975,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "What is one common response to reduce city heat mentioned in the lecture?",
-      options: [
-        "Increase shade",
-        "Build taller buildings",
-        "Paint roads darker",
-        "Reduce street lighting"
-      ],
+      options: ["Increase shade", "Build taller buildings", "Paint roads darker", "Reduce street lighting"],
       answer: 0,
       difficulty: "medium",
       explanation: "The lecturer says one common response is to increase shade."
@@ -1072,10 +987,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Street trees can lower surface temperatures.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 0,
       difficulty: "medium",
       explanation: "The lecturer says street trees can lower surface temperatures."
@@ -1087,12 +999,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Street trees can make ______ more comfortable.",
-      options: [
-        "Walking",
-        "Driving",
-        "Flying",
-        "Shopping"
-      ],
+      options: ["Walking", "Driving", "Flying", "Shopping"],
       answer: 0,
       difficulty: "easy",
       explanation: "The lecture says trees make walking more comfortable."
@@ -1104,10 +1011,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Reflective roofs bounce more sunlight back into the atmosphere.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 0,
       difficulty: "medium",
       explanation: "The lecture explains that light-coloured roofs reflect sunlight."
@@ -1130,12 +1034,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Reducing traffic can lower air ______.",
-      options: [
-        "Pollution",
-        "Pressure",
-        "Moisture",
-        "Oxygen"
-      ],
+      options: ["Pollution", "Pressure", "Moisture", "Oxygen"],
       answer: 0,
       difficulty: "medium",
       explanation: "The lecturer says reduced traffic can lower air pollution."
@@ -1147,10 +1046,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Air pollution can sometimes trap heat.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 0,
       difficulty: "hard",
       explanation: "The lecture says air pollution sometimes traps heat."
@@ -1162,10 +1058,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Green roofs add plants on top of buildings.",
-      options: [
-        "True",
-        "False"
-      ],
+      options: ["True", "False"],
       answer: 0,
       difficulty: "easy",
       explanation: "The lecturer describes green roofs as plants on top of buildings."
@@ -1177,15 +1070,106 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Which measure directly increases shade on streets?",
-      options: [
-        "Planting street trees",
-        "Using darker asphalt",
-        "Increasing traffic",
-        "Removing roof surfaces"
-      ],
+      options: ["Planting street trees", "Using darker asphalt", "Increasing traffic", "Removing roof surfaces"],
       answer: 0,
       difficulty: "medium",
       explanation: "The lecture describes shade as a key response; street trees provide it."
+    },
+
+    // -----------------------------
+    // Added questions (to meet min bank/run ratio: 90 for Run=30)
+    // -----------------------------
+    {
+      id: "q83",
+      partId: "p1",
+      type: "listenFillInTheBlank",
+      say: P1B,
+      context: "Part 1: A student books an IELTS listening workshop. Complete the information.",
+      question: "Write the student's family name.",
+      answer: ["Wong", "wong"],
+      difficulty: "easy",
+      explanation: "The student says: 'Daniel Wong' and spells W-O-N-G."
+    },
+    {
+      id: "q84",
+      partId: "p1",
+      type: "listenChoice",
+      say: P1B,
+      context: "Part 1: A student books an IELTS listening workshop.",
+      question: "What does the receptionist tell the student to bring?",
+      options: ["Headphones", "A laptop", "A passport photo", "A calculator"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The receptionist says: 'Please bring headphones.'"
+    },
+    {
+      id: "q85",
+      partId: "p2",
+      type: "listenFillInTheBlank",
+      say: P2B,
+      context: "Part 2: A public transport announcement. Answer the questions.",
+      question: "From Monday, route ______ will be diverted.",
+      answer: ["5", "five"],
+      difficulty: "easy",
+      explanation: "The announcement says: 'route 5 will be diverted'."
+    },
+    {
+      id: "q86",
+      partId: "p2",
+      type: "listenTrueFalse",
+      say: P2B,
+      context: "Part 2: A public transport announcement.",
+      question: "The stop outside Central Park will be closed.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The speaker clearly states the Central Park stop will be closed."
+    },
+    {
+      id: "q87",
+      partId: "p3",
+      type: "listenChoice",
+      say: P3B,
+      context: "Part 3: Two students plan a class presentation.",
+      question: "What topic do they choose?",
+      options: ["Online privacy", "Healthy eating", "Volunteering", "Sports training"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Mia suggests online privacy and Jack agrees."
+    },
+    {
+      id: "q88",
+      partId: "p3",
+      type: "listenFillInTheBlank",
+      say: P3B,
+      context: "Part 3: Two students plan a class presentation.",
+      question: "They agree to meet at ______.",
+      answer: ["4:45", "445", "four forty-five", "four forty five"],
+      difficulty: "hard",
+      explanation: "Jack says: 'Thursday at 4:45 in the computer room.'"
+    },
+    {
+      id: "q89",
+      partId: "p4",
+      type: "listenFillInTheBlank",
+      say: P4B,
+      context: "Part 4: A short lecture about sleep and learning.",
+      question: "The strengthening process is called ______.",
+      answer: ["consolidation", "memory consolidation"],
+      difficulty: "medium",
+      explanation: "The lecturer says the process is called consolidation."
+    },
+    {
+      id: "q90",
+      partId: "p4",
+      type: "listenChoice",
+      say: P4B,
+      context: "Part 4: A short lecture about sleep and learning.",
+      question: "What can delay the release of melatonin?",
+      options: ["Using bright screens late at night", "Drinking water in the morning", "Walking to school", "Studying in the afternoon"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "The lecture says bright screens late at night can delay melatonin."
     }
   ];
 
