@@ -26,10 +26,12 @@
   const AGE_GROUP = "13-18";
   const SKILL = "speaking";
 
+  // SECTION_PLAN total increased from 15 -> 18:
+  // Part 1 pick 10, Part 2 pick 1, Part 3 pick 7
   const SECTION_PLAN = [
-    { key: "part1", label: "Part 1 (Interview)", pick: 8 },
+    { key: "part1", label: "Part 1 (Interview)", pick: 10 },
     { key: "part2", label: "Part 2 (Cue card)", pick: 1 },
-    { key: "part3", label: "Part 3 (Discussion)", pick: 6 }
+    { key: "part3", label: "Part 3 (Discussion)", pick: 7 }
   ];
 
   const store = window.UEAH_TESTS_STORE;
@@ -253,7 +255,7 @@
   function buildFallbackSet(qs, totalTarget) {
     const tmp = (Array.isArray(qs) ? qs : []).slice();
     shuffleInPlace(tmp);
-    return tmp.slice(0, Math.max(1, totalTarget || 15));
+    return tmp.slice(0, Math.max(1, totalTarget || 18));
   }
 
   function buildStructuredSet(allQuestions) {
@@ -273,7 +275,7 @@
     const p2Pool = (bySection.get("part2") || []).slice();
     const p3Pool = (bySection.get("part3") || []).slice();
 
-    const targetTotal = SECTION_PLAN.reduce((a, s) => a + (s.pick || 0), 0) || 15;
+    const targetTotal = SECTION_PLAN.reduce((a, s) => a + (s.pick || 0), 0) || 18;
 
     // If the bank isn't structured at all, fallback.
     const hasAnyStructured = p1Pool.length || p2Pool.length || p3Pool.length;
@@ -288,7 +290,7 @@
     const anchorTopic = p2 ? normalizeTopic(p2.topicId) : "";
 
     // 2) Part 1: prefer topic variety; if topicId missing, treat as unique
-    const p1Need = (SECTION_PLAN.find((s) => s.key === "part1") || {}).pick || 8;
+    const p1Need = (SECTION_PLAN.find((s) => s.key === "part1") || {}).pick || 10;
     const p1Picked = [];
     const topicCounts = new Map();
 
@@ -319,7 +321,7 @@
     }
 
     // 3) Part 3: prefer anchorTopic, then fill from remaining
-    const p3Need = (SECTION_PLAN.find((s) => s.key === "part3") || {}).pick || 6;
+    const p3Need = (SECTION_PLAN.find((s) => s.key === "part3") || {}).pick || 7;
 
     const p3Picked = [];
     const p3Tmp = p3Pool.slice();

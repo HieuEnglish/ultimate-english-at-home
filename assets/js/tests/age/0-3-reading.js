@@ -18,7 +18,7 @@
   const SLUG = "age-0-3-reading";
   const BANK_SRC = "assets/data/tests-0-3-reading.js";
   // Keep each run short, even if the bank grows over time.
-  const MAX_QUESTIONS = 14;
+  const MAX_QUESTIONS = 10;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;

@@ -33,8 +33,8 @@
 
   // Easier than IELTS but similar structure.
   const TIME_LIMIT_SEC = 30 * 60;
-  const MAX_PER_PART = 5;
-  const TARGET_TOTAL = 4 * MAX_PER_PART;
+  const MAX_PER_PART = 8;   // raised (was 5)
+  const TARGET_TOTAL = 30;  // set to 30 (was 4 * MAX_PER_PART = 20)
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;

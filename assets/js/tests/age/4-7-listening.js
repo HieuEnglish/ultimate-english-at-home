@@ -15,6 +15,7 @@
    Update:
    - Adds a final summary report (per-question review).
    - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE).
+   - Adds per-run cap (bank is a pool; each run uses a short randomized subset).
 */
 
 (function () {
@@ -22,6 +23,7 @@
 
   const SLUG = "age-4-7-listening";
   const BANK_SRC = "assets/data/tests-4-7-listening.js";
+  const MAX_QUESTIONS_PER_RUN = 12;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -270,11 +272,15 @@
     const total = state.questions.length;
     const n = Math.min(state.index + 1, total);
 
+    const q = state.questions[state.index];
+    const hasSay = !!(q && String(q.say || "").trim());
+    const playDisabled = supportsSpeech() && hasSay ? "" : "disabled";
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" aria-label="Play the audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" aria-label="Play the audio" ${playDisabled}>🔊 Play</button>
           <button class="btn" type="button" data-action="toggleWords" aria-pressed="${state.showWords ? "true" : "false"}">
             ${state.showWords ? "Hide words" : "Show words"}
           </button>
@@ -415,11 +421,14 @@
       ? `<p style="margin:8px 0 0">Picture: <span style="font-size:22px">${safeText(q.picture)}</span></p>`
       : "";
 
+    const hasSay = !!(q && String(q.say || "").trim());
+    const playDisabled = supportsSpeech() && hasSay ? "" : "disabled";
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" aria-label="Play the audio again">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" aria-label="Play the audio again" ${playDisabled}>🔊 Play</button>
           <button class="btn" type="button" data-action="restart" aria-label="Restart the test">Restart</button>
         </div>
       </div>
@@ -647,7 +656,9 @@
           const prepared = bank.map(cloneQuestionWithShuffledOptions);
           shuffleInPlace(prepared);
 
-          state.questions = prepared;
+          const picked = prepared.slice(0, Math.min(MAX_QUESTIONS_PER_RUN, prepared.length));
+
+          state.questions = picked;
           state.index = 0;
           state.correctCount = 0;
           state.lastChoice = null;
@@ -746,7 +757,6 @@
           skill: "listening",
           at: nowIso(),
 
-          // FIX: include scoring inputs for normalization
           questions: Array.isArray(state.questions) ? state.questions : [],
           review: Array.isArray(state.review) ? state.review : [],
 
@@ -760,7 +770,6 @@
         const res = window.UEAH_SAVE_SCORE.save(payload);
 
         if (res && res.ok) {
-          // Try to show something informative if helper returns details, otherwise generic.
           const norm =
             res.normalizedScore != null
               ? `${Math.round(Number(res.normalizedScore))}/100`

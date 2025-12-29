@@ -27,7 +27,7 @@
 
   const SLUG = "age-0-3-speaking";
   const BANK_SRC = "assets/data/tests-0-3-speaking.js";
-  const MAX_PROMPTS_PER_RUN = 10;
+  const MAX_PROMPTS_PER_RUN = 8;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;

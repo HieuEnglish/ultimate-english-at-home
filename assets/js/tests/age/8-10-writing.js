@@ -549,7 +549,7 @@
         </div>
 
         <div class="note" style="margin-top:12px" aria-live="polite">
-          <strong>⏭️ Skipped</strong>
+          <strong⏭️ Skipped</strong>
           <p style="margin:8px 0 0">0 points for this question.</p>
         </div>
 
@@ -1080,7 +1080,9 @@
             objective: {
               earned: state.objectiveEarnedPoints,
               possible: state.objectiveMaxPoints,
-              percent: state.objectiveMaxPoints ? Math.round((state.objectiveEarnedPoints / state.objectiveMaxPoints) * 100) : 0
+              percent: state.objectiveMaxPoints
+                ? Math.round((state.objectiveEarnedPoints / state.objectiveMaxPoints) * 100)
+                : 0
             },
             prompts: {
               earned: state.promptEarnedPoints,

@@ -20,6 +20,7 @@
    - Stops TTS on navigation (popstate) and when changing screens
    - Summary includes per-section counts if `section` exists in the bank, otherwise totals only
    - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE)
+   - Adds per-run cap (bank is a pool; each run uses a short randomized subset)
 */
 
 (function () {
@@ -27,6 +28,7 @@
 
   const SLUG = "age-4-7-speaking";
   const BANK_SRC = "assets/data/tests-4-7-speaking.js";
+  const MAX_QUESTIONS_PER_RUN = 10;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -517,7 +519,10 @@
           const prepared = ensureIds(bank.filter(isPlainObject).map((q) => ({ ...q })));
           shuffleInPlace(prepared);
 
-          state.questions = prepared;
+          // Per-run cap: use a short subset after shuffle
+          const picked = prepared.slice(0, Math.min(MAX_QUESTIONS_PER_RUN, prepared.length));
+
+          state.questions = picked;
           state.index = 0;
           state.results = Object.create(null);
           state.status = "prompt";
@@ -589,11 +594,9 @@
           skill: "speaking",
           at: nowIso(),
 
-          // FIX: include scoring inputs used for normalization
           questions: Array.isArray(state.questions) ? state.questions : [],
           resultsById,
 
-          // speaking is observational: store "said" as rawCorrect to keep consistency
           rawCorrect: overall.said,
           totalQuestions: overall.total,
           percent: overall.percent,

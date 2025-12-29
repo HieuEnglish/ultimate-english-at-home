@@ -34,7 +34,7 @@
 
   // Section structure (keeps the test consistent while still randomized)
   const SECTION_PLAN = [
-    { key: "warmup", label: "Warm-up", pick: 3 },
+    { key: "warmup", label: "Warm-up", pick: 4 },
     { key: "describe", label: "Describe", pick: 4 },
     { key: "story", label: "Story", pick: 3 },
     { key: "opinion", label: "Opinion", pick: 3 }

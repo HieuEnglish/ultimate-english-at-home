@@ -14,6 +14,7 @@
    - Save payload now includes:
      * questions: state.questions
      * review: state.review
+   - Adds per-run cap (bank is a pool; each run uses a short randomized subset).
 */
 
 (function () {
@@ -21,6 +22,7 @@
 
   const SLUG = "age-0-3-listening";
   const BANK_SRC = "assets/data/tests-0-3-listening.js";
+  const MAX_QUESTIONS_PER_RUN = 8;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -522,7 +524,9 @@
           const prepared = bank.map(cloneQuestionWithShuffledOptions);
           shuffleInPlace(prepared);
 
-          state.questions = prepared;
+          const picked = prepared.slice(0, Math.min(MAX_QUESTIONS_PER_RUN, prepared.length));
+
+          state.questions = picked;
           state.index = 0;
           state.correctCount = 0;
           state.lastChoice = null;

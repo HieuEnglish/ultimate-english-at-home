@@ -47,8 +47,8 @@
 
   // Easier than IELTS but similar structure.
   const TIME_LIMIT_SEC = 45 * 60;
-  const MAX_PER_PASSAGE = 8;
-  const TARGET_TOTAL = 3 * MAX_PER_PASSAGE;
+  const MAX_PER_PASSAGE = 10; // increased (was 8)
+  const TARGET_TOTAL = 3 * MAX_PER_PASSAGE; // now 30 (was 24)
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;

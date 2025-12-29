@@ -1,7 +1,7 @@
 /* assets/js/tests/iels/reading.js
    Runner: IELTS Reading (Academic-style, original passages)
 
-   - 3 passages (P1–P3), bank-controlled question count (typically 40)
+   - 3 passages (P1–P3), per-run cap (40 questions by default; bank is a pool)
    - Question types supported:
      - multipleChoice (incl. True/False/Not Given when provided as options)
      - trueFalse (auto options True/False)
@@ -9,6 +9,9 @@
    - Auto-grading + per-question review at the end
 
    Updates (this file):
+   - Per-run cap: pick a short subset from the bank pool (default 40)
+   - IELTS requirement: totals computed from picked, not full prepared bank
+   - Restart behavior unchanged: start() rebuilds questions each run; random pick keeps runs randomized
    - Bank loader resilient when script already exists/has executed
    - Ensures stable ids if missing
    - Case-insensitive type handling (fillInTheBlank vs fillintheblank, etc.)
@@ -24,6 +27,10 @@
 
   const SLUG = "iels-reading";
   const BANK_SRC = "assets/data/tests-iels-reading.js";
+
+  // Per-run cap (bank is a pool)
+  const MAX_QUESTIONS_PER_RUN = 40; // IELTS Reading is typically 40 questions
+  const PASSAGE_COUNT = 3;
 
   // IELTS Reading timing (standard)
   const TIME_LIMIT_SEC = 60 * 60;
@@ -89,6 +96,14 @@
     return "Passage";
   }
 
+  function passageOrderValue(passageId) {
+    const id = String(passageId || "").toLowerCase();
+    if (id === "p1") return 1;
+    if (id === "p2") return 2;
+    if (id === "p3") return 3;
+    return 99;
+  }
+
   function pointsFor(q) {
     const p = Number(q && q.points);
     return Number.isFinite(p) && p > 0 ? p : 1;
@@ -150,6 +165,78 @@
     return { ...q, options: newOptions, answer: newAnswer };
   }
 
+  function pickPerRunSubset(preparedAll) {
+    const all = Array.isArray(preparedAll) ? preparedAll : [];
+    const cap = Math.max(1, Number(MAX_QUESTIONS_PER_RUN) || 40);
+
+    if (all.length <= cap) return all.slice();
+
+    // Best-effort distribution across passages:
+    // base per passage, then distribute remainder in order P1->P3
+    const base = Math.floor(cap / PASSAGE_COUNT);
+    const remainder = cap - base * PASSAGE_COUNT;
+    const target = {
+      p1: base + (remainder >= 1 ? 1 : 0),
+      p2: base + (remainder >= 2 ? 1 : 0),
+      p3: base
+    };
+
+    // Attach stable original index for ordering after random selection
+    const withIdx = all
+      .map((q, i) => (isPlainObject(q) ? { ...q, __bankIndex: i } : q))
+      .filter(isPlainObject);
+
+    // Group by passageId
+    const groups = Object.create(null);
+    withIdx.forEach((q) => {
+      const pid = String(q.passageId || "p1").toLowerCase();
+      if (!groups[pid]) groups[pid] = [];
+      groups[pid].push(q);
+    });
+
+    const pickedMap = Object.create(null);
+    const picked = [];
+
+    ["p1", "p2", "p3"].forEach((pid) => {
+      const g = Array.isArray(groups[pid]) ? groups[pid].slice() : [];
+      if (!g.length) return;
+      shuffleInPlace(g);
+      const take = Math.min(Number(target[pid] || 0), g.length);
+      for (let i = 0; i < take; i++) {
+        const item = g[i];
+        const id = String(item.id || "");
+        if (id && pickedMap[id]) continue;
+        if (id) pickedMap[id] = true;
+        picked.push(item);
+      }
+    });
+
+    // Fill remaining up to cap from the rest (random)
+    if (picked.length < cap) {
+      const remaining = withIdx.filter((q) => {
+        const id = String(q.id || "");
+        return !(id && pickedMap[id]);
+      });
+      shuffleInPlace(remaining);
+      const need = cap - picked.length;
+      for (let i = 0; i < remaining.length && i < need; i++) picked.push(remaining[i]);
+    }
+
+    // Sort into IELTS-like flow: passage order then original order
+    picked.sort((a, b) => {
+      const pa = passageOrderValue(a.passageId);
+      const pb = passageOrderValue(b.passageId);
+      if (pa !== pb) return pa - pb;
+      return Number(a.__bankIndex) - Number(b.__bankIndex);
+    });
+
+    // Strip internal index key
+    return picked.slice(0, cap).map((q) => {
+      const { __bankIndex, ...rest } = q;
+      return rest;
+    });
+  }
+
   // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
@@ -202,7 +289,7 @@
       <div class="note" style="margin-top:0">
         <strong>IELTS Reading</strong>
         <p style="margin:8px 0 0">
-          3 passages • bank-controlled question count • 60 minutes (practice).
+          3 passages • up to ${safeText(MAX_QUESTIONS_PER_RUN)} questions per run • 60 minutes (practice).
         </p>
         <p style="margin:8px 0 0; opacity:.92">
           Tip: skim for the main idea, then scan for keywords. Answers follow passage order.
@@ -580,12 +667,18 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          // Keep question order (IELTS-style), shuffle options only (when safe).
-          const prepared = ensureIds(bank.map(cloneQuestionWithShuffledOptions).filter(isPlainObject));
-          if (!prepared.length) throw new Error("Question bank contained no usable questions.");
+          // Bank is a pool:
+          // - shuffle options only (when safe)
+          // - then pick a random subset (best-effort even per passage) up to MAX_QUESTIONS_PER_RUN
+          const preparedAll = ensureIds(bank.map(cloneQuestionWithShuffledOptions).filter(isPlainObject));
+          if (!preparedAll.length) throw new Error("Question bank contained no usable questions.");
 
-          state.questions = prepared;
-          state.totalPoints = prepared.reduce((sum, q) => sum + pointsFor(q), 0);
+          const picked = pickPerRunSubset(preparedAll);
+
+          state.questions = picked;
+
+          // IELTS requirement: totals computed from picked, not full bank
+          state.totalPoints = picked.reduce((sum, q) => sum + pointsFor(q), 0);
 
           state.status = "question";
           paint();
@@ -667,7 +760,9 @@
           return;
         }
 
-        const scoreTxt = Number.isFinite(Number(res.normalizedScore)) ? String(Math.round(Number(res.normalizedScore))) : "—";
+        const scoreTxt = Number.isFinite(Number(res.normalizedScore))
+          ? String(Math.round(Number(res.normalizedScore)))
+          : "—";
         const levelTxt = res.levelTitle ? String(res.levelTitle) : "Saved";
         state.savedMsg = `Saved to Profile — ${scoreTxt}/100 • ${levelTxt}`;
         paint();

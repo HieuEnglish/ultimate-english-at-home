@@ -23,12 +23,13 @@
   const SLUG = "age-11-12-speaking";
   const BANK_SRC = "assets/data/tests-11-12-speaking.js";
 
+  // SECTION_PLAN total: 16 prompts per attempt
   const SECTION_PLAN = [
-    { key: "warmup", label: "Warm-up", pick: 3 },
-    { key: "describe", label: "Describe", pick: 3 },
-    { key: "roleplay", label: "Role-play", pick: 2 },
+    { key: "warmup", label: "Warm-up", pick: 4 },
+    { key: "describe", label: "Describe", pick: 4 },
+    { key: "roleplay", label: "Role-play", pick: 3 },
     { key: "longturn", label: "Cue card", pick: 1 },
-    { key: "discussion", label: "Discussion", pick: 3 }
+    { key: "discussion", label: "Discussion", pick: 4 }
   ];
 
   const TARGET_TOTAL = SECTION_PLAN.reduce((sum, s) => sum + (Number(s.pick) || 0), 0);

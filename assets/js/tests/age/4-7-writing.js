@@ -20,8 +20,11 @@
    - Robust bank loader (waits for existing script load/error; validates bank)
    - Ensures stable ids (fallback id if missing)
    - Prevents double-submit grading
+   - Adds Skip button (records 0 points + review row)
    - Adds a final summary report (per-question review)
    - Adds "Save score to Profile" using shared helper (window.UEAH_SAVE_SCORE) when available
+   - Adds per-run cap (bank is a pool; each run uses a short randomized subset)
+   - Fix: bank loader validates the bank after script load (covers async bank population)
 */
 
 (function () {
@@ -29,6 +32,7 @@
 
   const SLUG = "age-4-7-writing";
   const BANK_SRC = "assets/data/tests-4-7-writing.js";
+  const MAX_QUESTIONS_PER_RUN = 10;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -106,14 +110,23 @@
     });
   }
 
+  function normalizeType(raw) {
+    const t = String(raw || "").trim().toLowerCase();
+    if (t === "fillintheblank" || t === "fill_in_the_blank" || t === "fillblank" || t === "blank")
+      return "fillintheblank";
+    if (t === "multiplechoice" || t === "mcq" || t === "multiple_choice") return "multiplechoice";
+    if (t === "prompt" || t === "free" || t === "freeresponse") return "prompt";
+    return t || "multiplechoice";
+  }
+
   function cloneQuestionWithShuffledOptions(q) {
     if (!isPlainObject(q)) return q;
 
-    const type = String(q.type || "multipleChoice").toLowerCase();
-    if (type === "prompt" || type === "fillintheblank") return { ...q };
+    const type = normalizeType(q.type || "multipleChoice");
+    if (type === "prompt" || type === "fillintheblank") return { ...q, type };
 
-    if (!Array.isArray(q.options)) return { ...q };
-    if (typeof q.answer !== "number") return { ...q };
+    if (!Array.isArray(q.options)) return { ...q, type };
+    if (typeof q.answer !== "number") return { ...q, type };
 
     const pairs = q.options.map((text, idx) => ({ text, idx }));
     shuffleInPlace(pairs);
@@ -121,7 +134,7 @@
     const newOptions = pairs.map((p) => p.text);
     const newAnswer = pairs.findIndex((p) => p.idx === q.answer);
 
-    return { ...q, options: newOptions, answer: newAnswer };
+    return { ...q, type, options: newOptions, answer: newAnswer };
   }
 
   function promptPointsPossible(q) {
@@ -215,7 +228,6 @@
   }
 
   function normalizeResponsesForSave(responses) {
-    // state.responses is created with null-prototype; convert to a plain object for JSON + downstream scoring.
     const src = responses && typeof responses === "object" ? responses : null;
     if (!src) return {};
     const out = {};
@@ -243,25 +255,26 @@
     const src = ctx && typeof ctx.assetHref === "function" ? ctx.assetHref(BANK_SRC) : BANK_SRC;
 
     bankPromise = new Promise((resolve, reject) => {
+      const validate = () => {
+        setTimeout(() => {
+          if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) resolve(true);
+          else reject(new Error("Missing question bank."));
+        }, 0);
+      };
+
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
-          resolve(true);
-          return;
-        }
-        existing.addEventListener("load", () => resolve(true), { once: true });
-        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), {
-          once: true
-        });
+        validate();
+        existing.addEventListener("load", validate, { once: true });
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
         return;
       }
 
       const s = document.createElement("script");
       s.defer = true;
-      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
-      s.onload = () => resolve(true);
+      s.onload = validate;
       s.onerror = () => reject(new Error(`Failed to load: ${src}`));
       document.head.appendChild(s);
     });
@@ -311,17 +324,16 @@
     const total = state.questions.length;
     const n = Math.min(state.index + 1, total);
 
-    const type = state.questions[state.index] ? String(state.questions[state.index].type || "") : "";
-    const points = state.questions[state.index]
-      ? (isPromptType(type) ? promptPointsPossible(state.questions[state.index]) : pointsPossible(state.questions[state.index]))
-      : 0;
+    const q = state.questions[state.index];
+    const type = q ? normalizeType(q.type) : "";
+    const pts = q ? (type === "prompt" ? promptPointsPossible(q) : pointsPossible(q)) : 0;
 
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
           <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
           <span style="display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid var(--border); color: var(--muted); font-weight:800; font-size:12px">+${safeText(
-            points
+            pts
           )} pt</span>
         </div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
@@ -393,7 +405,7 @@
       .join("");
 
     return `
-      <form data-form="question" data-qtype="multipleChoice" style="margin-top:12px">
+      <form data-form="question" data-qtype="multiplechoice" style="margin-top:12px">
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <legend style="padding:0 8px; font-weight:900">${prompt}</legend>
 
@@ -413,7 +425,7 @@
     const prompt = safeTextWithBreaks(q.question || "Fill in the blank");
 
     return `
-      <form data-form="question" data-qtype="fillInTheBlank" style="margin-top:12px">
+      <form data-form="question" data-qtype="fillintheblank" style="margin-top:12px">
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <legend style="padding:0 8px; font-weight:900">${prompt}</legend>
 
@@ -480,7 +492,7 @@
   function renderQuestionScreen(state) {
     const q = state.questions[state.index];
     const top = renderTopBar(state);
-    const type = String(q.type || "multipleChoice").toLowerCase();
+    const type = normalizeType(q && q.type);
 
     let form = "";
     if (type === "prompt") form = renderPromptForm(q);
@@ -495,7 +507,7 @@
     const total = state.questions.length;
     const n = state.index + 1;
 
-    const type = String(q.type || "multipleChoice").toLowerCase();
+    const type = normalizeType(q && q.type);
     const nextLabel = n >= total ? "Finish" : "Next";
 
     if (state.lastWasSkipped) {
@@ -575,23 +587,23 @@
       const chosenText = state.lastBlank != null ? String(state.lastBlank) : "";
 
       detailHtml = ok
-        ? `<p style="margin:8px 0 0">Correct. +${state.lastPointsEarned} point(s)</p>`
+        ? `<p style="margin:8px 0 0">Correct. +${safeText(state.lastPointsEarned)} point(s)</p>`
         : `<p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText || "(unknown)")}</strong></p>
            <p style="margin:8px 0 0; opacity:.92">You typed: <strong>${safeText(chosenText || "(blank)")}</strong></p>`;
     } else {
-      const correctIdx = Number(q.answer);
+      const correctIdx = Number(q && q.answer);
       const chosenIdx = Number(state.lastChoice);
 
-      const correctText = Array.isArray(q.options) ? q.options[correctIdx] : "";
-      const chosenText = Array.isArray(q.options) ? q.options[chosenIdx] : "";
+      const correctText = optionAt(q, correctIdx);
+      const chosenText = optionAt(q, chosenIdx);
 
       detailHtml = ok
-        ? `<p style="margin:8px 0 0">Correct. +${state.lastPointsEarned} point(s)</p>`
+        ? `<p style="margin:8px 0 0">Correct. +${safeText(state.lastPointsEarned)} point(s)</p>`
         : `<p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText)}</strong></p>
            <p style="margin:8px 0 0; opacity:.92">You chose: <strong>${safeText(chosenText)}</strong></p>`;
     }
 
-    const explanation = q.explanation ? String(q.explanation).trim() : "";
+    const explanation = q && q.explanation ? String(q.explanation).trim() : "";
     const explanationHtml = explanation
       ? `<p style="margin:8px 0 0; opacity:.92"><strong>Tip:</strong> ${safeText(explanation)}</p>`
       : "";
@@ -627,15 +639,14 @@
 
     const body = rows
       .map((r) => {
-        const icon = r.skipped ? "⏭️" : r.isCorrect ? "✅" : r.type === "prompt" ? "✍️" : "❌";
-        const extra = `<div style="opacity:.9; margin-top:6px">Points: ${safeText(r.pointsEarned)} / ${safeText(
-          r.pointsPossible
-        )}</div>`;
-
+        const icon = r.skipped ? "⏭️" : r.type === "prompt" ? "✍️" : r.isCorrect ? "✅" : "❌";
         const wrote =
           r.type === "prompt" && r.userText
             ? `<div style="opacity:.9; margin-top:6px; white-space:pre-wrap">${safeText(r.userText)}</div>`
             : "";
+        const pts = `<div style="opacity:.9; margin-top:6px">Points: ${safeText(r.pointsEarned)} / ${safeText(
+          r.pointsPossible
+        )}</div>`;
 
         return `
           <tr>
@@ -646,7 +657,7 @@
               <div style="font-weight:900">${safeText(r.typeLabel)}</div>
               <div style="margin-top:6px">${safeText(r.question || "")}</div>
               ${wrote}
-              ${extra}
+              ${pts}
             </td>
             <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:800">${safeText(
               r.chosenText || ""
@@ -704,9 +715,15 @@
     return `
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
-        <p style="margin:8px 0 0">Objective score: <strong>${objEarned}</strong> / ${objMax} (${objPct}%)</p>
-        <p style="margin:8px 0 0">Writing score: <strong>${wrEarned}</strong> / ${wrMax} (${wrPct}%)</p>
-        <p style="margin:8px 0 0">Overall score: <strong>${allEarned}</strong> / ${allMax} (${allPct}%)</p>
+        <p style="margin:8px 0 0">Objective score: <strong>${safeText(objEarned)}</strong> / ${safeText(objMax)} (${safeText(
+          objPct
+        )}%)</p>
+        <p style="margin:8px 0 0">Writing score: <strong>${safeText(wrEarned)}</strong> / ${safeText(wrMax)} (${safeText(
+          wrPct
+        )}%)</p>
+        <p style="margin:8px 0 0">Overall score: <strong>${safeText(allEarned)}</strong> / ${safeText(allMax)} (${safeText(
+          allPct
+        )}%)</p>
         <p style="margin:8px 0 0">Tip: Repeat the test to practice again. The question order changes each time.</p>
       </div>
 
@@ -726,6 +743,13 @@
         }
       </div>
     `;
+  }
+
+  function optionAt(q, idx) {
+    if (!q || !Array.isArray(q.options)) return "";
+    const n = Number(idx);
+    if (!Number.isFinite(n)) return "";
+    return q.options[n] == null ? "" : String(q.options[n]);
   }
 
   // -----------------------------
@@ -806,21 +830,14 @@
       }
 
       function typeLabel(q) {
-        const t = String(q && q.type ? q.type : "multipleChoice").toLowerCase();
+        const t = normalizeType(q && q.type);
         if (t === "prompt") return "Writing prompt";
         if (t === "fillintheblank") return "Fill in the blank";
         return "Multiple choice";
       }
 
-      function optionAt(q, idx) {
-        if (!q || !Array.isArray(q.options)) return "";
-        const n = Number(idx);
-        if (!Number.isFinite(n)) return "";
-        return q.options[n] == null ? "" : String(q.options[n]);
-      }
-
       function recordReviewRow(q, r) {
-        const t = String(q && q.type ? q.type : "multipleChoice").toLowerCase();
+        const t = normalizeType(q && q.type);
 
         let chosenText = "";
         let correctText = "";
@@ -902,11 +919,14 @@
 
           if (!bank.length) throw new Error("Missing question bank.");
 
-          const prepared = ensureIds(bank.filter(isPlainObject).map(cloneQuestionWithShuffledOptions));
-          shuffleInPlace(prepared);
+          const preparedAll = ensureIds(bank.filter(isPlainObject).map(cloneQuestionWithShuffledOptions));
+          shuffleInPlace(preparedAll);
 
-          const objectiveQs = prepared.filter((q) => !isPromptType(q && q.type));
-          const promptQs = prepared.filter((q) => isPromptType(q && q.type));
+          // Per-run cap (after shuffle)
+          const prepared = preparedAll.slice(0, Math.min(MAX_QUESTIONS_PER_RUN, preparedAll.length));
+
+          const objectiveQs = prepared.filter((q) => normalizeType(q && q.type) !== "prompt");
+          const promptQs = prepared.filter((q) => normalizeType(q && q.type) === "prompt");
 
           state.questions = prepared;
           state.index = 0;
@@ -945,7 +965,7 @@
         paint();
       }
 
-      function toNextScreenAfterFeedback() {
+      function next() {
         state.isGrading = false;
         state.lastWasSkipped = false;
         state.lastChecks = [];
@@ -968,8 +988,8 @@
 
         state.isGrading = true;
 
-        const type = String(q.type || "multipleChoice").toLowerCase();
-        const possible = isPromptType(type) ? promptPointsPossible(q) : pointsPossible(q);
+        const type = normalizeType(q.type);
+        const possible = type === "prompt" ? promptPointsPossible(q) : pointsPossible(q);
 
         state.lastWasSkipped = true;
         state.lastIsCorrect = false;
@@ -994,7 +1014,10 @@
 
       function handleMCQSubmit(q, choice) {
         const chosen = Number(choice);
-        if (!Number.isFinite(chosen)) return;
+        if (!Number.isFinite(chosen)) {
+          state.isGrading = false;
+          return;
+        }
 
         const ok = chosen === Number(q.answer);
         const possible = pointsPossible(q);
@@ -1074,7 +1097,7 @@
           type: "prompt",
           user: raw,
           checks,
-          correct: true, // prompts are not right/wrong; keep true to indicate "completed"
+          correct: true, // prompts are "completed", not right/wrong
           skipped: false,
           pointsEarned: earned,
           pointsPossible: possible
@@ -1098,7 +1121,6 @@
         const possible = Number(state.objectiveMaxPoints || 0) + Number(state.promptMaxPoints || 0);
         const percent = possible ? Math.round((earned / possible) * 100) : 0;
 
-        // FIX: include scoring inputs used for normalization
         const reviewMap = normalizeResponsesForSave(state.responses);
 
         const payload = {
@@ -1107,12 +1129,13 @@
           skill: "writing",
           at: nowIso(),
 
-          // scoring inputs for normalization
+          // scoring inputs used for normalization
           questions: Array.isArray(state.questions) ? state.questions : [],
           review: reviewMap, // id -> { pointsEarned, pointsPossible, ... }
 
+          // writing uses points; keep fields consistent
           rawCorrect: earned,
-          totalQuestions: possible, // treat as "total points" for writing
+          totalQuestions: possible,
           percent,
           rubric: {
             scoring: "points",
@@ -1154,18 +1177,31 @@
         if (action === "start" || action === "retry") {
           ev.preventDefault();
           start();
-        } else if (action === "restart") {
+          return;
+        }
+
+        if (action === "restart") {
           ev.preventDefault();
           restart();
-        } else if (action === "next") {
+          return;
+        }
+
+        if (action === "next") {
           ev.preventDefault();
-          toNextScreenAfterFeedback();
-        } else if (action === "skip") {
+          next();
+          return;
+        }
+
+        if (action === "skip") {
           ev.preventDefault();
           skip();
-        } else if (action === "save-score") {
+          return;
+        }
+
+        if (action === "save-score") {
           ev.preventDefault();
           saveScoreToProfile();
+          return;
         }
       });
 
@@ -1181,7 +1217,7 @@
 
         state.isGrading = true;
 
-        const qtype = String(form.getAttribute("data-qtype") || "").toLowerCase();
+        const qtype = normalizeType(form.getAttribute("data-qtype"));
 
         try {
           if (qtype === "prompt") {

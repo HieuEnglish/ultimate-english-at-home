@@ -41,8 +41,8 @@
   const SKILL = "writing";
 
   const TIME_LIMIT_SEC = 60 * 60; // 60 minutes (easier than IELTS)
-  const MAX_OBJECTIVE = 10;
-  const MAX_QUESTIONS = 12;
+  const MAX_OBJECTIVE = 12;
+  const MAX_QUESTIONS = 14;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;

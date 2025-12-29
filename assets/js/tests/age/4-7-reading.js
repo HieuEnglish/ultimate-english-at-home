@@ -12,6 +12,7 @@
    Update:
    - Adds a final summary report (per-question review).
    - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE).
+   - Adds per-run cap (bank is a pool; each run uses a short randomized subset).
 */
 
 (function () {
@@ -19,6 +20,7 @@
 
   const SLUG = "age-4-7-reading";
   const BANK_SRC = "assets/data/tests-4-7-reading.js";
+  const MAX_QUESTIONS_PER_RUN = 12;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -574,7 +576,10 @@
           const prepared = bank.map(cloneQuestionWithShuffledOptions);
           shuffleInPlace(prepared);
 
-          state.questions = prepared;
+          // Per-run cap: use a short subset after shuffle
+          const picked = prepared.slice(0, Math.min(MAX_QUESTIONS_PER_RUN, prepared.length));
+
+          state.questions = picked;
           state.index = 0;
           state.correctCount = 0;
           state.lastChoice = null;
@@ -701,7 +706,6 @@
           skill: "reading",
           at: nowIso(),
 
-          // FIX: include scoring inputs for normalization
           questions: Array.isArray(state.questions) ? state.questions : [],
           review: Array.isArray(state.review) ? state.review : [],
 

@@ -27,7 +27,7 @@
 
   const SLUG = "age-8-10-reading";
   const BANK_SRC = "assets/data/tests-8-10-reading.js";
-  const MAX_QUESTIONS = 15;
+  const MAX_QUESTIONS = 16;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;

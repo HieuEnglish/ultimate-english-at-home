@@ -17,6 +17,7 @@
      * questions: state.questions
      * resultsById: state.results
      * notesById: state.notes
+   - Adds per-run cap (bank is a pool; each run uses a short randomized subset).
 */
 
 (function () {
@@ -24,6 +25,7 @@
 
   const SLUG = "age-0-3-writing";
   const BANK_SRC = "assets/data/tests-0-3-writing.js";
+  const MAX_QUESTIONS_PER_RUN = 8;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") {
@@ -123,7 +125,7 @@
     return `
       <div class="detail-card" role="region" aria-label="Writing test">
         <div style="display:flex; gap:12px; align-items:flex-start">
-          <div class="card-icon" aria-hidden="true" style="width:44px; height:44px">✍️</div>
+          <div class="card-icon" aria-hidden="true" style="width:44px; height:44px"✍️</div>
           <div>
             <h2 style="margin:0; font-size:18px">Ages 0–3 • Pre-writing practice</h2>
             <p style="margin:10px 0 0; color: var(--muted)">
@@ -382,6 +384,7 @@
     canvas.addEventListener("pointerup", onUp);
     canvas.addEventListener("pointercancel", onUp);
     canvas.addEventListener("pointerleave", onUp);
+    canvas.addEventListener("pointerout", onUp);
 
     const clear = () => {
       const r = canvas.getBoundingClientRect();
@@ -394,6 +397,7 @@
       canvas.removeEventListener("pointerup", onUp);
       canvas.removeEventListener("pointercancel", onUp);
       canvas.removeEventListener("pointerleave", onUp);
+      canvas.removeEventListener("pointerout", onUp);
     };
 
     return { canvas, ctx, destroy, clear };
@@ -506,7 +510,9 @@
 
           shuffleInPlace(prepared);
 
-          state.questions = prepared;
+          const picked = prepared.slice(0, Math.min(MAX_QUESTIONS_PER_RUN, prepared.length));
+
+          state.questions = picked;
           state.index = 0;
           state.doneCount = 0;
           state.results = Object.create(null);
