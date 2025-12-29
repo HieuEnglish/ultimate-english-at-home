@@ -47,6 +47,15 @@ function readFileAsText(file) {
   });
 }
 
+function emojiForSkill(skill) {
+  const s = String(skill || '').trim().toLowerCase();
+  if (s === 'reading') return '📖';
+  if (s === 'listening') return '🎧';
+  if (s === 'writing') return '✍️';
+  if (s === 'speaking') return '🗣️';
+  return '⭐';
+}
+
 function buildResourceSnapshotForView(f) {
   const age = f && f.age != null ? String(f.age) : '';
   const skill = f && f.skill != null ? String(f.skill) : '';
@@ -79,8 +88,13 @@ function renderFavouritesList(items, hrefFor) {
   if (!safeItems.length) {
     return `
       <div class="note">
-        <strong>No favourites yet.</strong>
-        <p style="margin:8px 0 0">Go to Resources and tap <span aria-hidden="true">♥</span> Save on anything you want to keep.</p>
+        <strong>
+          No favourites yet <span class="emoji" aria-hidden="true">💔</span>
+        </strong>
+        <p style="margin:8px 0 0">
+          Go to Resources and tap <span class="emoji" aria-hidden="true">♥</span> Save on anything you want to keep
+          <span class="emoji" aria-hidden="true">🔖</span>
+        </p>
       </div>
     `;
   }
@@ -94,6 +108,7 @@ function renderFavouritesList(items, hrefFor) {
           const ageHeading = r.age ? ageGroupHeading(r.age) : '';
           const safeSkill = escapeHtml(r.skill || '');
           const skillLabel = r.skill ? capitalize(r.skill) : 'Resource';
+          const skillEmoji = r.skill ? emojiForSkill(r.skill) : '';
           const detailPath = r.age && r.skill && r.slug ? `/resources/${r.age}/${r.skill}/${r.slug}` : '';
           const detailHref = detailPath ? hrefFor(detailPath) : '';
 
@@ -105,26 +120,35 @@ function renderFavouritesList(items, hrefFor) {
                 r.link
               )}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeAttr(
                 r.title
-              )} in a new tab">Open Resource ↗</a>`
-            : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
+              )} in a new tab">Open Resource ↗ <span class="emoji" aria-hidden="true">🚀</span></a>`
+            : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK <span class="emoji" aria-hidden="true">⚠️</span></span>`;
 
           const detailsBtn = detailHref
-            ? `<a class="btn btn--small" href="${detailHref}" data-nav>Details →</a>`
-            : `<span class="btn btn--small btn--disabled" aria-disabled="true">No details</span>`;
+            ? `<a class="btn btn--small" href="${detailHref}" data-nav>Details → <span class="emoji" aria-hidden="true">✨</span></a>`
+            : `<span class="btn btn--small btn--disabled" aria-disabled="true">No details <span class="emoji" aria-hidden="true">🧩</span></span>`;
 
           const key = String(fav && fav.key ? fav.key : '');
 
           return `
             <article class="resource-item" role="listitem" data-fav-item="${escapeAttr(key)}">
               <div class="resource-card" role="group" aria-label="${escapeAttr(r.title)}">
-                <h2 class="resource-title">${escapeHtml(r.title)}</h2>
+                <h2 class="resource-title">
+                  ${escapeHtml(r.title)}
+                  <span class="emoji" aria-hidden="true" style="margin-left:6px">💟</span>
+                </h2>
                 <p class="resource-desc">${escapeHtml(desc)}</p>
                 ${
                   safeAge || safeSkill
                     ? `<p class="muted" style="margin:8px 0 0; font-size:13px">
                         ${ageHeading ? `${escapeHtml(ageHeading)}` : ''}
                         ${safeAge && safeSkill ? ' · ' : ''}
-                        ${safeSkill ? `${escapeHtml(skillLabel)}` : ''}
+                        ${
+                          safeSkill
+                            ? `<span class="emoji" aria-hidden="true" style="margin-right:6px">${escapeHtml(
+                                skillEmoji
+                              )}</span>${escapeHtml(skillLabel)}`
+                            : ''
+                        }
                       </p>`
                     : ''
                 }
@@ -140,7 +164,7 @@ function renderFavouritesList(items, hrefFor) {
                   data-fav-key="${escapeAttr(key)}"
                   aria-label="Remove ${escapeAttr(r.title)} from favourites"
                 >
-                  Remove
+                  Remove <span class="emoji" aria-hidden="true">🗑️</span>
                 </button>
               </div>
             </article>
@@ -167,28 +191,36 @@ export function getView(ctx) {
   const listHtml = renderFavouritesList(items, hrefFor);
 
   const html = `
-    <section class="page-top">
+    <section class="page-top favourites-page">
       ${breadcrumb}
-      <h1 class="page-title">Favourites</h1>
-      <p class="page-subtitle">Your saved resources (stored on this device).</p>
+      <h1 class="page-title">
+        Favourites <span class="emoji" aria-hidden="true">💖</span>
+      </h1>
+      <p class="page-subtitle">
+        Your saved resources (stored on this device)
+        <span class="emoji" aria-hidden="true">📌</span>
+      </p>
 
       <div id="favourites-list">
         ${listHtml}
       </div>
 
       <div class="detail-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
-        <h2 class="detail-title" style="font-size:18px; margin:0">Move to another device</h2>
+        <h2 class="detail-title" style="font-size:18px; margin:0">
+          Move to another device <span class="emoji" aria-hidden="true">🚚</span>
+        </h2>
         <p class="detail-desc" style="margin-top:10px">
           Save your <strong>Profile + Favourites</strong> to a file. On your other device, load the file to copy them.
+          <span class="emoji" aria-hidden="true">📦</span>
         </p>
 
         <div class="actions" style="margin-top:12px; flex-wrap:wrap">
           <button type="button" class="btn btn--primary" data-sync-export>
-            Save to file
+            Save to file <span class="emoji" aria-hidden="true">💾</span>
           </button>
 
           <label class="btn" style="position:relative; overflow:hidden">
-            Load from file
+            Load from file <span class="emoji" aria-hidden="true">📂</span>
             <input
               type="file"
               accept=".json,application/json"
@@ -199,7 +231,7 @@ export function getView(ctx) {
           </label>
 
           <button type="button" class="btn btn--small" data-sync-import-merge aria-pressed="false">
-            Load option: Add (keep current)
+            Load option: Add (keep current) <span class="emoji" aria-hidden="true">➕</span>
           </button>
         </div>
 
@@ -207,9 +239,15 @@ export function getView(ctx) {
       </div>
 
       <div class="actions">
-        <a class="btn btn--primary" href="${hrefFor('/')}" data-nav>Home</a>
-        <a class="btn" href="${hrefFor('/resources')}" data-nav>Resources</a>
-        <a class="btn" href="${hrefFor('/profile')}" data-nav>Profile</a>
+        <a class="btn btn--primary" href="${hrefFor('/')}" data-nav>
+          Home <span class="emoji" aria-hidden="true">🏠</span>
+        </a>
+        <a class="btn" href="${hrefFor('/resources')}" data-nav>
+          Resources <span class="emoji" aria-hidden="true">📚</span>
+        </a>
+        <a class="btn" href="${hrefFor('/profile')}" data-nav>
+          Profile <span class="emoji" aria-hidden="true">👤</span>
+        </a>
       </div>
     </section>
   `;
@@ -259,16 +297,16 @@ export function getView(ctx) {
       exportBtn.addEventListener('click', (ev) => {
         ev.preventDefault();
         if (!ctx || typeof ctx.syncExport !== 'function') {
-          setStatus('Save not available.');
+          setStatus('Save not available. ⚠️');
           return;
         }
 
         try {
           const payload = ctx.syncExport();
           downloadJsonFile(payload, safeNowName());
-          setStatus('File saved. Use it on your other device.');
+          setStatus('File saved. Use it on your other device. ✅');
         } catch (_) {
-          setStatus('Could not save file.');
+          setStatus('Could not save file. ❌');
         }
       });
     }
@@ -277,13 +315,13 @@ export function getView(ctx) {
       const r = String(reason || '').trim();
       const low = r.toLowerCase();
 
-      if (!r) return 'Could not load this file.';
-      if (low.includes('not a ueah')) return 'This file is not from UEAH.';
+      if (!r) return 'Could not load this file. ❌';
+      if (low.includes('not a ueah')) return 'This file is not from UEAH. ⚠️';
       if (low.includes('invalid json') || low.includes('payload') || low.includes('shape')) {
-        return 'This file is not supported.';
+        return 'This file is not supported. ⚠️';
       }
-      if (low.includes('failed to save')) return 'Could not save on this device.';
-      return 'Could not load this file.';
+      if (low.includes('failed to save')) return 'Could not save on this device. ❌';
+      return 'Could not load this file. ❌';
     }
 
     // Import mode toggle (merge/replace)
@@ -291,8 +329,10 @@ export function getView(ctx) {
     const modeBtn = document.querySelector('[data-sync-import-merge]');
     function updateModeUi() {
       if (!modeBtn) return;
-      modeBtn.textContent =
-        importMode === 'replace' ? 'Load option: Replace (overwrite)' : 'Load option: Add (keep current)';
+      modeBtn.innerHTML =
+        importMode === 'replace'
+          ? 'Load option: Replace (overwrite) <span class="emoji" aria-hidden="true">♻️</span>'
+          : 'Load option: Add (keep current) <span class="emoji" aria-hidden="true">➕</span>';
       modeBtn.setAttribute('aria-pressed', importMode === 'replace' ? 'true' : 'false');
     }
     updateModeUi();
@@ -313,12 +353,12 @@ export function getView(ctx) {
         if (!file) return;
 
         if (!ctx || typeof ctx.syncImport !== 'function') {
-          setStatus('Load not available.');
+          setStatus('Load not available. ⚠️');
           fileInput.value = '';
           return;
         }
 
-        setStatus('Loading file…');
+        setStatus('Loading file… ⏳');
 
         try {
           const text = await readFileAsText(file);
@@ -328,12 +368,12 @@ export function getView(ctx) {
             const reason = result && result.reason ? String(result.reason) : '';
             setStatus(friendlySyncError(reason));
           } else {
-            setStatus('Done. Your profile and favourites are now on this device.');
+            setStatus('Done. Your profile and favourites are now on this device. ✅');
             // Re-render list
             renderList();
           }
         } catch (_) {
-          setStatus('Could not load this file.');
+          setStatus('Could not load this file. ❌');
         } finally {
           // Allow importing the same file again
           fileInput.value = '';

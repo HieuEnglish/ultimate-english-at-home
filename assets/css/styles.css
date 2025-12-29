@@ -23,6 +23,11 @@
   --profile-glow-border: rgba(255, 160, 70, .52);
   --profile-glow-ring: rgba(255, 160, 70, .16);
 
+  /* NEW: favourites button glow (pink) */
+  --fav-glow: rgba(255, 106, 179, .30);
+  --fav-glow-border: rgba(255, 106, 179, .56);
+  --fav-glow-ring: rgba(255, 106, 179, .16);
+
   /* NEW: form error color */
   --danger:#c0183c;
 
@@ -80,6 +85,11 @@
     --profile-glow: rgba(255, 160, 70, .28);
     --profile-glow-border: rgba(255, 160, 70, .58);
     --profile-glow-ring: rgba(255, 160, 70, .18);
+
+    /* NEW: favourites button glow (pink, dark mode tweaks) */
+    --fav-glow: rgba(255, 106, 179, .26);
+    --fav-glow-border: rgba(255, 106, 179, .60);
+    --fav-glow-ring: rgba(255, 106, 179, .18);
 
     /* NEW: form error color (dark mode) */
     --danger:#ff5f86;
@@ -660,6 +670,19 @@ small.emoji{
   border-color: var(--profile-glow-border);
 }
 
+/* -------------------------------------------------
+   NEW: Favourites page buttons glow pink on hover/focus
+   Apply to any .btn inside a .favourites-page wrapper
+-------------------------------------------------- */
+.favourites-page .btn:hover,
+.favourites-page .btn:focus-visible{
+  box-shadow:
+    0 0 0 3px var(--fav-glow-ring),
+    0 0 22px var(--fav-glow),
+    var(--shadow);
+  border-color: var(--fav-glow-border);
+}
+
 /* NEW: small + disabled buttons (used on resource cards) */
 .btn--small{
   padding:8px 12px;
@@ -1075,4 +1098,6 @@ progress::-moz-progress-bar{
   .tests-page .btn:focus-visible{box-shadow: var(--shadow2) !important}
   .profile-page .btn:hover,
   .profile-page .btn:focus-visible{box-shadow: var(--shadow2) !important}
+  .favourites-page .btn:hover,
+  .favourites-page .btn:focus-visible{box-shadow: var(--shadow2) !important}
 }
