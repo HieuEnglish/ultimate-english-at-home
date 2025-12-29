@@ -9,6 +9,46 @@ import { breadcrumbs, escapeHtml } from "../common.js";
 
 const AGE_ORDER = ["0-3", "4-7", "8-10", "11-12", "13-18", "ielts"];
 
+// Friendly, relevant emojis for the scoring UI (view-only; does not affect scoring logic)
+const AGE_EMOJI = {
+  "0-3": "🧸",
+  "4-7": "🎈",
+  "8-10": "📚",
+  "11-12": "🧠",
+  "13-18": "🎓",
+  ielts: "🏁",
+};
+
+const LEVEL_EMOJI = {
+  1: "🌱",
+  2: "🐣",
+  3: "🌟",
+  4: "🚀",
+  5: "🏆",
+};
+
+function ageEmoji(age) {
+  const a = String(age || "").trim().toLowerCase();
+  return AGE_EMOJI[a] || "📘";
+}
+
+function levelEmoji(levelsType, row) {
+  if (levelsType === "bands") {
+    // Map practice bands to a simple progression.
+    const m = String(row && row.title ? row.title : "").match(/Band\s*(\d+(?:\.\d+)?)/i);
+    const band = m ? Number(m[1]) : NaN;
+    if (!Number.isFinite(band)) return "🎯";
+    if (band >= 8) return "🏆";
+    if (band >= 7) return "🎯";
+    if (band >= 6) return "🚀";
+    if (band >= 5) return "🌟";
+    return "🌱";
+  }
+
+  const lvl = Number(row && row.level);
+  return LEVEL_EMOJI[lvl] || "⭐";
+}
+
 function displayAgeHeading(age) {
   const a = String(age || "").trim().toLowerCase();
   if (a === "ielts") return "IELTS Scoring (Practice)";
@@ -31,9 +71,11 @@ function renderQuickNav(plan) {
     const label = age === "ielts" ? "IELTS" : String(age).replace("-", "–");
     const id = `age-${String(age)}`;
     const aria = age === "ielts" ? "Jump to IELTS scoring" : `Jump to ages ${String(age)} scoring`;
-    return `<a class="btn btn--small scoring-age-btn" data-age-jump href="#${escapeHtml(id)}" aria-label="${escapeHtml(
-      aria
-    )}">${escapeHtml(label)}</a>`;
+    return `<a class="btn btn--small scoring-age-btn" data-age-jump href="#${escapeHtml(
+      id
+    )}" aria-label="${escapeHtml(aria)}"><span class="emoji" aria-hidden="true">${ageEmoji(
+      age
+    )}</span> ${escapeHtml(label)}</a>`;
   }).join("");
 
   return `
@@ -111,14 +153,22 @@ function renderScoringPageStyles() {
 function renderMethod(plan) {
   const m = plan.method || {};
   const w = m.difficultyWeights || {};
-  const weightsText = `easy=${escapeHtml(String(w.easy))}, medium=${escapeHtml(String(w.medium))}, hard=${escapeHtml(String(w.hard))}`;
+  const weightsText = `easy=${escapeHtml(String(w.easy))}, medium=${escapeHtml(
+    String(w.medium)
+  )}, hard=${escapeHtml(String(w.hard))}`;
 
   return `
     <section class="note" aria-label="How scoring works">
-      <p><strong>How scoring works (practice):</strong> ${escapeHtml(m.normalizedScore || "")}</p>
-      <p><strong>Difficulty weighting:</strong> ${weightsText}</p>
-      <p><strong>Stability:</strong> ${escapeHtml(m.stability || "")}</p>
-      <p><strong>Caregiver marking:</strong> ${escapeHtml(m.caregiverMarking || "")}</p>
+      <p><strong><span class="emoji" aria-hidden="true">🧮</span> How scoring works (practice):</strong> ${escapeHtml(
+        m.normalizedScore || ""
+      )}</p>
+      <p><strong><span class="emoji" aria-hidden="true">⚖️</span> Difficulty weighting:</strong> ${weightsText}</p>
+      <p><strong><span class="emoji" aria-hidden="true">🎯</span> Stability:</strong> ${escapeHtml(
+        m.stability || ""
+      )}</p>
+      <p><strong><span class="emoji" aria-hidden="true">👨‍👩‍👧‍👦</span> Caregiver marking:</strong> ${escapeHtml(
+        m.caregiverMarking || ""
+      )}</p>
     </section>
   `;
 }
@@ -147,16 +197,25 @@ function renderLevelCards(agePlan) {
         <div class="card" role="listitem">
           <div class="card-icon" aria-hidden="true"><span>${escapeHtml(iconText)}</span></div>
           <div class="card-body">
-            <h3 class="card-title">${escapeHtml(title)}</h3>
-            <p class="card-text"><strong>Score range:</strong> ${escapeHtml(range)}</p>
+            <h3 class="card-title"><span class="emoji" aria-hidden="true">${levelEmoji(
+              levels.type,
+              r
+            )}</span> ${escapeHtml(title)}</h3>
+            <p class="card-text"><strong><span class="emoji" aria-hidden="true">📊</span> Score range:</strong> ${escapeHtml(
+              range
+            )}</p>
             ${
               req
-                ? `<p class="card-text"><strong>Requirements:</strong> ${escapeHtml(req)}</p>`
+                ? `<p class="card-text"><strong><span class="emoji" aria-hidden="true">✅</span> Requirements:</strong> ${escapeHtml(
+                    req
+                  )}</p>`
                 : ""
             }
             ${
               canDo
-                ? `<p class="card-text"><strong>Can do:</strong> ${escapeHtml(canDo)}</p>`
+                ? `<p class="card-text"><strong><span class="emoji" aria-hidden="true">💡</span> Can do:</strong> ${escapeHtml(
+                    canDo
+                  )}</p>`
                 : ""
             }
           </div>
@@ -167,7 +226,7 @@ function renderLevelCards(agePlan) {
 
   const notes = Array.isArray(levels.notes) ? levels.notes : [];
   const notesHtml = notes.length
-    ? `<div class="note"><strong>Notes:</strong><ul>${notes
+    ? `<div class="note"><strong><span class="emoji" aria-hidden="true">📝</span> Notes:</strong><ul>${notes
         .map((n) => `<li>${escapeHtml(n)}</li>`)
         .join("")}</ul></div>`
     : "";
@@ -184,25 +243,35 @@ function renderAgeSection(agePlan) {
   const notes = Array.isArray(agePlan.notes) ? agePlan.notes : [];
 
   return `
-    <section id="age-${escapeHtml(agePlan.id)}" class="tests-section" aria-label="${escapeHtml(agePlan.label)} scoring">
-      <h2 class="section-title">${escapeHtml(displayAgeHeading(agePlan.id))}</h2>
+    <section id="age-${escapeHtml(agePlan.id)}" class="tests-section" aria-label="${escapeHtml(
+      agePlan.label
+    )} scoring">
+      <h2 class="section-title"><span class="emoji" aria-hidden="true">${ageEmoji(
+        agePlan.id
+      )}</span> ${escapeHtml(displayAgeHeading(agePlan.id))}</h2>
 
       <div class="note">
-        <p><strong>Stability target:</strong> Full confidence at <strong>${escapeHtml(
+        <p><strong><span class="emoji" aria-hidden="true">🎯</span> Stability target:</strong> Full confidence at <strong>${escapeHtml(
           String(stability.fullConfidencePoints || "")
         )}</strong> effective points. ${escapeHtml(stability.meaning || "")}</p>
 
-        <p><strong>Overall certification:</strong> ${escapeHtml(overall.formula || "")}</p>
+        <p><strong><span class="emoji" aria-hidden="true">🏅</span> Overall certification:</strong> ${escapeHtml(
+          overall.formula || ""
+        )}</p>
 
         ${
           isIeltsLike(agePlan.id)
-            ? `<p><strong>Disclaimer:</strong> ${escapeHtml((window.UEAH_SCORING_PLAN && window.UEAH_SCORING_PLAN.getPlan().disclaimer.ielts) || "")}</p>`
+            ? `<p><strong><span class="emoji" aria-hidden="true">⚠️</span> Disclaimer:</strong> ${escapeHtml(
+                (window.UEAH_SCORING_PLAN && window.UEAH_SCORING_PLAN.getPlan().disclaimer.ielts) || ""
+              )}</p>`
             : ""
         }
 
         ${
           notes.length
-            ? `<ul>${notes.map((n) => `<li>${escapeHtml(n)}</li>`).join("")}</ul>`
+            ? `<ul>${notes
+                .map((n) => `<li><span class="emoji" aria-hidden="true">📝</span> ${escapeHtml(n)}</li>`)
+                .join("")}</ul>`
             : ""
         }
       </div>
@@ -231,7 +300,7 @@ export function getView(ctx) {
       <section class="page-top scoring-page">
         ${renderScoringPageStyles()}
         ${breadcrumb}
-        <h1 class="page-title">Scoring plan</h1>
+        <h1 class="page-title"><span class="emoji" aria-hidden="true">📋</span> Scoring plan</h1>
 
         <div class="note">
           <strong>Missing scoring plan data.</strong>
@@ -255,15 +324,20 @@ export function getView(ctx) {
       ${renderScoringPageStyles()}
       ${breadcrumb}
 
-      <h1 class="page-title">Scoring plan</h1>
+      <h1 class="page-title"><span class="emoji" aria-hidden="true">📋</span> Scoring plan</h1>
       <p class="page-subtitle">
+        <span class="emoji" aria-hidden="true">🧩</span>
         Practice scoring rules and level titles per age group.
         IELTS-related bands are <strong>practice estimates</strong> only.
       </p>
 
       <div class="note" aria-label="Disclaimer">
-        <p><strong>General:</strong> ${escapeHtml(plan.disclaimer && plan.disclaimer.general ? plan.disclaimer.general : "")}</p>
-        <p><strong>IELTS:</strong> ${escapeHtml(plan.disclaimer && plan.disclaimer.ielts ? plan.disclaimer.ielts : "")}</p>
+        <p><strong><span class="emoji" aria-hidden="true">⚠️</span> General:</strong> ${escapeHtml(
+          plan.disclaimer && plan.disclaimer.general ? plan.disclaimer.general : ""
+        )}</p>
+        <p><strong><span class="emoji" aria-hidden="true">⚠️</span> IELTS:</strong> ${escapeHtml(
+          plan.disclaimer && plan.disclaimer.ielts ? plan.disclaimer.ielts : ""
+        )}</p>
       </div>
 
       ${renderMethod(plan)}
