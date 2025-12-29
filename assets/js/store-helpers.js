@@ -581,18 +581,17 @@ export function syncImport(syncJson, opts = {}) {
 }
 
 // -----------------------------
-// Contact helpers (fallback to mailto)
+// Contact helpers (GitHub issue)
 // -----------------------------
 
-export const CONTACT_TO = "hieuenglishapps@gmail.com";
+export const CONTACT_REPO = "HieuEnglish/ultimate-english-at-home";
 
-function buildMailto(to, subject, body) {
-  const _to = encodeURIComponent(String(to || ""));
-  const qs = new URLSearchParams();
-  if (subject) qs.set("subject", String(subject));
-  if (body) qs.set("body", String(body));
-  const query = qs.toString();
-  return query ? `mailto:${_to}?${query}` : `mailto:${_to}`;
+function buildIssueUrl(repo, title, body) {
+  const r = String(repo || CONTACT_REPO || "").trim();
+  const u = new URL(`https://github.com/${r}/issues/new`);
+  if (title) u.searchParams.set("title", String(title));
+  if (body) u.searchParams.set("body", String(body));
+  return u.toString();
 }
 
 function safePageUrl() {
@@ -606,45 +605,52 @@ function safePageUrl() {
 /**
  * Send a contact message.
  * - Prefers window.UEAH_CONTACT.send if available.
- * - Falls back to mailto when contact.js is unavailable or errors.
+ * - Falls back to opening a pre-filled GitHub issue.
  *
  * Payload shape expected by views/contact.js:
- *   { fromEmail, subject, message }
+ *   { name, subject, message }
  */
 export function contactSend(payload) {
   const data = payload && typeof payload === "object" ? payload : {};
-  const fromEmail = String(data.fromEmail || "").trim();
-  const subject = String(data.subject || "").trim() || "UEAH Contact";
+  const name = String(data.name || "").trim();
+  const subject = String(data.subject || "").trim() || "UEAH Feedback";
   const message = String(data.message || "").trim();
 
   const CONTACT = getContactHelpers();
 
   // Prefer contact.js helper if present.
-  // Expected: window.UEAH_CONTACT.send({ to, fromEmail, subject, message })
+  // Expected: window.UEAH_CONTACT.send({ repo, name, subject, message })
   if (CONTACT && typeof CONTACT === "object" && typeof CONTACT.send === "function") {
     try {
-      return CONTACT.send({ to: CONTACT_TO, fromEmail, subject, message });
+      return CONTACT.send({ repo: CONTACT_REPO, name, subject, message });
     } catch (_) {
-      // Fall back to mailto below.
+      // Fall back below.
     }
   }
 
-  // Fallback: mailto (always usable on static hosting)
+  // Fallback: open a pre-filled GitHub issue.
   const url = safePageUrl();
   const bodyLines = [
-    message || "",
+    message || "-",
     "",
     "---",
-    `From: ${fromEmail || "Not provided"}`,
-  ];
-  if (url) bodyLines.push(`Page: ${url}`);
+    name ? `Name: ${name}` : null,
+    url ? `Page: ${url}` : null,
+  ].filter(Boolean);
+
   const body = bodyLines.join("\n");
+  const issueUrl = buildIssueUrl(CONTACT_REPO, subject, body);
 
   try {
-    window.location.href = buildMailto(CONTACT_TO, subject, body);
-    return true;
+    const w = window.open(issueUrl, "_blank", "noopener,noreferrer");
+    if (w) return { ok: true, url: issueUrl };
+  } catch (_) {}
+
+  try {
+    window.location.href = issueUrl;
+    return { ok: true, url: issueUrl };
   } catch (_) {
-    return false;
+    return { ok: false, url: issueUrl };
   }
 }
 
