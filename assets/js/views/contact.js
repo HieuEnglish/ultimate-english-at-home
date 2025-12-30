@@ -1,6 +1,6 @@
 /* assets/js/views/contact.js
    Contact view for Ultimate English At Home.
-   Friendly, emoji-forward contact form that opens a pre-filled GitHub issue.
+   Friendly, emoji-forward contact form that opens a Google Form.
 */
 
 import { breadcrumbs, escapeHtml } from '../common.js';
@@ -15,8 +15,9 @@ function sanitizeText(value, maxLen) {
   return s.length > maxLen ? s.slice(0, maxLen) : s;
 }
 
-function buildCopyText({ name, subject, message, pageUrl }) {
+function buildCopyText({ category, name, subject, message, pageUrl }) {
   const lines = [];
+  if (category) lines.push(`Category: ${category}`);
   if (subject) lines.push(`Subject: ${subject}`);
   if (name) lines.push(`Name: ${name}`);
   if (pageUrl) lines.push(`Page: ${pageUrl}`);
@@ -31,6 +32,16 @@ function safePageUrl() {
   } catch (_) {
     return '';
   }
+}
+
+function inferCategoryFromSubject(subject) {
+  const s = String(subject || '').trim();
+  if (!s) return '';
+  const lower = s.toLowerCase();
+  if (lower.startsWith('idea:')) return 'Idea';
+  if (lower.startsWith('bug:')) return 'Bug';
+  if (lower.startsWith('question:')) return 'Question';
+  return '';
 }
 
 /**
@@ -59,17 +70,17 @@ export function getView(ctx) {
 
       <div class="detail-card" role="region" aria-label="Contact form">
         <div class="chips" style="margin: 0 0 12px" aria-label="Quick subject presets">
-          <button class="chip" type="button" data-preset="Idea" aria-label="Preset: Idea">
+          <button class="chip" type="button" data-preset="Idea" aria-label="Preset: Idea" aria-pressed="false">
             <span class="emoji" aria-hidden="true">💡</span> Idea
           </button>
-          <button class="chip" type="button" data-preset="Bug" aria-label="Preset: Bug">
+          <button class="chip" type="button" data-preset="Bug" aria-label="Preset: Bug" aria-pressed="false">
             <span class="emoji" aria-hidden="true">🐞</span> Bug
           </button>
-          <button class="chip" type="button" data-preset="Question" aria-label="Preset: Question">
+          <button class="chip" type="button" data-preset="Question" aria-label="Preset: Question" aria-pressed="false">
             <span class="emoji" aria-hidden="true">❓</span> Question
           </button>
           <span class="chip">
-            <span class="emoji" aria-hidden="true">✨</span> No email needed
+            <span class="emoji" aria-hidden="true">✨</span> No login needed
           </span>
         </div>
 
@@ -129,11 +140,11 @@ export function getView(ctx) {
           <div class="actions">
             <button class="btn btn--primary" type="submit"><span class="emoji" aria-hidden="true">🚀</span> Send</button>
             <button class="btn" type="button" id="contact-copy"><span class="emoji" aria-hidden="true">📋</span> Copy</button>
-            <a class="btn" href="${hrefFor('/') }" data-nav><span class="emoji" aria-hidden="true">🏠</span> Home</a>
+            <a class="btn" href="${hrefFor('/')}" data-nav><span class="emoji" aria-hidden="true">🏠</span> Home</a>
           </div>
 
           <p class="muted" style="margin:12px 0 0">
-            When you press <strong>Send</strong>, this opens a GitHub form in a new tab so you can review everything before submitting.
+            When you press <strong>Send</strong>, this opens a Google Form in a new tab so you can review everything before submitting.
             <span class="emoji" aria-hidden="true">🔗</span>
           </p>
 
@@ -167,6 +178,21 @@ export function getView(ctx) {
 
     const fallbackWrap = document.getElementById('contact-fallback');
     const fallbackLink = document.getElementById('contact-fallback-link');
+
+    let selectedCategory = '';
+
+    const presetButtons = Array.from(document.querySelectorAll('button[data-preset]'));
+
+    function setActivePreset(preset) {
+      selectedCategory = String(preset || '').trim();
+      presetButtons.forEach((b) => {
+        const p = String(b.getAttribute('data-preset') || '').trim();
+        const isActive = !!selectedCategory && p.toLowerCase() === selectedCategory.toLowerCase();
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        // chip--ok exists in your design system (used elsewhere). If not, it will just be ignored.
+        b.classList.toggle('chip--ok', isActive);
+      });
+    }
 
     // Prefill the name field from the profile store if available
     const prof = typeof profileGet === 'function' ? profileGet() || {} : {};
@@ -290,12 +316,14 @@ export function getView(ctx) {
     }
 
     // Subject presets (chips)
-    document.querySelectorAll('button[data-preset]').forEach((btn) => {
+    presetButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const preset = btn.getAttribute('data-preset');
         if (!subjectEl) return;
 
         const base = String(preset || '').trim();
+        if (base) setActivePreset(base);
+
         const current = String(subjectEl.value || '').trim();
 
         if (!current) subjectEl.value = `${base}: `;
@@ -320,6 +348,7 @@ export function getView(ctx) {
 
         const ok = await copyToClipboard(
           buildCopyText({
+            category: selectedCategory || inferCategoryFromSubject(subjVal),
             name: nameVal,
             subject: subjVal,
             message: msgVal,
@@ -347,11 +376,12 @@ export function getView(ctx) {
 
       try {
         if (typeof contactSend === 'function') {
-          const res = contactSend({ name: nameVal, subject: subjVal, message: msgVal });
+          const categoryVal = selectedCategory || inferCategoryFromSubject(subjVal) || 'Question';
+          const res = contactSend({ category: categoryVal, name: nameVal, subject: subjVal, message: msgVal });
           const url = res && typeof res === 'object' ? String(res.url || '') : '';
           if (url && fallbackLink) fallbackLink.setAttribute('href', url);
           if (url && fallbackWrap) fallbackWrap.style.display = 'block';
-          setStatus('Opening GitHub…');
+          setStatus('Opening the form…');
         } else {
           setStatus('Contact is not configured on this page.');
         }

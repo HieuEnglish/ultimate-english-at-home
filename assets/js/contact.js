@@ -1,27 +1,45 @@
 /* assets/js/contact.js
-   UEAH Contact helpers (progressive enhancement)
+   UEAH Contact helpers (Google Forms)
 
    What this does:
-   - Provides a safe, dependency-free "mailto:" sender that works on GitHub Pages (no backend)
+   - Opens a Google Form in a new tab (works on GitHub Pages / no backend)
    - Exposes a stable API used by the SPA:
-       window.UEAH_CONTACT.send({ to, fromEmail, subject, message })
-   - Also includes optional helpers for rendering/attaching a standalone contact form
-     (kept for backward compatibility, but the SPA view can validate on its own)
+       window.UEAH_CONTACT.send(payload)
 
-   IMPORTANT:
-   - GitHub Pages cannot send email directly from client-side JS without a backend.
-   - This uses a mailto: fallback which opens the user's email app.
+   Supported payload shapes (backward compatible):
+   1) New (recommended):
+      { category, name, subject, message }
+   2) Older (from store-helpers.js fallback):
+      { repo, name, subject, message }
+   3) Legacy mailto-style callers (accepted but ignored fields):
+      { to, fromEmail, subject, message }
+
+   Configuration:
+   - assets/js/contact-config.js should define:
+       window.UEAH_CONTACT_FORM = { formUrl, entry: { category, name, subject, message, pageUrl, userAgent } }
+
+   Notes:
+   - If entry IDs are not configured yet, this still opens the form normally.
+   - Prefill happens via querystring; very long messages may be truncated for URL safety.
 */
 
 (function () {
   "use strict";
 
-  const DEFAULT_TO = "hieuenglishapps@gmail.com";
+  // Public form URL (safe to hardcode as fallback if config fails to load)
+  const FALLBACK_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSdPI4D3ctNZTcGZHqGGWkjBOiEgpN5R8WWd6ON4fml-PifvMw/viewform";
 
-  const MAX_MESSAGE = 4000;
-  const MAX_SUBJECT = 140;
+  const MAX_CATEGORY = 40;
   const MAX_NAME = 80;
-  const MAX_EMAIL = 120;
+  const MAX_SUBJECT = 140;
+  const MAX_MESSAGE = 4000;
+
+  // URL prefill safety (querystring length limits vary by browser)
+  const MAX_PREFILL_MESSAGE = 1500;
+  const MAX_PREFILL_SUBJECT = 180;
+  const MAX_PREFILL_NAME = 120;
+  const MAX_PREFILL_META = 800;
 
   function sanitizeText(value, maxLen) {
     const s = String(value || "").trim();
@@ -29,55 +47,175 @@
     return s.length > maxLen ? s.slice(0, maxLen) : s;
   }
 
-  function normalizeEmail(value) {
-    const s = String(value || "").trim();
-    return s ? s.toLowerCase() : "";
+  function safePageUrl() {
+    try {
+      return typeof window !== "undefined" && window.location ? String(window.location.href || "") : "";
+    } catch (_) {
+      return "";
+    }
   }
 
-  function isValidEmail(email) {
-    // Pragmatic check for client-side UX.
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+  function safeUserAgent() {
+    try {
+      return typeof navigator !== "undefined" ? String(navigator.userAgent || "") : "";
+    } catch (_) {
+      return "";
+    }
   }
 
-  function buildMailto({ to, subject, body }) {
-    const _to = (to || DEFAULT_TO || "").trim();
-    const qs = new URLSearchParams();
-    if (subject) qs.set("subject", subject);
-    if (body) qs.set("body", body);
-    const query = qs.toString();
-    return query
-      ? `mailto:${encodeURIComponent(_to)}?${query}`
-      : `mailto:${encodeURIComponent(_to)}`;
+  function getConfig() {
+    const cfg = typeof window !== "undefined" ? window.UEAH_CONTACT_FORM : null;
+    if (!cfg || typeof cfg !== "object") {
+      return {
+        formUrl: FALLBACK_FORM_URL,
+        entry: {},
+      };
+    }
+    const formUrl = String(cfg.formUrl || "").trim() || FALLBACK_FORM_URL;
+    const entry = cfg.entry && typeof cfg.entry === "object" ? cfg.entry : {};
+    return { formUrl, entry };
   }
 
-  function composeBody({ name, email, message, pageUrl }) {
+  function normalizeFormUrl(url) {
+    const s = String(url || "").trim();
+    if (!s) return "";
+    try {
+      const u = new URL(s);
+      u.search = "";
+      u.hash = "";
+      return u.toString();
+    } catch (_) {
+      return s;
+    }
+  }
+
+  function entryKey(v) {
+    const s = String(v || "").trim();
+    if (!s) return "";
+    if (s.startsWith("entry.")) return s;
+    if (/^\d+$/.test(s)) return `entry.${s}`;
+    return s;
+  }
+
+  function hasAnyEntryIds(entry) {
+    if (!entry || typeof entry !== "object") return false;
+    return Object.values(entry).some((v) => !!String(v || "").trim());
+  }
+
+  function inferCategory(category, subject) {
+    const c = String(category || "").trim();
+    if (c) return c;
+
+    const s = String(subject || "").trim().toLowerCase();
+    if (s.startsWith("idea:")) return "Idea";
+    if (s.startsWith("bug:")) return "Bug";
+    if (s.startsWith("question:")) return "Question";
+    return "";
+  }
+
+  function composeMessageWithContext(message, { pageUrl, userAgent, name }) {
+    const msg = String(message || "").trim();
     const lines = [];
-    lines.push("UEAH Contact Message");
-    lines.push("-------------------");
-    if (name) lines.push(`Name: ${name}`);
-    if (email) lines.push(`Email: ${email}`);
-    if (pageUrl) lines.push(`Page: ${pageUrl}`);
-    lines.push("");
-    lines.push("Message:");
-    lines.push(message || "-");
-    lines.push("");
-    lines.push(`Sent: ${new Date().toLocaleString()}`);
+    lines.push(msg || "-");
+
+    const meta = [];
+    if (name) meta.push(`Name: ${name}`);
+    if (pageUrl) meta.push(`Page: ${pageUrl}`);
+    if (userAgent) meta.push(`Device/Browser: ${userAgent}`);
+
+    if (meta.length) {
+      lines.push("");
+      lines.push("---");
+      meta.forEach((m) => lines.push(m));
+    }
+
     return lines.join("\n");
   }
 
+  function buildGoogleFormUrl(payload) {
+    const { formUrl, entry } = getConfig();
+    const base = normalizeFormUrl(formUrl);
+    if (!base) return "";
+
+    let u;
+    try {
+      u = new URL(base);
+    } catch (_) {
+      return base;
+    }
+
+    const wantsPrefill = hasAnyEntryIds(entry);
+
+    // If we can prefill, use pp_url; otherwise keep a clean open.
+    // (Some shared links use usp=dialog; not required.)
+    if (wantsPrefill) u.searchParams.set("usp", "pp_url");
+    else u.searchParams.set("usp", "dialog");
+
+    // Backward-compatible payload parsing
+    const name = sanitizeText(payload.name, MAX_NAME);
+    const subject = sanitizeText(payload.subject, MAX_SUBJECT);
+    const category = sanitizeText(inferCategory(payload.category, subject), MAX_CATEGORY);
+
+    // "message" is the canonical field across all payload shapes
+    const rawMessage = sanitizeText(payload.message, MAX_MESSAGE);
+
+    const pageUrl = sanitizeText(payload.pageUrl || safePageUrl(), MAX_PREFILL_META);
+    const userAgent = sanitizeText(payload.userAgent || safeUserAgent(), MAX_PREFILL_META);
+
+    // If the form doesn't have separate fields mapped for page/userAgent,
+    // include context inside the message so you still receive it.
+    const hasPageField = !!entryKey(entry.pageUrl);
+    const hasUaField = !!entryKey(entry.userAgent);
+
+    let message = rawMessage;
+    if (!hasPageField || !hasUaField) {
+      message = composeMessageWithContext(rawMessage, {
+        pageUrl: hasPageField ? "" : pageUrl,
+        userAgent: hasUaField ? "" : userAgent,
+        name: name || "",
+      });
+    }
+
+    // Prefill caps (avoid huge URLs)
+    const prefillName = sanitizeText(name, MAX_PREFILL_NAME);
+    const prefillSubject = sanitizeText(subject, MAX_PREFILL_SUBJECT);
+    const prefillMessage = sanitizeText(message, MAX_PREFILL_MESSAGE);
+
+    function setIf(key, value) {
+      const k = entryKey(key);
+      const v = String(value || "").trim();
+      if (!k || !v) return;
+      u.searchParams.set(k, v);
+    }
+
+    // Optional prefill fields (only used if entry IDs are configured)
+    setIf(entry.category, category);
+    setIf(entry.name, prefillName);
+    setIf(entry.subject, prefillSubject);
+    setIf(entry.message, prefillMessage);
+    setIf(entry.pageUrl, pageUrl);
+    setIf(entry.userAgent, userAgent);
+
+    return u.toString();
+  }
+
+  function openNewTab(url) {
+    try {
+      const w = window.open(url, "_blank", "noopener,noreferrer");
+      return !!w;
+    } catch (_) {
+      return false;
+    }
+  }
+
   /**
-   * Validation for the helper API (send/attach).
-   * The SPA view may also validate independently; this ensures safety if called directly.
+   * Minimal validation for form UX safety.
+   * (Your SPA view already validates; this protects direct callers.)
    */
-  function validateSend({ fromEmail, subject, message }) {
+  function validateSend({ subject, message }) {
     const errors = {};
-    const email = String(fromEmail || "").trim();
     const subj = String(subject || "").trim();
     const msg = String(message || "").trim();
-
-    if (!email) errors.fromEmail = "Email is required.";
-    else if (email.length > MAX_EMAIL) errors.fromEmail = `Email is too long (max ${MAX_EMAIL} characters).`;
-    else if (!isValidEmail(email)) errors.fromEmail = "Please enter a valid email address.";
 
     if (!subj) errors.subject = "Subject is required.";
     else if (subj.length > MAX_SUBJECT) errors.subject = `Subject is too long (max ${MAX_SUBJECT} characters).`;
@@ -88,9 +226,55 @@
     return errors;
   }
 
+  /**
+   * Primary API expected by the SPA (store-helpers.js / views/contact.js).
+   * Opens Google Forms in a new tab.
+   *
+   * Returns: { ok, url }
+   */
+  function send(payload = {}) {
+    const data = payload && typeof payload === "object" ? payload : {};
+
+    // Backward compatibility: some callers pass { fromEmail } or { repo }.
+    // We ignore those fields (no email required, no GitHub needed).
+    const subject = sanitizeText(data.subject, MAX_SUBJECT);
+    const message = sanitizeText(data.message, MAX_MESSAGE);
+
+    const errors = validateSend({ subject, message });
+    if (Object.keys(errors).length) {
+      const err = new Error("CONTACT_VALIDATION_ERROR");
+      err.code = "CONTACT_VALIDATION_ERROR";
+      err.details = errors;
+      throw err;
+    }
+
+    const { formUrl } = getConfig();
+    const base = normalizeFormUrl(formUrl) || FALLBACK_FORM_URL;
+
+    const url = buildGoogleFormUrl({
+      category: data.category,
+      name: data.name,
+      subject,
+      message,
+      pageUrl: data.pageUrl,
+      userAgent: data.userAgent,
+    }) || base;
+
+    const ok = openNewTab(url);
+    if (!ok) {
+      // Do not force navigation away from the SPA; return url for fallback link UI.
+      return { ok: false, url };
+    }
+
+    return { ok: true, url };
+  }
+
+  // ---------------------------------------------------------------------------
+  // Legacy helpers kept for backward compatibility (not used by the SPA today)
+  // ---------------------------------------------------------------------------
+
   function setFieldError(fieldEl, message) {
     if (!fieldEl) return;
-    // Prefer removing aria-invalid when valid; but keep "false" if you rely on it elsewhere.
     if (message) fieldEl.setAttribute("aria-invalid", "true");
     else fieldEl.removeAttribute("aria-invalid");
 
@@ -109,11 +293,16 @@
 
   function readForm(root) {
     const name = sanitizeText(root.querySelector("[name='name']")?.value, MAX_NAME);
-    const email = normalizeEmail(sanitizeText(root.querySelector("[name='email']")?.value, MAX_EMAIL));
+    const email = sanitizeText(root.querySelector("[name='email']")?.value, 120);
     const subject = sanitizeText(root.querySelector("[name='subject']")?.value, MAX_SUBJECT);
     const message = sanitizeText(root.querySelector("[name='message']")?.value, MAX_MESSAGE);
 
-    return { name, email, subject, message };
+    // If someone uses the legacy email field, fold it into the message (form has no email field)
+    const mergedMessage = email
+      ? `Email: ${email}\n\n${message || ""}`.trim()
+      : message;
+
+    return { name, subject, message: mergedMessage };
   }
 
   function clearErrors(root) {
@@ -122,76 +311,14 @@
   }
 
   /**
-   * Primary API expected by the SPA (store-helpers.js / views/contact.js).
-   * Opens a mailto link. Throws a descriptive Error if input is invalid.
-   */
-  function send({ to, fromEmail, subject, message } = {}) {
-    const email = sanitizeText(fromEmail, MAX_EMAIL);
-    const subj = sanitizeText(subject, MAX_SUBJECT);
-    const msg = sanitizeText(message, MAX_MESSAGE);
-
-    const errors = validateSend({ fromEmail: email, subject: subj, message: msg });
-    if (Object.keys(errors).length) {
-      const err = new Error("CONTACT_VALIDATION_ERROR");
-      err.code = "CONTACT_VALIDATION_ERROR";
-      err.details = errors;
-      throw err;
-    }
-
-    const pageUrl = window.location && window.location.href ? window.location.href : "";
-    const body = composeBody({
-      name: "",
-      email,
-      message: msg,
-      pageUrl
-    });
-
-    const href = buildMailto({
-      to: String(to || DEFAULT_TO || "").trim(),
-      subject: subj || "UEAH Contact",
-      body
-    });
-
-    window.location.href = href;
-    return true;
-  }
-
-  /**
-   * Optional: attach behavior to a standalone form markup (kept for backward compatibility).
-   * Note: this older form supports name/email optional; your SPA view now enforces required fields.
+   * Optional: attach behavior to a standalone form markup (legacy).
+   * Opens Google Forms and returns URL for fallback.
    */
   function attach(root, opts) {
     if (!root) return () => {};
 
-    const options = {
-      to: (opts && opts.to) || DEFAULT_TO,
-      onSent: (opts && opts.onSent) || null
-    };
-
     const form = root.querySelector("[data-contact-form]");
     if (!form) return () => {};
-
-    const nameEl = form.querySelector("[name='name']");
-    const emailEl = form.querySelector("[name='email']");
-    const subjectEl = form.querySelector("[name='subject']");
-    const messageEl = form.querySelector("[name='message']");
-
-    function validateLegacy({ name, email, message, subject }) {
-      const errors = {};
-
-      // Legacy form: name/email/subject optional, but sanity check if provided
-      if (name && name.length > MAX_NAME) errors.name = `Name is too long (max ${MAX_NAME} characters).`;
-
-      if (email && email.length > MAX_EMAIL) errors.email = `Email is too long (max ${MAX_EMAIL} characters).`;
-      if (email && !isValidEmail(email)) errors.email = "That email address doesn’t look valid.";
-
-      if (subject && subject.length > MAX_SUBJECT) errors.subject = `Subject is too long (max ${MAX_SUBJECT} characters).`;
-
-      if (!message || message.trim().length < 3) errors.message = "Please write a message.";
-      if (message && message.length > MAX_MESSAGE) errors.message = `Message is too long (max ${MAX_MESSAGE} characters).`;
-
-      return errors;
-    }
 
     function onSubmit(e) {
       e.preventDefault();
@@ -199,48 +326,43 @@
       setStatus(root, "", "");
 
       const data = readForm(form);
-      const errors = validateLegacy(data);
+      const errors = validateSend({ subject: data.subject, message: data.message });
 
-      setFieldError(nameEl, errors.name || "");
-      setFieldError(emailEl, errors.email || "");
+      const nameEl = form.querySelector("[name='name']");
+      const subjectEl = form.querySelector("[name='subject']");
+      const messageEl = form.querySelector("[name='message']");
+
       setFieldError(subjectEl, errors.subject || "");
       setFieldError(messageEl, errors.message || "");
 
       const hasErrors = Object.keys(errors).length > 0;
       if (hasErrors) {
         setStatus(root, "Please fix the highlighted fields.", "error");
-        const first =
-          (errors.name && nameEl) ||
-          (errors.email && emailEl) ||
-          (errors.subject && subjectEl) ||
-          (errors.message && messageEl) ||
-          null;
+        const first = (errors.subject && subjectEl) || (errors.message && messageEl) || null;
         if (first && typeof first.focus === "function") first.focus();
         return;
       }
 
-      const pageUrl = window.location.href;
-      const subject = data.subject || "UEAH Contact";
-      const body = composeBody({
-        name: data.name,
-        email: data.email,
-        message: data.message,
-        pageUrl
-      });
+      setStatus(root, "Opening the form…", "info");
 
-      const href = buildMailto({ to: options.to, subject, body });
+      let res;
+      try {
+        res = send({
+          category: (opts && opts.category) || "",
+          name: data.name,
+          subject: data.subject,
+          message: data.message,
+        });
+      } catch (_) {
+        res = { ok: false, url: normalizeFormUrl(getConfig().formUrl) || FALLBACK_FORM_URL };
+      }
 
-      setStatus(root, "Opening your email app…", "info");
-      window.location.href = href;
-
-      if (typeof options.onSent === "function") {
+      if (typeof opts?.onSent === "function") {
         try {
-          options.onSent({ ...data, subject, body, to: options.to, mode: "mailto" });
+          opts.onSent({ ...data, url: res.url, mode: "google-form" });
         } catch (_) {}
       }
     }
-
-    form.addEventListener("submit", onSubmit);
 
     function onInput(e) {
       const el = e.target;
@@ -249,6 +371,8 @@
         setFieldError(el, "");
       }
     }
+
+    form.addEventListener("submit", onSubmit);
     form.addEventListener("input", onInput);
 
     return function detach() {
@@ -257,10 +381,9 @@
     };
   }
 
-  // Optional helper for app.js to render a consistent form block
   function renderContactFormHtml({ title, subtitle } = {}) {
     const safeTitle = escapeHtml(title || "Contact");
-    const safeSubtitle = escapeHtml(subtitle || `Send a message to ${DEFAULT_TO}.`);
+    const safeSubtitle = escapeHtml(subtitle || "Send feedback via our contact form.");
 
     return `
       <section class="page-top">
@@ -283,8 +406,8 @@
               </div>
 
               <div class="field" data-field style="grid-column: 1 / -1">
-                <label class="label" for="contact-subject">Subject (optional)</label>
-                <input class="input" id="contact-subject" name="subject" type="text" />
+                <label class="label" for="contact-subject">Subject</label>
+                <input class="input" id="contact-subject" name="subject" type="text" required />
                 <div class="field-error" data-error aria-live="polite"></div>
               </div>
 
@@ -301,7 +424,7 @@
             </div>
 
             <p class="muted" style="margin-top:12px">
-              This opens your email app (no backend required).
+              This opens a Google Form in a new tab.
             </p>
 
             <div class="contact-status" data-contact-status aria-live="polite"></div>
@@ -311,6 +434,7 @@
     `;
   }
 
+  // Legacy utility: keep escape helpers (used by renderContactFormHtml)
   function escapeHtml(s) {
     return String(s)
       .replaceAll("&", "&amp;")
@@ -324,16 +448,30 @@
     return escapeHtml(String(s)).replaceAll("\n", " ");
   }
 
+  // Legacy utility: keep buildMailto (no default email), in case something external still uses it
+  function buildMailto({ to, subject, body }) {
+    const _to = String(to || "").trim();
+    if (!_to) return "";
+    const qs = new URLSearchParams();
+    if (subject) qs.set("subject", String(subject));
+    if (body) qs.set("body", String(body));
+    const query = qs.toString();
+    return query ? `mailto:${encodeURIComponent(_to)}?${query}` : `mailto:${encodeURIComponent(_to)}`;
+  }
+
   // Expose
   window.UEAH_CONTACT = {
     // Primary SPA API
     send,
 
+    // New helpers
+    buildGoogleFormUrl,
+    getConfig,
+
     // Optional/legacy helpers
     attach,
     renderContactFormHtml,
+    validateSend,
     buildMailto,
-    composeBody,
-    validateSend
   };
 })();

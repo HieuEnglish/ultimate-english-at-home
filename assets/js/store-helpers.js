@@ -8,6 +8,7 @@
    - window.UEAH_PROFILE_STORE (assets/js/profile-store.js)
    - window.UEAH_FAVOURITES_STORE (assets/js/favourites-store.js)
    - window.UEAH_CONTACT (assets/js/contact.js)
+   - window.UEAH_CONTACT_FORM (assets/js/contact-config.js)
 
    NOTE: This app is static (GitHub Pages) with no build step.
    Keep these helpers dependency-free and browser-safe.
@@ -581,37 +582,50 @@ export function syncImport(syncJson, opts = {}) {
 }
 
 // -----------------------------
-// Contact helpers (GitHub issue)
+// Contact helpers (Google Forms)
 // -----------------------------
 
-export const CONTACT_REPO = "HieuEnglish/ultimate-english-at-home";
-
-function buildIssueUrl(repo, title, body) {
-  const r = String(repo || CONTACT_REPO || "").trim();
-  const u = new URL(`https://github.com/${r}/issues/new`);
-  if (title) u.searchParams.set("title", String(title));
-  if (body) u.searchParams.set("body", String(body));
-  return u.toString();
+function getContactFormConfig() {
+  const cfg = typeof window !== "undefined" ? window.UEAH_CONTACT_FORM : null;
+  if (!cfg || typeof cfg !== "object") return null;
+  const formUrl = String(cfg.formUrl || "").trim();
+  const entry = cfg.entry && typeof cfg.entry === "object" ? cfg.entry : {};
+  return { formUrl, entry };
 }
 
-function safePageUrl() {
+function normalizeFormUrl(url) {
+  const s = String(url || "").trim();
+  if (!s) return "";
   try {
-    return typeof window !== "undefined" && window.location ? String(window.location.href || "") : "";
+    const u = new URL(s);
+    u.search = "";
+    u.hash = "";
+    return u.toString();
   } catch (_) {
-    return "";
+    return s;
+  }
+}
+
+function openNewTab(url) {
+  try {
+    const w = window.open(url, "_blank", "noopener,noreferrer");
+    return !!w;
+  } catch (_) {
+    return false;
   }
 }
 
 /**
  * Send a contact message.
  * - Prefers window.UEAH_CONTACT.send if available.
- * - Falls back to opening a pre-filled GitHub issue.
+ * - Falls back to opening the configured Google Form URL (no prefill).
  *
  * Payload shape expected by views/contact.js:
- *   { name, subject, message }
+ *   { category?: "Idea"|"Bug"|"Question", name, subject, message }
  */
 export function contactSend(payload) {
   const data = payload && typeof payload === "object" ? payload : {};
+  const category = String(data.category || "").trim();
   const name = String(data.name || "").trim();
   const subject = String(data.subject || "").trim() || "UEAH Feedback";
   const message = String(data.message || "").trim();
@@ -619,39 +633,23 @@ export function contactSend(payload) {
   const CONTACT = getContactHelpers();
 
   // Prefer contact.js helper if present.
-  // Expected: window.UEAH_CONTACT.send({ repo, name, subject, message })
+  // Expected: window.UEAH_CONTACT.send({ category, name, subject, message })
   if (CONTACT && typeof CONTACT === "object" && typeof CONTACT.send === "function") {
     try {
-      return CONTACT.send({ repo: CONTACT_REPO, name, subject, message });
+      const res = CONTACT.send({ category, name, subject, message });
+      if (res && typeof res === "object") return res;
     } catch (_) {
       // Fall back below.
     }
   }
 
-  // Fallback: open a pre-filled GitHub issue.
-  const url = safePageUrl();
-  const bodyLines = [
-    message || "-",
-    "",
-    "---",
-    name ? `Name: ${name}` : null,
-    url ? `Page: ${url}` : null,
-  ].filter(Boolean);
+  // Fallback: open the base form URL (no prefill).
+  const cfg = getContactFormConfig();
+  const baseUrl = normalizeFormUrl(cfg && cfg.formUrl ? cfg.formUrl : "");
+  if (!baseUrl) return { ok: false, url: "" };
 
-  const body = bodyLines.join("\n");
-  const issueUrl = buildIssueUrl(CONTACT_REPO, subject, body);
-
-  try {
-    const w = window.open(issueUrl, "_blank", "noopener,noreferrer");
-    if (w) return { ok: true, url: issueUrl };
-  } catch (_) {}
-
-  try {
-    window.location.href = issueUrl;
-    return { ok: true, url: issueUrl };
-  } catch (_) {
-    return { ok: false, url: issueUrl };
-  }
+  const ok = openNewTab(baseUrl);
+  return { ok, url: baseUrl };
 }
 
 // -----------------------------
