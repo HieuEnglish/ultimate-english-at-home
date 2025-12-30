@@ -24,6 +24,8 @@
   <meta name="twitter:card" content="summary" />
 
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Certificates (print + preview styling) -->
+  <link rel="stylesheet" href="assets/css/certificates.css" />
 
   <!--
     Initial per-route SEO (supports GitHub Pages deep-link redirect: /?r=...).
@@ -103,6 +105,18 @@
           parts.length >= 2
             ? "Test detail page."
             : "Take free English practice tests for Reading, Listening, Writing, and Speaking.";
+      } else if (appPath.startsWith("/profile/certificates")) {
+        const parts = appPath.split("/").filter(Boolean); // ["profile","certificates","all" | ":age"?]
+        title = "Certificate — UEAH";
+        description = "View and print your achievement certificate from your saved profile scores.";
+
+        if (parts.length >= 3 && parts[2] === "all") {
+          title = "All certificates — UEAH";
+          description = "View and print all unlocked achievement certificates.";
+        } else if (parts.length >= 3 && parts[2]) {
+          title = `Certificate (${parts[2]}) — UEAH`;
+          description = `View and print the certificate for age group ${parts[2]}.`;
+        }
       } else if (appPath.startsWith("/profile")) {
         title = "Profile — UEAH";
         description = "Save your learning profile and track progress.";

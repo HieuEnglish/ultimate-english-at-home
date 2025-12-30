@@ -204,11 +204,20 @@ async function render(appPath) {
     if (parts.length === 0) {
       viewModule = await import('./views/home.js');
       viewResult = viewModule.getView(ctx);
+    } else if (parts[0] === 'profile' && parts[1] === 'certificates') {
+      // NEW: certificates
+      // /profile/certificates
+      // /profile/certificates/all
+      // /profile/certificates/:age
+      viewModule = await import('./views/certificates.js');
+
+      const mode = parts.length >= 3 ? parts[2] : null; // null | "all" | age (e.g. "8-10")
+      viewResult = await viewModule.getView(ctx, mode);
     } else if (parts[0] === 'profile' && parts.length === 1) {
       viewModule = await import('./views/profile.js');
       viewResult = viewModule.getView(ctx);
     } else if (parts[0] === 'scoring' && parts.length === 1) {
-      // NEW: scoring plan page (/scoring)
+      // scoring plan page (/scoring)
       viewModule = await import('./views/scoring.js');
       viewResult = viewModule.getView(ctx);
     } else if (parts[0] === 'contact' && parts.length === 1) {
@@ -272,7 +281,11 @@ async function render(appPath) {
   } catch (err) {
     // On error, load the error view
     const errorModule = await import('./views/error.js');
-    viewResult = errorModule.getErrorView(ctx, 'Something went wrong while loading this page.', err);
+    viewResult = errorModule.getErrorView(
+      ctx,
+      'Something went wrong while loading this page.',
+      err
+    );
   }
 
   // If navigation happened during the async load, discard this render

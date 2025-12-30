@@ -1,0 +1,96 @@
+/* assets/css/certificates.css
+   Certificate preview + print styling.
+
+   Notes:
+   - Keep it additive: do not break existing styles.css.
+   - Provide a clean "paper" look on screen and a print-friendly layout.
+*/
+
+.certificates-page .actions .btn[data-disabled="true"],
+.certificates-page a[data-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.ueah-certificate-wrap {
+  display: grid;
+  gap: 14px;
+}
+
+/* On screen: center and constrain width for readability */
+.ueah-certificate-sheet {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 14px 40px rgba(11, 16, 32, 0.08);
+}
+
+.ueah-certificate-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Improve focus visibility on certificate action buttons */
+.certificates-page .btn:focus-visible {
+  outline: 3px solid rgba(90, 120, 255, 0.45);
+  outline-offset: 3px;
+}
+
+/* Print styles */
+@media print {
+  /* Hide site chrome in print */
+  .site-header,
+  .site-footer,
+  .skip-link,
+  nav,
+  .site-nav {
+    display: none !important;
+  }
+
+  /* Give print full width */
+  .site-main,
+  .container {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Hide all buttons/notes/status in certificate view */
+  .certificates-page .actions,
+  .certificates-page .note,
+  .certificates-page #cert-status,
+  .certificates-page .page-subtitle,
+  .certificates-page .page-title,
+  .certificates-page .breadcrumbs {
+    display: none !important;
+  }
+
+  /* Each certificate should print on its own page */
+  .ueah-certificate-sheet {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .ueah-certificate-sheet:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .ueah-certificate-svg {
+    border-radius: 0 !important;
+  }
+
+  /* Avoid default print margins issues */
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+}

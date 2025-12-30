@@ -7,6 +7,11 @@
      • last saved score per skill (score + level title + timestamp)
      • overall certification when all 4 skills are present (computed by profile-store)
      • reset per age group + reset all saved scores
+   - Adds Certification printing entrypoints:
+     • /profile/certificates (best unlocked)
+     • /profile/certificates/all (all unlocked)
+     • /profile/certificates/:age (single age)
+   - Printing is unlocked per age group only when all 4 skills are saved AND each is 100/100.
    - Uses ctx.profileGet, profileSet and profileClear to persist data.
    - Includes Sync export/import for cross-device persistence.
 */
@@ -193,6 +198,64 @@ function getOverall(resultsByAge, age) {
     title: String(ov.title || ''),
     at: String(ov.at || ''),
   };
+}
+
+function isPerfectScore(n) {
+  const v = Number(n);
+  if (!Number.isFinite(v)) return false;
+  return Math.abs(v - 100) < 1e-9;
+}
+
+function ageCertificateStatus(resultsByAge, age) {
+  const saved = SKILLS.map((skill) => ({
+    skill,
+    last: getLastScore(resultsByAge, age, skill),
+  }));
+
+  const missing = saved.filter((x) => !x.last).map((x) => x.skill);
+  const notPerfect = saved
+    .filter((x) => x.last && !isPerfectScore(x.last.score))
+    .map((x) => x.skill);
+
+  const allSaved = missing.length === 0;
+  const allPerfect = allSaved && notPerfect.length === 0;
+
+  return {
+    allSaved,
+    allPerfect,
+    missing,
+    notPerfect,
+  };
+}
+
+function getUnlockedAges(resultsByAge) {
+  return AGE_GROUPS.filter((age) => ageCertificateStatus(resultsByAge, age).allPerfect);
+}
+
+function pickBestUnlockedAge(resultsByAge, ages) {
+  const list = Array.isArray(ages) ? ages.slice() : [];
+  if (list.length === 0) return '';
+
+  // Prefer highest overall score; tie-breaker: most recent overall.at; fallback: order
+  list.sort((a, b) => {
+    const oa = getOverall(resultsByAge, a);
+    const ob = getOverall(resultsByAge, b);
+
+    const sa = oa && Number.isFinite(Number(oa.score)) ? Number(oa.score) : 0;
+    const sb = ob && Number.isFinite(Number(ob.score)) ? Number(ob.score) : 0;
+
+    if (sb !== sa) return sb - sa;
+
+    const ta = oa && oa.at ? parseDateMaybe(oa.at) : null;
+    const tb = ob && ob.at ? parseDateMaybe(ob.at) : null;
+
+    const da = ta ? ta.getTime() : 0;
+    const db = tb ? tb.getTime() : 0;
+
+    return db - da;
+  });
+
+  return String(list[0] || '');
 }
 
 /**
@@ -392,9 +455,79 @@ export function getView(ctx) {
         SKILLS.some((skill) => !!getLastScore(resultsByAge, age, skill))
       );
 
+      const unlockedAges = getUnlockedAges(resultsByAge);
+      const bestUnlockedAge = pickBestUnlockedAge(resultsByAge, unlockedAges);
+
+      const certPanel = (() => {
+        const unlockedCount = unlockedAges.length;
+        const canPrintBest = unlockedCount >= 1;
+        const canPrintAll = unlockedCount >= 2;
+
+        const bestLabel = bestUnlockedAge ? ageLabelFor(bestUnlockedAge) : '';
+        const ruleLine =
+          'Printing unlocks only when all 4 skills are saved and each score is 100/100 for an age group.';
+
+        const bestBtnStyle = canPrintBest ? '' : 'pointer-events:none; opacity:.55; filter:saturate(.6)';
+        const allBtnStyle = canPrintAll ? '' : 'pointer-events:none; opacity:.55; filter:saturate(.6)';
+
+        const bestAria = canPrintBest
+          ? `View and print your best unlocked certificate${bestLabel ? ` (${bestLabel})` : ''}`
+          : 'Locked. Complete all skills with 100/100 in one age group to unlock printing.';
+
+        const allAria = canPrintAll
+          ? 'View and print all unlocked certificates'
+          : 'Locked. Unlock at least two age groups to print all certificates at once.';
+
+        return `
+          <div class="note" style="margin-top:0; padding:12px 12px" role="region" aria-label="Certification printing">
+            <strong>${emojiSpan('🏆')} Certification</strong>
+            <p style="margin:8px 0 0; opacity:.92">
+              ${safeText(ruleLine)}
+            </p>
+
+            <div class="actions" style="margin-top:12px; flex-wrap:wrap">
+              <a
+                class="btn btn--primary"
+                href="${hrefFor('/profile/certificates')}"
+                data-nav
+                aria-label="${safeText(bestAria)}"
+                aria-disabled="${canPrintBest ? 'false' : 'true'}"
+                data-disabled="${canPrintBest ? 'false' : 'true'}"
+                style="${bestBtnStyle}"
+              >
+                ${emojiSpan('🖨️')} Print / Save PDF (best)
+              </a>
+
+              <a
+                class="btn"
+                href="${hrefFor('/profile/certificates/all')}"
+                data-nav
+                aria-label="${safeText(allAria)}"
+                aria-disabled="${canPrintAll ? 'false' : 'true'}"
+                data-disabled="${canPrintAll ? 'false' : 'true'}"
+                style="${allBtnStyle}"
+              >
+                ${emojiSpan('🧾')} Print all unlocked
+              </a>
+            </div>
+
+            <p class="muted" style="margin:10px 0 0">
+              ${
+                canPrintBest
+                  ? `Unlocked: <strong>${safeText(String(unlockedCount))}</strong> age group${unlockedCount === 1 ? '' : 's'}.${
+                      bestLabel ? ` Best unlocked: <strong>${safeText(bestLabel)}</strong>.` : ''
+                    }`
+                  : 'No unlocked certificates yet.'
+              }
+            </p>
+          </div>
+        `;
+      })();
+
       if (!anySaved) {
         progressHost.innerHTML = `
-          <div class="note" style="margin-top:0">
+          ${certPanel}
+          <div class="note" style="margin-top:12px">
             <strong>${emojiSpan('📝')} No saved scores yet</strong>
             <p style="margin:8px 0 0; opacity:.92">
               Complete a skill test and click <strong>Save score to Profile</strong> to track progress here.
@@ -418,6 +551,9 @@ export function getView(ctx) {
           const overall = completedCount === SKILLS.length ? getOverall(resultsByAge, age) : null;
           const overallWhen = overall && overall.at ? formatDateTime(overall.at) : '';
 
+          const certStatus = ageCertificateStatus(resultsByAge, age);
+          const unlocked = certStatus.allPerfect;
+
           const skillGrid = savedSkills
             .map(({ skill, last }) => {
               const skLabelPlain = titleCase(skill);
@@ -430,6 +566,9 @@ export function getView(ctx) {
                   ? ` • <span style="opacity:.92">${safeText(last.levelTitle)}</span>`
                   : '';
                 const aria = `${skLabelPlain} saved. Score ${formatScore(last.score)} out of 100.`;
+
+                const ok = isPerfectScore(last.score);
+                const chipClass = ok ? 'chip chip--ok' : 'chip';
 
                 return `
                 <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
@@ -446,9 +585,9 @@ export function getView(ctx) {
                           : `<div class="muted" style="margin-top:4px">Saved</div>`
                       }
                     </div>
-                    <span class="chip chip--ok" style="font-weight:900" aria-label="${safeText(
+                    <span class="${chipClass}" style="font-weight:900" aria-label="${safeText(
                       aria
-                    )}" title="${safeText(aria)}">✓</span>
+                    )}" title="${safeText(aria)}">${ok ? '✓' : '•'}</span>
                   </div>
                 </div>
               `;
@@ -484,6 +623,49 @@ export function getView(ctx) {
 
           const progressLabel = `Completion for ${label}: ${completedCount} of ${SKILLS.length} skills.`;
 
+          const certHints = (() => {
+            if (unlocked) {
+              return `
+                <p style="margin:8px 0 0; opacity:.92">
+                  ${emojiSpan('✅')} Unlocked for printing (all skills are 100/100).
+                </p>
+                <div class="actions" style="margin-top:10px; flex-wrap:wrap">
+                  <a class="btn btn--small btn--primary" href="${hrefFor(
+                    `/profile/certificates/${age}`
+                  )}" data-nav aria-label="View and print certificate for ${safeText(label)}">
+                    ${emojiSpan('🖨️')} View / Print certificate
+                  </a>
+                </div>
+              `;
+            }
+
+            if (certStatus.allSaved) {
+              const needs = certStatus.notPerfect.map(titleCase).join(', ');
+              return `
+                <p style="margin:8px 0 0; opacity:.92">
+                  ${emojiSpan('🔒')} Locked for printing.
+                </p>
+                <p class="muted" style="margin:8px 0 0">
+                  All skills are saved, but certificates require <strong>100/100</strong> in each skill.
+                  ${
+                    needs ? `Skills to improve: <strong>${safeText(needs)}</strong>.` : ''
+                  }
+                </p>
+              `;
+            }
+
+            const missing = certStatus.missing.map(titleCase).join(', ');
+            return `
+              <p style="margin:8px 0 0; opacity:.92">
+                ${emojiSpan('🔒')} Locked for printing.
+              </p>
+              <p class="muted" style="margin:8px 0 0">
+                Save all 4 skills to unlock certification.
+                ${missing ? `Missing: <strong>${safeText(missing)}</strong>.` : ''}
+              </p>
+            `;
+          })();
+
           const overallBlock = overall
             ? `
             <div class="note" style="margin:12px 0 0; padding:10px 12px">
@@ -498,6 +680,7 @@ export function getView(ctx) {
                   : ''
               }
               ${overallWhen ? `<p class="muted" style="margin:8px 0 0">Last updated: ${safeText(overallWhen)}</p>` : ''}
+              ${certHints}
             </div>
           `
             : `
@@ -506,6 +689,7 @@ export function getView(ctx) {
               <p style="margin:8px 0 0; opacity:.92">
                 Complete all 4 skills to unlock an overall score for this group.
               </p>
+              ${certHints}
             </div>
           `;
 
@@ -550,7 +734,7 @@ export function getView(ctx) {
         })
         .join('');
 
-      progressHost.innerHTML = cards;
+      progressHost.innerHTML = `${certPanel}${cards}`;
     }
 
     function refreshAll(msgPersonal, msgProgress, focusTarget) {
@@ -568,6 +752,15 @@ export function getView(ctx) {
     // Live updates when profile-store dispatches changes (e.g., Save score from tests)
     window.addEventListener('ueah:profile-changed', () => {
       refreshAll('', '', '');
+    });
+
+    // Prevent navigation on disabled cert links
+    progressHost.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a[data-disabled="true"]') : null;
+      if (!a) return;
+      e.preventDefault();
+      e.stopPropagation();
+      setProgressStatus('Certificates are locked. Unlock an age group by saving all 4 skills at 100/100.', true);
     });
 
     // Save personal fields (preserve resultsByAge and any other fields)
