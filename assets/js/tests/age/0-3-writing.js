@@ -10,14 +10,10 @@
    - Caregiver marks each prompt as Done or Skip
    - Saves per-task status + optional notes (non-scored)
 
-   Updates:
-   - Ensures stable ids (fallback id if missing) so results/notes map reliably
-   - Adds "Save score to Profile" using the shared helper (window.UEAH_SAVE_SCORE)
-   - Save payload now includes (or ensures present):
-     * questions: state.questions
-     * resultsById: state.results
-     * notesById: state.notes
-   - Adds per-run cap (bank is a pool; each run uses a short randomized subset).
+   Fixes:
+   - Fixes broken intro HTML that caused layout issues on mobile
+   - Normalizes caregiver marks to "said"/"skip" so scoring + Profile save works end-to-end
+     (UEAH_SCORING expects caregiver resultsById values like "said")
 */
 
 (function () {
@@ -36,6 +32,10 @@
   // -----------------------------
   // Small helpers
   // -----------------------------
+
+  function nowIso() {
+    return new Date().toISOString();
+  }
 
   function shuffleInPlace(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -95,12 +95,9 @@
           return;
         }
         existing.addEventListener("load", validate, { once: true });
-        existing.addEventListener(
-          "error",
-          () => reject(new Error("Failed to load question bank.")),
-          { once: true }
-        );
-        // in case it loaded before listeners:
+        existing.addEventListener("error", () => reject(new Error("Failed to load question bank.")), {
+          once: true
+        });
         validate();
         return;
       }
@@ -125,7 +122,11 @@
     return `
       <div class="detail-card" role="region" aria-label="Writing test">
         <div style="display:flex; gap:12px; align-items:flex-start">
-          <div class="card-icon" aria-hidden="true" style="width:44px; height:44px"✍️</div>
+          <div
+            class="card-icon"
+            aria-hidden="true"
+            style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:22px"
+          >✍️</div>
           <div>
             <h2 style="margin:0; font-size:18px">Ages 0–3 • Pre-writing practice</h2>
             <p style="margin:10px 0 0; color: var(--muted)">
@@ -256,7 +257,7 @@
       .map((q, i) => {
         const id = q && q.id ? String(q.id) : "";
         const status = id ? state.results[id] || "skip" : "skip";
-        const icon = status === "done" ? "✅" : "⏭️";
+        const icon = status === "said" ? "✅" : "⏭️";
         const note = id && state.notes[id] ? String(state.notes[id]) : "";
         return `
           <li style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border)">
@@ -433,8 +434,10 @@
         questions: [],
         index: 0,
         doneCount: 0,
-        results: Object.create(null), // q.id -> "done" | "skip"
-        notes: Object.create(null), // q.id -> string
+        // IMPORTANT: normalize to scoring-compatible caregiver values
+        // q.id -> "said" | "skip"
+        results: Object.create(null),
+        notes: Object.create(null),
         lastError: "",
         savedMsg: ""
       };
@@ -544,8 +547,13 @@
         const q = currentQuestion();
         if (q && q.id) {
           saveNoteFromUI();
-          state.results[String(q.id)] = status;
-          if (status === "done") state.doneCount += 1;
+
+          // Normalize to values scoring recognizes.
+          // Done => "said" (counts as full credit), Skip => "skip"
+          const normalized = status === "done" ? "said" : "skip";
+          state.results[String(q.id)] = normalized;
+
+          if (normalized === "said") state.doneCount += 1;
         }
 
         if (state.index + 1 >= state.questions.length) {
@@ -566,14 +574,11 @@
           return;
         }
 
-        // REQUIRED fields for this runner family:
-        // - questions: state.questions
-        // - resultsById: state.results
-        // - notesById: state.notes
         const res = window.UEAH_SAVE_SCORE.save({
           slug: SLUG,
           ageGroup: "0-3",
           skill: "writing",
+          at: nowIso(),
           questions: state.questions,
           resultsById: state.results,
           notesById: state.notes
@@ -614,11 +619,7 @@
         }
       });
 
-      window.addEventListener(
-        "popstate",
-        () => teardownCanvas(),
-        { passive: true }
-      );
+      window.addEventListener("popstate", () => teardownCanvas(), { passive: true });
 
       paint();
     }
