@@ -210,39 +210,29 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — via shared helper UEAH_TTS
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
+
+    const tts = window.UEAH_TTS;
+    if (!tts || typeof tts.speak !== "function") return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // Best-effort: prime voices list (some browsers populate async)
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.93;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
+      // Chunk longer prompts for reliability (sentences / longer transcripts).
+      tts.speak(t, { lang: "en-US", chunk: t.length > 80 });
       return true;
     } catch (_) {
       return false;
@@ -317,28 +307,6 @@
     `;
   }
 
-  function renderContext(q) {
-    const c = q && q.context ? String(q.context) : "";
-    if (!c.trim()) return "";
-    return `
-      <div class="note" style="margin:12px 0 0; padding:10px 12px">
-        <strong>Context</strong>
-        <p style="margin:8px 0 0">${safeText(c)}</p>
-      </div>
-    `;
-  }
-
-  function renderPicture(q) {
-    const p = q && q.picture ? String(q.picture) : "";
-    if (!p.trim()) return "";
-    return `
-      <div class="note" style="margin:12px 0 0; padding:12px 14px">
-        <strong>Look</strong>
-        <div style="font-size:52px; line-height:1.1; margin-top:10px" aria-label="Picture">${safeText(p)}</div>
-      </div>
-    `;
-  }
-
   function renderTranscript(state) {
     if (!state.showTranscript) return "";
     const q = state.questions[state.index];
@@ -353,68 +321,134 @@
     `;
   }
 
-  function renderMCQForm(q) {
+  function renderListenChoice(state, q) {
     const prompt = safeText(q.question || "Listen. Choose the best answer.");
     const options = Array.isArray(q.options) ? q.options : [];
 
-    const optionsHtml = options
+    const optionButtons = options
       .map((opt, i) => {
-        const id = `opt-${SLUG}-${q.id}-${i}`;
         return `
-          <label for="${id}" style="display:flex; align-items:flex-start; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
-            <input id="${id}" type="radio" name="choice" value="${i}" required style="margin-top:3px" />
-            <span style="line-height:1.35">${safeText(opt)}</span>
-          </label>
+          <button
+            class="btn"
+            type="submit"
+            name="choice"
+            value="${i}"
+            data-choice="${i}"
+            style="justify-content:center; padding:14px 14px; min-height:54px"
+            aria-label="Option ${i + 1}: ${safeText(opt)}"
+          >${safeText(opt)}</button>
         `;
       })
       .join("");
 
     return `
+      ${renderTopBar(state)}
+
       <form data-form="question" style="margin-top:12px">
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <legend style="padding:0 8px; font-weight:900">${prompt}</legend>
 
-          <div role="radiogroup" aria-label="Answer choices" style="display:grid; gap:10px; margin-top:12px">
-            ${optionsHtml}
-          </div>
-
-          <div class="actions" style="margin-top:12px">
-            <button class="btn btn--primary" type="submit">Submit</button>
+          <div
+            role="group"
+            aria-label="Answer choices"
+            style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-top:12px"
+          >
+            ${optionButtons}
           </div>
         </fieldset>
       </form>
+
+      ${renderTranscript(state)}
     `;
   }
 
-  function renderFillBlankForm(q) {
-    const prompt = safeText(q.question || "Type your answer.");
+  function renderListenTrueFalse(state, q) {
+    const prompt = safeText(q.question || "Listen. True or False?");
+    const picture = q && q.picture ? String(q.picture) : "";
+    const options = Array.isArray(q.options) && q.options.length ? q.options : ["True", "False"];
+
+    const optionButtons = options
+      .map((opt, i) => {
+        return `
+          <button
+            class="btn"
+            type="submit"
+            name="choice"
+            value="${i}"
+            data-choice="${i}"
+            style="justify-content:center; padding:14px 14px; min-height:54px"
+            aria-label="Option ${i + 1}: ${safeText(opt)}"
+          >${safeText(opt)}</button>
+        `;
+      })
+      .join("");
 
     return `
+      ${renderTopBar(state)}
+
+      ${
+        picture
+          ? `
+        <div class="note" style="margin:12px 0 0; padding:12px 14px">
+          <strong>Look</strong>
+          <div style="font-size:52px; line-height:1.1; margin-top:10px" aria-label="Picture">${safeText(
+            picture
+          )}</div>
+        </div>
+      `
+          : ""
+      }
+
       <form data-form="question" style="margin-top:12px">
         <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <legend style="padding:0 8px; font-weight:900">${prompt}</legend>
 
-          <label style="display:block; margin-top:12px">
-            <span class="sr-only">Your answer</span>
-            <input
-              type="text"
-              name="blank"
-              inputmode="text"
-              autocomplete="off"
-              autocapitalize="none"
-              spellcheck="false"
-              maxlength="64"
-              required
-              style="width:100%; padding:12px 12px; border:1px solid var(--border); border-radius:14px; background: var(--surface)"
-              placeholder="Type your answer"
-            />
-          </label>
-
-          <div class="actions" style="margin-top:12px">
-            <button class="btn btn--primary" type="submit">Check</button>
+          <div
+            role="group"
+            aria-label="True or False"
+            style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-top:12px"
+          >
+            ${optionButtons}
           </div>
         </fieldset>
       </form>
+
+      ${renderTranscript(state)}
+    `;
+  }
+
+  function renderListenFillInTheBlank(state, q) {
+    const prompt = safeText(q.question || "Listen and type the missing word.");
+
+    return `
+      ${renderTopBar(state)}
+
+      <form data-form="blank" style="margin-top:12px">
+        <fieldset style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
+          <legend style="padding:0 8px; font-weight:900">${prompt}</legend>
+
+          <div class="field" style="margin-top:12px">
+            <label class="label" for="blank-${SLUG}">Your answer</label>
+            <input
+              id="blank-${SLUG}"
+              class="input"
+              type="text"
+              autocomplete="off"
+              inputmode="text"
+              spellcheck="false"
+              data-blank
+              placeholder="Type your answer"
+              style="max-width:420px"
+            />
+          </div>
+
+          <div class="actions" style="margin-top:12px">
+            <button class="btn btn--primary" type="submit" data-action="submit-blank">Submit</button>
+          </div>
+        </fieldset>
+      </form>
+
+      ${renderTranscript(state)}
     `;
   }
 
@@ -422,73 +456,35 @@
     const q = state.questions[state.index];
     const t = typeLower(q);
 
-    const top = renderTopBar(state);
-    const context = renderContext(q);
-    const picture = renderPicture(q);
-    const transcript = renderTranscript(state);
-
-    const form = t === "listenfillintheblank" ? renderFillBlankForm(q) : renderMCQForm(q);
-
-    return `
-      ${top}
-      ${context}
-      ${picture}
-      ${form}
-      ${transcript}
-    `;
+    if (t === "listenfillintheblank") return renderListenFillInTheBlank(state, q);
+    if (t === "listentruefalse") return renderListenTrueFalse(state, q);
+    return renderListenChoice(state, q);
   }
 
   function renderFeedback(state) {
     const q = state.questions[state.index];
+    const chosen = state.lastChoice;
+    const correct = q && q.answer;
+    const ok = !!state.lastCorrect;
     const total = state.questions.length;
     const n = state.index + 1;
 
-    const ok = !!state.lastIsCorrect;
-    const icon = ok ? "✅" : "❌";
     const nextLabel = n >= total ? "Finish" : "Next";
+    const icon = ok ? "✅" : "❌";
 
     const t = typeLower(q);
-
-    let detailHtml = "";
+    let correctText = "";
+    let chosenText = "";
 
     if (t === "listenfillintheblank") {
-      const typed = state.lastBlank != null ? String(state.lastBlank) : "";
-      const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
-      const best = answers.filter((x) => x != null).map(String);
-
-      detailHtml = ok
-        ? `<p style="margin:8px 0 0">Correct.</p>`
-        : `
-          <p style="margin:8px 0 0">Correct answer: <strong>${safeText(best[0] || "")}</strong></p>
-          <p style="margin:8px 0 0; opacity:.92">You typed: <strong>${safeText(typed || "(blank)")}</strong></p>
-        `;
-
-      if (best.length > 1) {
-        detailHtml += `<p style="margin:8px 0 0; opacity:.92">Also accepted: ${safeText(best.slice(1).join(", "))}</p>`;
-      }
+      correctText = answerTextForBlank(correct);
+      chosenText = state.lastBlank || "";
     } else {
-      const correctIdx = Number(q.answer);
-      const chosenIdx = Number(state.lastChoice);
-
-      const correctText = optionAt(q, correctIdx);
-      const chosenText = optionAt(q, chosenIdx);
-
-      detailHtml = ok
-        ? `<p style="margin:8px 0 0">Correct.</p>`
-        : `
-          <p style="margin:8px 0 0">Correct answer: <strong>${safeText(correctText)}</strong></p>
-          <p style="margin:8px 0 0; opacity:.92">You chose: <strong>${safeText(chosenText)}</strong></p>
-        `;
+      const cIdx = Number(correct);
+      const chIdx = Number(chosen);
+      correctText = optionAt(q, cIdx);
+      chosenText = optionAt(q, chIdx);
     }
-
-    const explanation = q.explanation ? String(q.explanation).trim() : "";
-    const explanationHtml = explanation
-      ? `<p style="margin:8px 0 0; opacity:.92"><strong>Tip:</strong> ${safeText(explanation)}</p>`
-      : "";
-
-    const transcriptLine = q.say
-      ? `<p style="margin:8px 0 0; opacity:.92"><strong>Transcript:</strong> ${safeText(q.say)}</p>`
-      : "";
 
     const sayText = q && q.say ? String(q.say).trim() : "";
     const canPlay = supportsSpeech() && !!sayText;
@@ -504,11 +500,13 @@
       </div>
 
       <div class="note" style="margin-top:12px" aria-live="polite">
-        <strong>${icon} ${ok ? "Nice work!" : "Keep going"}</strong>
-        ${detailHtml}
-        ${transcriptLine}
-        ${q.picture ? `<p style="margin:8px 0 0">Picture: <span style="font-size:22px">${safeText(q.picture)}</span></p>` : ""}
-        ${explanationHtml}
+        <strong>${icon} ${ok ? "Correct!" : "Not quite"}</strong>
+        <p style="margin:8px 0 0">
+          ${ok ? "Good job." : `Correct answer: <strong>${safeText(correctText)}</strong>`}
+        </p>
+        ${ok ? "" : `<p style="margin:8px 0 0; opacity:.9">You answered: <strong>${safeText(chosenText)}</strong></p>`}
+        ${q.say ? `<p style="margin:8px 0 0; opacity:.92">Transcript: <strong>${safeText(q.say)}</strong></p>` : ""}
+        ${q.explanation ? `<p style="margin:8px 0 0; opacity:.9">${safeText(q.explanation)}</p>` : ""}
       </div>
 
       <div class="actions" style="margin-top:12px">
@@ -531,11 +529,6 @@
     const body = rows
       .map((r) => {
         const icon = r.isCorrect ? "✅" : "❌";
-
-        const ctx = r.context ? `<div style="opacity:.9; margin-top:6px">${safeText(r.context)}</div>` : "";
-        const pic = r.picture ? `<div style="font-size:20px; margin-top:6px">${safeText(r.picture)}</div>` : "";
-        const said = r.say ? `<div style="opacity:.9; margin-top:6px">${safeText(r.say)}</div>` : "";
-
         return `
           <tr>
             <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:800; white-space:nowrap">${safeText(
@@ -543,10 +536,8 @@
             )}</td>
             <td style="padding:10px 10px; border-top:1px solid var(--border)">
               <div style="font-weight:900">${safeText(r.typeLabel)}</div>
-              <div style="margin-top:6px">${safeText(r.question || "")}</div>
-              ${ctx}
-              ${pic}
-              ${said}
+              ${r.say ? `<div style="opacity:.9; margin-top:4px">${safeText(r.say)}</div>` : ""}
+              ${r.question ? `<div style="opacity:.9; margin-top:4px">${safeText(r.question)}</div>` : ""}
             </td>
             <td style="padding:10px 10px; border-top:1px solid var(--border); font-weight:800">${safeText(
               r.chosenText || ""
@@ -597,7 +588,6 @@
       <div class="note" style="margin-top:0">
         <strong>Finished!</strong>
         <p style="margin:8px 0 0">Score: <strong>${correct}</strong> / ${total} (${pct}%)</p>
-        <p style="margin:8px 0 0">Tip: Repeat the test to practice again. The questions are randomized each time.</p>
       </div>
 
       ${renderReview(state)}
@@ -635,10 +625,10 @@
 
     afterRender(rootEl, ctx) {
       if (!rootEl) return;
-
       const host = rootEl.querySelector(`[data-ueah-test="${SLUG}"]`);
       if (!host) return;
 
+      // Prevent double-init if the user navigates away/back quickly.
       if (host.__ueahInited) return;
       host.__ueahInited = true;
 
@@ -652,13 +642,13 @@
         correctCount: 0,
         lastChoice: null,
         lastBlank: "",
-        lastIsCorrect: false,
+        lastCorrect: false,
         lastError: "",
         showTranscript: false,
         autoSpokenIndex: -1,
+        isGrading: false,
         review: [],
-        savedMsg: "",
-        isGrading: false
+        savedMsg: ""
       };
 
       function currentQuestion() {
@@ -677,13 +667,13 @@
         state.correctCount = 0;
         state.lastChoice = null;
         state.lastBlank = "";
-        state.lastIsCorrect = false;
+        state.lastCorrect = false;
         state.lastError = "";
         state.showTranscript = false;
         state.autoSpokenIndex = -1;
+        state.isGrading = false;
         state.review = [];
         state.savedMsg = "";
-        state.isGrading = false;
       }
 
       function paint() {
@@ -704,16 +694,6 @@
             } catch (_) {}
           }, 0);
         }
-
-        // Focus (best effort)
-        if (state.status === "question") {
-          setTimeout(() => {
-            try {
-              const el = host.querySelector("input, button");
-              if (el && typeof el.focus === "function") el.focus();
-            } catch (_) {}
-          }, 0);
-        }
       }
 
       async function start() {
@@ -722,38 +702,42 @@
         state.lastError = "";
         state.showTranscript = false;
         state.autoSpokenIndex = -1;
+        state.isGrading = false;
         state.review = [];
         state.savedMsg = "";
-        state.isGrading = false;
         paint();
 
         try {
           await ensureBankLoaded(ctx);
+
+          // Validate after next tick (script may have just executed)
+          await new Promise((r) => setTimeout(r, 0));
 
           const bank =
             window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])
               ? window.UEAH_TEST_BANKS[SLUG]
               : [];
 
-          if (!bank.length) throw new Error("Missing question bank.");
+          if (!bank.length) {
+            throw new Error("Missing question bank.");
+          }
 
-          const prepared = ensureIds(bank.filter(isPlainObject).map(cloneQuestionWithShuffledOptions));
+          const prepared = ensureIds(bank.map(cloneQuestionWithShuffledOptions));
           shuffleInPlace(prepared);
 
-          const subset = prepared.slice(0, Math.min(MAX_QUESTIONS, prepared.length));
+          const picked = prepared.slice(0, Math.min(MAX_QUESTIONS, prepared.length));
 
-          state.questions = subset;
+          state.questions = picked;
           state.index = 0;
           state.correctCount = 0;
           state.lastChoice = null;
           state.lastBlank = "";
-          state.lastIsCorrect = false;
-          state.lastError = "";
+          state.lastCorrect = false;
           state.showTranscript = false;
           state.autoSpokenIndex = -1;
-          state.review = [];
           state.isGrading = false;
-
+          state.review = [];
+          state.savedMsg = "";
           state.status = "question";
           paint();
         } catch (err) {
@@ -784,86 +768,94 @@
         state.index += 1;
         state.lastChoice = null;
         state.lastBlank = "";
-        state.lastIsCorrect = false;
+        state.lastCorrect = false;
         state.status = "question";
         paint();
       }
 
-      function recordReviewRow(q, ok, chosenIdx, blankText) {
-        const t = typeLower(q);
-
-        let chosenText = "";
-        let correctText = "";
-
-        if (t === "listenfillintheblank") {
-          chosenText = blankText != null && String(blankText).trim() ? String(blankText) : "(blank)";
-          correctText = answerTextForBlank(q ? q.answer : "");
-        } else {
-          const correctIdx = Number(q && q.answer);
-          chosenText = optionAt(q, chosenIdx) || "(none)";
-          correctText = optionAt(q, correctIdx) || "(not set)";
-        }
-
+      function recordReviewRow(q, isCorrect, chosenText, correctText) {
         state.review.push({
           number: state.review.length + 1,
           typeLabel: questionTypeLabel(q),
           question: q && q.question ? String(q.question) : "",
-          context: q && q.context ? String(q.context) : "",
-          picture: q && q.picture ? String(q.picture) : "",
           say: q && q.say ? String(q.say) : "",
-          chosenText,
-          correctText,
-          isCorrect: !!ok
+          chosenText: chosenText || "",
+          correctText: correctText || "",
+          isCorrect: !!isCorrect
         });
       }
 
-      function grade(choiceIndex, blankText) {
-        if (state.status !== "question" || state.isGrading) return;
+      function choose(choiceIndex) {
+        if (state.status !== "question") return;
+        if (state.isGrading) return;
 
-        const q = state.questions[state.index];
+        stopSpeech();
+
+        const q = currentQuestion();
+        if (!q) return;
+
+        const chosen = Number(choiceIndex);
+        if (!Number.isFinite(chosen)) return;
+
+        state.isGrading = true;
+
+        // Coerce correct index
+        let ans = q.answer;
+        if (typeof ans === "boolean") ans = ans ? 0 : 1;
+        else if (typeof ans === "string") {
+          const s = ans.trim().toLowerCase();
+          if (s === "true") ans = 0;
+          else if (s === "false") ans = 1;
+        }
+
+        const correctIdx = Number(ans);
+
+        state.lastChoice = chosen;
+        state.lastCorrect = chosen === correctIdx;
+
+        if (state.lastCorrect) state.correctCount += 1;
+
+        recordReviewRow(q, state.lastCorrect, optionAt(q, chosen) || "(none)", optionAt(q, correctIdx) || "(not set)");
+
+        state.status = "feedback";
+        paint();
+      }
+
+      function submitBlank(value) {
+        if (state.status !== "question") return;
+        if (state.isGrading) return;
+
+        stopSpeech();
+
+        const q = currentQuestion();
         if (!q) return;
 
         state.isGrading = true;
 
-        const t = typeLower(q);
+        const typedRaw = String(value == null ? "" : value);
+        const typed = normalizeAnswerText(typedRaw);
+
+        const ans = q.answer;
         let ok = false;
-
-        if (t === "listenfillintheblank") {
-          const user = normalizeAnswerText(blankText);
-          const ans = q.answer;
-
-          if (Array.isArray(ans)) ok = ans.some((a) => normalizeAnswerText(a) === user);
-          else ok = normalizeAnswerText(ans) === user;
-
-          state.lastBlank = blankText != null ? String(blankText) : "";
-          recordReviewRow(q, ok, null, state.lastBlank);
+        if (Array.isArray(ans)) {
+          ok = ans.some((a) => normalizeAnswerText(a) === typed);
         } else {
-          const chosen = Number(choiceIndex);
-          if (!Number.isFinite(chosen)) {
-            state.isGrading = false;
-            return;
-          }
-
-          state.lastChoice = chosen;
-
-          // For TF, answer might still be boolean/string; clone step tries to normalize, but keep safe:
-          let ansIdx = q.answer;
-          if (typeof ansIdx === "boolean") ansIdx = ansIdx ? 0 : 1;
-          else if (typeof ansIdx === "string") {
-            const s = ansIdx.trim().toLowerCase();
-            if (s === "true") ansIdx = 0;
-            else if (s === "false") ansIdx = 1;
-          }
-
-          ok = chosen === Number(ansIdx);
-
-          recordReviewRow(q, ok, chosen, null);
+          ok = normalizeAnswerText(ans) === typed;
         }
 
-        state.lastIsCorrect = ok;
+        state.lastBlank = typedRaw;
+        state.lastCorrect = ok;
+
         if (ok) state.correctCount += 1;
 
+        recordReviewRow(q, ok, typedRaw || "(blank)", answerTextForBlank(ans) || "(not set)");
+
         state.status = "feedback";
+        paint();
+      }
+
+      function toggleTranscript() {
+        state.showTranscript = !state.showTranscript;
         paint();
       }
 
@@ -876,43 +868,23 @@
 
         const total = state.questions.length;
         const correct = state.correctCount;
-        const percent = total ? Math.round((correct / total) * 100) : 0;
+        const percent = total ? (correct / total) * 100 : 0;
 
-        // UPDATE: include questions + review for downstream scoring/normalization
         const payload = {
           slug: SLUG,
           ageGroup: "8-10",
           skill: "listening",
           at: nowIso(),
-
-          questions: Array.isArray(state.questions) ? state.questions : [],
-          review: Array.isArray(state.review) ? state.review : [],
-
           rawCorrect: correct,
           totalQuestions: total,
-          percent,
-          difficultyBreakdown: computeDifficultyBreakdown(state.questions, state.review)
+          percent: Math.round(percent),
+          difficultyBreakdown: computeDifficultyBreakdown(state.questions, state.review),
+          questions: Array.isArray(state.questions) ? state.questions : [],
+          review: Array.isArray(state.review) ? state.review : []
         };
 
         const res = window.UEAH_SAVE_SCORE.save(payload);
-
-        if (res && res.ok) {
-          const norm =
-            res.normalizedScore != null
-              ? `${Math.round(Number(res.normalizedScore))}/100`
-              : res.saved && res.saved.normalizedScore != null
-                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
-                : "";
-          const level =
-            res.levelTitle ||
-            (res.saved && res.saved.levelTitle) ||
-            (res.saved && res.saved.level && res.saved.level.title) ||
-            "";
-          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
-        } else {
-          state.savedMsg = "Could not save.";
-        }
-
+        state.savedMsg = res && res.ok ? "Saved to Profile." : "Could not save.";
         paint();
       }
 
@@ -922,72 +894,56 @@
         if (!btn) return;
 
         const action = btn.getAttribute("data-action");
-
-        if (action === "start" || action === "retry") {
+        if (action === "start") {
           ev.preventDefault();
           start();
-          return;
-        }
-
-        if (action === "restart") {
+        } else if (action === "retry") {
+          ev.preventDefault();
+          start();
+        } else if (action === "restart") {
           ev.preventDefault();
           restart();
-          return;
-        }
-
-        if (action === "next") {
+        } else if (action === "next") {
           ev.preventDefault();
           next();
-          return;
-        }
-
-        if (action === "play") {
+        } else if (action === "play") {
           ev.preventDefault();
           speakCurrent();
-          return;
-        }
-
-        if (action === "stop") {
+        } else if (action === "stop") {
           ev.preventDefault();
           stopSpeech();
-          return;
-        }
-
-        if (action === "toggleTranscript") {
+        } else if (action === "toggleTranscript") {
           ev.preventDefault();
-          state.showTranscript = !state.showTranscript;
-          paint();
-          return;
-        }
-
-        if (action === "save-score") {
+          toggleTranscript();
+        } else if (action === "save-score") {
           ev.preventDefault();
           saveScoreToProfile();
-          return;
         }
       });
 
       host.addEventListener("submit", (ev) => {
         const form = ev.target;
-        if (!form || form.getAttribute("data-form") !== "question") return;
+        if (!form) return;
 
-        ev.preventDefault();
+        if (form.getAttribute("data-form") === "question") {
+          ev.preventDefault();
+          if (state.status !== "question") return;
 
-        const q = state.questions[state.index];
-        if (!q) return;
-
-        const t = typeLower(q);
-
-        if (t === "listenfillintheblank") {
-          const input = form.querySelector('input[name="blank"]');
-          const value = input ? input.value : "";
-          grade(null, value);
+          const submitter = ev.submitter || document.activeElement;
+          const raw = submitter && submitter.value != null ? submitter.value : null;
+          choose(raw);
           return;
         }
 
-        const checked = form.querySelector('input[name="choice"]:checked');
-        const val = checked ? checked.value : null;
-        grade(val, null);
+        if (form.getAttribute("data-form") === "blank") {
+          ev.preventDefault();
+          if (state.status !== "question") return;
+
+          const input = form.querySelector("[data-blank]");
+          const val = input && input.value != null ? input.value : "";
+          submitBlank(val);
+          return;
+        }
       });
 
       // Stop TTS on navigation (best effort)

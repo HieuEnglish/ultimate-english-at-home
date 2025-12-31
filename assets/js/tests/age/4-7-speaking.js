@@ -154,40 +154,27 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — use shared helper UEAH_TTS
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // best-effort prime voices
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.92;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
-      return true;
+      const fn = window.UEAH_TTS?.speak;
+      if (typeof fn !== "function") return false;
+      return !!fn.call(window.UEAH_TTS, t, { lang: "en-US", chunk: false });
     } catch (_) {
       return false;
     }
@@ -264,7 +251,7 @@
     const tip = safeText(q.explanation || "Keep it playful and short.");
 
     const audioText = String(q.say || q.model || "").trim();
-    const hasAudio = supportsSpeech() && !!audioText;
+    const hasAudio = supportsSpeech() && audioText;
 
     const speechHint =
       supportsSpeech() && hasAudio
@@ -393,11 +380,7 @@
             ? `<button class="btn" type="button" data-action="save-score" aria-label="Save score to Profile">Save score to Profile</button>`
             : ""
         }
-        ${
-          state.savedMsg
-            ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
-            : ""
-        }
+        ${state.savedMsg ? `<span style="font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>` : ""}
       </div>
     `;
   }
@@ -435,6 +418,7 @@
 
       const s = document.createElement("script");
       s.defer = true;
+      s.async = true;
       s.src = src;
       s.setAttribute("data-ueah-test-bank", SLUG);
       s.onload = validate;
@@ -558,6 +542,7 @@
       }
 
       function mark(val) {
+        stopSpeech();
         const q = state.questions[state.index];
         if (!q || q.id == null) return;
 
@@ -569,6 +554,7 @@
       }
 
       function speakCurrent() {
+        stopSpeech();
         const q = state.questions[state.index];
         if (!q) return;
         const t = String(q.say || q.model || "").trim();
@@ -585,9 +571,6 @@
 
         const overall = computeOverallScoreFromSpeaking(state.results, state.questions);
 
-        // Ensure plain object for serialization (state.results has null prototype)
-        const resultsById = Object.assign({}, state.results);
-
         const payload = {
           slug: SLUG,
           ageGroup: "4-7",
@@ -595,42 +578,22 @@
           at: nowIso(),
 
           questions: Array.isArray(state.questions) ? state.questions : [],
-          resultsById,
+          resultsById: Object.assign({}, state.results),
 
           rawCorrect: overall.said,
           totalQuestions: overall.total,
           percent: overall.percent,
-          rubric: {
-            scoring: "observational",
-            mapping: { said: 1, again: 0, skip: 0 }
-          },
+
           sectionBreakdown: computeSectionCounts(state.questions, state.results),
           difficultyBreakdown: computeDifficultyCounts(state.questions, state.results)
         };
 
         const res = window.UEAH_SAVE_SCORE.save(payload);
 
-        if (res && res.ok) {
-          const norm =
-            res.normalizedScore != null
-              ? `${Math.round(Number(res.normalizedScore))}/100`
-              : res.saved && res.saved.normalizedScore != null
-                ? `${Math.round(Number(res.saved.normalizedScore))}/100`
-                : "";
-          const level =
-            res.levelTitle ||
-            (res.saved && res.saved.levelTitle) ||
-            (res.saved && res.saved.level && res.saved.level.title) ||
-            "";
-          state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
-        } else {
-          state.savedMsg = "Could not save.";
-        }
-
+        state.savedMsg = res && res.ok ? "Saved to Profile." : "Could not save.";
         paint();
       }
 
-      // Event delegation
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("[data-action]") : null;
         if (!btn) return;
@@ -640,43 +603,35 @@
         if (action === "start" || action === "retry") {
           ev.preventDefault();
           start();
-          return;
-        }
-
-        if (action === "restart") {
+        } else if (action === "restart") {
           ev.preventDefault();
           restart();
-          return;
-        }
-
-        if (action === "play") {
+        } else if (action === "play") {
           ev.preventDefault();
           speakCurrent();
-          return;
-        }
-
-        if (action === "stop") {
+        } else if (action === "stop") {
           ev.preventDefault();
           stopSpeech();
-          return;
-        }
-
-        if (action === "mark") {
+        } else if (action === "mark") {
           ev.preventDefault();
           mark(btn.getAttribute("data-mark"));
-          return;
-        }
-
-        if (action === "save-score") {
+        } else if (action === "save-score") {
           ev.preventDefault();
           saveScoreToProfile();
-          return;
         }
       });
 
       // Stop TTS on navigation (best effort)
       window.addEventListener(
         "popstate",
+        () => {
+          stopSpeech();
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        "pagehide",
         () => {
           stopSpeech();
         },

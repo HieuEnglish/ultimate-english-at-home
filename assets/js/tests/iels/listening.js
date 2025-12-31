@@ -2,7 +2,7 @@
    Runner: IELTS Listening (original audio scripts via TTS)
 
    - 4 parts (P1–P4), per-run cap (40 questions by default; bank is a pool)
-   - Uses browser Speech Synthesis (TTS) so no external audio files required
+   - Uses shared TTS helper (window.UEAH_TTS) so no external audio files required
    - One-question-at-a-time UI, timer, auto-grading, and per-question review
 
    Bank: assets/data/tests-iels-listening.js
@@ -276,39 +276,29 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — via shared helper UEAH_TTS
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
+
+    const tts = window.UEAH_TTS;
+    if (!tts || typeof tts.speak !== "function") return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // Prime voices list (some browsers populate async)
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.97;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
+      // Chunking helps for long IELTS scripts.
+      tts.speak(t, { lang: "en-US", chunk: true });
       return true;
     } catch (_) {
       return false;
@@ -710,6 +700,7 @@
         const q = currentQuestion();
         if (!q) return;
         const pid = String(q.partId || "").toLowerCase();
+        stopSpeech();
         const ok = speak(q.say || "");
         if (ok && pid) state.playedParts.add(pid);
       }
@@ -934,7 +925,7 @@
         paint();
       }
 
-      // Cancel speech/timers when leaving route (best effort)
+      // Stop speech + timer on navigation changes (best effort)
       window.addEventListener(
         "popstate",
         () => {

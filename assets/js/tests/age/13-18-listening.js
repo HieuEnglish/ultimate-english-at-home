@@ -267,75 +267,29 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — via shared helper UEAH_TTS
+  // Special case: this runner previously chunked manually; now use { chunk: true }.
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
-  }
-
-  // Chunk long text for more reliable playback.
-  let activeUtterances = [];
-  function clearUtterances() {
-    activeUtterances = [];
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
+
+    const tts = window.UEAH_TTS;
+    if (!tts || typeof tts.speak !== "function") return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-      clearUtterances();
-
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const chunks = t
-        .split(/\n{2,}/g)
-        .map((s) => s.trim())
-        .filter(Boolean);
-
-      if (!chunks.length) return false;
-
-      chunks.forEach((chunk, idx) => {
-        const u = new SpeechSynthesisUtterance(chunk);
-        u.lang = "en-US";
-        u.rate = 0.97;
-        u.pitch = 1.0;
-        u.volume = 1.0;
-        if (idx === 0) {
-          u.onend = () => {};
-        }
-        activeUtterances.push(u);
-      });
-
-      // Speak sequentially
-      let i = 0;
-      const speakNext = () => {
-        if (i >= activeUtterances.length) return;
-        const u = activeUtterances[i];
-        u.onend = () => {
-          i += 1;
-          speakNext();
-        };
-        u.onerror = () => {
-          i += 1;
-          speakNext();
-        };
-        synth.speak(u);
-      };
-      speakNext();
-
+      tts.speak(t, { lang: "en-US", chunk: true });
       return true;
     } catch (_) {
       return false;

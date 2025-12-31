@@ -15,6 +15,10 @@
    - Keeps UI consistent with other runners (intro/loading/error/prompt/summary)
    - Adds optional Part 2 timers (1:00 prep / 2:00 speaking)
    - Adds “Save completion to Profile” on summary (uses window.UEAH_SAVE_SCORE if available)
+   - Migrates TTS to shared helper window.UEAH_TTS (supportsSpeech/stopSpeech/speak)
+   - Ensures save payload includes:
+     * questions: state.questions
+     * resultsById: state.results
 */
 
 (function () {
@@ -26,13 +30,14 @@
   const AGE_GROUP = "13-18";
   const SKILL = "speaking";
 
-  // SECTION_PLAN total increased from 15 -> 18:
-  // Part 1 pick 10, Part 2 pick 1, Part 3 pick 7
+  // Part 1 pick 10, Part 2 pick 1, Part 3 pick 7 (total 18)
   const SECTION_PLAN = [
     { key: "part1", label: "Part 1 (Interview)", pick: 10 },
     { key: "part2", label: "Part 2 (Cue card)", pick: 1 },
     { key: "part3", label: "Part 3 (Discussion)", pick: 7 }
   ];
+
+  const TARGET_TOTAL = SECTION_PLAN.reduce((a, s) => a + (Number(s.pick) || 0), 0) || 18;
 
   const store = window.UEAH_TESTS_STORE;
   if (!store || typeof store.registerRunner !== "function") return;
@@ -62,14 +67,6 @@
     return safeText(v).replace(/\n/g, "<br>");
   }
 
-  function safeDomId(v) {
-    return String(v == null ? "" : v)
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-z0-9\-_:.]/g, "-")
-      .slice(0, 80);
-  }
-
   function shuffleInPlace(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -91,44 +88,11 @@
     return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
   }
 
-  function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
-  }
-
-  function stopSpeech() {
-    try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
-    } catch (_) {}
-  }
-
-  function speak(text) {
-    const t = String(text || "").trim();
-    if (!t) return false;
-    if (!supportsSpeech()) return false;
-
-    try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.92;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-
-      synth.speak(u);
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
   function normalizeSection(v) {
-    return String(v || "").trim().toLowerCase();
+    return String(v || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "");
   }
 
   function normalizeTopic(v) {
@@ -136,7 +100,7 @@
   }
 
   function sectionLabelFor(key) {
-    const k = String(key || "").toLowerCase();
+    const k = normalizeSection(key);
     const match = SECTION_PLAN.find((s) => s.key === k);
     return match ? match.label : "Prompt";
   }
@@ -148,9 +112,9 @@
   }
 
   function deriveFallbackId(q, idx) {
-    const sec = normalizeSection(q.section) || "x";
-    const top = normalizeTopic(q.topicId) || "t";
-    const stem = String(q.question || q.prompt || "")
+    const sec = normalizeSection(q && q.section) || "x";
+    const top = normalizeTopic(q && q.topicId) || "t";
+    const stem = String((q && (q.question || q.prompt)) || "")
       .trim()
       .slice(0, 24)
       .toLowerCase()
@@ -185,6 +149,33 @@
   }
 
   // -----------------------------
+  // Speech (TTS) — shared helper UEAH_TTS
+  // -----------------------------
+
+  function supportsSpeech() {
+    return !!window.UEAH_TTS?.isSupported?.();
+  }
+
+  function stopSpeech() {
+    try {
+      window.UEAH_TTS?.stop?.();
+    } catch (_) {}
+  }
+
+  function speak(text) {
+    const t = String(text || "").trim();
+    if (!t) return false;
+
+    try {
+      const fn = window.UEAH_TTS?.speak;
+      if (typeof fn !== "function") return false;
+      return !!fn.call(window.UEAH_TTS, t, { lang: "en-US", chunk: true });
+    } catch (_) {
+      return false;
+    }
+  }
+
+  // -----------------------------
   // Bank loader (no build step)
   // -----------------------------
 
@@ -208,7 +199,6 @@
 
       const existing = document.querySelector(`script[data-ueah-test-bank="${SLUG}"]`);
       if (existing) {
-        // If already loaded, resolve immediately.
         if (window.UEAH_TEST_BANKS && Array.isArray(window.UEAH_TEST_BANKS[SLUG])) {
           resolve(true);
           return;
@@ -255,11 +245,13 @@
   function buildFallbackSet(qs, totalTarget) {
     const tmp = (Array.isArray(qs) ? qs : []).slice();
     shuffleInPlace(tmp);
-    return tmp.slice(0, Math.max(1, totalTarget || 18));
+    return tmp.slice(0, Math.max(1, totalTarget || TARGET_TOTAL));
   }
 
   function buildStructuredSet(allQuestions) {
-    const raw = (Array.isArray(allQuestions) ? allQuestions : []).filter(isPlainObject).map((q) => ({ ...q }));
+    const raw = (Array.isArray(allQuestions) ? allQuestions : [])
+      .filter(isPlainObject)
+      .map((q) => ({ ...q }));
 
     const qs = ensureUniqueIds(raw);
     if (!qs.length) return [];
@@ -275,21 +267,19 @@
     const p2Pool = (bySection.get("part2") || []).slice();
     const p3Pool = (bySection.get("part3") || []).slice();
 
-    const targetTotal = SECTION_PLAN.reduce((a, s) => a + (s.pick || 0), 0) || 18;
-
     // If the bank isn't structured at all, fallback.
     const hasAnyStructured = p1Pool.length || p2Pool.length || p3Pool.length;
-    if (!hasAnyStructured) return buildFallbackSet(qs, targetTotal);
+    if (!hasAnyStructured) return buildFallbackSet(qs, TARGET_TOTAL);
 
     const usedIds = new Set();
 
     // 1) Pick Part 2 first (topic anchor)
     shuffleInPlace(p2Pool);
-    const p2 = p2Pool.length ? p2Pool[0] : null;
+    let p2 = p2Pool.length ? p2Pool[0] : null;
     if (p2 && p2.id) usedIds.add(String(p2.id));
     const anchorTopic = p2 ? normalizeTopic(p2.topicId) : "";
 
-    // 2) Part 1: prefer topic variety; if topicId missing, treat as unique
+    // 2) Part 1: prefer topic variety (cap repeats when topicId exists)
     const p1Need = (SECTION_PLAN.find((s) => s.key === "part1") || {}).pick || 10;
     const p1Picked = [];
     const topicCounts = new Map();
@@ -307,7 +297,6 @@
       const t = normalizeTopic(q.topicId);
       const count = t ? topicCounts.get(t) || 0 : 0;
 
-      // cap repeats when topic exists
       if (t && count >= 2) continue;
 
       usedIds.add(id);
@@ -320,7 +309,7 @@
       Array.prototype.push.apply(p1Picked, fill);
     }
 
-    // 3) Part 3: prefer anchorTopic, then fill from remaining
+    // 3) Part 3: prefer anchorTopic then fill from remaining
     const p3Need = (SECTION_PLAN.find((s) => s.key === "part3") || {}).pick || 7;
 
     const p3Picked = [];
@@ -338,29 +327,28 @@
       Array.prototype.push.apply(p3Picked, got);
     }
 
-    // If P2 missing, attempt a cue-style middle prompt from remaining.
-    let p2Final = p2;
-    if (!p2Final) {
+    // If Part 2 missing, attempt a cue-style middle prompt from remaining.
+    if (!p2) {
       const remaining = qs.filter((q) => q && q.id && !usedIds.has(String(q.id)));
       shuffleInPlace(remaining);
-      p2Final = remaining.length ? remaining[0] : null;
-      if (p2Final && p2Final.id) usedIds.add(String(p2Final.id));
+      p2 = remaining.length ? remaining[0] : null;
+      if (p2 && p2.id) usedIds.add(String(p2.id));
     }
 
     // Build final in section order.
     const final = []
       .concat(p1Picked)
-      .concat(p2Final ? [p2Final] : [])
+      .concat(p2 ? [p2] : [])
       .concat(p3Picked);
 
-    // If still too small (missing sections), backfill from remaining questions.
-    if (final.length < targetTotal) {
+    // Backfill if still short
+    if (final.length < TARGET_TOTAL) {
       const remaining = qs.filter((q) => q && q.id && !usedIds.has(String(q.id)));
-      const back = sampleUnique(remaining, targetTotal - final.length, usedIds);
+      const back = sampleUnique(remaining, TARGET_TOTAL - final.length, usedIds);
       Array.prototype.push.apply(final, back);
     }
 
-    return final.length ? final : buildFallbackSet(qs, targetTotal);
+    return final.length ? final.slice(0, TARGET_TOTAL) : buildFallbackSet(qs, TARGET_TOTAL);
   }
 
   // -----------------------------
@@ -376,23 +364,23 @@
     return `
       <div class="note" style="margin-top:0">
         <strong>Speaking (Ages 13–18)</strong>
-        <p style="margin:8px 0 0; opacity:.92">
-          Read the prompt. The learner answers out loud. Encourage clear reasons and examples. This is IELTS-inspired (simplified).
+        <p style="margin:8px 0 0; color: var(--muted)">
+          Read the prompt. The learner answers out loud. Encourage clear reasons and examples. IELTS-inspired (simplified).
         </p>
 
         <div class="note" style="margin-top:12px; padding:12px 14px">
           <strong>Structure</strong>
           <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted)">${planList}</ul>
           <p style="margin:10px 0 0; color: var(--muted)">
-            Tip: Use linking words like <strong>because</strong>, <strong>however</strong>, <strong>for example</strong>, and <strong>on the other hand</strong>.
+            Tip: Use linkers like <strong>because</strong>, <strong>however</strong>, <strong>for example</strong>, <strong>on the other hand</strong>.
           </p>
         </div>
 
         <p style="margin:10px 0 0; opacity:.92">
           ${
             supportsAudio
-              ? "Use <strong>🔊 Play</strong> to hear a model answer (if provided)."
-              : "Audio is not available in this browser. Read the sample out loud."
+              ? "Use <strong>🔊 Play</strong> for a model answer (if provided)."
+              : "Audio is not available in this browser. Read the model answer out loud."
           }
         </p>
       </div>
@@ -415,7 +403,7 @@
   function renderError(message) {
     return `
       <div class="note" style="margin-top:0">
-        <strong>Could not load this test</strong>
+        <strong>Could not start the test</strong>
         <p style="margin:8px 0 0">${safeText(message || "Unknown error")}</p>
       </div>
       <div class="actions" style="margin-top:12px">
@@ -468,7 +456,7 @@
     const checks = [];
     if (Number.isFinite(Number(checksObj.minSentences))) checks.push(`Aim for ${Number(checksObj.minSentences)}+ sentences`);
     if (checksObj.encourageBecause) checks.push("Include a reason (because / so / due to)");
-    if (checksObj.encourageLinkers) checks.push("Use linking words (however / for example / on the other hand)");
+    if (checksObj.encourageLinkers) checks.push("Use linkers (however / for example / on the other hand)");
     if (!checks.length) return "";
 
     const items = checks.map((t) => `<li style="margin:6px 0">${safeText(t)}</li>`).join("");
@@ -481,7 +469,7 @@
   }
 
   function renderPart2Timers(state, q) {
-    if (normalizeSection(q.section) !== "part2") return "";
+    if (normalizeSection(q && q.section) !== "part2") return "";
 
     return `
       <div class="note" style="margin:12px 0 0; padding:10px 12px">
@@ -502,17 +490,21 @@
     const total = state.questions.length;
     const n = state.index + 1;
 
-    const prompt = safeTextWithBreaks(q.question || q.prompt || "Speak!");
-    const sample = safeTextWithBreaks(asTextLines(q.model || ""));
-    const tip = safeText(q.explanation || "Try your best.");
-
-    const sectionKey = normalizeSection(q.section);
+    const sectionKey = normalizeSection(q && q.section);
     const sectionLabel = sectionLabelFor(sectionKey);
 
-    const audioText = asTextLines(q.say || q.model || "").trim();
+    const promptText = q && (q.question || q.prompt) ? String(q.question || q.prompt) : "Speak!";
+    const prompt = safeTextWithBreaks(promptText);
+
+    const modelText = asTextLines((q && q.model) || "");
+    const model = safeTextWithBreaks(modelText);
+
+    const tip = safeText((q && q.explanation) || "Try your best.");
+
+    const audioText = asTextLines((q && (q.say || q.model || q.question || q.prompt)) || "").trim();
     const hasAudio = supportsSpeech() && !!audioText;
 
-    const topicText = q.topicId ? ` • Topic: ${safeText(q.topicId)}` : "";
+    const topicText = q && q.topicId ? ` • Topic: ${safeText(q.topicId)}` : "";
 
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
@@ -531,10 +523,10 @@
           <div style="font-weight:900; font-size:18px">${prompt}</div>
 
           ${
-            sample
+            modelText && String(modelText).trim()
               ? `<div style="margin-top:10px">
                   <div style="font-weight:900">Sample (optional)</div>
-                  <div style="margin-top:6px; line-height:1.5">${sample}</div>
+                  <div style="margin-top:6px; line-height:1.5">${model}</div>
                 </div>`
               : ""
           }
@@ -556,46 +548,60 @@
     `;
   }
 
-  function renderSummary(state) {
-    let said = 0;
-    let again = 0;
-    let skip = 0;
-
-    const sectionCounts = {
-      part1: { said: 0, again: 0, skip: 0 },
-      part2: { said: 0, again: 0, skip: 0 },
-      part3: { said: 0, again: 0, skip: 0 }
+  function computeCounts(state) {
+    const out = {
+      total: 0,
+      said: 0,
+      again: 0,
+      skip: 0,
+      sections: {
+        part1: { said: 0, again: 0, skip: 0 },
+        part2: { said: 0, again: 0, skip: 0 },
+        part3: { said: 0, again: 0, skip: 0 }
+      }
     };
 
-    state.questions.forEach((q) => {
-      const r = state.results[String(q.id)] || "skip";
-      const sec = normalizeSection(q.section) || "part1";
-      const bucket = sectionCounts[sec] || sectionCounts.part1;
+    const qs = Array.isArray(state.questions) ? state.questions : [];
+    out.total = qs.length;
+
+    qs.forEach((q) => {
+      const id = q && q.id != null ? String(q.id) : "";
+      const r = (id && state.results && state.results[id]) || "skip";
+      const sec = normalizeSection(q && q.section) || "part1";
+      const bucket = out.sections[sec] || out.sections.part1;
 
       if (r === "said") {
-        said += 1;
+        out.said += 1;
         bucket.said += 1;
       } else if (r === "again") {
-        again += 1;
+        out.again += 1;
         bucket.again += 1;
       } else {
-        skip += 1;
+        out.skip += 1;
         bucket.skip += 1;
       }
     });
 
-    const rows = state.questions
+    return out;
+  }
+
+  function renderSummary(state) {
+    const c = computeCounts(state);
+
+    const rows = (Array.isArray(state.questions) ? state.questions : [])
       .map((q, idx) => {
-        const r = state.results[String(q.id)] || "skip";
+        const id = q && q.id != null ? String(q.id) : "";
+        const r = (id && state.results && state.results[id]) || "skip";
         const status = r === "said" ? "✅ Said" : r === "again" ? "🔁 Try again" : "⏭️ Skipped";
-        const sectionLabel = sectionLabelFor(normalizeSection(q.section));
+        const secLabel = sectionLabelFor(q && q.section);
+        const text = q && (q.question || q.prompt) ? String(q.question || q.prompt) : "";
         return `
           <li style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border)">
             <span aria-hidden="true">${safeText(status.split(" ")[0])}</span>
             <span style="min-width:0">
-              <b>${idx + 1}.</b> <span style="color:var(--muted); font-weight:800">${safeText(sectionLabel)}</span><br>
-              ${safeText(q.question || q.prompt || "")}
-              <div style="margin-top:6px; font-weight:800">${status}</div>
+              <b>${idx + 1}.</b> <span style="color:var(--muted); font-weight:800">${safeText(secLabel)}</span><br>
+              ${safeText(text)}
+              <div style="margin-top:6px; font-weight:800">${safeText(status)}</div>
             </span>
           </li>
         `;
@@ -603,38 +609,31 @@
       .join("");
 
     const encouragement =
-      again > 0
+      c.again > 0
         ? "Repeat the ‘Try again’ prompts. In Part 3, push for deeper reasons and comparisons."
         : "Restart to get a different set of prompts.";
 
-    function secLine(key) {
-      const s = sectionCounts[key];
-      if (!s) return "";
-      return `<div style="margin-top:6px; color:var(--muted)"><strong>${safeText(sectionLabelFor(key))}:</strong> Said ${s.said} • Try again ${s.again} • Skipped ${s.skip}</div>`;
-    }
+    const canSave = !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function");
 
-    const canSave =
-      !!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function") && !state.isSaving && !state.savedMsg;
-
-    const savedNote = state.savedMsg
-      ? `
-        <div class="note" style="margin-top:12px">
-          <strong>Saved to Profile</strong>
-          <p style="margin:8px 0 0">${safeText(state.savedMsg)}</p>
-          <p style="margin:8px 0 0; opacity:.9">Open <strong>Profile</strong> to view progress and your certification.</p>
-        </div>
-      `
+    const savedLine = state.savedMsg
+      ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
       : "";
 
     return `
       <div class="note" style="margin-top:0">
         <strong>Summary</strong>
         <p style="margin:8px 0 0; color: var(--muted)">
-          Said: <strong>${said}</strong> • Try again: <strong>${again}</strong> • Skipped: <strong>${skip}</strong>
+          Said: <strong>${c.said}</strong> • Try again: <strong>${c.again}</strong> • Skipped: <strong>${c.skip}</strong>
         </p>
-        ${secLine("part1")}
-        ${secLine("part2")}
-        ${secLine("part3")}
+        <div style="margin-top:8px; color:var(--muted)">
+          <strong>${safeText(sectionLabelFor("part1"))}:</strong> Said ${c.sections.part1.said} • Try again ${c.sections.part1.again} • Skipped ${c.sections.part1.skip}
+        </div>
+        <div style="margin-top:6px; color:var(--muted)">
+          <strong>${safeText(sectionLabelFor("part2"))}:</strong> Said ${c.sections.part2.said} • Try again ${c.sections.part2.again} • Skipped ${c.sections.part2.skip}
+        </div>
+        <div style="margin-top:6px; color:var(--muted)">
+          <strong>${safeText(sectionLabelFor("part3"))}:</strong> Said ${c.sections.part3.said} • Try again ${c.sections.part3.again} • Skipped ${c.sections.part3.skip}
+        </div>
       </div>
 
       <div class="note" style="margin-top:12px; padding:12px 14px">
@@ -649,14 +648,17 @@
         </ul>
       </details>
 
-      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+      <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
         <button class="btn btn--primary" type="button" data-action="restart">Restart</button>
-        <button class="btn" type="button" data-action="save" ${canSave ? "" : "disabled"} aria-label="Save completion to Profile">
-          ${state.isSaving ? "Saving…" : "Save completion to Profile"}
-        </button>
+        ${
+          canSave
+            ? `<button class="btn" type="button" data-action="save" ${state.isSaving ? "disabled" : ""}>${
+                state.isSaving ? "Saving…" : "Save completion to Profile"
+              }</button>`
+            : ""
+        }
+        ${savedLine}
       </div>
-
-      ${savedNote}
     `;
   }
 
@@ -691,10 +693,10 @@
         status: "intro", // intro | loading | prompt | summary | error
         questions: [],
         index: 0,
-        results: Object.create(null),
+        results: Object.create(null), // id -> "said" | "again" | "skip"
         lastError: "",
 
-        // Part 2 mini timer (optional)
+        // Part 2 timer (optional)
         p2TimerId: null,
         p2Remaining: 0,
 
@@ -719,7 +721,6 @@
         paint();
 
         state.p2TimerId = setInterval(() => {
-          // Only tick while on prompt screen
           if (state.status !== "prompt") return;
 
           state.p2Remaining -= 1;
@@ -778,7 +779,6 @@
           if (!bank.length) throw new Error("Missing question bank.");
 
           const built = buildStructuredSet(bank);
-
           if (!built.length) throw new Error("Could not build a speaking test from the bank.");
 
           state.questions = built;
@@ -795,7 +795,6 @@
 
       function restart() {
         cleanup();
-
         state.status = "intro";
         state.questions = [];
         state.index = 0;
@@ -808,13 +807,11 @@
 
       function next() {
         cleanup();
-
         if (state.index + 1 >= state.questions.length) {
           state.status = "summary";
           paint();
           return;
         }
-
         state.index += 1;
         state.status = "prompt";
         paint();
@@ -822,7 +819,7 @@
 
       function mark(val) {
         const q = state.questions[state.index];
-        if (!q || !q.id) return;
+        if (!q || q.id == null) return;
 
         const v = String(val || "").toLowerCase();
         const normalized = v === "said" || v === "again" || v === "skip" ? v : "skip";
@@ -835,68 +832,101 @@
         const q = state.questions[state.index];
         if (!q) return;
 
-        const t = asTextLines(q.say || q.model || "").trim();
+        const t = asTextLines(q.say || q.model || q.question || q.prompt || "").trim();
+        if (!t) return;
         speak(t);
       }
 
-      function buildSavePayload() {
-        // Speaking is completion-marked, not auto-scored.
-        // Convert Said/TryAgain/Skip into a simple percent so the profile can show progress consistently:
-        // Said=1, Again=0.5, Skip=0.
+      function computeDerivedScore() {
+        // Said = 1.0, Try again = 0.5, Skipped = 0
         const qs = Array.isArray(state.questions) ? state.questions : [];
-        let earned = 0;
+        const total = qs.length || 0;
 
-        const review = qs.map((q) => {
-          const r = state.results[String(q.id)] || "skip";
-          const w = r === "said" ? 1 : r === "again" ? 0.5 : 0;
-          earned += w;
-          return { mark: r, weight: w };
+        let said = 0;
+        let again = 0;
+        let skip = 0;
+
+        qs.forEach((q) => {
+          const id = q && q.id != null ? String(q.id) : "";
+          const r = (id && state.results && state.results[id]) || "skip";
+          if (r === "said") said += 1;
+          else if (r === "again") again += 1;
+          else skip += 1;
         });
 
-        const total = qs.length || 1;
-        const percent = Math.round((earned / total) * 100);
+        const raw = total ? (said + again * 0.5) / total : 0;
+        const percent = Math.max(0, Math.min(100, Math.round(raw * 100)));
 
-        return { totalPrompts: qs.length, earned, percent, review };
+        return { total, said, again, skip, percent };
       }
 
       async function saveCompletionToProfile() {
-        if (!(window.UEAH_SAVE_SCORE && typeof window.UEAH_SAVE_SCORE.save === "function")) {
-          state.savedMsg = "Save is not available.";
+        if (!window.UEAH_SAVE_SCORE || typeof window.UEAH_SAVE_SCORE.save !== "function") {
+          state.savedMsg = "Save unavailable.";
           paint();
           return;
         }
-        if (state.isSaving || state.savedMsg) return;
+        if (state.status !== "summary") {
+          state.savedMsg = "Finish the test first.";
+          paint();
+          return;
+        }
+        if (state.isSaving) return;
 
         state.isSaving = true;
+        state.savedMsg = "";
         paint();
 
         try {
-          const p = buildSavePayload();
-          const info = await window.UEAH_SAVE_SCORE.save({
+          const s = computeDerivedScore();
+
+          // Ensure plain object (no null prototype) for storage
+          const resultsById = Object.assign({}, state.results);
+
+          const payload = {
             slug: SLUG,
             ageGroup: AGE_GROUP,
             skill: SKILL,
-            timestamp: nowIso(),
-            // speaking uses a derived percent
-            rawCorrect: p.earned, // not really "correct", but stored for reference
-            totalQuestions: p.totalPrompts,
-            percent: p.percent,
-            // Provide prompts as "questions" so the profile can store completion items if it wants.
-            questions: (Array.isArray(state.questions) ? state.questions : []).map((q) => ({ ...q, points: 1 })),
-            review: p.review
-          });
+            at: nowIso(),
 
-          state.savedMsg = `Saved: ${info.ageLabel} • ${info.skillLabel} — ${info.normalizedScore}/100 (${info.levelTitle})`;
+            // required in your spec:
+            questions: Array.isArray(state.questions) ? state.questions : [],
+            resultsById,
+
+            // useful metadata:
+            totalPrompts: s.total,
+            said: s.said,
+            again: s.again,
+            skip: s.skip,
+            percent: s.percent
+          };
+
+          let res = window.UEAH_SAVE_SCORE.save(payload);
+          if (res && typeof res.then === "function") res = await res;
+
+          if (res && res.ok) {
+            const norm =
+              res.normalizedScore != null
+                ? `${Math.round(Number(res.normalizedScore))}/100`
+                : res.saved && res.saved.normalizedScore != null
+                  ? `${Math.round(Number(res.saved.normalizedScore))}/100`
+                  : "";
+            const level =
+              res.levelTitle ||
+              (res.saved && res.saved.levelTitle) ||
+              (res.saved && res.saved.level && res.saved.level.title) ||
+              "";
+            state.savedMsg = norm || level ? `Saved (${[norm, level].filter(Boolean).join(" — ")}).` : "Saved to Profile.";
+          } else {
+            state.savedMsg = "Could not save.";
+          }
         } catch (e) {
-          state.savedMsg = `Could not save: ${e && e.message ? e.message : "Unknown error"}`;
+          state.savedMsg = e && e.message ? e.message : "Could not save.";
         } finally {
           state.isSaving = false;
           paint();
         }
       }
-
-      // Initial render
-      paint();
 
       host.addEventListener("click", (ev) => {
         const btn = ev.target && ev.target.closest ? ev.target.closest("[data-action]") : null;
@@ -931,28 +961,28 @@
           paint();
         } else if (action === "save") {
           ev.preventDefault();
-          if (state.status === "summary") saveCompletionToProfile();
+          saveCompletionToProfile();
         }
       });
 
-      // Cancel speech/timers when leaving the page (best effort)
-      if (!host.__ueahNavHooked) {
-        host.__ueahNavHooked = true;
-        window.addEventListener(
-          "popstate",
-          () => {
-            cleanup();
-          },
-          { passive: true }
-        );
-        window.addEventListener(
-          "pagehide",
-          () => {
-            cleanup();
-          },
-          { passive: true }
-        );
-      }
+      // Cancel speech/timers on navigation changes (best effort)
+      window.addEventListener(
+        "popstate",
+        () => {
+          cleanup();
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        "pagehide",
+        () => {
+          cleanup();
+        },
+        { passive: true }
+      );
+
+      paint();
     }
   });
 })();

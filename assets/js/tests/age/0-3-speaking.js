@@ -6,7 +6,7 @@
 
    Features:
    - Random order every run (limited to MAX_PROMPTS_PER_RUN)
-   - Optional model audio using Speech Synthesis (TTS)
+   - Optional model audio using shared TTS helper (window.UEAH_TTS)
    - Caregiver marks each prompt as Said / Try again / Skip
 
    Updates:
@@ -92,12 +92,9 @@
           resolve(true);
           return;
         }
+
         existing.addEventListener("load", validate, { once: true });
-        existing.addEventListener(
-          "error",
-          () => reject(new Error("Failed to load test bank")),
-          { once: true }
-        );
+        existing.addEventListener("error", () => reject(new Error("Failed to load test bank")), { once: true });
 
         // In case load already happened before listeners attached:
         validate();
@@ -118,39 +115,28 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — via shared helper UEAH_TTS
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
+
+    const tts = window.UEAH_TTS;
+    if (!tts || typeof tts.speak !== "function") return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // Best-effort: prime voices list
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.9;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
+      tts.speak(t, { lang: "en-US", chunk: false });
       return true;
     } catch (_) {
       return false;
@@ -228,7 +214,7 @@
     const tip = safeText(q.explanation || "Keep it playful and short.");
 
     const audioText = String(q.say || q.model || "").trim();
-    const hasAudio = supportsSpeech() && audioText;
+    const hasAudio = supportsSpeech() && !!audioText;
 
     const speechHint =
       supportsSpeech() && hasAudio
@@ -237,11 +223,7 @@
           <div class="note" style="margin:12px 0 0; padding:10px 12px">
             <strong>Model support</strong>
             <p style="margin:6px 0 0; color: var(--muted)">
-              ${
-                model
-                  ? "Read the model out loud and encourage copying."
-                  : "Say an example first, then let your child try."
-              }
+              ${model ? "Read the model out loud and encourage copying." : "Say an example first, then let your child try."}
             </p>
           </div>
         `;
@@ -262,7 +244,11 @@
       <div style="margin-top:12px">
         <div style="border:1px solid var(--border); border-radius:16px; padding:14px; background: var(--surface2)">
           <div style="font-weight:900; font-size:18px">${prompt}</div>
-          ${model ? `<div style="margin-top:10px; font-size:26px; font-weight:900; letter-spacing:.2px">${model}</div>` : ""}
+          ${
+            model
+              ? `<div style="margin-top:10px; font-size:26px; font-weight:900; letter-spacing:.2px">${model}</div>`
+              : ""
+          }
           <p style="margin:10px 0 0; color: var(--muted); font-size:13px">Tip: ${tip}</p>
 
           <div class="actions" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
@@ -335,9 +321,7 @@
         }
         ${
           state.savedMsg
-            ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(
-                state.savedMsg
-              )}</span>`
+            ? `<span style="align-self:center; font-weight:800; color: var(--muted)">${safeText(state.savedMsg)}</span>`
             : ""
         }
       </div>
@@ -491,7 +475,6 @@
           return;
         }
 
-        // Optional: include simple summary numbers (safe for storage)
         const total = state.questions.length;
         let said = 0;
         let again = 0;
@@ -514,7 +497,8 @@
           said,
           again,
           skip,
-          // REQUIRED UPDATE:
+
+          // Required payload fields:
           questions: state.questions,
           resultsById: state.results
         };
@@ -554,6 +538,7 @@
         }
       });
 
+      // Stop TTS on navigation (best effort)
       window.addEventListener(
         "popstate",
         () => {

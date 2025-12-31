@@ -790,6 +790,93 @@ small.emoji{
   .form-grid{gap:16px}
 }
 
+/* -------------------------------------------------
+   NEW: TTS controls (Audio settings panel on tests)
+   Used by assets/js/views/test-detail.js
+-------------------------------------------------- */
+[data-tts-panel]{
+  /* panel already uses .note styles; keep it compact and aligned */
+  margin-top: 14px;
+}
+
+[data-tts-panel] label{
+  display:block;
+  font-weight:750;
+  letter-spacing:.1px;
+  color: var(--text);
+}
+
+/* Make native controls match existing input styling */
+[data-tts-panel] select{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: var(--font);
+  box-shadow: none;
+}
+
+/* Keep hint text subtle + readable */
+[data-tts-panel] small{
+  display:block;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Range slider polish (keeps a native feel but matches theme) */
+[data-tts-panel] input[type="range"]{
+  width:100%;
+  background: transparent;
+  accent-color: var(--accent);
+}
+
+/* WebKit (Chrome/Edge/Safari) */
+[data-tts-panel] input[type="range"]::-webkit-slider-runnable-track{
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(107,102,255,.12);
+}
+[data-tts-panel] input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow2);
+  margin-top: -5px; /* centers thumb on 8px track */
+}
+
+/* Firefox */
+[data-tts-panel] input[type="range"]::-moz-range-track{
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(107,102,255,.12);
+}
+[data-tts-panel] input[type="range"]::-moz-range-thumb{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow2);
+}
+
+/* Dark mode slider track tweak */
+@media (prefers-color-scheme: dark){
+  [data-tts-panel] input[type="range"]::-webkit-slider-runnable-track{
+    background: rgba(122,176,255,.14);
+  }
+  [data-tts-panel] input[type="range"]::-moz-range-track{
+    background: rgba(122,176,255,.14);
+  }
+}
+
 /* ARIA-invalid styling (works for both .input/.textarea and inline-styled fields) */
 input[aria-invalid="true"],
 textarea[aria-invalid="true"]{

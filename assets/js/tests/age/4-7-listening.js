@@ -5,7 +5,7 @@
    simple, accessible, one-question-at-a-time listening quiz.
 
    Audio approach (no assets needed):
-   - Uses the browser's Speech Synthesis (TTS) to say the target word/sentence.
+   - Uses the shared UEAH_TTS helper (Speech Synthesis under the hood) to say the target word/sentence.
    - Includes a "🔊 Play" button and a "Show words" fallback.
 
    Supported question types:
@@ -191,39 +191,29 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) via shared helper
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
+
+    const tts = window.UEAH_TTS;
+    if (!tts || typeof tts.speak !== "function") return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // Best-effort: prime voices list (some browsers populate async)
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.92;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
+      // Chunk longer prompts (sentences) for reliability across browsers.
+      tts.speak(t, { lang: "en-US", chunk: t.length > 80 });
       return true;
     } catch (_) {
       return false;

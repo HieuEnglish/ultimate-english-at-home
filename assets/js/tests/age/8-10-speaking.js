@@ -108,40 +108,27 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — use shared helper UEAH_TTS
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // Best-effort prime voices
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.92;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
-      return true;
+      const fn = window.UEAH_TTS?.speak;
+      if (typeof fn !== "function") return false;
+      return !!fn.call(window.UEAH_TTS, t, { lang: "en-US", chunk: false });
     } catch (_) {
       return false;
     }
@@ -612,6 +599,7 @@
       }
 
       function mark(val) {
+        stopSpeech();
         const q = state.questions[state.index];
         if (!q || q.id == null) return;
 
@@ -623,6 +611,7 @@
       }
 
       function speakCurrent() {
+        stopSpeech();
         const q = state.questions[state.index];
         if (!q) return;
         const t = String(q.say || q.model || q.question || "").trim();
@@ -651,9 +640,8 @@
           skill: "speaking",
           at: nowIso(),
 
-          // UPDATE: include questions + resultsById for downstream use
           questions: Array.isArray(state.questions) ? state.questions : [],
-          resultsById: state.results && typeof state.results === "object" ? state.results : Object.create(null),
+          resultsById: state.results,
 
           totalPrompts: total,
           said,

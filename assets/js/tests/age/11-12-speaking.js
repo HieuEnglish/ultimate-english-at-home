@@ -8,7 +8,7 @@
      * If a section is missing/short, backfills from remaining questions
      * Ensures "longturn" is included when available (1 cue card)
    - Adds optional Cue Card timers for "longturn" (00:30 prep / 01:30 speaking)
-   - SpeechSynthesis: Play + Stop; cancels on navigation and between prompts
+   - TTS: Play + Stop via shared UEAH_TTS; cancels on navigation and between prompts
    - Bank loader: resilient to existing script; validates bank after load tick
    - Summary includes per-section counts + compact review list
    - Adds "Save score to Profile" on summary (uses window.UEAH_SAVE_SCORE.save)
@@ -97,40 +97,27 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — use shared helper UEAH_TTS
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // best-effort prime voices
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.92;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
-      return true;
+      const fn = window.UEAH_TTS?.speak;
+      if (typeof fn !== "function") return false;
+      return !!fn.call(window.UEAH_TTS, t, { lang: "en-US", chunk: true });
     } catch (_) {
       return false;
     }

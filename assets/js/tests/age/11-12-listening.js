@@ -241,39 +241,36 @@
   }
 
   // -----------------------------
-  // Speech (TTS)
+  // Speech (TTS) — via shared helper UEAH_TTS
   // -----------------------------
 
   function supportsSpeech() {
-    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+    return !!window.UEAH_TTS?.isSupported?.();
   }
 
   function stopSpeech() {
     try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      window.UEAH_TTS?.stop?.();
     } catch (_) {}
+  }
+
+  function shouldChunk(text) {
+    const t = String(text || "").trim();
+    if (!t) return false;
+    return t.length > 90 || t.includes("\n");
   }
 
   function speak(text) {
     const t = String(text || "").trim();
     if (!t) return false;
-    if (!supportsSpeech()) return false;
+
+    const tts = window.UEAH_TTS;
+    if (!tts || typeof tts.speak !== "function") return false;
 
     try {
-      const synth = window.speechSynthesis;
-      synth.cancel();
-
-      // Best-effort: prime voices list (some browsers populate async)
-      try {
-        if (typeof synth.getVoices === "function") synth.getVoices();
-      } catch (_) {}
-
-      const u = new SpeechSynthesisUtterance(t);
-      u.lang = "en-US";
-      u.rate = 0.98;
-      u.pitch = 1.0;
-      u.volume = 1.0;
-      synth.speak(u);
+      // Ensure any prior speech is stopped (best effort).
+      if (typeof tts.stop === "function") tts.stop();
+      tts.speak(t, { lang: "en-US", chunk: shouldChunk(t) });
       return true;
     } catch (_) {
       return false;
@@ -328,11 +325,15 @@
     const total = state.questions.length;
     const n = Math.min(state.index + 1, total);
 
+    const q = state.questions[state.index];
+    const sayText = q && q.say ? String(q.say).trim() : "";
+    const canPlay = supportsSpeech() && !!sayText;
+
     return `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <div style="font-weight:800; color: var(--muted)">Question ${n} of ${total}</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" type="button" data-action="play" ${supportsSpeech() ? "" : "disabled"} aria-label="Play the audio">🔊 Play</button>
+          <button class="btn" type="button" data-action="play" ${canPlay ? "" : "disabled"} aria-label="Play the audio">🔊 Play</button>
           <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"} aria-label="Stop audio">⏹ Stop</button>
           <button class="btn" type="button" data-action="toggleTranscript" aria-pressed="${state.showTranscript ? "true" : "false"}">
             ${state.showTranscript ? "Hide transcript" : "Show transcript"}
@@ -512,6 +513,9 @@
       ? `<p style="margin:8px 0 0; opacity:.92"><strong>Tip:</strong> ${safeText(explanation)}</p>`
       : "";
 
+    const sayText = q && q.say ? String(q.say).trim() : "";
+    const canPlay = supportsSpeech() && !!sayText;
+
     return `
       <div class="note" style="margin-top:12px" aria-live="polite">
         <strong>${icon} ${ok ? "Correct" : "Not quite"}</strong>
@@ -523,7 +527,7 @@
 
       <div class="actions" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
         <button class="btn btn--primary" type="button" data-action="next">${nextLabel}</button>
-        <button class="btn" type="button" data-action="play" ${supportsSpeech() ? "" : "disabled"}>🔊 Play again</button>
+        <button class="btn" type="button" data-action="play" ${canPlay ? "" : "disabled"}>🔊 Play again</button>
         <button class="btn" type="button" data-action="stop" ${supportsSpeech() ? "" : "disabled"}>⏹ Stop</button>
         <button class="btn" type="button" data-action="toggleTranscript" aria-pressed="${state.showTranscript ? "true" : "false"}">
           ${state.showTranscript ? "Hide transcript" : "Show transcript"}
