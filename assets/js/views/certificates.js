@@ -237,6 +237,24 @@ function buildCertificateData(profile, resultsByAge, age) {
   };
 }
 
+function skillLine(data, wantedSkills) {
+  const list = Array.isArray(wantedSkills) ? wantedSkills : [];
+  const bySkill = new Map();
+  (data.skills || []).forEach((s) => {
+    bySkill.set(String(s.skill || '').toLowerCase(), s);
+  });
+
+  return list
+    .map((k) => {
+      const s = bySkill.get(String(k).toLowerCase()) || null;
+      const icon = skillEmoji(k);
+      const label = titleCase(k);
+      const score = s && s.score != null ? formatScore(s.score) : '—';
+      return `${icon ? icon + ' ' : ''}${label}: ${score}/100`;
+    })
+    .join('  •  ');
+}
+
 function svgCertificateMarkup(data, svgId) {
   const name = safeText(data.learnerName || 'Learner');
   const email = safeText(data.email || '');
@@ -247,14 +265,9 @@ function svgCertificateMarkup(data, svgId) {
   const ieltsLine = safeText(data.ieltsLine || '');
   const disclaimer = safeText(data.disclaimer || '');
 
-  const skillLines = (data.skills || [])
-    .map((s) => {
-      const icon = skillEmoji(s.skill);
-      const label = titleCase(s.skill);
-      const score = s.score == null ? '—' : formatScore(s.score);
-      return `${icon ? icon + ' ' : ''}${label}: ${score}/100`;
-    })
-    .join('  •  ');
+  // Split skill summary into 2 readable lines to prevent squashing/overlap.
+  const skillsTop = safeText(skillLine(data, ['reading', 'listening']));
+  const skillsBottom = safeText(skillLine(data, ['writing', 'speaking']));
 
   // A4 landscape-ish viewBox (print-friendly)
   return `
@@ -333,16 +346,23 @@ function svgCertificateMarkup(data, svgId) {
         in ${ageLabel}
       </text>
 
-      <!-- Score row -->
-      <rect x="200" y="548" width="720" height="62" rx="16" fill="#f6f7ff" stroke="#e7e9f6"/>
-      <text x="235" y="585" text-anchor="start" font-size="16" font-weight="800" fill="#1d2440">
+      <!-- Score row (taller so skill lines never squash) -->
+      <rect x="200" y="540" width="720" height="82" rx="16" fill="#f6f7ff" stroke="#e7e9f6"/>
+
+      <!-- Left: overall -->
+      <text x="235" y="582" text-anchor="start" font-size="16" font-weight="800" fill="#1d2440">
         Overall score:
       </text>
-      <text x="405" y="585" text-anchor="start" font-size="20" font-weight="900" fill="#141a34">
+      <text x="405" y="582" text-anchor="start" font-size="20" font-weight="900" fill="#141a34">
         ${overallScore}/100
       </text>
-      <text x="560" y="585" text-anchor="middle" font-size="14" font-weight="700" fill="#4a5270" opacity="0.95">
-        ${safeText(skillLines)}
+
+      <!-- Right: skills split into 2 lines (readable) -->
+      <text x="905" y="572" text-anchor="end" font-size="13" font-weight="800" fill="#4a5270" opacity="0.96">
+        ${skillsTop}
+      </text>
+      <text x="905" y="594" text-anchor="end" font-size="13" font-weight="800" fill="#4a5270" opacity="0.96">
+        ${skillsBottom}
       </text>
 
       <!-- Recognition -->
@@ -588,8 +608,9 @@ export async function getView(ctx, mode) {
   }
 
   const certData = targetAges.map((age) => buildCertificateData(profile, resultsByAge, age));
-  const learnerName = String(profile && profile.name ? profile.name : profile && profile.email ? profile.email : 'Learner')
-    .trim() || 'Learner';
+  const learnerName = String(
+    profile && profile.name ? profile.name : profile && profile.email ? profile.email : 'Learner'
+  ).trim() || 'Learner';
 
   const title =
     kind === 'all'
