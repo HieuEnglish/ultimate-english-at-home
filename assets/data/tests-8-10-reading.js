@@ -1069,6 +1069,32 @@
       answer: 0,
       difficulty: "medium",
       explanation: "The passage shows Sam doing several jobs to care for his dog."
+    },
+    {
+      id: "q76",
+      type: "multipleChoice",
+      passage:
+        "Linh packed her bag the night before. In the morning, she left early and arrived on time.",
+      question: "Why did Linh arrive on time?",
+      options: [
+        "She packed her bag and left early",
+        "She missed the bus",
+        "She went back home for lunch",
+        "She stayed up all night playing games"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The passage says she packed her bag and left early, so she arrived on time."
+    },
+    {
+      id: "q77",
+      type: "fillInTheBlank",
+      passage:
+        "Please put the glass on the table, not on the edge.",
+      question: "Fill in the missing word: Put the glass on the ______.",
+      answer: ["table"],
+      difficulty: "easy",
+      explanation: "The sentence says: on the table."
     }
   );
 

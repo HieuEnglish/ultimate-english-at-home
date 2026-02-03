@@ -1614,6 +1614,50 @@
           }
         ]
       }
+    },
+    {
+      id: "q67",
+      type: "prompt",
+      question:
+        "Write a paragraph (90–120 words) giving advice to a new student at your school. Include at least THREE tips and one reason using because.\n\nTip: Use linking words (First, Also, Finally).",
+      difficulty: "medium",
+      explanation: "Give clear tips and support one of them with a reason.",
+      rubric: {
+        checks: [
+          { id: "minWords", label: "90+ words", type: "minWords", value: 90 },
+          { id: "maxWords", label: "120 words or fewer", type: "maxWords", value: 120 },
+          {
+            id: "hasBecause",
+            label: "Uses because",
+            type: "includesAny",
+            value: ["because"]
+          },
+          {
+            id: "hasLinkers",
+            label: "Uses linking words (First / Also / Finally)",
+            type: "includesAny",
+            value: ["first", "also", "finally"]
+          }
+        ],
+        criteria: [
+          {
+            name: "Content",
+            descriptors: {
+              meets: "Three or more useful tips with at least one reason.",
+              developing: "Two tips or tips are not specific.",
+              needsWork: "Advice is unclear or missing."
+            }
+          },
+          {
+            name: "Language",
+            descriptors: {
+              meets: "Mostly correct sentences and polite advice.",
+              developing: "Some errors but meaning is clear.",
+              needsWork: "Many errors make meaning unclear."
+            }
+          }
+        ]
+      }
     }
 
   ];

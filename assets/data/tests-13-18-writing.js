@@ -1281,6 +1281,40 @@
           }
         ]
       }
+    },
+    {
+      id: "q63",
+      type: "essay",
+      task: "task2",
+      question:
+        "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nMany teenagers spend a lot of time on their smartphones.\n\nWhat are the advantages and disadvantages of this trend?\n\nGive reasons for your answer and include relevant examples from your knowledge or experience.",
+      difficulty: "medium",
+      explanation:
+        "Discuss 2 advantages (communication, learning tools) and 2 disadvantages (distraction, sleep/mental health), then conclude.",
+      rubric: {
+        checks: [
+          { id: "minWords", label: "250+ words", type: "minWords", value: 250 },
+          { id: "maxWords", label: "330 words or fewer (recommended)", type: "maxWords", value: 330 },
+          {
+            id: "positionMarker",
+            label: "Shows a clear position (I believe / I agree / I disagree)",
+            type: "includesAny",
+            value: ["i believe", "i agree", "i disagree", "in my opinion", "i think"]
+          },
+          {
+            id: "exampleMarker",
+            label: "Includes at least one example marker (for example / for instance)",
+            type: "includesAny",
+            value: ["for example", "for instance", "such as"]
+          },
+          {
+            id: "conclusionMarker",
+            label: "Includes a conclusion marker (In conclusion / To conclude)",
+            type: "includesAny",
+            value: ["in conclusion", "to conclude", "to sum up", "overall,"]
+          }
+        ]
+      }
     }
 
   ];

@@ -473,6 +473,15 @@
       model: "🌙 good night",
       difficulty: "hard",
       explanation: "If too hard, try “night-night”."
+    },
+    {
+      id: "q51",
+      type: "prompt",
+      question: "Say: “I want water.” 💧",
+      say: "I want water",
+      model: "I want water",
+      difficulty: "hard",
+      explanation: "A shorter try like “want water” is OK."
     }
   ];
 

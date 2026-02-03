@@ -1226,6 +1226,18 @@
       explanation: "Give one method, one example, and encouraging advice.",
       targets: ["Method", "Example", "Encouragement"],
       rubric: RUBRIC
+    },
+    {
+      id: "p21",
+      type: "prompt",
+      section: "discussion",
+      question: "Is it better to study alone or with a group? Why?",
+      say: "I think studying with a group can be better because you can share ideas and ask questions quickly. However, studying alone is useful when you need deep focus, so a mix of both is best.",
+      model: "I think ____ because ____. However, ____.",
+      difficulty: "medium",
+      explanation: "Give a preference with a reason and one balanced point.",
+      targets: ["Opinion", "Reason", "However"],
+      rubric: RUBRIC
     }
 
   ];

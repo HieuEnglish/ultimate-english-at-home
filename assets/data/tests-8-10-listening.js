@@ -855,6 +855,26 @@
       answer: ["silently"],
       difficulty: "hard",
       explanation: "Silently means without talking."
+    },
+    {
+      id: "q83",
+      type: "listenChoice",
+      question: "Listen. What should the student bring?",
+      say: "Teacher: Please bring your raincoat tomorrow. It will rain.",
+      options: ["A raincoat", "A swimsuit", "A sandwich", "A toy"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The teacher says: bring your raincoat."
+    },
+    {
+      id: "q84",
+      type: "listenChoice",
+      question: "Listen. What time is the meeting?",
+      say: "The meeting starts at three thirty.",
+      options: ["3:30", "3:00", "4:30", "2:30"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Three thirty = 3:30."
     }
   );
 

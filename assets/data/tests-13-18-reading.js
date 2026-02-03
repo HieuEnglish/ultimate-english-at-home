@@ -1208,6 +1208,22 @@
       answer: 0,
       difficulty: "hard",
       explanation: "Paragraph B says very cheap new products can make repair seem irrational."
+    },
+    {
+      id: "q91",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "What is the main purpose of a repairability score (Paragraph D)?",
+      options: [
+        "To encourage companies to design products that are easier to repair",
+        "To make products more expensive",
+        "To stop people from repairing items",
+        "To replace warranties completely"
+      ],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Paragraph D explains that the score rewards designs that are easy to open and maintain."
     }
   ];
 

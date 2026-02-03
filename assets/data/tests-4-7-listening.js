@@ -752,6 +752,16 @@
       answer: 0,
       difficulty: "hard",
       explanation: "🚲 is a bike."
+    },
+    {
+      id: "q71",
+      type: "listenChoice",
+      question: "Listen. Choose the best answer.",
+      say: "jump",
+      options: ["🧒‍🦱⬆️", "🧒‍🦱😴", "🧒‍🦱🍽️", "🧒‍🦱🧼"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Jump = go up off the ground."
     }
   ];
 

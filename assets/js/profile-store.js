@@ -75,7 +75,10 @@
 
       // New: age-group practice tracking (0-3, 4-7, 8-10, 11-12, 13-18, ielts)
       // Each age group contains per-skill lastScore + history and an optional overall summary.
-      resultsByAge: {}
+      resultsByAge: {},
+
+      // Feature: Game Certificates
+      certificates: [] // { id, title, level, date, image? }
     };
   }
 
@@ -487,6 +490,7 @@
 
     // New: resultsByAge
     out.resultsByAge = isPlainObject(data.resultsByAge) ? ensureResultsByAgeShape(data.resultsByAge) : {};
+    out.certificates = Array.isArray(data.certificates) ? data.certificates : [];
 
     // Keep overall score in sync with the latest saved skill scores.
     // This fixes legacy/stale overalls and ensures re-takes update certification consistently.
@@ -540,6 +544,9 @@
     // resultsByAge
     const shaped = isPlainObject(p.resultsByAge) ? ensureResultsByAgeShape(p.resultsByAge) : {};
     out.resultsByAge = syncAllOveralls(shaped).resultsByAge;
+
+    // Certificates
+    out.certificates = Array.isArray(p.certificates) ? p.certificates : [];
 
     const dispatch = !(opts && opts.dispatch === false);
     persist(out, dispatch);
@@ -776,6 +783,25 @@
     });
   }
 
+  function addCertificate(cert) {
+    const current = load();
+    const list = Array.isArray(current.certificates) ? current.certificates : [];
+
+    // Dedupe by ID
+    if (list.find(c => c.id === cert.id)) return current;
+
+    const newCert = {
+      id: cert.id || Date.now().toString(),
+      title: cert.title || "Certificate",
+      level: cert.level || 1,
+      date: nowIso(),
+      ...cert
+    };
+
+    list.push(newCert);
+    return save({ ...current, certificates: list });
+  }
+
   // Compatibility API expected by store-helpers.js patterns
   function get() {
     return load();
@@ -898,11 +924,12 @@
     clearAgeResults,
 
     // Compatibility API (store-helpers)
-    get,
-    set,
-
-    // Sync helpers
+    getIelsHistory,
+    addAgeSkillScore,
+    clearAgeResults,
+    addCertificate, // Exposed API
     exportData,
-    importData
+    importData,
+    onProfileChanged
   };
 })();

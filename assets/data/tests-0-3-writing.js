@@ -817,6 +817,14 @@
       model: "★",
       difficulty: "hard",
       explanation: "Stars are advanced. Copying and any attempt is a success."
+    },
+    {
+      id: "q101",
+      type: "prompt",
+      question: "Trace your name (caregiver writes it in big letters first).",
+      model: "NAME",
+      difficulty: "hard",
+      explanation: "Tracing name letters builds control. Any letter attempt is OK."
     }
   ];
 

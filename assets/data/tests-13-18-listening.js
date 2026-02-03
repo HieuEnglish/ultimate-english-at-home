@@ -1170,6 +1170,18 @@
       answer: 0,
       difficulty: "medium",
       explanation: "The lecture says bright screens late at night can delay melatonin."
+    },
+    {
+      id: "q91",
+      partId: "p4",
+      type: "listenTrueFalse",
+      say: P4B,
+      context: "Part 4: A short lecture about sleep and learning.",
+      question: "Sleep helps the brain organise what we learned during the day.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The lecture explains that sleep supports memory and learning."
     }
   ];
 

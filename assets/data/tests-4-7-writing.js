@@ -607,6 +607,14 @@
       answer: ".",
       difficulty: "easy",
       explanation: "A sentence ends with a full stop."
+    },
+    {
+      id: "q71",
+      type: "prompt",
+      question: "Write 1 sentence about your favourite animal.",
+      model: "I like ____.",
+      difficulty: "medium",
+      explanation: "Use a capital letter and a full stop."
     }
   ];
 

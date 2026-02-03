@@ -1025,6 +1025,18 @@
       explanation: "Encourage 2 reasons and accept any subject choice.",
       targets: ["Use ‘because’", "Give 2 reasons", "Clear opinion"],
       rubric: { ...RUBRIC, checks: { minSentences: 3, encourageBecause: true } }
+    },
+    {
+      id: "o22",
+      type: "prompt",
+      section: "opinion",
+      question: "Should students do homework every day? Why or why not? 📚",
+      say: "I think homework is good because it helps me practise what I learned. However, too much homework can make students tired, so it should be short.",
+      model: "I think ____ because ____. However, ____.",
+      difficulty: "hard",
+      explanation: "Give one reason and one balanced idea.",
+      targets: ["Reason", "However", "3 sentences"],
+      rubric: { ...RUBRIC, checks: { minSentences: 3, encourageBecause: true } }
     }
   );
 

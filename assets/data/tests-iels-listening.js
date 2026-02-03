@@ -1514,6 +1514,17 @@
       question: "Mina says they can ______ the questions together.",
       answer: ["review", "Review"],
       explanation: "Mina says they can review them together."
+    },
+    {
+      id: "q121",
+      partId: "p3",
+      type: "multipleChoice",
+      say: P3,
+      context: "Part 3: Choose the correct answer.",
+      question: "When will they meet to work on the questionnaire?",
+      options: ["This afternoon", "Tomorrow morning", "On Friday", "Next week"],
+      answer: 0,
+      explanation: "They agree to work on it later today."
     }
   );
 

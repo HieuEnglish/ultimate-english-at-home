@@ -737,6 +737,15 @@
       difficulty: "medium",
       explanation: "HOUSE matches the house."
     }
+    ,{
+      id: "q81",
+      type: "multipleChoice",
+      question: "Tap the letter: T",
+      options: ["T", "I", "L", "F"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "T has a line on top and a line down."
+    }
   ];
 
   // Global export (no build step)

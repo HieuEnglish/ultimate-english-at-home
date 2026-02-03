@@ -1009,6 +1009,20 @@
         "What are the main reasons for this, and is it generally a positive or negative development?\n\n" +
         "Write at least 250 words.",
       rubric: TASK2_RUBRIC
+    },
+    {
+      id: "t2-v29",
+      type: "essay",
+      taskNumber: 2,
+      recommendedTimeMin: 40,
+      minWords: 250,
+      notes:
+        "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      question:
+        "Many people now work from home using the internet and communication technology.\n\n" +
+        "Do the advantages of working from home outweigh the disadvantages?\n\n" +
+        "Write at least 250 words.",
+      rubric: TASK2_RUBRIC
     }
   ];
 

@@ -1104,6 +1104,17 @@
       answer: ["6:10", "6.10", "six ten", "six ten pm", "six ten p.m."],
       difficulty: "medium",
       explanation: "Six ten = 6:10."
+    },
+    {
+      id: "q99",
+      type: "listenTrueFalse",
+      context: "A short weather update.",
+      question: "Listen. True or False: It will rain this afternoon.",
+      say: "The forecast says it will be sunny in the morning, but rain is expected this afternoon.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "The speaker says rain is expected this afternoon."
     }
   ];
 

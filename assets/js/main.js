@@ -6,7 +6,7 @@
    monolithic app.js and leverages ES modules to split views and logic.
 */
 
-import { AGE_GROUPS, SKILLS } from './constants.js';
+import { AGE_GROUPS, SKILLS, GAME_AGE_GROUPS, GAME_SKILLS } from './constants.js';
 import {
   detectBasePath,
   rewriteNavHrefs,
@@ -167,9 +167,9 @@ function loadingHtml() {
   return `
     <section class="page-top">
       ${breadcrumbs([
-        { label: 'Home', href: ctx.hrefFor('/') },
-        { label: 'Loading…' },
-      ])}
+    { label: 'Home', href: ctx.hrefFor('/') },
+    { label: 'Loading…' },
+  ])}
       <h1 class="page-title">Loading…</h1>
       <p class="page-subtitle">Please wait a moment.</p>
     </section>
@@ -229,6 +229,39 @@ async function render(appPath) {
     } else if (parts[0] === 'games' && parts.length === 1) {
       viewModule = await import('./views/games.js');
       viewResult = viewModule.getView(ctx);
+    } else if (parts[0] === 'games' && parts.length === 2) {
+      // /games/:age - skill selection
+      const age = parts[1];
+      if (!GAME_AGE_GROUPS.includes(age)) {
+        viewModule = await import('./views/not-found.js');
+        viewResult = viewModule.getView(ctx, normalizedPath);
+      } else {
+        viewModule = await import('./views/games-age.js');
+        viewResult = viewModule.getView(ctx, age);
+      }
+    } else if (parts[0] === 'games' && parts.length === 3) {
+      // /games/:age/:skill - game list
+      const age = parts[1];
+      const skill = parts[2];
+      if (!GAME_AGE_GROUPS.includes(age) || !GAME_SKILLS.includes(skill)) {
+        viewModule = await import('./views/not-found.js');
+        viewResult = viewModule.getView(ctx, normalizedPath);
+      } else {
+        viewModule = await import('./views/games-skill.js');
+        viewResult = viewModule.getView(ctx, age, skill);
+      }
+    } else if (parts[0] === 'games' && parts.length === 4) {
+      // /games/:age/:skill/:slug - play game
+      const age = parts[1];
+      const skill = parts[2];
+      const slug = parts[3];
+      if (!GAME_AGE_GROUPS.includes(age) || !GAME_SKILLS.includes(skill)) {
+        viewModule = await import('./views/not-found.js');
+        viewResult = viewModule.getView(ctx, normalizedPath);
+      } else {
+        viewModule = await import('./views/game-play.js');
+        viewResult = await viewModule.getView(ctx, age, skill, slug);
+      }
     } else if (parts[0] === 'tests' && parts.length === 1) {
       viewModule = await import('./views/tests.js');
       viewResult = viewModule.getView(ctx);

@@ -1636,6 +1636,21 @@
       explanation: "Compare both types and give a clear conclusion.",
       targets: ["Comparison", "Conclusion"],
       rubric: RUBRIC_P3
+    },
+    {
+      id: "p3-community-09",
+      type: "prompt",
+      section: "part3",
+      topicId: "community",
+      question: "What can local governments do to strengthen a sense of community?",
+      model:
+        "Local governments can strengthen community by investing in public spaces like parks and libraries where people can meet. They can also support events such as markets or festivals that encourage neighbours to interact. Another useful step is improving communication, for example through community noticeboards or official updates. However, the most effective policies are usually those that involve residents in decision-making. When people feel heard, they are more willing to participate and help others.",
+      say:
+        "Local governments can strengthen community by investing in public spaces like parks and libraries where people can meet. They can also support events such as markets or festivals that encourage neighbours to interact. Another useful step is improving communication, for example through community noticeboards or official updates. However, the most effective policies are usually those that involve residents in decision-making. When people feel heard, they are more willing to participate and help others.",
+      difficulty: "hard",
+      explanation: "Give 2–3 actions and explain why they work.",
+      targets: ["Actions", "Explanation"],
+      rubric: RUBRIC_P3
     }
   ];
 

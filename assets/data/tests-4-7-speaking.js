@@ -649,6 +649,15 @@
       model: "Goodbye! Have a nice day!",
       difficulty: "easy",
       explanation: "Speak clearly and smile."
+    },
+    {
+      id: "q71",
+      type: "prompt",
+      question: "Ask for help politely. 🆘",
+      say: "Can you help me, please?",
+      model: "Can you help me, please?",
+      difficulty: "medium",
+      explanation: "Use please to be polite."
     }
   );
 

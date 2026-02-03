@@ -571,10 +571,11 @@
     cues: { label: "Compare options (on the one hand / on the other hand)", anyOf: ["on the one hand", "on the other hand"] }
   });
 
-  // Part 3 (Discussion) — 2 items
+  // Part 3 (Discussion) — 3 items
   [
     "Will automation and AI create more opportunities or more unemployment overall? Why?",
-    "How can governments help young people prepare for the job market?"
+    "How can governments help young people prepare for the job market?",
+    "Should companies encourage flexible working hours? Why / why not?"
   ].forEach((q, i) => {
     add({
       id: `f-p3-${i + 1}`,

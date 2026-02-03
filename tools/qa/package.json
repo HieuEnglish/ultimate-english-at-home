@@ -1,0 +1,8 @@
+{
+  "name": "ueah-qa",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "playwright": "^1.41.2"
+  }
+}

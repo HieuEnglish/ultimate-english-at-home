@@ -12,4 +12,11 @@ export const AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18", "ielts"];
 // Skill areas available for each age group.
 export const SKILLS = ["reading", "listening", "writing", "speaking"];
 
+// Games-specific age groups (no IELTS for games)
+export const GAME_AGE_GROUPS = ["0-3", "4-7", "8-10", "11-12", "13-18"];
+
+// Games-specific skill categories
+export const GAME_SKILLS = ["vocabulary", "listening", "spelling", "grammar", "speaking", "reading", "writing"];
+
 // Additional static lists or configuration values can be added here in the future.
+

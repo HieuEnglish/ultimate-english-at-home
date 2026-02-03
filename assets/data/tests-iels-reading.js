@@ -1576,6 +1576,22 @@
       answer: ["beds"],
       difficulty: "easy",
       explanation: "Paragraph G mentions pools and gravel beds."
+    },
+    {
+      id: "q121",
+      passageId: "p3",
+      type: "multipleChoice",
+      passage: P3,
+      question: "According to Paragraph D, what is one short-term effect of dam removal?",
+      options: [
+        "Water may become more turbid for months",
+        "Fish populations immediately double",
+        "Electricity production increases",
+        "Reservoirs become deeper"
+      ],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "Paragraph D says sediment can increase turbidity for months."
     }
   );
 

@@ -1228,6 +1228,25 @@
         }
       },
       explanation: "Start with the main idea. End by restating your point in a new way."
+    },
+    {
+      id: "q79",
+      type: "prompt",
+      question: "Write an email (60–80 words) to your teacher. Say you are sick, ask for the homework, and thank the teacher.",
+      model: "Dear ____,\n\nI am writing because ____. Could you please send me the homework for today? Thank you for your help.\n\nSincerely,\n____",
+      difficulty: "medium",
+      rubric: {
+        minWords: 60,
+        maxWords: 80,
+        mustIncludeAny: [["thank"], ["homework"]],
+        criteria: {
+          ideas: "Mentions being sick + asks for homework + thanks",
+          organization: "Greeting, body, closing",
+          language: "Polite request (could you please)",
+          punctuation: "Capitals and end punctuation"
+        }
+      },
+      explanation: "Use polite language and include all three points."
     }
   ];
 

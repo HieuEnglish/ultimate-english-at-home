@@ -814,6 +814,16 @@
       answer: 0,
       difficulty: "easy",
       explanation: "Heart = ❤️"
+    },
+    {
+      id: "q81",
+      type: "listenChoice",
+      question: "Listen. Tap the picture.",
+      say: "banana",
+      options: ["🍌", "🍎", "🍇", "🍓"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Banana = 🍌"
     }
   ];
 

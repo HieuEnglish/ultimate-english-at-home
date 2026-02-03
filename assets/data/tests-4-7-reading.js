@@ -655,6 +655,16 @@
       answer: 0,
       difficulty: "hard",
       explanation: "Hungry means it needs food."
+    },
+    {
+      id: "q71",
+      type: "multipleChoice",
+      passage: "Read: Mia has a red hat. She wears it in the sun.",
+      question: "Why does Mia wear the hat?",
+      options: ["Because it is sunny", "Because it is snowing", "Because she is hungry", "Because it is night"],
+      answer: 0,
+      difficulty: "medium",
+      explanation: "She wears it in the sun, so it is sunny."
     }
   ];
 

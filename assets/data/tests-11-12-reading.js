@@ -1134,6 +1134,15 @@
       answer: 0,
       difficulty: "hard",
       explanation: "Teachers saw students using the habit in other situations and reminding each other to sort waste." 
+    },
+    {
+      id: "q81",
+      type: "trueFalse",
+      question: "A heading is a short title for a paragraph.",
+      options: ["True", "False"],
+      answer: 0,
+      difficulty: "easy",
+      explanation: "Headings help readers understand what each part is about."
     }
   ];
 
