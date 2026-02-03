@@ -1,311 +1,335 @@
 /* assets/js/games/11-12/tense-race.js
    Tense Race - Ages 11-12
    
-   Convert sentences to different tenses!
-   Fast-paced grammar practice.
+   Cyberpunk racing game. Type the converted sentence correctly to boost speed!
 */
 
 const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
 
-// Sentence transformations
-const TENSE_CHALLENGES = [
-  {
-    base: "She plays tennis",
-    tense: "Past Simple",
-    answer: "She played tennis"
-  },
-  {
-    base: "They are eating dinner",
-    tense: "Past Continuous",
-    answer: "They were eating dinner"
-  },
-  {
-    base: "I go to school",
-    tense: "Present Perfect",
-    answer: "I have gone to school"
-  },
-  {
-    base: "He writes a letter",
-    tense: "Future Simple",
-    answer: "He will write a letter"
-  },
-  {
-    base: "We watch TV",
-    tense: "Past Simple",
-    answer: "We watched TV"
-  },
-  {
-    base: "She reads books",
-    tense: "Present Continuous",
-    answer: "She is reading books"
-  },
-  {
-    base: "They study English",
-    tense: "Present Perfect",
-    answer: "They have studied English"
-  },
-  {
-    base: "I cook dinner",
-    tense: "Past Continuous",
-    answer: "I was cooking dinner"
-  },
+const CHALLENGES = [
+  { base: "I run fast", tense: "Past Simple", answer: "I ran fast" },
+  { base: "She eats an apple", tense: "Present Continuous", answer: "She is eating an apple" },
+  { base: "They play soccer", tense: "Future Simple", answer: "They will play soccer" },
+  { base: "We study hard", tense: "Present Perfect", answer: "We have studied hard" },
+  { base: "He writes a letter", tense: "Past Continuous", answer: "He was writing a letter" },
+  { base: "The bird flies high", tense: "Past Simple", answer: "The bird flew high" },
+  { base: "I sleep early", tense: "Future (going to)", answer: "I am going to sleep early" },
+  { base: "You drink water", tense: "Past Perfect", answer: "You had drunk water" }
 ];
 
 class TenseRaceGame extends GameBase {
   constructor(container, config) {
     super(container, { ...config, hasTimer: true, timerDuration: 90 });
+    this.distance = 0;
+    this.speed = 0;
+    this.maxSpeed = 200;
+    this.opponentDist = 0;
+    this.opponentSpeed = 50; // Constant speed
     this.currentChallenge = null;
-    this.rounds = 0;
-    this.correctAnswers = 0;
-    this.userInput = '';
   }
 
   async init() {
-    await this.init3D();
     this.container.innerHTML = `
-      <div class="game-area tense-race-game">
-        <div class="race-header">
-          <span class="race-title">⏱️ Tense Race!</span>
-        </div>
-        <div class="challenge-box" id="challenge-box">
-          <div class="base-sentence" id="base-sentence"></div>
-          <div class="target-tense" id="target-tense"></div>
-        </div>
-        <div class="answer-input-area">
-          <input type="text" class="answer-input" id="answer-input" placeholder="Type the converted sentence..." autocomplete="off">
-          <button class="btn btn--primary submit-btn" id="submit-btn">Submit</button>
-        </div>
-        <div class="game-feedback" id="game-feedback"></div>
-        <div class="game-progress" id="game-progress"></div>
-      </div>
-    `;
+            <div class="game-wrapper race-theme">
+                <div class="skyline-bg"></div>
+                <div class="track-perspective">
+                     <div class="road">
+                        <div class="lane-marker"></div>
+                     </div>
+                </div>
+                
+                <div class="hud-top">
+                    <div class="race-bar">
+                        <div class="racer-icon player-icon" id="prog-player">🏎️</div>
+                        <div class="racer-icon opp-icon" id="prog-opp">🚙</div>
+                    </div>
+                </div>
 
+                <div class="dashboard">
+                    <div class="task-panel">
+                        <div class="task-label">MISSION: CONVERT TENSE</div>
+                        <div class="base-text" id="base-text">...</div>
+                        <div class="target-badge" id="target-badge">...</div>
+                    </div>
+                    
+                    <div class="input-panel">
+                        <input type="text" id="race-input" class="cyber-input" placeholder="Initiate sequence..." autocomplete="off">
+                        <div class="speedometer"><span id="speed-val">0</span> KM/H</div>
+                    </div>
+                </div>
+                
+                <div class="scene-objects">
+                    <div class="car player-car" id="player-car">🏎️</div>
+                    <div class="car opp-car" id="opp-car">🚙</div>
+                </div>
+
+                <div class="start-overlay" id="start-overlay">
+                    <div class="cyber-title">NEON RACER</div>
+                    <button class="start-btn" id="start-btn">IGNITE ENGINE</button>
+                </div>
+            </div>
+        `;
+
+    this.injectStyles();
+    document.getElementById('start-btn').onclick = () => this.startRace();
+
+    const input = document.getElementById('race-input');
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') this.checkAnswer();
+    });
+  }
+
+  injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .tense-race-game { max-width: 550px; margin: 0 auto; }
-      .race-header { text-align: center; margin-bottom: 20px; }
-      .race-title { font-size: 22px; font-weight: 700; }
-      .challenge-box {
-        padding: 24px;
-        border-radius: 16px;
-        background: var(--surface);
-        border: 2px solid var(--border);
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .base-sentence {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 12px;
-      }
-      .target-tense {
-        display: inline-block;
-        padding: 8px 16px;
-        border-radius: 999px;
-        background: rgba(255, 230, 70, 0.15);
-        border: 1px solid rgba(255, 230, 70, 0.35);
-        font-size: 14px;
-        font-weight: 600;
-      }
-      .answer-input-area {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 16px;
-      }
-      .answer-input {
-        flex: 1;
-        padding: 14px 18px;
-        border-radius: 12px;
-        border: 2px solid var(--border);
-        background: var(--surface);
-        font-size: 16px;
-        color: var(--text);
-        outline: none;
-        transition: border-color 0.2s ease;
-      }
-      .answer-input:focus {
-        border-color: var(--accent);
-      }
-      .submit-btn {
-        padding: 14px 24px;
-      }
-      .feedback-message {
-        padding: 12px 20px;
-        border-radius: 12px;
-        font-weight: 700;
-        text-align: center;
-      }
-      .feedback-success { background: rgba(0, 255, 136, 0.15); color: #00cc6a; }
-      .feedback-error { background: rgba(255, 95, 95, 0.15); color: #ff5f5f; }
-      .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 16px; }
-      .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.3s ease; }
-      .progress-text { font-size: 12px; color: var(--muted); text-align: center; margin-top: 8px; }
-    `;
+            .game-wrapper {
+                width: 100%; height: 600px;
+                background: #000;
+                position: relative; overflow: hidden;
+                border-radius: 20px;
+                font-family: 'Rajdhani', sans-serif;
+                color: #0ff;
+            }
+            .skyline-bg {
+                position: absolute; top: 0; width: 100%; height: 50%;
+                background: linear-gradient(#1e0030, #000);
+                z-index: 0;
+            }
+            /* Grid floor */
+            .track-perspective {
+                position: absolute; top: 50%; width: 100%; height: 50%;
+                perspective: 600px;
+                overflow: hidden;
+                background: #050510;
+            }
+            .road {
+                position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                transform: rotateX(60deg);
+                background: repeating-linear-gradient(
+                    0deg,
+                    transparent 0px,
+                    transparent 40px,
+                    rgba(0, 255, 255, 0.2) 41px,
+                    rgba(0, 255, 255, 0.2) 42px
+                ),
+                linear-gradient(90deg, #050510 0%, #101030 50%, #050510 100%);
+                animation: scrollRoad 1s linear infinite;
+            }
+            @keyframes scrollRoad { from { background-position: 0 0; } to { background-position: 0 84px; } }
+            
+            .hud-top {
+                position: absolute; top: 20px; left: 20px; right: 20px;
+                height: 40px; background: rgba(0,0,0,0.5);
+                border: 1px solid #0ff; border-radius: 20px;
+                padding: 5px;
+            }
+            .race-bar { position: relative; width: 100%; height: 100%; }
+            .racer-icon { position: absolute; font-size: 24px; transition: left 0.5s; top: -5px; }
+            .player-icon { z-index: 2; filter: drop-shadow(0 0 5px #0ff); }
+            .opp-icon { filter: grayscale(1); opacity: 0.7; }
+            
+            .dashboard {
+                position: absolute; bottom: 0; width: 100%; height: 200px;
+                background: rgba(0, 10, 20, 0.9);
+                border-top: 2px solid #0ff;
+                display: flex; flex-direction: column; align-items: center; padding: 20px;
+                box-shadow: 0 -10px 20px #0ff5;
+                z-index: 20;
+            }
+            
+            .task-panel { text-align: center; margin-bottom: 20px; }
+            .task-label { font-size: 14px; letter-spacing: 2px; color: #f0f; text-shadow: 0 0 5px #f0f; margin-bottom: 5px; }
+            .base-text { font-size: 28px; font-weight: bold; margin-bottom: 5px; color: white; }
+            .target-badge { 
+                background: #f0f; color: black; padding: 2px 10px; font-weight: bold; 
+                display: inline-block; transform: skew(-10deg);
+            }
+            
+            .input-panel { display: flex; gap: 20px; align-items: center; width: 80%; }
+            .cyber-input {
+                flex: 1; padding: 15px; background: rgba(0,0,0,0.5); border: 2px solid #0ff;
+                color: #0ff; font-family: inherit; font-size: 20px; outline: none;
+                box-shadow: 0 0 10px #0ff;
+            }
+            .cyber-input:focus { background: black; box-shadow: 0 0 20px #0ff; }
+            .speedometer { font-size: 24px; font-weight: bold; width: 120px; text-align: right; }
+            
+            .scene-objects {
+                position: absolute; bottom: 220px; left: 0; width: 100%; height: 100px;
+                pointer-events: none;
+            }
+            .car {
+                position: absolute; bottom: 0; font-size: 60px;
+                transform: translateX(-50%);
+                transition: left 0.5s, bottom 0.5s, transform 0.5s;
+            }
+            
+            .start-overlay {
+                position: absolute; inset: 0; background: rgba(0,0,0,0.9);
+                display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 50;
+            }
+            .cyber-title {
+                font-size: 60px; color: #0ff; font-weight: 900;
+                text-shadow: 4px 4px 0 #f0f; margin-bottom: 30px;
+                font-family: 'Courier New', monospace;
+            }
+            .start-btn {
+                padding: 20px 50px; background: transparent; border: 2px solid #f0f;
+                color: #f0f; font-size: 24px; font-weight: bold; cursor: pointer;
+                box-shadow: 0 0 20px #f0f; transition: all 0.2s;
+            }
+            .start-btn:hover { background: #f0f; color: black; }
+        `;
+    // Font
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
     this.container.appendChild(style);
-    this.showStartOverlay();
   }
 
-  start() {
-    this.rounds = 0;
-    this.correctAnswers = 0;
-    this.createRaceTrack();
-    this.nextRound();
-
-    // Focus input
-    document.getElementById('answer-input').focus();
-
-    // Submit handlers
-    document.getElementById('submit-btn').onclick = () => this.submitAnswer();
-    document.getElementById('answer-input').onkeydown = (e) => {
-      if (e.key === 'Enter') this.submitAnswer();
-    };
+  startRace() {
+    document.getElementById('start-overlay').style.display = 'none';
+    super.start();
+    this.distance = 0;
+    this.opponentDist = 0;
+    this.nextChallenge();
+    this.gameLoop();
+    document.getElementById('race-input').focus();
   }
 
-  createRaceTrack() {
-    // Scrolling Grid/Road
-    const geometry = new THREE.PlaneGeometry(20, 40, 20, 20);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0x4a69bd,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.3
-    });
+  gameLoop() {
+    // Update physics
+    // Boost decays
+    if (this.speed > 0) this.speed *= 0.98;
 
-    const road = new THREE.Mesh(geometry, material);
-    road.rotation.x = -Math.PI / 2 + 0.2; // Tilted slightly
-    road.position.y = -2;
-    this.threeHelper.scene.add(road);
+    // Opponent visual logic (simplified)
+    // If player is faster, opp car moves back. If slower, moves forward?
+    // Let's model relative distance.
 
-    // Stars/Particles passing by
-    const starGeo = new THREE.BufferGeometry();
-    const starCount = 200;
-    const positions = new Float32Array(starCount * 3);
+    this.distance += this.speed * 0.01;
+    this.opponentDist += this.opponentSpeed * 0.01;
 
-    for (let i = 0; i < starCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 30;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 10 - 5;
-    }
+    const relative = (this.opponentDist - this.distance); // +ve means opp is ahead
 
-    starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.1 }));
-    this.threeHelper.scene.add(stars);
+    // Visual positioning
+    const playerCar = document.getElementById('player-car');
+    const oppCar = document.getElementById('opp-car');
 
-    this.trackSpeed = 0.05;
+    // Player is always centered visually? Or fixed lane?
+    playerCar.style.left = '30%';
+    playerCar.style.zIndex = 10;
 
-    this.threeHelper.objects.push({
-      isObject3D: false,
-      update: () => {
-        // Scroll effect
-        road.position.z = (road.position.z + this.trackSpeed) % 2;
-        // Stars movement
-        const pos = stars.geometry.attributes.position.array;
-        for (let i = 0; i < starCount; i++) {
-          pos[i * 3 + 2] += this.trackSpeed * 5;
-          if (pos[i * 3 + 2] > 5) pos[i * 3 + 2] = -15;
-        }
-        stars.geometry.attributes.position.needsUpdate = true;
+    // Opponent position based on relative distance
+    // Distance unit: meters. 100m = screen width?
+    // Let's say if relative is 0, they are side by side (opp at 70%)
+    // If relative is 50, opp is far ahead (fade out / smaller)
+    // If relative is -50, opp is far behind
 
-        // Return to normal speed
-        if (this.trackSpeed > 0.05) this.trackSpeed *= 0.98;
+    // Simple 2D projection
+    let oppVisualLeft = 70; // %
+    let oppScale = 1;
+    let oppBottom = 0;
 
-        return true;
+    if (Math.abs(relative) < 200) {
+      // Visible range
+      oppCar.style.display = 'block';
+      // Perspective effect
+      // Ahead: moves up and smaller
+      // Behind: moves down? No, just keep simple.
+
+      // Side-scroller logic inside 3D scene?
+      // Let's stick to simple "Passing" visual
+
+      // If relative > 0 (opp ahead), it should be further up the road?
+      // But our road is into screen.
+      // We can use scale and bottom.
+
+      const perspectiveFactor = 1 / (1 + (relative * 0.05));
+      // If relative is large positive, factor is small -> car small + higher up
+      // If relative is negative (we are ahead), car is behind us -> effectively invisible or very large/offscreen?
+
+      if (relative > 0) {
+        // Ahead
+        oppCar.style.bottom = (relative * 2) + 'px';
+        oppCar.style.transform = `translateX(-50%) scale(${Math.max(0.1, 1 - relative * 0.01)})`;
+        oppCar.style.opacity = 1;
+      } else {
+        // Behind (Drag race style)
+        // Just fade it out
+        oppCar.style.bottom = '0px';
+        oppCar.style.transform = `translateX(-50%) scale(1)`;
+        oppCar.style.opacity = Math.max(0, 1 + relative * 0.05);
       }
-    });
-  }
 
-  nextRound() {
-    if (!this.isRunning) return;
-
-    this.rounds++;
-    this.updateProgress();
-
-    // Pick random challenge
-    const shuffled = [...TENSE_CHALLENGES].sort(() => Math.random() - 0.5);
-    this.currentChallenge = shuffled[0];
-
-    this.renderRound();
-  }
-
-  renderRound() {
-    const baseEl = document.getElementById('base-sentence');
-    const tenseEl = document.getElementById('target-tense');
-    const inputEl = document.getElementById('answer-input');
-    const feedbackEl = document.getElementById('game-feedback');
-
-    baseEl.textContent = `"${this.currentChallenge.base}"`;
-    tenseEl.textContent = `Convert to: ${this.currentChallenge.tense}`;
-    inputEl.value = '';
-    inputEl.focus();
-    feedbackEl.innerHTML = '';
-  }
-
-  submitAnswer() {
-    const inputEl = document.getElementById('answer-input');
-    const userAnswer = inputEl.value.trim().toLowerCase();
-    const correctAnswer = this.currentChallenge.answer.toLowerCase();
-
-    // Allow minor variations (punctuation, capitalization)
-    const isCorrect = userAnswer === correctAnswer ||
-      userAnswer.replace(/[.,!?]/g, '') === correctAnswer.replace(/[.,!?]/g, '');
-
-    if (isCorrect) {
-      this.incrementCombo();
-      this.addScore(100);
-      this.correctAnswers++;
-      this.updateScoreDisplay();
-      this.showFeedback('🎉 Correct!', 'success');
-
-      // Visual Boost
-      this.trackSpeed = 0.5; // Boost speed!
-      this.threeHelper.createExplosion(0x00ff88);
-
-      setTimeout(() => this.nextRound(), 1000);
     } else {
-      this.resetCombo();
-      this.showFeedback(`Not quite. Answer: "${this.currentChallenge.answer}"`, 'error');
-      setTimeout(() => this.nextRound(), 2000);
+      oppCar.style.display = 'none';
+    }
+
+    // Update HUD progress bar
+    const totalRace = 500; // Finish line
+    document.getElementById('prog-player').style.left = Math.min(100, (this.distance / totalRace) * 100) + '%';
+    document.getElementById('prog-opp').style.left = Math.min(100, (this.opponentDist / totalRace) * 100) + '%';
+
+    document.getElementById('speed-val').textContent = Math.floor(this.speed);
+
+    if (this.distance >= totalRace || this.opponentDist >= totalRace) {
+      this.finishRace();
+    } else {
+      requestAnimationFrame(() => this.gameLoop());
     }
   }
 
-  showFeedback(message, type) {
-    const feedbackEl = document.getElementById('game-feedback');
-    feedbackEl.innerHTML = `<div class="feedback-message feedback-${type}">${message}</div>`;
+  nextChallenge() {
+    const data = CHALLENGES[Math.floor(Math.random() * CHALLENGES.length)];
+    this.currentChallenge = data;
+
+    document.getElementById('base-text').textContent = data.base;
+    document.getElementById('target-badge').textContent = data.tense;
+    document.getElementById('race-input').value = "";
   }
 
-  updateProgress() {
-    const progressEl = document.getElementById('game-progress');
-    if (progressEl) {
-      progressEl.innerHTML = `
-        <div class="progress-text">Sentences: ${this.correctAnswers} correct</div>
-      `;
+  checkAnswer() {
+    const input = document.getElementById('race-input');
+    const val = input.value.trim();
+
+    // Normalize (ignore case, punctuation logic optional)
+    // Let's be strict but case-insensitive
+    const correct = this.currentChallenge.answer;
+
+    if (val.toLowerCase() === correct.toLowerCase()) {
+      // Correct - Boost!
+      this.speed = Math.min(this.speed + 80, this.maxSpeed);
+      this.playSound('success');
+
+      // Visual feedback
+      const feedback = document.createElement('div');
+      feedback.textContent = "TURBO BOOST!";
+      feedback.style.cssText = "position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#0ff; font-size:40px; font-weight:bold; text-shadow:0 0 10px #0ff; animation: fadeUp 1s forwards;";
+      this.container.appendChild(feedback);
+      setTimeout(() => feedback.remove(), 1000);
+
+      this.addScore(100);
+      this.nextChallenge();
+    } else {
+      // Wrong - Stall
+      this.speed = Math.max(0, this.speed - 30);
+      this.playSound('error');
+      input.classList.add('shake');
+      setTimeout(() => input.classList.remove('shake'), 500);
     }
   }
 
-  updateScoreDisplay() {
-    let hud = this.container.querySelector('.game-hud');
-    if (!hud) {
-      const gameArea = this.container.querySelector('.game-area');
-      gameArea.insertAdjacentHTML('afterbegin', `
-        <div class="game-hud">
-          <div class="hud-score"><span class="hud-label">Score</span><span class="hud-value" data-game-score>${this.score}</span></div>
-          <div class="hud-combo"><span class="hud-value" data-game-combo>${this.combo}x</span><span class="hud-label">Combo</span></div>
-          <div class="hud-timer"><span class="hud-label">Time</span><span class="hud-value" data-game-timer>1:30</span></div>
-        </div>
-      `);
-    }
-    const scoreEl = this.container.querySelector('[data-game-score]');
-    if (scoreEl) { scoreEl.textContent = this.score; Animations.bounce(scoreEl, 1.2, 200); }
-    const comboEl = this.container.querySelector('[data-game-combo]');
-    if (comboEl) { comboEl.textContent = `${this.combo}x`; }
-  }
+  finishRace() {
+    const pWin = this.distance > this.opponentDist;
+    this.end();
 
-  end() {
-    this.isRunning = false;
-    this.endTime = Date.now();
-    if (this.correctAnswers >= 10) this.addScore(500);
-    const isHighScore = this.saveScore();
-    this.showResults(isHighScore);
+    if (pWin) {
+      this.showResults(this.saveScore() + 500); // Bonus
+    } else {
+      this.showResults(this.saveScore());
+    }
   }
 }
 

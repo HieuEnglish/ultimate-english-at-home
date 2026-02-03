@@ -8,27 +8,29 @@
 const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
 
 const SYNONYM_DATA = [
-    { word: "Happy", synonyms: ["Joyful", "Glad", "Cheerful"], antonyms: ["Sad", "Angry", "Bored"] },
-    { word: "Big", synonyms: ["Huge", "Large", "Giant"], antonyms: ["Small", "Tiny", "Little"] },
-    { word: "Fast", synonyms: ["Quick", "Rapid", "Swift"], antonyms: ["Slow", "Lazy", "Late"] },
-    { word: "Smart", synonyms: ["Clever", "Wise", "Bright"], antonyms: ["Dumb", "Silly", "Dull"] },
-    { word: "Beautiful", synonyms: ["Pretty", "Lovely", "Stunning"], antonyms: ["Ugly", "Gross", "Plain"] },
-    { word: "Difficult", synonyms: ["Hard", "Tough", "Tricky"], antonyms: ["Easy", "Simple", "Light"] },
-    { word: "Start", synonyms: ["Begin", "Launch", "Open"], antonyms: ["End", "Stop", "Finish"] },
-    { word: "Scared", synonyms: ["Afraid", "Frightened", "Terrified"], antonyms: ["Brave", "Calm", "Bold"] },
+  { word: "Happy", synonyms: ["Joyful", "Glad", "Cheerful"], antonyms: ["Sad", "Angry", "Bored"] },
+  { word: "Big", synonyms: ["Huge", "Large", "Giant"], antonyms: ["Small", "Tiny", "Little"] },
+  { word: "Fast", synonyms: ["Quick", "Rapid", "Swift"], antonyms: ["Slow", "Lazy", "Late"] },
+  { word: "Smart", synonyms: ["Clever", "Wise", "Bright"], antonyms: ["Dumb", "Silly", "Dull"] },
+  { word: "Beautiful", synonyms: ["Pretty", "Lovely", "Stunning"], antonyms: ["Ugly", "Gross", "Plain"] },
+  { word: "Difficult", synonyms: ["Hard", "Tough", "Tricky"], antonyms: ["Easy", "Simple", "Light"] },
+  { word: "Start", synonyms: ["Begin", "Launch", "Open"], antonyms: ["End", "Stop", "Finish"] },
+  { word: "Scared", synonyms: ["Afraid", "Frightened", "Terrified"], antonyms: ["Brave", "Calm", "Bold"] },
 ];
 
 class SynonymSprintGame extends GameBase {
-    constructor(container, config) {
-        super(container, { ...config, hasTimer: true, timerDuration: 90 });
-        this.distance = 0;
-        this.speed = 1;
-        this.score = 0;
-        this.isRunningGame = false; // Internal flag diff from engine isRunning
-    }
+  constructor(container, config) {
+    super(container, { ...config, hasTimer: true, timerDuration: 90 });
+    this.distance = 0;
+    this.speed = 1;
+    this.score = 0;
+    this.isRunningGame = false;
+    this.hurdleAnimId = null;
+    this.hurdleStartTime = null;
+  }
 
-    async init() {
-        this.container.innerHTML = `
+  async init() {
+    this.container.innerHTML = `
       <div class="game-wrapper sprint-theme">
         <div class="sky-layer">
             <div class="cloud c1">☁️</div>
@@ -59,13 +61,13 @@ class SynonymSprintGame extends GameBase {
       </div>
     `;
 
-        this.injectStyles();
-        document.getElementById('start-run-btn').onclick = () => this.startRun();
-    }
+    this.injectStyles();
+    document.getElementById('start-run-btn').onclick = () => this.startRun();
+  }
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
       .game-wrapper {
         width: 100%; height: 500px;
         background: #81ecec;
@@ -92,14 +94,15 @@ class SynonymSprintGame extends GameBase {
         font-size: 80px;
         z-index: 10;
         transition: bottom 0.3s ease-out;
+        transform: scaleX(-1); /* Face right */
       }
       .runner-character.jump { bottom: 250px; }
       
       .hurdle-container {
-        position: absolute; bottom: 80px; right: 0;
+        position: absolute; bottom: 80px; right: -150px;
         width: 100px; height: 150px;
         display: flex; align-items: flex-end; justify-content: center;
-        transition: right 2s linear; /* Movement logic */
+        /* Animation handled by JS for smoothness */
       }
       
       .hurdle {
@@ -151,111 +154,129 @@ class SynonymSprintGame extends GameBase {
       }
       .start-btn:active { transform: translateY(5px); box-shadow: 0 5px 0 #e67e22; }
     `;
-        this.container.appendChild(style);
-    }
+    this.container.appendChild(style);
+  }
 
-    startRun() {
-        document.getElementById('start-overlay').style.display = 'none';
-        super.start();
-        this.isRunningGame = true;
-        this.distance = 0;
-        this.gameLoop();
-        this.spawnHurdle();
-    }
+  startRun() {
+    document.getElementById('start-overlay').style.display = 'none';
+    super.start();
+    this.isRunningGame = true;
+    this.distance = 0;
+    this.gameLoop();
+    this.spawnHurdle();
+  }
 
-    gameLoop() {
-        if (!this.isRunningGame) return;
+  gameLoop() {
+    if (!this.isRunningGame) return;
 
-        this.distance += 0.1;
-        document.getElementById('dist-val').textContent = Math.floor(this.distance);
+    this.distance += 0.1;
+    document.getElementById('dist-val').textContent = Math.floor(this.distance);
 
-        requestAnimationFrame(() => this.gameLoop());
-    }
+    requestAnimationFrame(() => this.gameLoop());
+  }
 
-    spawnHurdle() {
-        if (!this.isRunningGame) return;
+  spawnHurdle() {
+    if (!this.isRunningGame) return;
 
-        const hurdleCont = document.getElementById('hurdle-container');
-        // Reset position to right
-        hurdleCont.style.transition = 'none';
-        hurdleCont.style.right = '-150px';
+    const hurdleCont = document.getElementById('hurdle-container');
+    // Reset position to right (offscreen)
+    hurdleCont.style.right = '-20%';
 
-        // Pick word
-        const data = SYNONYM_DATA[Math.floor(Math.random() * SYNONYM_DATA.length)];
-        this.currentData = data;
+    // Pick word
+    const data = SYNONYM_DATA[Math.floor(Math.random() * SYNONYM_DATA.length)];
+    this.currentData = data;
 
-        document.getElementById('hurdle-word').textContent = data.word;
+    document.getElementById('hurdle-word').textContent = data.word;
 
-        // Prepare options
-        const correct = data.synonyms[0]; // Pick one
-        const wrong = data.antonyms[0];
+    // Prepare options
+    const correct = data.synonyms[0];
+    const wrong = data.antonyms[0];
 
-        const opts = [correct, wrong].sort(() => Math.random() - 0.5);
-        const dock = document.getElementById('options-dock');
+    const opts = [correct, wrong].sort(() => Math.random() - 0.5);
+    const dock = document.getElementById('options-dock');
 
-        dock.innerHTML = opts.map(word => `
+    dock.innerHTML = opts.map(word => `
            <button class="sprint-btn" data-word="${word}">${word}</button>
         `).join('');
 
-        dock.querySelectorAll('.sprint-btn').forEach(btn => {
-            btn.onclick = () => this.jump(btn, btn.dataset.word === correct);
-        });
+    dock.querySelectorAll('.sprint-btn').forEach(btn => {
+      btn.onclick = () => this.jump(btn, btn.dataset.word === correct);
+    });
 
-        // Start moving hurdle
-        setTimeout(() => {
-            hurdleCont.style.transition = 'right 3s linear';
-            hurdleCont.style.right = '100%';
-        }, 50);
+    // Use requestAnimationFrame for smoothness
+    this.hurdleStartTime = null;
+    this.animateHurdle();
+  }
 
-        // Fail condition (if it hits runner approx)
-        this.failTimer = setTimeout(() => {
-            if (this.isRunningGame) {
-                this.hitObstacle();
-            }
-        }, 2200); // Timing assumes CSS transition matches
-    }
+  animateHurdle() {
+    if (!this.isRunningGame) return;
 
-    jump(btn, isCorrect) {
-        if (!isCorrect) {
-            btn.style.backgroundColor = '#ff7675';
-            btn.style.borderColor = '#d63031';
-            return; // Don't jump
+    const hurdleCont = document.getElementById('hurdle-container');
+    if (!this.hurdleStartTime) this.hurdleStartTime = performance.now();
+
+    // Speed increases with distance/score basically
+    const duration = Math.max(2000, 3500 - (this.score * 0.5));
+    const progress = (performance.now() - this.hurdleStartTime) / duration;
+
+    if (progress < 1) {
+      // Move from right (-20%) to left (120%)
+      const currentPos = -20 + (progress * 140);
+      hurdleCont.style.right = currentPos + '%';
+
+      // Checking collision
+      // Visual collision happens when right is approx 75% to 85%
+      // (Since left align is at 50px, which is small %, so right side is huge %)
+      if (progress > 0.75 && progress < 0.82) {
+        const runner = document.getElementById('runner');
+        if (!runner.classList.contains('jump')) {
+          this.hitObstacle();
+          return;
         }
+      }
 
-        // Jump!
-        clearTimeout(this.failTimer);
-        const runner = document.getElementById('runner');
-        runner.classList.add('jump');
+      this.hurdleAnimId = requestAnimationFrame(() => this.animateHurdle());
+    } else {
+      // Done, respawn
+      this.spawnHurdle();
+    }
+  }
 
-        this.addScore(100);
-        this.confetti.explode(btn, null, 10);
-
-        setTimeout(() => {
-            runner.classList.remove('jump');
-            // Next hurdle
-            setTimeout(() => this.spawnHurdle(), 500);
-        }, 600);
+  jump(btn, isCorrect) {
+    if (!isCorrect) {
+      btn.style.backgroundColor = '#ff7675';
+      btn.style.borderColor = '#d63031';
+      return; // Don't jump
     }
 
-    hitObstacle() {
-        this.isRunningGame = false;
-        // Crash animation
-        const runner = document.getElementById('runner');
-        runner.textContent = '💥';
+    // Jump!
+    const runner = document.getElementById('runner');
+    runner.classList.add('jump');
 
-        this.speak("Oh no!");
+    this.addScore(100);
+    this.confetti.explode(btn, null, 10);
 
-        setTimeout(() => {
-            this.end();
-        }, 1500);
-    }
+    setTimeout(() => {
+      runner.classList.remove('jump');
+      // We don't need to manually spawn next hurdle, the animation loop handles it
+    }, 600);
+  }
 
-    end() {
-        super.end(); // handles UI results
-        this.showResults(this.saveScore());
-    }
+  hitObstacle() {
+    this.isRunningGame = false;
+    cancelAnimationFrame(this.hurdleAnimId);
+
+    // Crash animation
+    const runner = document.getElementById('runner');
+    runner.textContent = '💥';
+    this.speak("Oh no!");
+
+    setTimeout(() => {
+      this.end(); // GameBase end
+      this.showResults(this.saveScore());
+    }, 1500);
+  }
 }
 
 export function createGame(container, config) {
-    return new SynonymSprintGame(container, config);
+  return new SynonymSprintGame(container, config);
 }

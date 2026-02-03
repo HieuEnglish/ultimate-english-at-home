@@ -85,7 +85,6 @@ class ColorMatchGame extends GameBase {
     `;
 
     this.injectStyles();
-    this.injectStyles();
     this.showStartOverlay(); // Changed from this.start()
   }
 
