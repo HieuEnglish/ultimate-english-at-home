@@ -8,25 +8,25 @@
 const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
 
 const CODES = [
-    { text: "The_cat_sat_on_the_mat", answer: "The cat sat on the mat", hint: "Missing spaces" },
-    { text: "She [go/goes] to school every day", answer: "goes", hint: "Subject-Verb Agreement" },
-    { text: "Th_y ar_ h_ppy", answer: "They are happy", hint: "Vowels missing (e, a)" },
-    { text: "I have [see/seen] that movie", answer: "seen", hint: "Past Participle" },
-    { text: "He is [taller/tallest] than me", answer: "taller", hint: "Comparative" },
-    { text: "Wh_re is the lib_ary?", answer: "Where is the library?", hint: "Spelling fix" },
-    { text: "We [was/were] playing football", answer: "were", hint: "Past Plural" },
+  { text: "The_cat_sat_on_the_mat", answer: "The cat sat on the mat", hint: "Missing spaces" },
+  { text: "She [go/goes] to school every day", answer: "goes", hint: "Subject-Verb Agreement" },
+  { text: "Th_y ar_ h_ppy", answer: "They are happy", hint: "Vowels missing (e, a)" },
+  { text: "I have [see/seen] that movie", answer: "seen", hint: "Past Participle" },
+  { text: "He is [taller/tallest] than me", answer: "taller", hint: "Comparative" },
+  { text: "Wh_re is the lib_ary?", answer: "Where is the library?", hint: "Spelling fix" },
+  { text: "We [was/were] playing football", answer: "were", hint: "Past Plural" },
 ];
 
 class CodeBreakerGame extends GameBase {
-    constructor(container, config) {
-        super(container, { ...config, hasTimer: true, timerDuration: 120 });
-        this.currentCode = null;
-        this.rounds = 0;
-        this.score = 0;
-    }
+  constructor(container, config) {
+    super(container, { ...config, hasTimer: true, timerDuration: 120 });
+    this.currentCode = null;
+    this.rounds = 0;
+    this.score = 0;
+  }
 
-    async init() {
-        this.container.innerHTML = `
+  async init() {
+    this.container.innerHTML = `
       <div class="game-wrapper hacker-theme">
         <canvas id="matrix-bg"></canvas>
         
@@ -61,14 +61,14 @@ class CodeBreakerGame extends GameBase {
       </div>
     `;
 
-        this.injectStyles();
-        this.startMatrixRain();
-        this.start();
-    }
+    this.injectStyles();
+    this.startMatrixRain();
+    this.start();
+  }
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
       .game-wrapper {
         width: 100%; height: 500px;
         background: #000;
@@ -140,98 +140,111 @@ class CodeBreakerGame extends GameBase {
       .glitch { animation: glitch 0.2s linear infinite; color: red; }
       @keyframes glitch { 0% { transform: translate(2px,0); } 50% { transform: translate(-2px,0); } 100% { transform: translate(0,0); } }
     `;
-        this.container.appendChild(style);
+    this.container.appendChild(style);
+  }
+
+  startMatrixRain() {
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = this.container.clientWidth;
+    canvas.height = this.container.clientHeight;
+
+    const chars = "10";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+      if (this.isRunning) requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  start() {
+    super.start();
+    this.rounds = 0;
+    this.questionQueue = this.shuffleArray([...CODES]);
+    this.nextRound();
+
+    const input = document.getElementById('decoder-input');
+    input.focus();
+    input.onkeydown = (e) => { if (e.key === 'Enter') this.checkAnswer(); };
+    document.getElementById('decrypt-btn').onclick = () => this.checkAnswer();
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  nextRound() {
+    if (this.rounds >= 5 || this.questionQueue.length === 0) {
+      this.end();
+      return;
     }
 
-    startMatrixRain() {
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = this.container.clientWidth;
-        canvas.height = this.container.clientHeight;
+    this.rounds++;
+    this.currentCode = this.questionQueue.pop();
 
-        const chars = "10";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
+    document.getElementById('cipher-text').textContent = this.currentCode.text;
+    document.getElementById('hint-box').textContent = `SYSTEM HINT: ${this.currentCode.hint}`;
+    const input = document.getElementById('decoder-input');
+    input.value = "";
+    input.focus();
 
-        const draw = () => {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0F0";
-            ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars.charAt(Math.floor(Math.random() * chars.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-            if (this.isRunning) requestAnimationFrame(draw);
-        };
-        draw();
-    }
+    this.log(`Intercepted signal #${this.rounds}... Analysing structure...`);
+  }
 
-    start() {
-        super.start();
-        this.rounds = 0;
+  checkAnswer() {
+    const input = document.getElementById('decoder-input');
+    const val = input.value.trim();
+
+    if (val.toLowerCase() === this.currentCode.answer.toLowerCase()) {
+      this.log("Decryption successful. Access granted.");
+      this.addScore(200);
+
+      document.getElementById('cipher-text').style.color = "#fff"; // Flash white
+      input.disabled = true; // Prevent double submit
+
+      setTimeout(() => {
+        document.getElementById('cipher-text').style.color = "#33ff00";
+        input.disabled = false;
         this.nextRound();
-
-        const input = document.getElementById('decoder-input');
-        input.focus();
-        input.onkeydown = (e) => { if (e.key === 'Enter') this.checkAnswer(); };
-        document.getElementById('decrypt-btn').onclick = () => this.checkAnswer();
+      }, 1000);
+    } else {
+      this.log("ERROR: Decryption failed. Invalid syntax.");
+      this.container.querySelector('.terminal-window').classList.add('glitch');
+      setTimeout(() => this.container.querySelector('.terminal-window').classList.remove('glitch'), 500);
+      input.value = "";
+      input.focus();
     }
+  }
 
-    nextRound() {
-        if (this.rounds >= 5) { this.end(); return; }
+  log(msg) {
+    const log = document.getElementById('console-log');
+    log.innerHTML += `> ${msg}<br>`;
+    log.scrollTop = log.scrollHeight;
+  }
 
-        this.rounds++;
-        this.currentCode = CODES[Math.floor(Math.random() * CODES.length)];
-
-        document.getElementById('cipher-text').textContent = this.currentCode.text;
-        document.getElementById('hint-box').textContent = `SYSTEM HINT: ${this.currentCode.hint}`;
-        document.getElementById('decoder-input').value = "";
-
-        this.log(`Intercepted signal #${this.rounds}... Analysing structure...`);
-    }
-
-    checkAnswer() {
-        const input = document.getElementById('decoder-input');
-        const val = input.value.trim();
-
-        // Exact match for now (maybe allow flexible regex later)
-        // If the answer is just the missing word (e.g. "goes") vs the full sentence
-        // Let's assume user types just the missing part IF the prompt implies it, 
-        // but for "scrambled" text they might type full.
-        // My CODES array has both full sentences and single words.
-
-        if (val.toLowerCase() === this.currentCode.answer.toLowerCase()) {
-            this.log("Decryption successful. Access granted.");
-            this.addScore(200);
-            this.playSound('success');
-            document.getElementById('cipher-text').style.color = "#fff"; // Flash white
-            setTimeout(() => {
-                document.getElementById('cipher-text').style.color = "#33ff00";
-                this.nextRound();
-            }, 1000);
-        } else {
-            this.log("ERROR: Decryption failed. Invalid syntax.");
-            this.container.querySelector('.terminal-window').classList.add('glitch');
-            setTimeout(() => this.container.querySelector('.terminal-window').classList.remove('glitch'), 500);
-        }
-    }
-
-    log(msg) {
-        const log = document.getElementById('console-log');
-        log.innerHTML += `> ${msg}<br>`;
-        log.scrollTop = log.scrollHeight;
-    }
-
-    end() {
-        this.isRunning = false;
-        this.showResults(this.saveScore());
-    }
+  end() {
+    this.isRunning = false;
+    this.showResults(this.saveScore());
+  }
 }
 
 export function createGame(container, config) {
-    return new CodeBreakerGame(container, config);
+  return new CodeBreakerGame(container, config);
 }

@@ -45,6 +45,7 @@ class NewsAnchorGame extends GameBase {
     super(container, { ...config, hasTimer: true, timerDuration: 120 });
     this.currentIndex = 0;
     this.score = 0;
+    this.questionQueue = [];
   }
 
   async init() {
@@ -74,11 +75,26 @@ class NewsAnchorGame extends GameBase {
         <div class="bottom-ticker">
            <span class="ticker-content" id="ticker">BREAKING NEWS: VOCABULARY EXPERTS WANTED FOR PRIME TIME SLOT ***   </span>
         </div>
+
+        <!-- Start Overlay -->
+        <div id="news-start-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;">
+            <div style="font-size: 100px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">🗞️</div>
+            <h1 style="font-size: 40px; color: #3498db; margin-bottom: 15px;">News Anchor</h1>
+            <p style="margin-bottom: 30px; font-size: 18px; max-width: 400px;">Deliver the news live! Fill in the blanks with the most appropriate professional vocabulary.</p>
+            <button id="news-start-btn" style="padding: 15px 40px; background: #3498db; color: white; border: none; font-size: 20px; font-weight: bold; border-radius: 30px; cursor: pointer; box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);">TAKE THE SEAT</button>
+        </div>
       </div>
     `;
 
     this.injectStyles();
-    this.showStartOverlay();
+
+    const startBtn = this.container.querySelector('#news-start-btn');
+    if (startBtn) {
+      startBtn.onclick = () => {
+        this.container.querySelector('#news-start-overlay').style.display = 'none';
+        this.start();
+      };
+    }
   }
 
   injectStyles() {
@@ -109,11 +125,12 @@ class NewsAnchorGame extends GameBase {
       }
       
       @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
       
       .camera-view {
         position: absolute; inset: 0;
         display: flex; justify-content: center; align-items: center;
-        background: transparent; /* Changed from radial gradient to transparent for 3D */
+        background: transparent;
       }
       .anchor-woman { font-size: 150px; z-index: 2; margin-top: 50px; }
       .desk {
@@ -138,15 +155,16 @@ class NewsAnchorGame extends GameBase {
       .news-btn {
         background: white; color: black; border: none; padding: 10px 20px; font-weight: bold;
         cursor: pointer; border-radius: 4px; font-size: 16px;
+        transition: all 0.2s;
       }
-      .news-btn:hover { background: #3498db; color: white; }
+      .news-btn:hover { background: #3498db; color: white; transform: translateY(-2px); }
       
       .bottom-ticker {
         height: 40px; background: #c0392b; color: white;
         display: flex; align-items: center; overflow: hidden;
         white-space: nowrap; border-top: 2px solid #e74c3c;
       }
-      .ticker-content { font-weight: bold; padding-left: 100%; animation: scrollTicker 10s linear infinite; }
+      .ticker-content { font-weight: bold; padding-left: 100%; animation: scrollTicker 15s linear infinite; }
       
       @keyframes scrollTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } }
     `;
@@ -156,12 +174,20 @@ class NewsAnchorGame extends GameBase {
   start() {
     super.start();
     this.createNewsBackground();
+    this.questionQueue = this.shuffleArray([...HEADLINES]);
     this.currentIndex = 0;
     this.nextHeadline();
   }
 
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   createNewsBackground() {
-    // Digital Globe / Grid Effect
     const geometry = new THREE.IcosahedronGeometry(3, 2);
     const material = new THREE.MeshBasicMaterial({
       color: 0x3498db,
@@ -173,14 +199,12 @@ class NewsAnchorGame extends GameBase {
     const globe = new THREE.Mesh(geometry, material);
     this.threeHelper.scene.add(globe);
 
-    // Add rotating rings
     const ringGeo = new THREE.TorusGeometry(4, 0.05, 16, 100);
     const ringMat = new THREE.MeshBasicMaterial({ color: 0xe74c3c, transparent: true, opacity: 0.5 });
     const ring = new THREE.Mesh(ringGeo, ringMat);
     ring.rotation.x = Math.PI / 2;
     this.threeHelper.scene.add(ring);
 
-    // Custom animation
     this.threeHelper.objects.push({
       isObject3D: false,
       update: () => {
@@ -194,18 +218,19 @@ class NewsAnchorGame extends GameBase {
   }
 
   nextHeadline() {
-    if (this.currentIndex >= HEADLINES.length) {
+    if (this.questionQueue.length === 0) {
       this.end();
       return;
     }
 
-    const data = HEADLINES[this.currentIndex];
+    const data = this.questionQueue.pop();
+    this.currentData = data;
     const text = data.headline.replace("____", "<span style='color:cyan'>[...]</span>");
 
     document.getElementById('prompter-text').innerHTML = text;
 
     const optionsEl = document.getElementById('news-options');
-    const shuffled = [...data.options].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleArray([...data.options]);
 
     optionsEl.innerHTML = shuffled.map(opt => `
            <button class="news-btn" data-word="${opt}">${opt}</button>
@@ -218,19 +243,19 @@ class NewsAnchorGame extends GameBase {
 
   checkAnswer(btn, word, data) {
     if (word === data.correct) {
-      // Correct
+      this.score += 100;
       document.getElementById('prompter-text').innerHTML = data.headline.replace("____", `<span style='color:#2ecc71'>${word.toUpperCase()}</span>`);
-      this.addScore(100);
-      this.playSound('success');
+
+      const optionsEl = document.getElementById('news-options');
+      optionsEl.querySelectorAll('.news-btn').forEach(b => b.disabled = true);
 
       setTimeout(() => {
-        this.currentIndex++;
         this.nextHeadline();
-      }, 1000);
+      }, 1500);
     } else {
-      // Wrong
-      btn.style.background = "red";
+      btn.style.background = "#e74c3c";
       btn.style.color = "white";
+      Animations.shake(btn);
       this.speak("Cut! Try again!");
     }
   }
