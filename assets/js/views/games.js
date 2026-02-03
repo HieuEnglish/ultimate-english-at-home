@@ -47,6 +47,19 @@ export function getView(ctx) {
     `;
   }).join("");
 
+  // IELTS Game card (styled like IELTS test cards)
+  const ieltsCard = `
+    <a class="card" href="${hrefFor('/games/featured/comprehensive/ielts-runner')}" data-nav role="listitem" data-glow="iels">
+      <div class="card-icon game-age-icon" aria-hidden="true">
+        <span class="game-age-emoji">🏆</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">IELTS BuildUp</h2>
+        <p class="card-text">The Ultimate Challenge</p>
+      </div>
+    </a>
+  `;
+
   // Get stats if available
   let statsHtml = "";
   if (window.UEAH_GAME_SCORES) {
@@ -69,6 +82,7 @@ export function getView(ctx) {
       ${statsHtml}
       <div class="card-grid games-age-grid" role="list">
         ${cardsHtml}
+        ${ieltsCard}
       </div>
       <div class="actions">
         <a class="btn" href="${hrefFor('/')}" data-nav>← Back to Home</a>

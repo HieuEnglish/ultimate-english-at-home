@@ -243,7 +243,12 @@ async function render(appPath) {
       // /games/:age/:skill - game list
       const age = parts[1];
       const skill = parts[2];
-      if (!GAME_AGE_GROUPS.includes(age) || !GAME_SKILLS.includes(skill)) {
+      // Check for featured games route first
+      if (age === 'featured') {
+        // Skip to length 4 handler for actual game play
+        viewModule = await import('./views/not-found.js');
+        viewResult = viewModule.getView(ctx, normalizedPath);
+      } else if (!GAME_AGE_GROUPS.includes(age) || !GAME_SKILLS.includes(skill)) {
         viewModule = await import('./views/not-found.js');
         viewResult = viewModule.getView(ctx, normalizedPath);
       } else {
@@ -255,7 +260,12 @@ async function render(appPath) {
       const age = parts[1];
       const skill = parts[2];
       const slug = parts[3];
-      if (!GAME_AGE_GROUPS.includes(age) || !GAME_SKILLS.includes(skill)) {
+      // Allow featured games or standard age/skill combos
+      if (age === 'featured') {
+        // Featured games bypass normal age/skill validation
+        viewModule = await import('./views/game-play.js');
+        viewResult = await viewModule.getView(ctx, age, skill, slug);
+      } else if (!GAME_AGE_GROUPS.includes(age) || !GAME_SKILLS.includes(skill)) {
         viewModule = await import('./views/not-found.js');
         viewResult = viewModule.getView(ctx, normalizedPath);
       } else {
