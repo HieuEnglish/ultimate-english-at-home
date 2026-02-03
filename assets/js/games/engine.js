@@ -245,6 +245,40 @@ class GameBase {
         this.threeHelper = new ThreeJSHelper(this.container);
     }
 
+    // Generic Start Overlay for all games
+    showStartOverlay() {
+        if (this.container.querySelector('.game-start-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'game-start-overlay';
+        overlay.innerHTML = `
+            <div class="start-content">
+                <div class="start-icon">${this.config.emoji || '🎮'}</div>
+                <h2 class="start-title">${this.config.name || 'Ready?'}</h2>
+                <p class="start-description">${this.config.description || 'Tap the button to begin!'}</p>
+                <button class="btn btn--primary start-btn">START GAME</button>
+            </div>
+            <style>
+                .game-start-overlay {
+                    position: absolute; inset: 0; background: rgba(0,0,0,0.8);
+                    display: flex; align-items: center; justify-content: center;
+                    z-index: 1000; color: white; border-radius: 24px;
+                    font-family: 'Fredoka One', cursive, sans-serif;
+                }
+                .start-content { text-align: center; animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+                .start-icon { font-size: 80px; margin-bottom: 20px; }
+                .start-title { font-size: 32px; margin-bottom: 10px; }
+                .start-btn { padding: 15px 40px; font-size: 20px; border-radius: 50px; cursor: pointer; background: #00b894; border: none; color: white; font-weight: bold; box-shadow: 0 4px 15px rgba(0,184,148,0.4); }
+                @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+            </style>
+        `;
+        this.container.appendChild(overlay);
+        overlay.querySelector('.start-btn').onclick = () => {
+            overlay.remove();
+            this.start();
+        };
+    }
+
     async init() {
         // Load game data, set up UI
     }
@@ -409,6 +443,14 @@ class GameBase {
             utterance.pitch = options.pitch || 1;
             speechSynthesis.speak(utterance);
         }
+    }
+
+    // Sound effect helper (alias or fallback for playSound)
+    playSound(effect) {
+        // Most games use 'success' or 'error'
+        if (effect === 'success') this.speak("Great!");
+        else if (effect === 'error') this.speak("Try again!");
+        else this.speak(effect);
     }
 
     // Update score display
