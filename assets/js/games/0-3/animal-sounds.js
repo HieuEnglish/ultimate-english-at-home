@@ -16,6 +16,19 @@ const ANIMALS = [
   { name: "duck", emoji: "🦆", sound: "quack quack" },
   { name: "sheep", emoji: "🐑", sound: "baa baa" },
   { name: "rooster", emoji: "🐓", sound: "cock-a-doodle-doo" },
+  { name: "horse", emoji: "🐴", sound: "neigh neigh" },
+  { name: "frog", emoji: "🐸", sound: "ribbit ribbit" },
+  { name: "lion", emoji: "🦁", sound: "roar roar" },
+  { name: "monkey", emoji: "🐒", sound: "ooh ooh ah ah" },
+  { name: "elephant", emoji: "🐘", sound: "trumpet trumpet" },
+  { name: "bee", emoji: "🐝", sound: "buzz buzz" },
+  { name: "owl", emoji: "🦉", sound: "hoot hoot" },
+  { name: "snake", emoji: "🐍", sound: "hiss hiss" },
+  { name: "mouse", emoji: "🐭", sound: "squeak squeak" },
+  { name: "bird", emoji: "🐦", sound: "tweet tweet" },
+  { name: "donkey", emoji: "🫏", sound: "hee haw" },
+  { name: "goat", emoji: "🐐", sound: "meh meh" },
+  { name: "turkey", emoji: "🦃", sound: "gobble gobble" },
 ];
 
 class AnimalSoundsGame extends GameBase {

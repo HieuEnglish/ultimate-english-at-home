@@ -19,6 +19,18 @@ const SPEECH_SCRIPTS = [
         origin: "Tech CEO",
         text: "Innovation is not just about technology, it is about solving the human problems that define our generation.",
         difficulty: "Easy"
+    },
+    {
+        title: "The Power of Education",
+        origin: "Malala Yousafzai",
+        text: "One child, one teacher, one book, and one pen can change the world. Education is the only solution.",
+        difficulty: "Medium"
+    },
+    {
+        title: "Courage and Persistence",
+        origin: "Winston Churchill",
+        text: "Success is not final, failure is not fatal. It is the courage to continue that counts.",
+        difficulty: "Easy"
     }
 ];
 

@@ -129,6 +129,26 @@ class AnimalDanceGame extends GameBase {
             .dancing.jump .animal-emoji { animation: jump 0.6s infinite; }
             .dancing.shake .animal-emoji { animation: shake 0.4s infinite; }
             .dancing.pulse .animal-emoji { animation: pulse 0.8s infinite; }
+
+            /* New action animations */
+            .action-stomp { animation: stomp 0.5s infinite; }
+            .action-stretch { animation: stretch 1.2s infinite ease-in-out; }
+            .action-shake { animation: shake 0.4s infinite; }
+            .action-wiggle { animation: wiggle 0.6s infinite; }
+            .action-march { animation: march 0.8s infinite; }
+            .action-fly { animation: fly 1s infinite ease-in-out; }
+
+            @keyframes stomp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px) scale(1.1); } }
+            @keyframes stretch { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.3); } }
+            @keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-15deg); } 75% { transform: rotate(15deg); } }
+            @keyframes march { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-10px) rotate(-5deg); } 75% { transform: translateY(-10px) rotate(5deg); } }
+            @keyframes fly { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-40px) scale(1.1); } }
+
+            .dancing.stomp .animal-emoji { animation: stomp 0.5s infinite; }
+            .dancing.stretch .animal-emoji { animation: stretch 1.2s infinite ease-in-out; }
+            .dancing.wiggle .animal-emoji { animation: wiggle 0.6s infinite; }
+            .dancing.march .animal-emoji { animation: march 0.8s infinite; }
+            .dancing.fly .animal-emoji { animation: fly 1s infinite ease-in-out; }
         `;
         this.container.appendChild(style);
     }

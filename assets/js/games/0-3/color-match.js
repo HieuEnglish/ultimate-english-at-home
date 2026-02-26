@@ -15,6 +15,11 @@ const COLORS = [
   { name: "purple", hex: "#a29bfe", emoji: "🟣" },
   { name: "orange", hex: "#fdcb6e", emoji: "🟠" },
   { name: "pink", hex: "#fd79a8", emoji: "💗" },
+  { name: "brown", hex: "#b97a57", emoji: "🟤" },
+  { name: "black", hex: "#2d3436", emoji: "⚫" },
+  { name: "white", hex: "#dfe6e9", emoji: "⚪" },
+  { name: "gray", hex: "#b2bec3", emoji: "🩶" },
+  { name: "cyan", hex: "#00cec9", emoji: "💎" },
 ];
 
 class ColorMatchGame extends GameBase {

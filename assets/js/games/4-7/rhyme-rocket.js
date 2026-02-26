@@ -18,6 +18,16 @@ const RHYME_SETS = [
     { target: "Moon", options: ["Spoon", "Cat", "Run"], correct: "Spoon", emoji: "🌙" },
     { target: "Fish", options: ["Dish", "Bear", "One"], correct: "Dish", emoji: "🐟" },
     { target: "Frog", options: ["Dog", "Log", "Cat"], correct: "Log", emoji: "🐸" },
+    { target: "Ball", options: ["Wall", "Cup", "Dog"], correct: "Wall", emoji: "⚽" },
+    { target: "Pig", options: ["Wig", "Cat", "Sun"], correct: "Wig", emoji: "🐷" },
+    { target: "Pen", options: ["Hen", "Pot", "Bed"], correct: "Hen", emoji: "🖊️" },
+    { target: "Ring", options: ["King", "Bag", "Cup"], correct: "King", emoji: "💍" },
+    { target: "Boat", options: ["Coat", "Fish", "Dog"], correct: "Coat", emoji: "⛵" },
+    { target: "Bug", options: ["Rug", "Cat", "Pen"], correct: "Rug", emoji: "🐛" },
+    { target: "Sun", options: ["Run", "Dog", "Box"], correct: "Run", emoji: "☀️" },
+    { target: "Bed", options: ["Red", "Cat", "Bus"], correct: "Red", emoji: "🛏️" },
+    { target: "Bell", options: ["Shell", "Dog", "Pen"], correct: "Shell", emoji: "🔔" },
+    { target: "Goat", options: ["Boat", "Fish", "Hat"], correct: "Boat", emoji: "🐐" },
 ];
 
 class RhymeRocketGame extends GameBase {

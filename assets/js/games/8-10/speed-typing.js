@@ -13,6 +13,9 @@ const WORDS = [
     "queen", "river", "storm", "tiger", "unity", "vivid", "water", "youth",
     "zebra", "arrow", "brain", "candy", "dance", "earth", "frost", "ghost",
     "heart", "image", "jolly", "knife", "light", "music", "noble", "orbit",
+    "pearl", "quest", "solar", "train", "ultra", "voice", "wheat", "pixel",
+    "blaze", "crisp", "dwarf", "ember", "flute", "grape", "haven", "ivory",
+    "joust", "karma", "lunar", "maple",
 ];
 
 class SpeedTypingGame extends GameBase {

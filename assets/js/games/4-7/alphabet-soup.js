@@ -17,7 +17,21 @@ const WORDS = [
     { word: "BEAR", image: "🐻" },
     { word: "WORM", image: "🪱" },
     { word: "ANT", image: "🐜" },
-    { word: "BEE", image: "🐝" }
+    { word: "BEE", image: "🐝" },
+    { word: "FOX", image: "🦊" },
+    { word: "OWL", image: "🦉" },
+    { word: "PIG", image: "🐷" },
+    { word: "COW", image: "🐄" },
+    { word: "HEN", image: "🐔" },
+    { word: "BAT", image: "🦇" },
+    { word: "SUN", image: "☀️" },
+    { word: "HAT", image: "🎩" },
+    { word: "CUP", image: "🥤" },
+    { word: "BUS", image: "🚌" },
+    { word: "BOX", image: "📦" },
+    { word: "PEN", image: "🖊️" },
+    { word: "MAP", image: "🗺️" },
+    { word: "NET", image: "🥅" },
 ];
 
 class AlphabetSoupGame extends GameBase {

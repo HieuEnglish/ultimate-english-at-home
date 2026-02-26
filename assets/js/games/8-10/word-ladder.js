@@ -52,7 +52,52 @@ const LEVELS = [
             { word: "BEAT", type: "input", hint: "Rhythm of music" },
             { word: "BEAR", type: "end", hint: "Target word!" }
         ]
-    }
+    },
+    {
+        start: "PIG",
+        end: "COW",
+        rungs: [
+            { word: "PIG", type: "start", hint: "Farm animal that oinks" },
+            { word: "BIG", type: "input", hint: "Opposite of small" },
+            { word: "BOG", type: "input", hint: "Wet muddy ground" },
+            { word: "BOW", type: "input", hint: "Bend forward" },
+            { word: "COW", type: "end", hint: "Target word!" }
+        ]
+    },
+    {
+        start: "FISH",
+        end: "BIRD",
+        rungs: [
+            { word: "FISH", type: "start", hint: "Swims in water" },
+            { word: "FIST", type: "input", hint: "Closed hand" },
+            { word: "MIST", type: "input", hint: "Thin fog" },
+            { word: "MIND", type: "input", hint: "Where you think" },
+            { word: "BIND", type: "input", hint: "To tie together" },
+            { word: "BIRD", type: "end", hint: "Target word!" }
+        ]
+    },
+    {
+        start: "DARK",
+        end: "LAMP",
+        rungs: [
+            { word: "DARK", type: "start", hint: "No light" },
+            { word: "DAMP", type: "input", hint: "Slightly wet" },
+            { word: "LAMP", type: "end", hint: "Target word!" }
+        ]
+    },
+    {
+        start: "HEAT",
+        end: "COOL",
+        rungs: [
+            { word: "HEAT", type: "start", hint: "Warmth from fire" },
+            { word: "HEAP", type: "input", hint: "A pile of things" },
+            { word: "REAP", type: "input", hint: "Harvest crops" },
+            { word: "REAL", type: "input", hint: "Not fake" },
+            { word: "REEL", type: "input", hint: "Wind on a spool" },
+            { word: "ROOL", type: "input", hint: "A made up step" },
+            { word: "COOL", type: "end", hint: "Target word!" }
+        ]
+    },
 ];
 
 class LadderClimberGame extends GameBase {

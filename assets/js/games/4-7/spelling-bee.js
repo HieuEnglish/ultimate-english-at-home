@@ -28,6 +28,21 @@ const WORDS = [
   { word: "moon", emoji: "🌙", color: "#a29bfe" },
   { word: "star", emoji: "⭐", color: "#fdcb6e" },
   { word: "tree", emoji: "🌳", color: "#00b894" },
+  { word: "frog", emoji: "🐸", color: "#55efc4" },
+  { word: "cake", emoji: "🍰", color: "#fd79a8" },
+  { word: "ball", emoji: "⚽", color: "#00cec9" },
+  { word: "duck", emoji: "🦆", color: "#fdcb6e" },
+  { word: "bear", emoji: "🐻", color: "#636e72" },
+  { word: "fox", emoji: "🦊", color: "#e17055" },
+  { word: "ant", emoji: "🐜", color: "#d63031" },
+  { word: "net", emoji: "🥅", color: "#74b9ff" },
+  { word: "pot", emoji: "🍯", color: "#fab1a0" },
+  { word: "jam", emoji: "🫙", color: "#e84393" },
+  { word: "egg", emoji: "🥚", color: "#dfe6e9" },
+  { word: "map", emoji: "🗺️", color: "#00b894" },
+  { word: "web", emoji: "🕸️", color: "#636e72" },
+  { word: "bell", emoji: "🔔", color: "#feca57" },
+  { word: "drum", emoji: "🥁", color: "#d63031" },
 ];
 
 class SpellingBeeGame extends GameBase {

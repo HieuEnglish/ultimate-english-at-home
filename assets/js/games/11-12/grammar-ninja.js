@@ -20,6 +20,14 @@ const SENTENCES = [
     { sentence: "She is more smarter.", correct: "She is smarter.", error: "more smarter → smarter" },
     { sentence: "They plays soccer.", correct: "They play soccer.", error: "plays → play" },
     { sentence: "I have went there.", correct: "I have gone there.", error: "went → gone" },
+    { sentence: "Him and me are friends.", correct: "He and I are friends.", error: "Him and me → He and I" },
+    { sentence: "She telled me a story.", correct: "She told me a story.", error: "telled → told" },
+    { sentence: "The childs are noisy.", correct: "The children are noisy.", error: "childs → children" },
+    { sentence: "I doesn't like broccoli.", correct: "I don't like broccoli.", error: "doesn't → don't" },
+    { sentence: "There playing outside.", correct: "They're playing outside.", error: "There → They're" },
+    { sentence: "She catched the ball.", correct: "She caught the ball.", error: "catched → caught" },
+    { sentence: "He swim very well.", correct: "He swims very well.", error: "swim → swims" },
+    { sentence: "The mouses ran away.", correct: "The mice ran away.", error: "mouses → mice" },
 ];
 
 class GrammarNinjaGame extends GameBase {

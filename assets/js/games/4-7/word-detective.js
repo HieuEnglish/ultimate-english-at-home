@@ -16,7 +16,17 @@ const CASES = [
     { word: "MAP", missingIndex: 2, image: "🗺️", options: ["P", "T", "D"] },
     { word: "WEB", missingIndex: 0, image: "🕸️", options: ["W", "R", "L"] },
     { word: "NET", missingIndex: 0, image: "🥅", options: ["N", "M", "B"] },
-    { word: "PIG", missingIndex: 1, image: "🐷", options: ["I", "E", "A"] }
+    { word: "PIG", missingIndex: 1, image: "🐷", options: ["I", "E", "A"] },
+    { word: "HAT", missingIndex: 0, image: "🎩", options: ["H", "B", "M"] },
+    { word: "BED", missingIndex: 2, image: "🛏️", options: ["D", "T", "N"] },
+    { word: "CUP", missingIndex: 1, image: "🥤", options: ["U", "A", "O"] },
+    { word: "PEN", missingIndex: 2, image: "🖊️", options: ["N", "T", "D"] },
+    { word: "BOX", missingIndex: 0, image: "📦", options: ["B", "F", "D"] },
+    { word: "EGG", missingIndex: 0, image: "🥚", options: ["E", "A", "O"] },
+    { word: "JAM", missingIndex: 1, image: "🫙", options: ["A", "U", "I"] },
+    { word: "BEE", missingIndex: 2, image: "🐝", options: ["E", "A", "O"] },
+    { word: "COW", missingIndex: 0, image: "🐄", options: ["C", "D", "G"] },
+    { word: "ANT", missingIndex: 1, image: "🐜", options: ["N", "M", "L"] },
 ];
 
 class WordDetectiveGame extends GameBase {

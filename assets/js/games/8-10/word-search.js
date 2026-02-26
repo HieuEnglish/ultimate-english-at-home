@@ -8,9 +8,12 @@
 const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
 
 const TOPICS = {
-    animals: ['DOG', 'CAT', 'BIRD', 'FISH', 'LION', 'BEAR', 'WOLF', 'TIGER'],
-    food: ['APPLE', 'BREAD', 'SOUP', 'MILK', 'CAKE', 'PIZZA', 'RICE', 'EGG'],
-    space: ['SUN', 'MOON', 'STAR', 'MARS', 'EARTH', 'COMET', 'ORBIT'],
+    animals: ['DOG', 'CAT', 'BIRD', 'FISH', 'LION', 'BEAR', 'WOLF', 'TIGER', 'FROG', 'OWL'],
+    food: ['APPLE', 'BREAD', 'SOUP', 'MILK', 'CAKE', 'PIZZA', 'RICE', 'EGG', 'CORN', 'PEAR'],
+    space: ['SUN', 'MOON', 'STAR', 'MARS', 'EARTH', 'COMET', 'ORBIT', 'NOVA', 'PLUTO'],
+    sports: ['GOLF', 'SWIM', 'BALL', 'RACE', 'SURF', 'JUMP', 'KICK', 'TEAM', 'GOAL'],
+    nature: ['TREE', 'LAKE', 'RAIN', 'WIND', 'ROCK', 'HILL', 'LEAF', 'SEED', 'ROSE'],
+    school: ['BOOK', 'MATH', 'READ', 'DESK', 'BELL', 'QUIZ', 'DRAW', 'NOTE', 'RULE'],
 };
 
 class WordSearchGame extends GameBase {

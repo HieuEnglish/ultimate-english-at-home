@@ -18,6 +18,16 @@ const SENTENCES = [
   { sentence: "dolphins can swim fast", emoji: "🐬🌊" },
   { sentence: "I drink water often", emoji: "🥤💧" },
   { sentence: "They are happy friends", emoji: "👫😄" },
+  { sentence: "Birds fly in the sky", emoji: "🐦☁️" },
+  { sentence: "She eats her breakfast", emoji: "👩🍳" },
+  { sentence: "The flower is very pretty", emoji: "🌸😍" },
+  { sentence: "He rides his bicycle fast", emoji: "🚴💨" },
+  { sentence: "The baby is sleeping now", emoji: "👶💤" },
+  { sentence: "We planted many trees", emoji: "🌳🌱" },
+  { sentence: "The moon shines at night", emoji: "🌙✨" },
+  { sentence: "She draws beautiful pictures", emoji: "🎨🖼️" },
+  { sentence: "They sing songs together", emoji: "🎤🎶" },
+  { sentence: "The frog jumps very high", emoji: "🐸⬆️" },
 ];
 
 class FastPhrasesGame extends GameBase {

@@ -14,6 +14,12 @@ const RECIPES = [
   { idiom: "Cold feet", meaning: "Nervous", color: "#3498db" },
   { idiom: "Cost an arm and leg", meaning: "Expensive", color: "#2ecc71" },
   { idiom: "Under the weather", meaning: "Sick", color: "#e67e22" },
+  { idiom: "Hit the nail on the head", meaning: "Exactly right", color: "#1abc9c" },
+  { idiom: "Let the cat out of the bag", meaning: "Reveal a secret", color: "#d35400" },
+  { idiom: "Once in a blue moon", meaning: "Very rarely", color: "#2980b9" },
+  { idiom: "Bite the bullet", meaning: "Face something tough", color: "#8e44ad" },
+  { idiom: "On cloud nine", meaning: "Extremely happy", color: "#27ae60" },
+  { idiom: "A blessing in disguise", meaning: "Good from bad", color: "#c0392b" },
 ];
 
 class IdiomAlchemistGame extends GameBase {

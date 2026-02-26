@@ -17,15 +17,28 @@ const WORD_POOL = [
     { text: "Read", type: "verb" },
     { text: "Swim", type: "verb" },
     { text: "Fly", type: "verb" },
+    { text: "Write", type: "verb" },
+    { text: "Draw", type: "verb" },
+    { text: "Climb", type: "verb" },
+    { text: "Think", type: "verb" },
+    { text: "Build", type: "verb" },
 
     { text: "Table", type: "noun" },
     { text: "Cat", type: "noun" },
+    { text: "Apple", type: "noun" },
+    { text: "House", type: "noun" },
+    { text: "Book", type: "noun" },
+    { text: "River", type: "noun" },
+    { text: "Cloud", type: "noun" },
+    { text: "Mountain", type: "noun" },
+
     { text: "Blue", type: "adj" },
     { text: "Happy", type: "adj" },
-    { text: "Apple", type: "noun" },
     { text: "Slow", type: "adj" },
-    { text: "House", type: "noun" },
-    { text: "Big", type: "adj" }
+    { text: "Big", type: "adj" },
+    { text: "Bright", type: "adj" },
+    { text: "Quiet", type: "adj" },
+    { text: "Soft", type: "adj" },
 ];
 
 class VerbViperGame extends GameBase {

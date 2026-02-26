@@ -14,7 +14,7 @@ const TOPICS = [
             { text: "Connects friends globally", side: "against" },
             { text: "Causes cyberbullying", side: "for" },
             { text: "Spreads fake news", side: "for" },
-            { text: " Educational resources", side: "against" },
+            { text: "Educational resources", side: "against" },
             { text: "Addictive algorithms", side: "for" },
             { text: "Platform for voices", side: "against" },
         ]
@@ -37,8 +37,30 @@ const TOPICS = [
             { text: "Limits self-expression", side: "against" },
             { text: "Saves morning time", side: "for" },
             { text: "Costly for parents", side: "against" },
-            { text: "School contentration", side: "for" },
+            { text: "School concentration", side: "for" },
             { text: "Discomfort", side: "against" },
+        ]
+    },
+    {
+        topic: "AI will replace most jobs.",
+        cards: [
+            { text: "Increases productivity", side: "for" },
+            { text: "Creates new job types", side: "against" },
+            { text: "Reduces human error", side: "for" },
+            { text: "Lacks creativity", side: "against" },
+            { text: "Cheaper labor costs", side: "for" },
+            { text: "Needs human oversight", side: "against" },
+        ]
+    },
+    {
+        topic: "Video games are harmful for teenagers.",
+        cards: [
+            { text: "Promotes sedentary lifestyle", side: "for" },
+            { text: "Improves problem-solving", side: "against" },
+            { text: "Can cause addiction", side: "for" },
+            { text: "Builds teamwork online", side: "against" },
+            { text: "Increases aggression", side: "for" },
+            { text: "Encourages strategic thinking", side: "against" },
         ]
     }
 ];

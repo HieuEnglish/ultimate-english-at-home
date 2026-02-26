@@ -10,6 +10,24 @@ const PARAGRAPH_CHALLENGES = [
             { text: "Moreover, these areas act as critical habitats for local biodiversity.", role: "Supporting Detail", order: 2 },
             { text: "Ultimately, urban planning must prioritize the integration of nature to create sustainable cities.", role: "Conclusion", order: 3 }
         ]
+    },
+    {
+        title: "The Role of Technology in Modern Education",
+        sentences: [
+            { text: "Technology has fundamentally transformed the way students learn and engage with educational content.", role: "Topic Sentence", order: 0 },
+            { text: "Digital platforms enable personalized learning experiences that adapt to each student's pace.", role: "Evidence", order: 1 },
+            { text: "However, excessive screen time can lead to decreased attention spans and social isolation.", role: "Counterpoint", order: 2 },
+            { text: "Therefore, a balanced approach that combines technology with traditional teaching methods is essential.", role: "Conclusion", order: 3 }
+        ]
+    },
+    {
+        title: "Climate Change and Individual Responsibility",
+        sentences: [
+            { text: "While corporations produce the majority of greenhouse gas emissions, individuals also play a critical role.", role: "Topic Sentence", order: 0 },
+            { text: "Simple actions like reducing meat consumption and using public transport can collectively make a significant impact.", role: "Evidence", order: 1 },
+            { text: "Additionally, consumer choices drive corporate behavior, meaning individual action can influence industry standards.", role: "Supporting Detail", order: 2 },
+            { text: "In conclusion, systemic change requires both institutional reform and personal commitment from each citizen.", role: "Conclusion", order: 3 }
+        ]
     }
 ];
 

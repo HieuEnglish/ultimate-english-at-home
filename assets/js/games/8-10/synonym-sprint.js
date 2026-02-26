@@ -16,6 +16,13 @@ const SYNONYM_DATA = [
   { word: "Difficult", synonyms: ["Hard", "Tough", "Tricky"], antonyms: ["Easy", "Simple", "Light"] },
   { word: "Start", synonyms: ["Begin", "Launch", "Open"], antonyms: ["End", "Stop", "Finish"] },
   { word: "Scared", synonyms: ["Afraid", "Frightened", "Terrified"], antonyms: ["Brave", "Calm", "Bold"] },
+  { word: "Strong", synonyms: ["Powerful", "Mighty", "Tough"], antonyms: ["Weak", "Frail", "Soft"] },
+  { word: "Angry", synonyms: ["Furious", "Mad", "Upset"], antonyms: ["Calm", "Happy", "Peaceful"] },
+  { word: "Cold", synonyms: ["Chilly", "Freezing", "Icy"], antonyms: ["Hot", "Warm", "Burning"] },
+  { word: "Old", synonyms: ["Ancient", "Aged", "Elderly"], antonyms: ["Young", "New", "Fresh"] },
+  { word: "Loud", synonyms: ["Noisy", "Booming", "Roaring"], antonyms: ["Quiet", "Silent", "Soft"] },
+  { word: "Rich", synonyms: ["Wealthy", "Affluent", "Loaded"], antonyms: ["Poor", "Broke", "Needy"] },
+  { word: "Brave", synonyms: ["Courageous", "Bold", "Fearless"], antonyms: ["Scared", "Timid", "Cowardly"] },
 ];
 
 class SynonymSprintGame extends GameBase {

@@ -20,6 +20,14 @@ const PAIRS = [
     { word: "tree", emoji: "🌳" },
     { word: "flower", emoji: "🌸" },
     { word: "house", emoji: "🏠" },
+    { word: "car", emoji: "🚗" },
+    { word: "ball", emoji: "⚽" },
+    { word: "cake", emoji: "🍰" },
+    { word: "frog", emoji: "🐸" },
+    { word: "bear", emoji: "🐻" },
+    { word: "duck", emoji: "🦆" },
+    { word: "bee", emoji: "🐝" },
+    { word: "hat", emoji: "🎩" },
 ];
 
 class MemoryMatchGame extends GameBase {

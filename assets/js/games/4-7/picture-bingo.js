@@ -21,6 +21,19 @@ const BINGO_ITEMS = [
     { word: "Fish", emoji: "🐟" },
     { word: "Hat", emoji: "🎩" },
     { word: "Bed", emoji: "🛏️" },
+    { word: "Moon", emoji: "🌙" },
+    { word: "Star", emoji: "⭐" },
+    { word: "Frog", emoji: "🐸" },
+    { word: "Duck", emoji: "🦆" },
+    { word: "Bird", emoji: "🐦" },
+    { word: "Cake", emoji: "🍰" },
+    { word: "Cup", emoji: "🥤" },
+    { word: "Bus", emoji: "🚌" },
+    { word: "Bee", emoji: "🐝" },
+    { word: "Egg", emoji: "🥚" },
+    { word: "Fox", emoji: "🦊" },
+    { word: "Bear", emoji: "🐻" },
+    { word: "Pig", emoji: "🐷" },
 ];
 
 class PictureBingoGame extends GameBase {

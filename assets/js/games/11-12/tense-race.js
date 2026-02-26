@@ -14,7 +14,14 @@ const CHALLENGES = [
   { base: "He writes a letter", tense: "Past Continuous", answer: "He was writing a letter" },
   { base: "The bird flies high", tense: "Past Simple", answer: "The bird flew high" },
   { base: "I sleep early", tense: "Future (going to)", answer: "I am going to sleep early" },
-  { base: "You drink water", tense: "Past Perfect", answer: "You had drunk water" }
+  { base: "You drink water", tense: "Past Perfect", answer: "You had drunk water" },
+  { base: "She sings a song", tense: "Past Simple", answer: "She sang a song" },
+  { base: "We walk to school", tense: "Present Perfect", answer: "We have walked to school" },
+  { base: "He reads a book", tense: "Past Continuous", answer: "He was reading a book" },
+  { base: "They swim in the pool", tense: "Future Simple", answer: "They will swim in the pool" },
+  { base: "I cook dinner", tense: "Present Continuous", answer: "I am cooking dinner" },
+  { base: "She drives to work", tense: "Past Simple", answer: "She drove to work" },
+  { base: "We build a house", tense: "Future (going to)", answer: "We are going to build a house" },
 ];
 
 class TenseRaceGame extends GameBase {

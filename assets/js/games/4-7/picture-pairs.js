@@ -16,7 +16,17 @@ const VOCAB_ITEMS = [
     { word: "Flower", emoji: "🌸", color: "#e17055" },
     { word: "Ball", emoji: "⚽", color: "#55efc4" },
     { word: "Bear", emoji: "🐻", color: "#636e72" },
-    { word: "Fish", emoji: "🐠", color: "#00cec9" }
+    { word: "Fish", emoji: "🐠", color: "#00cec9" },
+    { word: "Bird", emoji: "🐦", color: "#00b894" },
+    { word: "Tree", emoji: "🌳", color: "#27ae60" },
+    { word: "Sun", emoji: "☀️", color: "#f1c40f" },
+    { word: "Cake", emoji: "🍰", color: "#fd79a8" },
+    { word: "Frog", emoji: "🐸", color: "#00b894" },
+    { word: "Duck", emoji: "🦆", color: "#fdcb6e" },
+    { word: "Book", emoji: "📖", color: "#6c5ce7" },
+    { word: "Hat", emoji: "🎩", color: "#2d3436" },
+    { word: "Bus", emoji: "🚌", color: "#e17055" },
+    { word: "Bee", emoji: "🐝", color: "#ffeaa7" },
 ];
 
 class PicturePairsGame extends GameBase {

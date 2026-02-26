@@ -19,6 +19,18 @@ const THESIS_CHALLENGES = [
         claim: "social media algorithms require strict regulation",
         rationale: "as they currently contribute to increasing social polarization",
         feedback: "A sophisticated thesis addressing a complex modern issue."
+    },
+    {
+        topic: "Healthcare",
+        claim: "mental health services should be free for all citizens",
+        rationale: "because untreated mental illness costs society billions in lost productivity",
+        feedback: "A compelling economic argument tied to a social cause."
+    },
+    {
+        topic: "Urban Planning",
+        claim: "cities should prioritize public transport over private car infrastructure",
+        rationale: "since reducing vehicle emissions is critical to combating climate change",
+        feedback: "A well-structured thesis connecting urban policy to environmental outcomes."
     }
 ];
 

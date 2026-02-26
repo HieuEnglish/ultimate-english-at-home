@@ -20,6 +20,19 @@ const WORDS = [
     { word: "sunset", hint: "End of day", category: "🌅" },
     { word: "bridge", hint: "Cross a river", category: "🌉" },
     { word: "garden", hint: "Flowers grow", category: "🌻" },
+    { word: "trophy", hint: "Winner gets this", category: "🏆" },
+    { word: "desert", hint: "Hot and sandy", category: "🏜️" },
+    { word: "forest", hint: "Full of trees", category: "🌲" },
+    { word: "mirror", hint: "Shows reflection", category: "🪞" },
+    { word: "temple", hint: "Place of worship", category: "⛩️" },
+    { word: "guitar", hint: "Musical strings", category: "🎸" },
+    { word: "parrot", hint: "Talking bird", category: "🦜" },
+    { word: "market", hint: "Buy things here", category: "🏪" },
+    { word: "tunnel", hint: "Underground path", category: "🚇" },
+    { word: "basket", hint: "Carry things in", category: "🧺" },
+    { word: "number", hint: "Count with these", category: "🔢" },
+    { word: "silver", hint: "Shiny metal", category: "🥈" },
+    { word: "candle", hint: "Light with flame", category: "🕯️" },
 ];
 
 class WordScrambleGame extends GameBase {

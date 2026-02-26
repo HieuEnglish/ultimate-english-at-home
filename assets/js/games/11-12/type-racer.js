@@ -20,6 +20,14 @@ const SENTENCES = [
     "A journey of a thousand miles begins with a single step.",
     "Time flies when you are having fun.",
     "Better late than never, but better never late.",
+    "Actions speak louder than words in every situation.",
+    "The early bird catches the worm every morning.",
+    "Curiosity is the engine of achievement.",
+    "Every expert was once a beginner at some point.",
+    "Hard work beats talent when talent fails to work hard.",
+    "The pen is mightier than the sword.",
+    "Imagination is more important than knowledge.",
+    "Patience is a virtue that leads to great rewards.",
 ];
 
 class TypeRacerGame extends GameBase {

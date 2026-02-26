@@ -20,6 +20,12 @@ const VOCAB = [
     { word: "candid", meaning: "truthful and straightforward", wrong: ["deceptive", "dishonest", "secretive"] },
     { word: "benevolent", meaning: "well-meaning and kindly", wrong: ["malicious", "cruel", "harmful"] },
     { word: "diligent", meaning: "having careful and persistent effort", wrong: ["lazy", "careless", "negligent"] },
+    { word: "arduous", meaning: "involving great effort and difficulty", wrong: ["simple", "effortless", "trivial"] },
+    { word: "sycophant", meaning: "a person who flatters to gain advantage", wrong: ["critic", "rebel", "opponent"] },
+    { word: "pernicious", meaning: "having a harmful effect gradually", wrong: ["helpful", "beneficial", "healing"] },
+    { word: "ostentatious", meaning: "designed to impress or attract attention", wrong: ["modest", "humble", "simple"] },
+    { word: "juxtapose", meaning: "place close together for contrasting effect", wrong: ["separate", "isolate", "divide"] },
+    { word: "cacophony", meaning: "a harsh mixture of sounds", wrong: ["harmony", "melody", "silence"] },
 ];
 
 const MONSTERS = [

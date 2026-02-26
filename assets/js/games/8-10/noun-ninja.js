@@ -15,14 +15,29 @@ const WORD_LIST = [
     { text: "House", type: "noun" },
     { text: "Ball", type: "noun" },
     { text: "Chair", type: "noun" },
+    { text: "Moon", type: "noun" },
+    { text: "River", type: "noun" },
+    { text: "Cloud", type: "noun" },
+    { text: "Bread", type: "noun" },
+    { text: "Drum", type: "noun" },
+    { text: "Flower", type: "noun" },
+    { text: "Guitar", type: "noun" },
 
     { text: "Run", type: "verb" },
     { text: "Jump", type: "verb" },
+    { text: "Sing", type: "verb" },
+    { text: "Write", type: "verb" },
+    { text: "Dance", type: "verb" },
+    { text: "Think", type: "verb" },
+    { text: "Climb", type: "verb" },
+
     { text: "Fast", type: "adj" },
     { text: "Slow", type: "adj" },
-    { text: "Sing", type: "verb" },
     { text: "Blue", type: "adj" },
-    { text: "Big", type: "adj" }
+    { text: "Big", type: "adj" },
+    { text: "Bright", type: "adj" },
+    { text: "Soft", type: "adj" },
+    { text: "Tall", type: "adj" },
 ];
 
 class NounNinjaGame extends GameBase {

@@ -37,6 +37,36 @@ const HEADLINES = [
     options: ["strengthen", "make strong", "help"],
     correct: "strengthen",
     context: "Diplomatic news"
+  },
+  {
+    headline: "The president will ____ a formal statement this afternoon.",
+    options: ["issue", "say", "give out"],
+    correct: "issue",
+    context: "Government communication"
+  },
+  {
+    headline: "The committee voted to ____ the proposed legislation.",
+    options: ["ratify", "agree on", "okay"],
+    correct: "ratify",
+    context: "Legislative process"
+  },
+  {
+    headline: "Witnesses were asked to ____ at the upcoming trial.",
+    options: ["testify", "talk", "speak up"],
+    correct: "testify",
+    context: "Court proceedings"
+  },
+  {
+    headline: "The charity aims to ____ funds for disaster relief.",
+    options: ["allocate", "give out", "share"],
+    correct: "allocate",
+    context: "Humanitarian report"
+  },
+  {
+    headline: "Experts ____ a sharp rise in global temperatures by 2050.",
+    options: ["forecast", "guess", "think about"],
+    correct: "forecast",
+    context: "Climate report"
   }
 ];
 

@@ -10,7 +10,10 @@ class AccentAce extends GameBase {
             { id: "uk", name: "British", lang: "en-GB", phrase: "I'm heading to the cinema for some crisps and a tin of biscuits.", marker: "cinema, crisps, biscuits" },
             { id: "au", name: "Australian", lang: "en-AU", phrase: "G'day mate! Let's fire up the barbie in the backyard this afternoon.", marker: "G'day, barbie" },
             { id: "in", name: "Indian", lang: "en-IN", phrase: "I will be completing the assignment by this evening, definitely.", marker: "distinctive phrasing" },
-            { id: "za", name: "South African", lang: "en-ZA", phrase: "Is it far to the shop? Howzit, my friend!", marker: "Howzit" }
+            { id: "za", name: "South African", lang: "en-ZA", phrase: "Is it far to the shop? Howzit, my friend!", marker: "Howzit" },
+            { id: "ie", name: "Irish", lang: "en-IE", phrase: "Grand day for a walk, isn't it? The craic was mighty last night!", marker: "Grand, craic" },
+            { id: "sc", name: "Scottish", lang: "en-GB", phrase: "Aye, the bonnie wee loch is just over the brae yonder.", marker: "Aye, bonnie, brae" },
+            { id: "nz", name: "New Zealand", lang: "en-NZ", phrase: "Sweet as, bro! Let's head to the dairy for some lollies.", marker: "Sweet as, dairy, lollies" }
         ];
 
         this.currentQ = 0;

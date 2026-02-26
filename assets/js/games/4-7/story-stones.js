@@ -16,7 +16,17 @@ const SENTENCES = [
     { text: "The __ is blue.", answer: "Sky", options: ["Sky", "Tree", "Banana"], emoji: "☁️" },
     { text: "A __ can fly.", answer: "Bird", options: ["Bird", "Fish", "Dog"], emoji: "🐦" },
     { text: "I eat __.", answer: "Food", options: ["Food", "Rock", "Toy"], emoji: "🍕" },
-    { text: "The __ swims.", answer: "Fish", options: ["Fish", "Cat", "Bird"], emoji: "🐟" }
+    { text: "The __ swims.", answer: "Fish", options: ["Fish", "Cat", "Bird"], emoji: "🐟" },
+    { text: "The __ is yellow.", answer: "Banana", options: ["Banana", "Grape", "Berry"], emoji: "🍌" },
+    { text: "I ride a __.", answer: "Bike", options: ["Bike", "Tree", "Ball"], emoji: "🚲" },
+    { text: "The __ hops.", answer: "Frog", options: ["Frog", "Snake", "Fish"], emoji: "🐸" },
+    { text: "I drink __.", answer: "Water", options: ["Water", "Rock", "Sand"], emoji: "💧" },
+    { text: "The __ is round.", answer: "Ball", options: ["Ball", "Box", "Stick"], emoji: "⚽" },
+    { text: "A __ gives milk.", answer: "Cow", options: ["Cow", "Dog", "Cat"], emoji: "🐄" },
+    { text: "The __ is cold.", answer: "Ice", options: ["Ice", "Fire", "Sun"], emoji: "🧊" },
+    { text: "I wear a __.", answer: "Shirt", options: ["Shirt", "Book", "Ball"], emoji: "👕" },
+    { text: "The __ grows tall.", answer: "Tree", options: ["Tree", "Rock", "Fish"], emoji: "🌳" },
+    { text: "I sleep in a __.", answer: "Bed", options: ["Bed", "Car", "Park"], emoji: "🛏️" },
 ];
 
 class StoryStonesGame extends GameBase {

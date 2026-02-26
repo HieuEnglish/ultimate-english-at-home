@@ -15,6 +15,13 @@ const CODES = [
   { text: "He is [taller/tallest] than me", answer: "taller", hint: "Comparative" },
   { text: "Wh_re is the lib_ary?", answer: "Where is the library?", hint: "Spelling fix" },
   { text: "We [was/were] playing football", answer: "were", hint: "Past Plural" },
+  { text: "She_can_run_very_fast", answer: "She can run very fast", hint: "Missing spaces" },
+  { text: "He [don't/doesn't] like homework", answer: "doesn't", hint: "Negative Agreement" },
+  { text: "B_tter l_te th_n n_ver", answer: "Better late than never", hint: "Vowels missing (e, a)" },
+  { text: "They [is/are] going home", answer: "are", hint: "Subject-Verb Agreement" },
+  { text: "She has [ate/eaten] lunch already", answer: "eaten", hint: "Past Participle" },
+  { text: "This is the [more good/best] day ever", answer: "best", hint: "Superlative" },
+  { text: "N_body kn_ws the _nswer", answer: "Nobody knows the answer", hint: "Vowels missing (o, o, a)" },
 ];
 
 class CodeBreakerGame extends GameBase {

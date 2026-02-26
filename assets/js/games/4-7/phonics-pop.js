@@ -9,14 +9,21 @@ const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
 
 // Words grouped by starting sound
 const PHONICS_WORDS = {
-    'b': ['ball', 'bat', 'bed', 'book', 'bus'],
-    'c': ['cat', 'car', 'cup', 'cow', 'cake'],
-    'd': ['dog', 'door', 'duck', 'desk', 'doll'],
-    'f': ['fish', 'frog', 'fan', 'foot', 'flag'],
-    'h': ['hat', 'house', 'hand', 'horse', 'hen'],
-    'm': ['moon', 'mouse', 'man', 'map', 'milk'],
-    's': ['sun', 'star', 'sock', 'snake', 'soap'],
-    't': ['tree', 'top', 'ten', 'train', 'tiger'],
+    'b': ['ball', 'bat', 'bed', 'book', 'bus', 'box'],
+    'c': ['cat', 'car', 'cup', 'cow', 'cake', 'coat'],
+    'd': ['dog', 'door', 'duck', 'desk', 'doll', 'drum'],
+    'f': ['fish', 'frog', 'fan', 'foot', 'flag', 'fork'],
+    'h': ['hat', 'house', 'hand', 'horse', 'hen', 'hill'],
+    'm': ['moon', 'mouse', 'man', 'map', 'milk', 'mop'],
+    's': ['sun', 'star', 'sock', 'snake', 'soap', 'ship'],
+    't': ['tree', 'top', 'ten', 'train', 'tiger', 'tent'],
+    'g': ['goat', 'gate', 'game', 'gift', 'girl', 'gold'],
+    'l': ['lion', 'lamp', 'leaf', 'leg', 'lock', 'log'],
+    'n': ['net', 'nest', 'nose', 'nut', 'nail', 'nine'],
+    'p': ['pig', 'pen', 'pan', 'pot', 'pin', 'pear'],
+    'r': ['rat', 'rain', 'ring', 'rock', 'rope', 'rug'],
+    'w': ['web', 'wig', 'win', 'worm', 'wall', 'well'],
+    'j': ['jam', 'jar', 'jet', 'jug', 'jump', 'joy'],
 };
 
 const SOUNDS = Object.keys(PHONICS_WORDS);

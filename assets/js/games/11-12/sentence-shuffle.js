@@ -18,6 +18,12 @@ const SENTENCES = [
   { sentence: "The more you practice, the better you become", grammar: "Comparative structure" },
   { sentence: "Although it was raining, they went for a walk", grammar: "Concessive clause" },
   { sentence: "She asked me where I had been", grammar: "Reported question" },
+  { sentence: "He told me that he would come tomorrow", grammar: "Reported speech" },
+  { sentence: "Not only did she win, but she also broke the record", grammar: "Not only...but also" },
+  { sentence: "If I had known earlier, I would have helped", grammar: "Third conditional" },
+  { sentence: "The cake which my mother baked was delicious", grammar: "Relative clause" },
+  { sentence: "Having finished the homework, she went outside", grammar: "Participle clause" },
+  { sentence: "Unless you study hard, you will not pass the exam", grammar: "Unless conditional" },
 ];
 
 class SentenceShuffleGame extends GameBase {

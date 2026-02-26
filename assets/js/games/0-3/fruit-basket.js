@@ -17,7 +17,16 @@ const FRUITS = [
     { name: "Peach", emoji: "🍑", color: "#fab1a0" },
     { name: "Pineapple", emoji: "🍍", color: "#ffeaa7" },
     { name: "Cherry", emoji: "🍒", color: "#ff7675" },
-    { name: "Pear", emoji: "🍐", color: "#55efc4" }
+    { name: "Pear", emoji: "🍐", color: "#55efc4" },
+    { name: "Mango", emoji: "🥭", color: "#fdcb6e" },
+    { name: "Coconut", emoji: "🥥", color: "#dfe6e9" },
+    { name: "Kiwi", emoji: "🥝", color: "#55efc4" },
+    { name: "Blueberry", emoji: "🫐", color: "#74b9ff" },
+    { name: "Plum", emoji: "🫐", color: "#a29bfe" },
+    { name: "Melon", emoji: "🍈", color: "#55efc4" },
+    { name: "Avocado", emoji: "🥑", color: "#00b894" },
+    { name: "Tomato", emoji: "🍅", color: "#ff7675" },
+    { name: "Corn", emoji: "🌽", color: "#ffeaa7" },
 ];
 
 class FruitBasketGame extends GameBase {

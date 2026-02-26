@@ -14,7 +14,14 @@ const PATIENTS = [
     { original: "we was happy", correct: "We were happy.", errorIndex: 3, options: ["were", "is", "am"], type: "grammar", label: "Verb Tense" },
     { original: "Me hungry.", correct: "I am hungry.", errorIndex: 0, options: ["I am", "My", "Mine"], type: "grammar", label: "Subject" },
     { original: "where is it", correct: "Where is it?", errorIndex: 11, options: ["?", ".", "!"], type: "punctuation", label: "Question Mark" },
-    { original: "wow that huge", correct: "Wow, that is huge!", errorIndex: 13, options: ["!", "?", "."], type: "punctuation", label: "Exclamation" }
+    { original: "wow that huge", correct: "Wow, that is huge!", errorIndex: 13, options: ["!", "?", "."], type: "punctuation", label: "Exclamation" },
+    { original: "they is playing", correct: "They are playing.", errorIndex: 5, options: ["are", "is", "was"], type: "grammar", label: "Subject-Verb" },
+    { original: "him ate lunch", correct: "He ate lunch.", errorIndex: 0, options: ["He", "Him", "His"], type: "grammar", label: "Pronoun" },
+    { original: "the dogs is barking", correct: "The dogs are barking.", errorIndex: 9, options: ["are", "is", "was"], type: "grammar", label: "Plural Verb" },
+    { original: "i goed to school", correct: "I went to school.", errorIndex: 2, options: ["went", "goed", "go"], type: "grammar", label: "Irregular Verb" },
+    { original: "do you like pizza", correct: "Do you like pizza?", errorIndex: 17, options: ["?", ".", "!"], type: "punctuation", label: "Question Mark" },
+    { original: "her plays the piano", correct: "She plays the piano.", errorIndex: 0, options: ["She", "Her", "Hers"], type: "grammar", label: "Subject Pronoun" },
+    { original: "the childs are loud", correct: "The children are loud.", errorIndex: 4, options: ["children", "childs", "child"], type: "grammar", label: "Irregular Plural" },
 ];
 
 class SentenceSurgeonGame extends GameBase {

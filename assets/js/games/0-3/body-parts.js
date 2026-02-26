@@ -16,7 +16,15 @@ const BODY_PARTS = [
   { name: "ears", emoji: "👂", label: "Ears" },
   { name: "hands", emoji: "🖐️", label: "Hands" },
   { name: "feet", emoji: "🦶", label: "Feet" },
-  { name: "tummy", emoji: "👕", label: "Tummy" }, // T-shirt for tummy
+  { name: "tummy", emoji: "👕", label: "Tummy" },
+  { name: "hair", emoji: "💇", label: "Hair" },
+  { name: "teeth", emoji: "🦷", label: "Teeth" },
+  { name: "tongue", emoji: "👅", label: "Tongue" },
+  { name: "fingers", emoji: "☝️", label: "Fingers" },
+  { name: "knees", emoji: "🦵", label: "Knees" },
+  { name: "shoulders", emoji: "🤷", label: "Shoulders" },
+  { name: "arms", emoji: "💪", label: "Arms" },
+  { name: "legs", emoji: "🦿", label: "Legs" },
 ];
 
 class BodyPartsGame extends GameBase {

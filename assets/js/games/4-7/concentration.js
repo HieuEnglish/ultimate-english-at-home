@@ -17,6 +17,14 @@ const PAIRS = [
   { word: "flower", emoji: "🌸" },
   { word: "guitar", emoji: "🎸" },
   { word: "house", emoji: "🏠" },
+  { word: "ice cream", emoji: "🍦" },
+  { word: "juice", emoji: "🧃" },
+  { word: "kite", emoji: "🪁" },
+  { word: "lion", emoji: "🦁" },
+  { word: "moon", emoji: "🌙" },
+  { word: "nose", emoji: "👃" },
+  { word: "orange", emoji: "🍊" },
+  { word: "penguin", emoji: "🐧" },
 ];
 
 class ConcentrationGame extends GameBase {

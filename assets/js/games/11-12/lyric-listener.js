@@ -15,7 +15,13 @@ class LyricListener extends GameBase {
             { lyric: "I believe I can fly.", missing: "fly", sentence: "I believe I can ________." },
             { lyric: "Roar louder than a lion.", missing: "louder", sentence: "Roar ________ than a lion." },
             { lyric: "Count your stars, not your shadows.", missing: "stars", sentence: "Count your ________, not your shadows." },
-            { lyric: "The fire in my heart is burning.", missing: "burning", sentence: "The fire in my heart is ________." }
+            { lyric: "The fire in my heart is burning.", missing: "burning", sentence: "The fire in my heart is ________." },
+            { lyric: "You are my sunshine, my only sunshine.", missing: "sunshine", sentence: "You are my ________, my only ________." },
+            { lyric: "Somewhere over the rainbow.", missing: "rainbow", sentence: "Somewhere over the ________." },
+            { lyric: "We are the champions, my friends.", missing: "champions", sentence: "We are the ________, my friends." },
+            { lyric: "Don't worry about a thing.", missing: "worry", sentence: "Don't ________ about a thing." },
+            { lyric: "Every little thing gonna be alright.", missing: "alright", sentence: "Every little thing gonna be ________." },
+            { lyric: "You've got a friend in me.", missing: "friend", sentence: "You've got a ________ in me." }
         ];
 
         this.currentQ = 0;

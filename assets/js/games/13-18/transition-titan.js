@@ -28,6 +28,33 @@ const TRANSITION_LEVELS = [
             { text: "Alternatively", type: "Choice", correct: false },
             { text: "Nevertheless", type: "Contrast", correct: false }
         ]
+    },
+    {
+        premise: "The company invested heavily in employee training programs.",
+        conclusion: "productivity and employee satisfaction increased significantly.",
+        options: [
+            { text: "As a result", type: "Causality", correct: true },
+            { text: "In contrast", type: "Contrast", correct: false },
+            { text: "Meanwhile", type: "Time", correct: false }
+        ]
+    },
+    {
+        premise: "Some critics argue that standardized testing limits creativity in schools.",
+        conclusion: "others maintain that it ensures accountability and consistent standards.",
+        options: [
+            { text: "On the other hand", type: "Contrast", correct: true },
+            { text: "Therefore", type: "Causality", correct: false },
+            { text: "In addition", type: "Addition", correct: false }
+        ]
+    },
+    {
+        premise: "The city suffered from severe air pollution for decades.",
+        conclusion: "residents began planting trees and advocating for stricter emission laws.",
+        options: [
+            { text: "In response", type: "Reaction", correct: true },
+            { text: "Similarly", type: "Comparison", correct: false },
+            { text: "For instance", type: "Example", correct: false }
+        ]
     }
 ];
 

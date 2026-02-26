@@ -19,6 +19,16 @@ const WORDS = [
   { word: "pig", emoji: "🐷", sentence: "The pig likes mud!" },
   { word: "frog", emoji: "🐸", sentence: "The frog jumps high!" },
   { word: "bee", emoji: "🐝", sentence: "The bee makes honey!" },
+  { word: "horse", emoji: "🐴", sentence: "The horse runs fast!" },
+  { word: "lion", emoji: "🦁", sentence: "The lion is brave!" },
+  { word: "monkey", emoji: "🐒", sentence: "The monkey likes bananas!" },
+  { word: "elephant", emoji: "🐘", sentence: "The elephant is big!" },
+  { word: "turtle", emoji: "🐢", sentence: "The turtle is slow!" },
+  { word: "rabbit", emoji: "🐰", sentence: "The rabbit hops fast!" },
+  { word: "snake", emoji: "🐍", sentence: "The snake goes hiss!" },
+  { word: "whale", emoji: "🐳", sentence: "The whale is huge!" },
+  { word: "penguin", emoji: "🐧", sentence: "The penguin loves snow!" },
+  { word: "butterfly", emoji: "🦋", sentence: "The butterfly is pretty!" },
 ];
 
 class TapTheSoundGame extends GameBase {

@@ -16,7 +16,17 @@ const PETS = [
     { name: "Panda", emoji: "🐼" },
     { name: "Koala", emoji: "🐨" },
     { name: "Tiger", emoji: "🐯" },
-    { name: "Lion", emoji: "🦁" }
+    { name: "Lion", emoji: "🦁" },
+    { name: "Monkey", emoji: "🐒" },
+    { name: "Penguin", emoji: "🐧" },
+    { name: "Elephant", emoji: "🐘" },
+    { name: "Giraffe", emoji: "🦒" },
+    { name: "Whale", emoji: "🐳" },
+    { name: "Dolphin", emoji: "🐬" },
+    { name: "Owl", emoji: "🦉" },
+    { name: "Frog", emoji: "🐸" },
+    { name: "Turtle", emoji: "🐢" },
+    { name: "Hamster", emoji: "🐹" },
 ];
 
 class PeekabooPetsGame extends GameBase {

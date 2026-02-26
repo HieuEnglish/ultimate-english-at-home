@@ -75,6 +75,41 @@ class ContextClues extends GameBase {
                 correct: "Doubtful",
                 options: ["Doubtful", "Believing", "Sure", "Excited"],
                 hint: "If it sounds like magic, you might doubt it."
+            },
+            {
+                sentence: "The scientist's **hypothesis** was proven correct after the experiment.",
+                word: "hypothesis",
+                correct: "Theory",
+                options: ["Theory", "Fact", "Question", "Result"],
+                hint: "Scientists test these before they become facts."
+            },
+            {
+                sentence: "The **obsolete** computer could barely run any modern software.",
+                word: "obsolete",
+                correct: "Outdated",
+                options: ["Outdated", "Popular", "Expensive", "Fast"],
+                hint: "It can't run modern software because it's too..."
+            },
+            {
+                sentence: "Her **eloquent** speech convinced everyone to support the cause.",
+                word: "eloquent",
+                correct: "Well-spoken",
+                options: ["Well-spoken", "Quiet", "Boring", "Short"],
+                hint: "The speech 'convinced everyone'."
+            },
+            {
+                sentence: "The **diligent** student always finished homework on time.",
+                word: "diligent",
+                correct: "Hardworking",
+                options: ["Hardworking", "Lazy", "Lucky", "Distracted"],
+                hint: "Always finishing on time requires effort."
+            },
+            {
+                sentence: "The magician's trick was so **baffling** that no one could explain it.",
+                word: "baffling",
+                correct: "Confusing",
+                options: ["Confusing", "Obvious", "Boring", "Simple"],
+                hint: "No one could explain it because it was..."
             }
         ];
 

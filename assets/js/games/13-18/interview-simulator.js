@@ -25,6 +25,22 @@ const INTERVIEW_QUESTIONS = [
             { text: "I sometimes struggle with perfectionism, but I've learned to manage my time more effectively by setting realistic deadlines.", tone: "Professional", points: 100 },
             { text: "I'm really lazy and hate waking up early.", tone: "Too Honest", points: 20 }
         ]
+    },
+    {
+        question: "Where do you see yourself in five years?",
+        options: [
+            { text: "I envision myself in a leadership role, having developed my skills and contributed meaningfully to the company's growth.", tone: "Professional", points: 100 },
+            { text: "Probably at a different company making more money.", tone: "Blunt", points: 10 },
+            { text: "I haven't really thought about it that much.", tone: "Passive", points: 20 }
+        ]
+    },
+    {
+        question: "How do you handle working under pressure?",
+        options: [
+            { text: "I prioritize tasks, break them into manageable steps, and maintain clear communication with my team.", tone: "Professional", points: 100 },
+            { text: "I usually panic but things sort themselves out eventually.", tone: "Too Honest", points: 20 },
+            { text: "I don't deal with pressure. I just leave early.", tone: "Blunt", points: 10 }
+        ]
     }
 ];
 

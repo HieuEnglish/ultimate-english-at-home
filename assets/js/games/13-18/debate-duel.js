@@ -31,6 +31,26 @@ const DEBATE_SCENARIOS = [
             { text: "The budget for space is actually very small compared to military spending.", strength: 2, feedback: "Good context, though it shifts the topic slightly." }
         ],
         correct: 0
+    },
+    {
+        topic: "Universal Basic Income",
+        argument: "Giving everyone free money will make people lazy and unwilling to work.",
+        options: [
+            { text: "Pilot programs in Finland and Canada showed most recipients continued working while gaining financial security.", strength: 3, feedback: "Excellent use of real-world evidence." },
+            { text: "People deserve free money because life is hard.", strength: 1, feedback: "Lacks logical structure for a formal debate." },
+            { text: "UBI could actually boost entrepreneurship since people would have a safety net to take risks.", strength: 2, feedback: "Good economic reasoning." }
+        ],
+        correct: 0
+    },
+    {
+        topic: "Privacy vs. Security",
+        argument: "Governments should have access to all personal data to prevent terrorism and crime.",
+        options: [
+            { text: "Mass surveillance has historically been used to suppress dissent, not just prevent crime, making it a threat to democracy itself.", strength: 3, feedback: "Strong historical and political rebuttal." },
+            { text: "I don't want the government reading my messages.", strength: 1, feedback: "Too personal; needs broader reasoning." },
+            { text: "Targeted surveillance with judicial oversight is more effective than mass data collection.", strength: 2, feedback: "Good alternative proposal." }
+        ],
+        correct: 0
     }
 ];
 

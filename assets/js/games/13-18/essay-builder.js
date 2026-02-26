@@ -35,6 +35,24 @@ const ESSAYS = [
             { id: 3, text: "Governments and businesses also have responsibilities. They must create policies that prioritize sustainability." },
             { id: 4, text: "Together, we can create a cleaner future. Environmental protection requires effort from everyone in society." }
         ]
+    },
+    {
+        topic: "The Value of Critical Thinking",
+        paragraphs: [
+            { id: 1, text: "Critical thinking is an essential skill in the modern information age. It allows people to evaluate claims and make informed decisions." },
+            { id: 2, text: "Without critical thinking, individuals are vulnerable to misinformation and manipulation. They may accept ideas without questioning their validity." },
+            { id: 3, text: "Schools play a crucial role in developing this skill. Encouraging debate, analysis, and evidence-based reasoning prepares students for real-world challenges." },
+            { id: 4, text: "Ultimately, a society that values critical thinking is more democratic and resilient. Informed citizens are the foundation of a healthy democracy." }
+        ]
+    },
+    {
+        topic: "Mental Health Awareness",
+        paragraphs: [
+            { id: 1, text: "Mental health is just as important as physical health, yet it remains widely misunderstood and stigmatized in many cultures." },
+            { id: 2, text: "Research shows that one in four people will experience a mental health issue in their lifetime. Early intervention and support are key to recovery." },
+            { id: 3, text: "Schools and workplaces must create environments where people feel safe discussing their mental well-being without fear of judgment." },
+            { id: 4, text: "In summary, raising awareness and reducing stigma around mental health is not just compassionate but necessary for a healthier society." }
+        ]
     }
 ];
 

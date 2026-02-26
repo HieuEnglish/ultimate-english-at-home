@@ -10,7 +10,9 @@ const SIGHT_WORDS = [
     "the", "of", "and", "a", "to", "in", "is", "you", "that", "it",
     "he", "was", "for", "on", "are", "as", "with", "his", "they", "I",
     "at", "be", "this", "have", "from", "or", "one", "had", "by", "word",
-    "but", "not", "what", "all", "were", "we", "when", "your", "can", "said"
+    "but", "not", "what", "all", "were", "we", "when", "your", "can", "said",
+    "she", "do", "how", "if", "will", "up", "her", "him", "has", "look",
+    "go", "come", "make", "like", "just", "over", "such", "take", "than", "them"
 ];
 
 const ANIMALS = [
@@ -21,7 +23,13 @@ const ANIMALS = [
     { name: "Monkey", emoji: "🐒" },
     { name: "Tiger", emoji: "🐅" },
     { name: "Hippo", emoji: "🦛" },
-    { name: "Rhino", emoji: "🦏" }
+    { name: "Rhino", emoji: "🦏" },
+    { name: "Parrot", emoji: "🦜" },
+    { name: "Gorilla", emoji: "🦍" },
+    { name: "Flamingo", emoji: "🦩" },
+    { name: "Crocodile", emoji: "🐊" },
+    { name: "Snake", emoji: "🐍" },
+    { name: "Eagle", emoji: "🦅" },
 ];
 
 class SightWordSafariGame extends GameBase {

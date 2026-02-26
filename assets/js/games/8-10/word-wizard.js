@@ -16,7 +16,17 @@ const SPELLS = [
     { word: "SHIELD", hint: "Protection gear" },
     { word: "FOREST", hint: "Many trees" },
     { word: "CRYSTAL", hint: "Shiny stone" },
-    { word: "LEGEND", hint: "Famous story" }
+    { word: "LEGEND", hint: "Famous story" },
+    { word: "POTION", hint: "Magical drink" },
+    { word: "THRONE", hint: "Royal seat" },
+    { word: "WIZARD", hint: "Spell caster" },
+    { word: "TEMPLE", hint: "Sacred place" },
+    { word: "SCROLL", hint: "Written roll" },
+    { word: "SHADOW", hint: "Dark outline" },
+    { word: "SILVER", hint: "Shiny metal" },
+    { word: "GOBLIN", hint: "Small creature" },
+    { word: "VOYAGE", hint: "Long journey" },
+    { word: "RIDDLE", hint: "Brain puzzle" },
 ];
 
 class WordWizardGame extends GameBase {

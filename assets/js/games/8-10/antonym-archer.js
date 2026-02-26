@@ -16,7 +16,17 @@ const ARCHER_DATA = [
     { word: "Hard", antonym: "Soft", distractors: ["Tough", "Solid", "Rock"] },
     { word: "Start", antonym: "End", distractors: ["Begin", "Go", "First"] },
     { word: "Win", antonym: "Lose", distractors: ["Victory", "Champ", "Medal"] },
-    { word: "Friend", antonym: "Enemy", distractors: ["Pal", "Buddy", "Mate"] }
+    { word: "Friend", antonym: "Enemy", distractors: ["Pal", "Buddy", "Mate"] },
+    { word: "Light", antonym: "Dark", distractors: ["Bright", "Glow", "Shine"] },
+    { word: "Young", antonym: "Old", distractors: ["New", "Fresh", "Junior"] },
+    { word: "Rich", antonym: "Poor", distractors: ["Wealthy", "Loaded", "Fancy"] },
+    { word: "Loud", antonym: "Quiet", distractors: ["Noisy", "Boom", "Roar"] },
+    { word: "Brave", antonym: "Cowardly", distractors: ["Bold", "Heroic", "Daring"] },
+    { word: "Full", antonym: "Empty", distractors: ["Packed", "Loaded", "Stuffed"] },
+    { word: "Open", antonym: "Closed", distractors: ["Wide", "Free", "Clear"] },
+    { word: "Strong", antonym: "Weak", distractors: ["Mighty", "Power", "Tough"] },
+    { word: "Wet", antonym: "Dry", distractors: ["Damp", "Moist", "Soaked"] },
+    { word: "Love", antonym: "Hate", distractors: ["Adore", "Like", "Care"] },
 ];
 
 class AntonymArcherGame extends GameBase {

@@ -15,7 +15,15 @@ class DictationDash extends GameBase {
             "She decided to bake a delicious chocolate cake.",
             "The scientist discovered a new species of butterfly.",
             "Traveling around the world opens up your mind.",
-            "Practice makes perfect in everything you do."
+            "Practice makes perfect in everything you do.",
+            "The orchestra played a beautiful symphony last night.",
+            "Knowledge is power, and reading is the key.",
+            "Creativity allows us to solve problems in new ways.",
+            "The museum displays artifacts from ancient civilizations.",
+            "Education is the most powerful weapon for change.",
+            "The thunderstorm caused a power outage in the city.",
+            "Healthy eating habits contribute to a longer life.",
+            "Communication skills are essential in every career."
         ];
 
         this.currentLap = 0;

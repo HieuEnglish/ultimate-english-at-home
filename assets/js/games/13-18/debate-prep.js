@@ -47,6 +47,32 @@ const DEBATES = [
       "Students need time for other activities and rest",
       "Quality of learning matters more than quantity"
     ]
+  },
+  {
+    topic: "Should voting age be lowered to sixteen?",
+    forArguments: [
+      "Young people are directly affected by political decisions",
+      "Sixteen-year-olds can work and pay taxes, so they deserve representation",
+      "Early voting builds lifelong civic engagement habits"
+    ],
+    againstArguments: [
+      "Most sixteen-year-olds lack sufficient political knowledge",
+      "Adolescent brains are still developing decision-making abilities",
+      "Lowering the age could make elections more susceptible to manipulation"
+    ]
+  },
+  {
+    topic: "Should college education be free for everyone?",
+    forArguments: [
+      "Free education increases access and reduces inequality",
+      "A more educated workforce benefits the entire economy",
+      "Students would graduate without crippling debt"
+    ],
+    againstArguments: [
+      "Taxpayers would bear the enormous financial burden",
+      "Free tuition could reduce the perceived value of a degree",
+      "Trade schools and apprenticeships are equally valuable alternatives"
+    ]
   }
 ];
 

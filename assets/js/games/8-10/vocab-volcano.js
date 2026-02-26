@@ -16,7 +16,17 @@ const VOCAB_DATA = [
     { word: "Detect", correct: "To discover", options: ["To hide", "To protect", "To destroy"] },
     { word: "Abandon", correct: "Leave behind", options: ["Pick up", "Hold tight", "Build up"] },
     { word: "Massive", correct: "Huge", options: ["Tiny", "Invisible", "Weak"] },
-    { word: "Ancient", correct: "Very old", options: ["Young", "Future", "Modern"] }
+    { word: "Ancient", correct: "Very old", options: ["Young", "Future", "Modern"] },
+    { word: "Fragile", correct: "Easily broken", options: ["Very strong", "Very heavy", "Very fast"] },
+    { word: "Curious", correct: "Eager to learn", options: ["Sleepy", "Angry", "Bored"] },
+    { word: "Genuine", correct: "Real and true", options: ["Fake", "Borrowed", "Stolen"] },
+    { word: "Peculiar", correct: "Strange or odd", options: ["Normal", "Common", "Simple"] },
+    { word: "Vanish", correct: "Disappear", options: ["Appear", "Grow", "Shine"] },
+    { word: "Triumph", correct: "Great victory", options: ["Big loss", "Sad moment", "Small step"] },
+    { word: "Cautious", correct: "Careful", options: ["Reckless", "Brave", "Fast"] },
+    { word: "Expand", correct: "Make bigger", options: ["Shrink", "Delete", "Freeze"] },
+    { word: "Observe", correct: "Watch carefully", options: ["Ignore", "Break", "Hide"] },
+    { word: "Vibrant", correct: "Full of energy", options: ["Dull", "Quiet", "Dark"] },
 ];
 
 class VocabVolcanoGame extends GameBase {

@@ -26,6 +26,17 @@ const WORDS = [
   { word: "dinosaur", hint: "Ancient reptile creatures", theme: "🦕" },
   { word: "astronaut", hint: "Space traveler", theme: "👨‍🚀" },
   { word: "universe", hint: "Everything that exists", theme: "🌌" },
+  { word: "treasure", hint: "Hidden valuable items", theme: "💎" },
+  { word: "carnival", hint: "A fun outdoor event", theme: "🎪" },
+  { word: "skeleton", hint: "Bones inside your body", theme: "💀" },
+  { word: "umbrella", hint: "Protection from rain", theme: "☂️" },
+  { word: "sandwich", hint: "Bread with filling inside", theme: "🥪" },
+  { word: "mushroom", hint: "Grows in damp places", theme: "🍄" },
+  { word: "calendar", hint: "Shows days and months", theme: "📅" },
+  { word: "basement", hint: "Room below the house", theme: "🏠" },
+  { word: "keyboard", hint: "You type on this", theme: "⌨️" },
+  { word: "firework", hint: "Explodes with colors", theme: "🎆" },
+  { word: "kangaroo", hint: "Australian jumping animal", theme: "🦘" },
 ];
 
 class HangmanGame extends GameBase {

@@ -14,7 +14,14 @@ const RHYMES = [
     { target: "Car", emoji: "🚗", matches: ["Star", "Jar", "Far"], wrong: ["Bus", "Cat", "Dig", "Cut"] },
     { target: "Pig", emoji: "🐷", matches: ["Wig", "Dig", "Big"], wrong: ["Pot", "Pan", "Leg", "Bag"] },
     { target: "Pen", emoji: "🖊️", matches: ["Hen", "Ten", "Men"], wrong: ["Pin", "Pan", "Can", "Top"] },
-    { target: "Box", emoji: "📦", matches: ["Fox", "Sox"], wrong: ["Big", "Bag", "Six", "Bus"] }
+    { target: "Box", emoji: "📦", matches: ["Fox", "Sox"], wrong: ["Big", "Bag", "Six", "Bus"] },
+    { target: "Cake", emoji: "🍰", matches: ["Lake", "Make", "Shake"], wrong: ["Cup", "Dog", "Sit", "Run"] },
+    { target: "Ball", emoji: "⚽", matches: ["Tall", "Wall", "Fall"], wrong: ["Bat", "Big", "Bed", "Cup"] },
+    { target: "Moon", emoji: "🌙", matches: ["Spoon", "Soon", "Noon"], wrong: ["Sun", "Star", "Man", "Fan"] },
+    { target: "Ring", emoji: "💍", matches: ["Sing", "King", "Wing"], wrong: ["Ran", "Rug", "Ram", "Red"] },
+    { target: "Boat", emoji: "⛵", matches: ["Coat", "Goat", "Float"], wrong: ["Bus", "Bat", "Bag", "Bed"] },
+    { target: "Bug", emoji: "🐛", matches: ["Rug", "Mug", "Hug"], wrong: ["Bag", "Bad", "Bit", "Bin"] },
+    { target: "Tree", emoji: "🌳", matches: ["Bee", "See", "Free"], wrong: ["Top", "Tip", "Tap", "Tin"] },
 ];
 
 class RhymeTimeGame extends GameBase {

@@ -18,9 +18,14 @@ const SHAPES = [
 const SHAPES_SIMPLE = [
     { name: "Circle", icon: "⚫", match: "🔴", color: "#ff7675" },
     { name: "Square", icon: "⬛", match: "🟥", color: "#0984e3" },
-    { name: "Triangle", icon: "📐", match: "🔺", color: "#fdcb6e" }, // Using generic icons for holes if possible, or just CSS silhouettes
+    { name: "Triangle", icon: "📐", match: "🔺", color: "#fdcb6e" },
     { name: "Star", icon: "⭐", match: "⭐", color: "#ffeaa7" },
-    { name: "Heart", icon: "❤️", match: "❤️", color: "#e17055" }
+    { name: "Heart", icon: "❤️", match: "❤️", color: "#e17055" },
+    { name: "Diamond", icon: "💠", match: "💎", color: "#00cec9" },
+    { name: "Moon", icon: "🌙", match: "🌙", color: "#a29bfe" },
+    { name: "Sun", icon: "☀️", match: "☀️", color: "#ff9f43" },
+    { name: "Cloud", icon: "☁️", match: "☁️", color: "#74b9ff" },
+    { name: "Flower", icon: "🌸", match: "🌸", color: "#fd79a8" },
 ];
 
 class ShapeSorterGame extends GameBase {

@@ -19,6 +19,12 @@ const PRONUNCIATION_CHALLENGES = [
     { text: "Squirrel", difficulty: 3, tip: "SKWUR-uhl" },
     { text: "I would have gone if I had known", difficulty: 3, tip: "Would've, not would of" },
     { text: "She sells seashells by the seashore", difficulty: 3, tip: "Tongue twister! Go slow" },
+    { text: "comfortable", difficulty: 2, tip: "KUMF-ter-buhl (3 syllables)" },
+    { text: "February", difficulty: 2, tip: "FEB-roo-air-ee" },
+    { text: "How much wood would a woodchuck chuck", difficulty: 3, tip: "Tongue twister! Emphasize each word" },
+    { text: "Colonel", difficulty: 3, tip: "KER-nuhl (silent 'o' and 'l')" },
+    { text: "vocabulary", difficulty: 2, tip: "voh-KAB-yuh-lair-ee" },
+    { text: "Unique New York, unique New York", difficulty: 3, tip: "Tongue twister! Keep pace steady" },
 ];
 
 class PronunciationProGame extends GameBase {

@@ -11,12 +11,18 @@ class PhrasalPhantom extends GameBase {
             { sentence: "Can you look _____ my cat while I'm on holiday?", correct: "after", alts: ["up", "into", "over"] },
             { sentence: "Don't give _____! You can do it!", correct: "up", alts: ["in", "on", "off"] },
             { sentence: "They had to call _____ the meeting due to illness.", correct: "off", alts: ["out", "away", "back"] },
-            { sentence: "Please turn _____ the music, it's too loud.", correct: "down", alts: ["up", "on", "in"] }, // Context implies down
+            { sentence: "Please turn _____ the music, it's too loud.", correct: "down", alts: ["up", "on", "in"] },
             { sentence: "I can't put _____ with this noise anymore!", correct: "up", alts: ["down", "on", "in"] },
             { sentence: "Don't bring _____ that topic again.", correct: "up", alts: ["down", "out", "in"] },
             { sentence: "I look _____ to seeing you soon.", correct: "forward", alts: ["back", "up", "round"] },
             { sentence: "Do you get _____ well with your brother?", correct: "along", alts: ["around", "over", "up"] },
-            { sentence: "My car broke _____ on the highway.", correct: "down", alts: ["up", "out", "off"] }
+            { sentence: "My car broke _____ on the highway.", correct: "down", alts: ["up", "out", "off"] },
+            { sentence: "She takes _____ her mother in many ways.", correct: "after", alts: ["over", "up", "off"] },
+            { sentence: "I need to work _____ this math problem.", correct: "out", alts: ["up", "off", "in"] },
+            { sentence: "They set _____ on their journey at dawn.", correct: "off", alts: ["up", "out", "in"] },
+            { sentence: "Please fill _____ this form before leaving.", correct: "in", alts: ["up", "out", "off"] },
+            { sentence: "He pulled _____ his car near the shop.", correct: "over", alts: ["up", "out", "off"] },
+            { sentence: "We ran _____ of milk this morning.", correct: "out", alts: ["off", "up", "over"] }
         ];
 
         this.currentQ = 0;

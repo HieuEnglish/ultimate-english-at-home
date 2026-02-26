@@ -11,7 +11,12 @@ const ROUNDS = [
     { type: "Adverbs", options: ["Loudly", "Big", "Run", "Cat"], correct: ["Loudly"], hint: "Describes an action (usually ends in -ly)" },
     { type: "Proper Nouns", options: ["London", "city", "dog", "Fido"], correct: ["London", "Fido"], hint: "Specific names (Capitalized)" },
     { type: "Conjunctions", options: ["And", "The", "Jump", "But"], correct: ["And", "But"], hint: "Connects words or phrases" },
-    { type: "Prepositions", options: ["Under", "Yellow", "Walk", "Over"], correct: ["Under", "Over"], hint: "Position or relation" }
+    { type: "Prepositions", options: ["Under", "Yellow", "Walk", "Over"], correct: ["Under", "Over"], hint: "Position or relation" },
+    { type: "Pronouns", options: ["She", "Table", "Quickly", "They"], correct: ["She", "They"], hint: "Replaces a noun" },
+    { type: "Verbs", options: ["Climb", "Beautiful", "House", "Swim"], correct: ["Climb", "Swim"], hint: "Action words" },
+    { type: "Articles", options: ["The", "Run", "Pretty", "An"], correct: ["The", "An"], hint: "Comes before a noun (a, an, the)" },
+    { type: "Adjectives", options: ["Brave", "Slowly", "River", "Tiny"], correct: ["Brave", "Tiny"], hint: "Describes a noun" },
+    { type: "Adverbs", options: ["Gently", "Chair", "Happily", "Green"], correct: ["Gently", "Happily"], hint: "Describes how an action is done" },
 ];
 
 class GrammarGladiatorGame extends GameBase {
