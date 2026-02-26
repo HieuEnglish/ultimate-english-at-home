@@ -34,6 +34,25 @@ export class IeltsRunnerGame {
         this.isRunning = false;
         this.isPaused = false;
         this.gameTime = 0;
+        this.questionsAnswered = 0;
+
+        // Power-ups
+        this.hasShield = false;
+        this.shieldTimer = 0;
+        this.speedBoost = false;
+        this.speedBoostTimer = 0;
+        this.hasMagnet = false;
+        this.magnetTimer = 0;
+
+        // Combo system
+        this.combo = 0;
+        this.maxCombo = 0;
+        this.comboTimer = 0;
+
+        // Screen effects
+        this.shakeAmount = 0;
+        this.flashAlpha = 0;
+        this.flashColor = '#fff';
 
         // Player State
         this.lane = 1; // 0=left, 1=center, 2=right
@@ -782,16 +801,51 @@ export class IeltsRunnerGame {
         this.container.querySelector('#start-screen').classList.add('hidden');
         this.container.querySelector('#mobile-controls').classList.add('active');
 
+        // Reset all game state
         this.isRunning = true;
+        this.isPaused = false;
         this.distance = 0;
         this.planks = 3;
+        this.score = 0;
         this.questionsAnswered = 0;
         this.speed = 5;
+        this.gameTime = 0;
+
+        // Reset player
+        this.lane = 1;
+        this.targetLane = 1;
+        this.playerY = 0;
+        this.playerVelY = 0;
+        this.isJumping = false;
+        this.runFrame = 0;
+
+        // Reset collections
+        this.obstacles = [];
+        this.particles = [];
+
+        // Reset power-ups & combo
+        this.hasShield = false;
+        this.shieldTimer = 0;
+        this.speedBoost = false;
+        this.speedBoostTimer = 0;
+        this.hasMagnet = false;
+        this.magnetTimer = 0;
+        this.combo = 0;
+        this.maxCombo = 0;
+        this.comboTimer = 0;
+        this.shakeAmount = 0;
+        this.flashAlpha = 0;
 
         this.updateHUD();
         this.spawnInitialObstacles();
         this.lastTime = performance.now();
         this.gameLoop();
+    }
+
+    spawnInitialObstacles() {
+        for (let z = 300; z < 900; z += 150 + Math.random() * 100) {
+            this.spawnObstacle(z);
+        }
     }
 
     spawnObstacle(z = 800) {
@@ -827,16 +881,100 @@ export class IeltsRunnerGame {
                 height: 40,
                 collected: false
             });
-        } else {
+        } else if (type < 0.92) {
             // Gap (requires bridge)
             this.obstacles.push({
                 type: 'gap',
                 lane: lane,
                 z: z,
                 length: 150,
-                collected: false // 'collected' here means 'bridged'
+                collected: false
+            });
+        } else {
+            // Power-up!
+            const powerTypes = ['shield', 'speedboost', 'magnet'];
+            const pType = powerTypes[Math.floor(Math.random() * powerTypes.length)];
+            this.obstacles.push({
+                type: 'powerup',
+                powerType: pType,
+                lane: lane,
+                z: z,
+                collected: false,
+                bobPhase: Math.random() * Math.PI * 2
             });
         }
+    }
+
+    // --- Sound Effects (Web Audio API, no external files) ---
+    playSound(type) {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            switch (type) {
+                case 'collect':
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1760, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.15);
+                    break;
+                case 'correct':
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
+                    osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.35);
+                    break;
+                case 'wrong':
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.3);
+                    break;
+                case 'hit':
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(150, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.2);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.2);
+                    break;
+                case 'powerup':
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(400, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.15);
+                    osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.25);
+                    osc.frequency.exponentialRampToValueAtTime(1600, ctx.currentTime + 0.4);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.4);
+                    break;
+                case 'combo':
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(600 + this.combo * 100, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200 + this.combo * 100, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.15);
+                    break;
+            }
+            setTimeout(() => ctx.close(), 1000);
+        } catch (e) { /* Audio not supported */ }
     }
 
     gameLoop() {
@@ -855,8 +993,11 @@ export class IeltsRunnerGame {
     update(dt) {
         if (this.isPaused) return;
 
+        // Speed boost multiplier
+        const speedMult = this.speedBoost ? 1.6 : 1;
+
         // Update distance
-        this.distance += this.speed * dt * 10;
+        this.distance += this.speed * dt * 10 * speedMult;
 
         // Update game time
         this.gameTime += dt;
@@ -867,6 +1008,20 @@ export class IeltsRunnerGame {
         // Update HUD
         this.updateHUD();
 
+        // Decay screen effects
+        this.shakeAmount *= 0.9;
+        if (this.shakeAmount < 0.5) this.shakeAmount = 0;
+        this.flashAlpha *= 0.92;
+        if (this.flashAlpha < 0.01) this.flashAlpha = 0;
+
+        // Decay power-up timers
+        if (this.shieldTimer > 0) { this.shieldTimer -= dt; if (this.shieldTimer <= 0) { this.hasShield = false; this.showFloatText('🛡️ Shield expired', 'info'); } }
+        if (this.speedBoostTimer > 0) { this.speedBoostTimer -= dt; if (this.speedBoostTimer <= 0) { this.speedBoost = false; this.showFloatText('⚡ Speed normal', 'info'); } }
+        if (this.magnetTimer > 0) { this.magnetTimer -= dt; if (this.magnetTimer <= 0) { this.hasMagnet = false; this.showFloatText('🧲 Magnet off', 'info'); } }
+
+        // Decay combo timer
+        if (this.comboTimer > 0) { this.comboTimer -= dt; if (this.comboTimer <= 0) { this.combo = 0; } }
+
         // Check level completion
         const levelConf = this.levelConfig[this.level];
         if (this.distance >= levelConf.length) {
@@ -875,14 +1030,12 @@ export class IeltsRunnerGame {
         }
 
         // Update player lane (smooth transition)
-        const laneWidth = this.canvasWidth / 3;
         this.lane += (this.targetLane - this.lane) * 0.15;
 
         // Update jump physics
         if (this.isJumping) {
-            this.playerVelY += 60 * dt; // Gravity
+            this.playerVelY += 60 * dt;
             this.playerY += this.playerVelY;
-
             if (this.playerY >= 0) {
                 this.playerY = 0;
                 this.playerVelY = 0;
@@ -891,20 +1044,31 @@ export class IeltsRunnerGame {
         }
 
         // Update run animation frame
-        this.runFrame = (this.runFrame + dt * 10) % 4;
+        this.runFrame = (this.runFrame + dt * 10 * speedMult) % 4;
+
+        // Magnet effect - attract plank items nearby
+        const playerLane = Math.round(this.lane);
+        if (this.hasMagnet) {
+            for (const obs of this.obstacles) {
+                if (obs.type === 'plank' && !obs.collected && obs.z < 200 && obs.z > 0) {
+                    // Pull planks toward player lane
+                    obs.lane += (playerLane - obs.lane) * 0.1;
+                }
+            }
+        }
 
         // Update obstacles
         for (let i = this.obstacles.length - 1; i >= 0; i--) {
             const obs = this.obstacles[i];
-            obs.z -= this.speed * dt * 30;
+            obs.z -= this.speed * dt * 30 * speedMult;
 
-            // Collision Detection
-            // Determine player's current lane (rounded)
-            const playerLane = Math.round(this.lane);
-            const isInLane = playerLane === obs.lane;
+            // Animate power-up bobbing
+            if (obs.type === 'powerup') {
+                obs.bobPhase += dt * 4;
+            }
 
-            // Player Z is implicitly at 60-120 range roughly in this perspective projection
-            // We interact when object is "close" to camera (z < 100)
+            // Collision detection
+            const isInLane = Math.round(this.lane) === Math.round(obs.lane);
 
             if (obs.z < 120 && obs.z > 0) {
                 if (isInLane) {
@@ -917,25 +1081,24 @@ export class IeltsRunnerGame {
                         this.collectPlank();
                     }
                     else if (obs.type === 'barrier' && !obs.collected && obs.z < 80) {
-                        if (this.playerY > -30) { // Not jumping high enough
+                        if (this.playerY > -30) {
                             obs.collected = true;
                             this.hitBarrier();
                         }
                     }
+                    else if (obs.type === 'powerup' && !obs.collected && obs.z < 80) {
+                        obs.collected = true;
+                        this.collectPowerUp(obs.powerType);
+                    }
                     else if (obs.type === 'gap' && obs.z < 100 && obs.z > 20) {
-                        // In a gap!
-                        if (!obs.collected) { // Not yet bridged
+                        if (!obs.collected) {
                             if (this.isJumping && this.playerY < -20) {
-                                // Jumping over it - ok!
+                                // Jumping over - ok!
                             } else if (this.planks > 0) {
-                                // Build bridge!
-                                this.planks = Math.max(0, this.planks - 0.2); // Consume planks gradually while over gap
+                                this.planks = Math.max(0, this.planks - 0.2);
                                 this.score += 1;
-                                this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.8, '#8B4513', 1); // Wood chips
-                                // Visual: we don't mark 'collected' fully because it's continuous, 
-                                // but we could track 'bridged amount'. For simple version:
+                                this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.8, '#8B4513', 1);
                             } else {
-                                // Fall!
                                 this.gameOver("You fell into a gap! Need planks to build bridges.");
                                 return;
                             }
@@ -984,22 +1147,55 @@ export class IeltsRunnerGame {
         const h = this.canvasHeight;
         const levelConf = this.levelConfig[this.level];
 
+        // Screen shake
+        ctx.save();
+        if (this.shakeAmount > 0) {
+            const sx = (Math.random() - 0.5) * this.shakeAmount;
+            const sy = (Math.random() - 0.5) * this.shakeAmount;
+            ctx.translate(sx, sy);
+        }
+
         // Clear
         ctx.clearRect(0, 0, w, h);
 
-        // Sky gradient (already in CSS but draw mountains)
+        // --- SKY ---
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, h * 0.55);
+        skyGrad.addColorStop(0, levelConf.skyTop);
+        skyGrad.addColorStop(0.6, levelConf.skyBottom);
+        skyGrad.addColorStop(1, this.adjustColor(levelConf.skyBottom, 20));
+        ctx.fillStyle = skyGrad;
+        ctx.fillRect(0, 0, w, h * 0.55);
 
-        // Draw clouds
-        ctx.fillStyle = 'rgba(255,255,255,0.8)';
+        // Sun / glow
+        const sunX = w * 0.75;
+        const sunY = h * 0.18;
+        const sunGrad = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 120);
+        sunGrad.addColorStop(0, 'rgba(255,255,200,0.6)');
+        sunGrad.addColorStop(0.3, 'rgba(255,245,157,0.2)');
+        sunGrad.addColorStop(1, 'rgba(255,245,157,0)');
+        ctx.fillStyle = sunGrad;
+        ctx.fillRect(0, 0, w, h * 0.55);
+
+        // Sun disc
+        ctx.fillStyle = 'rgba(255,250,205,0.9)';
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, 22, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw clouds (volumetric)
         for (const cloud of this.clouds) {
             this.drawCloud(ctx, cloud.x, cloud.y, cloud.size);
         }
 
-        // Draw mountains silhouette
-        ctx.fillStyle = levelConf.bgMountain;
-        ctx.globalAlpha = 0.3;
-        this.drawMountains(ctx, w, h);
-        ctx.globalAlpha = 1;
+        // Draw mountains (multi-layer parallax)
+        this.drawMountains(ctx, w, h, levelConf);
+
+        // --- GROUND fill below track ---
+        const groundGrad = ctx.createLinearGradient(0, h * 0.45, 0, h);
+        groundGrad.addColorStop(0, this.adjustColor(levelConf.trackColor, -40));
+        groundGrad.addColorStop(1, this.adjustColor(levelConf.trackColor, -70));
+        ctx.fillStyle = groundGrad;
+        ctx.fillRect(0, h * 0.45, w, h * 0.55);
 
         // Draw 3D track
         this.drawTrack(ctx, w, h, levelConf);
@@ -1012,46 +1208,205 @@ export class IeltsRunnerGame {
 
         // Draw particles
         this.drawParticles(ctx);
+
+        // Speed lines effect
+        if (this.isRunning && this.speed > 8) {
+            const intensity = Math.min((this.speed - 8) / 5, 1);
+            for (let i = 0; i < 12 * intensity; i++) {
+                const lx = Math.random() * w;
+                const ly = h * 0.45 + Math.random() * h * 0.55;
+                const len = 20 + Math.random() * 60;
+                const alpha = 0.05 + Math.random() * 0.15 * intensity;
+                ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+                ctx.lineWidth = 1 + Math.random() * 2;
+                ctx.beginPath();
+                ctx.moveTo(lx, ly);
+                ctx.lineTo(lx + (Math.random() - 0.5) * 5, ly + len);
+                ctx.stroke();
+            }
+        }
+
+        // Flash overlay
+        if (this.flashAlpha > 0) {
+            ctx.fillStyle = this.flashColor;
+            ctx.globalAlpha = this.flashAlpha;
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalAlpha = 1;
+        }
+
+        // Combo display
+        if (this.combo > 1) {
+            ctx.save();
+            const comboScale = 1 + Math.sin(this.gameTime * 6) * 0.08;
+            ctx.translate(w / 2, h * 0.22);
+            ctx.scale(comboScale, comboScale);
+            ctx.font = 'bold 36px Segoe UI, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#FFD700';
+            ctx.shadowColor = '#FF8C00';
+            ctx.shadowBlur = 15;
+            ctx.fillText(`🔥 ${this.combo}x COMBO`, 0, 0);
+            ctx.shadowBlur = 0;
+            ctx.restore();
+        }
+
+        // Active power-up indicators
+        let piY = 100;
+        ctx.font = 'bold 14px Segoe UI, sans-serif';
+        ctx.textAlign = 'left';
+        if (this.hasShield) {
+            ctx.fillStyle = '#4FC3F7';
+            ctx.fillText(`🛡️ ${Math.ceil(this.shieldTimer)}s`, 20, piY);
+            piY += 22;
+        }
+        if (this.speedBoost) {
+            ctx.fillStyle = '#FFD740';
+            ctx.fillText(`⚡ ${Math.ceil(this.speedBoostTimer)}s`, 20, piY);
+            piY += 22;
+        }
+        if (this.hasMagnet) {
+            ctx.fillStyle = '#E040FB';
+            ctx.fillText(`🧲 ${Math.ceil(this.magnetTimer)}s`, 20, piY);
+        }
+
+        ctx.restore(); // End screen shake
     }
 
     drawCloud(ctx, x, y, size) {
+        // Volumetric cloud with soft shading
+        ctx.save();
+
+        // Cloud shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.04)';
+        ctx.beginPath();
+        ctx.arc(x + 3, y + 4, size * 0.5, 0, Math.PI * 2);
+        ctx.arc(x + size * 0.4 + 3, y - size * 0.1 + 4, size * 0.38, 0, Math.PI * 2);
+        ctx.arc(x + size * 0.7 + 3, y + 4, size * 0.42, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cloud highlight (bright top)
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
         ctx.beginPath();
         ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
-        ctx.arc(x + size * 0.4, y - size * 0.1, size * 0.35, 0, Math.PI * 2);
-        ctx.arc(x + size * 0.7, y, size * 0.4, 0, Math.PI * 2);
+        ctx.arc(x + size * 0.4, y - size * 0.12, size * 0.38, 0, Math.PI * 2);
+        ctx.arc(x + size * 0.7, y, size * 0.42, 0, Math.PI * 2);
         ctx.fill();
+
+        // Bright center highlight
+        const cGrad = ctx.createRadialGradient(x + size * 0.35, y - size * 0.15, 0, x + size * 0.35, y - size * 0.15, size * 0.5);
+        cGrad.addColorStop(0, 'rgba(255,255,255,0.6)');
+        cGrad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = cGrad;
+        ctx.beginPath();
+        ctx.arc(x + size * 0.35, y - size * 0.1, size * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
     }
 
-    drawMountains(ctx, w, h) {
+    drawMountains(ctx, w, h, levelConf) {
+        const baseY = h * 0.55;
+
+        // Far mountains (lighter, blurry)
+        ctx.fillStyle = this.adjustColor(levelConf.bgMountain, 60);
+        ctx.globalAlpha = 0.25;
         ctx.beginPath();
-        ctx.moveTo(0, h * 0.6);
-        ctx.lineTo(w * 0.15, h * 0.35);
-        ctx.lineTo(w * 0.3, h * 0.5);
-        ctx.lineTo(w * 0.5, h * 0.25);
-        ctx.lineTo(w * 0.7, h * 0.45);
-        ctx.lineTo(w * 0.85, h * 0.3);
-        ctx.lineTo(w, h * 0.5);
-        ctx.lineTo(w, h);
-        ctx.lineTo(0, h);
+        ctx.moveTo(0, baseY);
+        ctx.lineTo(w * 0.1, baseY - 80);
+        ctx.lineTo(w * 0.22, baseY - 40);
+        ctx.lineTo(w * 0.35, baseY - 110);
+        ctx.lineTo(w * 0.45, baseY - 50);
+        ctx.lineTo(w * 0.58, baseY - 130);
+        ctx.lineTo(w * 0.72, baseY - 60);
+        ctx.lineTo(w * 0.82, baseY - 95);
+        ctx.lineTo(w * 0.95, baseY - 45);
+        ctx.lineTo(w, baseY - 70);
+        ctx.lineTo(w, baseY);
         ctx.closePath();
         ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // Mid mountains
+        ctx.fillStyle = this.adjustColor(levelConf.bgMountain, 20);
+        ctx.globalAlpha = 0.4;
+        ctx.beginPath();
+        ctx.moveTo(0, baseY);
+        ctx.lineTo(w * 0.12, baseY - 55);
+        ctx.lineTo(w * 0.28, baseY - 30);
+        ctx.lineTo(w * 0.42, baseY - 85);
+        ctx.lineTo(w * 0.55, baseY - 35);
+        ctx.lineTo(w * 0.68, baseY - 70);
+        ctx.lineTo(w * 0.78, baseY - 25);
+        ctx.lineTo(w * 0.92, baseY - 60);
+        ctx.lineTo(w, baseY - 40);
+        ctx.lineTo(w, baseY);
+        ctx.closePath();
+        ctx.fill();
+
+        // Snow caps on mid mountains
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.beginPath();
+        ctx.moveTo(w * 0.42, baseY - 85);
+        ctx.lineTo(w * 0.39, baseY - 65);
+        ctx.lineTo(w * 0.45, baseY - 65);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(w * 0.68, baseY - 70);
+        ctx.lineTo(w * 0.65, baseY - 55);
+        ctx.lineTo(w * 0.71, baseY - 55);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // Near mountains (darkest)
+        const nearGrad = ctx.createLinearGradient(0, baseY - 50, 0, baseY);
+        nearGrad.addColorStop(0, levelConf.bgMountain);
+        nearGrad.addColorStop(1, this.adjustColor(levelConf.bgMountain, -30));
+        ctx.fillStyle = nearGrad;
+        ctx.globalAlpha = 0.55;
+        ctx.beginPath();
+        ctx.moveTo(0, baseY);
+        ctx.lineTo(w * 0.08, baseY - 30);
+        ctx.lineTo(w * 0.2, baseY - 15);
+        ctx.lineTo(w * 0.32, baseY - 45);
+        ctx.lineTo(w * 0.48, baseY - 20);
+        ctx.lineTo(w * 0.6, baseY - 40);
+        ctx.lineTo(w * 0.75, baseY - 10);
+        ctx.lineTo(w * 0.88, baseY - 35);
+        ctx.lineTo(w, baseY - 18);
+        ctx.lineTo(w, baseY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // Simple tree silhouettes at base
+        ctx.fillStyle = this.adjustColor(levelConf.bgMountain, -25);
+        ctx.globalAlpha = 0.35;
+        for (let tx = 0; tx < w; tx += 35 + Math.sin(tx) * 15) {
+            const th = 12 + Math.abs(Math.sin(tx * 0.1)) * 12;
+            ctx.beginPath();
+            ctx.moveTo(tx, baseY);
+            ctx.lineTo(tx + 5, baseY - th);
+            ctx.lineTo(tx + 10, baseY);
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
     }
 
     drawTrack(ctx, w, h, levelConf) {
         const trackTop = h * 0.45;
         const trackBottom = h;
-        const perspective = 0.4;
-
-        // Track gradient
-        const trackGrad = ctx.createLinearGradient(0, trackTop, 0, trackBottom);
-        trackGrad.addColorStop(0, levelConf.trackColor);
-        trackGrad.addColorStop(1, this.adjustColor(levelConf.trackColor, -30));
-
-        // Draw perspective track
-        ctx.fillStyle = trackGrad;
-        ctx.beginPath();
         const topWidth = w * 0.3;
         const bottomWidth = w * 1.2;
+
+        // Track body with gradient
+        const trackGrad = ctx.createLinearGradient(0, trackTop, 0, trackBottom);
+        trackGrad.addColorStop(0, this.adjustColor(levelConf.trackColor, 10));
+        trackGrad.addColorStop(0.4, levelConf.trackColor);
+        trackGrad.addColorStop(1, this.adjustColor(levelConf.trackColor, -40));
+        ctx.fillStyle = trackGrad;
+        ctx.beginPath();
         ctx.moveTo(w / 2 - topWidth / 2, trackTop);
         ctx.lineTo(w / 2 + topWidth / 2, trackTop);
         ctx.lineTo(w / 2 + bottomWidth / 2, trackBottom);
@@ -1059,9 +1414,44 @@ export class IeltsRunnerGame {
         ctx.closePath();
         ctx.fill();
 
-        // Lane dividers
-        ctx.strokeStyle = 'rgba(255,255,255,0.4)';
-        ctx.lineWidth = 2;
+        // Edge barriers (left & right rails)
+        const edgeWidth = 6;
+        ctx.fillStyle = this.adjustColor(levelConf.trackColor, -50);
+        // Left edge
+        ctx.beginPath();
+        ctx.moveTo(w / 2 - topWidth / 2, trackTop);
+        ctx.lineTo(w / 2 - topWidth / 2 - edgeWidth * 0.3, trackTop);
+        ctx.lineTo(w / 2 - bottomWidth / 2 - edgeWidth, trackBottom);
+        ctx.lineTo(w / 2 - bottomWidth / 2, trackBottom);
+        ctx.closePath();
+        ctx.fill();
+        // Right edge
+        ctx.beginPath();
+        ctx.moveTo(w / 2 + topWidth / 2, trackTop);
+        ctx.lineTo(w / 2 + topWidth / 2 + edgeWidth * 0.3, trackTop);
+        ctx.lineTo(w / 2 + bottomWidth / 2 + edgeWidth, trackBottom);
+        ctx.lineTo(w / 2 + bottomWidth / 2, trackBottom);
+        ctx.closePath();
+        ctx.fill();
+
+        // Edge glow strip
+        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(w / 2 - topWidth / 2, trackTop);
+        ctx.lineTo(w / 2 - bottomWidth / 2, trackBottom);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(w / 2 + topWidth / 2, trackTop);
+        ctx.lineTo(w / 2 + bottomWidth / 2, trackBottom);
+        ctx.stroke();
+
+        // Lane dividers (dashed)
+        ctx.setLineDash([12, 18]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+        ctx.lineWidth = 3;
+        const dashOffset = (this.distance * 8) % 30;
+        ctx.lineDashOffset = -dashOffset;
         for (let i = 1; i < 3; i++) {
             const xTop = w / 2 - topWidth / 2 + (topWidth / 3) * i;
             const xBottom = w / 2 - bottomWidth / 2 + (bottomWidth / 3) * i;
@@ -1070,21 +1460,40 @@ export class IeltsRunnerGame {
             ctx.lineTo(xBottom, trackBottom);
             ctx.stroke();
         }
+        ctx.setLineDash([]);
 
-        // Grid lines (scrolling effect)
+        // Scrolling grid lines
         const gridOffset = (this.distance * 5) % 50;
-        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-        for (let i = 0; i < 15; i++) {
-            const y = trackTop + ((i * 50 - gridOffset) / 500) * (trackBottom - trackTop);
+        for (let i = 0; i < 20; i++) {
+            const y = trackTop + ((i * 50 - gridOffset) / 600) * (trackBottom - trackTop);
             if (y > trackTop && y < trackBottom) {
                 const t = (y - trackTop) / (trackBottom - trackTop);
                 const lineWidth = topWidth + (bottomWidth - topWidth) * t;
+                const alpha = 0.06 + t * 0.12;
+                ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+                ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(w / 2 - lineWidth / 2, y);
                 ctx.lineTo(w / 2 + lineWidth / 2, y);
                 ctx.stroke();
             }
         }
+
+        // Center glow stripe
+        ctx.globalAlpha = 0.08;
+        const glowGrad = ctx.createLinearGradient(w / 2 - 30, 0, w / 2 + 30, 0);
+        glowGrad.addColorStop(0, 'transparent');
+        glowGrad.addColorStop(0.5, 'rgba(255,255,255,1)');
+        glowGrad.addColorStop(1, 'transparent');
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.moveTo(w / 2 - 8, trackTop);
+        ctx.lineTo(w / 2 + 8, trackTop);
+        ctx.lineTo(w / 2 + 40, trackBottom);
+        ctx.lineTo(w / 2 - 40, trackBottom);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
     }
 
     drawObstacles(ctx, w, h, levelConf) {
@@ -1093,13 +1502,12 @@ export class IeltsRunnerGame {
         const topWidth = w * 0.3;
         const bottomWidth = w * 1.0;
 
-        // Sort by z (furthest first)
         const sorted = [...this.obstacles].sort((a, b) => b.z - a.z);
 
         for (const obs of sorted) {
             if (obs.z < -100 || obs.z > 800) continue;
 
-            const t = 1 - (obs.z / 800); // 0 = far, 1 = near
+            const t = 1 - (obs.z / 800);
             if (t < 0) continue;
 
             const y = trackTop + t * (trackBottom - trackTop);
@@ -1114,60 +1522,230 @@ export class IeltsRunnerGame {
 
             if (obs.type === 'gate') {
                 if (!obs.collected) {
-                    // Question gate
-                    const gateWidth = 80;
-                    const gateHeight = 100;
-                    ctx.shadowColor = '#667eea';
-                    ctx.shadowBlur = 20;
-                    ctx.strokeStyle = '#667eea';
-                    ctx.lineWidth = 8;
+                    const gateWidth = 90;
+                    const gateHeight = 110;
+                    const pulse = Math.sin(this.gameTime * 4) * 0.3 + 0.7;
+
+                    // Gate pillars
+                    const pillarGrad = ctx.createLinearGradient(-gateWidth / 2, 0, -gateWidth / 2 + 12, 0);
+                    pillarGrad.addColorStop(0, '#5c6bc0');
+                    pillarGrad.addColorStop(1, '#3949ab');
+                    ctx.fillStyle = pillarGrad;
+                    ctx.fillRect(-gateWidth / 2, -gateHeight + 30, 12, gateHeight - 30);
+                    ctx.fillRect(gateWidth / 2 - 12, -gateHeight + 30, 12, gateHeight - 30);
+
+                    // Arch
+                    ctx.strokeStyle = '#7986cb';
+                    ctx.lineWidth = 10;
+                    ctx.shadowColor = `rgba(102,126,234,${pulse})`;
+                    ctx.shadowBlur = 25;
                     ctx.beginPath();
-                    ctx.arc(0, -gateHeight / 2, gateWidth / 2, Math.PI, 0);
-                    ctx.lineTo(gateWidth / 2, 0);
-                    ctx.moveTo(-gateWidth / 2, 0);
-                    ctx.lineTo(-gateWidth / 2, -gateHeight / 2 + gateWidth / 2);
+                    ctx.arc(0, -gateHeight + 30, gateWidth / 2, Math.PI, 0);
                     ctx.stroke();
 
-                    ctx.shadowBlur = 0;
-                    ctx.fillStyle = '#667eea';
-                    ctx.font = 'bold 40px Arial';
+                    // Inner energy glow
+                    const energyGrad = ctx.createRadialGradient(0, -gateHeight / 2, 0, 0, -gateHeight / 2, gateWidth / 2);
+                    energyGrad.addColorStop(0, `rgba(102,126,234,${0.3 * pulse})`);
+                    energyGrad.addColorStop(1, 'rgba(102,126,234,0)');
+                    ctx.fillStyle = energyGrad;
+                    ctx.fillRect(-gateWidth / 2, -gateHeight, gateWidth, gateHeight);
+
+                    // Question mark
+                    ctx.shadowColor = '#fff';
+                    ctx.shadowBlur = 15;
+                    ctx.fillStyle = '#fff';
+                    ctx.font = 'bold 48px Arial';
                     ctx.textAlign = 'center';
-                    ctx.fillText('?', 0, -gateHeight / 2 + 15);
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('?', 0, -gateHeight / 2 + 5);
+                    ctx.shadowBlur = 0;
                 }
             } else if (obs.type === 'plank') {
                 if (!obs.collected) {
+                    // Golden glow
                     ctx.shadowColor = '#FFD700';
-                    ctx.shadowBlur = 15;
-                    ctx.fillStyle = '#8B4513';
-                    ctx.fillRect(-25, -10, 50, 20);
-                    ctx.fillStyle = '#A0522D';
-                    ctx.fillRect(-23, -8, 46, 16);
-                    ctx.fillStyle = 'rgba(255,255,255,0.3)';
-                    ctx.fillRect(-20, -6, 10, 12);
+                    ctx.shadowBlur = 18;
+
+                    // Wood plank with grain
+                    const plankGrad = ctx.createLinearGradient(-28, -12, -28, 12);
+                    plankGrad.addColorStop(0, '#A0522D');
+                    plankGrad.addColorStop(0.3, '#CD853F');
+                    plankGrad.addColorStop(0.7, '#8B4513');
+                    plankGrad.addColorStop(1, '#654321');
+                    ctx.fillStyle = plankGrad;
+                    ctx.beginPath();
+                    ctx.roundRect(-28, -12, 56, 24, 4);
+                    ctx.fill();
+
+                    // Wood grain lines
+                    ctx.strokeStyle = 'rgba(139,69,19,0.4)';
+                    ctx.lineWidth = 1;
+                    for (let gi = -20; gi < 20; gi += 8) {
+                        ctx.beginPath();
+                        ctx.moveTo(gi, -10);
+                        ctx.lineTo(gi + 3, 10);
+                        ctx.stroke();
+                    }
+
+                    // Highlight
+                    ctx.fillStyle = 'rgba(255,255,255,0.25)';
+                    ctx.beginPath();
+                    ctx.roundRect(-25, -10, 50, 8, 2);
+                    ctx.fill();
+
+                    // Sparkle
+                    const sparkle = Math.sin(this.gameTime * 6 + obs.z) * 0.5 + 0.5;
+                    ctx.fillStyle = `rgba(255,215,0,${sparkle})`;
+                    ctx.beginPath();
+                    ctx.arc(20, -8, 3, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.shadowBlur = 0;
                 }
             } else if (obs.type === 'barrier') {
-                ctx.fillStyle = '#F44336';
-                ctx.fillRect(-30, -40, 60, 40);
-                ctx.fillStyle = '#FFEB3B';
-                ctx.fillRect(-25, -35, 10, 30);
-                ctx.fillRect(15, -35, 10, 30);
-            } else if (obs.type === 'gap') {
-                // Gap visualisation
-                // A gap is a break in the track. 
-                // We draw a dark hole
-                ctx.fillStyle = '#000';
-                // Drawn slightly differently - a gap lies Flat on the track
-                // Since we are transformed to center of object, draw rect
-                ctx.fillStyle = '#1a1a1a';
-                ctx.fillRect(-laneWidth * 0.6, 0, laneWidth * 1.2, 50); // Perspective-ish hole
+                // 3D barrier with danger stripes
+                const bw = 65, bh = 50;
 
-                // If bridging (we are close and have planks), draw bridge
-                // This is a bit tricky with update loop, purely visual here:
-                const distToPlayer = obs.z;
-                if (distToPlayer < 120 && distToPlayer > 0 && Math.round(this.lane) === obs.lane && this.planks > 0) {
-                    ctx.fillStyle = '#8B4513';
-                    ctx.fillRect(-laneWidth * 0.5, 0, laneWidth, 50);
+                // Side face (3D depth)
+                ctx.fillStyle = '#C62828';
+                ctx.beginPath();
+                ctx.moveTo(bw / 2, -bh);
+                ctx.lineTo(bw / 2 + 8, -bh + 5);
+                ctx.lineTo(bw / 2 + 8, 5);
+                ctx.lineTo(bw / 2, 0);
+                ctx.closePath();
+                ctx.fill();
+
+                // Top face
+                ctx.fillStyle = '#E53935';
+                ctx.beginPath();
+                ctx.moveTo(-bw / 2, -bh);
+                ctx.lineTo(-bw / 2 + 8, -bh - 5);
+                ctx.lineTo(bw / 2 + 8, -bh - 5 + 5);
+                ctx.lineTo(bw / 2, -bh);
+                ctx.closePath();
+                ctx.fill();
+
+                // Front face
+                const barrierGrad = ctx.createLinearGradient(0, -bh, 0, 0);
+                barrierGrad.addColorStop(0, '#F44336');
+                barrierGrad.addColorStop(1, '#D32F2F');
+                ctx.fillStyle = barrierGrad;
+                ctx.fillRect(-bw / 2, -bh, bw, bh);
+
+                // Danger stripes
+                ctx.save();
+                ctx.beginPath();
+                ctx.rect(-bw / 2, -bh, bw, bh);
+                ctx.clip();
+                ctx.fillStyle = '#FFEB3B';
+                for (let si = -bw; si < bw * 2; si += 20) {
+                    ctx.beginPath();
+                    ctx.moveTo(-bw / 2 + si, -bh);
+                    ctx.lineTo(-bw / 2 + si + 10, -bh);
+                    ctx.lineTo(-bw / 2 + si + 10 - bh, 0);
+                    ctx.lineTo(-bw / 2 + si - bh, 0);
+                    ctx.closePath();
+                    ctx.fill();
                 }
+                ctx.restore();
+
+                // Warning sign
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 24px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('⚠', 0, -bh / 2);
+
+            } else if (obs.type === 'gap') {
+                // Animated void gap
+                ctx.fillStyle = '#0a0a0a';
+                ctx.beginPath();
+                ctx.roundRect(-laneWidth * 0.6, -5, laneWidth * 1.2, 55, 4);
+                ctx.fill();
+
+                // Void shimmer lines
+                ctx.strokeStyle = 'rgba(100,50,150,0.4)';
+                ctx.lineWidth = 1;
+                for (let vi = 0; vi < 4; vi++) {
+                    const vy = 5 + vi * 12;
+                    const wave = Math.sin(this.gameTime * 3 + vi) * 5;
+                    ctx.beginPath();
+                    ctx.moveTo(-laneWidth * 0.5 + wave, vy);
+                    ctx.lineTo(laneWidth * 0.5 + wave, vy);
+                    ctx.stroke();
+                }
+
+                // Bridge if close and have planks
+                const distToPlayer = obs.z;
+                if (distToPlayer < 120 && distToPlayer > 0 && Math.round(this.lane) === Math.round(obs.lane) && this.planks > 0) {
+                    const bridgeGrad = ctx.createLinearGradient(-laneWidth * 0.5, 0, laneWidth * 0.5, 0);
+                    bridgeGrad.addColorStop(0, '#654321');
+                    bridgeGrad.addColorStop(0.5, '#8B4513');
+                    bridgeGrad.addColorStop(1, '#654321');
+                    ctx.fillStyle = bridgeGrad;
+                    ctx.beginPath();
+                    ctx.roundRect(-laneWidth * 0.5, -2, laneWidth, 52, 3);
+                    ctx.fill();
+                    // Planks on bridge
+                    ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                    ctx.lineWidth = 1;
+                    for (let pi = -laneWidth * 0.4; pi < laneWidth * 0.4; pi += 12) {
+                        ctx.beginPath();
+                        ctx.moveTo(pi, 0);
+                        ctx.lineTo(pi, 48);
+                        ctx.stroke();
+                    }
+                }
+            } else if (obs.type === 'powerup' && !obs.collected) {
+                const bob = Math.sin(obs.bobPhase || 0) * 10;
+                ctx.save();
+                ctx.translate(0, bob - 35);
+
+                const glowColors = { shield: '#4FC3F7', speedboost: '#FFD740', magnet: '#E040FB' };
+                const emojis = { shield: '🛡️', speedboost: '⚡', magnet: '🧲' };
+                const gc = glowColors[obs.powerType] || '#fff';
+
+                // Rotating sparkle ring
+                ctx.save();
+                ctx.rotate(this.gameTime * 2);
+                for (let si = 0; si < 6; si++) {
+                    const angle = (si / 6) * Math.PI * 2;
+                    const sx = Math.cos(angle) * 30;
+                    const sy = Math.sin(angle) * 30;
+                    ctx.fillStyle = gc;
+                    ctx.globalAlpha = 0.4 + Math.sin(this.gameTime * 5 + si) * 0.3;
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+                ctx.restore();
+
+                // Main glow
+                ctx.shadowColor = gc;
+                ctx.shadowBlur = 25 + Math.sin(obs.bobPhase * 2) * 12;
+
+                // Background disc
+                const discGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 28);
+                discGrad.addColorStop(0, gc);
+                discGrad.addColorStop(0.6, gc);
+                discGrad.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = discGrad;
+                ctx.globalAlpha = 0.35;
+                ctx.beginPath();
+                ctx.arc(0, 0, 28, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+
+                // Emoji
+                ctx.font = '36px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowBlur = 0;
+                ctx.fillText(emojis[obs.powerType] || '⭐', 0, 0);
+
+                ctx.restore();
             }
 
             ctx.restore();
@@ -1183,51 +1761,199 @@ export class IeltsRunnerGame {
         ctx.save();
         ctx.translate(playerX, playerY);
 
-        // Shadow
-        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        // Shadow (dynamic based on jump height)
+        const shadowScale = 1 - Math.abs(this.playerY) * 0.005;
+        ctx.fillStyle = 'rgba(0,0,0,0.15)';
         ctx.beginPath();
-        ctx.ellipse(0, 60 - this.playerY * 0.3, 25, 8, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 60 - this.playerY * 0.3, 28 * shadowScale, 8 * shadowScale, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Character body
-        const runOffset = Math.sin(this.runFrame * Math.PI) * 5;
+        const runOffset = Math.sin(this.runFrame * Math.PI) * 6;
+        const breathe = Math.sin(this.gameTime * 3) * 1;
 
-        // Legs (animated)
+        // --- LEGS (animated) ---
+        // Left leg
         ctx.fillStyle = '#1a1a2e';
-        ctx.fillRect(-12, 20 + runOffset, 8, 30);
-        ctx.fillRect(4, 20 - runOffset, 8, 30);
-
-        // Body
-        ctx.fillStyle = '#667eea';
         ctx.beginPath();
-        ctx.roundRect(-18, -20, 36, 45, 8);
+        ctx.roundRect(-14, 18 + runOffset, 10, 32, 4);
+        ctx.fill();
+        // Shoe
+        ctx.fillStyle = '#e53935';
+        ctx.beginPath();
+        ctx.roundRect(-16, 46 + runOffset, 14, 6, 3);
         ctx.fill();
 
-        // Head
+        // Right leg
+        ctx.fillStyle = '#1a1a2e';
+        ctx.beginPath();
+        ctx.roundRect(4, 18 - runOffset, 10, 32, 4);
+        ctx.fill();
+        // Shoe
+        ctx.fillStyle = '#e53935';
+        ctx.beginPath();
+        ctx.roundRect(2, 46 - runOffset, 14, 6, 3);
+        ctx.fill();
+
+        // --- BODY ---
+        const bodyGrad = ctx.createLinearGradient(-20, -22, 20, 25);
+        bodyGrad.addColorStop(0, '#7c4dff');
+        bodyGrad.addColorStop(0.5, '#651fff');
+        bodyGrad.addColorStop(1, '#536dfe');
+        ctx.fillStyle = bodyGrad;
+        ctx.beginPath();
+        ctx.roundRect(-20, -22 + breathe, 40, 45, 10);
+        ctx.fill();
+
+        // Jersey stripe
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fillRect(-18, -5 + breathe, 36, 6);
+
+        // --- ARMS (animated) ---
+        ctx.fillStyle = '#7c4dff';
+        // Left arm
+        ctx.save();
+        ctx.translate(-20, -10 + breathe);
+        ctx.rotate((-runOffset * 0.04) - 0.3);
+        ctx.beginPath();
+        ctx.roundRect(-4, 0, 8, 28, 4);
+        ctx.fill();
+        // Hand
         ctx.fillStyle = '#FFE0BD';
         ctx.beginPath();
-        ctx.arc(0, -35, 18, 0, Math.PI * 2);
+        ctx.arc(0, 28, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Right arm
+        ctx.fillStyle = '#7c4dff';
+        ctx.save();
+        ctx.translate(20, -10 + breathe);
+        ctx.rotate((runOffset * 0.04) + 0.3);
+        ctx.beginPath();
+        ctx.roundRect(-4, 0, 8, 28, 4);
+        ctx.fill();
+        ctx.fillStyle = '#FFE0BD';
+        ctx.beginPath();
+        ctx.arc(0, 28, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // --- HEAD ---
+        // Neck
+        ctx.fillStyle = '#FFE0BD';
+        ctx.fillRect(-5, -28 + breathe, 10, 8);
+
+        // Head shape
+        ctx.fillStyle = '#FFE0BD';
+        ctx.beginPath();
+        ctx.arc(0, -40 + breathe, 20, 0, Math.PI * 2);
         ctx.fill();
 
         // Hair
-        ctx.fillStyle = '#4a3728';
+        const hairGrad = ctx.createLinearGradient(-18, -60 + breathe, 18, -45 + breathe);
+        hairGrad.addColorStop(0, '#3e2723');
+        hairGrad.addColorStop(1, '#5d4037');
+        ctx.fillStyle = hairGrad;
         ctx.beginPath();
-        ctx.arc(0, -42, 16, Math.PI, 0);
+        ctx.arc(0, -47 + breathe, 18, Math.PI, 0);
         ctx.fill();
+        // Hair side
+        ctx.fillRect(-18, -50 + breathe, 4, 12);
+        ctx.fillRect(14, -50 + breathe, 4, 12);
 
         // Eyes
-        ctx.fillStyle = '#333';
+        const eyeY = -40 + breathe;
+        ctx.fillStyle = '#fff';
         ctx.beginPath();
-        ctx.arc(-6, -35, 3, 0, Math.PI * 2);
-        ctx.arc(6, -35, 3, 0, Math.PI * 2);
+        ctx.ellipse(-7, eyeY, 6, 5, 0, 0, Math.PI * 2);
+        ctx.ellipse(7, eyeY, 6, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Pupils (look forward)
+        ctx.fillStyle = '#1a237e';
+        ctx.beginPath();
+        ctx.arc(-6, eyeY + 1, 3, 0, Math.PI * 2);
+        ctx.arc(8, eyeY + 1, 3, 0, Math.PI * 2);
+        ctx.fill();
+        // Pupil highlights
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(-5, eyeY - 1, 1.5, 0, Math.PI * 2);
+        ctx.arc(9, eyeY - 1, 1.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Plank backpack (if has planks)
+        // Mouth (changes with state)
+        ctx.strokeStyle = '#d84315';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        if (this.combo > 2) {
+            // Big grin
+            ctx.beginPath();
+            ctx.arc(0, -33 + breathe, 8, 0.1, Math.PI - 0.1);
+            ctx.stroke();
+        } else {
+            // Small smile
+            ctx.beginPath();
+            ctx.arc(0, -34 + breathe, 5, 0.2, Math.PI - 0.2);
+            ctx.stroke();
+        }
+
+        // --- CAPE (fluttering) ---
+        const capeFlutter = Math.sin(this.gameTime * 8) * 4;
+        const capeGrad = ctx.createLinearGradient(-15, -18, -15, 30);
+        capeGrad.addColorStop(0, '#ff6f00');
+        capeGrad.addColorStop(1, '#e65100');
+        ctx.fillStyle = capeGrad;
+        ctx.globalAlpha = 0.85;
+        ctx.beginPath();
+        ctx.moveTo(-16, -18 + breathe);
+        ctx.lineTo(-18, -15 + breathe);
+        ctx.quadraticCurveTo(-25 + capeFlutter, 10 + breathe, -20 + capeFlutter * 0.5, 30 + breathe);
+        ctx.lineTo(-10 + capeFlutter * 0.3, 25 + breathe);
+        ctx.quadraticCurveTo(-12, 5 + breathe, -14, -15 + breathe);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // Shield glow
+        if (this.hasShield) {
+            ctx.shadowColor = '#4FC3F7';
+            ctx.shadowBlur = 30;
+            ctx.strokeStyle = '#4FC3F7';
+            ctx.lineWidth = 3;
+            ctx.globalAlpha = 0.6 + Math.sin(this.gameTime * 4) * 0.2;
+            ctx.beginPath();
+            ctx.arc(0, -10 + breathe, 45, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+        }
+
+        // Speed boost trail
+        if (this.speedBoost) {
+            ctx.globalAlpha = 0.4;
+            for (let ti = 1; ti <= 3; ti++) {
+                ctx.fillStyle = `rgba(255,215,64,${0.3 / ti})`;
+                ctx.beginPath();
+                ctx.roundRect(-18 - ti * 2, -20 + breathe + ti * 3, 36, 40, 8);
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        // Plank backpack
         if (this.planks > 0) {
-            const stackHeight = Math.min(this.planks, 10) * 6;
             ctx.fillStyle = '#8B4513';
             for (let i = 0; i < Math.min(this.planks, 10); i++) {
-                ctx.fillRect(-15, -60 - i * 6, 30, 5);
+                ctx.beginPath();
+                ctx.roundRect(-15, -65 + breathe - i * 6, 30, 5, 2);
+                ctx.fill();
+            }
+            // Glow on stack
+            if (this.planks >= 5) {
+                ctx.fillStyle = 'rgba(255,215,0,0.15)';
+                ctx.beginPath();
+                ctx.arc(0, -70 + breathe - Math.min(this.planks, 10) * 3, 20, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
 
@@ -1269,19 +1995,60 @@ export class IeltsRunnerGame {
 
     collectPlank() {
         this.planks++;
-        this.score += 25;
+        const comboMult = Math.max(1, this.combo);
+        this.score += 25 * comboMult;
         this.updateHUD();
-        this.showFloatText('+1 🧱', 'success');
+        this.showFloatText(`+1 🧱 ${comboMult > 1 ? `(${comboMult}x)` : ''}`, 'success');
         this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#FFD700', 15);
+        this.playSound('collect');
     }
 
     hitBarrier() {
+        if (this.hasShield) {
+            this.hasShield = false;
+            this.shieldTimer = 0;
+            this.showFloatText('🛡️ Shield blocked!', 'info');
+            this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#4FC3F7', 20);
+            this.playSound('powerup');
+            return;
+        }
         if (this.planks > 0) {
             this.planks--;
             this.updateHUD();
             this.showFloatText('-1 🧱', 'error');
         }
+        this.combo = 0;
+        this.shakeAmount = 12;
+        this.flashAlpha = 0.3;
+        this.flashColor = 'rgba(244,67,54,0.5)';
         this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#F44336', 10);
+        this.playSound('hit');
+    }
+
+    collectPowerUp(powerType) {
+        this.playSound('powerup');
+        this.flashAlpha = 0.2;
+        this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#FFD700', 25);
+        switch (powerType) {
+            case 'shield':
+                this.hasShield = true;
+                this.shieldTimer = 15;
+                this.flashColor = 'rgba(79,195,247,0.3)';
+                this.showFloatText('🛡️ SHIELD!', 'success');
+                break;
+            case 'speedboost':
+                this.speedBoost = true;
+                this.speedBoostTimer = 5;
+                this.flashColor = 'rgba(255,215,64,0.3)';
+                this.showFloatText('⚡ SPEED BOOST!', 'success');
+                break;
+            case 'magnet':
+                this.hasMagnet = true;
+                this.magnetTimer = 8;
+                this.flashColor = 'rgba(224,64,251,0.3)';
+                this.showFloatText('🧲 MAGNET!', 'success');
+                break;
+        }
     }
 
     triggerQuestion() {
@@ -1358,13 +2125,26 @@ export class IeltsRunnerGame {
         this.questionsAnswered++;
 
         if (correct) {
+            this.combo++;
+            this.comboTimer = 10;
+            if (this.combo > this.maxCombo) this.maxCombo = this.combo;
+            const comboMult = Math.max(1, this.combo);
+            const points = 100 * comboMult;
             this.planks += 3;
-            this.score += 100;
-            this.showFloatText('+100 ⭐ +3 🧱', 'success');
-            this.createParticles(this.canvasWidth / 2, this.canvasHeight / 2, '#4CAF50', 20);
+            this.score += points;
+            this.showFloatText(`+${points} ⭐ +3 🧱 ${comboMult > 1 ? `(${comboMult}x!)` : ''}`, 'success');
+            this.createParticles(this.canvasWidth / 2, this.canvasHeight / 2, '#4CAF50', 20 + this.combo * 5);
+            this.flashAlpha = 0.15;
+            this.flashColor = 'rgba(76,175,80,0.4)';
+            this.playSound('correct');
+            if (this.combo > 1) this.playSound('combo');
         } else {
+            this.combo = 0;
+            this.comboTimer = 0;
             this.showFloatText('Wrong! ❌', 'error');
             this.createParticles(this.canvasWidth / 2, this.canvasHeight / 2, '#F44336', 10);
+            this.shakeAmount = 8;
+            this.playSound('wrong');
         }
 
         this.updateHUD();
@@ -1397,10 +2177,12 @@ export class IeltsRunnerGame {
         if (progressBar) {
             const levelConf = this.levelConfig[this.level];
             const progress = Math.min(100, (this.distance / levelConf.length) * 100);
-            progressBar.style.setProperty('--progress', progress + '%');
-            progressBar.querySelector('::after')?.style?.setProperty('width', progress + '%');
-            // Actually update the after pseudo-element
-            progressBar.innerHTML = `<div style="height:100%;width:${progress}%;background:linear-gradient(90deg,#4CAF50,#8BC34A);border-radius:3px;transition:width 0.3s"></div>`;
+            const inner = progressBar.querySelector('.progress-fill');
+            if (inner) {
+                inner.style.width = progress + '%';
+            } else {
+                progressBar.innerHTML = `<div class="progress-fill" style="height:100%;width:${progress}%;background:linear-gradient(90deg,#4CAF50,#8BC34A);border-radius:3px;transition:width 0.3s"></div>`;
+            }
         }
     }
 
@@ -1431,6 +2213,11 @@ export class IeltsRunnerGame {
 
         const config = this.levelConfig[this.level];
 
+        // Victory flash
+        this.flashAlpha = 0.4;
+        this.flashColor = 'rgba(255,215,0,0.5)';
+        this.playSound('correct');
+
         // Show completion screen
         const modal = this.container.querySelector('#level-complete');
         this.container.querySelector('#final-score').textContent = this.score;
@@ -1438,13 +2225,16 @@ export class IeltsRunnerGame {
 
         if (config.award) {
             this.container.querySelector('#cert-award').textContent = `🏆 ${config.award}`;
+            if (this.maxCombo > 1) {
+                this.container.querySelector('#cert-award').textContent += ` | 🔥 Max Combo: ${this.maxCombo}x`;
+            }
 
-            // Award certificate
             ProfileStore.addCertificate({
                 id: `ielts_runner_${this.level}`,
                 title: config.award,
                 level: this.level,
                 score: this.score,
+                maxCombo: this.maxCombo,
                 date: new Date().toISOString()
             });
         }
@@ -1507,8 +2297,10 @@ export class IeltsRunnerGame {
     }
 
     start() {
-        // Called by game-play.js
-        // Already handled by play button
+        // Called by game-play.js external Start Game button
+        if (!this.isRunning) {
+            this.startGame();
+        }
     }
 }
 
