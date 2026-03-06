@@ -622,6 +622,7 @@ export class IeltsRunnerGame {
                 padding: 16px 20px;
                 border: 2px solid #eee;
                 background: white;
+                color: #333;
                 border-radius: 14px;
                 font-size: 16px;
                 font-weight: 600;
@@ -2284,53 +2285,19 @@ export class IeltsRunnerGame {
         ctx.arc(0, -40 + breathe, 20, 0, Math.PI * 2);
         ctx.fill();
 
-        // Hair
+        // Hair (back of head)
         const hairGrad = ctx.createLinearGradient(-18, -60 + breathe, 18, -45 + breathe);
         hairGrad.addColorStop(0, '#3e2723');
         hairGrad.addColorStop(1, '#5d4037');
         ctx.fillStyle = hairGrad;
         ctx.beginPath();
-        ctx.arc(0, -47 + breathe, 18, Math.PI, 0);
-        ctx.fill();
-        // Hair side
-        ctx.fillRect(-18, -50 + breathe, 4, 12);
-        ctx.fillRect(14, -50 + breathe, 4, 12);
-
-        // Eyes
-        const eyeY = -40 + breathe;
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.ellipse(-7, eyeY, 6, 5, 0, 0, Math.PI * 2);
-        ctx.ellipse(7, eyeY, 6, 5, 0, 0, Math.PI * 2);
-        ctx.fill();
-        // Pupils (look forward)
-        ctx.fillStyle = '#1a237e';
-        ctx.beginPath();
-        ctx.arc(-6, eyeY + 1, 3, 0, Math.PI * 2);
-        ctx.arc(8, eyeY + 1, 3, 0, Math.PI * 2);
-        ctx.fill();
-        // Pupil highlights
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.arc(-5, eyeY - 1, 1.5, 0, Math.PI * 2);
-        ctx.arc(9, eyeY - 1, 1.5, 0, Math.PI * 2);
+        ctx.arc(0, -42 + breathe, 20, Math.PI, 0); // covers the top half
         ctx.fill();
 
-        // Mouth (changes with state)
-        ctx.strokeStyle = '#d84315';
-        ctx.lineWidth = 2;
-        ctx.lineCap = 'round';
-        if (this.combo > 2) {
-            // Big grin
-            ctx.beginPath();
-            ctx.arc(0, -33 + breathe, 8, 0.1, Math.PI - 0.1);
-            ctx.stroke();
-        } else {
-            // Small smile
-            ctx.beginPath();
-            ctx.arc(0, -34 + breathe, 5, 0.2, Math.PI - 0.2);
-            ctx.stroke();
-        }
+        // Hair continuing down the back
+        ctx.beginPath();
+        ctx.roundRect(-16, -45 + breathe, 32, 20, 6);
+        ctx.fill();
 
         // --- CAPE (fluttering) ---
         const capeFlutter = Math.sin(this.gameTime * 8) * 4;
