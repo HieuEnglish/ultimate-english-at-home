@@ -28,6 +28,21 @@ const SENTENCES = [
   { sentence: "She draws beautiful pictures", emoji: "🎨🖼️" },
   { sentence: "They sing songs together", emoji: "🎤🎶" },
   { sentence: "The frog jumps very high", emoji: "🐸⬆️" },
+  { sentence: "My teacher is very kind", emoji: "👩‍🏫❤️" },
+  { sentence: "The children play outside", emoji: "👧🌳" },
+  { sentence: "I brush my teeth daily", emoji: "🪥😁" },
+  { sentence: "The stars twinkle at night", emoji: "⭐🌃" },
+  { sentence: "She finished her homework", emoji: "📝✅" },
+  { sentence: "We watched a funny movie", emoji: "🎬😂" },
+  { sentence: "The rain falls from clouds", emoji: "🌧️☁️" },
+  { sentence: "He helped his little sister", emoji: "👦👧" },
+  { sentence: "I enjoy learning new words", emoji: "📚🧠" },
+  { sentence: "The rabbit has long ears", emoji: "🐰👂" },
+  { sentence: "She plays the piano well", emoji: "🎹🎵" },
+  { sentence: "They visited the museum today", emoji: "🏛️📸" },
+  { sentence: "The cake tastes very sweet", emoji: "🍰😋" },
+  { sentence: "We wrote a story together", emoji: "✍️📖" },
+  { sentence: "The elephant has a long trunk", emoji: "🐘💪" },
 ];
 
 class FastPhrasesGame extends GameBase {

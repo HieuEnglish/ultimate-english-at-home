@@ -26,6 +26,16 @@ const SHAPES_SIMPLE = [
     { name: "Sun", icon: "☀️", match: "☀️", color: "#ff9f43" },
     { name: "Cloud", icon: "☁️", match: "☁️", color: "#74b9ff" },
     { name: "Flower", icon: "🌸", match: "🌸", color: "#fd79a8" },
+    { name: "Rainbow", icon: "🌈", match: "🌈", color: "#e84393" },
+    { name: "Drop", icon: "💧", match: "💧", color: "#0984e3" },
+    { name: "Lightning", icon: "⚡", match: "⚡", color: "#f9ca24" },
+    { name: "Snowflake", icon: "❄️", match: "❄️", color: "#74b9ff" },
+    { name: "Leaf", icon: "🍃", match: "🍃", color: "#00b894" },
+    { name: "Bell", icon: "🔔", match: "🔔", color: "#fdcb6e" },
+    { name: "Apple", icon: "🍎", match: "🍎", color: "#d63031" },
+    { name: "Crown", icon: "👑", match: "👑", color: "#f9ca24" },
+    { name: "Egg", icon: "🥚", match: "🥚", color: "#dfe6e9" },
+    { name: "Butterfly", icon: "🦋", match: "🦋", color: "#a29bfe" },
 ];
 
 class ShapeSorterGame extends GameBase {

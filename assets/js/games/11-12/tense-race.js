@@ -22,6 +22,21 @@ const CHALLENGES = [
   { base: "I cook dinner", tense: "Present Continuous", answer: "I am cooking dinner" },
   { base: "She drives to work", tense: "Past Simple", answer: "She drove to work" },
   { base: "We build a house", tense: "Future (going to)", answer: "We are going to build a house" },
+  { base: "He teaches math", tense: "Past Simple", answer: "He taught math" },
+  { base: "They bring their lunch", tense: "Present Perfect", answer: "They have brought their lunch" },
+  { base: "I catch the bus", tense: "Past Simple", answer: "I caught the bus" },
+  { base: "She gives a speech", tense: "Past Continuous", answer: "She was giving a speech" },
+  { base: "We make a cake", tense: "Future Simple", answer: "We will make a cake" },
+  { base: "He draws a picture", tense: "Present Perfect", answer: "He has drawn a picture" },
+  { base: "They choose a leader", tense: "Past Simple", answer: "They chose a leader" },
+  { base: "I speak English", tense: "Present Continuous", answer: "I am speaking English" },
+  { base: "She takes the test", tense: "Past Perfect", answer: "She had taken the test" },
+  { base: "We find the answer", tense: "Past Simple", answer: "We found the answer" },
+  { base: "He grows vegetables", tense: "Present Perfect", answer: "He has grown vegetables" },
+  { base: "They forget the password", tense: "Past Simple", answer: "They forgot the password" },
+  { base: "I throw the ball", tense: "Future (going to)", answer: "I am going to throw the ball" },
+  { base: "She breaks the record", tense: "Past Simple", answer: "She broke the record" },
+  { base: "We know the truth", tense: "Past Perfect", answer: "We had known the truth" },
 ];
 
 class TenseRaceGame extends GameBase {

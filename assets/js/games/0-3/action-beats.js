@@ -8,29 +8,41 @@
 const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
 
 const ACTIONS = [
-    { verb: "Clap", emoji: "👏", color: "#fdcb6e", sound: "clap" },
-    { verb: "Jump", emoji: "🏃", color: "#6c5ce7", sound: "jump" },
-    { verb: "Wave", emoji: "👋", color: "#ff7675", sound: "wave" },
-    { verb: "Spin", emoji: "🌪️", color: "#00cec9", sound: "spin" },
-    { verb: "Sleep", emoji: "😴", color: "#636e72", sound: "snore" },
-    { verb: "Dance", emoji: "💃", color: "#e84393", sound: "music" },
-    { verb: "Stomp", emoji: "🦶", color: "#d63031", sound: "stomp" },
-    { verb: "Stretch", emoji: "🙆", color: "#00b894", sound: "stretch" },
-    { verb: "Shake", emoji: "🫨", color: "#e17055", sound: "shake" },
-    { verb: "Wiggle", emoji: "🪱", color: "#74b9ff", sound: "wiggle" },
-    { verb: "March", emoji: "🚶", color: "#a29bfe", sound: "march" },
-    { verb: "Fly", emoji: "🦅", color: "#55efc4", sound: "fly" },
+  { verb: "Clap", emoji: "👏", color: "#fdcb6e", sound: "clap" },
+  { verb: "Jump", emoji: "🏃", color: "#6c5ce7", sound: "jump" },
+  { verb: "Wave", emoji: "👋", color: "#ff7675", sound: "wave" },
+  { verb: "Spin", emoji: "🌪️", color: "#00cec9", sound: "spin" },
+  { verb: "Sleep", emoji: "😴", color: "#636e72", sound: "snore" },
+  { verb: "Dance", emoji: "💃", color: "#e84393", sound: "music" },
+  { verb: "Stomp", emoji: "🦶", color: "#d63031", sound: "stomp" },
+  { verb: "Stretch", emoji: "🙆", color: "#00b894", sound: "stretch" },
+  { verb: "Shake", emoji: "🫨", color: "#e17055", sound: "shake" },
+  { verb: "Wiggle", emoji: "🪱", color: "#74b9ff", sound: "wiggle" },
+  { verb: "March", emoji: "🚶", color: "#a29bfe", sound: "march" },
+  { verb: "Fly", emoji: "🦅", color: "#55efc4", sound: "fly" },
+  { verb: "Swim", emoji: "🏊", color: "#0984e3", sound: "swim" },
+  { verb: "Crawl", emoji: "🐛", color: "#b8e994", sound: "crawl" },
+  { verb: "Hug", emoji: "🤗", color: "#fd79a8", sound: "hug" },
+  { verb: "Kick", emoji: "🦵", color: "#e55039", sound: "kick" },
+  { verb: "Blow", emoji: "🌬️", color: "#82ccdd", sound: "blow" },
+  { verb: "Sing", emoji: "🎤", color: "#f8c291", sound: "sing" },
+  { verb: "Peek", emoji: "🙈", color: "#b71540", sound: "peek" },
+  { verb: "Tickle", emoji: "🤭", color: "#78e08f", sound: "tickle" },
+  { verb: "Run", emoji: "🏃‍♂️", color: "#3c6382", sound: "run" },
+  { verb: "Hop", emoji: "🐸", color: "#38ada9", sound: "hop" },
+  { verb: "Roll", emoji: "🔄", color: "#fa983a", sound: "roll" },
+  { verb: "Nod", emoji: "😊", color: "#4a69bd", sound: "nod" },
 ];
 
 class ActionBeatsGame extends GameBase {
-    constructor(container, config) {
-        super(container, config);
-        this.beatActive = false;
-        this.currentAction = null;
-    }
+  constructor(container, config) {
+    super(container, config);
+    this.beatActive = false;
+    this.currentAction = null;
+  }
 
-    async init() {
-        this.container.innerHTML = `
+  async init() {
+    this.container.innerHTML = `
       <div class="game-wrapper dj-theme">
         <div class="disco-lights">
            <div class="light l1"></div>
@@ -57,14 +69,14 @@ class ActionBeatsGame extends GameBase {
       </div>
     `;
 
-        this.injectStyles();
-        this.renderButtons();
-        this.start();
-    }
+    this.injectStyles();
+    this.renderButtons();
+    this.start();
+  }
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
       .game-wrapper {
         width: 100%; height: 500px;
         background: #2d3436;
@@ -182,64 +194,64 @@ class ActionBeatsGame extends GameBase {
       }
       @keyframes glow { from { filter: brightness(1); } to { filter: brightness(1.3); } }
     `;
-        this.container.appendChild(style);
-    }
+    this.container.appendChild(style);
+  }
 
-    renderButtons() {
-        const grid = document.getElementById('action-buttons');
-        grid.innerHTML = ACTIONS.map(action => `
+  renderButtons() {
+    const grid = document.getElementById('action-buttons');
+    grid.innerHTML = ACTIONS.map(action => `
             <button class="beat-btn" style="background: ${action.color}" data-verb="${action.verb}">
                <span>${action.emoji}</span>
                ${action.verb}
             </button>
         `).join('');
 
-        grid.querySelectorAll('.beat-btn').forEach(btn => {
-            btn.onclick = () => this.triggerAction(btn, btn.dataset.verb);
-        });
-    }
+    grid.querySelectorAll('.beat-btn').forEach(btn => {
+      btn.onclick = () => this.triggerAction(btn, btn.dataset.verb);
+    });
+  }
 
-    triggerAction(btn, verb) {
-        // Reset old
-        this.container.querySelectorAll('.beat-btn').forEach(b => b.classList.remove('active'));
-        const char = document.getElementById('dj-char');
-        char.className = 'dj-character'; // reset anims
-        void char.offsetWidth; // trigger reflow
+  triggerAction(btn, verb) {
+    // Reset old
+    this.container.querySelectorAll('.beat-btn').forEach(b => b.classList.remove('active'));
+    const char = document.getElementById('dj-char');
+    char.className = 'dj-character'; // reset anims
+    void char.offsetWidth; // trigger reflow
 
-        // Set new
-        btn.classList.add('active');
-        const actionData = ACTIONS.find(a => a.verb === verb);
+    // Set new
+    btn.classList.add('active');
+    const actionData = ACTIONS.find(a => a.verb === verb);
 
-        // Animate Char
-        char.classList.add(`action-${verb.toLowerCase()}`);
+    // Animate Char
+    char.classList.add(`action-${verb.toLowerCase()}`);
 
-        // Show Speech
-        const bubble = document.getElementById('char-speech');
-        bubble.textContent = `${verb}!`;
-        bubble.classList.add('visible');
+    // Show Speech
+    const bubble = document.getElementById('char-speech');
+    bubble.textContent = `${verb}!`;
+    bubble.classList.add('visible');
 
-        // Speakers pump
-        this.container.querySelectorAll('.speaker').forEach(s => s.classList.add('pump'));
+    // Speakers pump
+    this.container.querySelectorAll('.speaker').forEach(s => s.classList.add('pump'));
 
-        // Speak
-        this.speak(verb);
+    // Speak
+    this.speak(verb);
 
-        // Timeout to "stop" the music visually after a bit (or keep it going!)
-        // For 0-3, instant reaction is best. Let it loop for 3s then stop.
-        if (this.currentTimer) clearTimeout(this.currentTimer);
-        this.currentTimer = setTimeout(() => {
-            this.stopAction();
-        }, 3000);
-    }
+    // Timeout to "stop" the music visually after a bit (or keep it going!)
+    // For 0-3, instant reaction is best. Let it loop for 3s then stop.
+    if (this.currentTimer) clearTimeout(this.currentTimer);
+    this.currentTimer = setTimeout(() => {
+      this.stopAction();
+    }, 3000);
+  }
 
-    stopAction() {
-        this.container.querySelectorAll('.beat-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('dj-char').className = 'dj-character';
-        document.getElementById('char-speech').classList.remove('visible');
-        this.container.querySelectorAll('.speaker').forEach(s => s.classList.remove('pump'));
-    }
+  stopAction() {
+    this.container.querySelectorAll('.beat-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('dj-char').className = 'dj-character';
+    document.getElementById('char-speech').classList.remove('visible');
+    this.container.querySelectorAll('.speaker').forEach(s => s.classList.remove('pump'));
+  }
 }
 
 export function createGame(container, config) {
-    return new ActionBeatsGame(container, config);
+  return new ActionBeatsGame(container, config);
 }

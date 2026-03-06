@@ -10,7 +10,13 @@ class AnimalDanceGame extends GameBase {
             { id: 'cow', emoji: '🐮', name: 'Cow', dance: 'wobble' },
             { id: 'duck', emoji: '🦆', name: 'Duck', dance: 'jump' },
             { id: 'pig', emoji: '🐷', name: 'Pig', dance: 'shake' },
-            { id: 'lion', emoji: '🦁', name: 'Lion', dance: 'pulse' }
+            { id: 'lion', emoji: '🦁', name: 'Lion', dance: 'pulse' },
+            { id: 'frog', emoji: '🐸', name: 'Frog', dance: 'bounce' },
+            { id: 'monkey', emoji: '🐒', name: 'Monkey', dance: 'wobble' },
+            { id: 'penguin', emoji: '🐧', name: 'Penguin', dance: 'wobble' },
+            { id: 'bear', emoji: '🐻', name: 'Bear', dance: 'stomp' },
+            { id: 'bunny', emoji: '🐰', name: 'Bunny', dance: 'jump' },
+            { id: 'elephant', emoji: '🐘', name: 'Elephant', dance: 'stomp' },
         ];
     }
 

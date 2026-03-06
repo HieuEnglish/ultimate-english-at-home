@@ -27,6 +27,21 @@ const CASES = [
     { word: "BEE", missingIndex: 2, image: "🐝", options: ["E", "A", "O"] },
     { word: "COW", missingIndex: 0, image: "🐄", options: ["C", "D", "G"] },
     { word: "ANT", missingIndex: 1, image: "🐜", options: ["N", "M", "L"] },
+    { word: "BAT", missingIndex: 0, image: "🦇", options: ["B", "C", "D"] },
+    { word: "HEN", missingIndex: 2, image: "🐔", options: ["N", "T", "M"] },
+    { word: "MOP", missingIndex: 0, image: "🧹", options: ["M", "D", "T"] },
+    { word: "RUG", missingIndex: 1, image: "🟫", options: ["U", "A", "O"] },
+    { word: "VAN", missingIndex: 2, image: "🚐", options: ["N", "T", "S"] },
+    { word: "FAN", missingIndex: 0, image: "🪭", options: ["F", "V", "D"] },
+    { word: "ZIP", missingIndex: 1, image: "🤐", options: ["I", "A", "O"] },
+    { word: "YAM", missingIndex: 0, image: "🍠", options: ["Y", "H", "W"] },
+    { word: "JUG", missingIndex: 2, image: "🫗", options: ["G", "D", "B"] },
+    { word: "LOG", missingIndex: 0, image: "🪵", options: ["L", "R", "B"] },
+    { word: "RAT", missingIndex: 1, image: "🐀", options: ["A", "O", "U"] },
+    { word: "OWL", missingIndex: 0, image: "🦉", options: ["O", "A", "U"] },
+    { word: "BAG", missingIndex: 2, image: "🎒", options: ["G", "D", "K"] },
+    { word: "GUM", missingIndex: 1, image: "🫧", options: ["U", "A", "O"] },
+    { word: "HUG", missingIndex: 0, image: "🤗", options: ["H", "M", "B"] },
 ];
 
 class WordDetectiveGame extends GameBase {

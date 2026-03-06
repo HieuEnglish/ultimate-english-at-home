@@ -8,46 +8,66 @@
 const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
 
 const VOCAB = [
-    { word: "ephemeral", meaning: "lasting for a very short time", wrong: ["permanent", "solid", "eternal"] },
-    { word: "ubiquitous", meaning: "present everywhere", wrong: ["rare", "scarce", "hidden"] },
-    { word: "eloquent", meaning: "fluent and persuasive", wrong: ["silent", "awkward", "mumbling"] },
-    { word: "pragmatic", meaning: "dealing with things sensibly", wrong: ["idealistic", "dreamy", "impractical"] },
-    { word: "resilient", meaning: "able to recover quickly", wrong: ["fragile", "weak", "breakable"] },
-    { word: "meticulous", meaning: "showing great attention to detail", wrong: ["careless", "sloppy", "messy"] },
-    { word: "ambiguous", meaning: "open to more than one interpretation", wrong: ["clear", "obvious", "definite"] },
-    { word: "tenacious", meaning: "holding firmly to something", wrong: ["weak", "quitting", "giving up"] },
-    { word: "prolific", meaning: "producing much work or results", wrong: ["unproductive", "idle", "lazy"] },
-    { word: "candid", meaning: "truthful and straightforward", wrong: ["deceptive", "dishonest", "secretive"] },
-    { word: "benevolent", meaning: "well-meaning and kindly", wrong: ["malicious", "cruel", "harmful"] },
-    { word: "diligent", meaning: "having careful and persistent effort", wrong: ["lazy", "careless", "negligent"] },
-    { word: "arduous", meaning: "involving great effort and difficulty", wrong: ["simple", "effortless", "trivial"] },
-    { word: "sycophant", meaning: "a person who flatters to gain advantage", wrong: ["critic", "rebel", "opponent"] },
-    { word: "pernicious", meaning: "having a harmful effect gradually", wrong: ["helpful", "beneficial", "healing"] },
-    { word: "ostentatious", meaning: "designed to impress or attract attention", wrong: ["modest", "humble", "simple"] },
-    { word: "juxtapose", meaning: "place close together for contrasting effect", wrong: ["separate", "isolate", "divide"] },
-    { word: "cacophony", meaning: "a harsh mixture of sounds", wrong: ["harmony", "melody", "silence"] },
+  { word: "ephemeral", meaning: "lasting for a very short time", wrong: ["permanent", "solid", "eternal"] },
+  { word: "ubiquitous", meaning: "present everywhere", wrong: ["rare", "scarce", "hidden"] },
+  { word: "eloquent", meaning: "fluent and persuasive", wrong: ["silent", "awkward", "mumbling"] },
+  { word: "pragmatic", meaning: "dealing with things sensibly", wrong: ["idealistic", "dreamy", "impractical"] },
+  { word: "resilient", meaning: "able to recover quickly", wrong: ["fragile", "weak", "breakable"] },
+  { word: "meticulous", meaning: "showing great attention to detail", wrong: ["careless", "sloppy", "messy"] },
+  { word: "ambiguous", meaning: "open to more than one interpretation", wrong: ["clear", "obvious", "definite"] },
+  { word: "tenacious", meaning: "holding firmly to something", wrong: ["weak", "quitting", "giving up"] },
+  { word: "prolific", meaning: "producing much work or results", wrong: ["unproductive", "idle", "lazy"] },
+  { word: "candid", meaning: "truthful and straightforward", wrong: ["deceptive", "dishonest", "secretive"] },
+  { word: "benevolent", meaning: "well-meaning and kindly", wrong: ["malicious", "cruel", "harmful"] },
+  { word: "diligent", meaning: "having careful and persistent effort", wrong: ["lazy", "careless", "negligent"] },
+  { word: "arduous", meaning: "involving great effort and difficulty", wrong: ["simple", "effortless", "trivial"] },
+  { word: "sycophant", meaning: "a person who flatters to gain advantage", wrong: ["critic", "rebel", "opponent"] },
+  { word: "pernicious", meaning: "having a harmful effect gradually", wrong: ["helpful", "beneficial", "healing"] },
+  { word: "ostentatious", meaning: "designed to impress or attract attention", wrong: ["modest", "humble", "simple"] },
+  { word: "juxtapose", meaning: "place close together for contrasting effect", wrong: ["separate", "isolate", "divide"] },
+  { word: "cacophony", meaning: "a harsh mixture of sounds", wrong: ["harmony", "melody", "silence"] },
+  { word: "ameliorate", meaning: "to make something bad better", wrong: ["worsen", "damage", "destroy"] },
+  { word: "conundrum", meaning: "a confusing and difficult problem", wrong: ["solution", "answer", "clarity"] },
+  { word: "debilitate", meaning: "to make someone very weak", wrong: ["strengthen", "empower", "energize"] },
+  { word: "exacerbate", meaning: "to make a problem worse", wrong: ["improve", "fix", "resolve"] },
+  { word: "fastidious", meaning: "very attentive to accuracy and detail", wrong: ["careless", "indifferent", "casual"] },
+  { word: "gregarious", meaning: "fond of company and sociable", wrong: ["shy", "reclusive", "introverted"] },
+  { word: "hypothetical", meaning: "based on an imagined situation", wrong: ["factual", "proven", "real"] },
+  { word: "impetuous", meaning: "acting quickly without thought", wrong: ["cautious", "deliberate", "careful"] },
+  { word: "loquacious", meaning: "tending to talk a great deal", wrong: ["quiet", "reserved", "taciturn"] },
+  { word: "nefarious", meaning: "wicked or criminal in nature", wrong: ["virtuous", "noble", "righteous"] },
+  { word: "paradigm", meaning: "a typical example or pattern", wrong: ["anomaly", "exception", "deviation"] },
+  { word: "quintessential", meaning: "representing the most perfect example", wrong: ["atypical", "unusual", "imperfect"] },
+  { word: "recalcitrant", meaning: "stubbornly uncooperative", wrong: ["obedient", "compliant", "agreeable"] },
+  { word: "superfluous", meaning: "unnecessary or more than enough", wrong: ["essential", "necessary", "vital"] },
+  { word: "voracious", meaning: "wanting great quantities of something", wrong: ["moderate", "restrained", "satisfied"] },
+  { word: "vindicate", meaning: "to clear someone of blame", wrong: ["accuse", "condemn", "blame"] },
+  { word: "zealous", meaning: "having great energy or enthusiasm", wrong: ["apathetic", "indifferent", "passive"] },
 ];
 
 const MONSTERS = [
-    { name: "Vocab Slime", emoji: "👾", hp: 3, color: "#a55eea" },
-    { name: "Grammar Goblin", emoji: "👺", hp: 4, color: "#00b894" },
-    { name: "Word Wraith", emoji: "👻", hp: 4, color: "#74b9ff" },
-    { name: "Syntax Spider", emoji: "🕷️", hp: 5, color: "#ff7675" },
-    { name: "Meaning Monster", emoji: "🐉", hp: 6, color: "#fdcb6e" },
+  { name: "Vocab Slime", emoji: "👾", hp: 3, color: "#a55eea" },
+  { name: "Grammar Goblin", emoji: "👺", hp: 4, color: "#00b894" },
+  { name: "Word Wraith", emoji: "👻", hp: 4, color: "#74b9ff" },
+  { name: "Syntax Spider", emoji: "🕷️", hp: 5, color: "#ff7675" },
+  { name: "Meaning Monster", emoji: "🐉", hp: 6, color: "#fdcb6e" },
+  { name: "Prefix Phoenix", emoji: "🔥", hp: 5, color: "#e17055" },
+  { name: "Suffix Serpent", emoji: "🐍", hp: 4, color: "#00cec9" },
+  { name: "Etymology Elemental", emoji: "⚡", hp: 7, color: "#6c5ce7" },
 ];
 
 class VocabQuestGame extends GameBase {
-    constructor(container, config) {
-        super(container, config);
-        this.currentMonster = null;
-        this.monsterHP = 0;
-        this.currentQuestion = null;
-        this.monstersDefeated = 0;
-        this.playerHP = 5;
-    }
+  constructor(container, config) {
+    super(container, config);
+    this.currentMonster = null;
+    this.monsterHP = 0;
+    this.currentQuestion = null;
+    this.monstersDefeated = 0;
+    this.playerHP = 5;
+  }
 
-    async init() {
-        this.container.innerHTML = `
+  async init() {
+    this.container.innerHTML = `
       <div class="quest-game">
         <div class="quest-bg">
           <div class="particles" id="particles"></div>
@@ -98,13 +118,13 @@ class VocabQuestGame extends GameBase {
       </div>
     `;
 
-        this.injectStyles();
-        this.setupParticles();
-    }
+    this.injectStyles();
+    this.setupParticles();
+  }
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
       .quest-game {
         position: relative;
         width: 100%;
@@ -323,153 +343,153 @@ class VocabQuestGame extends GameBase {
         100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
       }
     `;
-        this.container.appendChild(style);
+    this.container.appendChild(style);
+  }
+
+  setupParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'bg-particle';
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDelay = `${Math.random() * 10}s`;
+      particle.style.animationDuration = `${8 + Math.random() * 6}s`;
+      container.appendChild(particle);
+    }
+  }
+
+  start() {
+    super.start();
+    this.playerHP = 5;
+    this.monstersDefeated = 0;
+    this.score = 0;
+    this.spawnMonster();
+  }
+
+  spawnMonster() {
+    const monster = MONSTERS[Math.min(this.monstersDefeated, MONSTERS.length - 1)];
+    this.currentMonster = { ...monster };
+    this.monsterHP = monster.hp;
+
+    document.getElementById('monster-name').textContent = monster.name;
+    document.getElementById('monster-char').textContent = monster.emoji;
+    document.getElementById('monster-char').classList.remove('hit', 'defeated');
+    document.getElementById('monster-char').style.animation = 'monsterBounce 1s ease infinite';
+    this.updateMonsterHP();
+
+    this.nextQuestion();
+  }
+
+  nextQuestion() {
+    const shuffled = [...VOCAB].sort(() => Math.random() - 0.5);
+    const vocab = shuffled[0];
+
+    this.currentQuestion = vocab;
+
+    const options = [vocab.meaning, ...vocab.wrong].sort(() => Math.random() - 0.5);
+
+    document.getElementById('word-word').textContent = vocab.word;
+
+    const grid = document.getElementById('answer-grid');
+    grid.innerHTML = options.map(opt =>
+      `<button class="answer-btn" data-answer="${opt}">${opt}</button>`
+    ).join('');
+
+    grid.querySelectorAll('.answer-btn').forEach(btn => {
+      btn.addEventListener('click', () => this.checkAnswer(btn, btn.dataset.answer));
+    });
+
+    this.updatePlayerStats();
+  }
+
+  checkAnswer(btn, answer) {
+    const isCorrect = answer === this.currentQuestion.meaning;
+
+    document.querySelectorAll('.answer-btn').forEach(b => b.style.pointerEvents = 'none');
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      this.incrementCombo();
+      this.addScore(50);
+
+      // Damage monster
+      this.monsterHP--;
+      this.updateMonsterHP();
+
+      const monsterEl = document.getElementById('monster-char');
+      monsterEl.classList.add('hit');
+      this.showBattleEffect('⚔️');
+
+      setTimeout(() => monsterEl.classList.remove('hit'), 300);
+
+      if (this.monsterHP <= 0) {
+        // Monster defeated
+        this.monstersDefeated++;
+        this.addScore(100);
+        monsterEl.classList.add('defeated');
+
+        if (this.combo >= 3) this.confetti.explode(null, null, 40);
+
+        setTimeout(() => {
+          if (this.monstersDefeated >= MONSTERS.length) {
+            this.end(); // Victory!
+          } else {
+            this.spawnMonster();
+          }
+        }, 1000);
+      } else {
+        setTimeout(() => this.nextQuestion(), 600);
+      }
+    } else {
+      btn.classList.add('wrong');
+      this.resetCombo();
+
+      // Player takes damage
+      this.playerHP--;
+      this.updatePlayerStats();
+      this.showBattleEffect('💔');
+
+      if (this.playerHP <= 0) {
+        setTimeout(() => this.end(), 800);
+      } else {
+        setTimeout(() => this.nextQuestion(), 800);
+      }
+    }
+  }
+
+  updateMonsterHP() {
+    const pct = (this.monsterHP / this.currentMonster.hp) * 100;
+    document.getElementById('monster-hp-fill').style.width = `${pct}%`;
+  }
+
+  updatePlayerStats() {
+    const pct = (this.playerHP / 5) * 100;
+    document.getElementById('player-hp-fill').style.width = `${pct}%`;
+    document.getElementById('player-hp-text').textContent = `${this.playerHP}/5`;
+    document.getElementById('score-text').textContent = this.score;
+  }
+
+  showBattleEffect(emoji) {
+    const effect = document.getElementById('battle-effect');
+    effect.textContent = emoji;
+    effect.classList.remove('attack');
+    void effect.offsetWidth;
+    effect.classList.add('attack');
+  }
+
+  end() {
+    this.isRunning = false;
+    this.endTime = Date.now();
+
+    if (this.monstersDefeated >= MONSTERS.length) {
+      this.addScore(500); // Victory bonus
     }
 
-    setupParticles() {
-        const container = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'bg-particle';
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.animationDelay = `${Math.random() * 10}s`;
-            particle.style.animationDuration = `${8 + Math.random() * 6}s`;
-            container.appendChild(particle);
-        }
-    }
-
-    start() {
-        super.start();
-        this.playerHP = 5;
-        this.monstersDefeated = 0;
-        this.score = 0;
-        this.spawnMonster();
-    }
-
-    spawnMonster() {
-        const monster = MONSTERS[Math.min(this.monstersDefeated, MONSTERS.length - 1)];
-        this.currentMonster = { ...monster };
-        this.monsterHP = monster.hp;
-
-        document.getElementById('monster-name').textContent = monster.name;
-        document.getElementById('monster-char').textContent = monster.emoji;
-        document.getElementById('monster-char').classList.remove('hit', 'defeated');
-        document.getElementById('monster-char').style.animation = 'monsterBounce 1s ease infinite';
-        this.updateMonsterHP();
-
-        this.nextQuestion();
-    }
-
-    nextQuestion() {
-        const shuffled = [...VOCAB].sort(() => Math.random() - 0.5);
-        const vocab = shuffled[0];
-
-        this.currentQuestion = vocab;
-
-        const options = [vocab.meaning, ...vocab.wrong].sort(() => Math.random() - 0.5);
-
-        document.getElementById('word-word').textContent = vocab.word;
-
-        const grid = document.getElementById('answer-grid');
-        grid.innerHTML = options.map(opt =>
-            `<button class="answer-btn" data-answer="${opt}">${opt}</button>`
-        ).join('');
-
-        grid.querySelectorAll('.answer-btn').forEach(btn => {
-            btn.addEventListener('click', () => this.checkAnswer(btn, btn.dataset.answer));
-        });
-
-        this.updatePlayerStats();
-    }
-
-    checkAnswer(btn, answer) {
-        const isCorrect = answer === this.currentQuestion.meaning;
-
-        document.querySelectorAll('.answer-btn').forEach(b => b.style.pointerEvents = 'none');
-
-        if (isCorrect) {
-            btn.classList.add('correct');
-            this.incrementCombo();
-            this.addScore(50);
-
-            // Damage monster
-            this.monsterHP--;
-            this.updateMonsterHP();
-
-            const monsterEl = document.getElementById('monster-char');
-            monsterEl.classList.add('hit');
-            this.showBattleEffect('⚔️');
-
-            setTimeout(() => monsterEl.classList.remove('hit'), 300);
-
-            if (this.monsterHP <= 0) {
-                // Monster defeated
-                this.monstersDefeated++;
-                this.addScore(100);
-                monsterEl.classList.add('defeated');
-
-                if (this.combo >= 3) this.confetti.explode(null, null, 40);
-
-                setTimeout(() => {
-                    if (this.monstersDefeated >= MONSTERS.length) {
-                        this.end(); // Victory!
-                    } else {
-                        this.spawnMonster();
-                    }
-                }, 1000);
-            } else {
-                setTimeout(() => this.nextQuestion(), 600);
-            }
-        } else {
-            btn.classList.add('wrong');
-            this.resetCombo();
-
-            // Player takes damage
-            this.playerHP--;
-            this.updatePlayerStats();
-            this.showBattleEffect('💔');
-
-            if (this.playerHP <= 0) {
-                setTimeout(() => this.end(), 800);
-            } else {
-                setTimeout(() => this.nextQuestion(), 800);
-            }
-        }
-    }
-
-    updateMonsterHP() {
-        const pct = (this.monsterHP / this.currentMonster.hp) * 100;
-        document.getElementById('monster-hp-fill').style.width = `${pct}%`;
-    }
-
-    updatePlayerStats() {
-        const pct = (this.playerHP / 5) * 100;
-        document.getElementById('player-hp-fill').style.width = `${pct}%`;
-        document.getElementById('player-hp-text').textContent = `${this.playerHP}/5`;
-        document.getElementById('score-text').textContent = this.score;
-    }
-
-    showBattleEffect(emoji) {
-        const effect = document.getElementById('battle-effect');
-        effect.textContent = emoji;
-        effect.classList.remove('attack');
-        void effect.offsetWidth;
-        effect.classList.add('attack');
-    }
-
-    end() {
-        this.isRunning = false;
-        this.endTime = Date.now();
-
-        if (this.monstersDefeated >= MONSTERS.length) {
-            this.addScore(500); // Victory bonus
-        }
-
-        const isHighScore = this.saveScore();
-        this.showResults(isHighScore);
-    }
+    const isHighScore = this.saveScore();
+    this.showResults(isHighScore);
+  }
 }
 
 export function createGame(container, config) {
-    return new VocabQuestGame(container, config);
+  return new VocabQuestGame(container, config);
 }

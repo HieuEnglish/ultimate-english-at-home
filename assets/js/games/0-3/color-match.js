@@ -20,6 +20,18 @@ const COLORS = [
   { name: "white", hex: "#dfe6e9", emoji: "⚪" },
   { name: "gray", hex: "#b2bec3", emoji: "🩶" },
   { name: "cyan", hex: "#00cec9", emoji: "💎" },
+  { name: "gold", hex: "#f9ca24", emoji: "🌟" },
+  { name: "silver", hex: "#c0c0c0", emoji: "🪙" },
+  { name: "turquoise", hex: "#1abc9c", emoji: "🧊" },
+  { name: "coral", hex: "#ff7979", emoji: "🪸" },
+  { name: "lime", hex: "#bada55", emoji: "🍀" },
+  { name: "navy", hex: "#30336b", emoji: "🫐" },
+  { name: "peach", hex: "#ffbe76", emoji: "🍑" },
+  { name: "lavender", hex: "#c7b8ea", emoji: "💜" },
+  { name: "mint", hex: "#a3d9a5", emoji: "🌱" },
+  { name: "cream", hex: "#fffdd0", emoji: "🍦" },
+  { name: "sky blue", hex: "#87ceeb", emoji: "🦋" },
+  { name: "maroon", hex: "#6F1E51", emoji: "🍷" },
 ];
 
 class ColorMatchGame extends GameBase {

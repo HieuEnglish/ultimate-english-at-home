@@ -27,6 +27,15 @@ export const MASTER_QUESTION_BANK = [
     { level: 1, type: "vocab", question: "A baby cat is a ___.", answer: "Kitten", distractors: ["Puppy", "Cub"] },
     { level: 1, type: "grammar", question: "He ___ my friend.", answer: "is", distractors: ["are", "am"] },
     { level: 1, type: "vocab", question: "We drink ___.", answer: "Water", distractors: ["Sand", "Paper"] },
+    { level: 1, type: "spelling", question: "🐻", answer: "Bear", distractors: ["Beer", "Bare"] },
+    { level: 1, type: "vocab", question: "Opposite of 'Up'", answer: "Down", distractors: ["Left", "Right"] },
+    { level: 1, type: "grammar", question: "We ___ going home.", answer: "are", distractors: ["is", "am"] },
+    { level: 1, type: "vocab", question: "A baby dog is a ___.", answer: "Puppy", distractors: ["Kitten", "Calf"] },
+    { level: 1, type: "spelling", question: "🌙", answer: "Moon", distractors: ["Mone", "Mune"] },
+    { level: 1, type: "vocab", question: "We write with a ___.", answer: "Pen", distractors: ["Cup", "Hat"] },
+    { level: 1, type: "grammar", question: "It ___ raining.", answer: "is", distractors: ["are", "am"] },
+    { level: 1, type: "vocab", question: "Opposite of 'Happy'", answer: "Sad", distractors: ["Glad", "Fun"] },
+    { level: 1, type: "spelling", question: "🐸", answer: "Frog", distractors: ["Forg", "Frug"] },
 
     // --- LEVEL 2 (A2 / Ages 6-9) ---
     { level: 2, type: "grammar", question: "Yesterday, I ___ to school.", answer: "walked", distractors: ["walk", "walking"] },
@@ -44,6 +53,16 @@ export const MASTER_QUESTION_BANK = [
     { level: 2, type: "grammar", question: "There ___ two cats on the sofa.", answer: "are", distractors: ["is", "was"] },
     { level: 2, type: "vocab", question: "You wear this on your head.", answer: "Hat", distractors: ["Shoe", "Glove"] },
     { level: 2, type: "spelling", question: "Correct spelling?", answer: "Elephant", distractors: ["Elefant", "Elephent"] },
+    { level: 2, type: "vocab", question: "A person who teaches.", answer: "Teacher", distractors: ["Doctor", "Farmer"] },
+    { level: 2, type: "grammar", question: "I ___ homework last night.", answer: "did", distractors: ["do", "doing"] },
+    { level: 2, type: "vocab", question: "You wear these on your feet.", answer: "Shoes", distractors: ["Gloves", "Hats"] },
+    { level: 2, type: "spelling", question: "Correct spelling?", answer: "Beautiful", distractors: ["Beautifull", "Beutiful"] },
+    { level: 2, type: "grammar", question: "She ___ not come yesterday.", answer: "did", distractors: ["does", "do"] },
+    { level: 2, type: "vocab", question: "The opposite of 'old'.", answer: "Young", distractors: ["New", "Small"] },
+    { level: 2, type: "spelling", question: "Correct spelling?", answer: "Wednesday", distractors: ["Wendsday", "Wensday"] },
+    { level: 2, type: "vocab", question: "A very tall building.", answer: "Skyscraper", distractors: ["Cottage", "Tent"] },
+    { level: 2, type: "grammar", question: "Can you ___ me the time?", answer: "tell", distractors: ["told", "telling"] },
+    { level: 2, type: "vocab", question: "The season after summer.", answer: "Autumn", distractors: ["Spring", "Winter"] },
 
     // --- LEVEL 3 (B1 / Ages 10-12) ---
     { level: 3, type: "grammar", question: "If it rains, we ___ inside.", answer: "will stay", distractors: ["stayed", "staying"] },
@@ -61,6 +80,16 @@ export const MASTER_QUESTION_BANK = [
     { level: 3, type: "grammar", question: "I wish I ___ taller.", answer: "were", distractors: ["was", "am"] },
     { level: 3, type: "vocab", question: "To 'postpone' is to ___.", answer: "Delay", distractors: ["Cancel", "Rush"] },
     { level: 3, type: "spelling", question: "Correct spelling?", answer: "Necessary", distractors: ["Neccessary", "Necesary"] },
+    { level: 3, type: "vocab", question: "Synonym for 'Brave'", answer: "Courageous", distractors: ["Scared", "Nervous"] },
+    { level: 3, type: "grammar", question: "He ___ already finished his work.", answer: "has", distractors: ["have", "had"] },
+    { level: 3, type: "vocab", question: "A group of fish is called a ___.", answer: "School", distractors: ["Pack", "Flock"] },
+    { level: 3, type: "spelling", question: "Correct spelling?", answer: "Definitely", distractors: ["Definately", "Definatly"] },
+    { level: 3, type: "grammar", question: "If I ___ you, I would study harder.", answer: "were", distractors: ["was", "am"] },
+    { level: 3, type: "vocab", question: "Antonym for 'Generous'", answer: "Stingy", distractors: ["Kind", "Wealthy"] },
+    { level: 3, type: "grammar", question: "She asked me ___ I liked the book.", answer: "whether", distractors: ["weather", "that"] },
+    { level: 3, type: "vocab", question: "A person who writes books.", answer: "Author", distractors: ["Reader", "Editor"] },
+    { level: 3, type: "spelling", question: "Correct spelling?", answer: "Environment", distractors: ["Enviroment", "Enviornment"] },
+    { level: 3, type: "grammar", question: "You ___ to brush your teeth twice a day.", answer: "ought", distractors: ["should", "must"] },
 
     // --- LEVEL 4 (B2 / Ages 13-15) ---
     { level: 4, type: "vocab", question: "Synonym: 'Essential'", answer: "Necessary", distractors: ["Optional", "Extra"] },
@@ -79,6 +108,15 @@ export const MASTER_QUESTION_BANK = [
     { level: 4, type: "grammar", question: "Not only did he win, ___ he set a record.", answer: "but", distractors: ["and", "so"] },
     { level: 4, type: "vocab", question: "A 'consensus' is...", answer: "General agreement", distractors: ["A debate", "A census count"] },
     { level: 4, type: "spelling", question: "Correct spelling?", answer: "Occurrence", distractors: ["Occurence", "Ocurrence"] },
+    { level: 4, type: "vocab", question: "'Bite the bullet' means...", answer: "Face something difficult", distractors: ["Eat something hard", "Be aggressive"] },
+    { level: 4, type: "grammar", question: "Hardly ___ she arrived when it started raining.", answer: "had", distractors: ["has", "did"] },
+    { level: 4, type: "vocab", question: "'Meticulous' means...", answer: "Very careful and precise", distractors: ["Careless", "Fast"] },
+    { level: 4, type: "spelling", question: "Correct spelling?", answer: "Privilege", distractors: ["Priviledge", "Privelege"] },
+    { level: 4, type: "grammar", question: "She insisted ___ paying the bill.", answer: "on", distractors: ["for", "to"] },
+    { level: 4, type: "vocab", question: "'Burning the midnight oil' means...", answer: "Working late", distractors: ["Cooking at night", "Wasting fuel"] },
+    { level: 4, type: "grammar", question: "I wish I ___ started earlier.", answer: "had", distractors: ["have", "would"] },
+    { level: 4, type: "vocab", question: "A 'dilemma' is...", answer: "A difficult choice", distractors: ["An easy task", "A type of illness"] },
+    { level: 4, type: "spelling", question: "Correct spelling?", answer: "Mischievous", distractors: ["Mischevious", "Mischievious"] },
 
     // --- LEVEL 5 (C1 / Advanced) ---
     { level: 5, type: "vocab", question: "Ephemeral means...", answer: "Short-lived", distractors: ["Eternal", "Heavy"] },
@@ -98,7 +136,16 @@ export const MASTER_QUESTION_BANK = [
     { level: 5, type: "grammar", question: "Little ___ he know about the surprise.", answer: "did", distractors: ["does", "was"] },
     { level: 5, type: "spelling", question: "Correct spelling?", answer: "Onomatopoeia", distractors: ["Onomatapoeia", "Onomatopeia"] },
     { level: 5, type: "vocab", question: "A 'dichotomy' is a ___.", answer: "Division into two", distractors: ["Type of book", "Medical tool"] },
-    { level: 5, type: "grammar", question: "Were it not ___ his help, I'd have failed.", answer: "for", distractors: ["of", "to"] }
+    { level: 5, type: "grammar", question: "Were it not ___ his help, I'd have failed.", answer: "for", distractors: ["of", "to"] },
+    { level: 5, type: "vocab", question: "'Perfunctory' means...", answer: "Done without care", distractors: ["Done perfectly", "Done slowly"] },
+    { level: 5, type: "grammar", question: "No sooner had she arrived ___ she left.", answer: "than", distractors: ["when", "that"] },
+    { level: 5, type: "vocab", question: "'Surreptitious' means...", answer: "Done secretly", distractors: ["Done loudly", "Done openly"] },
+    { level: 5, type: "spelling", question: "Correct spelling?", answer: "Acquaintance", distractors: ["Aquaintance", "Acquantance"] },
+    { level: 5, type: "vocab", question: "'Obfuscate' means to ___.", answer: "Make unclear", distractors: ["Clarify", "Delete"] },
+    { level: 5, type: "grammar", question: "Only after finishing ___ he realize his mistake.", answer: "did", distractors: ["had", "was"] },
+    { level: 5, type: "vocab", question: "'Laconic' means...", answer: "Using few words", distractors: ["Very talkative", "Very emotional"] },
+    { level: 5, type: "spelling", question: "Correct spelling?", answer: "Connoisseur", distractors: ["Connoiseur", "Conoisseur"] },
+    { level: 5, type: "vocab", question: "'Equivocal' means...", answer: "Ambiguous", distractors: ["Clear", "Equal"] },
 ];
 
 export function getQuestionsForLevel(level) {
