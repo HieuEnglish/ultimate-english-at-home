@@ -20,6 +20,40 @@ const ProfileStore = window.UEAHProfileStore || {
     get: () => ({ certificates: [] })
 };
 
+// Inline fallback questions for extended gameplay
+const FALLBACK_QUESTIONS = [
+    { level: 1, type: 'vocab', question: '🐱 What animal is this?', answer: 'Cat', distractors: ['Dog', 'Bird'] },
+    { level: 1, type: 'spelling', question: 'Spell: 🏠', answer: 'House', distractors: ['Hous', 'Howse'] },
+    { level: 1, type: 'grammar', question: 'She ___ a girl.', answer: 'is', distractors: ['are', 'am'] },
+    { level: 1, type: 'vocab', question: 'Opposite of night?', answer: 'Day', distractors: ['Dark', 'Moon'] },
+    { level: 2, type: 'grammar', question: 'I ___ to school yesterday.', answer: 'went', distractors: ['go', 'going'] },
+    { level: 2, type: 'vocab', question: 'A place with lots of books.', answer: 'Library', distractors: ['Kitchen', 'Garden'] },
+    { level: 2, type: 'spelling', question: 'Correct: ___', answer: 'Beautiful', distractors: ['Beutiful', 'Beautifull'] },
+    { level: 2, type: 'grammar', question: 'They ___ playing football.', answer: 'are', distractors: ['is', 'was'] },
+    { level: 3, type: 'vocab', question: 'Synonym for happy?', answer: 'Joyful', distractors: ['Sad', 'Angry'] },
+    { level: 3, type: 'grammar', question: 'I have ___ this before.', answer: 'done', distractors: ['did', 'do'] },
+    { level: 3, type: 'spelling', question: 'Correct spelling?', answer: 'Necessary', distractors: ['Neccessary', 'Necesary'] },
+    { level: 3, type: 'vocab', question: 'Antonym for brave?', answer: 'Cowardly', distractors: ['Strong', 'Bold'] },
+    { level: 4, type: 'vocab', question: '\'Ubiquitous\' means...', answer: 'Everywhere', distractors: ['Rare', 'Hidden'] },
+    { level: 4, type: 'grammar', question: 'Neither he ___ she came.', answer: 'nor', distractors: ['or', 'and'] },
+    { level: 4, type: 'vocab', question: '\'Break the ice\' means...', answer: 'Start conversation', distractors: ['Freeze water', 'Be cold'] },
+    { level: 4, type: 'spelling', question: 'Correct?', answer: 'Accommodate', distractors: ['Accomodate', 'Acomodate'] },
+    { level: 5, type: 'vocab', question: '\'Ephemeral\' means...', answer: 'Short-lived', distractors: ['Eternal', 'Heavy'] },
+    { level: 5, type: 'grammar', question: 'Had I known, I ___ helped.', answer: 'would have', distractors: ['will have', 'should'] },
+    { level: 5, type: 'vocab', question: '\'Pragmatic\' means...', answer: 'Practical', distractors: ['Dreamy', 'Dramatic'] },
+    { level: 5, type: 'spelling', question: 'Correct?', answer: 'Entrepreneur', distractors: ['Entreprenur', 'Enterpreneur'] },
+    { level: 6, type: 'vocab', question: '\'Ambivalent\' means...', answer: 'Mixed feelings', distractors: ['Certain', 'Happy'] },
+    { level: 6, type: 'grammar', question: 'Seldom ___ he arrive on time.', answer: 'does', distractors: ['do', 'is'] },
+    { level: 6, type: 'vocab', question: '\'Taciturn\' means...', answer: 'Reserved', distractors: ['Talkative', 'Loud'] },
+    { level: 6, type: 'spelling', question: 'Correct?', answer: 'Conscientious', distractors: ['Consciencious', 'Consientious'] },
+    { level: 7, type: 'vocab', question: '\'Alleviate\' means...', answer: 'Reduce pain', distractors: ['Increase', 'Ignore'] },
+    { level: 7, type: 'grammar', question: 'Not until later ___ she understand.', answer: 'did', distractors: ['does', 'was'] },
+    { level: 7, type: 'vocab', question: '\'Disparate\' means...', answer: 'Very different', distractors: ['Similar', 'Equal'] },
+    { level: 7, type: 'spelling', question: 'Correct?', answer: 'Surveillance', distractors: ['Surveilance', 'Survaliance'] },
+    { level: 8, type: 'vocab', question: '\'Obsequious\' means...', answer: 'Overly submissive', distractors: ['Defiant', 'Brave'] },
+    { level: 8, type: 'grammar', question: 'On no account ___ you enter.', answer: 'should', distractors: ['will', 'can'] },
+];
+
 export class IeltsRunnerGame {
     constructor(container, config) {
         this.container = container;
@@ -70,7 +104,8 @@ export class IeltsRunnerGame {
                 trackColor: "#4CAF50",
                 length: 1000,
                 award: "A1 Starters Certificate",
-                bgMountain: "#2E7D32"
+                bgMountain: "#2E7D32",
+                weather: 'leaf', weatherRate: 0.05, weatherVx: 1, weatherVy: 1.5, weatherSize: 6
             },
             2: {
                 title: "Movers Mountain",
@@ -94,7 +129,8 @@ export class IeltsRunnerGame {
                 trackColor: "#F44336",
                 length: 3000,
                 award: "B2 Competent Certificate",
-                bgMountain: "#C62828"
+                bgMountain: "#C62828",
+                weather: 'rain', weatherRate: 0.3, weatherVx: -0.5, weatherVy: 8, weatherSize: 2
             },
             5: {
                 title: "Proficiency Peak",
@@ -102,7 +138,35 @@ export class IeltsRunnerGame {
                 trackColor: "#9C27B0",
                 length: 5000,
                 award: "C2 Mastery Certificate",
-                bgMountain: "#6A1B9A"
+                bgMountain: "#6A1B9A",
+                weather: 'snow', weatherRate: 0.15, weatherVx: -0.5, weatherVy: 2, weatherSize: 3
+            },
+            6: {
+                title: "Sunset Bay",
+                skyTop: "#FF6B35", skyBottom: "#FFC371",
+                trackColor: "#FF8C00",
+                length: 6000,
+                award: "Advanced Fluency Certificate",
+                bgMountain: "#CC5500",
+                weather: 'leaf', weatherRate: 0.08, weatherVx: 1.5, weatherVy: 1, weatherSize: 5
+            },
+            7: {
+                title: "Northern Lights",
+                skyTop: "#0F2027", skyBottom: "#203A43",
+                trackColor: "#00BFA5",
+                length: 7500,
+                award: "Expert Linguist Certificate",
+                bgMountain: "#1A237E",
+                weather: 'snow', weatherRate: 0.2, weatherVx: 0.5, weatherVy: 1.5, weatherSize: 3
+            },
+            8: {
+                title: "Champions Summit",
+                skyTop: "#1a1a2e", skyBottom: "#16213e",
+                trackColor: "#FFD700",
+                length: 10000,
+                award: "🏆 Grand Master Certificate",
+                bgMountain: "#0d1117",
+                weather: 'sparkle', weatherRate: 0.1, weatherVx: 0, weatherVy: -1, weatherSize: 2
             }
         };
 
@@ -110,6 +174,11 @@ export class IeltsRunnerGame {
         this.obstacles = [];
         this.particles = [];
         this.clouds = [];
+        this.sceneryObjects = [];
+        this.birds = [];
+        this.weatherParticles = [];
+        this.dustParticles = [];
+        this.milestoneNext = 100;
 
         // Animation frame
         this.frameId = null;
@@ -126,6 +195,8 @@ export class IeltsRunnerGame {
         this.injectStyles();
         this.initCanvas();
         this.initClouds();
+        this.initScenery();
+        this.initBirds();
         this.bindEvents();
         this.updateHUD();
         this.renderStartScreen();
@@ -136,7 +207,7 @@ export class IeltsRunnerGame {
 
         // Generate Campaign Map HTML
         let mapHtml = '<div class="campaign-map">';
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 8; i++) {
             const status = i < this.level ? 'completed' : (i === this.level ? 'current' : 'locked');
             const conf = this.levelConfig[i];
             mapHtml += `
@@ -147,7 +218,7 @@ export class IeltsRunnerGame {
                     <div class="node-label">Lvl ${i}</div>
                 </div>
             `;
-            if (i < 5) mapHtml += '<div class="map-line"></div>';
+            if (i < 8) mapHtml += '<div class="map-line"></div>';
         }
         mapHtml += '</div>';
 
@@ -740,6 +811,46 @@ export class IeltsRunnerGame {
         }
     }
 
+    initScenery() {
+        // Trackside decoration objects that scroll with the world
+        const types = ['tree', 'flag', 'bush', 'lamp', 'sign'];
+        for (let z = 200; z < 1200; z += 80 + Math.random() * 120) {
+            const side = Math.random() > 0.5 ? 'left' : 'right';
+            this.sceneryObjects.push({
+                type: types[Math.floor(Math.random() * types.length)],
+                z: z,
+                side: side,
+                scale: 0.7 + Math.random() * 0.5
+            });
+        }
+    }
+
+    initBirds() {
+        // Animated birds flying across the sky
+        for (let i = 0; i < 3; i++) {
+            this.birds.push({
+                x: Math.random() * this.canvasWidth,
+                y: 30 + Math.random() * 80,
+                speed: 0.8 + Math.random() * 1.2,
+                wingPhase: Math.random() * Math.PI * 2,
+                size: 8 + Math.random() * 6
+            });
+        }
+    }
+
+    getGameQuestion() {
+        // Try imported question bank first, then fallback to inline
+        try {
+            const q = getRandomQuestion(Math.max(1, this.level - 1), Math.min(this.level + 1, 8));
+            if (q) return q;
+        } catch (e) { /* import failed, use fallback */ }
+        // Fallback to inline questions
+        const pool = FALLBACK_QUESTIONS.filter(q =>
+            q.level >= Math.max(1, this.level - 1) && q.level <= Math.min(this.level + 1, 8)
+        );
+        return pool[Math.floor(Math.random() * pool.length)] || FALLBACK_QUESTIONS[0];
+    }
+
     bindEvents() {
         // Start button
         this.container.querySelector('#play-btn').onclick = () => this.startGame();
@@ -822,6 +933,11 @@ export class IeltsRunnerGame {
         // Reset collections
         this.obstacles = [];
         this.particles = [];
+        this.dustParticles = [];
+        this.weatherParticles = [];
+        this.milestoneNext = 100;
+        this.sceneryObjects = [];
+        this.initScenery();
 
         // Reset power-ups & combo
         this.hasShield = false;
@@ -852,7 +968,7 @@ export class IeltsRunnerGame {
         const type = Math.random();
         const lane = Math.floor(Math.random() * 3);
 
-        if (type < 0.3) {
+        if (type < 0.25) {
             // Question gate
             this.obstacles.push({
                 type: 'gate',
@@ -861,7 +977,7 @@ export class IeltsRunnerGame {
                 width: 100,
                 collected: false
             });
-        } else if (type < 0.6) {
+        } else if (type < 0.45) {
             // Plank collectible (spawn in groups)
             for (let i = 0; i < 3; i++) {
                 this.obstacles.push({
@@ -871,7 +987,18 @@ export class IeltsRunnerGame {
                     collected: false
                 });
             }
-        } else if (type < 0.8) {
+        } else if (type < 0.6) {
+            // Coin collectible (bonus points)
+            for (let i = 0; i < 5; i++) {
+                this.obstacles.push({
+                    type: 'coin',
+                    lane: lane,
+                    z: z + i * 30,
+                    collected: false,
+                    bobPhase: Math.random() * Math.PI * 2 + i * 0.5
+                });
+            }
+        } else if (type < 0.75) {
             // Barrier (jump over)
             this.obstacles.push({
                 type: 'barrier',
@@ -881,7 +1008,7 @@ export class IeltsRunnerGame {
                 height: 40,
                 collected: false
             });
-        } else if (type < 0.92) {
+        } else if (type < 0.88) {
             // Gap (requires bridge)
             this.obstacles.push({
                 type: 'gap',
@@ -999,6 +1126,14 @@ export class IeltsRunnerGame {
         // Update distance
         this.distance += this.speed * dt * 10 * speedMult;
 
+        // Check milestone
+        if (this.distance > this.milestoneNext) {
+            this.showFloatText(`🏁 ${this.milestoneNext}m! +${this.milestoneNext} ⭐`, 'success');
+            this.score += this.milestoneNext;
+            this.milestoneNext += 100;
+            this.playSound('powerup');
+        }
+
         // Update game time
         this.gameTime += dt;
 
@@ -1046,12 +1181,12 @@ export class IeltsRunnerGame {
         // Update run animation frame
         this.runFrame = (this.runFrame + dt * 10 * speedMult) % 4;
 
-        // Magnet effect - attract plank items nearby
+        // Magnet effect - attract plank & coin items nearby
         const playerLane = Math.round(this.lane);
         if (this.hasMagnet) {
             for (const obs of this.obstacles) {
-                if (obs.type === 'plank' && !obs.collected && obs.z < 200 && obs.z > 0) {
-                    // Pull planks toward player lane
+                if ((obs.type === 'plank' || obs.type === 'coin') && !obs.collected && obs.z < 200 && obs.z > 0) {
+                    // Pull items toward player lane
                     obs.lane += (playerLane - obs.lane) * 0.1;
                 }
             }
@@ -1089,6 +1224,10 @@ export class IeltsRunnerGame {
                     else if (obs.type === 'powerup' && !obs.collected && obs.z < 80) {
                         obs.collected = true;
                         this.collectPowerUp(obs.powerType);
+                    }
+                    else if (obs.type === 'coin' && !obs.collected && obs.z < 80) {
+                        obs.collected = true;
+                        this.collectCoin();
                     }
                     else if (obs.type === 'gap' && obs.z < 100 && obs.z > 20) {
                         if (!obs.collected) {
@@ -1139,6 +1278,91 @@ export class IeltsRunnerGame {
                 this.particles.splice(i, 1);
             }
         }
+
+        // Update dust particles
+        for (let i = this.dustParticles.length - 1; i >= 0; i--) {
+            const p = this.dustParticles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.size += dt * 5;
+            p.life -= dt * 2;
+            if (p.life <= 0) {
+                this.dustParticles.splice(i, 1);
+            }
+        }
+
+        // Running dust spawner
+        if (!this.isJumping && this.speed > 5 && Math.random() < 0.3) {
+            this.dustParticles.push({
+                x: this.canvasWidth / 2 + (this.lane - 1) * (this.canvasWidth * 0.3 / 3),
+                y: this.canvasHeight * 0.85,
+                vx: (Math.random() - 0.5) * 2,
+                vy: -1 - Math.random() * 2,
+                size: 2 + Math.random() * 4,
+                life: 1
+            });
+        }
+
+        // Update scenery objects
+        for (let i = this.sceneryObjects.length - 1; i >= 0; i--) {
+            const obj = this.sceneryObjects[i];
+            obj.z -= this.speed * dt * 30 * speedMult;
+            if (obj.z < -100) {
+                this.sceneryObjects.splice(i, 1);
+            }
+        }
+        // Spawn continuous scenery
+        const lastScenery = this.sceneryObjects[this.sceneryObjects.length - 1];
+        if (!lastScenery || lastScenery.z < 1000) {
+            const types = ['tree', 'flag', 'bush', 'lamp', 'sign'];
+            this.sceneryObjects.push({
+                type: types[Math.floor(Math.random() * types.length)],
+                z: (lastScenery ? lastScenery.z : 1000) + 80 + Math.random() * 120,
+                side: Math.random() > 0.5 ? 'left' : 'right',
+                scale: 0.7 + Math.random() * 0.5
+            });
+        }
+
+        // Update birds
+        for (const bird of this.birds) {
+            bird.x -= bird.speed * dt * 60;
+            bird.y += Math.sin(this.gameTime * 2 + bird.speed) * 0.5;
+            bird.wingPhase += dt * 15;
+            if (bird.x < -50) {
+                bird.x = this.canvasWidth + 50;
+                bird.y = 30 + Math.random() * 80;
+            }
+        }
+
+        // Weather system update
+        if (levelConf.weather) {
+            if (Math.random() < levelConf.weatherRate) {
+                this.weatherParticles.push({
+                    x: Math.random() * this.canvasWidth,
+                    y: -10,
+                    vx: levelConf.weatherVx + (Math.random() - 0.5),
+                    vy: levelConf.weatherVy + Math.random(),
+                    size: levelConf.weatherSize * (0.5 + Math.random() * 0.5),
+                    type: levelConf.weather,
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+        }
+        for (let i = this.weatherParticles.length - 1; i >= 0; i--) {
+            const p = this.weatherParticles[i];
+            p.x += p.vx * dt * 60;
+            p.y += p.vy * dt * 60;
+            p.phase += dt * 2;
+            if (p.type === 'leaf') p.x += Math.sin(p.phase) * 2;
+            if (p.type === 'snow') p.x += Math.cos(p.phase) * 0.5;
+            if (p.type === 'sparkle') {
+                p.vy -= dt * 2; // Float up
+                p.life -= dt;
+            }
+            if (p.y > this.canvasHeight || p.y < -50) {
+                this.weatherParticles.splice(i, 1);
+            }
+        }
     }
 
     render() {
@@ -1187,6 +1411,9 @@ export class IeltsRunnerGame {
             this.drawCloud(ctx, cloud.x, cloud.y, cloud.size);
         }
 
+        // Draw animated birds
+        this.drawBirds(ctx, w, h);
+
         // Draw mountains (multi-layer parallax)
         this.drawMountains(ctx, w, h, levelConf);
 
@@ -1199,6 +1426,9 @@ export class IeltsRunnerGame {
 
         // Draw 3D track
         this.drawTrack(ctx, w, h, levelConf);
+
+        // Draw trackside scenery objects
+        this.drawScenery(ctx, w, h, levelConf);
 
         // Draw obstacles
         this.drawObstacles(ctx, w, h, levelConf);
@@ -1225,6 +1455,9 @@ export class IeltsRunnerGame {
                 ctx.stroke();
             }
         }
+
+        // Draw weather overlay
+        this.drawWeather(ctx, w, h);
 
         // Flash overlay
         if (this.flashAlpha > 0) {
@@ -1602,6 +1835,41 @@ export class IeltsRunnerGame {
 
                     ctx.shadowBlur = 0;
                 }
+            } else if (obs.type === 'coin') {
+                if (!obs.collected) {
+                    const bob = Math.sin(obs.bobPhase || 0) * 10;
+                    ctx.translate(0, bob - 20);
+
+                    // Coin glow
+                    ctx.shadowColor = '#FFD700';
+                    ctx.shadowBlur = 15;
+
+                    // Golden coin
+                    const coinGrad = ctx.createLinearGradient(-15, -15, 15, 15);
+                    coinGrad.addColorStop(0, '#FFE066');
+                    coinGrad.addColorStop(0.5, '#FFD700');
+                    coinGrad.addColorStop(1, '#B8860B');
+
+                    ctx.fillStyle = coinGrad;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 18, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Inner ring
+                    ctx.strokeStyle = '#DAA520';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 12, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Star symbol
+                    ctx.fillStyle = '#FFF8E1';
+                    ctx.font = 'bold 18px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowBlur = 0;
+                    ctx.fillText('⭐', 0, 1);
+                }
             } else if (obs.type === 'barrier') {
                 // 3D barrier with danger stripes
                 const bw = 65, bh = 50;
@@ -1750,6 +2018,173 @@ export class IeltsRunnerGame {
 
             ctx.restore();
         }
+    }
+
+    drawBirds(ctx, w, h) {
+        ctx.fillStyle = '#2c3e50';
+        for (const bird of this.birds) {
+            ctx.save();
+            ctx.translate(bird.x, bird.y);
+
+            const wingY = Math.sin(bird.wingPhase) * bird.size;
+
+            ctx.beginPath();
+            // Left wing
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(-bird.size, wingY, -bird.size * 2, -bird.size * 0.5);
+            ctx.quadraticCurveTo(-bird.size, wingY - bird.size * 0.5, 0, 0);
+
+            // Right wing
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(bird.size, wingY, bird.size * 2, -bird.size * 0.5);
+            ctx.quadraticCurveTo(bird.size, wingY - bird.size * 0.5, 0, 0);
+
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    drawScenery(ctx, w, h, levelConf) {
+        const trackTop = h * 0.45;
+        const trackBottom = h * 0.85;
+        const topWidth = w * 0.3;
+        const bottomWidth = w * 1.0;
+
+        // Sort scenery by Z index
+        const sorted = [...this.sceneryObjects].sort((a, b) => b.z - a.z);
+
+        for (const obj of sorted) {
+            if (obj.z < 0 || obj.z > 1000) continue;
+
+            const t = 1 - (obj.z / 1000);
+            if (t < 0) continue;
+
+            const y = trackTop + t * (trackBottom - trackTop);
+            const scale = (0.2 + t * 0.8) * obj.scale;
+            const trackWidth = topWidth + (bottomWidth - topWidth) * t;
+
+            // Calculate X based on side, pushing them away from track center
+            const xOffset = obj.side === 'left' ? -(trackWidth / 2 + 60 * scale) : (trackWidth / 2 + 60 * scale);
+            const x = w / 2 + xOffset;
+
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(scale, scale);
+
+            if (obj.type === 'tree') {
+                // Pine tree
+                ctx.fillStyle = '#5D4037'; // Trunk
+                ctx.fillRect(-8, 0, 16, 40);
+
+                const foliageColor = levelConf.trackColor === '#FF8C00' ? '#D84315' :
+                    levelConf.skyTop === '#EDE7F6' ? '#FFFFFF' : '#2E7D32';
+
+                ctx.fillStyle = foliageColor;
+                ctx.beginPath();
+                ctx.moveTo(0, -80);
+                ctx.lineTo(40, 20);
+                ctx.lineTo(-40, 20);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.moveTo(0, -130);
+                ctx.lineTo(30, -30);
+                ctx.lineTo(-30, -30);
+                ctx.fill();
+
+            } else if (obj.type === 'flag') {
+                ctx.fillStyle = '#90A4AE'; // Pole
+                ctx.fillRect(-3, -120, 6, 120);
+                // Flag
+                ctx.fillStyle = '#E53935';
+                const wave = Math.sin(this.gameTime * 5 + obj.z) * 10;
+                ctx.beginPath();
+                ctx.moveTo(3, -115);
+                ctx.lineTo(60 + wave, -100);
+                ctx.lineTo(3, -85);
+                ctx.fill();
+            } else if (obj.type === 'bush') {
+                const bColor = levelConf.trackColor === '#FF8C00' ? '#E64A19' : levelConf.bgMountain;
+                ctx.fillStyle = bColor;
+                ctx.beginPath();
+                ctx.arc(0, 10, 25, 0, Math.PI * 2);
+                ctx.arc(-20, 15, 20, 0, Math.PI * 2);
+                ctx.arc(20, 15, 20, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (obj.type === 'lamp') {
+                ctx.fillStyle = '#455A64';
+                ctx.fillRect(-4, -150, 8, 150);
+                ctx.fillRect(-15, -155, 30, 8);
+                // Glow
+                ctx.fillStyle = 'rgba(255, 235, 59, 0.4)';
+                ctx.beginPath();
+                ctx.moveTo(-10, -147);
+                ctx.lineTo(10, -147);
+                ctx.lineTo(40, -50);
+                ctx.lineTo(-40, -50);
+                ctx.fill();
+                ctx.fillStyle = '#FFF59D';
+                ctx.beginPath();
+                ctx.arc(0, -147, 8, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (obj.type === 'sign') {
+                ctx.fillStyle = '#795548'; // Post
+                ctx.fillRect(-3, -60, 6, 60);
+                ctx.fillStyle = '#FFC107'; // Sign
+                ctx.beginPath();
+                ctx.roundRect(-25, -50, 50, 30, 4);
+                ctx.fill();
+                ctx.fillStyle = '#e65100';
+                ctx.beginPath();
+                ctx.moveTo(-15, -35);
+                ctx.lineTo(0, -35);
+                ctx.lineTo(15, -45);
+                ctx.lineTo(15, -25);
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+    }
+
+    drawWeather(ctx, w, h) {
+        if (!this.weatherParticles.length) return;
+
+        ctx.save();
+        for (const p of this.weatherParticles) {
+            ctx.translate(p.x, p.y);
+
+            if (p.type === 'leaf') {
+                ctx.rotate(p.phase);
+                ctx.fillStyle = '#FF9800'; // Orange autumn leaves
+                ctx.beginPath();
+                ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.rotate(-p.phase);
+            } else if (p.type === 'snow') {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (p.type === 'rain') {
+                ctx.fillStyle = 'rgba(129, 212, 250, 0.6)';
+                ctx.rotate(0.1); // Angled rain
+                ctx.fillRect(0, -p.size * 4, 1.5, p.size * 8);
+                ctx.rotate(-0.1);
+            } else if (p.type === 'sparkle') {
+                ctx.fillStyle = `rgba(255, 215, 0, ${p.life})`;
+                const sSize = p.size * Math.max(0.1, Math.sin(p.phase));
+                ctx.beginPath();
+                ctx.moveTo(0, -sSize * 2);
+                ctx.lineTo(sSize, 0);
+                ctx.lineTo(0, sSize * 2);
+                ctx.lineTo(-sSize, 0);
+                ctx.fill();
+            }
+
+            ctx.translate(-p.x, -p.y);
+        }
+        ctx.restore();
     }
 
     drawPlayer(ctx, w, h) {
@@ -1991,6 +2426,14 @@ export class IeltsRunnerGame {
         const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
         const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
         return `rgb(${r},${g},${b})`;
+    }
+
+    collectCoin() {
+        const points = 10 * Math.max(1, this.combo);
+        this.score += points;
+        this.updateHUD();
+        this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#FFD700', 5);
+        this.playSound('collect'); // Using collect sound for coin
     }
 
     collectPlank() {
