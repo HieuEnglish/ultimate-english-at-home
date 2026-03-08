@@ -437,6 +437,32 @@
         level: "caregiver-led"
       },
 
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "4-7-reading-storyberries",
+        title: "Storyberries — Free 5 Minute Stories 🍓📖",
+        link: "https://www.storyberries.com/",
+        format: "site",
+        description:
+          "A large collection of free, short, and engaging stories designed for quick reading sessions and bedtime.",
+        details: {
+          type: "Digital stories (text + audio) 📱🔊",
+          teaches: "Early reading fluency, comprehension, and vocabulary. 📖🧠",
+          howTo: [
+            "Select '5 Min Stories'. ⏱️",
+            "Read one story together, alternating pages if the child is ready. 🤝📖",
+            "Discuss the story using simple questions at the end. ❓💬"
+          ],
+          whyTopPick: "Huge variety of free, high-quality stories filterable by age and length. ⭐📚",
+          freeAccess: "Free to read online. 🆓✅",
+          ageCheck: "Great for 4-7 shared reading. 👨‍👩‍👧"
+        },
+        focus: "short stories, shared reading",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
       // =========================
       // 4–7 LISTENING
       // =========================
@@ -871,6 +897,32 @@
         level: "caregiver-led"
       },
 
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "4-7-listening-julies-library",
+        title: "Julie's Library (Podcast) 🎙️📚",
+        link: "https://www.julieslibraryshow.org/",
+        format: "podcast",
+        description:
+          "Julie Andrews and her daughter read their favorite children's books, offering wonderful storytelling and rich language listening.",
+        details: {
+          type: "Storytelling podcast 🎧🎙️",
+          teaches: "Listening comprehension, expressive reading, and story structure. 👂🎭📖",
+          howTo: [
+            "Pick a short episode. 🎧",
+            "Listen together in the car or during quiet time. 🚗😌",
+            "Ask your child to draw their favorite part while listening. 🖍️👂"
+          ],
+          whyTopPick: "Beautifully narrated stories that instantly engage young listeners. ⭐✨",
+          freeAccess: "Free to stream on the site or via podcast apps. 🆓📱",
+          ageCheck: "Perfect for ages 4-7. 🧒"
+        },
+        focus: "story listening, rich vocabulary",
+        time: "10-20 min",
+        level: "caregiver-led"
+      },
+
       // =========================
       // 4–7 WRITING
       // =========================
@@ -1222,6 +1274,32 @@
         },
         focus: "handwriting, sentences, real writing",
         time: "10–15 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-pobble-365",
+        title: "Pobble 365 — Daily Picture Prompts 🖼️✍️",
+        link: "https://pobble365.com/",
+        format: "site",
+        description:
+          "Provides a stunning new image every day with simple sentence-starter prompts to inspire short writing practice.",
+        details: {
+          type: "Visual writing prompts 🖼️📝",
+          teaches: "Creative thinking, sentence construction, and descriptive writing. 🧠✍️",
+          howTo: [
+            "Look at today's picture together. 👀",
+            "Talk about what you see using the prompting questions. 🗣️❓",
+            "Write 1-2 simple sentences describing the picture. 📝✍️"
+          ],
+          whyTopPick: "Incredible visuals that naturally prompt kids to talk and write. ⭐🖼️",
+          freeAccess: "Free daily image and prompts. 🆓✅",
+          ageCheck: "Best for 5-7; for 4-year-olds, do oral storytelling instead of writing. 🗣️🧒"
+        },
+        focus: "sentence writing, creative prompts",
+        time: "5-10 min",
         level: "caregiver-led"
       },
 
@@ -1706,6 +1784,31 @@
         },
         focus: "speaking confidence, repetition",
         time: "10–15 min/day",
+        level: "caregiver-led"
+      },
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-cbeebies-bedtime",
+        title: "BBC CBeebies Bedtime Stories 📺🌙🗣️",
+        link: "https://www.bbc.co.uk/iplayer/episodes/b00jdlm2/cbeebies-bedtime-stories",
+        format: "video",
+        description:
+          "Calm, high-quality stories read aloud by familiar faces. Excellent for echo-speaking and discussing characters before sleep.",
+        details: {
+          type: "Video read-alouds 📺📖",
+          teaches: "Pacing, expressive speaking, and vocabulary through imitation. 🗣️🎭",
+          howTo: [
+            "Watch a story before bedtime. 🌙",
+            "Pause occasionally and have your child repeat a fun phrase or sound effect. ⏸️🗣️",
+            "Ask them to recount the main event of the story. ❓🧠"
+          ],
+          whyTopPick: "Very calming format with expressive reading models. ⭐😌",
+          freeAccess: "Free to stream (may require BBC iPlayer depending on region or use their YouTube). 🆓📺",
+          ageCheck: "Great for 4-7 shared wind-down time. 🧒🌙"
+        },
+        focus: "expressive speaking, retell",
+        time: "5-10 min",
         level: "caregiver-led"
       }
     ]

@@ -411,6 +411,33 @@
       {
         age: "8-10",
         skill: "reading",
+        slug: "8-10-reading-readworks",
+        title: "ReadWorks — Free Reading Passages 📚🧠",
+        link: "https://www.readworks.org/",
+        format: "site",
+        description:
+          "Huge library of free, high-quality reading comprehension passages with questions and vocabulary support.",
+        details: {
+          type: "Reading passages + comprehension questions 📝🧠",
+          teaches: "Deep reading comprehension, vocabulary, and answering text-based questions. 📖✅",
+          howTo: [
+            "Create a free parent/student account. 🔐",
+            "Pick a passage based on interest or grade level. 🎯",
+            "Read the text closely and complete the 5-7 questions that follow. 📝",
+            "Review answers together to discuss meaning. 🗣️🤝"
+          ],
+          whyTopPick: "Extensive, highly educational content used in classrooms worldwide. ⭐🏫",
+          freeAccess: "Free to use (requires account creation). 🆓🔐",
+          ageCheck: "Excellent for ages 8-10 to build rigorous reading skills. 🧒"
+        },
+        focus: "reading comprehension, text analysis",
+        time: "15-20 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
         slug: "best-set-recommended-bundle-for-8-10-reading",
         title: "Best Set — 6-Week ESL Reading Plan 🗓️📚✨",
         link: "",
@@ -741,6 +768,33 @@
         focus: "songs/videos, shadowing",
         time: "10–15 min",
         level: "caregiver-led or independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "8-10-listening-smash-boom-best",
+        title: "Smash Boom Best (Debate Podcast) 🎤🥊🎧",
+        link: "https://www.smashboom.org/",
+        format: "podcast",
+        description:
+          "A clever and hilarious debate podcast for kids that teaches listeners how to defend their opinions using facts.",
+        details: {
+          type: "Debate-style educational podcast 🎙️🧠",
+          teaches: "Active listening, critical thinking, forming arguments, and advanced vocabulary. 🗣️⚖️",
+          howTo: [
+            "Pick a fun debate topic (e.g., Cats vs. Dogs, Pizza vs. Tacos). 🍕🌮",
+            "Listen to the two sides present their arguments. 🎧👂",
+            "Pause and ask: 'Who is winning and why?' ⏸️❓",
+            "Vote on the winner at the end! 🗳️"
+          ],
+          whyTopPick: "Highly engaging format that pushes listeners to evaluate what they hear. ⭐🥊",
+          freeAccess: "Free to stream on their site or any podcast app. 🆓✅",
+          ageCheck: "Perfect for 8-10s developing critical thinking. 🎯"
+        },
+        focus: "argumentative listening, critical thinking",
+        time: "20-30 min",
+        level: "independent or caregiver-led"
       },
 
       {
@@ -1085,6 +1139,33 @@
         focus: "grammar + editing feedback",
         time: "10–15 min",
         level: "independent (with setup)"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-trading-card-creator",
+        title: "ReadWriteThink — Trading Card Creator 🎴✍️",
+        link: "https://www.readwritethink.org/classroom-resources/student-interactives/trading-card-creator",
+        format: "interactive",
+        description:
+          "Interactive tool that prompts kids to write short, descriptive summaries to create trading cards for characters, places, or objects.",
+        details: {
+          type: "Interactive summarization tool 💻📝",
+          teaches: "Summarizing, descriptive writing, and identifying key traits. 🧠✍️",
+          howTo: [
+            "Choose a topic (a favorite book character, an animal, or historical figure). 👤",
+            "Answer the short prompts to describe the topic. 📝",
+            "Download or print the finished trading card. 🖨️✅",
+            "Create a whole deck over time! 🃏"
+          ],
+          whyTopPick: "Turns writing summaries into a fun, gamified collecting activity. ⭐🎴",
+          freeAccess: "Free to use online. 🆓✅",
+          ageCheck: "Great for 8-10 for practicing concise descriptions. 🎯"
+        },
+        focus: "summarizing, descriptive writing",
+        time: "10-15 min",
+        level: "independent or caregiver-led"
       },
 
       {
@@ -1537,6 +1618,33 @@
         focus: "confidence, role-play",
         time: "5–10 min",
         level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-speechling",
+        title: "Speechling — Audio Dictation & Speaking Practice 🎙️✅",
+        link: "https://speechling.com/",
+        format: "site",
+        description:
+          "A platform focused on speaking fluency where users listen to native speakers, record themselves, and (optionally) get feedback.",
+        details: {
+          type: "Audio repetition and recording tool 🎧🎤",
+          teaches: "Speaking fluency, exact pronunciation, and sentence rhythm. 🗣️📈",
+          howTo: [
+            "Choose a set of simple sentences or phrases. 🎯",
+            "Listen to the native speaker model the sentence. 👂",
+            "Record yourself repeating the sentence exactly. 🎤",
+            "Compare your waveform to the native speaker's. 📊"
+          ],
+          whyTopPick: "Highly focused on actual mouth movements and replicating accurate sounds. ⭐",
+          freeAccess: "Core repetition and recording features are free (advanced coaching has a premium tier). 🆓⚠️",
+          ageCheck: "Better for focused 8-10 learners; adult guidance needed to set up. 🧑‍🏫"
+        },
+        focus: "pronunciation accuracy, shadowing",
+        time: "10-15 min",
+        level: "caregiver-led or independent"
       },
 
       {

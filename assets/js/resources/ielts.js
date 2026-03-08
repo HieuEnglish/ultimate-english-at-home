@@ -379,6 +379,28 @@
 
       {
         age: "ielts",
+        skill: "reading",
+        slug: "mini-ielts-free-practice",
+        title: "Mini-IELTS — Free Reading Practice Tests ⏱️📖",
+        description: "🎯 Huge collection of short, free IELTS Reading passages to practice on the go.",
+        link: "https://mini-ielts.com/",
+        format: "site",
+        details: {
+          type: "🧰 Shorter practice test snippets",
+          teaches: "🎯 Realistic exam questions and pacing without needing a full 60 minutes",
+          howTo: [
+            "🪜 ① Choose a topic or question type you struggle with",
+            "② Set a 10-15 minute timer per passage",
+            "③ Check your score instantly and review the text for paraphrases"
+          ],
+          whyTopPick: "⭐ Perfect for daily practice when you don't have a full hour.",
+          freeAccess: "💸 Web access is completely free.",
+          ageCheck: "👤 Teen/Adult; standard IELTS texts."
+        }
+      },
+
+      {
+        age: "ielts",
         skill: "listening",
         slug: "ielts-org-ielts-academic-format-listening",
         title: "🎧 IELTS.org — Listening Test Format 🧾",
@@ -526,6 +548,28 @@
 
       {
         age: "ielts",
+        skill: "listening",
+        slug: "bbc-global-news-podcast",
+        title: "BBC Global News Podcast 🌍📻",
+        description: "🎯 High-level vocabulary and global accents perfect for IELTS Part 4 training.",
+        link: "https://www.bbc.co.uk/programmes/p02nq0gn/episodes/downloads",
+        format: "podcast",
+        details: {
+          type: "📻 Daily News Podcast",
+          teaches: "🎯 Advanced vocabulary, British/global accents, sustained listening stamina",
+          howTo: [
+            "🪜 ① Listen to one 30-minute episode actively",
+            "② Note down 5 unfamiliar academic words",
+            "③ Try to summarize the top 3 news stories aloud"
+          ],
+          whyTopPick: "⭐ Excellent off-screen preparation for the toughest parts of the listening exam.",
+          freeAccess: "💸 Free on all podcast apps.",
+          ageCheck: "👤 Real world news; may contain heavy topics."
+        }
+      },
+
+      {
+        age: "ielts",
         skill: "writing",
         slug: "ielts-org-writing-test-resources",
         title: "IELTS.org — Writing test preparation resources 🏛️📚",
@@ -667,6 +711,28 @@
 
       {
         age: "ielts",
+        skill: "writing",
+        slug: "ielts-simon-writing-tips",
+        title: "IELTS Simon — Writing Task 1 & 2 Tips 📝🧑‍🏫",
+        description: "🎯 Extremely clear, band 9 model answers from an ex-examiner.",
+        link: "https://ielts-simon.study/",
+        format: "site",
+        details: {
+          type: "🧠 Strategy and Model Essay hub",
+          teaches: "🎯 Simplicity, clarity, and precise sentence structures that examiners want to see",
+          howTo: [
+            "🪜 ① Read a Band 9 model for Task 1 or 2",
+            "② Analyze the paragraph structure and linking words",
+            "③ Rewrite a similar prompt using that exact structure"
+          ],
+          whyTopPick: "⭐ Strips away complex vocabulary myths to show clear, logical writing.",
+          freeAccess: "💸 Free blog archive available online.",
+          ageCheck: "👤 Suitable for all IELTS candidates."
+        }
+      },
+
+      {
+        age: "ielts",
         skill: "speaking",
         slug: "ielts-org-ielts-academic-format-speaking",
         title: "🗣️ IELTS.org — IELTS Academic Speaking format 📘",
@@ -798,6 +864,27 @@
           ageCheck: "👤 Teen/adult",
         },
       },
+      {
+        age: "ielts",
+        skill: "speaking",
+        slug: "ielts-speaking-for-success-podcast",
+        title: "IELTS Speaking for Success Podcast 🎙️🏆",
+        description: "🎯 Fun, unscripted model answers to the latest IELTS speaking topics.",
+        link: "https://successwithielts.com/podcast",
+        format: "podcast",
+        details: {
+          type: "📻 Specialized Exam Podcast",
+          teaches: "🎯 Natural idiomatic language, high-level vocabulary, and fluency",
+          howTo: [
+            "🪜 ① Listen to an episode on a specific topic",
+            "② Note the 'Band 9' vocabulary highlighted by the hosts",
+            "③ Try answering the exact same questions with those words"
+          ],
+          whyTopPick: "⭐ Keeps speaking practice engaging while delivering high-value vocabulary.",
+          freeAccess: "💸 Main episodes are free on Spotify/Apple Podcasts.",
+          ageCheck: "👤 Suitable for all IELTS candidates."
+        }
+      }
     ],
   };
 

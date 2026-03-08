@@ -471,6 +471,32 @@
         level: "caregiver-led"
       },
 
+      {
+        age: "0-3",
+        skill: "reading",
+        slug: "starfall-free-phonics",
+        title: "Starfall — Free Phonics & Reading Sections ⭐📚",
+        link: "https://www.starfall.com/h/index-kindergarten.php",
+        format: "site",
+        description:
+          "Free online games and simple digital books that introduce letters, sounds, and early vocabulary.",
+        details: {
+          type: "Interactive site/app (free sections) 💻📱",
+          teaches: "Alphabet basics, sounds, and early word recognition. 🔤🗣️",
+          howTo: [
+            "Start with the ABCs section. 🔤",
+            "Let the child explore the animated letter sounds. 🔊✨",
+            "Keep sessions short (5-10 minutes). ⏱️"
+          ],
+          whyTopPick: "Engaging, ad-free environment for the free sections. ⭐🛡️",
+          freeAccess: "Free sections available without login. 🆓✅",
+          ageCheck: "Best for 2-3; co-play with a caregiver. 👶🧑‍🍼"
+        },
+        focus: "phonics basics, letter sounds",
+        time: "5-10 min",
+        level: "caregiver-led"
+      },
+
       // =========================
       // 0–3 LISTENING (existing/new)
       // =========================
@@ -901,6 +927,32 @@
         level: "caregiver-led"
       },
 
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "cbeebies-radio",
+        title: "CBeebies Radio (BBC) 📻🎶",
+        link: "https://www.bbc.co.uk/cbeebies/radio",
+        format: "audio",
+        description:
+          "Free audio stories, rhymes, and calming sounds perfect for toddler listening routines.",
+        details: {
+          type: "Audio platform 📻",
+          teaches: "Listening comprehension, music appreciation, and calming down. 🎧🎵😌",
+          howTo: [
+            "Pick a short audio story or rhyme. 📖🎵",
+            "Listen together without any screens. 🚫📺",
+            "Use as part of a wind-down routine. 🌙"
+          ],
+          whyTopPick: "High-quality, screen-free BBC audio for young kids. ⭐📻",
+          freeAccess: "Free to stream on the BBC site. 🆓🌐",
+          ageCheck: "Ideal for 0-3 (caregiver-led calm listening). 👶🧑‍🍼"
+        },
+        focus: "calm audio, nursery rhymes",
+        time: "5-15 min",
+        level: "caregiver-led"
+      },
+
       // =========================
       // 0–3 WRITING (new)
       // =========================
@@ -1327,6 +1379,32 @@
         },
         focus: "mark-making routine, fine motor",
         time: "10 min/day",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "pbs-kids-printables",
+        title: "PBS KIDS Printables & Coloring 🖍️📄",
+        link: "https://pbskids.org/games/coloring",
+        format: "site",
+        description:
+          "Free, printable coloring sheets featuring familiar characters to encourage early mark-making and crayon grip.",
+        details: {
+          type: "Printable coloring pages 🖨️🎨",
+          teaches: "Fine motor control, grip strength, and early mark-making via coloring. 🖍️💪",
+          howTo: [
+            "Print a few familiar character sheets. 🖨️🐻",
+            "Provide thick, washable crayons suitable for toddlers. 🖍️✅",
+            "Focus on the process of making marks, not staying in the lines. 〰️🎈"
+          ],
+          whyTopPick: "Familiar characters motivate early holding and scribbling. ⭐🖍️",
+          freeAccess: "Free to access and print. 🆓🖨️",
+          ageCheck: "2-3 for guided coloring; use large grip crayons. 👶👨‍👩‍👧‍👦"
+        },
+        focus: "coloring, fine motor grip",
+        time: "5-10 min",
         level: "caregiver-led"
       },
 

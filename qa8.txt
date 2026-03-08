@@ -1,0 +1,40 @@
+﻿UEAH weekly QA @ 2026-03-08T07:45:46.070Z
+Base: https://hieuenglish.github.io/ultimate-english-at-home/
+Pages checked: 8 (OK 1, Fail 7)
+- OK Home (200) 4503ms
+- FAIL Resources (404) 470ms
+- FAIL Tests (404) 484ms
+- FAIL Games (404) 466ms
+- FAIL Profile (404) 468ms
+- FAIL Favourites (404) 419ms
+- FAIL Scoring (404) 475ms
+- FAIL Contact (404) 487ms
+
+Warnings (3):
+- [ui] Home: expected CTA cards list
+- [routing] Tests: direct /tests returned 404 (static server may not support SPA routes). Use /?r=/tests.
+- [tests] Tests page: could not locate a known test card
+
+Errors (22):
+- [console] ReferenceError: onProfileChanged is not defined
+- [console] Failed to load resource: the server responded with a status of 404 ()
+- [console] ReferenceError: onProfileChanged is not defined
+- [http] Resources: HTTP 404 at https://hieuenglish.github.io/ultimate-english-at-home/%3Fr=resources
+- [console] Failed to load resource: the server responded with a status of 404 ()
+- [console] ReferenceError: onProfileChanged is not defined
+- [http] Tests: HTTP 404 at https://hieuenglish.github.io/ultimate-english-at-home/%3Fr=tests
+- [console] Failed to load resource: the server responded with a status of 404 ()
+- [console] ReferenceError: onProfileChanged is not defined
+- [http] Games: HTTP 404 at https://hieuenglish.github.io/ultimate-english-at-home/%3Fr=games
+- [console] Failed to load resource: the server responded with a status of 404 ()
+- [console] ReferenceError: onProfileChanged is not defined
+- [http] Profile: HTTP 404 at https://hieuenglish.github.io/ultimate-english-at-home/%3Fr=profile
+- [console] Failed to load resource: the server responded with a status of 404 ()
+- [console] ReferenceError: onProfileChanged is not defined
+- [http] Favourites: HTTP 404 at https://hieuenglish.github.io/ultimate-english-at-home/%3Fr=favourites
+- [console] Failed to load resource: the server responded with a status of 404 ()
+- [console] ReferenceError: onProfileChanged is not defined
+- [http] Scoring: HTTP 404 at https://hieuenglish.github.io/ultimate-english-at-home/%3Fr=scoring
+- [console] Failed to load resource: the server responded with a status of 404 ()
+- [console] ReferenceError: onProfileChanged is not defined
+- [http] Contact: HTTP 404 at https://hieuenglish.github.io/ultimate-english-at-home/%3Fr=contact

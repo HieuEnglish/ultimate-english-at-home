@@ -448,6 +448,32 @@
       {
         "age": "11-12",
         "skill": "reading",
+        "slug": "dogonews-articles",
+        "title": "DOGO News — News for Kids 📰👧",
+        "description": "Engaging news articles for students with vocab explanations.",
+        "link": "https://www.dogonews.com/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "current events, vocab",
+        "notes": "",
+        "details": {
+          "type": "News articles 📰",
+          "teaches": "Reading comprehension on current events and new vocabulary 🧠",
+          "howTo": [
+            "1️⃣ Pick a news article that interests you 🔍",
+            "2️⃣ Read it and define 3 unfamiliar words using the site tool 📝",
+            "3️⃣ Summarize what happened in 3 sentences 🗣️",
+            "4️⃣ Discuss your opinion with a parent/friend 💬"
+          ],
+          "whyTopPick": "High-interest, safe current events designed for student readers.",
+          "freeAccess": "Free to read articles.",
+          "ageCheck": "Perfect for 11–12."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "reading",
         "slug": "best-set-mini-pack-11-12-reading",
         "title": "Best “Set” 🎒🗓️ (11–12 Reading mini-pack)",
         "description": "A weekly routine that mixes skills + fun 📖✨",
@@ -844,6 +870,32 @@
           "whyTopPick": "Very motivating content for curious 11–12 learners.",
           "freeAccess": "Free-to-watch channel (YouTube access required).",
           "ageCheck": "YouTube ads/comments risk; use Restricted Mode and adult supervision."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "bbc-6-minute-english",
+        "title": "BBC Learning English — 6 Minute English 📻⏱️",
+        "description": "Short, topical audio discussions with vocabulary breakdowns.",
+        "link": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english",
+        "format": "podcast",
+        "level": "B1–B2",
+        "time": "10-15 min",
+        "focus": "listening, vocabulary",
+        "notes": "Fast-paced but includes a transcript.",
+        "details": {
+          "type": "Topical audio discussions 📻",
+          "teaches": "Real-world conversational listening and intermediate vocabulary 🧠",
+          "howTo": [
+            "▶️ Listen to the 6-minute audio track without the text",
+            "📝 Note down 3 interesting words discussed",
+            "🔁 Listen again while reading the transcript",
+            "🗣️ Summarize the main topic to someone else"
+          ],
+          "whyTopPick": "Incredibly popular and effective for bridging the gap to native-speed English.",
+          "freeAccess": "Fully free to access on the site or podcast apps.",
+          "ageCheck": "Best for stronger 11-12 learners; broad topics."
         }
       },
       {
@@ -1354,6 +1406,32 @@
       {
         "age": "11-12",
         "skill": "writing",
+        "slug": "nanowrimo-ywp",
+        "title": "NaNoWriMo Young Writers Program ✍️📚",
+        "description": "A platform for setting writing goals and drafting stories.",
+        "link": "https://ywp.nanowrimo.org/",
+        "format": "site",
+        "level": "B1–B2",
+        "time": "20–30 min",
+        "focus": "creative writing, fluency",
+        "notes": "Requires account setup.",
+        "details": {
+          "type": "Goal-oriented writing platform 📝",
+          "teaches": "Writing fluency, story structure, and overcoming writer's block 🧠",
+          "howTo": [
+            "1️⃣ Set a reachable word-count goal for a week or month 🎯",
+            "2️⃣ Write freely without worrying about perfect grammar 📝",
+            "3️⃣ Track your progress on the dashboard 📊",
+            "4️⃣ Revise your favorite section later ✍️"
+          ],
+          "whyTopPick": "Focuses heavily on getting words onto the page, reducing anxiety.",
+          "freeAccess": "Free to join and use.",
+          "ageCheck": "Great for ambitious 11-12 kids writing longer pieces."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "writing",
         "slug": "best-set-mini-pack-11-12-writing",
         "title": "Best “Set” 🎒🗓️ (11–12 Writing mini-pack)",
         "description": "A simple weekly routine that builds writing through models + revision ✍️✨",
@@ -1803,6 +1881,32 @@
           "whyTopPick": "Instant pronunciation checking for any vocabulary set.",
           "freeAccess": "Free web access (dictionary pages usable without subscription).",
           "ageCheck": "Safe; just supervise web browsing/ads as needed."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "engoo-daily-news",
+        "title": "Engoo Daily News — Discussion Articles 🗞️🗣️",
+        "description": "Short news articles structured specifically for English discussion practice.",
+        "link": "https://engoo.com/app/daily-news",
+        "format": "site",
+        "level": "B1–B2",
+        "time": "15–20 min",
+        "focus": "speaking fluency, opinions",
+        "notes": "Ideal for pair work or parent-led discussion.",
+        "details": {
+          "type": "Discussion-based news articles 🗣️",
+          "teaches": "Expressing opinions, answering questions, and using new vocabulary in speech 💬",
+          "howTo": [
+            "🔎 Pick an interesting article (levels 5-6 are great)",
+            "📖 Read it aloud to practice pronunciation",
+            "❓ Ask and answer the 'Discussion' questions at the bottom",
+            "🗣️ Give your personal opinion on the topic"
+          ],
+          "whyTopPick": "Provides the exact structure needed for meaningful speaking practice.",
+          "freeAccess": "Daily News materials are entirely free to read.",
+          "ageCheck": "Topics are generally safe, but preview to ensure it fits the 11-12 age range."
         }
       },
       {

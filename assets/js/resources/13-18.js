@@ -521,6 +521,29 @@
       {
         age: "13-18",
         skill: "reading",
+        slug: "lit2go-classic-literature",
+        title: "Lit2Go — Classic Literature & Poems 📖🎧",
+        description: "Free online collection of stories and poems in audio format with printable text.",
+        link: "https://etc.usf.edu/lit2go/",
+        format: "site",
+        focus: "classic literature, reading stamina",
+        details: {
+          type: "Audiobooks + printable reading passages 📚🎧",
+          teaches: "Reading classic literature, understanding complex themes, and poetry appreciation 🧠📖",
+          howTo: [
+            "1️⃣ 🔎 Browse by author, genre, or readability level (Flesch-Kincaid) 🎯",
+            "2️⃣ 🎧 Listen to the audio while reading the text passage 📖",
+            "3️⃣ 📝 Note down interesting historical vocabulary 📌",
+            "4️⃣ 🗣️ Write a brief character analysis or summary ✍️"
+          ],
+          whyTopPick: "Excellent for bridging the gap to high school English literature demands. ⭐📚",
+          freeAccess: "Provided free by the Florida Center for Instructional Technology. 🆓✅",
+          ageCheck: "Classic texts can contain dated language/themes; requires some maturity. ⚠️🔍"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "reading",
         slug: "best-set-bundle-13-18-reading",
         title: "Best “Set” (Recommended Bundle) 🎒📚✅",
         description: "Weekly plan (25–40 mins/day) 🗓️⏱️ + daily summary add-on 📝",
@@ -906,6 +929,29 @@
           whyTopPick: "Fast, modern phrases teens hear online. ⭐⚡",
           freeAccess: "Free to listen on podcast platforms. 🆓✅",
           ageCheck: "Teen-appropriate; idioms may need explanation. ✅🧠"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "ted-talks-main",
+        title: "TED Talks — Ideas Worth Spreading 🎙️💡",
+        description: "Inspiring and educational talks from experts on every topic imaginable.",
+        link: "https://www.ted.com/talks",
+        format: "video",
+        focus: "advanced listening, specialized vocabulary",
+        details: {
+          type: "Expert presentation videos with interactive transcripts 🎥🌍",
+          teaches: "High-level listening comprehension, presentation skills, and diverse accents 🧠📈",
+          howTo: [
+            "1️⃣ 🔎 Find a talk under 10 minutes on a topic you love 🎯",
+            "2️⃣ 🎧 Watch once with English subtitles ON 📝",
+            "3️⃣ 🔁 Watch again with subtitles OFF to test understanding 🚫📄",
+            "4️⃣ 🗣️ Summarize the speaker's core message in 3 sentences 🎙️"
+          ],
+          whyTopPick: "The gold standard for exposure to advanced, passionate English speaking. ⭐🌟",
+          freeAccess: "Free to stream on TED website or YouTube. 🆓✅",
+          ageCheck: "Vast majority are teen-safe; preview topics for relevance. 👦🧑"
         }
       },
       {
@@ -1307,6 +1353,29 @@
           whyTopPick: "Quick, printable, directly improves essays 🧰⭐",
           freeAccess: "Free PDF download 🌐🆓",
           ageCheck: "Perfect for teen essay classes 🎯✅"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "nyt-learning-network-writing-prompts",
+        title: "NYT Learning Network — Writing Prompts 📰✍️",
+        description: "Engaging daily writing prompts and contests based on current events.",
+        link: "https://www.nytimes.com/section/learning/student-opinion",
+        format: "site",
+        focus: "argumentative writing, current events",
+        details: {
+          type: "Daily argument and opinion prompts 🗞️📝",
+          teaches: "Forming opinions, argumentative structure, and engaging hooks 🧠⚖️",
+          howTo: [
+            "1️⃣ 🎯 Read the daily prompt and the short linked article 📖",
+            "2️⃣ 🧠 Form a stance (Agree? Disagree? Why?) 🤔",
+            "3️⃣ ✍️ Draft a 150-word response using evidence from the text 📝",
+            "4️⃣ ✅ Edit for clarity and post in the comments (if allowed) or save 🗂️"
+          ],
+          whyTopPick: "Connects writing directly to what is happening in the real world today. 🌍⭐",
+          freeAccess: "The Learning Network is accessible for free to students/teachers. 🆓🔓",
+          ageCheck: "Highly appropriate for teens forming their own worldview. 🧑‍🎓✅"
         }
       },
       {
@@ -1774,6 +1843,29 @@
           whyTopPick: "Boosts participation fairly and fast. ⚡⭐",
           freeAccess: "Usable without payment during this check. 🆓✅",
           ageCheck: "Fully appropriate for teens. ✅👦🧑"
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "toastmasters-youth-leadership",
+        title: "Toastmasters — Public Speaking Tips 🎤📈",
+        description: "Resources and tips for structuring speeches and managing public speaking anxiety.",
+        link: "https://www.toastmasters.org/resources/public-speaking-tips",
+        format: "site",
+        focus: "public speaking, presentation skills",
+        details: {
+          type: "Public speaking guidelines and articles 📋🗣️",
+          teaches: "Speech structure, body language, vocal variety, and confidence 🧠🌟",
+          howTo: [
+            "1️⃣ 📖 Read one tip article (e.g., '10 Tips for Public Speaking') 📝",
+            "2️⃣ 🎯 Choose one specific technique to focus on (e.g., eye contact or pausing) 👀",
+            "3️⃣ 🎙️ Record a 2-minute speech applying that technique ⏱️",
+            "4️⃣ 🔁 Review the recording and evaluate your success ✅"
+          ],
+          whyTopPick: "Brings professional-grade speaking techniques down to an accessible level. ⭐💼",
+          freeAccess: "Articles and tips are free to read. 🆓✅",
+          ageCheck: "Excellent for older teens preparing for college/work presentations. 🎓✅"
         }
       },
       {
