@@ -954,6 +954,55 @@
           ageCheck: "Vast majority are teen-safe; preview topics for relevance. 👦🧑"
         }
       },
+
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "13-18-listening-podcasts-in-english",
+        title: "Podcasts in English — Leveled Listening 🎧📈",
+        description: "Short podcast episodes graded by level with downloadable worksheets and vocabulary activities.",
+        link: "https://www.podcastsinenglish.com/",
+        format: "audio",
+        focus: "leveled listening, natural speech, vocabulary",
+        details: {
+          type: "Graded podcast episodes + worksheets 🎧📝",
+          teaches: "Listening comprehension at multiple levels with natural speech patterns 🧠✅",
+          howTo: [
+            "1️⃣ 🎚️ Choose your level (1–3) 🎯",
+            "2️⃣ 🎧 Listen once without the worksheet 👂",
+            "3️⃣ 📝 Do the worksheet activities ✅",
+            "4️⃣ 🗣️ Summarize the episode in 30 seconds 🎙️⏱️"
+          ],
+          whyTopPick: "Authentic podcasts graded for learners with ready-made worksheets. ⭐📝",
+          freeAccess: "Free podcasts and worksheets available (premium extras exist). 🆓📢",
+          ageCheck: "Suitable for teens; preview topics if needed. 🔍✅"
+        }
+      },
+
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "13-18-listening-all-ears-english",
+        title: "All Ears English Podcast — Natural Conversation 🗣️🎧",
+        description: "Popular ESL podcast with fun, natural conversation episodes about everyday English and culture.",
+        link: "https://www.allearsenglish.com/episodes/",
+        format: "audio",
+        focus: "natural English, idioms, conversation skills",
+        details: {
+          type: "ESL conversation podcast 🗣️🎧",
+          teaches: "Natural spoken English, idioms, and real-world conversation strategies 🧠💬",
+          howTo: [
+            "1️⃣ 🎧 Pick an episode topic that interests you 🎯",
+            "2️⃣ 🎧 Listen and note 3 new expressions 📝",
+            "3️⃣ 🗣️ Use each expression in a sentence 💬✍️",
+            "4️⃣ 🔁 Re-listen in 2 days and test recall 🧠🔁"
+          ],
+          whyTopPick: "Feels like listening to friends chat — highly engaging for teens. ⭐🗣️",
+          freeAccess: "Free on podcast platforms (website has extras). 🆓📢",
+          ageCheck: "Teen-friendly; conversational topics. ✅🧑‍🎓"
+        }
+      },
+
       {
         age: "13-18",
         skill: "listening",

@@ -438,6 +438,90 @@
       {
         age: "8-10",
         skill: "reading",
+        slug: "8-10-reading-news-in-levels",
+        title: "News in Levels — Leveled News Articles 📰🎚️",
+        link: "https://www.newsinlevels.com/",
+        format: "site",
+        description:
+          "Real news rewritten at three difficulty levels with audio support; great for building reading confidence with current topics.",
+        details: {
+          type: "Leveled news articles + audio 📰🎧",
+          teaches:
+            "Reading comprehension, vocabulary in context, and real-world knowledge. 🧠🌍",
+          howTo: [
+            "Pick a news story and start at Level 1. 🎚️",
+            "Read once, then listen with audio support. 📖🎧",
+            "Try Level 2 if Level 1 feels easy. 📈",
+            "Write 3 new words + meanings. ✍️3️⃣"
+          ],
+          whyTopPick: "Real news simplified for learners with clear level progression. ⭐",
+          freeAccess: "Free to access (ads may appear). 🆓⚠️",
+          ageCheck: "Good for 8–10; preview topics for age-appropriateness. 🎯"
+        },
+        focus: "leveled reading, current events",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "8-10-reading-commonlit",
+        title: "CommonLit — Free Reading Passages & Activities 📚🧠",
+        link: "https://www.commonlit.org/",
+        format: "site",
+        description:
+          "High-quality reading passages with guided questions, annotations, and vocabulary support for building comprehension skills.",
+        details: {
+          type: "Reading passages + comprehension questions 📝🧠",
+          teaches:
+            "Close reading, inference, main idea, and vocabulary in context. 📖✅",
+          howTo: [
+            "Filter by grade level and interest topic. 🎯🔎",
+            "Read the passage and highlight key information. ✨📖",
+            "Answer the guided questions using text evidence. ✅📝",
+            "Discuss 1 opinion question with a parent. 🗣️💬"
+          ],
+          whyTopPick: "Professional-quality texts with built-in comprehension scaffolding. ⭐",
+          freeAccess: "Many texts free; full features may require educator account. 🆓🔐",
+          ageCheck: "Excellent for 8–10 with teacher/parent guidance. 🎯"
+        },
+        focus: "close reading, text analysis",
+        time: "15–20 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "8-10-reading-readtheory",
+        title: "ReadTheory — Adaptive Reading Quizzes 📈📖",
+        link: "https://readtheory.org/",
+        format: "site",
+        description:
+          "Adaptive reading comprehension platform that adjusts difficulty based on performance; tracks progress over time.",
+        details: {
+          type: "Adaptive reading quizzes + progress tracking 📈✅",
+          teaches:
+            "Reading comprehension, inference, and vocabulary with personalized difficulty. 🧠📚",
+          howTo: [
+            "Create a free student account. 🆓👤",
+            "Complete 1–2 short passages per session. 📖⏱️",
+            "Review wrong answers to understand mistakes. 🔎❌➡️✅",
+            "Check your level progress weekly. 📈📅"
+          ],
+          whyTopPick: "Self-adjusting difficulty keeps practice productive and motivating. ⭐📈",
+          freeAccess: "Free access with account. 🆓✅",
+          ageCheck: "Great for 8–10; supports independent practice. 🎯"
+        },
+        focus: "adaptive practice, comprehension",
+        time: "10–15 min",
+        level: "independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
         slug: "best-set-recommended-bundle-for-8-10-reading",
         title: "Best Set — 6-Week ESL Reading Plan 🗓️📚✨",
         link: "",
@@ -795,6 +879,118 @@
         focus: "argumentative listening, critical thinking",
         time: "20-30 min",
         level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "8-10-listening-elllo",
+        title: "ELLLO — English Listening Library Online 🌍🎧",
+        link: "https://elllo.org/",
+        format: "site",
+        description:
+          "Huge library of short listening lessons with quizzes and transcripts featuring speakers from around the world.",
+        details: {
+          type: "Short listening lessons + quizzes + transcripts 🎧📝",
+          teaches:
+            "Listening comprehension, exposure to different accents, and useful phrases. 👂🌍",
+          howTo: [
+            "Pick a topic (food, hobbies, travel, school). 🎯",
+            "Listen once for the main idea. 🎧",
+            "Do the quiz and check answers. ✅",
+            "Repeat 3 key sentences aloud. 🗣️🔁"
+          ],
+          whyTopPick: "Huge variety of topics and accents for real-world listening practice. ⭐",
+          freeAccess: "Free to access. 🆓✅",
+          ageCheck: "Suitable for 8–10; pick kid-friendly topics. 🎯"
+        },
+        focus: "accents, short listening",
+        time: "8–12 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "8-10-listening-listen-a-minute",
+        title: "Listen A Minute — 1-Minute Listening Lessons ⏱️🎧",
+        link: "https://listenaminute.com/",
+        format: "site",
+        description:
+          "Ultra-short listening lessons (1 minute each) with quizzes and discussion questions; perfect for quick daily practice.",
+        details: {
+          type: "1-minute audio clips + quizzes 🎧⏱️",
+          teaches:
+            "Short, focused listening practice with quick comprehension checks. 👂✅",
+          howTo: [
+            "Pick 1 topic that interests you. 🎯",
+            "Listen 2–3 times (it's only 1 minute!). 🔁",
+            "Answer the quiz questions. ✅",
+            "Read the text aloud once for fluency. 🗣️"
+          ],
+          whyTopPick: "Super quick format is perfect for daily micro-practice. ⭐⏱️",
+          freeAccess: "Free to access. 🆓✅",
+          ageCheck: "Great for 8–10; easy to fit into any schedule. ✅"
+        },
+        focus: "micro-listening, quick practice",
+        time: "5–8 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "8-10-listening-ted-ed-student-talks",
+        title: "TED-Ed — Lessons Worth Sharing 🎓🎧",
+        link: "https://ed.ted.com/lessons",
+        format: "video",
+        description:
+          "Animated educational videos with built-in comprehension questions; great for learning about science, history, and language.",
+        details: {
+          type: "Animated educational videos + quizzes 🎥🧠",
+          teaches:
+            "Listening comprehension, academic vocabulary, and critical thinking. 🎧📚",
+          howTo: [
+            "Search for a kid-friendly topic (animals, space, inventions). 🔎",
+            "Watch the 3–5 minute video. 🎥⏱️",
+            "Answer the 'Think' questions. 🧠✅",
+            "Explain the main idea in your own words. 🗣️💬"
+          ],
+          whyTopPick: "Beautiful animations keep kids engaged while building real knowledge. ⭐",
+          freeAccess: "Free to access and use. 🆓✅",
+          ageCheck: "Choose age-appropriate topics; many are perfect for 8–10. 🎯"
+        },
+        focus: "academic listening, critical thinking",
+        time: "8–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "8-10-listening-esl-lab",
+        title: "Randall's ESL Cyber Listening Lab 🎙️📝",
+        link: "https://www.esl-lab.com/",
+        format: "site",
+        description:
+          "Listening quizzes at Easy, Intermediate, and Difficult levels covering everyday English scenarios.",
+        details: {
+          type: "Listening quizzes by difficulty level 🎧✅",
+          teaches:
+            "Everyday listening comprehension and question answering. 👂🗣️",
+          howTo: [
+            "Start at the Easy level. 🎚️",
+            "Listen and answer the quiz questions. 🎧✅",
+            "Replay and take notes on key words. 🔁📝",
+            "Retell the situation in your own words. 🗣️"
+          ],
+          whyTopPick: "Tons of topics with built-in quizzes at clear difficulty levels. ⭐",
+          freeAccess: "Free to access (ads may appear). 🆓⚠️",
+          ageCheck: "Generally appropriate for 8–10; supervise browsing. 👀"
+        },
+        focus: "everyday listening, quizzes",
+        time: "10–15 min",
+        level: "caregiver-led or independent"
       },
 
       {
@@ -1165,6 +1361,118 @@
         },
         focus: "summarizing, descriptive writing",
         time: "10-15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-write-and-improve",
+        title: "Cambridge Write & Improve — AI Writing Feedback ✍️🤖",
+        link: "https://writeandimprove.com/",
+        format: "site",
+        description:
+          "Free AI-powered writing tool from Cambridge that gives instant feedback on your writing with level indicators.",
+        details: {
+          type: "AI writing feedback tool ✍️🤖",
+          teaches:
+            "Writing accuracy, grammar, vocabulary range, and self-correction habits. 📝✅",
+          howTo: [
+            "Choose a writing task (or use your own topic). 🎯",
+            "Write a short paragraph (5–8 sentences). ✍️",
+            "Submit and read the AI feedback. 🤖📋",
+            "Revise and resubmit to improve your score. 🔁📈"
+          ],
+          whyTopPick: "Instant, personalized feedback that teaches self-revision. ⭐🤖",
+          freeAccess: "Free to use (Cambridge). 🆓✅",
+          ageCheck: "Great for 8–10 with adult guidance on topics. 🎯"
+        },
+        focus: "writing feedback, self-correction",
+        time: "15–20 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-quill-grammar",
+        title: "Quill.org — Free Grammar & Writing Practice 📝🎯",
+        link: "https://www.quill.org/",
+        format: "site",
+        description:
+          "Interactive grammar and writing exercises that build sentence construction, combining, and proofreading skills.",
+        details: {
+          type: "Interactive grammar + sentence exercises 📝✅",
+          teaches:
+            "Sentence structure, grammar accuracy, and proofreading. ✍️🧠",
+          howTo: [
+            "Create a free student account. 🆓👤",
+            "Start with sentence combining activities. 🧩",
+            "Complete 1–2 short exercises per session. ⏱️",
+            "Review corrections and try again. 🔁✅"
+          ],
+          whyTopPick: "Focused grammar practice with immediate correction. ⭐",
+          freeAccess: "Free to use. 🆓✅",
+          ageCheck: "Well-suited for 8–10 learners. 🎯"
+        },
+        focus: "grammar, sentence building",
+        time: "10–15 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-readwritethink-interactives",
+        title: "ReadWriteThink — Writing Interactives & Printables 🧩✍️",
+        link: "https://www.readwritethink.org/classroom-resources/student-interactives",
+        format: "site",
+        description:
+          "Interactive writing tools (story maps, letter generators, comic creators) plus printable organizers for planning writing.",
+        details: {
+          type: "Interactive writing tools + printable organizers 🧩📄",
+          teaches:
+            "Writing planning, story structure, and creative composition. 📝🎨",
+          howTo: [
+            "Pick a tool (Story Map, Comic Creator, Letter Generator). 🎯",
+            "Use it to plan or draft a short piece. 📝",
+            "Print your work (or save it digitally). 🖨️💾",
+            "Share your finished piece with someone. 🗣️🤝"
+          ],
+          whyTopPick: "Makes writing fun through interactive, visual tools. ⭐🎨",
+          freeAccess: "Free to access and use. 🆓✅",
+          ageCheck: "Excellent for 8–10. ✅"
+        },
+        focus: "creative writing, planning",
+        time: "15–20 min",
+        level: "independent or caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-826-digital",
+        title: "826 Digital — Creative Writing Prompts & Lessons 🎭✍️",
+        link: "https://826digital.com/",
+        format: "site",
+        description:
+          "Fun, imaginative writing lessons and prompts from the 826 National network that spark creative storytelling.",
+        details: {
+          type: "Creative writing lessons + prompts 🎭📝",
+          teaches:
+            "Creative thinking, storytelling, descriptive writing, and voice. ✍️💭",
+          howTo: [
+            "Browse the lesson library and pick one that looks fun. 🎯🎭",
+            "Follow the guided prompts to write your story. 📝",
+            "Read your story aloud to someone. 🗣️👂",
+            "Optional: illustrate your favorite scene. 🎨🖼️"
+          ],
+          whyTopPick: "Highly creative prompts that make writing feel exciting. ⭐🎭",
+          freeAccess: "Free to access. 🆓✅",
+          ageCheck: "Perfect for 8–10 creative writers. ✅"
+        },
+        focus: "creative writing, storytelling",
+        time: "15–25 min",
         level: "independent or caregiver-led"
       },
 
@@ -1644,6 +1952,62 @@
         },
         focus: "pronunciation accuracy, shadowing",
         time: "10-15 min",
+        level: "caregiver-led or independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-esl-conversation-questions",
+        title: "ITESLJ Conversation Questions for ESL Students 🗣️❓",
+        link: "http://iteslj.org/questions/",
+        format: "site",
+        description:
+          "Huge bank of conversation questions sorted by topic; perfect for structured speaking practice with a partner.",
+        details: {
+          type: "Conversation question bank (by topic) 🗣️📋",
+          teaches:
+            "Speaking fluency, extending answers, and topic vocabulary. 🗣️🧠",
+          howTo: [
+            "Pick a topic (animals, food, holidays, sports). 🎯",
+            "Take turns asking and answering 5 questions. 🗣️🔁",
+            "Try to give 3+ sentence answers. 📝3️⃣",
+            "Record yourself answering one question (optional). 🎙️"
+          ],
+          whyTopPick: "Simple, zero-prep speaking practice with endless topics. ⭐",
+          freeAccess: "Free to access. 🆓✅",
+          ageCheck: "Good for 8–10; adult picks age-appropriate topics. 🎯"
+        },
+        focus: "conversation practice, fluency",
+        time: "10–15 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-baamboozle",
+        title: "Baamboozle — Speaking & Quiz Games 🎮🗣️",
+        link: "https://www.baamboozle.com/",
+        format: "game",
+        description:
+          "Interactive quiz-style games that can be used for fun speaking practice, vocabulary review, and turn-taking.",
+        details: {
+          type: "Interactive quiz/speaking games 🎮🗣️",
+          teaches:
+            "Speaking under fun pressure, vocabulary recall, and quick thinking. 🧠⚡",
+          howTo: [
+            "Search for an English topic game (vocabulary, grammar). 🔎",
+            "Play in turns; say the answer out loud before clicking. 🗣️👆",
+            "Use full sentences when giving answers. 📝✅",
+            "Keep it to 10 minutes for best focus. ⏱️🎯"
+          ],
+          whyTopPick: "Gamified format keeps kids motivated to speak. ⭐🎮",
+          freeAccess: "Free to play (some premium features exist). 🆓⚠️",
+          ageCheck: "Great for 8–10; fun and competitive. ✅"
+        },
+        focus: "speaking games, vocabulary recall",
+        time: "8–12 min",
         level: "caregiver-led or independent"
       },
 

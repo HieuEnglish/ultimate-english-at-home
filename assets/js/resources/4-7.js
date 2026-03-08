@@ -402,6 +402,87 @@
       {
         age: "4-7",
         skill: "reading",
+        slug: "4-7-reading-abcya-reading-games",
+        title: "ABCya — Reading & Phonics Games 🎮🔤",
+        link: "https://www.abcya.com/grades/prek/reading",
+        format: "game",
+        description:
+          "Fun, colorful phonics and reading games that practice letter sounds, blending, and sight words in short, focused sessions.",
+        details: {
+          type: "Phonics + reading games 🎮🔤",
+          teaches: "Letter sounds, blending, sight words, and reading basics. 🔤➡️📖",
+          howTo: [
+            "Choose a phonics or reading game. 🎯",
+            "Play 5–10 minutes only. ⏱️",
+            "Say the sounds/words out loud while playing. 🗣️🔊",
+            "Repeat the same game for a week. 🔁📅"
+          ],
+          whyTopPick: "Engaging games that kids enjoy returning to for practice. ⭐🎮",
+          freeAccess: "Free games available (some premium content exists). 🆓⚠️",
+          ageCheck: "Great for 4–7; adult helps navigate. 🧒👀"
+        },
+        focus: "phonics games, sight words",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "4-7-reading-room-to-read-literacy-cloud",
+        title: "Room to Read — Literacy Cloud 🌍📚",
+        link: "https://literacycloud.org/",
+        format: "site",
+        description:
+          "Free digital library of diverse, illustrated storybooks with read-aloud audio and multiple languages.",
+        details: {
+          type: "Digital storybook library + audio 📚🎧",
+          teaches: "Shared reading, early vocabulary, and story comprehension. 📖🧠",
+          howTo: [
+            "Browse by age/level and pick a short book. 🎯📖",
+            "Use the read-aloud audio feature. 🎧",
+            "Re-read the same book 3 times across the week. 🔁📅",
+            "Ask: 'What was your favorite part?' ❓❤️"
+          ],
+          whyTopPick: "Beautiful illustrations and strong multilingual support. ⭐🌍",
+          freeAccess: "Free to access with account. 🆓🔐",
+          ageCheck: "Excellent for 4–7. ✅"
+        },
+        focus: "digital library, multilingual",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "4-7-reading-international-childrens-digital-library",
+        title: "International Children's Digital Library 🌐📚🧒",
+        link: "http://en.childrenslibrary.org/",
+        format: "site",
+        description:
+          "Free collection of children's books from around the world in many languages; great for shared reading and cultural exposure.",
+        details: {
+          type: "Digital children's book library 📚🌍",
+          teaches: "Reading enjoyment, cultural awareness, and early literacy. 📖❤️",
+          howTo: [
+            "Search for simple picture books by age. 🔎📖",
+            "Read 1–2 short books together. 📖🤝",
+            "Point to pictures and name objects. 👉🖼️",
+            "Save favorites and re-read later. ❤️🔁"
+          ],
+          whyTopPick: "Unique global collection not found on other platforms. ⭐🌐",
+          freeAccess: "Free to access. 🆓✅",
+          ageCheck: "Good for 4–7 with caregiver selection. 🧒👀"
+        },
+        focus: "global stories, shared reading",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
         slug: "best-set-recommended-bundle-for-4-7-reading",
         title: "Best “Set” (bundle + simple weekly plan for 4–7 Reading) 🗓️📚✨",
         link: "",
@@ -1235,6 +1316,87 @@
         },
         focus: "sentence building, handwriting",
         time: "10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-ict-games-handwriting",
+        title: "ICT Games — Handwriting & Letter Formation ✍️🔤",
+        link: "https://www.ictgames.com/mobilePage/literacy.html",
+        format: "game",
+        description:
+          "Free online handwriting and literacy games that help young learners practice letter formation and early writing skills.",
+        details: {
+          type: "Handwriting + letter games 🎮✍️",
+          teaches: "Letter formation, pencil control (digital), and early writing confidence. 🔤✍️",
+          howTo: [
+            "Choose a letter formation or writing game. 🎯",
+            "Trace letters on screen (or on paper alongside). 💻✍️",
+            "Practice the same 3–5 letters all week. 🔁3️⃣–️5️⃣",
+            "Keep sessions short (5–7 minutes). ⏱️✅"
+          ],
+          whyTopPick: "Playful approach to handwriting that keeps kids motivated. ⭐🎮",
+          freeAccess: "Free to play on the site. 🆓✅",
+          ageCheck: "Great for 4–7. ✅"
+        },
+        focus: "handwriting, letter formation",
+        time: "5–7 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-topmarks-writing-games",
+        title: "Topmarks — Writing & Spelling Games (5–7) 🔤🎮",
+        link: "https://www.topmarks.co.uk/english-games/5-7-years/writing-and-spelling",
+        format: "game",
+        description:
+          "Quick spelling and writing mini-games that fit naturally into short daily writing practice routines.",
+        details: {
+          type: "Spelling + writing games 🎮✍️",
+          teaches: "Spelling patterns, word building, and early writing skills. 🔤🧩",
+          howTo: [
+            "Pick 1 game that matches what they're learning. 🎯",
+            "Play 5 minutes. ⏱️",
+            "Write 3 words on paper after playing. ✍️3️⃣",
+            "Repeat the same game all week. 🔁📅"
+          ],
+          whyTopPick: "Quick, focused games that match common phonics routines. ⭐⚡",
+          freeAccess: "Free to play on the site. 🆓✅",
+          ageCheck: "Best for 5–7; younger kids need caregiver help. 🧒🤝"
+        },
+        focus: "spelling games, word building",
+        time: "5–7 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-starfall-write-a-word",
+        title: "Starfall — Write-a-Word Activities ⭐✍️",
+        link: "https://www.starfall.com/h/index-kindergarten.php",
+        format: "site",
+        description:
+          "Free interactive writing and phonics activities where kids build words, trace letters, and practice early sentence skills.",
+        details: {
+          type: "Interactive word-building + writing 💻✍️",
+          teaches: "Word construction, letter-sound connections, and early sentence writing. 🔤➡️📝",
+          howTo: [
+            "Start with the 'Learn to Read' writing activities. 📖✍️",
+            "Build 5–10 words by clicking letters/sounds. 🔤🔟",
+            "Write the words on paper afterward. ✍️📝",
+            "Keep sessions under 10 minutes. ⏱️✅"
+          ],
+          whyTopPick: "Ad-free environment with clear phonics-to-writing progression. ⭐🛡️",
+          freeAccess: "Free sections available without login. 🆓✅",
+          ageCheck: "Perfect for 4–7 with caregiver support. 🧒🤝"
+        },
+        focus: "word building, phonics writing",
+        time: "5–10 min",
         level: "caregiver-led"
       },
 

@@ -438,6 +438,33 @@
       {
         age: "0-3",
         skill: "reading",
+        slug: "0-3-reading-storyline-online",
+        title: "Storyline Online — Celebrity Read-Alouds 🌟📖",
+        link: "https://storylineonline.net/",
+        format: "video",
+        description:
+          "Free videos of celebrated actors reading children's picture books aloud, with beautiful animations. Perfect for shared screen-time reading.",
+        details: {
+          type: "Video read-alouds of picture books 🎥📖",
+          teaches: "Listening comprehension, story vocabulary, and love of books. 👂📚❤️",
+          howTo: [
+            "Pick a short video together. 🎬🤝",
+            "Watch and listen (pause to talk about pictures). ⏸️🗣️",
+            "Ask: 'What happened in the story?' 🧠❓",
+            "Re-watch the same video a few days later. 🔁📅"
+          ],
+          whyTopPick: "Celebrity voices + beautiful animations captivate even the youngest listeners. ⭐🌟",
+          freeAccess: "Free to stream on the website. 🆓✅",
+          ageCheck: "Perfect for 0–3 with caregiver. 👶🧑‍🍼"
+        },
+        focus: "read-alouds, story enjoyment",
+        time: "5–10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "reading",
         slug: "best-set-recommended-bundle-for-0-3-reading",
         title: "Best “Set” (recommended bundle for 0–3 Reading) 🧺📚",
         link: "",

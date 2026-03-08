@@ -570,6 +570,98 @@
 
       {
         age: "ielts",
+        skill: "listening",
+        slug: "ielts-up-listening-practice-tests",
+        title: "IELTS Up — Free Listening Practice Tests 🎧🧪",
+        description: "🎯 Full IELTS Listening mock tests with audio, answers, and explanations.",
+        link: "https://ielts-up.com/listening/ielts-listening-practice.html",
+        format: "site",
+        details: {
+          type: "🧪 Full practice tests with audio + answer keys",
+          teaches: "🎯 All 4 parts of the IELTS Listening test under timed conditions",
+          howTo: [
+            "🪜 ① Choose a practice test ✅",
+            "② Listen to all 4 parts with headphones 🎧",
+            "③ Check answers and note your raw score /40 📊",
+            "④ Re-do weak sections after 2 days 🔁"
+          ],
+          whyTopPick: "⭐ Full-length listening tests that closely match real exam difficulty.",
+          freeAccess: "💸 Free to access online.",
+          ageCheck: "👤 Teen/adult; standard IELTS content."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "listening",
+        slug: "ielts-buddy-listening-tips",
+        title: "IELTS Buddy — Listening Tips & Practice 🎧💡",
+        description: "🎯 Question-type strategies and practice exercises for IELTS Listening.",
+        link: "https://www.ieltsbuddy.com/ielts-listening.html",
+        format: "site",
+        details: {
+          type: "🧠 Strategy lessons + exercises",
+          teaches: "🎯 Strategies for each question type (matching, maps, MCQ, gap-fill)",
+          howTo: [
+            "🪜 ① Choose a question type you struggle with 🎯",
+            "② Read the strategy tips carefully 📖",
+            "③ Do the practice exercise ✅",
+            "④ Apply the strategy in a full test 🔁"
+          ],
+          whyTopPick: "⭐ Practical question-type strategies that translate to real test gains.",
+          freeAccess: "💸 Free website content.",
+          ageCheck: "👤 Teen/adult friendly."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "listening",
+        slug: "cambridge-ielts-listening-youtube",
+        title: "Cambridge IELTS Listening Tests — YouTube 🎧📺",
+        description: "🎯 Full Cambridge IELTS listening test audio for realistic practice.",
+        link: "https://www.youtube.com/results?search_query=cambridge+ielts+listening+test",
+        format: "video",
+        details: {
+          type: "📺 Full test audio on YouTube",
+          teaches: "🎯 Realistic exam pacing and audio quality experience",
+          howTo: [
+            "🪜 ① Search for a Cambridge IELTS test number (e.g. 15, 16, 17) 🔎",
+            "② Play the full test with headphones 🎧",
+            "③ Write answers on paper (simulates real test) ✍️",
+            "④ Check against published answer keys ✅"
+          ],
+          whyTopPick: "⭐ The gold standard for IELTS listening practice.",
+          freeAccess: "💸 Free on YouTube (search for specific test numbers).",
+          ageCheck: "👤 Teen/adult; standard exam content."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "listening",
+        slug: "ted-talks-ielts-listening",
+        title: "TED Talks — Academic Listening Practice 🎓🎧",
+        description: "🎯 Advanced listening practice with academic topics that mirror IELTS Part 3/4 difficulty.",
+        link: "https://www.ted.com/talks",
+        format: "video",
+        details: {
+          type: "🎓 Academic talks + subtitles",
+          teaches: "🎯 Academic vocabulary, sustained listening, and note-taking skills",
+          howTo: [
+            "🪜 ① Choose a 10–15 minute talk on a topic you find interesting 🎯",
+            "② Watch without subtitles first 👂",
+            "③ Note 5–10 academic words ✍️",
+            "④ Re-watch with subtitles to check understanding ✅"
+          ],
+          whyTopPick: "⭐ Builds the academic listening stamina needed for IELTS Part 3 and 4.",
+          freeAccess: "💸 Free to watch on ted.com.",
+          ageCheck: "👤 Teen/adult; previewing topics recommended."
+        }
+      },
+
+      {
+        age: "ielts",
         skill: "writing",
         slug: "ielts-org-writing-test-resources",
         title: "IELTS.org — Writing test preparation resources 🏛️📚",
@@ -733,6 +825,75 @@
 
       {
         age: "ielts",
+        skill: "writing",
+        slug: "write-and-improve-ielts",
+        title: "Cambridge Write & Improve — IELTS Writing Feedback ✍️🤖",
+        description: "🎯 Free AI-powered writing tool from Cambridge with IELTS-specific tasks and instant CEFR-level feedback.",
+        link: "https://writeandimprove.com/",
+        format: "site",
+        details: {
+          type: "✍️ AI writing feedback tool",
+          teaches: "🎯 Self-correction, grammar accuracy, and vocabulary range for IELTS writing",
+          howTo: [
+            "🪜 ① Select an IELTS-style writing task 🎯",
+            "② Write your response in the editor ✍️",
+            "③ Submit for instant AI feedback 🤖",
+            "④ Revise and resubmit to improve your level 📈"
+          ],
+          whyTopPick: "⭐ Instant, unlimited feedback on your writing — perfect for daily practice.",
+          freeAccess: "💸 Free to use (Cambridge).",
+          ageCheck: "👤 Suitable for all IELTS candidates."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "writing",
+        slug: "ielts-buddy-writing-task-2",
+        title: "IELTS Buddy — Writing Task 2 Model Essays 📝🏆",
+        description: "🎯 Model essays with analysis for every common Task 2 essay type.",
+        link: "https://www.ieltsbuddy.com/ielts-writing-task-2.html",
+        format: "site",
+        details: {
+          type: "📝 Model essays + analysis",
+          teaches: "🎯 Essay structure, linking words, and vocabulary for high band scores",
+          howTo: [
+            "🪜 ① Read a model essay for your target essay type 📖",
+            "② Analyze the paragraph structure and transitions 🧠",
+            "③ Write your own essay on a similar topic ✍️",
+            "④ Compare your structure against the model 🔍"
+          ],
+          whyTopPick: "⭐ Clear, structured models that show exactly how to organize essays.",
+          freeAccess: "💸 Free website content.",
+          ageCheck: "👤 Teen/adult IELTS candidates."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "writing",
+        slug: "grammarly-writing-assistant",
+        title: "Grammarly — Free Writing Assistant 📝✅",
+        description: "🎯 Free grammar and spelling checker useful for proofreading IELTS practice essays.",
+        link: "https://www.grammarly.com/",
+        format: "site",
+        details: {
+          type: "📝 Grammar/spelling checker tool",
+          teaches: "🎯 Spotting grammar errors, improving clarity, and building self-editing habits",
+          howTo: [
+            "🪜 ① Write your IELTS essay in a notebook first ✍️",
+            "② Type it into Grammarly to check errors 💻",
+            "③ Review each correction and understand why 🧠",
+            "④ Rewrite the corrected version by hand for memory 🔁"
+          ],
+          whyTopPick: "⭐ Helps build self-editing awareness before test day.",
+          freeAccess: "💸 Free tier available (premium features are paid).",
+          ageCheck: "👤 Suitable for all IELTS candidates."
+        }
+      },
+
+      {
+        age: "ielts",
         skill: "speaking",
         slug: "ielts-org-ielts-academic-format-speaking",
         title: "🗣️ IELTS.org — IELTS Academic Speaking format 📘",
@@ -882,6 +1043,98 @@
           ],
           whyTopPick: "⭐ Keeps speaking practice engaging while delivering high-value vocabulary.",
           freeAccess: "💸 Main episodes are free on Spotify/Apple Podcasts.",
+          ageCheck: "👤 Suitable for all IELTS candidates."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "speaking",
+        slug: "ielts-speaking-assistant-app",
+        title: "IELTS Speaking Assistant — Free Practice App 📱🗣️",
+        description: "🎯 Mobile app with real IELTS speaking questions, timer, and recording feature.",
+        link: "https://play.google.com/store/search?q=ielts+speaking+assistant&c=apps",
+        format: "app",
+        details: {
+          type: "📱 Speaking practice app",
+          teaches: "🎯 Timed speaking practice for Parts 1, 2, and 3 with self-recording",
+          howTo: [
+            "🪜 ① Install a free IELTS speaking app 📲",
+            "② Choose a Part 2 cue card topic 🎯",
+            "③ Plan for 1 minute, speak for 2 minutes ⏱️",
+            "④ Listen back and note areas to improve 🔁"
+          ],
+          whyTopPick: "⭐ Convenient daily speaking practice anytime, anywhere.",
+          freeAccess: "💸 Free versions available (check your app store).",
+          ageCheck: "👤 Teen/adult; standard IELTS topics."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "speaking",
+        slug: "youglish-pronunciation-practice",
+        title: "YouGlish — Pronunciation Practice with Real Videos 🎥🗣️",
+        description: "🎯 Search any English word to see how native speakers pronounce it in real YouTube videos.",
+        link: "https://youglish.com/",
+        format: "site",
+        details: {
+          type: "🎥 Pronunciation video search tool",
+          teaches: "🎯 Natural pronunciation, word stress, and intonation patterns",
+          howTo: [
+            "🪜 ① Search a word you often mispronounce 🔎",
+            "② Watch 3–5 clips to hear different speakers 🎥",
+            "③ Shadow (say it at the same time) each clip 🗣️",
+            "④ Record yourself and compare 🎙️"
+          ],
+          whyTopPick: "⭐ Authentic pronunciation examples from real speech contexts.",
+          freeAccess: "💸 Free to use (YouTube-based).",
+          ageCheck: "👤 Suitable for all IELTS candidates."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "speaking",
+        slug: "ielts-speaking-topics-blog",
+        title: "IELTS Liz — Common Speaking Topics & Questions 🗣️📋",
+        description: "🎯 Extensive list of common IELTS Speaking Part 1/2/3 questions sorted by topic.",
+        link: "https://ieltsliz.com/ielts-speaking-topics/",
+        format: "site",
+        details: {
+          type: "📋 Topic-based question bank",
+          teaches: "🎯 Preparing answers for common exam topics and building topic vocabulary",
+          howTo: [
+            "🪜 ① Choose 1 topic per day (work, study, technology, etc.) 🎯",
+            "② Answer each question aloud for 30–60 seconds 🗣️",
+            "③ Record yourself and listen back 🎙️",
+            "④ Note 5 useful vocabulary items per topic ✍️"
+          ],
+          whyTopPick: "⭐ Covers the most commonly tested speaking topics with clear organization.",
+          freeAccess: "💸 Free website content.",
+          ageCheck: "👤 Teen/adult."
+        }
+      },
+
+      {
+        age: "ielts",
+        skill: "speaking",
+        slug: "sounds-right-ipa-chart-app",
+        title: "Sounds Right — Interactive IPA Pronunciation Chart 🔤🗣️",
+        description: "🎯 British Council's free interactive phonemic chart for mastering English sounds.",
+        link: "https://learnenglish.britishcouncil.org/content/sounds-right",
+        format: "app",
+        details: {
+          type: "🔤 Interactive phonemic chart + app",
+          teaches: "🎯 Individual English sounds, stress patterns, and connected speech",
+          howTo: [
+            "🪜 ① Tap a sound to hear it clearly 🔊",
+            "② Practice 3 target sounds per session 🎯",
+            "③ Use example words to practise in context 🗣️",
+            "④ Record and compare your pronunciation 🎙️"
+          ],
+          whyTopPick: "⭐ The official British Council pronunciation tool — trusted and free.",
+          freeAccess: "💸 Free app/web tool (British Council).",
           ageCheck: "👤 Suitable for all IELTS candidates."
         }
       }

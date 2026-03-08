@@ -474,6 +474,32 @@
       {
         "age": "11-12",
         "skill": "reading",
+        "slug": "11-12-reading-wonderopolis",
+        "title": "Wonderopolis — Wonder of the Day 🤔📖",
+        "description": "Daily curiosity articles with vocabulary and comprehension activities.",
+        "link": "https://wonderopolis.org/",
+        "format": "site",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "curiosity-driven reading, vocab",
+        "notes": "",
+        "details": {
+          "type": "Curiosity articles + activities 🤔📖",
+          "teaches": "Reading for information, vocabulary building, and critical thinking.",
+          "howTo": [
+            "1️⃣ Read the Wonder of the Day 🧠",
+            "2️⃣ Try the vocabulary challenge 🔤",
+            "3️⃣ Answer the 'Did You Get It?' questions ✅",
+            "4️⃣ Write 1 sentence about what surprised you ✍️"
+          ],
+          "whyTopPick": "High-interest topics that make reading feel like exploring.",
+          "freeAccess": "Free to access.",
+          "ageCheck": "Excellent for 11–12."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "reading",
         "slug": "best-set-mini-pack-11-12-reading",
         "title": "Best “Set” 🎒🗓️ (11–12 Reading mini-pack)",
         "description": "A weekly routine that mixes skills + fun 📖✨",
@@ -896,6 +922,32 @@
           "whyTopPick": "Incredibly popular and effective for bridging the gap to native-speed English.",
           "freeAccess": "Fully free to access on the site or podcast apps.",
           "ageCheck": "Best for stronger 11-12 learners; broad topics."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "11-12-listening-bbc-learning-english-6-min",
+        "title": "BBC Learning English — 6 Minute English 🎧⏱️",
+        "description": "Short 6-minute discussion episodes with vocabulary and quiz.",
+        "link": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english",
+        "format": "audio",
+        "level": "A2–B1",
+        "time": "10–15 min",
+        "focus": "topic vocabulary, listening for detail",
+        "notes": "",
+        "details": {
+          "type": "Short listening episodes + vocab 🎧📝",
+          "teaches": "Topic vocabulary, listening for detail, and natural conversation patterns.",
+          "howTo": [
+            "1️⃣ Listen once without reading the transcript 🎧",
+            "2️⃣ Answer the quiz question ✅",
+            "3️⃣ Listen again with the transcript 📄🔁",
+            "4️⃣ Write 5 new words + meanings ✍️"
+          ],
+          "whyTopPick": "Perfect length and difficulty for daily listening habit building.",
+          "freeAccess": "Free to access on BBC.",
+          "ageCheck": "Good for 11–12; topics are mostly educational and safe."
         }
       },
       {
