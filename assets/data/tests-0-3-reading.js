@@ -21,8 +21,7 @@
       id: "q1",
       type: "multipleChoice",
       question: "Tap the letter: A",
-      options: ["A", "B", "C", "D"],
-      answer: 0,
+      options: ["B", "A", "C", "D"], answer: 1,
       difficulty: "easy",
       explanation: "A looks like a pointy triangle with a line."
     },
@@ -39,8 +38,7 @@
       id: "q3",
       type: "multipleChoice",
       question: "Tap the letter: C",
-      options: ["O", "C", "G", "Q"],
-      answer: 1,
+      options: ["O", "Q", "G", "C"], answer: 3,
       difficulty: "easy",
       explanation: "C is open like a smile."
     },
@@ -48,8 +46,7 @@
       id: "q4",
       type: "multipleChoice",
       question: "Tap the letter: M",
-      options: ["W", "N", "M", "H"],
-      answer: 2,
+      options: ["M", "N", "W", "H"], answer: 0,
       difficulty: "easy",
       explanation: "M has two mountains."
     },
@@ -57,8 +54,7 @@
       id: "q5",
       type: "multipleChoice",
       question: "Tap the letter: S",
-      options: ["S", "Z", "E", "G"],
-      answer: 0,
+      options: ["Z", "S", "E", "G"], answer: 1,
       difficulty: "easy",
       explanation: "S is a curvy snake shape."
     },
@@ -66,8 +62,7 @@
       id: "q6",
       type: "multipleChoice",
       question: "Which word says: MOM",
-      options: ["MOM", "DAD", "MAN", "MAP"],
-      answer: 0,
+      options: ["MAN", "DAD", "MOM", "MAP"], answer: 2,
       difficulty: "easy",
       explanation: "MOM = M-O-M."
     },
@@ -75,8 +70,7 @@
       id: "q7",
       type: "multipleChoice",
       question: "Which word says: DAD",
-      options: ["DAD", "DOG", "DOLL", "DAY"],
-      answer: 0,
+      options: ["DAY", "DOG", "DOLL", "DAD"], answer: 3,
       difficulty: "easy",
       explanation: "DAD = D-A-D."
     },
@@ -111,8 +105,7 @@
       id: "q11",
       type: "multipleChoice",
       question: "Which is the SAME as: A",
-      options: ["A", "a", "B", "b"],
-      answer: 0,
+      options: ["b", "a", "B", "A"], answer: 3,
       difficulty: "medium",
       explanation: "This one is the same big A."
     },
@@ -120,8 +113,7 @@
       id: "q12",
       type: "multipleChoice",
       question: "Which is the SAME as: O",
-      options: ["Q", "O", "C", "D"],
-      answer: 1,
+      options: ["O", "Q", "C", "D"], answer: 0,
       difficulty: "medium",
       explanation: "O is a round circle."
     },
@@ -129,8 +121,7 @@
       id: "q13",
       type: "multipleChoice",
       question: "Look at the word: BUS. Which picture matches?",
-      options: ["🚗", "🚲", "🚌", "🚂"],
-      answer: 2,
+      options: ["🚗", "🚌", "🚲", "🚂"], answer: 1,
       difficulty: "medium",
       explanation: "BUS matches the bus."
     },
@@ -147,8 +138,7 @@
       id: "q15",
       type: "multipleChoice",
       question: "Tap the letter: T",
-      options: ["F", "T", "I", "L"],
-      answer: 1,
+      options: ["F", "L", "I", "T"], answer: 3,
       difficulty: "easy",
       explanation: "T has a top line and a long line down."
     },
@@ -174,8 +164,7 @@
       id: "q18",
       type: "multipleChoice",
       question: "Tap the letter: R",
-      options: ["P", "R", "B", "K"],
-      answer: 1,
+      options: ["P", "B", "R", "K"], answer: 2,
       difficulty: "easy",
       explanation: "R looks like P with a little leg."
     },
@@ -183,8 +172,7 @@
       id: "q19",
       type: "multipleChoice",
       question: "Which word says: HI",
-      options: ["HI", "BY", "IT", "HE"],
-      answer: 0,
+      options: ["HE", "BY", "IT", "HI"], answer: 3,
       difficulty: "easy",
       explanation: "HI = H-I."
     },
@@ -192,8 +180,7 @@
       id: "q20",
       type: "multipleChoice",
       question: "Which word says: NO",
-      options: ["ON", "NO", "GO", "OK"],
-      answer: 1,
+      options: ["NO", "ON", "GO", "OK"], answer: 0,
       difficulty: "easy",
       explanation: "NO = N-O."
     },
@@ -201,8 +188,7 @@
       id: "q21",
       type: "multipleChoice",
       question: "Look at the word: CAR. Which picture matches?",
-      options: ["🚗", "🚌", "🚲", "🚂"],
-      answer: 0,
+      options: ["🚌", "🚗", "🚲", "🚂"], answer: 1,
       difficulty: "easy",
       explanation: "CAR matches the car picture."
     },
@@ -210,8 +196,7 @@
       id: "q22",
       type: "multipleChoice",
       question: "Look at the word: APPLE. Which picture matches?",
-      options: ["🍎", "🍌", "🍇", "🍓"],
-      answer: 0,
+      options: ["🍇", "🍌", "🍎", "🍓"], answer: 2,
       difficulty: "easy",
       explanation: "APPLE matches the apple picture."
     },
@@ -219,8 +204,7 @@
       id: "q23",
       type: "multipleChoice",
       question: "Look at the word: MILK. Which picture matches?",
-      options: ["🥛", "💧", "🧃", "☕"],
-      answer: 0,
+      options: ["☕", "💧", "🧃", "🥛"], answer: 3,
       difficulty: "easy",
       explanation: "MILK matches the milk picture."
     },
@@ -237,8 +221,7 @@
       id: "q25",
       type: "multipleChoice",
       question: "Tap the first letter in: CAT",
-      options: ["C", "A", "T", "B"],
-      answer: 0,
+      options: ["A", "C", "T", "B"], answer: 1,
       difficulty: "medium",
       explanation: "CAT starts with C."
     },
@@ -246,8 +229,7 @@
       id: "q26",
       type: "multipleChoice",
       question: "Tap the first letter in: DOG",
-      options: ["D", "O", "G", "B"],
-      answer: 0,
+      options: ["G", "O", "D", "B"], answer: 2,
       difficulty: "medium",
       explanation: "DOG starts with D."
     },
@@ -255,8 +237,7 @@
       id: "q27",
       type: "multipleChoice",
       question: "Tap the last letter in: DOG",
-      options: ["D", "O", "G", "C"],
-      answer: 2,
+      options: ["D", "O", "C", "G"], answer: 3,
       difficulty: "medium",
       explanation: "DOG ends with G."
     },
@@ -264,8 +245,7 @@
       id: "q28",
       type: "multipleChoice",
       question: "Which is the SAME as: a",
-      options: ["A", "a", "B", "b"],
-      answer: 1,
+      options: ["a", "A", "B", "b"], answer: 0,
       difficulty: "medium",
       explanation: "This one is the same small a."
     },
@@ -273,8 +253,7 @@
       id: "q29",
       type: "multipleChoice",
       question: "Tap the letter: o",
-      options: ["o", "a", "c", "e"],
-      answer: 0,
+      options: ["a", "o", "c", "e"], answer: 1,
       difficulty: "medium",
       explanation: "o is a small round circle."
     },
@@ -282,8 +261,7 @@
       id: "q30",
       type: "multipleChoice",
       question: "Look at the word: MOON. Which picture matches?",
-      options: ["☀️", "🌙", "⭐", "☁️"],
-      answer: 1,
+      options: ["☀️", "⭐", "🌙", "☁️"], answer: 2,
       difficulty: "medium",
       explanation: "MOON matches the moon."
     }
@@ -291,8 +269,7 @@
       id: "q31",
       type: "multipleChoice",
       question: "Tap the letter: F",
-      options: ["F", "E", "T", "P"],
-      answer: 0,
+      options: ["P", "E", "T", "F"], answer: 3,
       difficulty: "easy",
       explanation: "F has one line down and two lines across."
     }
@@ -300,8 +277,7 @@
       id: "q32",
       type: "multipleChoice",
       question: "Tap the letter: G",
-      options: ["C", "O", "G", "Q"],
-      answer: 2,
+      options: ["G", "O", "C", "Q"], answer: 0,
       difficulty: "easy",
       explanation: "G looks like C with a little line."
     }
@@ -318,8 +294,7 @@
       id: "q34",
       type: "multipleChoice",
       question: "Tap the letter: J",
-      options: ["I", "J", "L", "T"],
-      answer: 1,
+      options: ["I", "L", "J", "T"], answer: 2,
       difficulty: "easy",
       explanation: "J has a hook at the bottom."
     }
@@ -327,8 +302,7 @@
       id: "q35",
       type: "multipleChoice",
       question: "Tap the letter: K",
-      options: ["R", "B", "K", "H"],
-      answer: 2,
+      options: ["R", "B", "H", "K"], answer: 3,
       difficulty: "easy",
       explanation: "K has one line and two slanted lines."
     }
@@ -345,8 +319,7 @@
       id: "q37",
       type: "multipleChoice",
       question: "Tap the letter: P",
-      options: ["P", "R", "B", "D"],
-      answer: 0,
+      options: ["R", "P", "B", "D"], answer: 1,
       difficulty: "easy",
       explanation: "P has one bump at the top."
     }
@@ -354,8 +327,7 @@
       id: "q38",
       type: "multipleChoice",
       question: "Tap the letter: U",
-      options: ["V", "U", "Y", "J"],
-      answer: 1,
+      options: ["V", "Y", "U", "J"], answer: 2,
       difficulty: "easy",
       explanation: "U looks like a cup shape."
     }
@@ -363,8 +335,7 @@
       id: "q39",
       type: "multipleChoice",
       question: "Tap the letter: V",
-      options: ["Y", "U", "V", "W"],
-      answer: 2,
+      options: ["Y", "U", "W", "V"], answer: 3,
       difficulty: "easy",
       explanation: "V looks like a pointy valley."
     }
@@ -372,8 +343,7 @@
       id: "q40",
       type: "multipleChoice",
       question: "Tap the letter: X",
-      options: ["K", "X", "Y", "Z"],
-      answer: 1,
+      options: ["X", "K", "Y", "Z"], answer: 0,
       difficulty: "easy",
       explanation: "X is two lines crossing."
     }
@@ -390,8 +360,7 @@
       id: "q42",
       type: "multipleChoice",
       question: "Look at the word: CUP. Which picture matches?",
-      options: ["☕", "🍪", "🥛", "🍎"],
-      answer: 0,
+      options: ["🥛", "🍪", "☕", "🍎"], answer: 2,
       difficulty: "easy",
       explanation: "CUP matches the cup."
     }
@@ -399,8 +368,7 @@
       id: "q43",
       type: "multipleChoice",
       question: "Look at the word: BOOK. Which picture matches?",
-      options: ["📘", "✏️", "🧩", "🧸"],
-      answer: 0,
+      options: ["🧸", "✏️", "🧩", "📘"], answer: 3,
       difficulty: "easy",
       explanation: "BOOK matches the book."
     }
@@ -417,8 +385,7 @@
       id: "q45",
       type: "multipleChoice",
       question: "Look at the word: BIRD. Which picture matches?",
-      options: ["🐦", "🐠", "🐭", "🦋"],
-      answer: 0,
+      options: ["🐠", "🐦", "🐭", "🦋"], answer: 1,
       difficulty: "easy",
       explanation: "BIRD matches the bird."
     }
@@ -426,8 +393,7 @@
       id: "q46",
       type: "multipleChoice",
       question: "Look at the word: TREE. Which picture matches?",
-      options: ["🌳", "🌸", "🍄", "🌵"],
-      answer: 0,
+      options: ["🍄", "🌸", "🌳", "🌵"], answer: 2,
       difficulty: "easy",
       explanation: "TREE matches the tree."
     }
@@ -435,8 +401,7 @@
       id: "q47",
       type: "multipleChoice",
       question: "Look at the word: STAR. Which picture matches?",
-      options: ["⭐", "🌙", "☀️", "☁️"],
-      answer: 0,
+      options: ["☁️", "🌙", "☀️", "⭐"], answer: 3,
       difficulty: "easy",
       explanation: "STAR matches the star."
     }
@@ -453,8 +418,7 @@
       id: "q49",
       type: "multipleChoice",
       question: "Look at the word: TRAIN. Which picture matches?",
-      options: ["🚂", "🚌", "🚗", "✈️"],
-      answer: 0,
+      options: ["🚌", "🚂", "🚗", "✈️"], answer: 1,
       difficulty: "easy",
       explanation: "TRAIN matches the train."
     }
@@ -462,8 +426,7 @@
       id: "q50",
       type: "multipleChoice",
       question: "Look at the word: BOAT. Which picture matches?",
-      options: ["🚤", "🚗", "🚲", "🚂"],
-      answer: 0,
+      options: ["🚲", "🚗", "🚤", "🚂"], answer: 2,
       difficulty: "easy",
       explanation: "BOAT matches the boat."
     }
@@ -471,8 +434,7 @@
       id: "q51",
       type: "multipleChoice",
       question: "Which is the SAME as: b",
-      options: ["B", "b", "d", "p"],
-      answer: 1,
+      options: ["B", "p", "d", "b"], answer: 3,
       difficulty: "medium",
       explanation: "This one is the same small b."
     }
@@ -480,8 +442,7 @@
       id: "q52",
       type: "multipleChoice",
       question: "Which is the SAME as: D",
-      options: ["O", "D", "B", "P"],
-      answer: 1,
+      options: ["D", "O", "B", "P"], answer: 0,
       difficulty: "medium",
       explanation: "D has one big curve."
     }
@@ -489,8 +450,7 @@
       id: "q53",
       type: "multipleChoice",
       question: "Which word says: YES",
-      options: ["YES", "YET", "YOU", "YAM"],
-      answer: 0,
+      options: ["YET", "YES", "YOU", "YAM"], answer: 1,
       difficulty: "medium",
       explanation: "YES = Y-E-S."
     }
@@ -498,8 +458,7 @@
       id: "q54",
       type: "multipleChoice",
       question: "Which word says: GO",
-      options: ["DO", "GO", "NO", "SO"],
-      answer: 1,
+      options: ["DO", "NO", "GO", "SO"], answer: 2,
       difficulty: "easy",
       explanation: "GO = G-O."
     }
@@ -507,8 +466,7 @@
       id: "q55",
       type: "multipleChoice",
       question: "Which word says: UP",
-      options: ["UP", "PU", "OP", "IP"],
-      answer: 0,
+      options: ["IP", "PU", "OP", "UP"], answer: 3,
       difficulty: "medium",
       explanation: "UP = U-P."
     }
@@ -525,8 +483,7 @@
       id: "q57",
       type: "multipleChoice",
       question: "Tap the first letter in: BUS",
-      options: ["B", "U", "S", "D"],
-      answer: 0,
+      options: ["U", "B", "S", "D"], answer: 1,
       difficulty: "medium",
       explanation: "BUS starts with B."
     }
@@ -534,8 +491,7 @@
       id: "q58",
       type: "multipleChoice",
       question: "Tap the first letter in: MILK",
-      options: ["M", "I", "L", "K"],
-      answer: 0,
+      options: ["L", "I", "M", "K"], answer: 2,
       difficulty: "medium",
       explanation: "MILK starts with M."
     }
@@ -543,8 +499,7 @@
       id: "q59",
       type: "multipleChoice",
       question: "Tap the last letter in: CAT",
-      options: ["C", "A", "T", "D"],
-      answer: 2,
+      options: ["C", "A", "D", "T"], answer: 3,
       difficulty: "medium",
       explanation: "CAT ends with T."
     }
@@ -570,8 +525,7 @@
       id: "q62",
       type: "multipleChoice",
       question: "Look at the word: EGG. Which picture matches?",
-      options: ["🥚", "🍎", "🍞", "🥛"],
-      answer: 0,
+      options: ["🍞", "🍎", "🥚", "🥛"], answer: 2,
       difficulty: "easy",
       explanation: "EGG matches the egg."
     }
@@ -579,8 +533,7 @@
       id: "q63",
       type: "multipleChoice",
       question: "Look at the word: ICE. Which picture matches?",
-      options: ["🧊", "🔥", "💧", "☀️"],
-      answer: 0,
+      options: ["☀️", "🔥", "💧", "🧊"], answer: 3,
       difficulty: "medium",
       explanation: "ICE matches the ice cube."
     }
@@ -597,8 +550,7 @@
       id: "q65",
       type: "multipleChoice",
       question: "Tap the last letter in: FISH",
-      options: ["F", "I", "S", "H"],
-      answer: 3,
+      options: ["F", "H", "S", "I"], answer: 1,
       difficulty: "medium",
       explanation: "FISH ends with H."
     }
@@ -606,8 +558,7 @@
       id: "q66",
       type: "multipleChoice",
       question: "Tap the first letter in: HAT",
-      options: ["H", "A", "T", "B"],
-      answer: 0,
+      options: ["T", "A", "H", "B"], answer: 2,
       difficulty: "medium",
       explanation: "HAT starts with H."
     }
@@ -615,8 +566,7 @@
       id: "q67",
       type: "multipleChoice",
       question: "Tap the last letter in: HAT",
-      options: ["H", "A", "T", "D"],
-      answer: 2,
+      options: ["H", "A", "D", "T"], answer: 3,
       difficulty: "medium",
       explanation: "HAT ends with T."
     }
@@ -624,8 +574,7 @@
       id: "q68",
       type: "multipleChoice",
       question: "Which is the SAME as: m",
-      options: ["M", "n", "m", "w"],
-      answer: 2,
+      options: ["m", "n", "M", "w"], answer: 0,
       difficulty: "medium",
       explanation: "This one is the same small m."
     }
@@ -633,8 +582,7 @@
       id: "q69",
       type: "multipleChoice",
       question: "Which is the SAME as: R",
-      options: ["K", "P", "R", "B"],
-      answer: 2,
+      options: ["K", "R", "P", "B"], answer: 1,
       difficulty: "medium",
       explanation: "R has a bump and a little leg."
     }
@@ -642,8 +590,7 @@
       id: "q70",
       type: "multipleChoice",
       question: "Tap the letter: y",
-      options: ["v", "y", "g", "j"],
-      answer: 1,
+      options: ["v", "g", "y", "j"], answer: 2,
       difficulty: "medium",
       explanation: "y goes down like a tail."
     }
@@ -651,8 +598,7 @@
       id: "q71",
       type: "multipleChoice",
       question: "Tap the letter: p",
-      options: ["q", "b", "p", "d"],
-      answer: 2,
+      options: ["q", "b", "d", "p"], answer: 3,
       difficulty: "medium",
       explanation: "p has a stick and one bump."
     }
@@ -660,8 +606,7 @@
       id: "q72",
       type: "multipleChoice",
       question: "Tap the letter: t",
-      options: ["f", "l", "t", "i"],
-      answer: 2,
+      options: ["t", "l", "f", "i"], answer: 0,
       difficulty: "medium",
       explanation: "t has a little line across."
     }
@@ -669,8 +614,7 @@
       id: "q73",
       type: "multipleChoice",
       question: "Look at the word: SHOE. Which picture matches?",
-      options: ["👟", "🧦", "🧤", "🧢"],
-      answer: 0,
+      options: ["🧦", "👟", "🧤", "🧢"], answer: 1,
       difficulty: "easy",
       explanation: "SHOE matches the shoe."
     }
@@ -678,8 +622,7 @@
       id: "q74",
       type: "multipleChoice",
       question: "Look at the word: SOCK. Which picture matches?",
-      options: ["🧦", "👟", "👖", "🧥"],
-      answer: 0,
+      options: ["👖", "👟", "🧦", "🧥"], answer: 2,
       difficulty: "easy",
       explanation: "SOCK matches the sock."
     }
@@ -687,8 +630,7 @@
       id: "q75",
       type: "multipleChoice",
       question: "Look at the word: DOLL. Which picture matches?",
-      options: ["🧸", "🪆", "🚗", "⚽"],
-      answer: 1,
+      options: ["🧸", "⚽", "🚗", "🪆"], answer: 3,
       difficulty: "easy",
       explanation: "DOLL matches the doll."
     }
@@ -714,8 +656,7 @@
       id: "q78",
       type: "multipleChoice",
       question: "Look at the word: BREAD. Which picture matches?",
-      options: ["🍞", "🍚", "🥞", "🥐"],
-      answer: 0,
+      options: ["🥞", "🍚", "🍞", "🥐"], answer: 2,
       difficulty: "medium",
       explanation: "BREAD matches the bread."
     }
@@ -723,8 +664,7 @@
       id: "q79",
       type: "multipleChoice",
       question: "Look at the word: WATER. Which picture matches?",
-      options: ["💧", "🥛", "🧃", "☕"],
-      answer: 0,
+      options: ["☕", "🥛", "🧃", "💧"], answer: 3,
       difficulty: "medium",
       explanation: "WATER matches the water drop."
     }
@@ -741,8 +681,7 @@
       id: "q81",
       type: "multipleChoice",
       question: "Tap the letter: T",
-      options: ["T", "I", "L", "F"],
-      answer: 0,
+      options: ["I", "T", "L", "F"], answer: 1,
       difficulty: "easy",
       explanation: "T has a line on top and a line down."
     }

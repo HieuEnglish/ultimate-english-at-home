@@ -40,8 +40,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "bird",
-      options: ["🐦", "🐟", "🐸", "🐢"],
-      answer: 0,
+      options: ["🐸", "🐟", "🐦", "🐢"], answer: 2,
       difficulty: "easy",
       explanation: "Bird = 🐦"
     },
@@ -50,8 +49,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "fish",
-      options: ["🐦", "🐟", "🦋", "🐞"],
-      answer: 1,
+      options: ["🐦", "🐞", "🦋", "🐟"], answer: 3,
       difficulty: "easy",
       explanation: "Fish = 🐟"
     },
@@ -60,8 +58,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "cow",
-      options: ["🐷", "🐮", "🐴", "🐑"],
-      answer: 1,
+      options: ["🐮", "🐷", "🐴", "🐑"], answer: 0,
       difficulty: "easy",
       explanation: "Cow = 🐮"
     },
@@ -70,8 +67,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "ball",
-      options: ["⚽", "🚗", "🧸", "🍎"],
-      answer: 0,
+      options: ["🚗", "⚽", "🧸", "🍎"], answer: 1,
       difficulty: "easy",
       explanation: "Ball = ⚽"
     },
@@ -80,8 +76,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "car",
-      options: ["🚗", "🚲", "✈️", "🚂"],
-      answer: 0,
+      options: ["✈️", "🚲", "🚗", "🚂"], answer: 2,
       difficulty: "easy",
       explanation: "Car = 🚗"
     },
@@ -90,8 +85,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "apple",
-      options: ["🍎", "🍌", "🍇", "🍓"],
-      answer: 0,
+      options: ["🍓", "🍌", "🍇", "🍎"], answer: 3,
       difficulty: "easy",
       explanation: "Apple = 🍎"
     },
@@ -100,8 +94,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "banana",
-      options: ["🍎", "🍌", "🍐", "🥝"],
-      answer: 1,
+      options: ["🍌", "🍎", "🍐", "🥝"], answer: 0,
       difficulty: "easy",
       explanation: "Banana = 🍌"
     },
@@ -110,8 +103,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "milk",
-      options: ["🥛", "💧", "🧃", "☕"],
-      answer: 0,
+      options: ["💧", "🥛", "🧃", "☕"], answer: 1,
       difficulty: "easy",
       explanation: "Milk = 🥛"
     },
@@ -120,8 +112,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "water",
-      options: ["💧", "🥛", "🍹", "🧃"],
-      answer: 0,
+      options: ["🍹", "🥛", "💧", "🧃"], answer: 2,
       difficulty: "easy",
       explanation: "Water = 💧"
     },
@@ -130,8 +121,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "nose",
-      options: ["👃", "👂", "👁️", "🦷"],
-      answer: 0,
+      options: ["🦷", "👂", "👁️", "👃"], answer: 3,
       difficulty: "easy",
       explanation: "Nose = 👃"
     },
@@ -140,8 +130,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "ear",
-      options: ["👃", "👂", "🖐️", "🦶"],
-      answer: 1,
+      options: ["👂", "👃", "🖐️", "🦶"], answer: 0,
       difficulty: "easy",
       explanation: "Ear = 👂"
     },
@@ -150,8 +139,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "red",
-      options: ["🔴", "🔵", "🟢", "🟡"],
-      answer: 0,
+      options: ["🔵", "🔴", "🟢", "🟡"], answer: 1,
       difficulty: "easy",
       explanation: "Red = 🔴"
     },
@@ -160,8 +148,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "blue",
-      options: ["🔵", "🔴", "🟢", "🟡"],
-      answer: 0,
+      options: ["🟢", "🔴", "🔵", "🟡"], answer: 2,
       difficulty: "easy",
       explanation: "Blue = 🔵"
     },
@@ -170,8 +157,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "green",
-      options: ["🔴", "🔵", "🟢", "🟡"],
-      answer: 2,
+      options: ["🔴", "🔵", "🟡", "🟢"], answer: 3,
       difficulty: "easy",
       explanation: "Green = 🟢"
     },
@@ -180,8 +166,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "yellow",
-      options: ["🔴", "🔵", "🟢", "🟡"],
-      answer: 3,
+      options: ["🟡", "🔵", "🟢", "🔴"], answer: 0,
       difficulty: "easy",
       explanation: "Yellow = 🟡"
     },
@@ -190,8 +175,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "sun",
-      options: ["☀️", "🌙", "⭐", "☁️"],
-      answer: 0,
+      options: ["🌙", "☀️", "⭐", "☁️"], answer: 1,
       difficulty: "easy",
       explanation: "Sun = ☀️"
     },
@@ -200,8 +184,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "moon",
-      options: ["☀️", "🌙", "⭐", "🌈"],
-      answer: 1,
+      options: ["☀️", "⭐", "🌙", "🌈"], answer: 2,
       difficulty: "easy",
       explanation: "Moon = 🌙"
     },
@@ -210,8 +193,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "star",
-      options: ["⭐", "🌙", "☀️", "☁️"],
-      answer: 0,
+      options: ["☁️", "🌙", "☀️", "⭐"], answer: 3,
       difficulty: "easy",
       explanation: "Star = ⭐"
     },
@@ -230,8 +212,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "lion",
-      options: ["🦁", "🐯", "🐻", "🐵"],
-      answer: 0,
+      options: ["🐯", "🦁", "🐻", "🐵"], answer: 1,
       difficulty: "easy",
       explanation: "Lion = 🦁"
     },
@@ -240,8 +221,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "train",
-      options: ["🚂", "🚗", "🚲", "✈️"],
-      answer: 0,
+      options: ["🚲", "🚗", "🚂", "✈️"], answer: 2,
       difficulty: "easy",
       explanation: "Train = 🚂"
     },
@@ -250,8 +230,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "book",
-      options: ["📖", "🧸", "🖍️", "⚽"],
-      answer: 0,
+      options: ["⚽", "🧸", "🖍️", "📖"], answer: 3,
       difficulty: "easy",
       explanation: "Book = 📖"
     },
@@ -270,8 +249,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "eye",
-      options: ["👁️", "👂", "👃", "🦷"],
-      answer: 0,
+      options: ["👂", "👁️", "👃", "🦷"], answer: 1,
       difficulty: "easy",
       explanation: "Eye = 👁️"
     },
@@ -280,8 +258,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "mouth",
-      options: ["👄", "👁️", "👂", "👃"],
-      answer: 0,
+      options: ["👂", "👁️", "👄", "👃"], answer: 2,
       difficulty: "easy",
       explanation: "Mouth = 👄"
     },
@@ -290,8 +267,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "hand",
-      options: ["🖐️", "🦶", "👂", "👃"],
-      answer: 0,
+      options: ["👃", "🦶", "👂", "🖐️"], answer: 3,
       difficulty: "easy",
       explanation: "Hand = 🖐️"
     },
@@ -310,8 +286,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "baby",
-      options: ["👶", "👧", "👦", "👵"],
-      answer: 0,
+      options: ["👧", "👶", "👦", "👵"], answer: 1,
       difficulty: "easy",
       explanation: "Baby = 👶"
     },
@@ -320,8 +295,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "pig",
-      options: ["🐷", "🐮", "🐴", "🐑"],
-      answer: 0,
+      options: ["🐴", "🐮", "🐷", "🐑"], answer: 2,
       difficulty: "easy",
       explanation: "Pig = 🐷"
     },
@@ -330,8 +304,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "horse",
-      options: ["🐴", "🐷", "🐰", "🐶"],
-      answer: 0,
+      options: ["🐶", "🐷", "🐰", "🐴"], answer: 3,
       difficulty: "easy",
       explanation: "Horse = 🐴"
     },
@@ -350,8 +323,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "frog",
-      options: ["🐸", "🐢", "🐍", "🦎"],
-      answer: 0,
+      options: ["🐢", "🐸", "🐍", "🦎"], answer: 1,
       difficulty: "easy",
       explanation: "Frog = 🐸"
     },
@@ -360,8 +332,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "turtle",
-      options: ["🐢", "🐸", "🐟", "🐞"],
-      answer: 0,
+      options: ["🐟", "🐸", "🐢", "🐞"], answer: 2,
       difficulty: "easy",
       explanation: "Turtle = 🐢"
     },
@@ -370,8 +341,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "bear",
-      options: ["🐻", "🦁", "🐵", "🐯"],
-      answer: 0,
+      options: ["🐯", "🦁", "🐵", "🐻"], answer: 3,
       difficulty: "easy",
       explanation: "Bear = 🐻"
     },
@@ -390,8 +360,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "tiger",
-      options: ["🐯", "🦁", "🐻", "🐱"],
-      answer: 0,
+      options: ["🦁", "🐯", "🐻", "🐱"], answer: 1,
       difficulty: "easy",
       explanation: "Tiger = 🐯"
     },
@@ -400,8 +369,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "rabbit",
-      options: ["🐰", "🐭", "🐹", "🦊"],
-      answer: 0,
+      options: ["🐹", "🐭", "🐰", "🦊"], answer: 2,
       difficulty: "easy",
       explanation: "Rabbit = 🐰"
     },
@@ -410,8 +378,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "fox",
-      options: ["🦊", "🐰", "🐻", "🐯"],
-      answer: 0,
+      options: ["🐯", "🐰", "🐻", "🦊"], answer: 3,
       difficulty: "easy",
       explanation: "Fox = 🦊"
     },
@@ -430,8 +397,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "penguin",
-      options: ["🐧", "🐦", "🐔", "🦆"],
-      answer: 0,
+      options: ["🐦", "🐧", "🐔", "🦆"], answer: 1,
       difficulty: "easy",
       explanation: "Penguin = 🐧"
     },
@@ -440,8 +406,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "elephant",
-      options: ["🐘", "🦒", "🦓", "🦏"],
-      answer: 0,
+      options: ["🦓", "🦒", "🐘", "🦏"], answer: 2,
       difficulty: "easy",
       explanation: "Elephant = 🐘"
     },
@@ -450,8 +415,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "giraffe",
-      options: ["🦒", "🐘", "🦓", "🦏"],
-      answer: 0,
+      options: ["🦏", "🐘", "🦓", "🦒"], answer: 3,
       difficulty: "easy",
       explanation: "Giraffe = 🦒"
     },
@@ -470,8 +434,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "camel",
-      options: ["🐪", "🐴", "🦒", "🐘"],
-      answer: 0,
+      options: ["🐴", "🐪", "🦒", "🐘"], answer: 1,
       difficulty: "easy",
       explanation: "Camel = 🐪"
     },
@@ -480,8 +443,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "snake",
-      options: ["🐍", "🦎", "🐸", "🐢"],
-      answer: 0,
+      options: ["🐸", "🦎", "🐍", "🐢"], answer: 2,
       difficulty: "easy",
       explanation: "Snake = 🐍"
     },
@@ -490,8 +452,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "butterfly",
-      options: ["🦋", "🐞", "🐝", "🐜"],
-      answer: 0,
+      options: ["🐜", "🐞", "🐝", "🦋"], answer: 3,
       difficulty: "easy",
       explanation: "Butterfly = 🦋"
     },
@@ -510,8 +471,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "ant",
-      options: ["🐜", "🐝", "🐞", "🦋"],
-      answer: 0,
+      options: ["🐝", "🐜", "🐞", "🦋"], answer: 1,
       difficulty: "easy",
       explanation: "Ant = 🐜"
     },
@@ -520,8 +480,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "spider",
-      options: ["🕷️", "🐜", "🐞", "🦋"],
-      answer: 0,
+      options: ["🐞", "🐜", "🕷️", "🦋"], answer: 2,
       difficulty: "easy",
       explanation: "Spider = 🕷️"
     },
@@ -530,8 +489,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "tree",
-      options: ["🌳", "🌸", "🌵", "🍀"],
-      answer: 0,
+      options: ["🍀", "🌸", "🌵", "🌳"], answer: 3,
       difficulty: "easy",
       explanation: "Tree = 🌳"
     },
@@ -550,8 +508,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "leaf",
-      options: ["🍃", "⭐", "🍎", "🚗"],
-      answer: 0,
+      options: ["⭐", "🍃", "🍎", "🚗"], answer: 1,
       difficulty: "easy",
       explanation: "Leaf = 🍃"
     },
@@ -560,8 +517,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "rain",
-      options: ["🌧️", "☀️", "❄️", "🌈"],
-      answer: 0,
+      options: ["❄️", "☀️", "🌧️", "🌈"], answer: 2,
       difficulty: "easy",
       explanation: "Rain = 🌧️"
     },
@@ -570,8 +526,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "cloud",
-      options: ["☁️", "🌧️", "☀️", "🌙"],
-      answer: 0,
+      options: ["🌙", "🌧️", "☀️", "☁️"], answer: 3,
       difficulty: "easy",
       explanation: "Cloud = ☁️"
     },
@@ -590,8 +545,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "fire",
-      options: ["🔥", "💧", "❄️", "🌧️"],
-      answer: 0,
+      options: ["💧", "🔥", "❄️", "🌧️"], answer: 1,
       difficulty: "easy",
       explanation: "Fire = 🔥"
     },
@@ -600,8 +554,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "ice",
-      options: ["🧊", "🔥", "💧", "☀️"],
-      answer: 0,
+      options: ["💧", "🔥", "🧊", "☀️"], answer: 2,
       difficulty: "easy",
       explanation: "Ice = 🧊"
     },
@@ -610,8 +563,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "cookie",
-      options: ["🍪", "🍎", "🍞", "🧀"],
-      answer: 0,
+      options: ["🧀", "🍎", "🍞", "🍪"], answer: 3,
       difficulty: "easy",
       explanation: "Cookie = 🍪"
     },
@@ -630,8 +582,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "egg",
-      options: ["🥚", "🍞", "🍪", "🍇"],
-      answer: 0,
+      options: ["🍞", "🥚", "🍪", "🍇"], answer: 1,
       difficulty: "easy",
       explanation: "Egg = 🥚"
     },
@@ -640,8 +591,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "cheese",
-      options: ["🧀", "🥛", "🍎", "🍪"],
-      answer: 0,
+      options: ["🍎", "🥛", "🧀", "🍪"], answer: 2,
       difficulty: "easy",
       explanation: "Cheese = 🧀"
     },
@@ -650,8 +600,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "juice",
-      options: ["🧃", "🥛", "💧", "☕"],
-      answer: 0,
+      options: ["☕", "🥛", "💧", "🧃"], answer: 3,
       difficulty: "easy",
       explanation: "Juice = 🧃"
     },
@@ -670,8 +619,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "spoon",
-      options: ["🥄", "🍴", "🧸", "🧦"],
-      answer: 0,
+      options: ["🍴", "🥄", "🧸", "🧦"], answer: 1,
       difficulty: "easy",
       explanation: "Spoon = 🥄"
     },
@@ -680,8 +628,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "plate",
-      options: ["🍽️", "🥄", "🥤", "🧸"],
-      answer: 0,
+      options: ["🥤", "🥄", "🍽️", "🧸"], answer: 2,
       difficulty: "easy",
       explanation: "Plate = 🍽️"
     },
@@ -690,8 +637,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "chair",
-      options: ["🪑", "🛏️", "🚪", "🧸"],
-      answer: 0,
+      options: ["🧸", "🛏️", "🚪", "🪑"], answer: 3,
       difficulty: "easy",
       explanation: "Chair = 🪑"
     },
@@ -710,8 +656,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "bath",
-      options: ["🛁", "🚗", "🧸", "🛏️"],
-      answer: 0,
+      options: ["🚗", "🛁", "🧸", "🛏️"], answer: 1,
       difficulty: "easy",
       explanation: "Bath = 🛁"
     },
@@ -720,8 +665,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "toilet",
-      options: ["🚽", "🛁", "🪑", "🛏️"],
-      answer: 0,
+      options: ["🪑", "🛁", "🚽", "🛏️"], answer: 2,
       difficulty: "easy",
       explanation: "Toilet = 🚽"
     },
@@ -730,8 +674,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "soap",
-      options: ["🧼", "🪥", "🧻", "🧴"],
-      answer: 0,
+      options: ["🧴", "🪥", "🧻", "🧼"], answer: 3,
       difficulty: "easy",
       explanation: "Soap = 🧼"
     },
@@ -750,8 +693,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "tissue",
-      options: ["🧻", "🧼", "🪥", "🧴"],
-      answer: 0,
+      options: ["🧼", "🧻", "🪥", "🧴"], answer: 1,
       difficulty: "easy",
       explanation: "Tissue = 🧻"
     },
@@ -760,8 +702,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "hat",
-      options: ["🧢", "👟", "🧦", "🧤"],
-      answer: 0,
+      options: ["🧦", "👟", "🧢", "🧤"], answer: 2,
       difficulty: "easy",
       explanation: "Hat = 🧢"
     },
@@ -770,8 +711,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "shirt",
-      options: ["👕", "👖", "🧦", "👟"],
-      answer: 0,
+      options: ["👟", "👖", "🧦", "👕"], answer: 3,
       difficulty: "easy",
       explanation: "Shirt = 👕"
     },
@@ -790,8 +730,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "sock",
-      options: ["🧦", "👟", "🧤", "👒"],
-      answer: 0,
+      options: ["👟", "🧦", "🧤", "👒"], answer: 1,
       difficulty: "easy",
       explanation: "Sock = 🧦"
     },
@@ -800,8 +739,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "circle",
-      options: ["⭕", "⬛", "🔺", "⭐"],
-      answer: 0,
+      options: ["🔺", "⬛", "⭕", "⭐"], answer: 2,
       difficulty: "easy",
       explanation: "Circle = ⭕"
     },
@@ -810,8 +748,7 @@
       type: "listenChoice",
       question: "Listen. Tap the picture.",
       say: "heart",
-      options: ["❤️", "⭐", "☀️", "🍎"],
-      answer: 0,
+      options: ["🍎", "⭐", "☀️", "❤️"], answer: 3,
       difficulty: "easy",
       explanation: "Heart = ❤️"
     },

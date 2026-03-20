@@ -49,8 +49,7 @@
       type: "listenChoice",
       question: "Listen. What is the rule?",
       say: "Teacher: No talking during the test.",
-      options: ["No writing", "No talking", "No reading", "No listening"],
-      answer: 1,
+      options: ["No writing", "No listening", "No reading", "No talking"], answer: 3,
       difficulty: "easy",
       explanation: "The rule is: no talking."
     },
@@ -59,8 +58,7 @@
       type: "listenChoice",
       question: "Listen. What time is practice?",
       say: "Tom: What time is football practice? Mia: At four o'clock.",
-      options: ["3:00", "4:00", "5:00", "6:00"],
-      answer: 1,
+      options: ["4:00", "3:00", "5:00", "6:00"], answer: 0,
       difficulty: "easy",
       explanation: "Mia says practice is at four o'clock."
     },
@@ -69,8 +67,7 @@
       type: "listenChoice",
       question: "Listen. When is Ben's project due?",
       say: "Ben has a science project due on Monday.",
-      options: ["Monday", "Tuesday", "Wednesday", "Friday"],
-      answer: 0,
+      options: ["Tuesday", "Monday", "Wednesday", "Friday"], answer: 1,
       difficulty: "easy",
       explanation: "Ben says it is due on Monday."
     },
@@ -79,8 +76,7 @@
       type: "listenChoice",
       question: "Listen. How many apples are there?",
       say: "There are three apples on the table.",
-      options: ["Two", "Three", "Four", "Five"],
-      answer: 1,
+      options: ["Two", "Four", "Three", "Five"], answer: 2,
       difficulty: "easy",
       explanation: "The speaker says: three apples."
     },
@@ -89,8 +85,7 @@
       type: "listenChoice",
       question: "Listen. Who forgot their lunch?",
       say: "Teacher: Anna forgot her lunch today.",
-      options: ["Anna", "Ben", "Tom", "Mia"],
-      answer: 0,
+      options: ["Mia", "Ben", "Tom", "Anna"], answer: 3,
       difficulty: "easy",
       explanation: "The teacher says Anna forgot her lunch."
     },
@@ -99,8 +94,7 @@
       type: "listenChoice",
       question: "Listen. What does Alex prefer?",
       say: "Alex: I prefer tea, not coffee.",
-      options: ["Coffee", "Tea", "Juice", "Milk"],
-      answer: 1,
+      options: ["Tea", "Coffee", "Juice", "Milk"], answer: 0,
       difficulty: "easy",
       explanation: "Alex says he prefers tea."
     },
@@ -119,8 +113,7 @@
       type: "listenChoice",
       question: "Listen. What should students bring on the trip?",
       say: "Bring a hat and a bottle of water for the trip.",
-      options: ["A video game", "A hat and water", "A TV", "A pillow"],
-      answer: 1,
+      options: ["A video game", "A TV", "A hat and water", "A pillow"], answer: 2,
       difficulty: "easy",
       explanation: "The speaker says: bring a hat and water."
     },
@@ -131,8 +124,7 @@
       type: "listenChoice",
       question: "Listen. What is the weather like?",
       say: "It is raining, so take an umbrella.",
-      options: ["Sunny", "Snowy", "Raining", "Windy"],
-      answer: 2,
+      options: ["Sunny", "Snowy", "Windy", "Raining"], answer: 3,
       difficulty: "easy",
       explanation: "The speaker says it is raining."
     },
@@ -151,8 +143,7 @@
       type: "listenChoice",
       question: "Listen. Where should they meet?",
       say: "Let's meet at the front gate after school.",
-      options: ["Front gate", "Classroom", "Cafeteria", "Library"],
-      answer: 0,
+      options: ["Classroom", "Front gate", "Cafeteria", "Library"], answer: 1,
       difficulty: "easy",
       explanation: "They should meet at the front gate."
     },
@@ -161,8 +152,7 @@
       type: "listenChoice",
       question: "Listen. Which jacket is cheaper?",
       say: "The red jacket is twenty dollars. The blue jacket is fifteen dollars.",
-      options: ["Red jacket", "Blue jacket", "They are the same price", "Not enough information"],
-      answer: 1,
+      options: ["Red jacket", "They are the same price", "Blue jacket", "Not enough information"], answer: 2,
       difficulty: "medium",
       explanation: "Fifteen dollars is cheaper than twenty dollars."
     },
@@ -171,8 +161,7 @@
       type: "listenChoice",
       question: "Listen. Where were the keys?",
       say: "I found the keys under the sofa.",
-      options: ["On the table", "Under the sofa", "In the fridge", "In the bag"],
-      answer: 1,
+      options: ["On the table", "In the bag", "In the fridge", "Under the sofa"], answer: 3,
       difficulty: "medium",
       explanation: "The keys were under the sofa."
     },
@@ -206,8 +195,7 @@
       question: "Look. Listen. True or False?",
       picture: "🚌",
       say: "This is a train.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "medium",
       explanation: "🚌 is a bus."
     },
@@ -217,8 +205,7 @@
       question: "Look. Listen. True or False?",
       picture: "🐢",
       say: "This is a turtle.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "🐢 is a turtle."
     },
@@ -258,8 +245,7 @@
       type: "listenChoice",
       question: "Listen. What should you do when you finish?",
       say: "When you finish your work, put your paper on my desk.",
-      options: ["Throw it away", "Put it on the teacher's desk", "Hide it", "Take it home"],
-      answer: 1,
+      options: ["Put it on the teacher's desk", "Throw it away", "Hide it", "Take it home"], answer: 0,
       difficulty: "medium",
       explanation: "The teacher says: put it on my desk."
     },
@@ -278,8 +264,7 @@
       type: "listenChoice",
       question: "Listen. Where should the milk go?",
       say: "Please put the milk in the refrigerator.",
-      options: ["In the refrigerator", "On the counter", "In the drawer", "In the oven"],
-      answer: 0,
+      options: ["In the drawer", "On the counter", "In the refrigerator", "In the oven"], answer: 2,
       difficulty: "easy",
       explanation: "Milk should go in the refrigerator."
     },
@@ -288,8 +273,7 @@
       type: "listenChoice",
       question: "Listen. How many sentences should the homework have?",
       say: "Write five sentences for homework.",
-      options: ["Three", "Four", "Five", "Six"],
-      answer: 2,
+      options: ["Three", "Four", "Six", "Five"], answer: 3,
       difficulty: "medium",
       explanation: "The teacher says: five sentences."
     },
@@ -318,8 +302,7 @@
       type: "listenChoice",
       question: "Listen. What should you do first?",
       say: "First, wash your hands. Then eat your snack.",
-      options: ["Eat your snack first", "Wash your hands first", "Run outside first", "Call your friend first"],
-      answer: 1,
+      options: ["Eat your snack first", "Run outside first", "Wash your hands first", "Call your friend first"], answer: 2,
       difficulty: "medium",
       explanation: "The speaker says: first, wash your hands."
     },
@@ -337,8 +320,7 @@
       type: "listenChoice",
       question: "Listen. What time does the movie start?",
       say: "The movie starts at six p.m., but we should arrive early.",
-      options: ["5 p.m.", "6 p.m.", "7 p.m.", "8 p.m."],
-      answer: 1,
+      options: ["5 p.m.", "8 p.m.", "7 p.m.", "6 p.m."], answer: 3,
       difficulty: "medium",
       explanation: "The movie starts at six p.m."
     },
@@ -381,8 +363,7 @@
       type: "listenChoice",
       question: "Listen. Which bus should they take?",
       say: "Dad: We need to go to the stadium. Take bus twelve, not bus twenty.",
-      options: ["Bus 2", "Bus 12", "Bus 20", "Bus 22"],
-      answer: 1,
+      options: ["Bus 2", "Bus 22", "Bus 20", "Bus 12"], answer: 3,
       difficulty: "medium",
       explanation: "The speaker says bus twelve."
     },
@@ -391,8 +372,7 @@
       type: "listenChoice",
       question: "Listen. How much is one ticket?",
       say: "Clerk: One ticket is five dollars. Two tickets are ten dollars.",
-      options: ["$2", "$4", "$5", "$10"],
-      answer: 2,
+      options: ["$5", "$4", "$2", "$10"], answer: 0,
       difficulty: "easy",
       explanation: "One ticket costs five dollars."
     },
@@ -401,8 +381,7 @@
       type: "listenChoice",
       question: "Listen. When does the library close today?",
       say: "Announcement: The library will close at five o'clock today.",
-      options: ["4:00", "4:30", "5:00", "6:00"],
-      answer: 2,
+      options: ["4:00", "5:00", "4:30", "6:00"], answer: 1,
       difficulty: "easy",
       explanation: "The announcement says it closes at five o'clock."
     },
@@ -411,8 +390,7 @@
       type: "listenChoice",
       question: "Listen. How long should they read?",
       say: "Teacher: Please read quietly for ten minutes, then answer the questions.",
-      options: ["5 minutes", "10 minutes", "15 minutes", "20 minutes"],
-      answer: 1,
+      options: ["5 minutes", "15 minutes", "10 minutes", "20 minutes"], answer: 2,
       difficulty: "easy",
       explanation: "The teacher says: ten minutes."
     },
@@ -421,8 +399,7 @@
       type: "listenChoice",
       question: "Listen. Where did they see the lost dog?",
       say: "Boy: Have you seen the lost dog? Girl: Yes, I saw it near the river.",
-      options: ["Near the river", "At the mall", "Behind the school", "On the bus"],
-      answer: 0,
+      options: ["On the bus", "At the mall", "Behind the school", "Near the river"], answer: 3,
       difficulty: "medium",
       explanation: "The girl says she saw it near the river."
     },
@@ -431,8 +408,7 @@
       type: "listenChoice",
       question: "Listen. Which fruit does Alex choose?",
       say: "Alex: Should I get an apple or an orange? Mom: Choose one. Alex: I'll take an orange.",
-      options: ["Apple", "Orange", "Banana", "Grapes"],
-      answer: 1,
+      options: ["Orange", "Apple", "Banana", "Grapes"], answer: 0,
       difficulty: "easy",
       explanation: "Alex says he will take an orange."
     },
@@ -451,8 +427,7 @@
       type: "listenChoice",
       question: "Listen. What day is the meeting now?",
       say: "Text message: The meeting is moved from Monday to Tuesday.",
-      options: ["Monday", "Tuesday", "Wednesday", "Friday"],
-      answer: 1,
+      options: ["Monday", "Wednesday", "Tuesday", "Friday"], answer: 2,
       difficulty: "medium",
       explanation: "It is moved to Tuesday."
     },
@@ -461,8 +436,7 @@
       type: "listenChoice",
       question: "Listen. Why will practice be indoors?",
       say: "Coach: It might rain after school, so practice will be indoors today.",
-      options: ["Because it is too hot", "Because it might rain", "Because the field is new", "Because everyone is late"],
-      answer: 1,
+      options: ["Because it is too hot", "Because everyone is late", "Because the field is new", "Because it might rain"], answer: 3,
       difficulty: "medium",
       explanation: "Practice is indoors because it might rain."
     },
@@ -481,8 +455,7 @@
       type: "listenChoice",
       question: "Listen. What should they use to go upstairs?",
       say: "Mom: The elevator is busy. Let's take the stairs.",
-      options: ["The stairs", "A bicycle", "A car", "A skateboard"],
-      answer: 0,
+      options: ["A bicycle", "The stairs", "A car", "A skateboard"], answer: 1,
       difficulty: "easy",
       explanation: "Mom says to take the stairs."
     },
@@ -491,8 +464,7 @@
       type: "listenChoice",
       question: "Listen. What time does the museum open?",
       say: "Guide: The museum opens at nine thirty and closes at four.",
-      options: ["9:00", "9:30", "4:00", "4:30"],
-      answer: 1,
+      options: ["9:00", "4:00", "9:30", "4:30"], answer: 2,
       difficulty: "medium",
       explanation: "The guide says it opens at nine thirty."
     },
@@ -501,8 +473,7 @@
       type: "listenChoice",
       question: "Listen. Where should the ice cream go?",
       say: "Dad: Put the ice cream in the freezer, please.",
-      options: ["In the freezer", "On the table", "In the backpack", "Under the sink"],
-      answer: 0,
+      options: ["Under the sink", "On the table", "In the backpack", "In the freezer"], answer: 3,
       difficulty: "easy",
       explanation: "Ice cream goes in the freezer."
     },
@@ -511,8 +482,7 @@
       type: "listenChoice",
       question: "Listen. What should you do before leaving the room?",
       say: "Teacher: Before you leave, turn off the lights and close the door.",
-      options: ["Open the window", "Turn off the lights", "Move the desks", "Start a new page"],
-      answer: 1,
+      options: ["Turn off the lights", "Open the window", "Move the desks", "Start a new page"], answer: 0,
       difficulty: "medium",
       explanation: "The teacher says to turn off the lights (and close the door)."
     },
@@ -521,8 +491,7 @@
       type: "listenChoice",
       question: "Listen. How long until the game starts?",
       say: "Announcer: The game will start in twenty minutes.",
-      options: ["In 2 minutes", "In 10 minutes", "In 20 minutes", "Tomorrow"],
-      answer: 2,
+      options: ["In 2 minutes", "In 20 minutes", "In 10 minutes", "Tomorrow"], answer: 1,
       difficulty: "easy",
       explanation: "The announcer says: twenty minutes."
     },
@@ -531,8 +500,7 @@
       type: "listenChoice",
       question: "Listen. Which animal are they talking about?",
       say: "Girl: I saw an animal with a very long neck and spots. Boy: That sounds like a giraffe.",
-      options: ["Tiger", "Giraffe", "Rabbit", "Duck"],
-      answer: 1,
+      options: ["Tiger", "Rabbit", "Giraffe", "Duck"], answer: 2,
       difficulty: "medium",
       explanation: "A long neck and spots describes a giraffe."
     },
@@ -541,8 +509,7 @@
       type: "listenChoice",
       question: "Listen. What should you do if you don't understand?",
       say: "Teacher: If you don't understand the question, raise your hand and ask me.",
-      options: ["Close your book", "Raise your hand and ask", "Leave the room", "Skip every question"],
-      answer: 1,
+      options: ["Close your book", "Skip every question", "Leave the room", "Raise your hand and ask"], answer: 3,
       difficulty: "medium",
       explanation: "The teacher says to raise your hand and ask."
     },
@@ -561,8 +528,7 @@
       type: "listenChoice",
       question: "Listen. What did Sara buy?",
       say: "Sara: I went to the shop after school. I bought a notebook for my new class.",
-      options: ["A notebook", "A football", "A sandwich", "A jacket"],
-      answer: 0,
+      options: ["A football", "A notebook", "A sandwich", "A jacket"], answer: 1,
       difficulty: "easy",
       explanation: "Sara says she bought a notebook."
     },
@@ -571,8 +537,7 @@
       type: "listenChoice",
       question: "Listen. Where is the homework?",
       say: "Ben: I can't find my homework. Mom: Check your backpack pocket. Ben: Oh, it's there!",
-      options: ["In the backpack pocket", "On the kitchen table", "In the bathroom", "At the library"],
-      answer: 0,
+      options: ["In the bathroom", "On the kitchen table", "In the backpack pocket", "At the library"], answer: 2,
       difficulty: "medium",
       explanation: "Mom tells Ben to check the backpack pocket."
     },
@@ -581,8 +546,7 @@
       type: "listenChoice",
       question: "Listen. Which platform should they use?",
       say: "Speaker: The train to Green City will leave from platform two.",
-      options: ["Platform 1", "Platform 2", "Platform 3", "Platform 4"],
-      answer: 1,
+      options: ["Platform 1", "Platform 4", "Platform 3", "Platform 2"], answer: 3,
       difficulty: "medium",
       explanation: "The speaker says platform two."
     },
@@ -611,8 +575,7 @@
       type: "listenChoice",
       question: "Listen. Why does he bring a jacket?",
       say: "Brother: Why are you bringing a jacket? Sister: Because it will be cold tonight.",
-      options: ["Because it will be cold", "Because it will be sunny", "Because it is too small", "Because it is new"],
-      answer: 0,
+      options: ["Because it is too small", "Because it will be sunny", "Because it will be cold", "Because it is new"], answer: 2,
       difficulty: "medium",
       explanation: "She brings a jacket because it will be cold tonight."
     },
@@ -621,8 +584,7 @@
       type: "listenChoice",
       question: "Listen. What time should they wake up?",
       say: "Mom: Tomorrow, wake up at seven fifteen. We leave at eight.",
-      options: ["7:05", "7:15", "7:50", "8:15"],
-      answer: 1,
+      options: ["7:05", "8:15", "7:50", "7:15"], answer: 3,
       difficulty: "medium",
       explanation: "Mom says: seven fifteen."
     },
@@ -641,8 +603,7 @@
       type: "listenChoice",
       question: "Listen. Which fruit is cheaper?",
       say: "Shopkeeper: Apples are two dollars. Grapes are three dollars.",
-      options: ["Apples", "Grapes", "They cost the same", "The shopkeeper didn't say"],
-      answer: 0,
+      options: ["Grapes", "Apples", "They cost the same", "The shopkeeper didn't say"], answer: 1,
       difficulty: "medium",
       explanation: "Two dollars is cheaper than three dollars, so apples are cheaper."
     },
@@ -651,8 +612,7 @@
       type: "listenChoice",
       question: "Listen. What did the student forget?",
       say: "Teacher: Do you have your homework? Student: Oh no, I left it on my desk at home.",
-      options: ["A pencil", "Homework", "A coat", "Lunch money"],
-      answer: 1,
+      options: ["A pencil", "A coat", "Homework", "Lunch money"], answer: 2,
       difficulty: "medium",
       explanation: "The student says they left homework at home."
     },
@@ -661,8 +621,7 @@
       type: "listenChoice",
       question: "Listen. What should you do before crossing the road?",
       say: "Adult: Before you cross, look left and right for cars.",
-      options: ["Close your eyes", "Look left and right", "Run as fast as you can", "Walk backward"],
-      answer: 1,
+      options: ["Close your eyes", "Walk backward", "Run as fast as you can", "Look left and right"], answer: 3,
       difficulty: "easy",
       explanation: "You should look left and right before crossing."
     },
@@ -671,8 +630,7 @@
       type: "listenChoice",
       question: "Listen. What subject is next?",
       say: "Student: What's next after math? Teacher: Science is next period.",
-      options: ["Math", "Science", "Art", "Music"],
-      answer: 1,
+      options: ["Science", "Math", "Art", "Music"], answer: 0,
       difficulty: "easy",
       explanation: "The teacher says science is next."
     },
@@ -691,8 +649,7 @@
       type: "listenChoice",
       question: "Listen. What did the girl lose?",
       say: "Girl: I can't find my scarf. Boy: Did you leave it on the chair? Girl: Yes, that's where I left it.",
-      options: ["Her scarf", "Her shoes", "Her glasses", "Her book"],
-      answer: 0,
+      options: ["Her glasses", "Her shoes", "Her scarf", "Her book"], answer: 2,
       difficulty: "medium",
       explanation: "She says she can't find her scarf."
     },
@@ -701,8 +658,7 @@
       type: "listenChoice",
       question: "Listen. Where should the class line up?",
       say: "Teacher: Class, line up by the blue door, please.",
-      options: ["By the blue door", "By the red door", "By the window", "By the teacher's desk"],
-      answer: 0,
+      options: ["By the teacher's desk", "By the red door", "By the window", "By the blue door"], answer: 3,
       difficulty: "easy",
       explanation: "The teacher says: by the blue door."
     },
@@ -721,8 +677,7 @@
       type: "listenChoice",
       question: "Listen. Where is the cat sleeping?",
       say: "Boy: Where is the cat? Girl: It's sleeping on the sofa.",
-      options: ["On the sofa", "Under the bed", "In the garden", "In the car"],
-      answer: 0,
+      options: ["Under the bed", "On the sofa", "In the garden", "In the car"], answer: 1,
       difficulty: "easy",
       explanation: "The girl says the cat is sleeping on the sofa."
     },
@@ -731,8 +686,7 @@
       type: "listenChoice",
       question: "Listen. What should students underline?",
       say: "Teacher: In this paragraph, underline the topic sentence, not every detail.",
-      options: ["Every detail", "The topic sentence", "All the commas", "The last word only"],
-      answer: 1,
+      options: ["Every detail", "All the commas", "The topic sentence", "The last word only"], answer: 2,
       difficulty: "hard",
       explanation: "The teacher says to underline the topic sentence."
     },
@@ -742,8 +696,7 @@
       question: "Look. Listen. True or False?",
       picture: "🍓",
       say: "This is a strawberry.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "🍓 is a strawberry."
     },
@@ -753,8 +706,7 @@
       question: "Look. Listen. True or False?",
       picture: "🦁",
       say: "This is a tiger.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "medium",
       explanation: "🦁 is a lion, not a tiger."
     },
@@ -764,8 +716,7 @@
       question: "Look. Listen. True or False?",
       picture: "🐧",
       say: "This is a penguin.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "🐧 is a penguin."
     },
@@ -775,8 +726,7 @@
       question: "Look. Listen. True or False?",
       picture: "🥕",
       say: "This is a potato.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "easy",
       explanation: "🥕 is a carrot."
     },
@@ -861,8 +811,7 @@
       type: "listenChoice",
       question: "Listen. What should the student bring?",
       say: "Teacher: Please bring your raincoat tomorrow. It will rain.",
-      options: ["A raincoat", "A swimsuit", "A sandwich", "A toy"],
-      answer: 0,
+      options: ["A swimsuit", "A raincoat", "A sandwich", "A toy"], answer: 1,
       difficulty: "easy",
       explanation: "The teacher says: bring your raincoat."
     },
@@ -871,8 +820,7 @@
       type: "listenChoice",
       question: "Listen. What time is the meeting?",
       say: "The meeting starts at three thirty.",
-      options: ["3:30", "3:00", "4:30", "2:30"],
-      answer: 0,
+      options: ["4:30", "3:00", "3:30", "2:30"], answer: 2,
       difficulty: "medium",
       explanation: "Three thirty = 3:30."
     }

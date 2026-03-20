@@ -24,12 +24,11 @@
         "Linh forgot her water bottle at home. At break time, her friend Maya shared her bottle with Linh. Linh thanked Maya and promised to bring an extra bottle tomorrow.",
       question: "Why did Maya share her bottle?",
       options: [
-        "Because Linh forgot hers",
+        "Because Linh was late to class",
         "Because Maya had no water",
         "Because the teacher told her to",
-        "Because Linh was late to class"
-      ],
-      answer: 0,
+        "Because Linh forgot hers"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "The passage says Linh forgot her bottle at home, so Maya shared."
     },
@@ -50,8 +49,7 @@
       passage:
         "On Saturday, Amir visited a small museum with his family. He liked the room with old maps because he enjoys learning about different countries. Before leaving, he bought a postcard of a world map.",
       question: "Which heading fits the passage best?",
-      options: ["A Trip to the Museum", "Cooking at Home", "A Rainy School Day", "A Football Match"],
-      answer: 0,
+      options: ["Cooking at Home", "A Trip to the Museum", "A Rainy School Day", "A Football Match"], answer: 1,
       difficulty: "easy",
       explanation: "The passage is about visiting a museum."
     },
@@ -62,12 +60,11 @@
         "On Saturday, Amir visited a small museum with his family. He liked the room with old maps because he enjoys learning about different countries. Before leaving, he bought a postcard of a world map.",
       question: "Why did Amir like the room with old maps?",
       options: [
-        "He enjoys learning about countries",
-        "He wanted to draw maps",
         "He was looking for his family",
+        "He wanted to draw maps",
+        "He enjoys learning about countries",
         "He needed a place to sit"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "The text says he enjoys learning about different countries."
     },
@@ -77,8 +74,7 @@
       passage:
         "On Saturday, Amir visited a small museum with his family. He liked the room with old maps because he enjoys learning about different countries. Before leaving, he bought a postcard of a world map.",
       question: "Amir bought a postcard before he left.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "The last sentence says he bought a postcard before leaving."
     },
@@ -99,8 +95,7 @@
       passage:
         "Sora trained for a short race. She ran three times a week and stretched after each run. On race day, she felt nervous, but she remembered to breathe slowly. She finished the race and smiled.",
       question: "The word 'nervous' is closest in meaning to…",
-      options: ["worried", "hungry", "sleepy", "angry"],
-      answer: 0,
+      options: ["hungry", "worried", "sleepy", "angry"], answer: 1,
       difficulty: "medium",
       explanation: "Nervous means worried or a little scared."
     },
@@ -111,12 +106,11 @@
         "Sora trained for a short race. She ran three times a week and stretched after each run. On race day, she felt nervous, but she remembered to breathe slowly. She finished the race and smiled.",
       question: "Which sentence is true?",
       options: [
-        "Sora trained three times a week",
-        "Sora did not stretch at all",
         "Sora quit the race",
+        "Sora did not stretch at all",
+        "Sora trained three times a week",
         "Sora forgot to breathe"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "The passage says she ran three times a week."
     },
@@ -134,8 +128,7 @@
       passage:
         "At the library, Jia looked for a book about space. The librarian showed her a shelf with science books. Jia chose a book with photos of planets and read quietly for twenty minutes.",
       question: "Where was Jia?",
-      options: ["At the library", "At the zoo", "At the beach", "At a restaurant"],
-      answer: 0,
+      options: ["At a restaurant", "At the zoo", "At the beach", "At the library"], answer: 3,
       difficulty: "easy",
       explanation: "The first sentence says 'At the library'."
     },
@@ -161,8 +154,7 @@
       passage:
         "At the library, Jia looked for a book about space. The librarian showed her a shelf with science books. Jia chose a book with photos of planets and read quietly for twenty minutes.",
       question: "How long did Jia read?",
-      options: ["Twenty minutes", "Two minutes", "One hour", "All day"],
-      answer: 0,
+      options: ["Two minutes", "Twenty minutes", "One hour", "All day"], answer: 1,
       difficulty: "easy",
       explanation: "The passage says she read for twenty minutes."
     },
@@ -172,8 +164,7 @@
       passage:
         "The class planted seeds in small cups. Every day, they added a little water and put the cups near the window. After one week, tiny green leaves appeared.",
       question: "Which heading is best?",
-      options: ["Growing a Plant", "Buying New Shoes", "Building a Robot", "A Day at the Cinema"],
-      answer: 0,
+      options: ["Building a Robot", "Buying New Shoes", "Growing a Plant", "A Day at the Cinema"], answer: 2,
       difficulty: "easy",
       explanation: "The passage describes planting seeds and seeing leaves."
     },
@@ -183,8 +174,7 @@
       passage:
         "The class planted seeds in small cups. Every day, they added a little water and put the cups near the window. After one week, tiny green leaves appeared.",
       question: "The class watered the seeds every day.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "It says 'Every day, they added a little water'."
     },
@@ -206,12 +196,11 @@
         "Niko wanted to save money for a new skateboard. He decided to do small jobs at home, like washing dishes and watering plants. After two weeks, he counted his coins and felt proud.",
       question: "Why did Niko do small jobs at home?",
       options: [
-        "To save money for a skateboard",
         "To buy a new phone",
+        "To save money for a skateboard",
         "To skip homework",
         "To become a teacher"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "medium",
       explanation: "He wanted to save money for a skateboard."
     },
@@ -221,8 +210,7 @@
       passage:
         "Niko wanted to save money for a new skateboard. He decided to do small jobs at home, like washing dishes and watering plants. After two weeks, he counted his coins and felt proud.",
       question: "The word 'proud' means…",
-      options: ["happy with yourself", "tired", "confused", "bored"],
-      answer: 0,
+      options: ["confused", "tired", "happy with yourself", "bored"], answer: 2,
       difficulty: "medium",
       explanation: "Proud means you feel good about what you did."
     },
@@ -240,8 +228,7 @@
       passage:
         "During a storm, the power went out for ten minutes. Kai lit a small flashlight and sat with his sister in the living room. When the lights came back, they both cheered.",
       question: "What did Kai use when the power went out?",
-      options: ["A flashlight", "A fan", "A computer", "A bicycle"],
-      answer: 0,
+      options: ["A bicycle", "A fan", "A computer", "A flashlight"], answer: 3,
       difficulty: "easy",
       explanation: "He lit a small flashlight."
     },
@@ -251,8 +238,7 @@
       passage:
         "During a storm, the power went out for ten minutes. Kai lit a small flashlight and sat with his sister in the living room. When the lights came back, they both cheered.",
       question: "The power was out for one hour.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "easy",
       explanation: "It was out for ten minutes, not one hour."
     },
@@ -262,8 +248,7 @@
       passage:
         "Mina joined the art club. In the first meeting, the teacher asked everyone to draw something that made them feel calm. Mina drew a beach at sunset and used soft colours.",
       question: "What did Mina draw?",
-      options: ["A beach at sunset", "A busy city", "A scary monster", "A fast car"],
-      answer: 0,
+      options: ["A busy city", "A beach at sunset", "A scary monster", "A fast car"], answer: 1,
       difficulty: "easy",
       explanation: "The passage says she drew a beach at sunset."
     },
@@ -274,12 +259,11 @@
         "Mina joined the art club. In the first meeting, the teacher asked everyone to draw something that made them feel calm. Mina drew a beach at sunset and used soft colours.",
       question: "Why did the teacher ask students to draw?",
       options: [
-        "To draw something that made them feel calm",
-        "To copy a picture from the wall",
         "To finish maths homework",
+        "To copy a picture from the wall",
+        "To draw something that made them feel calm",
         "To clean the classroom"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "The teacher asked for something that made them feel calm."
     },
@@ -290,12 +274,11 @@
         "A koala sleeps for many hours each day. It saves energy because it eats eucalyptus leaves, which are not very high in energy. When it is awake, it slowly climbs and looks for more leaves.",
       question: "Why does the koala sleep so much?",
       options: [
-        "To save energy",
+        "To learn to fly",
         "Because it is always sick",
         "Because it is afraid of leaves",
-        "To learn to fly"
-      ],
-      answer: 0,
+        "To save energy"
+      ], answer: 3,
       difficulty: "medium",
       explanation: "The passage explains it sleeps to save energy."
     },
@@ -331,12 +314,11 @@
         "Rina made a paper airplane using a clean sheet of paper. It flew to the left at first, so she folded one wing again. Then she added a small piece of tape to the nose. After school, she tested it in the hallway and it glided far.",
       question: "Which heading fits the passage best?",
       options: [
-        "Testing a Paper Airplane",
         "A Broken Bicycle",
+        "Testing a Paper Airplane",
         "A Rainy Picnic",
         "A New Puppy"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The passage is about making and testing a paper airplane."
     },
@@ -348,11 +330,10 @@
       question: "Why did Rina change the wing?",
       options: [
         "Because the paper was wet",
-        "Because it flew to the left",
         "Because she lost the tape",
+        "Because it flew to the left",
         "Because the teacher asked her to"
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "It flew to the left at first, so she folded one wing again."
     },
@@ -364,11 +345,10 @@
       question: "The word 'glided' is closest in meaning to…",
       options: [
         "fell quickly",
-        "moved smoothly",
+        "spun loudly",
         "stopped suddenly",
-        "spun loudly"
-      ],
-      answer: 1,
+        "moved smoothly"
+      ], answer: 3,
       difficulty: "medium",
       explanation: "Glided means moved smoothly through the air."
     },
@@ -409,12 +389,11 @@
         "A desert is a very dry place, so it does not get much rain. Some plants, like cactus, can store water in their thick stems.",
       question: "The word 'dry' means…",
       options: [
-        "not wet",
-        "very loud",
         "full of plants",
+        "very loud",
+        "not wet",
         "made of metal"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "Dry means not wet."
     },
@@ -484,11 +463,10 @@
       question: "How did the kitchen smell?",
       options: [
         "Cold and wet",
-        "Warm and sweet",
         "Loud and bright",
+        "Warm and sweet",
         "Dirty and dusty"
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "The passage says the kitchen smelled warm and sweet."
     },
@@ -499,12 +477,11 @@
         "Then Leo kneaded the dough until it felt smooth.",
       question: "The word 'kneaded' means…",
       options: [
-        "to push and fold",
+        "to freeze in ice",
         "to cut with scissors",
         "to paint with a brush",
-        "to freeze in ice"
-      ],
-      answer: 0,
+        "to push and fold"
+      ], answer: 3,
       difficulty: "hard",
       explanation: "Kneading dough means pushing and folding it again and again."
     },
@@ -545,12 +522,11 @@
         "The class started a recycling project at school. They put new bins in the hallway and made signs for paper, plastic, and cans. Each day, the students sorted the rubbish into the correct bin. After a month, the hallway looked cleaner.",
       question: "Which heading fits the passage best?",
       options: [
-        "A School Recycling Project",
-        "A Trip to the Aquarium",
         "Learning to Play Chess",
+        "A Trip to the Aquarium",
+        "A School Recycling Project",
         "A New Pair of Shoes"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "The passage describes a recycling project at school."
     },
@@ -561,10 +537,9 @@
         "They made signs for paper, plastic, and cans.",
       question: "The signs helped students know which bin to use.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 0,
+        "False",
+        "True"
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Signs show what belongs in each bin."
     },
@@ -575,12 +550,11 @@
         "Each day, the students sorted the rubbish into the correct bin.",
       question: "The word 'sorted' means…",
       options: [
-        "mixed together",
         "put into groups",
+        "mixed together",
         "threw into the air",
         "hid under a desk"
-      ],
-      answer: 1,
+      ], answer: 0,
       difficulty: "medium",
       explanation: "Sorted means put things into groups."
     },
@@ -605,12 +579,11 @@
         "Mia went to a night market with her dad. The street was bright with lanterns and the air smelled like grilled food. Mia bought a cup of sugarcane juice and shared some grilled corn with her dad. When it got crowded, she held his hand.",
       question: "What did Mia buy to drink?",
       options: [
-        "Sugarcane juice",
         "Hot chocolate",
+        "Sugarcane juice",
         "Orange soup",
         "Plain water only"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The passage says Mia bought a cup of sugarcane juice."
     },
@@ -622,11 +595,10 @@
       question: "Why did Mia hold her dad's hand?",
       options: [
         "Because it was raining",
-        "Because it got crowded",
         "Because she was carrying a book",
+        "Because it got crowded",
         "Because she wanted to run away"
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "She held his hand when it got crowded."
     },
@@ -667,12 +639,11 @@
         "Mia went to a night market with her dad. The street was bright with lanterns and the air smelled like grilled food.",
       question: "Which heading is best?",
       options: [
-        "A Busy Night Market",
         "A Quiet Library",
+        "A Busy Night Market",
         "A Mountain Snowstorm",
         "A New Classroom Rule"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The passage describes a night market."
     },
@@ -711,10 +682,9 @@
         "When the babies hatch, they quickly crawl toward the ocean.",
       question: "The baby turtles move toward the ocean.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 0,
+        "False",
+        "True"
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The passage says they crawl toward the ocean."
     },
@@ -741,12 +711,11 @@
         "Sea turtles lay their eggs in warm sand. When the babies hatch, they quickly crawl toward the ocean.",
       question: "Which heading fits the passage best?",
       options: [
-        "Baby Turtles to the Sea",
         "How to Draw a Turtle",
+        "Baby Turtles to the Sea",
         "A Snowy Winter Day",
         "Making a Paper Boat"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The passage is about baby turtles hatching and going to the ocean."
     },
@@ -771,11 +740,10 @@
       question: "Why do some otters hold hands when they sleep?",
       options: [
         "To learn a new dance",
-        "So they do not drift apart",
         "To catch fish faster",
+        "So they do not drift apart",
         "So they can fly"
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "The passage says they hold hands so they do not drift apart."
     },
@@ -786,10 +754,9 @@
         "Sea otters often sleep while floating on their backs.",
       question: "Sea otters sleep while floating on their backs.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 0,
+        "False",
+        "True"
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The first sentence states this clearly."
     },
@@ -816,12 +783,11 @@
         "Sea otters often sleep while floating on their backs. Sometimes they hold hands with another otter so they do not drift apart. They may also wrap themselves in kelp.",
       question: "Which heading is best?",
       options: [
-        "Otters Staying Together",
         "How to Build a Boat",
+        "Otters Staying Together",
         "A Fast Basketball Game",
         "Cleaning a Bedroom"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The passage explains how otters stay together while sleeping."
     },
@@ -846,11 +812,10 @@
       question: "Why did Ben and his aunt turn back?",
       options: [
         "They forgot the map",
-        "They saw dark clouds and heard thunder",
         "They wanted to buy ice cream",
+        "They saw dark clouds and heard thunder",
         "They could not find any snacks"
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Dark clouds and thunder can mean a storm, so they turned back."
     },
@@ -861,12 +826,11 @@
         "Ben and his aunt walked up a mountain trail early in the morning. They carried water, a map, and some snacks.",
       question: "What did they bring with them?",
       options: [
-        "Water, a map, and snacks",
+        "A bicycle and a helmet",
         "Only a phone and a hat",
         "A tent and a stove",
-        "A bicycle and a helmet"
-      ],
-      answer: 0,
+        "Water, a map, and snacks"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "The passage lists water, a map, and some snacks."
     },
@@ -877,10 +841,9 @@
         "Halfway up, they saw dark clouds and heard thunder. They decided to turn back to stay safe.",
       question: "Ben and his aunt reached the top of the mountain.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 1,
+        "False",
+        "True"
+      ], answer: 0,
       difficulty: "easy",
       explanation: "They turned back halfway up, so they did not reach the top."
     },
@@ -891,12 +854,11 @@
         "Ben and his aunt walked up a mountain trail early in the morning.",
       question: "The word 'trail' means…",
       options: [
-        "a path",
         "a sandwich",
+        "a path",
         "a storm",
         "a pocket"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "A trail is a path you walk on."
     },
@@ -907,12 +869,11 @@
         "Ben and his aunt walked up a mountain trail early in the morning. Halfway up, they saw dark clouds and heard thunder. They decided to turn back to stay safe.",
       question: "Which heading fits the passage best?",
       options: [
-        "A Safe Mountain Walk",
-        "A New Video Game",
         "Learning to Swim",
+        "A New Video Game",
+        "A Safe Mountain Walk",
         "A Trip to the Dentist"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "The passage is about hiking and turning back to stay safe."
     },
@@ -935,12 +896,11 @@
         "Ben got on the city bus to go to football practice. He usually paid by tapping his bus card, but today he forgot it at home. The driver smiled and said Ben could pay with coins this time. Ben promised to keep his card in his bag tomorrow.",
       question: "Where was Ben going?",
       options: [
-        "To football practice",
+        "To a museum",
         "To a birthday party",
         "To the beach",
-        "To a museum"
-      ],
-      answer: 0,
+        "To football practice"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "The passage says he was going to football practice."
     },
@@ -951,12 +911,11 @@
         "He usually paid by tapping his bus card, but today he forgot it at home. The driver smiled and said Ben could pay with coins this time.",
       question: "What did the driver allow Ben to do?",
       options: [
-        "Ride for free forever",
         "Pay with coins this time",
+        "Ride for free forever",
         "Drive the bus",
         "Take the bus card home"
-      ],
-      answer: 1,
+      ], answer: 0,
       difficulty: "medium",
       explanation: "The driver said Ben could pay with coins this time."
     },
@@ -967,10 +926,9 @@
         "The driver smiled and said Ben could pay with coins this time.",
       question: "The driver was kind to Ben.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 0,
+        "False",
+        "True"
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Smiling and allowing coins shows kindness."
     },
@@ -981,12 +939,11 @@
         "He usually paid by tapping his bus card.",
       question: "The word 'tapping' means…",
       options: [
-        "touching quickly",
-        "sleeping deeply",
         "running far",
+        "sleeping deeply",
+        "touching quickly",
         "eating loudly"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "To tap a card means to touch it quickly to a reader."
     },
@@ -997,12 +954,11 @@
         "Ben got on the city bus to go to football practice. He usually paid by tapping his bus card, but today he forgot it at home.",
       question: "Which heading is best?",
       options: [
-        "Forgetting a Bus Card",
+        "A Snowy Camp Trip",
         "A Lost Library Book",
         "A Cooking Lesson",
-        "A Snowy Camp Trip"
-      ],
-      answer: 0,
+        "Forgetting a Bus Card"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "The passage is about forgetting a bus card and paying another way."
     },
@@ -1047,10 +1003,9 @@
       type: "trueFalse",
       question: "A title can help you guess what a passage is about.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 0,
+        "False",
+        "True"
+      ], answer: 1,
       difficulty: "easy",
       explanation: "The title often tells the topic of the passage."
     },
@@ -1061,12 +1016,11 @@
         "Sam fed his dog, took him for a walk, and then cleaned the water bowl.",
       question: "Which sentence is the best summary?",
       options: [
-        "Sam took care of his dog.",
-        "Sam bought a new dog.",
         "Sam fell asleep in class.",
+        "Sam bought a new dog.",
+        "Sam took care of his dog.",
         "Sam painted a picture."
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "The passage shows Sam doing several jobs to care for his dog."
     },
@@ -1077,12 +1031,11 @@
         "Linh packed her bag the night before. In the morning, she left early and arrived on time.",
       question: "Why did Linh arrive on time?",
       options: [
-        "She packed her bag and left early",
+        "She stayed up all night playing games",
         "She missed the bus",
         "She went back home for lunch",
-        "She stayed up all night playing games"
-      ],
-      answer: 0,
+        "She packed her bag and left early"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "The passage says she packed her bag and left early, so she arrived on time."
     },

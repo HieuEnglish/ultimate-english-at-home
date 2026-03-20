@@ -21,12 +21,11 @@
       type: "multipleChoice",
       question: "Choose the best topic sentence for a paragraph about a fun school day.",
       options: [
-        "My school is very big and old.",
         "Last Friday was the best day at school because we had a science fair.",
+        "My school is very big and old.",
         "Some students like maths and some like art.",
         "Teachers give homework on weekdays."
-      ],
-      answer: 1,
+      ], answer: 0,
       difficulty: "easy",
       explanation: "A topic sentence tells the main idea of the paragraph."
     },
@@ -52,8 +51,7 @@
       id: "q4",
       type: "multipleChoice",
       question: "Choose the best punctuation: Where are you going__",
-      options: [".", "?", "!", ","],
-      answer: 1,
+      options: [".", "!", "?", ","], answer: 2,
       difficulty: "easy",
       explanation: "A question needs a question mark."
     },
@@ -61,8 +59,7 @@
       id: "q5",
       type: "multipleChoice",
       question: "Choose the correct verb: Yesterday, we ____ to the museum.",
-      options: ["go", "goes", "went", "going"],
-      answer: 2,
+      options: ["go", "goes", "going", "went"], answer: 3,
       difficulty: "easy",
       explanation: "Yesterday shows the past. The past tense of go is went."
     },
@@ -79,8 +76,7 @@
       id: "q7",
       type: "multipleChoice",
       question: "Which word is spelled correctly?",
-      options: ["becaus", "because", "becose", "beacuse"],
-      answer: 1,
+      options: ["because", "becaus", "becose", "beacuse"], answer: 0,
       difficulty: "easy",
       explanation: "Because is the correct spelling."
     },
@@ -88,8 +84,7 @@
       id: "q8",
       type: "trueFalse",
       question: "A sentence should start with a capital letter.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "Capital letters help readers see new sentences."
     },
@@ -99,11 +94,10 @@
       question: "Choose the best word order.",
       options: [
         "To school I walked.",
-        "I walked to school.",
         "I to school walked.",
+        "I walked to school.",
         "Walked I to school."
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "The natural order is Subject + Verb + Object/Place."
     },
@@ -120,8 +114,7 @@
       id: "q11",
       type: "multipleChoice",
       question: "Choose the best ending: We turned off the lights and ____.",
-      options: ["go to bed", "went to bed", "going to bed", "goes to bed"],
-      answer: 1,
+      options: ["go to bed", "goes to bed", "going to bed", "went to bed"], answer: 3,
       difficulty: "medium",
       explanation: "Turned is past tense, so the next verb should be past: went."
     },
@@ -138,8 +131,7 @@
       id: "q13",
       type: "multipleChoice",
       question: "Choose the best linking word: I was tired, ____ I went to bed early.",
-      options: ["because", "so", "but", "or"],
-      answer: 1,
+      options: ["so", "because", "but", "or"], answer: 0,
       difficulty: "easy",
       explanation: "So shows a result."
     },
@@ -147,8 +139,7 @@
       id: "q14",
       type: "multipleChoice",
       question: "Choose the correct pronoun: Sara and I went to the shop. ____ bought ice cream.",
-      options: ["He", "She", "We", "They"],
-      answer: 2,
+      options: ["He", "We", "She", "They"], answer: 1,
       difficulty: "easy",
       explanation: "Sara and I = we."
     },
@@ -156,8 +147,7 @@
       id: "q15",
       type: "multipleChoice",
       question: "Choose the best word: I wanted to play outside, ____ it started to rain.",
-      options: ["because", "but", "so", "and"],
-      answer: 1,
+      options: ["because", "so", "but", "and"], answer: 2,
       difficulty: "easy",
       explanation: "But shows a contrast."
     },
@@ -372,8 +362,7 @@
       id: "q27",
       type: "multipleChoice",
       question: "Choose the best linking word: I packed my bag, ____ I checked my homework.",
-      options: ["then", "because", "but", "or"],
-      answer: 0,
+      options: ["or", "because", "but", "then"], answer: 3,
       difficulty: "easy",
       explanation: "Then shows the next step."
     },
@@ -409,11 +398,10 @@
       question: "Choose the correct punctuation: I can't wait to see the show__",
       options: [
         ".",
-        "?",
         "!",
+        "?",
         ","
-      ],
-      answer: 2,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "An exclamation mark (!) shows strong excitement."
     },
@@ -422,12 +410,11 @@
       type: "multipleChoice",
       question: "Choose the best title for a paragraph about a class recycling project.",
       options: [
-        "Our Recycling Project",
-        "My New Shoes",
         "A Scary Movie",
+        "My New Shoes",
+        "Our Recycling Project",
         "Winter Holidays"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "A title should match the topic of the paragraph."
     },
@@ -437,11 +424,10 @@
       question: "Choose the correct verb: Yesterday, I ____ my grandma.",
       options: [
         "visit",
-        "visited",
+        "visits",
         "visiting",
-        "visits"
-      ],
-      answer: 1,
+        "visited"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "Yesterday shows the past, so use visited."
     },
@@ -478,12 +464,11 @@
       type: "multipleChoice",
       question: "Choose the correct word: Please put the books ____ the shelf.",
       options: [
-        "on",
-        "in",
         "at",
+        "in",
+        "on",
         "to"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "We put books on a shelf."
     },
@@ -494,10 +479,9 @@
       options: [
         "Their",
         "There",
-        "They're",
-        "Theirs"
-      ],
-      answer: 2,
+        "Theirs",
+        "They're"
+      ], answer: 3,
       difficulty: "hard",
       explanation: "They're means 'they are'."
     },
@@ -506,12 +490,11 @@
       type: "multipleChoice",
       question: "Choose the best sentence.",
       options: [
-        "we went to the beach.",
-        "We went to the beach",
         "We went to the beach.",
+        "We went to the beach",
+        "we went to the beach.",
         "We Went to the beach."
-      ],
-      answer: 2,
+      ], answer: 0,
       difficulty: "easy",
       explanation: "A correct sentence starts with a capital letter and ends with a full stop."
     },
@@ -535,11 +518,10 @@
       question: "Choose the best word: The puppy was very ____ (cute).",
       options: [
         "slowly",
-        "cute",
         "cuteness",
+        "cute",
         "cutely"
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "We need an adjective to describe the puppy."
     },
@@ -550,10 +532,9 @@
       options: [
         "I bought apples bananas and grapes.",
         "I bought apples, bananas and grapes.",
-        "I bought apples, bananas, and grapes.",
-        "I bought apples bananas, and grapes."
-      ],
-      answer: 2,
+        "I bought apples bananas, and grapes.",
+        "I bought apples, bananas, and grapes."
+      ], answer: 3,
       difficulty: "medium",
       explanation: "Use commas to separate items in a list."
     },
@@ -562,12 +543,11 @@
       type: "multipleChoice",
       question: "Choose the best transition word: First, mix the flour. ____, add the water.",
       options: [
-        "Finally",
         "Next",
+        "Finally",
         "Because",
         "Suddenly"
-      ],
-      answer: 1,
+      ], answer: 0,
       difficulty: "easy",
       explanation: "Next shows the next step."
     },
@@ -591,11 +571,10 @@
       question: "Choose the best word order.",
       options: [
         "Always I brush my teeth.",
-        "I always brush my teeth.",
         "I brush my teeth always.",
+        "I always brush my teeth.",
         "Brush my teeth I always."
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "In English, 'always' usually comes before the main verb."
     },
@@ -606,10 +585,9 @@
       options: [
         "Because I said so.",
         "Sincerely, Your teacher",
-        "From, your friend",
-        "The end."
-      ],
-      answer: 2,
+        "The end.",
+        "From, your friend"
+      ], answer: 3,
       difficulty: "medium",
       explanation: "A friendly letter/message often ends with a closing like 'From,'."
     },
@@ -647,11 +625,10 @@
       question: "Choose the correct comparative: This puzzle is ____ than the last one.",
       options: [
         "hard",
-        "harder",
         "hardest",
+        "harder",
         "more hard"
-      ],
-      answer: 1,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Harder compares two things."
     },
@@ -660,12 +637,11 @@
       type: "multipleChoice",
       question: "Choose the best ending: After the storm, the sky became ____.",
       options: [
-        "clear",
+        "cleared",
         "clearly",
         "clears",
-        "cleared"
-      ],
-      answer: 0,
+        "clear"
+      ], answer: 3,
       difficulty: "medium",
       explanation: "We need an adjective: clear."
     },
@@ -818,10 +794,9 @@
       type: "trueFalse",
       question: "In dialogue, we use quotation marks around the words someone says.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 0,
+        "False",
+        "True"
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Quotation marks show spoken words in writing."
     },
@@ -830,10 +805,9 @@
       type: "trueFalse",
       question: "A full stop (.) is used at the end of a question.",
       options: [
-        "True",
-        "False"
-      ],
-      answer: 1,
+        "False",
+        "True"
+      ], answer: 0,
       difficulty: "easy",
       explanation: "Questions end with a question mark (?)."
     },

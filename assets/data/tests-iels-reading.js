@@ -72,12 +72,11 @@
       passage: P1,
       question: "Matching headings: Which heading best matches Paragraph B?",
       options: [
-        "Multiple treatment barriers target different contaminants",
         "How reservoirs are used for boating tourism",
+        "Multiple treatment barriers target different contaminants",
         "A warning that all sensors are unreliable",
         "Why wastewater should never be released"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Paragraph B lists several advanced treatment steps and what they remove."
     },
@@ -88,12 +87,11 @@
       passage: P1,
       question: "Matching headings: Which heading best matches Paragraph C?",
       options: [
-        "Two routes to potable reuse and the role of an environmental buffer",
-        "Pricing policies that reduce household water use",
         "Why brine is always harmless",
+        "Pricing policies that reduce household water use",
+        "Two routes to potable reuse and the role of an environmental buffer",
         "A comparison of dams and aquifers"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph C contrasts indirect and direct potable reuse."
     },
@@ -104,12 +102,11 @@
       passage: P1,
       question: "Matching headings: Which heading best matches Paragraph D?",
       options: [
-        "Concerns about consistent operation and trustworthy monitoring",
+        "A plan to replace laboratories with apps",
         "How slogans persuade the public",
         "Why microfiltration is unnecessary",
-        "A plan to replace laboratories with apps"
-      ],
-      answer: 0,
+        "Concerns about consistent operation and trustworthy monitoring"
+      ], answer: 3,
       difficulty: "hard",
       explanation: "Paragraph D focuses on management, maintenance, and measurement."
     },
@@ -135,8 +132,7 @@
       type: "multipleChoice",
       passage: P1,
       question: "True / False / Not Given: Potable reuse adds several treatment steps beyond conventional wastewater treatment.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph B says potable reuse goes further and adds multiple barriers."
     },
@@ -146,8 +142,7 @@
       type: "multipleChoice",
       passage: P1,
       question: "True / False / Not Given: Direct potable reuse always uses less energy than indirect potable reuse.",
-      options: ["True", "False", "Not Given"],
-      answer: 2,
+      options: ["Not Given", "False", "True"], answer: 0,
       difficulty: "hard",
       explanation: "Energy comparison between direct and indirect reuse is not stated."
     },
@@ -179,8 +174,7 @@
       type: "multipleChoice",
       passage: P1,
       question: "Which paragraph mentions energy use and the need to handle concentrated brine responsibly?",
-      options: ["A", "B", "C", "D", "E", "F"],
-      answer: 5,
+      options: ["A", "B", "C", "F", "E", "D"], answer: 3,
       difficulty: "medium",
       explanation: "Paragraph F notes energy demands and brine management."
     },
@@ -228,12 +222,11 @@
       passage: P2,
       question: "Which statement best summarises Passage 2?",
       options: [
-        "Digital tools can reduce mental load, but learning still needs active review",
-        "Outsourcing memory is a new invention of the smartphone era",
         "External memory always damages creativity",
+        "Outsourcing memory is a new invention of the smartphone era",
+        "Digital tools can reduce mental load, but learning still needs active review",
         "People remember more details when they can search later"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "The passage balances benefits of offloading with the need for active understanding."
     },
@@ -243,8 +236,7 @@
       type: "multipleChoice",
       passage: P2,
       question: "Which paragraph describes research showing people remember where information is stored rather than the details?",
-      options: ["A", "B", "C", "D", "E", "F"],
-      answer: 1,
+      options: ["A", "F", "C", "D", "E", "B"], answer: 5,
       difficulty: "easy",
       explanation: "Paragraph B describes this shift to location memory."
     },
@@ -254,8 +246,7 @@
       type: "multipleChoice",
       passage: P2,
       question: "Which paragraph notes that outsourcing memory existed before phones, but today’s systems are faster and searchable?",
-      options: ["A", "B", "C", "D", "E", "F"],
-      answer: 2,
+      options: ["C", "B", "A", "D", "E", "F"], answer: 0,
       difficulty: "medium",
       explanation: "Paragraph C compares older tools with modern scale and speed."
     },
@@ -265,8 +256,7 @@
       type: "multipleChoice",
       passage: P2,
       question: "Which paragraph gives examples of professionals using archives to support creative work?",
-      options: ["A", "B", "C", "D", "E", "F"],
-      answer: 3,
+      options: ["A", "D", "C", "B", "E", "F"], answer: 1,
       difficulty: "medium",
       explanation: "Paragraph D discusses researchers/designers using archives."
     },
@@ -276,8 +266,7 @@
       type: "multipleChoice",
       passage: P2,
       question: "True / False / Not Given: Cognitive offloading refers to using tools to reduce the effort of remembering and organising.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph A defines cognitive offloading in these terms."
     },
@@ -287,8 +276,7 @@
       type: "multipleChoice",
       passage: P2,
       question: "True / False / Not Given: People who offload information always remember the content better than those who do not.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["False", "True", "Not Given"], answer: 0,
       difficulty: "hard",
       explanation: "Paragraph B suggests the opposite for details: people may remember less content."
     },
@@ -298,8 +286,7 @@
       type: "multipleChoice",
       passage: P2,
       question: "True / False / Not Given: The passage claims that paper notebooks are more secure than digital notes in every situation.",
-      options: ["True", "False", "Not Given"],
-      answer: 2,
+      options: ["True", "Not Given", "False"], answer: 1,
       difficulty: "hard",
       explanation: "The passage discusses privacy risks but makes no blanket claim about paper vs digital security."
     },
@@ -309,8 +296,7 @@
       type: "multipleChoice",
       passage: P2,
       question: "True / False / Not Given: Taking photos of notes without reviewing them can lead to large collections that are poorly understood.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph E warns about capturing without review or summarising."
     },
@@ -343,12 +329,11 @@
       passage: P2,
       question: "In Paragraph C, what possible downside is linked to modern convenience?",
       options: [
-        "It may encourage a fragmented style of attention",
-        "It prevents any backups from being created",
         "It makes writing impossible for most people",
+        "It prevents any backups from being created",
+        "It may encourage a fragmented style of attention",
         "It eliminates the need for understanding"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph C says convenience can encourage fragmented attention."
     },
@@ -359,12 +344,11 @@
       passage: P2,
       question: "According to Paragraph E, which is a practical risk of relying on external systems?",
       options: [
-        "Subscriptions can lapse and systems can fail",
+        "Backups always erase older files",
         "All stored notes become public automatically",
         "Devices cannot store drafts or references",
-        "Backups always erase older files"
-      ],
-      answer: 0,
+        "Subscriptions can lapse and systems can fail"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "Paragraph E lists failures, lapsed subscriptions, and privacy concerns."
     },
@@ -395,12 +379,11 @@
       passage: P3,
       question: "Matching headings: Which heading best matches Paragraph A?",
       options: [
-        "A growing interest in removing aging infrastructure",
         "How reverse osmosis removes salt",
+        "A growing interest in removing aging infrastructure",
         "A guide to building new reservoirs",
         "Why fish ladders always solve migration"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph A introduces aging dams and the idea of removal."
     },
@@ -411,12 +394,11 @@
       passage: P3,
       question: "Matching headings: Which heading best matches Paragraph B?",
       options: [
-        "Sediment flow changes and downstream habitat effects",
-        "How smartphones replace diaries",
         "The benefits of brine concentration",
+        "How smartphones replace diaries",
+        "Sediment flow changes and downstream habitat effects",
         "Why turbidity never affects water quality"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph B explains sediment trapping and downstream erosion."
     },
@@ -427,12 +409,11 @@
       passage: P3,
       question: "Matching headings: Which heading best matches Paragraph D?",
       options: [
-        "Short-term impacts of removal and the need for planning",
+        "A list of subscription problems",
         "A claim that removal is instantly beneficial",
         "An argument that reservoirs always increase oxygen",
-        "A list of subscription problems"
-      ],
-      answer: 0,
+        "Short-term impacts of removal and the need for planning"
+      ], answer: 3,
       difficulty: "medium",
       explanation: "Paragraph D discusses turbidity and careful planning."
     },
@@ -459,12 +440,11 @@
       passage: P3,
       question: "According to the passage, what can trapped sediment do over time?",
       options: [
-        "Reduce reservoir storage capacity",
         "Increase fish migration speed",
+        "Reduce reservoir storage capacity",
         "Eliminate downstream erosion",
         "Raise oxygen levels below the dam"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph B says trapped sediment can reduce storage capacity."
     },
@@ -475,12 +455,11 @@
       passage: P3,
       question: "What is one limitation of fish ladders mentioned in the passage?",
       options: [
-        "They may not suit every species or flow condition",
-        "They always block sediment completely",
         "They reduce the height of reservoirs",
+        "They always block sediment completely",
+        "They may not suit every species or flow condition",
         "They can only be built in deserts"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph C notes fish ladders may not work for all species/conditions."
     },
@@ -491,12 +470,11 @@
       passage: P3,
       question: "Why can dam removal temporarily harm fish and water quality downstream?",
       options: [
-        "Stored sediment may increase turbidity for months",
+        "Fish ladders become longer",
         "Reservoirs immediately refill after removal",
         "Turbines stop producing oxygen",
-        "Fish ladders become longer"
-      ],
-      answer: 0,
+        "Stored sediment may increase turbidity for months"
+      ], answer: 3,
       difficulty: "medium",
       explanation: "Paragraph D describes sediment release and turbidity."
     },
@@ -522,8 +500,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Dams can trap sediment and alter habitats downstream.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph B explains sediment trapping and downstream effects."
     },
@@ -533,8 +510,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: The passage says removal always improves a river within a few days.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["False", "True", "Not Given"], answer: 0,
       difficulty: "easy",
       explanation: "Paragraph D and G indicate short-term disruption and long timelines."
     },
@@ -555,8 +531,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Scientists expect a restored river to be exactly identical to the pre-dam river.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph G says a restored system is rarely identical, but can regain functions."
     },
@@ -595,12 +570,11 @@
       passage: P3,
       question: "Matching headings: Which heading best matches Paragraph C?",
       options: [
-        "Fish passage is disrupted and reservoir water can change river conditions",
         "How rivers naturally form deserts",
+        "Fish passage is disrupted and reservoir water can change river conditions",
         "Why dams always increase oxygen levels",
         "A method for recycling wastewater into drinking water"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Paragraph C focuses on blocked migration, limits of fish ladders, and colder/low-oxygen releases."
     },
@@ -611,12 +585,11 @@
       passage: P3,
       question: "Matching headings: Which heading best matches Paragraph F?",
       options: [
-        "When modification is enough and when removal becomes practical",
-        "Why reservoirs should be expanded in all regions",
         "A claim that dams never require repairs",
+        "Why reservoirs should be expanded in all regions",
+        "When modification is enough and when removal becomes practical",
         "How cognitive offloading improves exam scores"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph F contrasts upgrading/modifying dams with situations where removal is the best option."
     },
@@ -627,12 +600,11 @@
       passage: P3,
       question: "Matching headings: Which heading best matches Paragraph G?",
       options: [
-        "Long-term indicators used to judge restoration success",
+        "An argument that sediment never moves downstream",
         "A guarantee that restoration is immediate",
         "How to design a fish ladder in five steps",
-        "An argument that sediment never moves downstream"
-      ],
-      answer: 0,
+        "Long-term indicators used to judge restoration success"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "Paragraph G explains that success is tracked over years using several ecological measures."
     },
@@ -676,8 +648,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "Which paragraph mentions that water released from the bottom of a reservoir can be colder and lower in oxygen?",
-      options: ["A", "B", "C", "D", "E", "F", "G"],
-      answer: 2,
+      options: ["A", "B", "D", "C", "E", "F", "G"], answer: 3,
       difficulty: "medium",
       explanation: "Paragraph C explains how deep-reservoir releases can alter temperature and oxygen."
     },
@@ -687,8 +658,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "Which paragraph describes how released sediment can increase turbidity for months after removal?",
-      options: ["A", "B", "C", "D", "E", "F", "G"],
-      answer: 3,
+      options: ["A", "B", "C", "E", "D", "F", "G"], answer: 4,
       difficulty: "easy",
       explanation: "Paragraph D explains the short-term turbidity problem following removal."
     },
@@ -698,8 +668,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "Which paragraph mentions phased removal or sediment management to reduce the shock of removal?",
-      options: ["A", "B", "C", "D", "E", "F", "G"],
-      answer: 3,
+      options: ["A", "B", "C", "F", "E", "D", "G"], answer: 5,
       difficulty: "medium",
       explanation: "Paragraph D says planning can include phased removal or sediment management."
     },
@@ -709,8 +678,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "Which paragraph discusses boating, lakeside property value, and local conflicts over benefits?",
-      options: ["A", "B", "C", "D", "E", "F", "G"],
-      answer: 4,
+      options: ["A", "B", "C", "D", "G", "F", "E"], answer: 6,
       difficulty: "easy",
       explanation: "Paragraph E describes social trade-offs and conflicts."
     },
@@ -720,8 +688,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "Which paragraph suggests that modifying a dam can sometimes be enough?",
-      options: ["A", "B", "C", "D", "E", "F", "G"],
-      answer: 5,
+      options: ["F", "B", "C", "D", "E", "A", "G"], answer: 0,
       difficulty: "easy",
       explanation: "Paragraph F lists modification options such as turbine upgrades and adjusted flow releases."
     },
@@ -748,12 +715,11 @@
       passage: P3,
       question: "In Paragraph E, why do outcomes of dam-removal debates differ from place to place?",
       options: [
-        "Because local communities value different benefits and costs",
         "Because dams are always removed in the same way",
+        "Because local communities value different benefits and costs",
         "Because only ecologists are involved in decisions",
         "Because reservoirs never affect property values"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Paragraph E says conflicts are common and outcomes depend on local priorities."
     },
@@ -764,12 +730,11 @@
       passage: P3,
       question: "According to Paragraph F, removal can be the most practical long-term choice when a dam is:",
       options: [
-        "unsafe, too costly to repair, or delivers minimal services",
-        "newly built and at peak performance",
         "located in a city with high rainfall",
+        "newly built and at peak performance",
+        "unsafe, too costly to repair, or delivers minimal services",
         "used mainly to trap sediment for construction"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph F lists safety, repair cost, and low service as reasons for removal."
     },
@@ -807,8 +772,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Engineers and ecologists consider dam removal only because it is always cheaper than repairing a dam.",
-      options: ["True", "False", "Not Given"],
-      answer: 2,
+      options: ["True", "Not Given", "False"], answer: 1,
       difficulty: "hard",
       explanation: "The passage gives several reasons to consider removal, but does not claim it is always cheaper."
     },
@@ -818,8 +782,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: A dam interrupts a river’s natural sediment flow.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph B explains that a dam interrupts sediment movement."
     },
@@ -829,8 +792,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Trapped sediment can increase reservoir storage capacity over time.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["False", "True", "Not Given"], answer: 0,
       difficulty: "easy",
       explanation: "Paragraph B says trapped material can reduce storage capacity."
     },
@@ -840,8 +802,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: A sediment-starved river below a dam may erode its banks and riverbed.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["False", "True", "Not Given"], answer: 1,
       difficulty: "medium",
       explanation: "Paragraph B describes erosion below a dam when sediment is trapped upstream."
     },
@@ -851,8 +812,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Fish ladders work equally well for all species and all flow conditions.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph C states fish ladders may not suit every species or flow condition."
     },
@@ -862,8 +822,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Water released from the bottom of a deep reservoir can be warmer than water in a free-flowing river.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["False", "True", "Not Given"], answer: 0,
       difficulty: "medium",
       explanation: "Paragraph C says bottom releases can be colder than a free-flowing river."
     },
@@ -873,8 +832,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Water released from the bottom of a deep reservoir can be lower in oxygen.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["False", "True", "Not Given"], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph C mentions releases can be lower in oxygen than a free-flowing river."
     },
@@ -884,8 +842,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: After a dam is removed, turbidity may increase for months.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph D says turbidity can increase for months as stored sediment moves downstream."
     },
@@ -917,8 +874,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Planning for dam removal sometimes includes phased removal to reduce the shock.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph D explicitly mentions phased removal or sediment management."
     },
@@ -928,8 +884,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Reservoirs always provide more recreation opportunities than a restored natural river corridor.",
-      options: ["True", "False", "Not Given"],
-      answer: 2,
+      options: ["Not Given", "False", "True"], answer: 0,
       difficulty: "hard",
       explanation: "Paragraph E discusses different views but does not make an absolute comparison."
     },
@@ -939,8 +894,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Some communities welcome dam removal because it can restore fisheries.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["False", "True", "Not Given"], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph E says some welcome restored fisheries and new recreation."
     },
@@ -950,8 +904,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Conflicts about dam removal are uncommon because most people agree on priorities.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph E states that conflicts are common."
     },
@@ -972,8 +925,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Turbines can be upgraded and flow releases can be adjusted.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["False", "True", "Not Given"], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph F lists turbine upgrades and adjusted flow releases."
     },
@@ -983,8 +935,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Dam removal is the only long-term option discussed in the passage.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph F notes that modification can be enough in some cases."
     },
@@ -994,8 +945,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Scientists expect a restored river system to be exactly identical to the pre-dam river.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["False", "True", "Not Given"], answer: 0,
       difficulty: "medium",
       explanation: "Paragraph G says a restored system is rarely identical to what existed before the dam."
     },
@@ -1005,8 +955,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Success after dam removal is usually measured over years rather than weeks.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["False", "True", "Not Given"], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph G says success is usually measured over years rather than weeks."
     },
@@ -1206,12 +1155,11 @@
       passage: P3,
       question: "Which list correctly identifies materials included in river sediment in Paragraph B?",
       options: [
-        "sand, gravel, and organic material",
         "salt, clay, and plastic",
+        "sand, gravel, and organic material",
         "water, oxygen, and carbon dioxide",
         "plants, fish, and insects"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph B defines sediment as sand, gravel, and organic material."
     },
@@ -1222,12 +1170,11 @@
       passage: P3,
       question: "What is one consequence of sediment being trapped behind a dam?",
       options: [
-        "The reservoir may lose storage capacity over time",
-        "The downstream river always becomes deeper and wider",
         "Fish ladders become unnecessary",
+        "The downstream river always becomes deeper and wider",
+        "The reservoir may lose storage capacity over time",
         "Water quality downstream always improves immediately"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph B says trapped material can reduce storage capacity."
     },
@@ -1238,12 +1185,11 @@
       passage: P3,
       question: "According to Paragraph C, water released from the bottom of a deep reservoir can be:",
       options: [
-        "colder and lower in oxygen",
+        "saltier because of reverse osmosis",
         "warmer and higher in oxygen",
         "identical in temperature and oxygen to a free-flowing river",
-        "saltier because of reverse osmosis"
-      ],
-      answer: 0,
+        "colder and lower in oxygen"
+      ], answer: 3,
       difficulty: "medium",
       explanation: "Paragraph C states bottom releases can be colder and lower in oxygen."
     },
@@ -1270,12 +1216,11 @@
       passage: P3,
       question: "Which option best describes the purpose of phased removal or sediment management in Paragraph D?",
       options: [
-        "To reduce the shock of sudden sediment movement downstream",
         "To guarantee that turbidity will never increase",
+        "To reduce the shock of sudden sediment movement downstream",
         "To increase boating revenue during removal",
         "To replace turbines with fish ladders"
-      ],
-      answer: 0,
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Paragraph D says planning includes these methods to reduce the shock."
     },
@@ -1286,12 +1231,11 @@
       passage: P3,
       question: "Which benefit is mentioned as a reason some communities welcome dam removal?",
       options: [
-        "Restored fisheries",
-        "Higher reservoir walls",
         "More trapped sediment for construction",
+        "Higher reservoir walls",
+        "Restored fisheries",
         "Guaranteed identical restoration to the pre-dam river"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph E lists restored fisheries among the welcomed benefits."
     },
@@ -1302,12 +1246,11 @@
       passage: P3,
       question: "What does Paragraph E suggest about conflicts over dam removal?",
       options: [
-        "Conflicts are common and outcomes depend on local priorities",
+        "Conflicts disappear once turbidity is measured",
         "Conflicts are rare because priorities are the same everywhere",
         "Conflicts happen only when fish ladders are missing",
-        "Conflicts disappear once turbidity is measured"
-      ],
-      answer: 0,
+        "Conflicts are common and outcomes depend on local priorities"
+      ], answer: 3,
       difficulty: "easy",
       explanation: "Paragraph E explicitly says conflicts are common and outcomes vary with priorities."
     },
@@ -1335,11 +1278,10 @@
       question: "Which factor is NOT listed in Paragraph F as a reason removal might be the most practical choice?",
       options: [
         "The dam is unsafe",
-        "The dam is too costly to repair",
+        "The dam provides excellent benefits and is cheap to maintain",
         "The dam delivers minimal services",
-        "The dam provides excellent benefits and is cheap to maintain"
-      ],
-      answer: 3,
+        "The dam is too costly to repair"
+      ], answer: 1,
       difficulty: "medium",
       explanation: "Paragraph F gives the first three as reasons; the last option contradicts that list."
     },
@@ -1350,12 +1292,11 @@
       passage: P3,
       question: "Which pair of features does Paragraph G say the river may re-form after restoration?",
       options: [
-        "pools and gravel beds",
-        "reservoirs and turbines",
         "fish ladders and floodgates",
+        "reservoirs and turbines",
+        "pools and gravel beds",
         "pipes and filtration barriers"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph G mentions pools and gravel beds."
     },
@@ -1366,12 +1307,11 @@
       passage: P3,
       question: "Which statement best matches Paragraph G’s view of a restored river system?",
       options: [
-        "It may regain many natural functions even if it is not identical to the pre-dam river",
+        "It will always lose fish returns for decades",
         "It will quickly become identical in every detail to the pre-dam river",
         "It cannot regain any natural functions once a dam has existed",
-        "It will always lose fish returns for decades"
-      ],
-      answer: 0,
+        "It may regain many natural functions even if it is not identical to the pre-dam river"
+      ], answer: 3,
       difficulty: "hard",
       explanation: "Paragraph G says the restored system is rarely identical but can regain many functions."
     },
@@ -1383,8 +1323,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: The passage states that many dams were built during the twentieth century.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph A begins: “During the twentieth century, dams were built...”"
     },
@@ -1394,8 +1333,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Many dams now provide more benefit than they once did.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["False", "True", "Not Given"], answer: 0,
       difficulty: "medium",
       explanation: "Paragraph A says some provide less benefit than they once did."
     },
@@ -1416,8 +1354,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Sediment released after removal may reduce water quality for towns downstream.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["Not Given", "False", "True"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph D says turbidity can reduce water quality for towns downstream."
     },
@@ -1427,8 +1364,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: The passage says phased removal guarantees there will be no turbidity increase.",
-      options: ["True", "False", "Not Given"],
-      answer: 2,
+      options: ["Not Given", "False", "True"], answer: 0,
       difficulty: "hard",
       explanation: "Paragraph D says phased removal can reduce the shock; it does not guarantee no turbidity."
     },
@@ -1438,8 +1374,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: Reservoirs can provide boating opportunities.",
-      options: ["True", "False", "Not Given"],
-      answer: 0,
+      options: ["False", "True", "Not Given"], answer: 1,
       difficulty: "easy",
       explanation: "Paragraph E says reservoirs provide boating."
     },
@@ -1449,8 +1384,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: All communities prefer restored rivers to reservoirs.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "easy",
       explanation: "Paragraph E shows different preferences; some worry about losing reservoir benefits."
     },
@@ -1471,8 +1405,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: If a dam is unsafe, the passage says it must be removed in every case.",
-      options: ["True", "False", "Not Given"],
-      answer: 2,
+      options: ["True", "Not Given", "False"], answer: 1,
       difficulty: "hard",
       explanation: "Paragraph F lists unsafe dams as a reason removal can be practical, but does not say it must happen in every case."
     },
@@ -1482,8 +1415,7 @@
       type: "multipleChoice",
       passage: P3,
       question: "True / False / Not Given: The passage states that scientists measure restoration success only by counting fish.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph G lists multiple measures (vegetation, temperature, channel changes, etc.)."
     },
@@ -1584,12 +1516,11 @@
       passage: P3,
       question: "According to Paragraph D, what is one short-term effect of dam removal?",
       options: [
-        "Water may become more turbid for months",
-        "Fish populations immediately double",
         "Electricity production increases",
+        "Fish populations immediately double",
+        "Water may become more turbid for months",
         "Reservoirs become deeper"
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "medium",
       explanation: "Paragraph D says sediment can increase turbidity for months."
     }

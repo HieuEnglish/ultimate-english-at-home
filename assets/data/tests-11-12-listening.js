@@ -37,8 +37,7 @@
       context: "Two students are planning a study session.",
       question: "Listen. Where will they meet?",
       say: "Emma: Let's meet in the library, near the history shelves. Liam: Great. I'll be there.",
-      options: ["In the library", "In the gym", "In the cafeteria", "Outside the main gate"],
-      answer: 0,
+      options: ["In the cafeteria", "In the gym", "In the library", "Outside the main gate"], answer: 2,
       difficulty: "easy",
       explanation: "Emma says they will meet in the library near the history shelves."
     },
@@ -48,8 +47,7 @@
       context: "A teacher gives homework instructions.",
       question: "Listen. What must students bring tomorrow?",
       say: "Please bring your science notebook and a ruler tomorrow. You won't need your textbook.",
-      options: ["A science notebook and a ruler", "A textbook and coloured pencils", "A calculator and headphones", "A map and a dictionary"],
-      answer: 0,
+      options: ["A map and a dictionary", "A textbook and coloured pencils", "A calculator and headphones", "A science notebook and a ruler"], answer: 3,
       difficulty: "easy",
       explanation: "The teacher mentions a science notebook and a ruler."
     },
@@ -80,8 +78,7 @@
       context: "A student calls the school office.",
       question: "Listen. Why is the student calling?",
       say: "Hello, this is Jordan. I'm going to be late because my bus broke down on the highway.",
-      options: ["Their bus broke down", "They forgot their homework", "They feel sick", "They missed the alarm"],
-      answer: 0,
+      options: ["They forgot their homework", "Their bus broke down", "They feel sick", "They missed the alarm"], answer: 1,
       difficulty: "medium",
       explanation: "Jordan says the bus broke down."
     },
@@ -91,8 +88,7 @@
       context: "Two students discuss a timetable change.",
       question: "Listen. What changed?",
       say: "Mia: Our maths test was moved from Friday to Monday. Ben: Oh no, that's sooner than I thought.",
-      options: ["The maths test date", "The lunch menu", "The school uniform", "The bus route"],
-      answer: 0,
+      options: ["The school uniform", "The lunch menu", "The maths test date", "The bus route"], answer: 2,
       difficulty: "medium",
       explanation: "They say the maths test was moved from Friday to Monday."
     },
@@ -102,8 +98,7 @@
       context: "A teacher explains a rule.",
       question: "Listen. Which behaviour is not allowed?",
       say: "Remember, phones must stay in your bag during class. You can use them at break time.",
-      options: ["Using phones during class", "Using phones during break", "Keeping phones in your bag", "Turning phones off"],
-      answer: 0,
+      options: ["Turning phones off", "Using phones during break", "Keeping phones in your bag", "Using phones during class"], answer: 3,
       difficulty: "easy",
       explanation: "Phones must stay in bags during class."
     },
@@ -134,8 +129,7 @@
       context: "A student talks about a problem.",
       question: "Listen. What can you infer?",
       say: "I left my umbrella at home, and now my shoes are completely soaked.",
-      options: ["It is raining", "It is snowing", "It is very hot", "It is windy"],
-      answer: 0,
+      options: ["It is snowing", "It is raining", "It is very hot", "It is windy"], answer: 1,
       difficulty: "hard",
       explanation: "If shoes are soaked and an umbrella is needed, it is likely raining."
     },
@@ -145,8 +139,7 @@
       context: "Two students talk about after-school plans.",
       question: "Listen. Why can't Kai come to the game?",
       say: "Kai: I'd love to come, but I have piano practice at the same time. I'll join you next week.",
-      options: ["He has piano practice", "He is sick", "He forgot the location", "He doesn't like football"],
-      answer: 0,
+      options: ["He forgot the location", "He is sick", "He has piano practice", "He doesn't like football"], answer: 2,
       difficulty: "medium",
       explanation: "Kai says he has piano practice at the same time."
     },
@@ -170,8 +163,7 @@
       context: "An announcement about a charity run.",
       question: "Listen. What is the main purpose of the announcement?",
       say: "This Saturday we're holding a charity run to raise money for the local animal shelter. Everyone is welcome.",
-      options: ["To invite people to a charity run", "To advertise a new sports shop", "To cancel a school event", "To explain a homework assignment"],
-      answer: 0,
+      options: ["To explain a homework assignment", "To advertise a new sports shop", "To cancel a school event", "To invite people to a charity run"], answer: 3,
       difficulty: "easy",
       explanation: "It invites people to a charity run for the animal shelter."
     },
@@ -212,8 +204,7 @@
       context: "A notice about a sports centre.",
       question: "Listen. Which facility is closed?",
       say: "The swimming pool is closed for repairs this week, but the gym is open as usual.",
-      options: ["The swimming pool", "The gym", "The café", "The reception desk"],
-      answer: 0,
+      options: ["The gym", "The swimming pool", "The café", "The reception desk"], answer: 1,
       difficulty: "easy",
       explanation: "It says the swimming pool is closed for repairs."
     },
@@ -223,8 +214,7 @@
       context: "A museum ticket message.",
       question: "Listen. How much does a student ticket cost?",
       say: "Tickets are eight dollars for adults, six dollars for students, and children under five are free.",
-      options: ["$6", "$8", "$5", "$10"],
-      answer: 0,
+      options: ["$5", "$8", "$6", "$10"], answer: 2,
       difficulty: "medium",
       explanation: "Students pay six dollars."
     },
@@ -234,8 +224,7 @@
       context: "A school canteen announcement.",
       question: "Listen. What change is mentioned?",
       say: "Starting next week, the canteen will stop selling fizzy drinks and will offer fruit juice instead.",
-      options: ["Fizzy drinks will be replaced by fruit juice", "The canteen will close at lunchtime", "Students must bring their own plates", "Only sandwiches will be sold"],
-      answer: 0,
+      options: ["Only sandwiches will be sold", "The canteen will close at lunchtime", "Students must bring their own plates", "Fizzy drinks will be replaced by fruit juice"], answer: 3,
       difficulty: "medium",
       explanation: "It says fizzy drinks will stop and fruit juice will be offered instead."
     },
@@ -256,8 +245,7 @@
       context: "A simple exam-style statement.",
       question: "Choose the correct option (True / False / Not Given). The speaker says parking is free.",
       say: "Parking is available behind the building. Please pay at the machine before you leave.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["False", "True", "Not Given"], answer: 0,
       difficulty: "hard",
       explanation: "If you must pay at a machine, it is not free."
     },
@@ -267,8 +255,7 @@
       context: "A short warning announcement.",
       question: "Listen. What should people do during the storm?",
       say: "A strong storm is expected tonight. Please stay indoors and keep away from tall trees.",
-      options: ["Stay indoors and avoid tall trees", "Go swimming to stay safe", "Leave windows open for fresh air", "Walk under trees for shelter"],
-      answer: 0,
+      options: ["Leave windows open for fresh air", "Go swimming to stay safe", "Stay indoors and avoid tall trees", "Walk under trees for shelter"], answer: 2,
       difficulty: "medium",
       explanation: "The advice is to stay indoors and keep away from tall trees."
     },
@@ -282,8 +269,7 @@
       context: "A teacher explains a science experiment.",
       question: "Listen. What is the first step?",
       say: "First, measure one cup of water. Then add a spoon of salt and stir until it disappears.",
-      options: ["Measure one cup of water", "Add sugar to the water", "Heat the water immediately", "Put the mixture in the freezer"],
-      answer: 0,
+      options: ["Put the mixture in the freezer", "Add sugar to the water", "Heat the water immediately", "Measure one cup of water"], answer: 3,
       difficulty: "easy",
       explanation: "The first step is measuring one cup of water."
     },
@@ -304,8 +290,7 @@
       context: "A short talk about reading habits.",
       question: "Listen. What is the speaker recommending?",
       say: "If you only have ten minutes, read a short article instead of scrolling on your phone. Small reading habits add up.",
-      options: ["Read short articles regularly", "Stop reading completely", "Only read very long books", "Use your phone more"],
-      answer: 0,
+      options: ["Stop reading completely", "Read short articles regularly", "Only read very long books", "Use your phone more"], answer: 1,
       difficulty: "medium",
       explanation: "The speaker recommends reading short articles in small time slots."
     },
@@ -315,8 +300,7 @@
       context: "A talk about recycling at school.",
       question: "Listen. Which item should NOT go in the paper bin?",
       say: "Put clean paper in the paper bin. Food-covered boxes should go in the general waste.",
-      options: ["A pizza box with food on it", "A clean worksheet", "A newspaper", "A paper bag"],
-      answer: 0,
+      options: ["A newspaper", "A clean worksheet", "A pizza box with food on it", "A paper bag"], answer: 2,
       difficulty: "medium",
       explanation: "Food-covered boxes should go in general waste."
     },
@@ -336,8 +320,7 @@
       context: "A teacher describes an upcoming quiz.",
       question: "Listen. What should students focus on?",
       say: "The quiz will focus on vocabulary from Unit Five, especially the words about the environment.",
-      options: ["Vocabulary from Unit Five", "History dates from Unit One", "Maths formulas", "Spelling of classmates' names"],
-      answer: 0,
+      options: ["Spelling of classmates' names", "History dates from Unit One", "Maths formulas", "Vocabulary from Unit Five"], answer: 3,
       difficulty: "easy",
       explanation: "It focuses on Unit Five vocabulary about the environment."
     },
@@ -358,8 +341,7 @@
       context: "A short story with inference.",
       question: "Listen. What can you infer about the speaker?",
       say: "I studied all week, but when I saw the first question, my mind went blank for a moment.",
-      options: ["They felt nervous during the test", "They didn't study at all", "They forgot to bring a pen", "They finished the test very quickly"],
-      answer: 0,
+      options: ["They didn't study at all", "They felt nervous during the test", "They forgot to bring a pen", "They finished the test very quickly"], answer: 1,
       difficulty: "hard",
       explanation: "‘My mind went blank’ suggests nervousness or stress."
     },
@@ -389,8 +371,7 @@
       context: "A teacher explains note-taking.",
       question: "Listen. Which tip is given?",
       say: "Write key words, not full sentences. You can add details after you finish listening.",
-      options: ["Write key words instead of full sentences", "Write everything word for word", "Don't write anything", "Only write the title"],
-      answer: 0,
+      options: ["Don't write anything", "Write everything word for word", "Write key words instead of full sentences", "Only write the title"], answer: 2,
       difficulty: "medium",
       explanation: "The tip is to write key words."
     },
@@ -400,8 +381,7 @@
       context: "A mini talk about sleep.",
       question: "Listen. What is the main point?",
       say: "Getting enough sleep helps your memory. If you stay up too late, studying becomes less effective.",
-      options: ["Sleep helps memory and learning", "Studying late is always best", "Coffee is better than sleep", "Memory cannot be improved"],
-      answer: 0,
+      options: ["Memory cannot be improved", "Studying late is always best", "Coffee is better than sleep", "Sleep helps memory and learning"], answer: 3,
       difficulty: "easy",
       explanation: "The speaker explains that sleep helps memory and learning."
     },
@@ -426,8 +406,7 @@
       context: "Directions continue.",
       question: "Listen. Which place do they walk past?",
       say: "Walk past the pharmacy, then turn left at the traffic lights.",
-      options: ["A pharmacy", "A bakery", "A post office", "A hospital"],
-      answer: 0,
+      options: ["A bakery", "A pharmacy", "A post office", "A hospital"], answer: 1,
       difficulty: "easy",
       explanation: "The speaker says walk past the pharmacy."
     },
@@ -437,8 +416,7 @@
       context: "A bus announcement.",
       question: "Listen. What should passengers do?",
       say: "This is the final stop. Please take all your belongings with you as you leave the bus.",
-      options: ["Take all belongings", "Stay seated until tomorrow", "Change buses immediately", "Pay again at the front"],
-      answer: 0,
+      options: ["Change buses immediately", "Stay seated until tomorrow", "Take all belongings", "Pay again at the front"], answer: 2,
       difficulty: "easy",
       explanation: "Passengers are told to take their belongings."
     },
@@ -448,8 +426,7 @@
       context: "A booking phone call.",
       question: "Listen. Which day is the appointment?",
       say: "The next available appointment is on the twelfth of May, at two thirty.",
-      options: ["12 May", "2 May", "15 May", "20 May"],
-      answer: 0,
+      options: ["20 May", "2 May", "15 May", "12 May"], answer: 3,
       difficulty: "hard",
       explanation: "The appointment is on the twelfth of May."
     },
@@ -480,8 +457,7 @@
       context: "A note about a new password.",
       question: "Listen. Which password should be used?",
       say: "Use the password green bird. That's two words: green, bird.",
-      options: ["green bird", "greenbird", "greenboard", "green birdd"],
-      answer: 0,
+      options: ["greenbird", "green bird", "greenboard", "green birdd"], answer: 1,
       difficulty: "hard",
       explanation: "The speaker says the password is two words: green bird."
     },
@@ -501,8 +477,7 @@
       context: "A short talk about being punctual.",
       question: "Listen. What does the speaker suggest?",
       say: "If you think you'll arrive at nine, aim for eight fifty-five. That way you're on time even with small delays.",
-      options: ["Arrive a few minutes early", "Arrive exactly at nine", "Arrive ten minutes late", "Cancel the plan"],
-      answer: 0,
+      options: ["Arrive ten minutes late", "Arrive exactly at nine", "Arrive a few minutes early", "Cancel the plan"], answer: 2,
       difficulty: "medium",
       explanation: "The suggestion is to aim a few minutes early."
     },
@@ -512,8 +487,7 @@
       context: "Exam-style inference.",
       question: "Listen. What is most likely true?",
       say: "I tried calling twice, but it went straight to voicemail. I'll send a message instead.",
-      options: ["The person is not answering the phone", "The phone battery is fully charged", "The caller is at the cinema", "The person answered immediately"],
-      answer: 0,
+      options: ["The person answered immediately", "The phone battery is fully charged", "The caller is at the cinema", "The person is not answering the phone"], answer: 3,
       difficulty: "hard",
       explanation: "Straight to voicemail suggests the person didn't answer."
     },
@@ -560,8 +534,7 @@
       picture: "⏰",
       question: "Look. Listen. True or False?",
       say: "This is a clock.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "⏰ represents a clock/alarm."
     }
@@ -587,8 +560,7 @@
       context: "A teacher explains what will be on a quiz.",
       question: "Listen. What will the quiz cover?",
       say: "Tomorrow's geography quiz covers rivers and mountains, not the climate section.",
-      options: ["Rivers and mountains", "Only climate", "Famous explorers", "Map symbols only"],
-      answer: 0,
+      options: ["Only climate", "Rivers and mountains", "Famous explorers", "Map symbols only"], answer: 1,
       difficulty: "easy",
       explanation: "The teacher says it covers rivers and mountains."
     },
@@ -608,8 +580,7 @@
       context: "A student asks to borrow something.",
       question: "Listen. What does the student want to borrow?",
       say: "Could I borrow your stapler for a minute? I need to attach these pages.",
-      options: ["A stapler", "A ruler", "A calculator", "A marker"],
-      answer: 0,
+      options: ["A calculator", "A ruler", "A stapler", "A marker"], answer: 2,
       difficulty: "easy",
       explanation: "The student asks to borrow a stapler."
     },
@@ -619,8 +590,7 @@
       context: "A parent leaves a message for the school.",
       question: "Listen. Why will Mei miss first period?",
       say: "Hello, this is Mei's dad. She won't be in first period because she has a dentist appointment.",
-      options: ["She has a dentist appointment", "She missed the bus", "She is on a holiday", "She forgot her timetable"],
-      answer: 0,
+      options: ["She forgot her timetable", "She missed the bus", "She is on a holiday", "She has a dentist appointment"], answer: 3,
       difficulty: "medium",
       explanation: "The reason is a dentist appointment."
     },
@@ -651,8 +621,7 @@
       context: "A shop clerk explains a discount.",
       question: "Listen. How much do students pay?",
       say: "The workbook costs twelve dollars, but students pay ten with the discount.",
-      options: ["$10", "$12", "$8", "$14"],
-      answer: 0,
+      options: ["$12", "$10", "$8", "$14"], answer: 1,
       difficulty: "medium",
       explanation: "With the discount, students pay ten dollars."
     },
@@ -672,8 +641,7 @@
       context: "Two friends talk about bus stops.",
       question: "Listen. Where should Mina get off?",
       say: "Mina: Should I get off at the museum? Theo: No, get off at the Central Park stop. It's closer.",
-      options: ["Central Park stop", "Museum stop", "Station stop", "School stop"],
-      answer: 0,
+      options: ["Station stop", "Museum stop", "Central Park stop", "School stop"], answer: 2,
       difficulty: "medium",
       explanation: "Theo says the Central Park stop is closer."
     },
@@ -683,8 +651,7 @@
       context: "A hallway reminder.",
       question: "Listen. Which behaviour is not allowed?",
       say: "Please walk in the corridors. Running near the stairs is not allowed.",
-      options: ["Running in the corridors", "Walking in the corridors", "Holding the handrail", "Speaking quietly"],
-      answer: 0,
+      options: ["Speaking quietly", "Walking in the corridors", "Holding the handrail", "Running in the corridors"], answer: 3,
       difficulty: "easy",
       explanation: "Running near the stairs is not allowed."
     },
@@ -715,8 +682,7 @@
       context: "Two students discuss printing.",
       question: "Listen. Which option is cheaper?",
       say: "We can print the posters in colour, but black and white is cheaper.",
-      options: ["Black and white printing", "Colour printing", "Laminating the posters", "Printing nothing"],
-      answer: 0,
+      options: ["Colour printing", "Black and white printing", "Laminating the posters", "Printing nothing"], answer: 1,
       difficulty: "medium",
       explanation: "The speaker says black and white is cheaper."
     },
@@ -746,8 +712,7 @@
       context: "A teacher explains how to submit homework.",
       question: "Listen. Where should students submit the assignment?",
       say: "Please submit your assignment on Google Classroom by six p.m., not by email.",
-      options: ["On Google Classroom", "By email", "On paper only", "By phone message"],
-      answer: 0,
+      options: ["On paper only", "By email", "On Google Classroom", "By phone message"], answer: 2,
       difficulty: "medium",
       explanation: "The teacher says to submit it on Google Classroom."
     },
@@ -757,8 +722,7 @@
       context: "A station announcement.",
       question: "Listen. How long is the delay?",
       say: "Attention passengers: the train is delayed by twenty minutes due to a signal problem.",
-      options: ["20 minutes", "2 minutes", "12 minutes", "30 minutes"],
-      answer: 0,
+      options: ["30 minutes", "2 minutes", "12 minutes", "20 minutes"], answer: 3,
       difficulty: "medium",
       explanation: "The announcement says twenty minutes."
     },
@@ -789,8 +753,7 @@
       context: "A quick café order.",
       question: "Listen. What is the total cost?",
       say: "Two muffins are two dollars each, so altogether that's four dollars.",
-      options: ["$4", "$2", "$6", "$8"],
-      answer: 0,
+      options: ["$2", "$4", "$6", "$8"], answer: 1,
       difficulty: "easy",
       explanation: "Two dollars plus two dollars equals four."
     },
@@ -800,8 +763,7 @@
       context: "A field trip reminder.",
       question: "Listen. What should students bring?",
       say: "Bring a reusable water bottle for the trip. There will be refill stations, but no plastic cups.",
-      options: ["A reusable water bottle", "A plastic cup", "A football", "A sleeping bag"],
-      answer: 0,
+      options: ["A football", "A plastic cup", "A reusable water bottle", "A sleeping bag"], answer: 2,
       difficulty: "easy",
       explanation: "Students should bring a reusable water bottle."
     },
@@ -811,8 +773,7 @@
       context: "A short inference statement.",
       question: "Listen. What is most likely true?",
       say: "I turned the handle, but the door wouldn't move at all. I think it's locked.",
-      options: ["The door is locked", "The door is made of glass", "The handle is brand new", "The speaker is outdoors in a storm"],
-      answer: 0,
+      options: ["The speaker is outdoors in a storm", "The door is made of glass", "The handle is brand new", "The door is locked"], answer: 3,
       difficulty: "medium",
       explanation: "If the door won't move and they think it's locked, it is likely locked."
     },
@@ -843,8 +804,7 @@
       context: "A library rule is explained.",
       question: "Listen. How long can students borrow a book?",
       say: "You can borrow a book for two weeks. If you need longer, renew it online.",
-      options: ["Two weeks", "Two days", "One month", "One year"],
-      answer: 0,
+      options: ["Two days", "Two weeks", "One month", "One year"], answer: 1,
       difficulty: "easy",
       explanation: "The rule is two weeks."
     },
@@ -864,8 +824,7 @@
       context: "Ticket information is announced.",
       question: "Choose the correct option (True / False / Not Given). The speaker says the event is free.",
       say: "Tickets are five dollars at the door, or four dollars if you buy online.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "medium",
       explanation: "If tickets cost money, the event is not free."
     },
@@ -875,8 +834,7 @@
       context: "An energy-saving announcement at school.",
       question: "Listen. What does the speaker suggest?",
       say: "Before you leave the classroom, switch off the lights and close the windows.",
-      options: ["Switch off lights and close windows", "Turn on every light", "Open all doors and leave them", "Leave computers running overnight"],
-      answer: 0,
+      options: ["Leave computers running overnight", "Turn on every light", "Open all doors and leave them", "Switch off lights and close windows"], answer: 3,
       difficulty: "easy",
       explanation: "The speaker suggests switching off lights and closing windows."
     },
@@ -907,8 +865,7 @@
       context: "Directions are given in town.",
       question: "Listen. Where should the person turn?",
       say: "Cross the bridge, then take the second right. The café is on the corner.",
-      options: ["Take the second right after the bridge", "Take the first left before the bridge", "Turn back at the bridge", "Go straight past two bridges"],
-      answer: 0,
+      options: ["Take the first left before the bridge", "Take the second right after the bridge", "Turn back at the bridge", "Go straight past two bridges"], answer: 1,
       difficulty: "medium",
       explanation: "The instruction is to take the second right after crossing the bridge."
     },
@@ -918,8 +875,7 @@
       context: "A station announcement about a coach.",
       question: "Listen. Which platform is the coach leaving from?",
       say: "The coach to Lakeside will depart from platform four in five minutes.",
-      options: ["Platform 4", "Platform 2", "Platform 14", "Platform 40"],
-      answer: 0,
+      options: ["Platform 14", "Platform 2", "Platform 4", "Platform 40"], answer: 2,
       difficulty: "medium",
       explanation: "It says platform four."
     },
@@ -939,8 +895,7 @@
       context: "Recycling instructions are explained.",
       question: "Listen. Where should glass bottles go?",
       say: "Glass bottles go in the green bin. Plastic bottles go in the yellow bin.",
-      options: ["In the green bin", "In the yellow bin", "In the paper bin", "In general waste"],
-      answer: 0,
+      options: ["In general waste", "In the yellow bin", "In the paper bin", "In the green bin"], answer: 3,
       difficulty: "medium",
       explanation: "Glass bottles go in the green bin."
     },
@@ -961,8 +916,7 @@
       context: "Customer service explains a word.",
       question: "Listen. What does 'refund' mean?",
       say: "If the shirt doesn't fit, you can return it for a refund, which means you get your money back.",
-      options: ["You get your money back", "You pay extra money", "You keep the item forever", "You exchange your name"],
-      answer: 0,
+      options: ["You pay extra money", "You get your money back", "You keep the item forever", "You exchange your name"], answer: 1,
       difficulty: "medium",
       explanation: "A refund means your money is returned."
     },
@@ -972,8 +926,7 @@
       context: "A sports coach gives advice.",
       question: "Listen. What is the coach's main message?",
       say: "Always warm up before you run. It helps prevent injuries.",
-      options: ["Warm up to prevent injuries", "Run as fast as possible immediately", "Skip stretching every time", "Drink no water during sports"],
-      answer: 0,
+      options: ["Skip stretching every time", "Run as fast as possible immediately", "Warm up to prevent injuries", "Drink no water during sports"], answer: 2,
       difficulty: "easy",
       explanation: "The coach says warming up helps prevent injuries."
     },
@@ -993,8 +946,7 @@
       context: "Shop opening hours are announced.",
       question: "Choose the correct option (True / False / Not Given). The speaker says the shop opens at 9:00.",
       say: "We open at nine thirty and close at six.",
-      options: ["True", "False", "Not Given"],
-      answer: 1,
+      options: ["True", "Not Given", "False"], answer: 2,
       difficulty: "medium",
       explanation: "If it opens at 9:30, it does not open at 9:00."
     },
@@ -1025,8 +977,7 @@
       context: "A meeting point is clarified.",
       question: "Listen. Which gate will they meet at?",
       say: "Let's meet at Gate B, not Gate A. Gate A is for arrivals.",
-      options: ["Gate B", "Gate A", "Gate C", "Gate D"],
-      answer: 0,
+      options: ["Gate A", "Gate B", "Gate C", "Gate D"], answer: 1,
       difficulty: "medium",
       explanation: "They will meet at Gate B."
     },
@@ -1079,8 +1030,7 @@
       picture: "🧯",
       question: "Look. Listen. True or False?",
       say: "This is a fire extinguisher.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "🧯 represents a fire extinguisher."
     },
@@ -1090,8 +1040,7 @@
       context: "A student talks about catching the last bus.",
       question: "Listen. What is most likely true?",
       say: "It's six oh five, the last bus leaves at six ten, and I'm still ten minutes away.",
-      options: ["They will miss the last bus", "They will catch the last bus easily", "The last bus leaves at six fifty", "They are already on the bus"],
-      answer: 0,
+      options: ["The last bus leaves at six fifty", "They will catch the last bus easily", "They will miss the last bus", "They are already on the bus"], answer: 2,
       difficulty: "hard",
       explanation: "If the bus leaves in 5 minutes and they need 10 minutes, they will miss it."
     },
@@ -1111,8 +1060,7 @@
       context: "A short weather update.",
       question: "Listen. True or False: It will rain this afternoon.",
       say: "The forecast says it will be sunny in the morning, but rain is expected this afternoon.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "The speaker says rain is expected this afternoon."
     }

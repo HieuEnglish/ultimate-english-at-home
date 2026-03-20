@@ -19,8 +19,7 @@
       id: "q1",
       type: "multipleChoice",
       question: "Which picture shows a cat?",
-      options: ["🐱", "🐶", "🐰", "🐻"],
-      answer: 0,
+      options: ["🐶", "🐱", "🐰", "🐻"], answer: 1,
       difficulty: "easy",
       explanation: "A cat says ‘meow’."
     },
@@ -28,8 +27,7 @@
       id: "q2",
       type: "multipleChoice",
       question: "Which picture shows a bus?",
-      options: ["🚗", "🚌", "🚲", "🚂"],
-      answer: 1,
+      options: ["🚗", "🚲", "🚌", "🚂"], answer: 2,
       difficulty: "easy",
       explanation: "A bus carries many people."
     },
@@ -37,8 +35,7 @@
       id: "q3",
       type: "multipleChoice",
       question: "Choose the word: DOG",
-      options: ["DOG", "DIG", "DOT", "DOLL"],
-      answer: 0,
+      options: ["DOLL", "DIG", "DOT", "DOG"], answer: 3,
       difficulty: "easy",
       explanation: "DOG = D-O-G."
     },
@@ -55,8 +52,7 @@
       id: "q5",
       type: "multipleChoice",
       question: "Which word rhymes with CAT?",
-      options: ["hat", "dog", "sun", "car"],
-      answer: 0,
+      options: ["dog", "hat", "sun", "car"], answer: 1,
       difficulty: "easy",
       explanation: "Cat and hat sound the same at the end."
     },
@@ -65,8 +61,7 @@
       type: "multipleChoice",
       passage: "Read: I like apples.",
       question: "What do I like?",
-      options: ["apples", "bananas", "cars", "cats"],
-      answer: 0,
+      options: ["cars", "bananas", "apples", "cats"], answer: 2,
       difficulty: "easy",
       explanation: "The sentence says ‘I like apples.’"
     },
@@ -74,8 +69,7 @@
       id: "q7",
       type: "multipleChoice",
       question: "Choose the best word: I ___ to school.",
-      options: ["go", "goes", "went", "going"],
-      answer: 0,
+      options: ["going", "goes", "went", "go"], answer: 3,
       difficulty: "medium",
       explanation: "We say: ‘I go to school.’"
     },
@@ -83,8 +77,7 @@
       id: "q8",
       type: "multipleChoice",
       question: "Choose the correct sentence.",
-      options: ["i have a dog", "I have a dog.", "I Have a dog", "I have a Dog"],
-      answer: 1,
+      options: ["I have a dog.", "i have a dog", "I Have a dog", "I have a Dog"], answer: 0,
       difficulty: "medium",
       explanation: "A sentence starts with a capital letter and ends with a full stop."
     },
@@ -92,8 +85,7 @@
       id: "q9",
       type: "multipleChoice",
       question: "Which word means the same as BIG?",
-      options: ["large", "small", "sad", "thin"],
-      answer: 0,
+      options: ["small", "large", "sad", "thin"], answer: 1,
       difficulty: "medium",
       explanation: "Big and large mean the same."
     },
@@ -101,8 +93,7 @@
       id: "q10",
       type: "multipleChoice",
       question: "Read the word: BOOK. Which picture matches?",
-      options: ["📚", "⚽", "🍎", "🚌"],
-      answer: 0,
+      options: ["🍎", "⚽", "📚", "🚌"], answer: 2,
       difficulty: "easy",
       explanation: "A book is something you read."
     },
@@ -111,8 +102,7 @@
       type: "multipleChoice",
       passage: "Mia has two pets: a cat and a fish.",
       question: "How many pets does Mia have?",
-      options: ["one", "two", "three", "four"],
-      answer: 1,
+      options: ["one", "four", "three", "two"], answer: 3,
       difficulty: "medium",
       explanation: "Cat + fish = two pets."
     },
@@ -131,8 +121,7 @@
       type: "multipleChoice",
       passage: "It is raining. Kim uses an umbrella.",
       question: "What does Kim use?",
-      options: ["an umbrella", "a ball", "a hat", "a kite"],
-      answer: 0,
+      options: ["a ball", "an umbrella", "a hat", "a kite"], answer: 1,
       difficulty: "medium",
       explanation: "An umbrella helps in the rain."
     },
@@ -141,8 +130,7 @@
       type: "multipleChoice",
       passage: "Dad cooks eggs. Mom makes toast.",
       question: "Who makes toast?",
-      options: ["Dad", "Mom", "Ben", "Mia"],
-      answer: 1,
+      options: ["Dad", "Ben", "Mom", "Mia"], answer: 2,
       difficulty: "medium",
       explanation: "Mom makes toast."
     },
@@ -150,8 +138,7 @@
       id: "q15",
       type: "trueFalse",
       question: "A bird has wings.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "Birds use wings to fly."
     },
@@ -159,8 +146,7 @@
       id: "q16",
       type: "trueFalse",
       question: "A fish can fly.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "easy",
       explanation: "Fish swim in water."
     },
@@ -184,8 +170,7 @@
       id: "q19",
       type: "multipleChoice",
       question: "Choose the best word: The sun is ___.",
-      options: ["hot", "cold", "sad", "thin"],
-      answer: 0,
+      options: ["cold", "hot", "sad", "thin"], answer: 1,
       difficulty: "easy",
       explanation: "The sun is hot."
     },
@@ -193,8 +178,7 @@
       id: "q20",
       type: "multipleChoice",
       question: "Which sentence tells you to be quiet?",
-      options: ["Please be quiet.", "Let's play!", "I am hungry.", "Thank you."],
-      answer: 0,
+      options: ["I am hungry.", "Let's play!", "Please be quiet.", "Thank you."], answer: 2,
       difficulty: "medium",
       explanation: "‘Please be quiet.’ means ‘Do not make noise.’"
     },
@@ -202,8 +186,7 @@
       id: "q21",
       type: "multipleChoice",
       question: "Which picture shows an apple?",
-      options: ["🍎", "🍌", "🥕", "🍪"],
-      answer: 0,
+      options: ["🍪", "🍌", "🥕", "🍎"], answer: 3,
       difficulty: "easy",
       explanation: "An apple is a fruit."
     },
@@ -220,8 +203,7 @@
       id: "q23",
       type: "multipleChoice",
       question: "Choose the word: SUN",
-      options: ["SUN", "SON", "SUNN", "SAN"],
-      answer: 0,
+      options: ["SON", "SUN", "SUNN", "SAN"], answer: 1,
       difficulty: "easy",
       explanation: "SUN = S-U-N."
     },
@@ -229,8 +211,7 @@
       id: "q24",
       type: "multipleChoice",
       question: "Which word is an animal?",
-      options: ["frog", "blue", "run", "happy"],
-      answer: 0,
+      options: ["run", "blue", "frog", "happy"], answer: 2,
       difficulty: "easy",
       explanation: "A frog is an animal."
     },
@@ -238,8 +219,7 @@
       id: "q25",
       type: "multipleChoice",
       question: "Which word rhymes with DOG?",
-      options: ["log", "cat", "sun", "tree"],
-      answer: 0,
+      options: ["tree", "cat", "sun", "log"], answer: 3,
       difficulty: "easy",
       explanation: "Dog and log sound the same at the end."
     },
@@ -258,8 +238,7 @@
       type: "multipleChoice",
       passage: "Lia eats rice. She drinks water.",
       question: "What does Lia drink?",
-      options: ["water", "milk", "juice", "soup"],
-      answer: 0,
+      options: ["milk", "water", "juice", "soup"], answer: 1,
       difficulty: "easy",
       explanation: "It says she drinks water."
     },
@@ -267,8 +246,7 @@
       id: "q28",
       type: "multipleChoice",
       question: "Choose the best word: He ___ fast.",
-      options: ["runs", "run", "running", "ran"],
-      answer: 0,
+      options: ["running", "run", "runs", "ran"], answer: 2,
       difficulty: "medium",
       explanation: "We say: ‘He runs fast.’"
     },
@@ -276,8 +254,7 @@
       id: "q29",
       type: "multipleChoice",
       question: "Choose the best word: They ___ happy.",
-      options: ["are", "is", "am", "be"],
-      answer: 0,
+      options: ["be", "is", "am", "are"], answer: 3,
       difficulty: "medium",
       explanation: "We say: ‘They are happy.’"
     },
@@ -294,8 +271,7 @@
       id: "q31",
       type: "multipleChoice",
       question: "Which word means the same as HAPPY?",
-      options: ["glad", "angry", "tired", "cold"],
-      answer: 0,
+      options: ["angry", "glad", "tired", "cold"], answer: 1,
       difficulty: "medium",
       explanation: "Happy and glad mean the same."
     },
@@ -303,8 +279,7 @@
       id: "q32",
       type: "multipleChoice",
       question: "Read the word: MILK. Which picture matches?",
-      options: ["🥛", "🍞", "🍇", "🧃"],
-      answer: 0,
+      options: ["🍇", "🍞", "🥛", "🧃"], answer: 2,
       difficulty: "easy",
       explanation: "Milk is a drink."
     },
@@ -313,8 +288,7 @@
       type: "multipleChoice",
       passage: "Read: This is my mom.",
       question: "Who is it?",
-      options: ["mom", "dad", "brother", "teacher"],
-      answer: 0,
+      options: ["teacher", "dad", "brother", "mom"], answer: 3,
       difficulty: "easy",
       explanation: "The sentence says ‘my mom.’"
     },
@@ -323,8 +297,7 @@
       type: "multipleChoice",
       passage: "Sam has 3 balloons: red, blue, and green.",
       question: "How many balloons does Sam have?",
-      options: ["one", "two", "three", "four"],
-      answer: 2,
+      options: ["three", "two", "one", "four"], answer: 0,
       difficulty: "medium",
       explanation: "It says Sam has 3 balloons."
     },
@@ -333,8 +306,7 @@
       type: "multipleChoice",
       passage: "The dog is under the table.",
       question: "Where is the dog?",
-      options: ["Under the table", "On the table", "In the bed", "In the water"],
-      answer: 0,
+      options: ["On the table", "Under the table", "In the bed", "In the water"], answer: 1,
       difficulty: "medium",
       explanation: "‘Under’ means below something."
     },
@@ -351,8 +323,7 @@
       id: "q37",
       type: "trueFalse",
       question: "The word ‘I’ starts with a capital letter.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "medium",
       explanation: "We write ‘I’ with a capital letter."
     },
@@ -360,8 +331,7 @@
       id: "q38",
       type: "trueFalse",
       question: "A snake has legs.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "easy",
       explanation: "Snakes do not have legs."
     },
@@ -393,8 +363,7 @@
       id: "q42",
       type: "multipleChoice",
       question: "Which picture shows a book?",
-      options: ["📖", "🍪", "🎈", "🚪"],
-      answer: 0,
+      options: ["🍪", "📖", "🎈", "🚪"], answer: 1,
       difficulty: "easy",
       explanation: "A book is something you read."
     },
@@ -402,8 +371,7 @@
       id: "q43",
       type: "multipleChoice",
       question: "Which word is a fruit?",
-      options: ["banana", "car", "chair", "rain"],
-      answer: 0,
+      options: ["chair", "car", "banana", "rain"], answer: 2,
       difficulty: "easy",
       explanation: "A banana is a fruit."
     },
@@ -411,8 +379,7 @@
       id: "q44",
       type: "multipleChoice",
       question: "Which word has the same first sound as BALL?",
-      options: ["bat", "cat", "sun", "fish"],
-      answer: 0,
+      options: ["fish", "cat", "sun", "bat"], answer: 3,
       difficulty: "medium",
       explanation: "Ball and bat start with the /b/ sound."
     },
@@ -429,8 +396,7 @@
       id: "q46",
       type: "multipleChoice",
       question: "Choose the best word: I have ___ orange.",
-      options: ["an", "a", "the", "some"],
-      answer: 0,
+      options: ["a", "an", "the", "some"], answer: 1,
       difficulty: "medium",
       explanation: "We use ‘an’ before a vowel sound: an orange."
     },
@@ -439,8 +405,7 @@
       type: "multipleChoice",
       passage: "It is cold. Tom wears a coat.",
       question: "What does Tom wear?",
-      options: ["a coat", "a hat", "shoes", "shorts"],
-      answer: 0,
+      options: ["shoes", "a hat", "a coat", "shorts"], answer: 2,
       difficulty: "easy",
       explanation: "The sentence says Tom wears a coat."
     },
@@ -449,8 +414,7 @@
       type: "multipleChoice",
       passage: "Nora is in the kitchen. She eats soup.",
       question: "Where is Nora?",
-      options: ["In the kitchen", "In the bedroom", "At the park", "At school"],
-      answer: 0,
+      options: ["At school", "In the bedroom", "At the park", "In the kitchen"], answer: 3,
       difficulty: "medium",
       explanation: "It says Nora is in the kitchen."
     },
@@ -467,8 +431,7 @@
       id: "q50",
       type: "multipleChoice",
       question: "Which word is a place?",
-      options: ["school", "blue", "eat", "small"],
-      answer: 0,
+      options: ["blue", "school", "eat", "small"], answer: 1,
       difficulty: "easy",
       explanation: "School is a place."
     },
@@ -477,8 +440,7 @@
       type: "multipleChoice",
       passage: "Read: The cat is small.",
       question: "What is small?",
-      options: ["the cat", "the dog", "the car", "the house"],
-      answer: 0,
+      options: ["the car", "the dog", "the cat", "the house"], answer: 2,
       difficulty: "easy",
       explanation: "The sentence says the cat is small."
     },
@@ -486,8 +448,7 @@
       id: "q52",
       type: "multipleChoice",
       question: "Choose the correct plural: one cat, two ___.",
-      options: ["cats", "cat", "cates", "cat's"],
-      answer: 0,
+      options: ["cat's", "cat", "cates", "cats"], answer: 3,
       difficulty: "medium",
       explanation: "We add -s to make ‘cats’."
     },
@@ -504,8 +465,7 @@
       id: "q54",
       type: "trueFalse",
       question: "A week has 7 days.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "medium",
       explanation: "There are 7 days in a week."
     },
@@ -558,8 +518,7 @@
       type: "multipleChoice",
       passage: "The kite is yellow. It is in the sky.",
       question: "What colour is the kite?",
-      options: ["yellow", "green", "red", "blue"],
-      answer: 0,
+      options: ["green", "yellow", "red", "blue"], answer: 1,
       difficulty: "medium",
       explanation: "The sentence says the kite is yellow."
     },
@@ -567,8 +526,7 @@
       id: "q61",
       type: "multipleChoice",
       question: "Which sentence is a question?",
-      options: ["Where is my bag?", "I like pizza.", "It is raining.", "Come here."],
-      answer: 0,
+      options: ["It is raining.", "I like pizza.", "Where is my bag?", "Come here."], answer: 2,
       difficulty: "medium",
       explanation: "A question ends with a question mark."
     },
@@ -576,8 +534,7 @@
       id: "q62",
       type: "multipleChoice",
       question: "Choose the best word: ___ you like milk?",
-      options: ["Do", "Does", "Did", "Doing"],
-      answer: 0,
+      options: ["Doing", "Does", "Did", "Do"], answer: 3,
       difficulty: "hard",
       explanation: "We say: ‘Do you like milk?’"
     },
@@ -595,8 +552,7 @@
       id: "q64",
       type: "multipleChoice",
       question: "Which word is spelled correctly?",
-      options: ["friend", "freind", "frend", "friand"],
-      answer: 0,
+      options: ["freind", "friend", "frend", "friand"], answer: 1,
       difficulty: "hard",
       explanation: "The correct spelling is ‘friend’."
     },
@@ -605,8 +561,7 @@
       type: "multipleChoice",
       passage: "Zoe has a blue dress and red shoes.",
       question: "What colour are Zoe’s shoes?",
-      options: ["red", "blue", "green", "black"],
-      answer: 0,
+      options: ["green", "blue", "red", "black"], answer: 2,
       difficulty: "medium",
       explanation: "It says Zoe has red shoes."
     },
@@ -614,8 +569,7 @@
       id: "q66",
       type: "multipleChoice",
       question: "Read the word: CLOCK. Which picture matches?",
-      options: ["🕒", "🛏️", "🧸", "🧃"],
-      answer: 0,
+      options: ["🧃", "🛏️", "🧸", "🕒"], answer: 3,
       difficulty: "easy",
       explanation: "A clock tells the time."
     },
@@ -641,8 +595,7 @@
       id: "q69",
       type: "multipleChoice",
       question: "Which word is a verb (action)?",
-      options: ["jump", "chair", "yellow", "baby"],
-      answer: 0,
+      options: ["chair", "jump", "yellow", "baby"], answer: 1,
       difficulty: "medium",
       explanation: "Jump is an action word."
     },
@@ -651,8 +604,7 @@
       type: "multipleChoice",
       passage: "Read: The puppy is hungry. It wants food.",
       question: "Why does the puppy want food?",
-      options: ["It is hungry", "It is sleepy", "It is wet", "It is angry"],
-      answer: 0,
+      options: ["It is wet", "It is sleepy", "It is hungry", "It is angry"], answer: 2,
       difficulty: "hard",
       explanation: "Hungry means it needs food."
     },
@@ -661,8 +613,7 @@
       type: "multipleChoice",
       passage: "Read: Mia has a red hat. She wears it in the sun.",
       question: "Why does Mia wear the hat?",
-      options: ["Because it is sunny", "Because it is snowing", "Because she is hungry", "Because it is night"],
-      answer: 0,
+      options: ["Because it is night", "Because it is snowing", "Because she is hungry", "Because it is sunny"], answer: 3,
       difficulty: "medium",
       explanation: "She wears it in the sun, so it is sunny."
     }

@@ -155,8 +155,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "What time does the course run?",
-      options: ["6:30–8:00 p.m.", "5:30–7:00 p.m.", "7:00–8:30 p.m.", "6:00–7:30 p.m."],
-      answer: 0,
+      options: ["6:00–7:30 p.m.", "5:30–7:00 p.m.", "7:00–8:30 p.m.", "6:30–8:00 p.m."], answer: 3,
       difficulty: "medium",
       explanation: "The receptionist says: 'from 6:30 to 8:00 p.m.'"
     },
@@ -190,8 +189,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Printed handouts are included in the fee.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "The receptionist says the fee includes printed handouts."
     },
@@ -206,8 +204,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "What time does the museum building open?",
-      options: ["9:30 a.m.", "10:00 a.m.", "9:00 a.m.", "11:00 a.m."],
-      answer: 0,
+      options: ["9:00 a.m.", "10:00 a.m.", "9:30 a.m.", "11:00 a.m."], answer: 2,
       difficulty: "easy",
       explanation: "The speaker says: 'The building opens at 9:30 a.m.'"
     },
@@ -229,8 +226,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum.",
       question: "Where are the lockers?",
-      options: ["Opposite the ticket desk", "Behind the café", "Inside the special exhibition", "Next to the main entrance"],
-      answer: 0,
+      options: ["Next to the main entrance", "Behind the café", "Inside the special exhibition", "Opposite the ticket desk"], answer: 3,
       difficulty: "medium",
       explanation: "Lockers are opposite the ticket desk."
     },
@@ -241,8 +237,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum.",
       question: "Photography is allowed without flash in every gallery.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "medium",
       explanation: "Photography is not allowed in the special exhibition on the second floor."
     },
@@ -253,8 +248,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum.",
       question: "How late is the museum open on Saturdays?",
-      options: ["8 p.m.", "6 p.m.", "7 p.m.", "9 p.m."],
-      answer: 0,
+      options: ["6 p.m.", "8 p.m.", "7 p.m.", "9 p.m."], answer: 1,
       difficulty: "easy",
       explanation: "On Saturdays the museum stays open until 8 p.m."
     },
@@ -287,8 +281,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum.",
       question: "Where is the main entrance?",
-      options: ["On King Street", "On Market Square", "On River Road", "On Queen Street"],
-      answer: 0,
+      options: ["On River Road", "On Market Square", "On King Street", "On Queen Street"], answer: 2,
       difficulty: "easy",
       explanation: "The main entrance is on King Street."
     },
@@ -303,8 +296,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "What topic do they choose?",
-      options: ["Reusable packaging", "Online advertising", "Sports nutrition", "Public transport"],
-      answer: 0,
+      options: ["Public transport", "Online advertising", "Sports nutrition", "Reusable packaging"], answer: 3,
       difficulty: "easy",
       explanation: "Nora suggests reusable packaging and Liam agrees."
     },
@@ -349,8 +341,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "Who will write the email to the café manager?",
-      options: ["Liam", "Nora", "Their teacher", "A classmate"],
-      answer: 0,
+      options: ["Nora", "Liam", "Their teacher", "A classmate"], answer: 1,
       difficulty: "easy",
       explanation: "Liam says: 'I'll write the email.'"
     },
@@ -361,8 +352,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "What will Nora do?",
-      options: ["Design the questionnaire", "Draw the posters", "Book the museum", "Call the bus company"],
-      answer: 0,
+      options: ["Book the museum", "Draw the posters", "Design the questionnaire", "Call the bus company"], answer: 2,
       difficulty: "easy",
       explanation: "Liam asks Nora to design the questionnaire."
     },
@@ -410,8 +400,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Which is mentioned as a main reason cities are warmer?",
-      options: ["Dark surfaces absorb heat and buildings reduce airflow", "Cities are always closer to the sun", "Rural areas produce more engine heat", "Trees make air hotter"],
-      answer: 0,
+      options: ["Trees make air hotter", "Cities are always closer to the sun", "Rural areas produce more engine heat", "Dark surfaces absorb heat and buildings reduce airflow"], answer: 3,
       difficulty: "medium",
       explanation: "The lecture mentions absorption by dark surfaces and reduced airflow."
     },
@@ -456,8 +445,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "What is one drawback of green roofs?",
-      options: ["They are heavier and cost more to maintain", "They stop all rainfall", "They cannot reduce indoor temperatures", "They increase traffic"],
-      answer: 0,
+      options: ["They stop all rainfall", "They are heavier and cost more to maintain", "They cannot reduce indoor temperatures", "They increase traffic"], answer: 1,
       difficulty: "medium",
       explanation: "The lecture says green roofs are heavier and cost more to maintain."
     },
@@ -479,8 +467,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "According to the lecture, the best plans…",
-      options: ["combine several measures", "rely on only one measure", "avoid all trees in cities", "use only dark surfaces"],
-      answer: 0,
+      options: ["avoid all trees in cities", "rely on only one measure", "combine several measures", "use only dark surfaces"], answer: 2,
       difficulty: "easy",
       explanation: "The lecturer says the best plans combine several measures."
     },
@@ -502,8 +489,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Which course does Maya want to register for?",
-      options: ["The evening presentation skills course", "The weekend photography course", "The morning debate workshop", "The afternoon business course"],
-      answer: 0,
+      options: ["The afternoon business course", "The weekend photography course", "The morning debate workshop", "The evening presentation skills course"], answer: 3,
       difficulty: "easy",
       explanation: "She says she wants the evening presentation skills course."
     },
@@ -548,8 +534,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "How can the student pay the fee?",
-      options: ["Online or at the front desk", "Only in cash on the first night", "Only by bank transfer", "Only by cheque"],
-      answer: 0,
+      options: ["Only in cash on the first night", "Online or at the front desk", "Only by bank transfer", "Only by cheque"], answer: 1,
       difficulty: "easy",
       explanation: "The receptionist says payment can be online or at the front desk."
     },
@@ -560,8 +545,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Maya plans to pay at the front desk.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "easy",
       explanation: "Maya says: \"I'll pay online.\""
     },
@@ -583,8 +567,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "How many sessions are in the course?",
-      options: ["Four", "Six", "Eight", "Ten"],
-      answer: 0,
+      options: ["Ten", "Six", "Eight", "Four"], answer: 3,
       difficulty: "easy",
       explanation: "It runs for four Tuesdays (four sessions)."
     },
@@ -618,8 +601,7 @@
       say: P1,
       context: "Part 1: A student registers for an evening course.",
       question: "Approximately how long is each session?",
-      options: ["1 hour 30 minutes", "2 hours", "45 minutes", "3 hours"],
-      answer: 0,
+      options: ["2 hours", "1 hour 30 minutes", "45 minutes", "3 hours"], answer: 1,
       difficulty: "hard",
       explanation: "From 6:30 to 8:00 is 1 hour 30 minutes."
     },
@@ -641,8 +623,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Where is the café?",
-      options: ["Next to the lobby", "Opposite the ticket desk", "On the second floor", "Outside the main entrance"],
-      answer: 0,
+      options: ["On the second floor", "Opposite the ticket desk", "Next to the lobby", "Outside the main entrance"], answer: 2,
       difficulty: "easy",
       explanation: "The speaker says the café is next to the lobby."
     },
@@ -664,8 +645,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Photography without flash is allowed in most galleries.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "medium",
       explanation: "The speaker says photography is allowed without flash in most galleries."
     },
@@ -676,8 +656,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Visitors may use flash photography in most galleries.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       difficulty: "hard",
       explanation: "The announcement allows photography without flash, so flash is not permitted."
     },
@@ -710,8 +689,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "Where should bus passengers get off?",
-      options: ["Market Square", "King Street", "River Road", "Museum Gate"],
-      answer: 0,
+      options: ["King Street", "Market Square", "River Road", "Museum Gate"], answer: 1,
       difficulty: "easy",
       explanation: "The speaker says to get off at Market Square."
     },
@@ -734,12 +712,11 @@
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "A visitor arrives at 9:40 a.m. What is correct?",
       options: [
-        "They can enter the building but must wait until 10 a.m. for a guided tour",
-        "They can join a guided tour immediately",
         "They must wait outside because the building is closed",
+        "They can join a guided tour immediately",
+        "They can enter the building but must wait until 10 a.m. for a guided tour",
         "They can go straight into the special exhibition before 10 a.m."
-      ],
-      answer: 0,
+      ], answer: 2,
       difficulty: "hard",
       explanation: "The building opens at 9:30, but tours begin at 10."
     },
@@ -750,8 +727,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "A student visits on Wednesday at 6:30 p.m. What is true?",
-      options: ["The museum is closed", "The museum is open until 8 p.m.", "Guided tours start at 6:30 p.m.", "The café is open but galleries are closed"],
-      answer: 0,
+      options: ["The café is open but galleries are closed", "The museum is open until 8 p.m.", "Guided tours start at 6:30 p.m.", "The museum is closed"], answer: 3,
       difficulty: "hard",
       explanation: "On other days the museum closes at 6 p.m."
     },
@@ -785,8 +761,7 @@
       say: P2,
       context: "Part 2: An announcement at a museum. Answer the questions.",
       question: "How much less do students pay than adults?",
-      options: ["3 dollars", "2 dollars", "4 dollars", "5 dollars"],
-      answer: 0,
+      options: ["2 dollars", "3 dollars", "4 dollars", "5 dollars"], answer: 1,
       difficulty: "medium",
       explanation: "Adults pay 9 dollars and students pay 6, a difference of 3."
     },
@@ -797,8 +772,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "Who first suggests the project idea?",
-      options: ["Nora", "Liam", "Their teacher", "The café manager"],
-      answer: 0,
+      options: ["Their teacher", "Liam", "Nora", "The café manager"], answer: 2,
       difficulty: "medium",
       explanation: "Nora suggests the idea at the start of the discussion."
     },
@@ -820,8 +794,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "What do they plan to compare?",
-      options: ["Two local brands", "Two train stations", "Two school clubs", "Two sports teams"],
-      answer: 0,
+      options: ["Two sports teams", "Two train stations", "Two school clubs", "Two local brands"], answer: 3,
       difficulty: "easy",
       explanation: "They say they could compare two local brands."
     },
@@ -855,8 +828,7 @@
       say: P3,
       context: "Part 3: Two students plan a business project.",
       question: "For the final presentation, what do they choose?",
-      options: ["Slides", "A poster", "A video", "A leaflet"],
-      answer: 0,
+      options: ["A poster", "Slides", "A video", "A leaflet"], answer: 1,
       difficulty: "easy",
       explanation: "They decide that slides are safer than a poster."
     },
@@ -868,8 +840,7 @@
         "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "What do Eva and Ben decide to compare?",
-      options: ["Music subscription services", "Football training plans", "Bus routes to school", "Museum ticket types"],
-      answer: 0,
+      options: ["Bus routes to school", "Football training plans", "Music subscription services", "Museum ticket types"], answer: 2,
       difficulty: "easy",
       explanation: "Eva suggests comparing music subscription services."
     },
@@ -905,8 +876,7 @@
         "Eva: For our economics project, let's compare music subscription services. Ben: Good. We can survey 60 students online and collect responses by Monday night. Eva: I'll create the Google Form, and you can analyse the results in Excel. Ben: Perfect. Let's meet in the café on Tuesday at 5:15 to check the questions. Eva: And we need at least one graph for the report.",
       context: "Part 3: Two students discuss an economics project.",
       question: "Who will analyse the results in Excel?",
-      options: ["Eva", "Ben", "Their teacher", "A volunteer"],
-      answer: 1,
+      options: ["Eva", "A volunteer", "Their teacher", "Ben"], answer: 3,
       difficulty: "easy",
       explanation: "Eva says Ben can analyse the results in Excel."
     },
@@ -975,8 +945,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "What is one common response to reduce city heat mentioned in the lecture?",
-      options: ["Increase shade", "Build taller buildings", "Paint roads darker", "Reduce street lighting"],
-      answer: 0,
+      options: ["Build taller buildings", "Increase shade", "Paint roads darker", "Reduce street lighting"], answer: 1,
       difficulty: "medium",
       explanation: "The lecturer says one common response is to increase shade."
     },
@@ -999,8 +968,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Street trees can make ______ more comfortable.",
-      options: ["Walking", "Driving", "Flying", "Shopping"],
-      answer: 0,
+      options: ["Shopping", "Driving", "Flying", "Walking"], answer: 3,
       difficulty: "easy",
       explanation: "The lecture says trees make walking more comfortable."
     },
@@ -1034,8 +1002,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Reducing traffic can lower air ______.",
-      options: ["Pollution", "Pressure", "Moisture", "Oxygen"],
-      answer: 0,
+      options: ["Pressure", "Pollution", "Moisture", "Oxygen"], answer: 1,
       difficulty: "medium",
       explanation: "The lecturer says reduced traffic can lower air pollution."
     },
@@ -1058,8 +1025,7 @@
       say: P4,
       context: "Part 4: A short lecture about cities and heat.",
       question: "Green roofs add plants on top of buildings.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "The lecturer describes green roofs as plants on top of buildings."
     },
@@ -1097,8 +1063,7 @@
       say: P1B,
       context: "Part 1: A student books an IELTS listening workshop.",
       question: "What does the receptionist tell the student to bring?",
-      options: ["Headphones", "A laptop", "A passport photo", "A calculator"],
-      answer: 0,
+      options: ["A laptop", "Headphones", "A passport photo", "A calculator"], answer: 1,
       difficulty: "easy",
       explanation: "The receptionist says: 'Please bring headphones.'"
     },
@@ -1132,8 +1097,7 @@
       say: P3B,
       context: "Part 3: Two students plan a class presentation.",
       question: "What topic do they choose?",
-      options: ["Online privacy", "Healthy eating", "Volunteering", "Sports training"],
-      answer: 0,
+      options: ["Sports training", "Healthy eating", "Volunteering", "Online privacy"], answer: 3,
       difficulty: "easy",
       explanation: "Mia suggests online privacy and Jack agrees."
     },
@@ -1178,8 +1142,7 @@
       say: P4B,
       context: "Part 4: A short lecture about sleep and learning.",
       question: "Sleep helps the brain organise what we learned during the day.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       difficulty: "easy",
       explanation: "The lecture explains that sleep supports memory and learning."
     }

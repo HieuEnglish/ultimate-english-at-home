@@ -27,12 +27,11 @@
       type: "multipleChoice",
       question: "Choose the best topic sentence for a paragraph about keeping the school clean.",
       options: [
-        "Keeping our school clean helps everyone feel comfortable and safe.",
         "My friend has a blue backpack and a red pencil case.",
+        "Keeping our school clean helps everyone feel comfortable and safe.",
         "Yesterday was Tuesday, and I ate noodles for lunch.",
         "Some animals live in the ocean, and some live on land."
-      ],
-      answer: 0,
+      ], answer: 1,
       points: 1,
       difficulty: "easy",
       explanation: "A topic sentence introduces the main idea of the paragraph."
@@ -56,8 +55,7 @@
       id: "q3",
       type: "multipleChoice",
       question: "Choose the best linking word: I wanted to go outside, ____ it started to rain.",
-      options: ["because", "but", "so", "and"],
-      answer: 1,
+      options: ["because", "and", "so", "but"], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation: "‘But’ shows contrast between two ideas."
@@ -76,8 +74,7 @@
       id: "q5",
       type: "multipleChoice",
       question: "Choose the best verb form: Last night, I ____ my homework before dinner.",
-      options: ["finish", "finished", "finishing", "will finish"],
-      answer: 1,
+      options: ["finished", "finish", "finishing", "will finish"], answer: 0,
       points: 1,
       difficulty: "easy",
       explanation: "‘Last night’ signals past tense: finished."
@@ -97,8 +94,7 @@
       type: "multipleChoice",
       question:
         "Choose the best order of these sentences to make a clear paragraph.\n\nA) Finally, we checked our answers.\nB) First, we read the questions carefully.\nC) Then, we wrote our ideas in short notes.",
-      options: ["B → C → A", "C → B → A", "A → B → C", "B → A → C"],
-      answer: 0,
+      options: ["A → B → C", "C → B → A", "B → C → A", "B → A → C"], answer: 2,
       points: 1,
       difficulty: "medium",
       explanation: "A clear sequence is: First → Then → Finally."
@@ -109,11 +105,10 @@
       question: "Which sentence is NOT a run-on sentence?",
       options: [
         "I like reading I read every night.",
-        "I like reading; I read every night.",
+        "I like reading I read every night, I learn new words.",
         "I like reading I read every night I learn new words.",
-        "I like reading I read every night, I learn new words."
-      ],
-      answer: 1,
+        "I like reading; I read every night."
+      ], answer: 3,
       points: 1,
       difficulty: "hard",
       explanation: "A semicolon (;) can correctly join two related complete sentences."
@@ -356,12 +351,11 @@
       type: "multipleChoice",
       question: "Choose the best supporting sentence for a paragraph about recycling at school.",
       options: [
-        "Recycling bins in the hallways make it easy to sort paper and plastic.",
+        "Winter is colder than summer.",
         "I watched a funny video after dinner.",
         "My cousin lives in a different city.",
-        "Winter is colder than summer."
-      ],
-      answer: 0,
+        "Recycling bins in the hallways make it easy to sort paper and plastic."
+      ], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation: "A supporting sentence should give a detail related to recycling at school."
@@ -371,12 +365,11 @@
       type: "multipleChoice",
       question: "Choose the sentence with correct punctuation.",
       options: [
-        "On monday we visited the museum", 
+        "On Monday, we visited the museum.", 
         "On Monday we visited the museum.",
-        "On Monday, we visited the museum.",
+        "On monday we visited the museum",
         "on Monday, we visited the museum"
-      ],
-      answer: 2,
+      ], answer: 0,
       points: 1,
       difficulty: "easy",
       explanation: "Use a capital letter for Monday and a comma after the opening time phrase, then end with a full stop."
@@ -405,8 +398,7 @@
       id: "q21",
       type: "multipleChoice",
       question: "Choose the best verb form: Each of the students ____ a role in the project.",
-      options: ["have", "has", "are", "were"],
-      answer: 1,
+      options: ["have", "are", "has", "were"], answer: 2,
       points: 1,
       difficulty: "medium",
       explanation: "‘Each’ is singular, so we use ‘has’."
@@ -415,8 +407,7 @@
       id: "q22",
       type: "multipleChoice",
       question: "Choose the correct word: Rita and Sam forgot ____ tickets.",
-      options: ["there", "their", "they're", "them"],
-      answer: 1,
+      options: ["there", "them", "they're", "their"], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation: "‘Their’ shows possession (tickets belong to them)."
@@ -435,8 +426,7 @@
       id: "q24",
       type: "multipleChoice",
       question: "Choose the best form: This puzzle is ____ than the last one.",
-      options: ["easy", "easier", "easiest", "more easy"],
-      answer: 1,
+      options: ["easier", "easy", "easiest", "more easy"], answer: 0,
       points: 1,
       difficulty: "medium",
       explanation: "Use the comparative form ‘easier’ when comparing two things."
@@ -466,12 +456,11 @@
       type: "multipleChoice",
       question: "Choose the best sentence to support this topic sentence: ‘Pocket parks improve neighbourhoods.’",
       options: [
-        "They provide shade and a place to rest, even in small spaces.",
+        "I bought a new notebook yesterday.",
         "My favourite snack is popcorn.",
         "Some people prefer rainy weather.",
-        "I bought a new notebook yesterday."
-      ],
-      answer: 0,
+        "They provide shade and a place to rest, even in small spaces."
+      ], answer: 3,
       points: 1,
       difficulty: "medium",
       explanation: "A supporting sentence should explain how pocket parks improve neighbourhoods."
@@ -480,8 +469,7 @@
       id: "q28",
       type: "multipleChoice",
       question: "Choose the correct word: ____ going to be a test tomorrow.",
-      options: ["Their", "There", "They're", "Them"],
-      answer: 1,
+      options: ["There", "Their", "They're", "Them"], answer: 0,
       points: 1,
       difficulty: "easy",
       explanation: "Use ‘There’ to talk about something existing or happening."
@@ -492,11 +480,10 @@
       question: "Choose the sentence with correct commas.",
       options: [
         "I packed apples bananas and oranges.",
-        "I packed apples, bananas and, oranges.",
         "I packed apples, bananas, and oranges.",
+        "I packed apples, bananas and, oranges.",
         "I packed, apples bananas, and oranges."
-      ],
-      answer: 2,
+      ], answer: 1,
       points: 1,
       difficulty: "medium",
       explanation: "Commas separate items in a list."
@@ -517,11 +504,10 @@
       question: "Choose the best sentence to avoid repeating the noun.",
       options: [
         "The bike was new. The bike was very fast.",
-        "The bike was new, and it was very fast.",
         "The bike was new, the bike was very fast.",
+        "The bike was new, and it was very fast.",
         "The bike was new. It it was very fast."
-      ],
-      answer: 1,
+      ], answer: 2,
       points: 1,
       difficulty: "medium",
       explanation: "Use a pronoun (‘it’) to avoid repeating the noun."
@@ -531,12 +517,11 @@
       type: "multipleChoice",
       question: "Choose the best concluding sentence for a paragraph about exercise.",
       options: [
-        "In conclusion, regular exercise keeps your body strong and your mind focused.",
+        "Yesterday I watched a movie.",
         "Exercise is a word with seven letters.",
         "My shoes are on the floor.",
-        "Yesterday I watched a movie."
-      ],
-      answer: 0,
+        "In conclusion, regular exercise keeps your body strong and your mind focused."
+      ], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation: "A conclusion summarizes the main idea of the paragraph."
@@ -556,8 +541,7 @@
       id: "q34",
       type: "trueFalse",
       question: "Supporting sentences should relate to the topic sentence.",
-      options: ["True", "False"],
-      answer: 0,
+      options: ["False", "True"], answer: 1,
       points: 1,
       difficulty: "easy",
       explanation: "Supporting sentences must develop the main idea introduced by the topic sentence."
@@ -568,11 +552,10 @@
       question: "Choose the sentence with consistent tense.",
       options: [
         "I walk to school yesterday and I saw my friend.",
-        "I walked to school yesterday and I saw my friend.",
         "I walk to school yesterday and I see my friend.",
+        "I walked to school yesterday and I saw my friend.",
         "I walked to school yesterday and I see my friend."
-      ],
-      answer: 1,
+      ], answer: 2,
       points: 1,
       difficulty: "medium",
       explanation: "‘Yesterday’ needs past tense: walked, saw."
@@ -591,8 +574,7 @@
       id: "q37",
       type: "multipleChoice",
       question: "Choose the best word for a formal email: I would like to ____ for your advice.",
-      options: ["wanna ask", "ask", "ask kindly", "ask politely"],
-      answer: 1,
+      options: ["wanna ask", "ask politely", "ask kindly", "ask"], answer: 3,
       points: 1,
       difficulty: "medium",
       explanation: "‘Ask’ is clear and appropriate; ‘wanna’ is informal."
@@ -602,12 +584,11 @@
       type: "multipleChoice",
       question: "Choose the correct sentence.",
       options: [
-        "Its raining outside today.",
         "It's raining outside today.",
+        "Its raining outside today.",
         "Its' raining outside today.",
         "Its raining, outside today."
-      ],
-      answer: 1,
+      ], answer: 0,
       points: 1,
       difficulty: "medium",
       explanation: "‘It’s’ means ‘it is’."
@@ -641,8 +622,7 @@
       id: "q41",
       type: "multipleChoice",
       question: "Choose the correct preposition: I am interested ____ joining the art club.",
-      options: ["on", "in", "at", "for"],
-      answer: 1,
+      options: ["on", "at", "in", "for"], answer: 2,
       points: 1,
       difficulty: "easy",
       explanation: "We say ‘interested in’."
@@ -688,11 +668,10 @@
       question: "Choose the most polite request.",
       options: [
         "Give me the worksheet now.",
-        "Can you give me the worksheet?",
         "Could you please give me the worksheet when you have time?",
+        "Can you give me the worksheet?",
         "Worksheet."
-      ],
-      answer: 2,
+      ], answer: 1,
       points: 1,
       difficulty: "medium",
       explanation: "Using ‘Could you please…’ sounds more polite and respectful."
@@ -703,11 +682,10 @@
       question: "Which sentence uses a comma correctly after an introductory word?",
       options: [
         "However I still finished my work.",
-        "However, I still finished my work.",
         "However I still, finished my work.",
+        "However, I still finished my work.",
         "However, I still, finished my work."
-      ],
-      answer: 1,
+      ], answer: 2,
       points: 1,
       difficulty: "medium",
       explanation: "A comma usually follows transition words at the beginning of a sentence."

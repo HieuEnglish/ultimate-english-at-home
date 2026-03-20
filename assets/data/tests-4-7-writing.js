@@ -72,8 +72,7 @@
       id: "q7",
       type: "multipleChoice",
       question: "Choose the best word: I ___ happy.",
-      options: ["am", "is", "are", "be"],
-      answer: 0,
+      options: ["are", "is", "am", "be"], answer: 2,
       difficulty: "easy",
       explanation: "We say: I am happy."
     },
@@ -81,8 +80,7 @@
       id: "q8",
       type: "multipleChoice",
       question: "Which one has spaces between words?",
-      options: ["Ilikecats.", "I like cats.", "I likecats.", "I-like-cats."],
-      answer: 1,
+      options: ["Ilikecats.", "I-like-cats.", "I likecats.", "I like cats."], answer: 3,
       difficulty: "medium",
       explanation: "Words need spaces: I / like / cats."
     },
@@ -90,8 +88,7 @@
       id: "q9",
       type: "multipleChoice",
       question: "Choose the best end mark: Are you ready__",
-      options: [".", "?", "!", ","],
-      answer: 1,
+      options: ["?", ".", "!", ","], answer: 0,
       difficulty: "medium",
       explanation: "A question ends with a question mark (?)."
     },
@@ -123,8 +120,7 @@
       id: "q13",
       type: "multipleChoice",
       question: "Choose the best order.",
-      options: ["I school go.", "Go I school.", "I go to school.", "School go I."],
-      answer: 2,
+      options: ["I school go.", "I go to school.", "Go I school.", "School go I."], answer: 1,
       difficulty: "medium",
       explanation: "Correct order: I go to school."
     },
@@ -140,8 +136,7 @@
       id: "q15",
       type: "multipleChoice",
       question: "Choose the correct punctuation: I have a dog__",
-      options: [".", "?", "!", ";"],
-      answer: 0,
+      options: ["!", "?", ".", ";"], answer: 2,
       difficulty: "medium",
       explanation: "A statement ends with a full stop."
     },
@@ -149,8 +144,7 @@
       id: "q16",
       type: "multipleChoice",
       question: "Which word is spelled correctly?",
-      options: ["skool", "school", "scool", "shcool"],
-      answer: 1,
+      options: ["skool", "shcool", "scool", "school"], answer: 3,
       difficulty: "hard",
       explanation: "The correct spelling is school."
     },
@@ -207,8 +201,7 @@
       id: "q23",
       type: "multipleChoice",
       question: "Choose the best end mark: Wow__",
-      options: [".", "?", "!", ","],
-      answer: 2,
+      options: ["!", "?", ".", ","], answer: 0,
       difficulty: "medium",
       explanation: "We use ! to show strong feeling."
     },
@@ -216,8 +209,7 @@
       id: "q24",
       type: "multipleChoice",
       question: "Choose the best capital letter: ___e is my dad.",
-      options: ["H", "h", "E", "e"],
-      answer: 0,
+      options: ["h", "H", "E", "e"], answer: 1,
       difficulty: "easy",
       explanation: "A sentence starts with a capital letter."
     },
@@ -266,8 +258,7 @@
       id: "q30",
       type: "multipleChoice",
       question: "Which one has the best spacing?",
-      options: ["Ilikerice.", "I like rice.", "I likeRice.", "I like  rice."],
-      answer: 1,
+      options: ["Ilikerice.", "I like  rice.", "I likeRice.", "I like rice."], answer: 3,
       difficulty: "medium",
       explanation: "Words need one space between them."
     },
@@ -283,8 +274,7 @@
       id: "q32",
       type: "multipleChoice",
       question: "Choose the best word: She ___ a cat.",
-      options: ["have", "has", "am", "are"],
-      answer: 1,
+      options: ["has", "have", "am", "are"], answer: 0,
       difficulty: "medium",
       explanation: "We say: She has."
     },
@@ -292,8 +282,7 @@
       id: "q33",
       type: "multipleChoice",
       question: "Choose the best word: They ___ play.",
-      options: ["can", "cans", "is", "am"],
-      answer: 0,
+      options: ["cans", "can", "is", "am"], answer: 1,
       difficulty: "medium",
       explanation: "We say: They can play."
     },
@@ -317,8 +306,7 @@
       id: "q36",
       type: "multipleChoice",
       question: "Choose the best word: I see ___ dog.",
-      options: ["a", "an", "the", "to"],
-      answer: 0,
+      options: ["the", "an", "a", "to"], answer: 2,
       difficulty: "easy",
       explanation: "We say: a dog."
     },
@@ -326,8 +314,7 @@
       id: "q37",
       type: "multipleChoice",
       question: "Which sentence is a question?",
-      options: ["You like ice cream.", "Do you like ice cream?", "I like ice cream!", "Like ice cream."],
-      answer: 1,
+      options: ["You like ice cream.", "Like ice cream.", "I like ice cream!", "Do you like ice cream?"], answer: 3,
       difficulty: "medium",
       explanation: "A question ends with a question mark (?)."
     },
@@ -351,8 +338,7 @@
       id: "q40",
       type: "multipleChoice",
       question: "Choose the correct way to write this day: ___",
-      options: ["monday", "Monday", "MONday", "MonDay"],
-      answer: 1,
+      options: ["Monday", "monday", "MONday", "MonDay"], answer: 0,
       difficulty: "medium",
       explanation: "Days start with a capital letter: Monday."
     },
@@ -393,8 +379,7 @@
       id: "q45",
       type: "multipleChoice",
       question: "Choose the correct sentence.",
-      options: ["My name is Ana.", "my name is Ana.", "My name is ana.", "My name is Ana"],
-      answer: 0,
+      options: ["My name is ana.", "my name is Ana.", "My name is Ana.", "My name is Ana"], answer: 2,
       difficulty: "medium",
       explanation: "Use capitals for the first word and the name, plus a full stop."
     },
@@ -418,8 +403,7 @@
       id: "q48",
       type: "multipleChoice",
       question: "Choose the best word: I ___ two cats.",
-      options: ["have", "has", "am", "is"],
-      answer: 0,
+      options: ["is", "has", "am", "have"], answer: 3,
       difficulty: "medium",
       explanation: "We say: I have two cats."
     },
@@ -427,8 +411,7 @@
       id: "q49",
       type: "multipleChoice",
       question: "Which word is spelled correctly?",
-      options: ["frend", "friend", "freind", "firend"],
-      answer: 1,
+      options: ["friend", "frend", "freind", "firend"], answer: 0,
       difficulty: "hard",
       explanation: "The correct spelling is friend."
     },
@@ -494,8 +477,7 @@
       id: "q57",
       type: "multipleChoice",
       question: "Choose the best end mark: Stop__",
-      options: [".", "?", "!", ","],
-      answer: 2,
+      options: [".", "?", ",", "!"], answer: 3,
       difficulty: "medium",
       explanation: "We use ! when we want someone to stop strongly."
     },
@@ -511,8 +493,7 @@
       id: "q59",
       type: "multipleChoice",
       question: "Which word is spelled correctly?",
-      options: ["aplpe", "apple", "aple", "appel"],
-      answer: 1,
+      options: ["apple", "aplpe", "aple", "appel"], answer: 0,
       difficulty: "easy",
       explanation: "The correct spelling is apple."
     },
@@ -528,8 +509,7 @@
       id: "q61",
       type: "multipleChoice",
       question: "Choose the best sentence with and.",
-      options: ["I like apples and bananas.", "I like apples andbananas.", "I like apples, and bananas.", "I like apples And bananas."],
-      answer: 0,
+      options: ["I like apples andbananas.", "I like apples and bananas.", "I like apples, and bananas.", "I like apples And bananas."], answer: 1,
       difficulty: "medium",
       explanation: "Use spaces and a lowercase and in the middle."
     },
@@ -545,8 +525,7 @@
       id: "q63",
       type: "multipleChoice",
       question: "Choose the best word: The cat is ___ the box.",
-      options: ["in", "on", "at", "to"],
-      answer: 0,
+      options: ["at", "on", "in", "to"], answer: 2,
       difficulty: "medium",
       explanation: "In means inside."
     },
@@ -570,8 +549,7 @@
       id: "q66",
       type: "multipleChoice",
       question: "Choose the best sentence.",
-      options: ["Because I like it.", "I like it because it is fun.", "I like it Because it is fun.", "I like it, because it is fun."],
-      answer: 1,
+      options: ["Because I like it.", "I like it, because it is fun.", "I like it Because it is fun.", "I like it because it is fun."], answer: 3,
       difficulty: "hard",
       explanation: "Because goes in the middle here, and we do not need a comma."
     },

@@ -141,8 +141,7 @@
       say: P1,
       context: "Part 1: Choose the correct answer.",
       question: "What time is the court booked for?",
-      options: ["6 to 7 p.m.", "7 to 8 p.m.", "7:30 to 8:30 p.m.", "8 to 9 p.m."],
-      answer: 1,
+      options: ["6 to 7 p.m.", "8 to 9 p.m.", "7:30 to 8:30 p.m.", "7 to 8 p.m."], answer: 3,
       explanation: "They agree on 7 p.m. for one hour."
     },
     {
@@ -172,8 +171,7 @@
       say: P1,
       context: "Part 1: Choose the correct answer.",
       question: "How will the caller pay?",
-      options: ["In cash at reception", "By bank transfer", "Online", "By cheque"],
-      answer: 2,
+      options: ["Online", "By bank transfer", "In cash at reception", "By cheque"], answer: 0,
       explanation: "He says: “I’ll pay online.”"
     },
     {
@@ -205,8 +203,7 @@
       say: P2,
       context: "Part 2: Choose the correct answer.",
       question: "Where is the main entrance?",
-      options: ["On River Road", "On King Street", "On Harbour Avenue", "On Station Lane"],
-      answer: 0,
+      options: ["On King Street", "On River Road", "On Harbour Avenue", "On Station Lane"], answer: 1,
       explanation: "The guide says the main entrance is on River Road."
     },
     {
@@ -228,11 +225,10 @@
       question: "Where is the café located?",
       options: [
         "On the ground floor beside the gift shop",
-        "Upstairs on the first floor next to the reading area",
         "Outside near the main entrance",
+        "Upstairs on the first floor next to the reading area",
         "In Gallery Two"
-      ],
-      answer: 1,
+      ], answer: 2,
       explanation: "The café is upstairs on the first floor next to the reading area."
     },
     {
@@ -254,11 +250,10 @@
       question: "Where does the free tour begin?",
       options: [
         "At the ticket desk",
-        "At the large map in Gallery One",
+        "At the ship model gallery",
         "At the café stairs",
-        "At the ship model gallery"
-      ],
-      answer: 1,
+        "At the large map in Gallery One"
+      ], answer: 3,
       explanation: "It starts at the large map in Gallery One."
     },
     {
@@ -278,8 +273,7 @@
       say: P2,
       context: "Part 2: Choose the correct answer.",
       question: "In which area are photos NOT allowed?",
-      options: ["Gallery One", "The reading area", "The ship model gallery", "The activity room"],
-      answer: 2,
+      options: ["The ship model gallery", "The reading area", "Gallery One", "The activity room"], answer: 0,
       explanation: "No photos in the ship model gallery."
     },
     {
@@ -310,12 +304,11 @@
       context: "Part 2: Choose the correct answer.",
       question: "Where is the activity room for children?",
       options: [
-        "On the ground floor behind the café stairs",
         "On the first floor inside Gallery Two",
+        "On the ground floor behind the café stairs",
         "Outside the building near the exit",
         "Next to the lockers"
-      ],
-      answer: 0,
+      ], answer: 1,
       explanation: "It’s on the ground floor behind the café stairs."
     },
 
@@ -327,8 +320,7 @@
       say: P3,
       context: "Part 3: Choose the correct answer.",
       question: "What topic do they decide to focus on?",
-      options: ["Remote work at home", "Co-working spaces in the city", "Online learning platforms", "Public transport surveys"],
-      answer: 1,
+      options: ["Remote work at home", "Online learning platforms", "Co-working spaces in the city", "Public transport surveys"], answer: 2,
       explanation: "They choose co-working spaces."
     },
     {
@@ -338,8 +330,7 @@
       say: P3,
       context: "Part 3: Choose the correct answer.",
       question: "Which two groups will they compare?",
-      options: ["Tourists and locals", "Students and full-time workers", "Teenagers and retirees", "Managers and customers"],
-      answer: 1,
+      options: ["Tourists and locals", "Managers and customers", "Teenagers and retirees", "Students and full-time workers"], answer: 3,
       explanation: "Mina suggests comparing students and full-time workers."
     },
     {
@@ -349,8 +340,7 @@
       say: P3,
       context: "Part 3: Choose the correct answer.",
       question: "Where will they collect responses?",
-      options: ["In the library", "At a café near campus", "At the Central Hub co-working space", "At the train station"],
-      answer: 2,
+      options: ["At the Central Hub co-working space", "At a café near campus", "In the library", "At the train station"], answer: 0,
       explanation: "They decide on the Central Hub co-working space."
     },
     {
@@ -446,11 +436,10 @@
       question: "According to the lecture, what happens at night?",
       options: [
         "The brain forgets most new information",
-        "Some new information is stabilised",
+        "The brain stops working",
         "Learning only happens during dreams",
-        "The brain stops working"
-      ],
-      answer: 1,
+        "Some new information is stabilised"
+      ], answer: 3,
       explanation: "The lecturer says some information is stabilised at night."
     },
     {
@@ -502,8 +491,7 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "What may happen if a nap is too long?",
-      options: ["Better memory immediately", "Grogginess", "Increased caffeine tolerance", "No effect"],
-      answer: 1,
+      options: ["Better memory immediately", "Increased caffeine tolerance", "Grogginess", "No effect"], answer: 2,
       explanation: "A long nap may cause grogginess, making study less effective afterwards."
     },
     {
@@ -561,12 +549,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "What idea does the lecturer challenge at the start of the talk?",
       options: [
-        "Learning happens only while we are awake",
+        "Caffeine improves memory during sleep",
         "Deep sleep is the same as REM sleep",
         "Naps always make study less effective",
-        "Caffeine improves memory during sleep"
-      ],
-      answer: 0,
+        "Learning happens only while we are awake"
+      ], answer: 3,
       explanation: "The talk begins by challenging the idea that learning happens only when we are awake."
     },
     {
@@ -622,8 +609,7 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Why does stabilising information matter, according to the lecturer?",
-      options: ["It helps learning last longer", "It prevents any new learning the next day", "It guarantees high test scores", "It eliminates the need for revision"],
-      answer: 0,
+      options: ["It prevents any new learning the next day", "It helps learning last longer", "It guarantees high test scores", "It eliminates the need for revision"], answer: 1,
       explanation: "He says stabilisation helps information last longer."
     },
     {
@@ -644,12 +630,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "One reason sleep helps learning is that the brain:",
       options: [
-        "replays patterns of activity linked to earlier learning",
-        "stores all information only in REM sleep",
         "forgets most of what was learned during the day",
+        "stores all information only in REM sleep",
+        "replays patterns of activity linked to earlier learning",
         "works best only when caffeine is consumed late"
-      ],
-      answer: 0,
+      ], answer: 2,
       explanation: "The lecture says the brain replays patterns of activity linked to what was learned."
     },
     {
@@ -680,12 +665,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "Which statement matches the lecturer's description of different sleep stages?",
       options: [
-        "Deep sleep is linked to facts and vocabulary, while REM is linked to creativity",
+        "Only short naps, not night sleep, support learning",
         "REM sleep is linked to facts and vocabulary, while deep sleep is linked to creativity",
         "All sleep stages have exactly the same effect on learning",
-        "Only short naps, not night sleep, support learning"
-      ],
-      answer: 0,
+        "Deep sleep is linked to facts and vocabulary, while REM is linked to creativity"
+      ], answer: 3,
       explanation: "Deep sleep is linked to remembering facts/vocabulary, while REM is linked to creativity and connecting ideas."
     },
     {
@@ -742,12 +726,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "Why does the lecturer say sleep is not a “magic solution”?",
       options: [
-        "Without correct practice, there is little useful information to consolidate",
         "Because the brain stops working during sleep",
+        "Without correct practice, there is little useful information to consolidate",
         "Because naps always damage memory",
         "Because REM sleep prevents consolidation"
-      ],
-      answer: 0,
+      ], answer: 1,
       explanation: "The lecturer says practice quality matters; otherwise there is little useful information to consolidate."
     },
     {
@@ -768,12 +751,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "What does the lecturer imply about practice and sleep?",
       options: [
-        "Sleep helps most when learners practise correctly",
-        "Sleep helps even if learners practise incorrectly",
         "Practice is unnecessary if learners sleep deeply",
+        "Sleep helps even if learners practise incorrectly",
+        "Sleep helps most when learners practise correctly",
         "Practice matters only for creativity, not memory"
-      ],
-      answer: 0,
+      ], answer: 2,
       explanation: "He notes that correct practice is needed for sleep to consolidate useful information."
     },
     {
@@ -793,8 +775,7 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "Which topic does the lecturer use to explain the importance of timing?",
-      options: ["Naps", "Fish migration", "Museum opening hours", "Online payments"],
-      answer: 0,
+      options: ["Online payments", "Fish migration", "Museum opening hours", "Naps"], answer: 3,
       explanation: "He discusses short naps and long naps to illustrate timing effects."
     },
     {
@@ -841,12 +822,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "Which option best summarises what the lecturer says about naps?",
       options: [
-        "Short naps can help, but very long naps may cause grogginess",
         "All naps are harmful for learning",
+        "Short naps can help, but very long naps may cause grogginess",
         "Only long naps improve learning",
         "Naps are unrelated to alertness"
-      ],
-      answer: 0,
+      ], answer: 1,
       explanation: "He contrasts short naps (alertness) with too-long naps (grogginess)."
     },
     {
@@ -867,12 +847,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "Why can grogginess make studying less effective?",
       options: [
-        "It can make study less effective afterwards",
-        "It prevents the brain from collecting information during the day",
         "It improves vocabulary recall too much",
+        "It prevents the brain from collecting information during the day",
+        "It can make study less effective afterwards",
         "It guarantees high scores without revision"
-      ],
-      answer: 0,
+      ], answer: 2,
       explanation: "He says grogginess makes study less effective afterwards."
     },
     {
@@ -893,12 +872,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "Which set of recommendations is mentioned in the lecture?",
       options: [
-        "Keep a regular schedule, limit caffeine late in the day, and review key material before bedtime",
+        "Change sleep times daily to train flexibility",
         "Avoid all naps, drink caffeine at midnight, and skip revision",
         "Study only in the morning and never review vocabulary",
-        "Change sleep times daily to train flexibility"
-      ],
-      answer: 0,
+        "Keep a regular schedule, limit caffeine late in the day, and review key material before bedtime"
+      ], answer: 3,
       explanation: "He recommends a regular schedule, limiting late caffeine, and reviewing key material shortly before bedtime."
     },
     {
@@ -939,8 +917,7 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "When does the lecturer suggest reviewing key material?",
-      options: ["Shortly before bedtime", "Immediately after waking up", "Only at lunchtime", "During a very long nap"],
-      answer: 0,
+      options: ["Immediately after waking up", "Shortly before bedtime", "Only at lunchtime", "During a very long nap"], answer: 1,
       explanation: "He suggests reviewing key material shortly before bedtime."
     },
     {
@@ -960,8 +937,7 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "What does the lecturer say these habits will NOT do?",
-      options: ["Guarantee high scores", "Support the brain's ability to store learning", "Help organise learning over time", "Reduce the negative effects of poor timing"],
-      answer: 0,
+      options: ["Help organise learning over time", "Support the brain's ability to store learning", "Guarantee high scores", "Reduce the negative effects of poor timing"], answer: 2,
       explanation: "He says these habits do not guarantee high scores."
     },
     {
@@ -981,8 +957,7 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "According to the lecturer, these habits can support the brain's ability to:",
-      options: ["store and organise learning over time", "learn without any practice", "avoid needing sleep completely", "replace all revision with caffeine"],
-      answer: 0,
+      options: ["replace all revision with caffeine", "learn without any practice", "avoid needing sleep completely", "store and organise learning over time"], answer: 3,
       explanation: "He concludes that the habits can support storing and organising learning over time."
     },
     {
@@ -1028,8 +1003,7 @@
       say: P4,
       context: "Part 4: Choose the correct answer.",
       question: "When does the lecturer say the brain collects new information?",
-      options: ["During the day", "Only during REM sleep", "Only during deep sleep", "Only during naps"],
-      answer: 0,
+      options: ["Only during REM sleep", "During the day", "Only during deep sleep", "Only during naps"], answer: 1,
       explanation: "He states: “During the day, the brain collects new information.”"
     },
     {
@@ -1042,10 +1016,9 @@
       options: [
         "Prioritise a regular schedule",
         "Limit caffeine late in the day",
-        "Review key material shortly before bedtime",
-        "Do intense exercise immediately before sleeping"
-      ],
-      answer: 3,
+        "Do intense exercise immediately before sleeping",
+        "Review key material shortly before bedtime"
+      ], answer: 2,
       explanation: "The lecture mentions schedule, caffeine, and reviewing material, but not intense exercise before sleeping."
     },
     {
@@ -1056,12 +1029,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "What does the lecturer mean by saying “not all sleep is the same”?",
       options: [
-        "Different sleep stages are linked to different learning outcomes",
+        "All sleep stages have identical effects",
         "Sleep has no effect on learning at all",
         "Only REM sleep exists",
-        "All sleep stages have identical effects"
-      ],
-      answer: 0,
+        "Different sleep stages are linked to different learning outcomes"
+      ], answer: 3,
       explanation: "He contrasts deep sleep (facts/vocabulary) with REM (creativity/connecting ideas)."
     },
     {
@@ -1098,12 +1070,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "Which title best fits the lecture segment in Part 4?",
       options: [
-        "How sleep supports learning and memory",
         "How to book a sports court online",
+        "How sleep supports learning and memory",
         "Museum rules for visitors with children",
         "Choosing a topic for a sociology project"
-      ],
-      answer: 0,
+      ], answer: 1,
       explanation: "The lecture focuses on sleep, consolidation, and study habits."
     },
     {
@@ -1124,12 +1095,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "In the final sentence, “over time” most nearly suggests that learning is stored and organised:",
       options: [
-        "gradually across days and weeks",
-        "instantly within seconds",
         "only during one long nap",
+        "instantly within seconds",
+        "gradually across days and weeks",
         "only if caffeine is avoided completely"
-      ],
-      answer: 0,
+      ], answer: 2,
       explanation: "“Over time” implies a gradual process rather than an instant result."
     },
     {
@@ -1140,12 +1110,11 @@
       context: "Part 4: Choose the correct answer.",
       question: "Which situation does the lecturer suggest could reduce how effective studying is after resting?",
       options: [
-        "Taking a nap that is too long and feeling groggy afterwards",
+        "Reviewing key material before bedtime",
         "Taking a short nap that improves alertness",
         "Keeping a regular sleep schedule",
-        "Reviewing key material before bedtime"
-      ],
-      answer: 0,
+        "Taking a nap that is too long and feeling groggy afterwards"
+      ], answer: 3,
       explanation: "A too-long nap may cause grogginess, making study less effective afterwards."
     },
     {
@@ -1173,8 +1142,7 @@
       say: P1,
       context: "Part 1: Choose the correct answer.",
       question: "What does the caller want to book?",
-      options: ["A swimming lesson", "A badminton court", "A tennis coach", "A fitness class"],
-      answer: 1,
+      options: ["A badminton court", "A swimming lesson", "A tennis coach", "A fitness class"], answer: 0,
       explanation: "The caller says he wants to book a badminton court."
     },
     {
@@ -1205,8 +1173,7 @@
       say: P1,
       context: "Part 1: Choose the correct answer.",
       question: "How long is the booking?",
-      options: ["30 minutes", "One hour", "Two hours", "Three hours"],
-      answer: 1,
+      options: ["30 minutes", "Two hours", "One hour", "Three hours"], answer: 2,
       explanation: "They agree it is just one hour."
     },
     {
@@ -1216,8 +1183,7 @@
       say: P1,
       context: "Part 1: Choose the correct answer.",
       question: "What other time is available besides 7 p.m.?",
-      options: ["5 p.m.", "6 p.m.", "8 p.m.", "9 p.m."],
-      answer: 1,
+      options: ["5 p.m.", "9 p.m.", "8 p.m.", "6 p.m."], answer: 3,
       explanation: "The assistant offers 6 p.m. or 7 p.m."
     },
     {
@@ -1237,8 +1203,7 @@
       say: P1,
       context: "Part 1: Choose the correct answer.",
       question: "What is mentioned as an alternative to paying online?",
-      options: ["Pay by cheque", "Pay at reception when he arrives", "Pay by bank transfer", "Pay in advance by phone"],
-      answer: 1,
+      options: ["Pay at reception when he arrives", "Pay by cheque", "Pay by bank transfer", "Pay in advance by phone"], answer: 0,
       explanation: "The assistant says he can pay online, or at reception when he arrives."
     },
     {
@@ -1281,8 +1246,7 @@
       say: P2,
       context: "Part 2: Choose the correct answer.",
       question: "Where is the ticket desk located?",
-      options: ["Outside the building", "Directly inside the front doors", "Upstairs beside the café", "In Gallery One"],
-      answer: 1,
+      options: ["Outside the building", "Upstairs beside the café", "Directly inside the front doors", "In Gallery One"], answer: 2,
       explanation: "The guide says the ticket desk is directly inside the front doors."
     },
     {
@@ -1304,11 +1268,10 @@
       question: "Where can you collect an audio guide?",
       options: [
         "From the café on the first floor",
-        "From the information counter beside the gift shop",
+        "From the large map in Gallery One",
         "From the lockers area",
-        "From the large map in Gallery One"
-      ],
-      answer: 1,
+        "From the information counter beside the gift shop"
+      ], answer: 3,
       explanation: "The guide says to collect an audio guide from the information counter beside the gift shop."
     },
     {
@@ -1329,12 +1292,11 @@
       context: "Part 2: Choose the correct answer.",
       question: "In an emergency, what is the nearest exit from Gallery Two?",
       options: [
-        "Through the main entrance on River Road",
         "Through the side corridor marked in green",
+        "Through the main entrance on River Road",
         "Up the café stairs to the first floor",
         "Through the ship model gallery"
-      ],
-      answer: 1,
+      ], answer: 0,
       explanation: "The guide mentions the nearest exit is through the side corridor marked in green."
     },
     {
@@ -1355,12 +1317,11 @@
       context: "Part 2: Choose the correct answer.",
       question: "Where is the reading area mentioned in the talk?",
       options: [
-        "Next to the café on the first floor",
         "Behind the ticket desk",
+        "Next to the café on the first floor",
         "Inside the ship model gallery",
         "Outside the main entrance"
-      ],
-      answer: 0,
+      ], answer: 1,
       explanation: "The guide says the café is upstairs on the first floor next to the reading area."
     },
     {
@@ -1412,8 +1373,7 @@
       say: P3,
       context: "Part 3: Choose the correct answer.",
       question: "What topic does Owen mention first?",
-      options: ["Co-working spaces", "Remote work", "City museums", "Sleep and learning"],
-      answer: 1,
+      options: ["Co-working spaces", "City museums", "Remote work", "Sleep and learning"], answer: 2,
       explanation: "Owen says he was thinking about remote work."
     },
     {
@@ -1434,12 +1394,11 @@
       context: "Part 3: Choose the correct answer.",
       question: "What two methods do they plan to use for data collection?",
       options: [
-        "Short interviews and a questionnaire",
+        "Online payments and a timetable",
         "A laboratory experiment and a quiz",
         "A debate and a poster",
-        "Online payments and a timetable"
-      ],
-      answer: 0,
+        "Short interviews and a questionnaire"
+      ], answer: 3,
       explanation: "Mina suggests short interviews and a simple questionnaire."
     },
     {
@@ -1459,8 +1418,7 @@
       say: P3,
       context: "Part 3: Choose the correct answer.",
       question: "Where will they meet?",
-      options: ["Inside the library", "Outside the main entrance", "At the café upstairs", "In Gallery Two"],
-      answer: 1,
+      options: ["Outside the main entrance", "Inside the library", "At the café upstairs", "In Gallery Two"], answer: 0,
       explanation: "They agree to meet outside the main entrance."
     },
     {
@@ -1481,12 +1439,11 @@
       context: "Part 3: Choose the correct answer.",
       question: "What do they say they need for the final report?",
       options: [
-        "A short summary and a chart",
         "A long essay and a video",
+        "A short summary and a chart",
         "A map of the museum",
         "A payment receipt"
-      ],
-      answer: 0,
+      ], answer: 1,
       explanation: "Owen says they need a short summary and a chart."
     },
     {
@@ -1497,12 +1454,11 @@
       context: "Part 3: Choose the correct answer.",
       question: "What will their bar chart show?",
       options: [
-        "How often people use the space each week",
-        "How much the museum tickets cost",
         "How many hours of sleep students get",
+        "How much the museum tickets cost",
+        "How often people use the space each week",
         "How many courts the sports centre has"
-      ],
-      answer: 0,
+      ], answer: 2,
       explanation: "Mina suggests a bar chart showing how often people use the space each week."
     },
     {
@@ -1522,8 +1478,7 @@
       say: P3,
       context: "Part 3: Choose the correct answer.",
       question: "When will they meet to work on the questionnaire?",
-      options: ["This afternoon", "Tomorrow morning", "On Friday", "Next week"],
-      answer: 0,
+      options: ["Next week", "Tomorrow morning", "On Friday", "This afternoon"], answer: 3,
       explanation: "They agree to work on it later today."
     }
   );

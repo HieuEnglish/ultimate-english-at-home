@@ -28,11 +28,10 @@
         "Which sentence best paraphrases this idea?\n\nTeenagers should be given more independence.",
       options: [
         "Teenagers must follow every rule without question.",
-        "Teenagers should have more freedom to make their own choices.",
         "Teenagers are too young to make any decisions.",
+        "Teenagers should have more freedom to make their own choices.",
         "Teenagers should stop depending on their families completely."
-      ],
-      answer: 1,
+      ], answer: 2,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -57,11 +56,10 @@
         "Choose the most formal option for academic writing:",
       options: [
         "A lot of people are super into public transport these days.",
-        "Many people are very interested in public transport nowadays.",
+        "People are kinda interested in public transport now.",
         "Loads of people love buses and trains now.",
-        "People are kinda interested in public transport now."
-      ],
-      answer: 1,
+        "Many people are very interested in public transport nowadays."
+      ], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -72,8 +70,7 @@
       type: "trueFalse",
       question:
         "True or False: In IELTS-style Writing Task 1, you should give your personal opinion about the topic.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -131,12 +128,11 @@
       question:
         "Which overview sentence best fits an IELTS-style Task 1 report about the data below?\n\nStudy time rose slightly, social media time rose sharply, exercise fell a little, and part-time work increased.",
       options: [
-        "Overall, time spent on studying and part-time work increased, while exercise fell and social media use grew the most.",
+        "Overall, the data has many numbers which are difficult to understand.",
         "Overall, teenagers like studying more than exercise.",
         "Overall, exercise is important for teenagers and should be encouraged.",
-        "Overall, the data has many numbers which are difficult to understand."
-      ],
-      answer: 0,
+        "Overall, time spent on studying and part-time work increased, while exercise fell and social media use grew the most."
+      ], answer: 3,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -385,10 +381,9 @@
       options: [
         "A lot of students are really stressed about exams.",
         "Loads of students are stressed about exams.",
-        "Many students feel stressed about exams.",
-        "Students are kinda stressed about exams."
-      ],
-      answer: 2,
+        "Students are kinda stressed about exams.",
+        "Many students feel stressed about exams."
+      ], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -430,11 +425,10 @@
         "Choose the best way to describe a decrease:",
       options: [
         "The number of users rose from 60 to 40.",
-        "The number of users fell from 60 to 40.",
         "The number of users grew down from 60 to 40.",
+        "The number of users fell from 60 to 40.",
         "The number of users increased under 60 to 40."
-      ],
-      answer: 1,
+      ], answer: 2,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -459,11 +453,10 @@
         "Which introduction sentence is best for a Task 1 report?",
       options: [
         "I think the chart is interesting and I will talk about it.",
-        "The table compares the percentages of commuters using three types of transport in 2005 and 2025.",
+        "Transport is important for modern life, especially in big cities.",
         "This report will explain why people choose different transport methods.",
-        "Transport is important for modern life, especially in big cities."
-      ],
-      answer: 1,
+        "The table compares the percentages of commuters using three types of transport in 2005 and 2025."
+      ], answer: 3,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -475,12 +468,11 @@
       question:
         "Which overview sentence best fits these trends?\n\nPhone ownership increased a lot, laptop ownership increased slightly, and tablet ownership fell.",
       options: [
-        "Overall, ownership of all devices increased dramatically.",
         "Overall, phone ownership rose strongly, while tablets became less common and laptops changed only a little.",
+        "Overall, ownership of all devices increased dramatically.",
         "Overall, phones are better than laptops for teenagers.",
         "Overall, the figures for devices are confusing to read."
-      ],
-      answer: 1,
+      ], answer: 0,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -517,11 +509,10 @@
         "Choose the correctly punctuated sentence:",
       options: [
         "The library which is open 24 hours is popular with students.",
-        "The library, which is open 24 hours, is popular with students.",
         "The library, which is open 24 hours is popular with students.",
+        "The library, which is open 24 hours, is popular with students.",
         "The library which is open 24 hours, is popular with students."
-      ],
-      answer: 1,
+      ], answer: 2,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -546,11 +537,10 @@
         "Which sentence is the best thesis statement for an opinion essay?",
       options: [
         "This essay will talk about some ideas about the topic.",
-        "In my opinion, governments should invest more in public transport because it reduces congestion and improves air quality.",
+        "I will describe buses and trains in different countries.",
         "Public transport is interesting and there are many kinds.",
-        "I will describe buses and trains in different countries."
-      ],
-      answer: 1,
+        "In my opinion, governments should invest more in public transport because it reduces congestion and improves air quality."
+      ], answer: 3,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -562,12 +552,11 @@
       question:
         "Choose the best topic sentence for a paragraph about volunteering:",
       options: [
-        "Volunteering is something that some people do.",
         "Volunteering benefits communities by providing support for people who need help.",
+        "Volunteering is something that some people do.",
         "I volunteered once and it was interesting.",
         "Volunteering can be hard and sometimes boring."
-      ],
-      answer: 1,
+      ], answer: 0,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -603,12 +592,11 @@
       question:
         "Which sentence correctly describes this comparison?\n\nCar users: 40% | Bus users: 20%",
       options: [
-        "There were twice as many car users as bus users.",
-        "There were twice as many bus users as car users.",
         "Car users were half of bus users.",
+        "There were twice as many bus users as car users.",
+        "There were twice as many car users as bus users.",
         "Car users and bus users were the same."
-      ],
-      answer: 0,
+      ], answer: 2,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -621,11 +609,10 @@
         "Which sentence is best for a process description (passive voice)?",
       options: [
         "First, you wash the bottles and then you cut them up.",
-        "First, the bottles are washed, and then they are cut into small pieces.",
+        "First, the bottles washed and then cutting them up.",
         "First, bottles wash and then cut into pieces.",
-        "First, the bottles washed and then cutting them up."
-      ],
-      answer: 1,
+        "First, the bottles are washed, and then they are cut into small pieces."
+      ], answer: 3,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -648,8 +635,7 @@
       type: "trueFalse",
       question:
         "True or False: A separate conclusion paragraph is required in Task 1 reports.",
-      options: ["True", "False"],
-      answer: 1,
+      options: ["False", "True"], answer: 0,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -691,11 +677,10 @@
         "Which sentence best paraphrases this idea?\n\nGovernments should limit the use of private cars.",
       options: [
         "Governments should ban all transport.",
-        "Governments ought to reduce how often people drive their own cars.",
         "Governments should make cars faster.",
+        "Governments ought to reduce how often people drive their own cars.",
         "Governments should encourage people to buy more cars."
-      ],
-      answer: 1,
+      ], answer: 2,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -707,12 +692,11 @@
       question:
         "Which phrase is most accurate for describing shares in a pie chart?",
       options: [
-        "It accounted for 35% of the total.",
+        "It increased under 35.",
         "It went up to 35 years old.",
         "It was 35 people taller.",
-        "It increased under 35."
-      ],
-      answer: 0,
+        "It accounted for 35% of the total."
+      ], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -736,12 +720,11 @@
       question:
         "Which sentence is correct?",
       options: [
-        "Although public transport is cheaper, but many people still drive.",
         "Although public transport is cheaper, many people still drive.",
+        "Although public transport is cheaper, but many people still drive.",
         "Although public transport is cheaper. Many people still drive.",
         "Although public transport cheaper, many people still drive."
-      ],
-      answer: 1,
+      ], answer: 0,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -754,11 +737,10 @@
         "Which sentence is best for academic tone (avoid overgeneralisation)?",
       options: [
         "Teenagers always waste time online.",
-        "Teenagers never read books anymore.",
         "Many teenagers tend to spend a considerable amount of time online.",
+        "Teenagers never read books anymore.",
         "Every teenager is addicted to social media."
-      ],
-      answer: 2,
+      ], answer: 1,
       points: 1,
       difficulty: "medium",
       explanation:
@@ -795,11 +777,10 @@
         "Which sentence is most suitable for Task 1 (objective report)?",
       options: [
         "I believe the government should improve public transport immediately.",
-        "The chart indicates that public transport use increased over the period.",
+        "In my opinion, people who drive are selfish.",
         "Public transport is the best option and everyone should use it.",
-        "In my opinion, people who drive are selfish."
-      ],
-      answer: 1,
+        "The chart indicates that public transport use increased over the period."
+      ], answer: 3,
       points: 1,
       difficulty: "easy",
       explanation:
@@ -811,12 +792,11 @@
       question:
         "Choose the correct use of 'respectively':",
       options: [
-        "The figures were 20 and 30 respectively percent.",
-        "The figures were respectively 20% and 30%.",
         "The figures were 20% and 30%, respectively.",
+        "The figures were respectively 20% and 30%.",
+        "The figures were 20 and 30 respectively percent.",
         "The figures respectively were 20% and 30% and 40%."
-      ],
-      answer: 2,
+      ], answer: 0,
       points: 1,
       difficulty: "hard",
       explanation:
@@ -870,11 +850,10 @@
         "Which opening sentence best paraphrases the task statement for an essay about remote work?",
       options: [
         "Working from home is cool and lots of people love it.",
-        "These days, more employees are choosing to work from home instead of in traditional offices.",
+        "Remote work is when you work far away.",
         "I work from home and it is great for me.",
-        "Remote work is when you work far away."
-      ],
-      answer: 1,
+        "These days, more employees are choosing to work from home instead of in traditional offices."
+      ], answer: 3,
       points: 1,
       difficulty: "medium",
       explanation:
