@@ -455,10 +455,14 @@
     const correctText = state.lastCorrectText || correctTextFor(q) || "";
     const expl = q && q.explanation ? String(q.explanation) : "";
 
+    const iconHtml = ok && window.UEAH_ICONS && typeof window.UEAH_ICONS.iconCheck === "function"
+      ? `<span class="feedback-icon">${window.UEAH_ICONS.iconCheck()}</span>`
+      : "";
+
     return `
       ${renderTopBar(state)}
-      <div class="note" style="margin-top:12px">
-        <strong>${ok ? "Correct" : "Not quite"}</strong>
+      <div class="note ${ok ? "is-correct" : ""}" style="margin-top:12px">
+        <strong>${iconHtml}${ok ? "Correct" : "Not quite"}</strong>
         <p style="margin:8px 0 0"><span style="font-weight:800">Your answer:</span> ${safeText(userText || "—")}</p>
         <p style="margin:8px 0 0"><span style="font-weight:800">Correct answer:</span> ${safeText(correctText || "—")}</p>
         ${expl ? `<p style="margin:8px 0 0; opacity:.95">${safeText(expl)}</p>` : ""}
@@ -841,6 +845,16 @@
 
         state.status = "feedback";
         paint();
+
+        // Celebratory confetti explosion 🎉
+        if (result.isCorrect && window.UEAH_GAME_ENGINE && window.UEAH_GAME_ENGINE.ConfettiExplosion) {
+          try {
+            const confetti = new window.UEAH_GAME_ENGINE.ConfettiExplosion(stage);
+            confetti.explode();
+          } catch (_) {
+            // ignore confetti errors
+          }
+        }
       }
 
       // Stop timer on navigation changes (best effort)

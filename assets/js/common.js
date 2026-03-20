@@ -263,6 +263,14 @@ export function iconClipboard() {
     `;
 }
 
+export function iconCheck() {
+  return `
+      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+        <path d="m8 12 3 3 5-5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    `;
+}
+
 export function iconSkill(skill) {
   if (skill === "reading") return iconBook();
   if (skill === "listening")

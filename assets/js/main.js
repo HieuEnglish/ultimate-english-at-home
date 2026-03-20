@@ -38,8 +38,13 @@ import {
   syncExport,
   syncImport,
 } from './store-helpers.js';
-import { breadcrumbs } from './common.js';
+import { breadcrumbs, iconCheck } from './common.js';
 import { applySEO } from './seo.js';
+
+// Expose icons globally for non-modular runners
+window.UEAH_ICONS = {
+  iconCheck
+};
 
 // Get references to the root app element and navigation links
 const appEl = document.getElementById('app');
@@ -154,6 +159,8 @@ const ctx = {
 
   AGE_GROUPS,
   SKILLS,
+
+  iconCheck,
 };
 
 // Token used to discard outdated renders when navigation happens quickly
