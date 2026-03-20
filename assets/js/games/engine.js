@@ -1,6 +1,6 @@
 /* assets/js/games/engine.js
    UEAH Game Engine - Core framework for all games
-   
+
    Provides:
    - GameBase class with lifecycle (init, start, end, cleanup)
    - Timer management (optional for younger ages)
@@ -9,6 +9,38 @@
    - Animation helpers (confetti, shake, glow, bounce)
    - Pause/resume functionality
 */
+
+const AGE_LABELS = {
+    "0-3": "Ages 0-3",
+    "4-7": "Ages 4-7",
+    "8-10": "Ages 8-10",
+    "11-12": "Ages 11-12",
+    "13-18": "Ages 13-18",
+    featured: "Featured",
+};
+
+const SKILL_LABELS = {
+    vocabulary: "Vocabulary",
+    listening: "Listening",
+    spelling: "Spelling",
+    grammar: "Grammar",
+    speaking: "Speaking",
+    comprehensive: "Comprehensive",
+};
+
+const AGE_THEMES = {
+    "0-3": { accent: "#ff8a65", accent2: "#ffd54f", accentGlow: "rgba(255, 138, 101, 0.38)", accentSoft: "rgba(255, 213, 79, 0.18)" },
+    "4-7": { accent: "#ff6b6b", accent2: "#ffd166", accentGlow: "rgba(255, 107, 107, 0.34)", accentSoft: "rgba(255, 209, 102, 0.18)" },
+    "8-10": { accent: "#4dabf7", accent2: "#845ef7", accentGlow: "rgba(77, 171, 247, 0.34)", accentSoft: "rgba(132, 94, 247, 0.18)" },
+    "11-12": { accent: "#00b894", accent2: "#6c5ce7", accentGlow: "rgba(0, 184, 148, 0.34)", accentSoft: "rgba(108, 92, 231, 0.18)" },
+    "13-18": { accent: "#9c36ff", accent2: "#ff6b6b", accentGlow: "rgba(156, 54, 255, 0.36)", accentSoft: "rgba(255, 107, 107, 0.16)" },
+    featured: { accent: "#f4b400", accent2: "#ff6ab3", accentGlow: "rgba(244, 180, 0, 0.34)", accentSoft: "rgba(255, 106, 179, 0.18)" },
+    default: { accent: "#6b66ff", accent2: "#ff6ab3", accentGlow: "rgba(107, 102, 255, 0.34)", accentSoft: "rgba(255, 106, 179, 0.18)" },
+};
+
+function getTheme(config = {}) {
+    return AGE_THEMES[config.age] || AGE_THEMES.default;
+}
 
 // Confetti explosion for high scores 🎉
 class ConfettiExplosion {
@@ -226,6 +258,121 @@ class GameBase {
         this.confetti = new ConfettiExplosion(container);
         this.startTime = null;
         this.endTime = null;
+        this.timeouts = new Set();
+        this.timerWarningShown = false;
+        this.theme = getTheme(config);
+
+        this.applyTheme();
+    }
+
+    applyTheme() {
+        this.container.style.setProperty("--game-accent", this.theme.accent);
+        this.container.style.setProperty("--game-accent-2", this.theme.accent2);
+        this.container.style.setProperty("--game-accent-glow", this.theme.accentGlow);
+        this.container.style.setProperty("--game-accent-soft", this.theme.accentSoft);
+    }
+
+    schedule(fn, delay) {
+        const timeoutId = setTimeout(() => {
+            this.timeouts.delete(timeoutId);
+            fn();
+        }, delay);
+        this.timeouts.add(timeoutId);
+        return timeoutId;
+    }
+
+    clearScheduledTasks() {
+        this.timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+        this.timeouts.clear();
+    }
+
+    emitStatus(label, message, kind = "ready") {
+        this.container.dispatchEvent(new CustomEvent("ueah:game-status", {
+            bubbles: true,
+            detail: { label, message, kind },
+        }));
+    }
+
+    ensureEffectsLayer() {
+        let ambientLayer = this.container.querySelector(".game-ambient-layer");
+        if (!ambientLayer) {
+            ambientLayer = document.createElement("div");
+            ambientLayer.className = "game-ambient-layer";
+            ambientLayer.setAttribute("aria-hidden", "true");
+            ambientLayer.innerHTML = `
+                <span class="game-ambient-orb game-ambient-orb--one"></span>
+                <span class="game-ambient-orb game-ambient-orb--two"></span>
+                <span class="game-ambient-orb game-ambient-orb--three"></span>
+                <span class="game-ambient-star game-ambient-star--one"></span>
+                <span class="game-ambient-star game-ambient-star--two"></span>
+                <span class="game-ambient-star game-ambient-star--three"></span>
+                <div class="game-ambient-grid"></div>
+            `;
+            this.container.appendChild(ambientLayer);
+        }
+
+        let feedbackStack = this.container.querySelector(".game-feedback-stack");
+        if (!feedbackStack) {
+            feedbackStack = document.createElement("div");
+            feedbackStack.className = "game-feedback-stack";
+            feedbackStack.setAttribute("aria-live", "polite");
+            this.container.appendChild(feedbackStack);
+        }
+
+        let burstLayer = this.container.querySelector(".game-score-burst-layer");
+        if (!burstLayer) {
+            burstLayer = document.createElement("div");
+            burstLayer.className = "game-score-burst-layer";
+            burstLayer.setAttribute("aria-hidden", "true");
+            this.container.appendChild(burstLayer);
+        }
+
+        return { ambientLayer, feedbackStack, burstLayer };
+    }
+
+    showFeedback(message, tone = "info", duration = 1600) {
+        const layers = this.ensureEffectsLayer();
+        if (!layers || !message) return;
+
+        const chip = document.createElement("div");
+        chip.className = `game-feedback-chip is-${tone}`;
+        chip.textContent = message;
+        layers.feedbackStack.appendChild(chip);
+
+        requestAnimationFrame(() => chip.classList.add("is-visible"));
+
+        this.schedule(() => {
+            chip.classList.remove("is-visible");
+            this.schedule(() => chip.remove(), 220);
+        }, duration);
+    }
+
+    showScoreBurst(text, x = null, y = null, tone = "success") {
+        const layers = this.ensureEffectsLayer();
+        if (!layers || !text) return;
+
+        const burst = document.createElement("div");
+        burst.className = `game-score-burst is-${tone}`;
+        burst.textContent = text;
+
+        if (x != null && y != null) {
+            burst.style.left = `${x}px`;
+            burst.style.top = `${y}px`;
+        } else {
+            burst.classList.add("is-centered");
+        }
+
+        layers.burstLayer.appendChild(burst);
+        requestAnimationFrame(() => burst.classList.add("is-visible"));
+        this.schedule(() => burst.remove(), 900);
+    }
+
+    pulseStage(tone = "success") {
+        this.container.classList.remove("is-pulse-success", "is-pulse-warning", "is-pulse-error");
+        this.container.classList.add(`is-pulse-${tone}`);
+        this.schedule(() => {
+            this.container.classList.remove("is-pulse-success", "is-pulse-warning", "is-pulse-error");
+        }, 550);
     }
 
     // Lifecycle methods (override in subclasses)
@@ -247,10 +394,14 @@ class GameBase {
 
     // Generic Start Overlay for all games
     showStartOverlay() {
-        if (this.container.querySelector('.game-start-overlay')) return;
+        if (this.container.querySelector(".game-start-overlay")) return;
 
-        const overlay = document.createElement('div');
-        overlay.className = 'game-start-overlay';
+        const ageLabel = AGE_LABELS[this.config.age] || "All ages";
+        const skillLabel = SKILL_LABELS[this.config.skill] || "Skill challenge";
+        const difficulty = Math.max(1, Math.min(5, Number(this.config.difficulty) || 1));
+        const overlay = document.createElement("div");
+        overlay.className = "game-start-overlay";
+        overlay.dataset.gameStartOverlay = "true";
         overlay.innerHTML = `
             <div class="start-content">
                 <div class="start-icon">${this.config.emoji || '🎮'}</div>
@@ -260,19 +411,35 @@ class GameBase {
             </div>
             <style>
                 .game-start-overlay {
-                    position: absolute; inset: 0; background: rgba(0,0,0,0.8);
+                    position: absolute; inset: 0; padding: 24px;
+                    background: linear-gradient(180deg, rgba(9,12,24,0.82), rgba(9,12,24,0.94));
                     display: flex; align-items: center; justify-content: center;
                     z-index: 1000; color: white; border-radius: 24px;
-                    font-family: 'Fredoka One', cursive, sans-serif;
+                    backdrop-filter: blur(18px);
                 }
-                .start-content { text-align: center; animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-                .start-icon { font-size: 80px; margin-bottom: 20px; }
-                .start-title { font-size: 32px; margin-bottom: 10px; }
-                .start-btn { padding: 15px 40px; font-size: 20px; border-radius: 50px; cursor: pointer; background: #00b894; border: none; color: white; font-weight: bold; box-shadow: 0 4px 15px rgba(0,184,148,0.4); }
-                @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+                .start-content {
+                    width: min(520px, 100%);
+                    padding: 28px;
+                    text-align: center;
+                    border-radius: 28px;
+                    border: 1px solid rgba(255,255,255,0.16);
+                    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+                    box-shadow: 0 28px 60px rgba(0,0,0,0.3);
+                    animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                }
+                .start-icon { font-size: 88px; margin-bottom: 18px; }
+                .start-title { font-size: 34px; margin-bottom: 12px; }
+                .start-description { margin: 0 auto 22px; max-width: 30ch; line-height: 1.6; color: rgba(255,255,255,0.78); }
+                .start-btn { padding: 15px 40px; font-size: 18px; border-radius: 999px; cursor: pointer; background: linear-gradient(135deg, #00b894, #6c5ce7); border: none; color: white; font-weight: 800; box-shadow: 0 12px 30px rgba(0,184,148,0.28); }
+                @keyframes pop { 0% { transform: scale(0.92); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
             </style>
         `;
         this.container.appendChild(overlay);
+        this.emitStatus(
+            "Ready to launch",
+            `${this.config.title || "This game"} is set up and waiting for you to begin.`,
+            "ready"
+        );
         overlay.querySelector('.start-btn').onclick = () => {
             overlay.remove();
             this.start();
@@ -284,12 +451,23 @@ class GameBase {
     }
 
     start() {
+        this.applyTheme();
+        this.ensureEffectsLayer();
+        this.container.classList.add("is-game-live");
+        this.container.classList.remove("is-game-complete");
+        this.container.querySelector(".game-results-overlay")?.remove();
+
         this.isRunning = true;
         this.isPaused = false;
         this.score = 0;
         this.combo = 0;
         this.maxCombo = 0;
         this.startTime = Date.now();
+        this.endTime = null;
+        this.timerWarningShown = false;
+
+        this.updateScoreDisplay();
+        this.updateComboDisplay();
 
         if (this.config.hasTimer && this.config.timerDuration) {
             this.timer = new GameTimer(
@@ -299,22 +477,43 @@ class GameBase {
             );
             this.timer.start();
         }
+
+        this.showFeedback(this.config.hasTimer ? "Stage live - race the clock" : "Stage live - have fun", "info", 1200);
+        this.emitStatus(
+            "Game live",
+            `${this.config.title || "The game"} has started. Build momentum and chase your best run.`,
+            "active"
+        );
     }
 
     pause() {
         this.isPaused = true;
         if (this.timer) this.timer.pause();
+
+        this.emitStatus(
+            "Paused",
+            `${this.config.title || "This game"} is paused. Jump back in whenever you are ready.`,
+            "warning"
+        );
     }
 
     resume() {
         this.isPaused = false;
         if (this.timer) this.timer.resume();
+
+        this.emitStatus(
+            "Back in action",
+            `${this.config.title || "This game"} is running again.`,
+            "active"
+        );
     }
 
     end() {
         this.isRunning = false;
         this.endTime = Date.now();
         if (this.timer) this.timer.stop();
+        this.container.classList.remove("is-game-live");
+        this.container.classList.add("is-game-complete");
 
         // Save score and check for high score
         const isHighScore = this.saveScore();
@@ -322,14 +521,26 @@ class GameBase {
     }
 
     cleanup() {
-        if (this.timer) this.timer.stop();
+        if (this.timer) {
+            this.timer.stop();
+            this.timer = null;
+        }
+        if (this.threeHelper) {
+            this.threeHelper.cleanup();
+            this.threeHelper = null;
+        }
+        this.clearScheduledTasks();
         this.confetti.cleanup();
+        this.isRunning = false;
+        this.isPaused = false;
+        this.container.classList.remove("is-game-live", "is-game-complete", "is-pulse-success", "is-pulse-warning", "is-pulse-error");
     }
 
     // Score methods
     addScore(points, multiplier = 1) {
         const earned = Math.round(points * multiplier * (1 + this.combo * 0.1));
         this.score += earned;
+        this.updateScoreDisplay();
         return earned;
     }
 
@@ -338,10 +549,17 @@ class GameBase {
         if (this.combo > this.maxCombo) {
             this.maxCombo = this.combo;
         }
+        this.updateComboDisplay();
+
+        if (this.combo > 0 && this.combo % 3 === 0) {
+            this.showFeedback(`${this.combo}x combo streak`, "success", 1200);
+            this.pulseStage("success");
+        }
     }
 
     resetCombo() {
         this.combo = 0;
+        this.updateComboDisplay();
     }
 
     // Timer tick handler (override if needed)
@@ -354,11 +572,22 @@ class GameBase {
                 timerEl.classList.add("timer-urgent");
             }
         }
+
+        if (remaining <= 10 && !this.timerWarningShown) {
+            this.timerWarningShown = true;
+            this.showFeedback("Final 10 seconds", "warning", 1000);
+            this.emitStatus(
+                "Final countdown",
+                `Only ${remaining} seconds left. Finish strong.`,
+                "warning"
+            );
+            this.pulseStage("warning");
+        }
     }
 
     formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
+        const secs = Math.max(0, seconds % 60);
         return `${mins}:${secs.toString().padStart(2, "0")}`;
     }
 
@@ -371,7 +600,7 @@ class GameBase {
 
         const isHighScore = window.UEAH_GAME_SCORES.saveGameScore(gameSlug, this.score, {
             combo: this.maxCombo,
-            duration: this.endTime - this.startTime,
+            duration: this.startTime && this.endTime ? this.endTime - this.startTime : 0,
         });
 
         return isHighScore;
@@ -379,18 +608,31 @@ class GameBase {
 
     // Show results screen
     showResults(isHighScore) {
-        const duration = Math.round((this.endTime - this.startTime) / 1000);
+        const safeHighScore = Boolean(isHighScore);
+        const duration = Math.round(((this.endTime || Date.now()) - (this.startTime || Date.now())) / 1000);
 
         // Trigger confetti for high scores! 🎉
-        if (isHighScore && this.score > 0) {
+        if (safeHighScore && this.score > 0) {
             this.confetti.explode();
+            this.showFeedback("Personal best unlocked", "success", 1500);
+        } else {
+            this.showFeedback("Round complete", "info", 1000);
         }
 
         const resultsHtml = `
-      <div class="game-results ${isHighScore ? "is-high-score" : ""}">
+      <div class="game-results ${safeHighScore ? "is-high-score" : ""}">
         <div class="results-header">
           ${isHighScore ? '<div class="high-score-badge">🏆 NEW HIGH SCORE! 🏆</div>' : ""}
-          <h2 class="results-title">${isHighScore ? "Amazing!" : "Game Over!"}</h2>
+          <div class="results-kicker">${safeHighScore ? "Personal best" : "Session recap"}</div>
+          <h2 class="results-title">${safeHighScore ? "New High Score" : "Round Complete"}</h2>
+          <p class="results-summary">${safeHighScore
+            ? "You set a new benchmark. Keep that rhythm and see how far you can push it."
+            : "Solid progress. Reset the stage and go again while the pattern is fresh."}</p>
+        </div>
+        <div class="results-ribbons">
+          <span class="results-ribbon">${AGE_LABELS[this.config.age] || "All ages"}</span>
+          <span class="results-ribbon">${SKILL_LABELS[this.config.skill] || "Skill play"}</span>
+          <span class="results-ribbon">${this.config.hasTimer ? "Timed run" : "Free play"}</span>
         </div>
         <div class="results-stats">
           <div class="stat">
@@ -425,10 +667,14 @@ class GameBase {
         // Animate in
         requestAnimationFrame(() => {
             overlay.classList.add("is-visible");
-            if (isHighScore) {
-                Animations.bounce(overlay.querySelector(".results-stats"));
-            }
+            Animations.bounce(overlay.querySelector(".game-results"), 1.02, 220);
         });
+
+        this.emitStatus(
+            safeHighScore ? "New high score" : "Round complete",
+            `${this.config.title || "This game"} is finished. Review your stats and jump back in when ready.`,
+            safeHighScore ? "success" : "ready"
+        );
     }
 
     // TTS helper (uses existing TTS system)
@@ -458,8 +704,17 @@ class GameBase {
         const scoreEl = this.container.querySelector("[data-game-score]");
         if (scoreEl) {
             scoreEl.textContent = this.score;
-            Animations.bounce(scoreEl, 1.1, 150);
+            Animations.bounce(scoreEl, 1.08, 150);
         }
+    }
+
+    updateComboDisplay() {
+        const comboEl = this.container.querySelector("[data-game-combo]");
+        const comboPanel = comboEl?.closest(".hud-combo");
+        if (!comboEl || !comboPanel) return;
+
+        comboEl.textContent = `${this.combo}x`;
+        comboPanel.classList.toggle("is-active", this.combo > 0);
     }
 
     // Render game HUD
@@ -470,12 +725,10 @@ class GameBase {
           <span class="hud-label">Score</span>
           <span class="hud-value" data-game-score>${this.score}</span>
         </div>
-        ${this.combo > 0 ? `
-          <div class="hud-combo">
-            <span class="hud-value" data-game-combo>${this.combo}x</span>
-            <span class="hud-label">Combo</span>
-          </div>
-        ` : ""}
+        <div class="hud-combo ${this.combo > 0 ? "is-active" : ""}">
+          <span class="hud-value" data-game-combo>${this.combo}x</span>
+          <span class="hud-label">Combo</span>
+        </div>
         ${this.config.hasTimer ? `
           <div class="hud-timer">
             <span class="hud-label">Time</span>
@@ -498,6 +751,8 @@ class ThreeJSHelper {
         this.clock = new THREE.Clock();
         this.animationFrameId = null;
         this.mouse = new THREE.Vector2();
+        this.handleResize = () => this.onResize();
+        this.handleMouseMove = (e) => this.onMouseMove(e);
 
         this.init();
     }
@@ -527,8 +782,8 @@ class ThreeJSHelper {
         dirLight.position.set(5, 10, 7);
         this.scene.add(dirLight);
 
-        window.addEventListener('resize', () => this.onResize());
-        this.container.addEventListener('mousemove', (e) => this.onMouseMove(e));
+        window.addEventListener('resize', this.handleResize);
+        this.container.addEventListener('mousemove', this.handleMouseMove);
 
         this.animate();
     }
@@ -615,6 +870,8 @@ class ThreeJSHelper {
 
     cleanup() {
         if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
+        window.removeEventListener('resize', this.handleResize);
+        this.container?.removeEventListener('mousemove', this.handleMouseMove);
         if (this.renderer) {
             this.renderer.domElement.remove();
             this.renderer.dispose();

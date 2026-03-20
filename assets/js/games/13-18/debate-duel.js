@@ -129,7 +129,14 @@ class DebateDuel extends GameBase {
     }
 
     startGame() {
+        super.start();
+        this.currentQ = 0;
+        this.score = 0;
+        this.persuasion = 50;
+        this.container.querySelector('#score').textContent = this.score;
+        this.container.querySelector('#persuasion-bar').style.width = `${this.persuasion}%`;
         this.container.querySelector('#start-overlay').style.display = 'none';
+        this.showFeedback('Court is now in session', 'info', 1200);
         this.loadScenario();
     }
 
@@ -176,18 +183,22 @@ class DebateDuel extends GameBase {
         this.container.querySelectorAll('.rebuttal-btn').forEach(b => b.style.pointerEvents = 'none');
 
         if (isCorrect) {
-            this.score += 500;
+            const earned = this.addScore(500);
             this.persuasion = Math.min(100, this.persuasion + 20);
             btn.style.background = 'rgba(39, 174, 96, 0.3)';
             btn.style.borderColor = '#27ae60';
             feedback.textContent = option.feedback;
             feedback.style.color = '#27ae60';
+            this.showScoreBurst(`+${earned}`);
+            this.showFeedback('Strong rebuttal', 'success', 900);
         } else {
             this.persuasion = Math.max(0, this.persuasion - 15);
             btn.style.background = 'rgba(192, 57, 43, 0.3)';
             btn.style.borderColor = '#c0392b';
             feedback.textContent = option.feedback;
             feedback.style.color = '#e67e22';
+            this.showFeedback('Pressure rising', 'warning', 900);
+            this.pulseStage('warning');
         }
 
         this.container.querySelector('#persuasion-bar').style.width = `${this.persuasion}%`;
@@ -203,6 +214,9 @@ class DebateDuel extends GameBase {
 
     endGame() {
         const victory = this.persuasion >= 50;
+        this.showFeedback(victory ? 'Judges impressed' : 'Time to sharpen the rebuttal', victory ? 'success' : 'warning', 1200);
+        super.end();
+        return;
         this.container.innerHTML = `
             <div style="position: absolute; inset: 0; background: #1a1a1a; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px;">
                 <h1 style="font-size: 60px; color: ${victory ? '#27ae60' : '#c0392b'};">${victory ? 'DEBATE WON! 🏅' : 'DEBATE LOST 📉'}</h1>
