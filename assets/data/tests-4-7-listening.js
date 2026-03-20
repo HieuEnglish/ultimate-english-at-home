@@ -711,6 +711,591 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q72",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the umbrella.",
+      "options": [
+        "??",
+        "?",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q73",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the kite.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q74",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the train.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q75",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the sandwich.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q76",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the rabbit.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q77",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the carrot.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q78",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the clock.",
+      "options": [
+        "??",
+        "?",
+        "???",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ?."
+    },
+    {
+      "id": "q79",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the backpack.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q80",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the teacher.",
+      "options": [
+        "?????",
+        "?????",
+        "?????",
+        "?????"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ?????."
+    },
+    {
+      "id": "q81",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the playground.",
+      "options": [
+        "???",
+        "??",
+        "??",
+        "???"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q82",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the banana.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q83",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the bus.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q84",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the pencil.",
+      "options": [
+        "??",
+        "??",
+        "???",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q85",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the shoes.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q86",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the flower.",
+      "options": [
+        "??",
+        "??",
+        "?",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q87",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the cake.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q88",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the duck.",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q89",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the moon.",
+      "options": [
+        "??",
+        "??",
+        "?",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q90",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the bed.",
+      "options": [
+        "??",
+        "??",
+        "???",
+        "???"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ???."
+    },
+    {
+      "id": "q91",
+      "type": "listenChoice",
+      "question": "Listen and choose.",
+      "say": "Point to the farm.",
+      "options": [
+        "???",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "The correct picture is ??."
+    },
+    {
+      "id": "q92",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "It is sunny.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q93",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "???",
+      "say": "It is raining.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q94",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a bike.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q95",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a fish.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q96",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a banana.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q97",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a cat.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q98",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "These are books.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q99",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a kite.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q100",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a bus.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q101",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a school.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q102",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is bread.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q103",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a tree.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q104",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "These are socks.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q105",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "?",
+      "say": "This is a clock.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q106",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "?",
+      "say": "This is a football.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q107",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a teddy bear.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q108",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a plane.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q109",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a carrot.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q110",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "This is a rabbit.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    },
+    {
+      "id": "q111",
+      "type": "listenTrueFalse",
+      "question": "Look. Listen. True or False?",
+      "picture": "??",
+      "say": "These are grapes.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the picture and sentence carefully."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

@@ -765,6 +765,461 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q82",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "duck",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Duck = ??"
+    },
+    {
+      "id": "q83",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "lion",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Lion = ??"
+    },
+    {
+      "id": "q84",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "monkey",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Monkey = ??"
+    },
+    {
+      "id": "q85",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "turtle",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Turtle = ??"
+    },
+    {
+      "id": "q86",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "orange",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Orange = ??"
+    },
+    {
+      "id": "q87",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "grapes",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Grapes = ??"
+    },
+    {
+      "id": "q88",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "pear",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Pear = ??"
+    },
+    {
+      "id": "q89",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "bread",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Bread = ??"
+    },
+    {
+      "id": "q90",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "egg",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Egg = ??"
+    },
+    {
+      "id": "q91",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "cheese",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Cheese = ??"
+    },
+    {
+      "id": "q92",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "spoon",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Spoon = ??"
+    },
+    {
+      "id": "q93",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "plate",
+      "options": [
+        "???",
+        "??",
+        "???",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Plate = ???"
+    },
+    {
+      "id": "q94",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "chair",
+      "options": [
+        "??",
+        "???",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Chair = ??"
+    },
+    {
+      "id": "q95",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "door",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Door = ??"
+    },
+    {
+      "id": "q96",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "bed",
+      "options": [
+        "???",
+        "???",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Bed = ???"
+    },
+    {
+      "id": "q97",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "sock",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Sock = ??"
+    },
+    {
+      "id": "q98",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "hat",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Hat = ??"
+    },
+    {
+      "id": "q99",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "glove",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Glove = ??"
+    },
+    {
+      "id": "q100",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "eye",
+      "options": [
+        "???",
+        "??",
+        "???",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Eye = ???"
+    },
+    {
+      "id": "q101",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "ear",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "?"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Ear = ??"
+    },
+    {
+      "id": "q102",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "nose",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Nose = ??"
+    },
+    {
+      "id": "q103",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "star",
+      "options": [
+        "?",
+        "?",
+        "?",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Star = ?"
+    },
+    {
+      "id": "q104",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "square",
+      "options": [
+        "?",
+        "?",
+        "?",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Square = ?"
+    },
+    {
+      "id": "q105",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "triangle",
+      "options": [
+        "??",
+        "??",
+        "?",
+        "?"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Triangle = ??"
+    },
+    {
+      "id": "q106",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "flower",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Flower = ??"
+    },
+    {
+      "id": "q107",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "tree",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Tree = ??"
+    },
+    {
+      "id": "q108",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "bus",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Bus = ??"
+    },
+    {
+      "id": "q109",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "train",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Train = ??"
+    },
+    {
+      "id": "q110",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "boat",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Boat = ??"
+    },
+    {
+      "id": "q111",
+      "type": "listenChoice",
+      "question": "Listen. Tap the picture.",
+      "say": "plane",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Plane = ??"
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

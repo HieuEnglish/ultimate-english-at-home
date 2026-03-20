@@ -93,8 +93,7 @@
   // -----------------------------
 
   const QUESTIONS = [
-    // Part 1 (10)
-    {
+{
       id: "q1",
       partId: "p1",
       type: "fillInTheBlank",
@@ -104,7 +103,7 @@
       answer: ["Daniel"],
       explanation: "He says: “It’s Daniel Cooper.”"
     },
-    {
+{
       id: "q2",
       partId: "p1",
       type: "fillInTheBlank",
@@ -114,7 +113,7 @@
       answer: ["Cooper"],
       explanation: "He spells the surname: C-O-O-P-E-R."
     },
-    {
+{
       id: "q3",
       partId: "p1",
       type: "fillInTheBlank",
@@ -124,7 +123,7 @@
       answer: ["07915 406 882", "07915406882"],
       explanation: "He gives: 07915 406 882."
     },
-    {
+{
       id: "q4",
       partId: "p1",
       type: "fillInTheBlank",
@@ -134,7 +133,7 @@
       answer: ["14", "14th"],
       explanation: "He says: Tuesday the 14th of May."
     },
-    {
+{
       id: "q5",
       partId: "p1",
       type: "multipleChoice",
@@ -144,7 +143,7 @@
       options: ["6 to 7 p.m.", "8 to 9 p.m.", "7:30 to 8:30 p.m.", "7 to 8 p.m."], answer: 3,
       explanation: "They agree on 7 p.m. for one hour."
     },
-    {
+{
       id: "q6",
       partId: "p1",
       type: "fillInTheBlank",
@@ -154,7 +153,7 @@
       answer: ["4", "four"],
       explanation: "He asks for Court 4."
     },
-    {
+{
       id: "q7",
       partId: "p1",
       type: "fillInTheBlank",
@@ -164,7 +163,7 @@
       answer: ["12", "twelve"],
       explanation: "The assistant says: twelve pounds."
     },
-    {
+{
       id: "q8",
       partId: "p1",
       type: "multipleChoice",
@@ -174,7 +173,7 @@
       options: ["Online", "By bank transfer", "In cash at reception", "By cheque"], answer: 0,
       explanation: "He says: “I’ll pay online.”"
     },
-    {
+{
       id: "q9",
       partId: "p1",
       type: "fillInTheBlank",
@@ -184,7 +183,7 @@
       answer: ["10", "ten"],
       explanation: "The assistant says: arrive ten minutes early."
     },
-    {
+{
       id: "q10",
       partId: "p1",
       type: "fillInTheBlank",
@@ -194,9 +193,7 @@
       answer: ["key", "keycard", "key card"],
       explanation: "The assistant mentions collecting the key card."
     },
-
-    // Part 2 (10)
-    {
+{
       id: "q11",
       partId: "p2",
       type: "multipleChoice",
@@ -206,7 +203,7 @@
       options: ["On King Street", "On River Road", "On Harbour Avenue", "On Station Lane"], answer: 1,
       explanation: "The guide says the main entrance is on River Road."
     },
-    {
+{
       id: "q12",
       partId: "p2",
       type: "fillInTheBlank",
@@ -216,7 +213,7 @@
       answer: ["left"],
       explanation: "The guide says lockers are to the left of the ticket desk."
     },
-    {
+{
       id: "q13",
       partId: "p2",
       type: "multipleChoice",
@@ -231,7 +228,7 @@
       ], answer: 2,
       explanation: "The café is upstairs on the first floor next to the reading area."
     },
-    {
+{
       id: "q14",
       partId: "p2",
       type: "fillInTheBlank",
@@ -241,7 +238,7 @@
       answer: ["11", "11am", "11:00"],
       explanation: "The guide says the free tour starts at 11 a.m."
     },
-    {
+{
       id: "q15",
       partId: "p2",
       type: "multipleChoice",
@@ -256,7 +253,7 @@
       ], answer: 3,
       explanation: "It starts at the large map in Gallery One."
     },
-    {
+{
       id: "q16",
       partId: "p2",
       type: "fillInTheBlank",
@@ -266,7 +263,7 @@
       answer: ["gift"],
       explanation: "The guide says: beside the gift shop."
     },
-    {
+{
       id: "q17",
       partId: "p2",
       type: "multipleChoice",
@@ -276,7 +273,7 @@
       options: ["The ship model gallery", "The reading area", "Gallery One", "The activity room"], answer: 0,
       explanation: "No photos in the ship model gallery."
     },
-    {
+{
       id: "q18",
       partId: "p2",
       type: "fillInTheBlank",
@@ -286,7 +283,7 @@
       answer: ["5:30", "530", "5 30", "five thirty"],
       explanation: "The guide says it closes at 5:30 p.m."
     },
-    {
+{
       id: "q19",
       partId: "p2",
       type: "fillInTheBlank",
@@ -296,7 +293,7 @@
       answer: ["5", "5:00", "500"],
       explanation: "The last entry is at 5 p.m."
     },
-    {
+{
       id: "q20",
       partId: "p2",
       type: "multipleChoice",
@@ -311,9 +308,7 @@
       ], answer: 1,
       explanation: "It’s on the ground floor behind the café stairs."
     },
-
-    // Part 3 (10)
-    {
+{
       id: "q21",
       partId: "p3",
       type: "multipleChoice",
@@ -323,7 +318,7 @@
       options: ["Remote work at home", "Online learning platforms", "Co-working spaces in the city", "Public transport surveys"], answer: 2,
       explanation: "They choose co-working spaces."
     },
-    {
+{
       id: "q22",
       partId: "p3",
       type: "multipleChoice",
@@ -333,7 +328,7 @@
       options: ["Tourists and locals", "Managers and customers", "Teenagers and retirees", "Students and full-time workers"], answer: 3,
       explanation: "Mina suggests comparing students and full-time workers."
     },
-    {
+{
       id: "q23",
       partId: "p3",
       type: "multipleChoice",
@@ -343,7 +338,7 @@
       options: ["At the Central Hub co-working space", "At a café near campus", "In the library", "At the train station"], answer: 0,
       explanation: "They decide on the Central Hub co-working space."
     },
-    {
+{
       id: "q24",
       partId: "p3",
       type: "multipleChoice",
@@ -354,7 +349,7 @@
       answer: 1,
       explanation: "They change to Friday morning."
     },
-    {
+{
       id: "q25",
       partId: "p3",
       type: "fillInTheBlank",
@@ -364,7 +359,7 @@
       answer: ["9:30", "930", "9 30", "nine thirty"],
       explanation: "They agree on 9:30."
     },
-    {
+{
       id: "q26",
       partId: "p3",
       type: "fillInTheBlank",
@@ -374,7 +369,7 @@
       answer: ["questionnaire"],
       explanation: "He says he’ll draft the questionnaire."
     },
-    {
+{
       id: "q27",
       partId: "p3",
       type: "fillInTheBlank",
@@ -384,7 +379,7 @@
       answer: ["questions"],
       explanation: "She says she’ll write the interview questions."
     },
-    {
+{
       id: "q28",
       partId: "p3",
       type: "multipleChoice",
@@ -395,7 +390,7 @@
       answer: 2,
       explanation: "They mention making a bar chart."
     },
-    {
+{
       id: "q29",
       partId: "p3",
       type: "fillInTheBlank",
@@ -405,7 +400,7 @@
       answer: ["8", "eight"],
       explanation: "They plan an eight-minute presentation."
     },
-    {
+{
       id: "q30",
       partId: "p3",
       type: "fillInTheBlank",
@@ -415,9 +410,7 @@
       answer: ["2", "2nd", "second"],
       explanation: "Mina says they’ll submit it on the 2nd of June."
     },
-
-    // Part 4 (10)
-    {
+{
       id: "q31",
       partId: "p4",
       type: "fillInTheBlank",
@@ -427,7 +420,7 @@
       answer: ["consolidation"],
       explanation: "The lecturer says: “This process is often called consolidation.”"
     },
-    {
+{
       id: "q32",
       partId: "p4",
       type: "multipleChoice",
@@ -442,7 +435,7 @@
       ], answer: 3,
       explanation: "The lecturer says some information is stabilised at night."
     },
-    {
+{
       id: "q33",
       partId: "p4",
       type: "multipleChoice",
@@ -453,7 +446,7 @@
       answer: 0,
       explanation: "Deep sleep is linked to remembering facts and vocabulary."
     },
-    {
+{
       id: "q34",
       partId: "p4",
       type: "fillInTheBlank",
@@ -463,7 +456,7 @@
       answer: ["REM"],
       explanation: "The lecture calls dream sleep REM."
     },
-    {
+{
       id: "q35",
       partId: "p4",
       type: "multipleChoice",
@@ -474,7 +467,7 @@
       answer: 1,
       explanation: "REM is linked to creativity and connecting ideas."
     },
-    {
+{
       id: "q36",
       partId: "p4",
       type: "fillInTheBlank",
@@ -484,7 +477,7 @@
       answer: ["correctly"],
       explanation: "The lecturer says correct practice is needed to consolidate useful information."
     },
-    {
+{
       id: "q37",
       partId: "p4",
       type: "multipleChoice",
@@ -494,7 +487,7 @@
       options: ["Better memory immediately", "Increased caffeine tolerance", "Grogginess", "No effect"], answer: 2,
       explanation: "A long nap may cause grogginess, making study less effective afterwards."
     },
-    {
+{
       id: "q38",
       partId: "p4",
       type: "fillInTheBlank",
@@ -504,7 +497,7 @@
       answer: ["caffeine"],
       explanation: "The lecture advises limiting caffeine late in the day."
     },
-    {
+{
       id: "q39",
       partId: "p4",
       type: "fillInTheBlank",
@@ -514,7 +507,7 @@
       answer: ["bedtime"],
       explanation: "The lecture says to review shortly before bedtime."
     },
-    {
+{
       id: "q40",
       partId: "p4",
       type: "fillInTheBlank",
@@ -523,15 +516,8 @@
       question: "Students should prioritise a regular ______.",
       answer: ["schedule"],
       explanation: "The lecture recommends a regular schedule."
-    }
-  ];
-
-  // -----------------------------
-  // Added questions (50) — q41–q90
-  // -----------------------------
-
-  QUESTIONS.push(
-    {
+    },
+{
       id: "q41",
       partId: "p4",
       type: "fillInTheBlank",
@@ -541,7 +527,7 @@
       answer: ["awake", "Awake"],
       explanation: "The lecturer says people assume learning happens only while we are awake."
     },
-    {
+{
       id: "q42",
       partId: "p4",
       type: "multipleChoice",
@@ -556,7 +542,7 @@
       ], answer: 3,
       explanation: "The talk begins by challenging the idea that learning happens only when we are awake."
     },
-    {
+{
       id: "q43",
       partId: "p4",
       type: "fillInTheBlank",
@@ -566,7 +552,7 @@
       answer: ["major", "Major"],
       explanation: "He states that sleep plays a major role in learning."
     },
-    {
+{
       id: "q44",
       partId: "p4",
       type: "fillInTheBlank",
@@ -576,7 +562,7 @@
       answer: ["collects", "Collects"],
       explanation: "The lecture says the brain collects new information during the day."
     },
-    {
+{
       id: "q45",
       partId: "p4",
       type: "multipleChoice",
@@ -592,7 +578,7 @@
       answer: 0,
       explanation: "The lecture mentions stabilising information and replaying patterns of activity during sleep."
     },
-    {
+{
       id: "q46",
       partId: "p4",
       type: "fillInTheBlank",
@@ -602,7 +588,7 @@
       answer: ["stabilised", "stabilized"],
       explanation: "The lecturer says some information is stabilised at night."
     },
-    {
+{
       id: "q47",
       partId: "p4",
       type: "multipleChoice",
@@ -612,7 +598,7 @@
       options: ["It prevents any new learning the next day", "It helps learning last longer", "It guarantees high test scores", "It eliminates the need for revision"], answer: 1,
       explanation: "He says stabilisation helps information last longer."
     },
-    {
+{
       id: "q48",
       partId: "p4",
       type: "fillInTheBlank",
@@ -622,7 +608,7 @@
       answer: ["longer", "Longer"],
       explanation: "The lecturer explains that stabilisation helps learning last longer."
     },
-    {
+{
       id: "q49",
       partId: "p4",
       type: "multipleChoice",
@@ -637,7 +623,7 @@
       ], answer: 2,
       explanation: "The lecture says the brain replays patterns of activity linked to what was learned."
     },
-    {
+{
       id: "q50",
       partId: "p4",
       type: "fillInTheBlank",
@@ -647,7 +633,7 @@
       answer: ["patterns", "Patterns"],
       explanation: "He says the brain replays patterns of activity."
     },
-    {
+{
       id: "q51",
       partId: "p4",
       type: "fillInTheBlank",
@@ -657,7 +643,7 @@
       answer: ["activity", "Activity"],
       explanation: "The phrase in the talk is “patterns of activity”."
     },
-    {
+{
       id: "q52",
       partId: "p4",
       type: "multipleChoice",
@@ -672,7 +658,7 @@
       ], answer: 3,
       explanation: "Deep sleep is linked to remembering facts/vocabulary, while REM is linked to creativity and connecting ideas."
     },
-    {
+{
       id: "q53",
       partId: "p4",
       type: "fillInTheBlank",
@@ -682,7 +668,7 @@
       answer: ["facts", "Facts"],
       explanation: "The lecturer says deep sleep is strongly linked to remembering facts and vocabulary."
     },
-    {
+{
       id: "q54",
       partId: "p4",
       type: "fillInTheBlank",
@@ -692,7 +678,7 @@
       answer: ["vocabulary", "Vocabulary"],
       explanation: "He pairs “facts and vocabulary” when describing deep sleep."
     },
-    {
+{
       id: "q55",
       partId: "p4",
       type: "multipleChoice",
@@ -708,7 +694,7 @@
       answer: 0,
       explanation: "The lecture links REM sleep to creativity and connecting ideas."
     },
-    {
+{
       id: "q56",
       partId: "p4",
       type: "fillInTheBlank",
@@ -718,7 +704,7 @@
       answer: ["magic", "Magic"],
       explanation: "He states that sleep is not a magic solution."
     },
-    {
+{
       id: "q57",
       partId: "p4",
       type: "multipleChoice",
@@ -733,7 +719,7 @@
       ], answer: 1,
       explanation: "The lecturer says practice quality matters; otherwise there is little useful information to consolidate."
     },
-    {
+{
       id: "q58",
       partId: "p4",
       type: "fillInTheBlank",
@@ -743,7 +729,7 @@
       answer: ["consolidate", "Consolidate"],
       explanation: "The lecture says there is little useful information to consolidate without correct practice."
     },
-    {
+{
       id: "q59",
       partId: "p4",
       type: "multipleChoice",
@@ -758,7 +744,7 @@
       ], answer: 2,
       explanation: "He notes that correct practice is needed for sleep to consolidate useful information."
     },
-    {
+{
       id: "q60",
       partId: "p4",
       type: "fillInTheBlank",
@@ -768,7 +754,7 @@
       answer: ["timing", "Timing"],
       explanation: "He introduces timing as another factor affecting learning outcomes."
     },
-    {
+{
       id: "q61",
       partId: "p4",
       type: "multipleChoice",
@@ -778,7 +764,7 @@
       options: ["Online payments", "Fish migration", "Museum opening hours", "Naps"], answer: 3,
       explanation: "He discusses short naps and long naps to illustrate timing effects."
     },
-    {
+{
       id: "q62",
       partId: "p4",
       type: "fillInTheBlank",
@@ -788,7 +774,7 @@
       answer: ["naps", "nap", "Naps", "Nap"],
       explanation: "The lecture says short naps can improve alertness."
     },
-    {
+{
       id: "q63",
       partId: "p4",
       type: "multipleChoice",
@@ -804,7 +790,7 @@
       answer: 0,
       explanation: "He says short naps can improve alertness."
     },
-    {
+{
       id: "q64",
       partId: "p4",
       type: "fillInTheBlank",
@@ -814,7 +800,7 @@
       answer: ["alertness", "Alertness"],
       explanation: "Alertness is the benefit mentioned for short naps."
     },
-    {
+{
       id: "q65",
       partId: "p4",
       type: "multipleChoice",
@@ -829,7 +815,7 @@
       ], answer: 1,
       explanation: "He contrasts short naps (alertness) with too-long naps (grogginess)."
     },
-    {
+{
       id: "q66",
       partId: "p4",
       type: "fillInTheBlank",
@@ -839,7 +825,7 @@
       answer: ["grogginess", "Grogginess"],
       explanation: "The lecturer warns that a nap that is too long may cause grogginess."
     },
-    {
+{
       id: "q67",
       partId: "p4",
       type: "multipleChoice",
@@ -854,7 +840,7 @@
       ], answer: 2,
       explanation: "He says grogginess makes study less effective afterwards."
     },
-    {
+{
       id: "q68",
       partId: "p4",
       type: "fillInTheBlank",
@@ -864,7 +850,7 @@
       answer: ["effective", "Effective"],
       explanation: "The lecture says grogginess can make study less effective afterwards."
     },
-    {
+{
       id: "q69",
       partId: "p4",
       type: "multipleChoice",
@@ -879,7 +865,7 @@
       ], answer: 3,
       explanation: "He recommends a regular schedule, limiting late caffeine, and reviewing key material shortly before bedtime."
     },
-    {
+{
       id: "q70",
       partId: "p4",
       type: "fillInTheBlank",
@@ -889,7 +875,7 @@
       answer: ["regular", "Regular"],
       explanation: "The advice includes prioritising a regular schedule."
     },
-    {
+{
       id: "q71",
       partId: "p4",
       type: "multipleChoice",
@@ -900,7 +886,7 @@
       answer: 0,
       explanation: "He advises limiting caffeine late in the day."
     },
-    {
+{
       id: "q72",
       partId: "p4",
       type: "fillInTheBlank",
@@ -910,7 +896,7 @@
       answer: ["late", "Late"],
       explanation: "The lecture says to limit caffeine late in the day."
     },
-    {
+{
       id: "q73",
       partId: "p4",
       type: "multipleChoice",
@@ -920,7 +906,7 @@
       options: ["Immediately after waking up", "Shortly before bedtime", "Only at lunchtime", "During a very long nap"], answer: 1,
       explanation: "He suggests reviewing key material shortly before bedtime."
     },
-    {
+{
       id: "q74",
       partId: "p4",
       type: "fillInTheBlank",
@@ -930,7 +916,7 @@
       answer: ["key", "Key"],
       explanation: "The phrase used is “review key material shortly before bedtime”."
     },
-    {
+{
       id: "q75",
       partId: "p4",
       type: "multipleChoice",
@@ -940,7 +926,7 @@
       options: ["Help organise learning over time", "Support the brain's ability to store learning", "Guarantee high scores", "Reduce the negative effects of poor timing"], answer: 2,
       explanation: "He says these habits do not guarantee high scores."
     },
-    {
+{
       id: "q76",
       partId: "p4",
       type: "fillInTheBlank",
@@ -950,7 +936,7 @@
       answer: ["scores", "Scores"],
       explanation: "The lecturer says the habits do not guarantee high scores."
     },
-    {
+{
       id: "q77",
       partId: "p4",
       type: "multipleChoice",
@@ -960,7 +946,7 @@
       options: ["replace all revision with caffeine", "learn without any practice", "avoid needing sleep completely", "store and organise learning over time"], answer: 3,
       explanation: "He concludes that the habits can support storing and organising learning over time."
     },
-    {
+{
       id: "q78",
       partId: "p4",
       type: "fillInTheBlank",
@@ -970,7 +956,7 @@
       answer: ["organise", "organize", "Organise", "Organize"],
       explanation: "The final sentence mentions the ability to store and organise learning over time."
     },
-    {
+{
       id: "q79",
       partId: "p4",
       type: "fillInTheBlank",
@@ -980,7 +966,7 @@
       answer: ["time", "Time"],
       explanation: "He says the brain can store and organise learning over time."
     },
-    {
+{
       id: "q80",
       partId: "p4",
       type: "multipleChoice",
@@ -996,7 +982,7 @@
       answer: 0,
       explanation: "He explains that sleep supports learning, but practice and habits still matter."
     },
-    {
+{
       id: "q81",
       partId: "p4",
       type: "multipleChoice",
@@ -1006,7 +992,7 @@
       options: ["Only during REM sleep", "During the day", "Only during deep sleep", "Only during naps"], answer: 1,
       explanation: "He states: “During the day, the brain collects new information.”"
     },
-    {
+{
       id: "q82",
       partId: "p4",
       type: "multipleChoice",
@@ -1021,7 +1007,7 @@
       ], answer: 2,
       explanation: "The lecture mentions schedule, caffeine, and reviewing material, but not intense exercise before sleeping."
     },
-    {
+{
       id: "q83",
       partId: "p4",
       type: "multipleChoice",
@@ -1036,7 +1022,7 @@
       ], answer: 3,
       explanation: "He contrasts deep sleep (facts/vocabulary) with REM (creativity/connecting ideas)."
     },
-    {
+{
       id: "q84",
       partId: "p4",
       type: "multipleChoice",
@@ -1052,7 +1038,7 @@
       answer: 0,
       explanation: "The lecture links deep sleep to facts/vocabulary and REM to creativity."
     },
-    {
+{
       id: "q85",
       partId: "p4",
       type: "fillInTheBlank",
@@ -1062,7 +1048,7 @@
       answer: ["replays", "Replays"],
       explanation: "He says the brain replays patterns of activity linked to what was learned earlier."
     },
-    {
+{
       id: "q86",
       partId: "p4",
       type: "multipleChoice",
@@ -1077,7 +1063,7 @@
       ], answer: 1,
       explanation: "The lecture focuses on sleep, consolidation, and study habits."
     },
-    {
+{
       id: "q87",
       partId: "p4",
       type: "fillInTheBlank",
@@ -1087,7 +1073,7 @@
       answer: ["store", "Store"],
       explanation: "The lecturer says the habits can support the brain’s ability to store and organise learning over time."
     },
-    {
+{
       id: "q88",
       partId: "p4",
       type: "multipleChoice",
@@ -1102,7 +1088,7 @@
       ], answer: 2,
       explanation: "“Over time” implies a gradual process rather than an instant result."
     },
-    {
+{
       id: "q89",
       partId: "p4",
       type: "multipleChoice",
@@ -1117,7 +1103,7 @@
       ], answer: 3,
       explanation: "A too-long nap may cause grogginess, making study less effective afterwards."
     },
-    {
+{
       id: "q90",
       partId: "p4",
       type: "fillInTheBlank",
@@ -1126,16 +1112,8 @@
       question: "The lecturer says that at ______, some new information is stabilised.",
       answer: ["night", "Night"],
       explanation: "He says that at night, some information is stabilised."
-    }
-  );
-
-  // -----------------------------
-  // Added questions (30) — q91–q120 (to reach bank size 120 for Run=40)
-  // -----------------------------
-
-  QUESTIONS.push(
-    // Part 1 — additional (10)
-    {
+    },
+{
       id: "q91",
       partId: "p1",
       type: "multipleChoice",
@@ -1145,7 +1123,7 @@
       options: ["A badminton court", "A swimming lesson", "A tennis coach", "A fitness class"], answer: 0,
       explanation: "The caller says he wants to book a badminton court."
     },
-    {
+{
       id: "q92",
       partId: "p1",
       type: "fillInTheBlank",
@@ -1155,7 +1133,7 @@
       answer: ["Northgate", "NORTHGATE"],
       explanation: "The assistant answers: “Northgate Sports Centre, bookings desk.”"
     },
-    {
+{
       id: "q93",
       partId: "p1",
       type: "multipleChoice",
@@ -1166,7 +1144,7 @@
       answer: 1,
       explanation: "The assistant says: “bookings desk.”"
     },
-    {
+{
       id: "q94",
       partId: "p1",
       type: "multipleChoice",
@@ -1176,7 +1154,7 @@
       options: ["30 minutes", "Two hours", "One hour", "Three hours"], answer: 2,
       explanation: "They agree it is just one hour."
     },
-    {
+{
       id: "q95",
       partId: "p1",
       type: "multipleChoice",
@@ -1186,7 +1164,7 @@
       options: ["5 p.m.", "9 p.m.", "8 p.m.", "6 p.m."], answer: 3,
       explanation: "The assistant offers 6 p.m. or 7 p.m."
     },
-    {
+{
       id: "q96",
       partId: "p1",
       type: "fillInTheBlank",
@@ -1196,7 +1174,7 @@
       answer: ["2", "two"],
       explanation: "The assistant asks: Court 2 or Court 4?"
     },
-    {
+{
       id: "q97",
       partId: "p1",
       type: "multipleChoice",
@@ -1206,7 +1184,7 @@
       options: ["Pay at reception when he arrives", "Pay by cheque", "Pay by bank transfer", "Pay in advance by phone"], answer: 0,
       explanation: "The assistant says he can pay online, or at reception when he arrives."
     },
-    {
+{
       id: "q98",
       partId: "p1",
       type: "fillInTheBlank",
@@ -1216,7 +1194,7 @@
       answer: ["reception", "Reception"],
       explanation: "The assistant says to collect the key card from reception."
     },
-    {
+{
       id: "q99",
       partId: "p1",
       type: "multipleChoice",
@@ -1227,7 +1205,7 @@
       answer: 1,
       explanation: "He must arrive early to collect the key card from reception."
     },
-    {
+{
       id: "q100",
       partId: "p1",
       type: "fillInTheBlank",
@@ -1237,9 +1215,7 @@
       answer: ["7", "7pm", "7 p.m.", "seven"],
       explanation: "They confirm 7 to 8 p.m."
     },
-
-    // Part 2 — additional (10)
-    {
+{
       id: "q101",
       partId: "p2",
       type: "multipleChoice",
@@ -1249,7 +1225,7 @@
       options: ["Outside the building", "Upstairs beside the café", "Directly inside the front doors", "In Gallery One"], answer: 2,
       explanation: "The guide says the ticket desk is directly inside the front doors."
     },
-    {
+{
       id: "q102",
       partId: "p2",
       type: "fillInTheBlank",
@@ -1259,7 +1235,7 @@
       answer: ["lockers", "Lockers"],
       explanation: "The guide asks visitors with backpacks to use the lockers."
     },
-    {
+{
       id: "q103",
       partId: "p2",
       type: "multipleChoice",
@@ -1274,7 +1250,7 @@
       ], answer: 3,
       explanation: "The guide says to collect an audio guide from the information counter beside the gift shop."
     },
-    {
+{
       id: "q104",
       partId: "p2",
       type: "fillInTheBlank",
@@ -1284,7 +1260,7 @@
       answer: ["map", "Map"],
       explanation: "The guide says it starts at the large map in Gallery One."
     },
-    {
+{
       id: "q105",
       partId: "p2",
       type: "multipleChoice",
@@ -1299,7 +1275,7 @@
       ], answer: 0,
       explanation: "The guide mentions the nearest exit is through the side corridor marked in green."
     },
-    {
+{
       id: "q106",
       partId: "p2",
       type: "fillInTheBlank",
@@ -1309,7 +1285,7 @@
       answer: ["green", "Green"],
       explanation: "The guide says the corridor is marked in green."
     },
-    {
+{
       id: "q107",
       partId: "p2",
       type: "multipleChoice",
@@ -1324,7 +1300,7 @@
       ], answer: 1,
       explanation: "The guide says the café is upstairs on the first floor next to the reading area."
     },
-    {
+{
       id: "q108",
       partId: "p2",
       type: "fillInTheBlank",
@@ -1334,7 +1310,7 @@
       answer: ["first", "First"],
       explanation: "The guide says the café is upstairs on the first floor."
     },
-    {
+{
       id: "q109",
       partId: "p2",
       type: "fillInTheBlank",
@@ -1344,19 +1320,15 @@
       answer: ["stairs", "Stairs"],
       explanation: "The guide says the activity room is behind the café stairs."
     },
-    {
+{
       id: "q110",
       partId: "p2",
       type: "fillInTheBlank",
       say: P2,
-      context: "Part 2: Complete the information. Write ONE WORD ONLY.",
-      question: "The main entrance is on River ______.",
-      answer: ["Road", "road"],
-      explanation: "The guide says the main entrance is on River Road."
+      answer: ["Northgate", "NORTHGATE"],
+      explanation: "The assistant answers: “Northgate Sports Centre, bookings desk.”"
     },
-
-    // Part 3 — additional (10)
-    {
+{
       id: "q111",
       partId: "p3",
       type: "fillInTheBlank",
@@ -1365,123 +1337,8 @@
       question: "Mina and Owen are discussing a ______ project.",
       answer: ["sociology", "Sociology"],
       explanation: "Mina says: “the sociology project.”"
-    },
-    {
-      id: "q112",
-      partId: "p3",
-      type: "multipleChoice",
-      say: P3,
-      context: "Part 3: Choose the correct answer.",
-      question: "What topic does Owen mention first?",
-      options: ["Co-working spaces", "City museums", "Remote work", "Sleep and learning"], answer: 2,
-      explanation: "Owen says he was thinking about remote work."
-    },
-    {
-      id: "q113",
-      partId: "p3",
-      type: "fillInTheBlank",
-      say: P3,
-      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
-      question: "They could focus on one area of the ______.",
-      answer: ["city", "City"],
-      explanation: "Mina suggests focusing on one area of the city."
-    },
-    {
-      id: "q114",
-      partId: "p3",
-      type: "multipleChoice",
-      say: P3,
-      context: "Part 3: Choose the correct answer.",
-      question: "What two methods do they plan to use for data collection?",
-      options: [
-        "Online payments and a timetable",
-        "A laboratory experiment and a quiz",
-        "A debate and a poster",
-        "Short interviews and a questionnaire"
-      ], answer: 3,
-      explanation: "Mina suggests short interviews and a simple questionnaire."
-    },
-    {
-      id: "q115",
-      partId: "p3",
-      type: "fillInTheBlank",
-      say: P3,
-      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
-      question: "They decide to go to the Central ______ co-working space.",
-      answer: ["Hub", "hub"],
-      explanation: "Mina says: “the Central Hub co-working space.”"
-    },
-    {
-      id: "q116",
-      partId: "p3",
-      type: "multipleChoice",
-      say: P3,
-      context: "Part 3: Choose the correct answer.",
-      question: "Where will they meet?",
-      options: ["Outside the main entrance", "Inside the library", "At the café upstairs", "In Gallery Two"], answer: 0,
-      explanation: "They agree to meet outside the main entrance."
-    },
-    {
-      id: "q117",
-      partId: "p3",
-      type: "fillInTheBlank",
-      say: P3,
-      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
-      question: "Owen says he will draft the questionnaire ______.",
-      answer: ["tonight", "Tonight"],
-      explanation: "Owen says: “I’ll draft the questionnaire tonight.”"
-    },
-    {
-      id: "q118",
-      partId: "p3",
-      type: "multipleChoice",
-      say: P3,
-      context: "Part 3: Choose the correct answer.",
-      question: "What do they say they need for the final report?",
-      options: [
-        "A long essay and a video",
-        "A short summary and a chart",
-        "A map of the museum",
-        "A payment receipt"
-      ], answer: 1,
-      explanation: "Owen says they need a short summary and a chart."
-    },
-    {
-      id: "q119",
-      partId: "p3",
-      type: "multipleChoice",
-      say: P3,
-      context: "Part 3: Choose the correct answer.",
-      question: "What will their bar chart show?",
-      options: [
-        "How many hours of sleep students get",
-        "How much the museum tickets cost",
-        "How often people use the space each week",
-        "How many courts the sports centre has"
-      ], answer: 2,
-      explanation: "Mina suggests a bar chart showing how often people use the space each week."
-    },
-    {
-      id: "q120",
-      partId: "p3",
-      type: "fillInTheBlank",
-      say: P3,
-      context: "Part 3: Complete the notes. Write ONE WORD ONLY.",
-      question: "Mina says they can ______ the questions together.",
-      answer: ["review", "Review"],
-      explanation: "Mina says they can review them together."
-    },
-    {
-      id: "q121",
-      partId: "p3",
-      type: "multipleChoice",
-      say: P3,
-      context: "Part 3: Choose the correct answer.",
-      question: "When will they meet to work on the questionnaire?",
-      options: ["Next week", "Tomorrow morning", "On Friday", "This afternoon"], answer: 3,
-      explanation: "They agree to work on it later today."
     }
-  );
+  ];
 
   // Global export (no build step)
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};

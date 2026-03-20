@@ -1026,6 +1026,497 @@
     }
   ];
 
+
+
+  // Added to normalize this bank to 111 items.
+  BANK.push(
+    {
+      "id": "t1-extra-1",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the percentage of students using four study methods in 2005 and 2025.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-2",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes average daily water use for cooking, cleaning, washing, and gardening in summer and winter.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-3",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the number of visitors to a museum, zoo, park, and aquarium over a six-month period.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-4",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the stages in producing recycled paper notebooks.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-5",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes energy use in four household appliances in 2010 and 2024.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-6",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes average hours teenagers spent on reading, gaming, exercise, and social media in 2012 and 2022.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-7",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the percentage of journeys made by bus, bicycle, car, and walking in one town in 2008 and 2023.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-8",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the process of preparing coffee beans for export.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-9",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes library borrowing by fiction, science, history, and comics in three age groups.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-10",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the percentage of electricity produced by coal, gas, wind, and solar between 2000 and 2025.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-11",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes monthly online sales of books, clothing, electronics, and food in one store.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-12",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the process of collecting and treating rainwater in an apartment building.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-13",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes classroom technology use in 2011 and 2021.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-14",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes household ownership of four smart devices in 2007 and 2027.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-15",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the number of passengers using three train stations over one week.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-16",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes daily time spent on commuting, study, leisure, and sleep during weekdays and weekends.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-17",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the stages of manufacturing reusable glass bottles.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-18",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the percentage of waste recycled by material type from 2013 to 2023.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-19",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes attendance at a community sports centre before and after renovation.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-20",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes how oranges are processed into juice concentrate.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-21",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the proportion of students choosing electives in 2014 and 2024.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-22",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the number of books published in four genres over ten years.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-23",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes how a bicycle-sharing system operates from sign-up to return.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-24",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes changes in rainfall across four seasons over a 20-year period.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-25",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes student participation in clubs before and after a new timetable was introduced.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-26",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes the stages in producing chocolate from cocoa beans.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t1-extra-27",
+      "type": "essay",
+      "taskNumber": 1,
+      "recommendedTimeMin": 20,
+      "minWords": 150,
+      "notes": "Write a report for a university lecturer. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "question": "The information below describes water consumption in homes using standard systems and smart systems.\n\nWrite at least 150 words."
+    },
+    {
+      "id": "t2-extra-1",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some people think schools should teach coding from a very young age, while others believe traditional literacy and numeracy should remain the clear priority. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-2",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "In many cities, car-free zones are becoming more common. Do the advantages of this trend outweigh the disadvantages?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-3",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some people argue that young adults should spend time doing voluntary work before starting university. To what extent do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-4",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Online learning is making face-to-face classes less necessary. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-5",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some believe governments should invest more in public parks than in large sports stadiums. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-6",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Many people now rely on ratings and reviews before making decisions. Is this a positive or negative development?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-7",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Schools should spend more time teaching practical life skills such as cooking and budgeting. To what extent do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-8",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some people believe tourism should be limited in environmentally sensitive areas. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-9",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "The best way to improve public health is to increase access to exercise facilities. Do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-10",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Artificial intelligence will change many jobs in the future. What are the advantages and disadvantages of this development?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-11",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some people think that museums should focus more on interactive experiences than on traditional displays. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-12",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Many universities now offer hybrid courses that combine online and in-person learning. Do the benefits outweigh the drawbacks?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-13",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "The best way to reduce waste is to make manufacturers responsible for the full life cycle of their products. Do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-14",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some people think news organisations should focus more on solutions than on problems. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-15",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Teenagers should be encouraged to take a part-time job while studying. To what extent do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-16",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "More companies are allowing employees to work from home. What are the advantages and disadvantages of this change?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-17",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some believe that cities should invest in cycling infrastructure more than in widening roads. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-18",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Public libraries should continue to expand their role as community spaces rather than remain mainly places for books. To what extent do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-19",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some people think it is better for children to spend more time outdoors than on digital devices. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-20",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Governments should place stricter controls on advertising aimed at young people. Do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-21",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "In the future, it may become normal for people to change careers several times. Is this a positive or negative development?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-22",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Many cities are encouraging urban farming projects. What are the advantages and disadvantages of this trend?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-23",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some people believe that success is mainly the result of hard work, while others think it depends more on circumstances. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-24",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Some believe that students should choose more of their own subjects in secondary school. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-25",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Public transport should be free in large cities. To what extent do you agree or disagree?\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-26",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "Governments should spend more money on preventing illness than on treating it. Discuss both views and give your own opinion.\n\nWrite at least 250 words."
+    },
+    {
+      "id": "t2-extra-27",
+      "type": "essay",
+      "taskNumber": 2,
+      "recommendedTimeMin": 40,
+      "minWords": 250,
+      "notes": "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+      "question": "More people are buying second-hand goods than in the past. What are the reasons for this, and is it a positive trend?\n\nWrite at least 250 words."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = BANK;
 })();

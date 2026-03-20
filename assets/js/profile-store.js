@@ -42,6 +42,21 @@
     }
   }
 
+  function onProfileChanged(handler) {
+    if (typeof handler !== "function") return () => {};
+
+    const listener = (ev) => {
+      try {
+        handler(ev && ev.detail ? ev.detail : {});
+      } catch (_) {
+        // ignore consumer errors
+      }
+    };
+
+    window.addEventListener("ueah:profile-changed", listener);
+    return () => window.removeEventListener("ueah:profile-changed", listener);
+  }
+
   function defaultAgeBucket() {
     return {
       reading: { lastScore: null, history: [] },

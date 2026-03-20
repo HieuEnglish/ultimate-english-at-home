@@ -828,6 +828,91 @@
     }
   ];
 
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q102",
+      "type": "prompt",
+      "question": "Trace a big triangle.",
+      "model": "?",
+      "difficulty": "easy",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q103",
+      "type": "prompt",
+      "question": "Trace a small square.",
+      "model": "?",
+      "difficulty": "easy",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q104",
+      "type": "prompt",
+      "question": "Draw three short lines.",
+      "model": "|||",
+      "difficulty": "easy",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q105",
+      "type": "prompt",
+      "question": "Draw three big circles.",
+      "model": "? ? ?",
+      "difficulty": "easy",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q106",
+      "type": "prompt",
+      "question": "Copy a zigzag line.",
+      "model": "/\\/\\",
+      "difficulty": "easy",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q107",
+      "type": "prompt",
+      "question": "Draw a smiling face: circle, eyes, mouth.",
+      "model": ":)",
+      "difficulty": "medium",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q108",
+      "type": "prompt",
+      "question": "Trace a big letter A.",
+      "model": "A",
+      "difficulty": "medium",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q109",
+      "type": "prompt",
+      "question": "Trace a big letter B.",
+      "model": "B",
+      "difficulty": "medium",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q110",
+      "type": "prompt",
+      "question": "Draw a house: square and triangle roof.",
+      "model": "? + ?",
+      "difficulty": "medium",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    },
+    {
+      "id": "q111",
+      "type": "prompt",
+      "question": "Copy your favourite shape two times.",
+      "model": "? ?",
+      "difficulty": "medium",
+      "explanation": "Keep strokes large and slow. Any close try is fine."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

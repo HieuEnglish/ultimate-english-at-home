@@ -1641,6 +1641,1355 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q68",
+      "type": "multipleChoice",
+      "question": "Choose the best thesis sentence for an essay about school uniforms.",
+      "options": [
+        "School uniforms are made of cloth.",
+        "School uniforms can be useful because they reduce distraction and create a sense of belonging.",
+        "Some students wear shoes to school.",
+        "My bag is black and blue."
+      ],
+      "answer": 1,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q69",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best linker: I wanted to join the club; ____, I had another class at the same time.",
+      "answer": "however",
+      "acceptedAnswers": [
+        "however"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q70",
+      "type": "multipleChoice",
+      "question": "Choose the best formal closing for an email.",
+      "options": [
+        "See ya!",
+        "Write back soon!!!",
+        "Best regards,",
+        "Later,"
+      ],
+      "answer": 2,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q71",
+      "type": "fillInTheBlank",
+      "question": "True or False: A paragraph should usually stay focused on one main idea.",
+      "answer": 1,
+      "acceptedAnswers": [
+        1
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q72",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: A sentence that explains your opinion is called a supporting ____.",
+      "answer": "reason",
+      "acceptedAnswers": [
+        "reason"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q73",
+      "type": "multipleChoice",
+      "question": "Choose the clearest topic sentence.",
+      "options": [
+        "Clean rivers are important because they protect wildlife and public health.",
+        "Rivers have water and boats sometimes.",
+        "I saw a river last summer.",
+        "Many things in nature are interesting."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q74",
+      "type": "multipleChoice",
+      "question": "Choose the best word: We should save electricity ____ it helps the environment.",
+      "options": [
+        "but",
+        "because",
+        "although",
+        "unless"
+      ],
+      "answer": 1,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q75",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best transition: ____, students should also learn how to manage time.",
+      "answer": "in addition",
+      "acceptedAnswers": [
+        "in addition"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q76",
+      "type": "multipleChoice",
+      "question": "Choose the sentence with correct punctuation.",
+      "options": [
+        "First we made a plan, then we started.",
+        "First, we made a plan then we started",
+        "first, we made a plan, then we started.",
+        "First we made a plan then we started"
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q77",
+      "type": "multipleChoice",
+      "question": "Choose the best word order.",
+      "options": [
+        "Important is teamwork in projects.",
+        "Teamwork is important in projects.",
+        "Is teamwork important in projects.",
+        "Teamwork important is in projects."
+      ],
+      "answer": 1,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q78",
+      "type": "fillInTheBlank",
+      "question": "True or False: A conclusion should repeat every detail from the body paragraphs.",
+      "answer": 0,
+      "acceptedAnswers": [
+        0
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q79",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best word: The writer should ____ both sides before giving an opinion.",
+      "answer": "consider",
+      "acceptedAnswers": [
+        "consider"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q80",
+      "type": "multipleChoice",
+      "question": "Choose the best sentence for a polite request.",
+      "options": [
+        "Can you please explain the last question again?",
+        "Explain the question now.",
+        "I don't get it, fix it.",
+        "Tell me the answer."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q81",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: A short title should be clear and ____.",
+      "answer": "relevant",
+      "acceptedAnswers": [
+        "relevant"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q82",
+      "type": "multipleChoice",
+      "question": "Choose the best evidence sentence.",
+      "options": [
+        "For example, our school library became busier after reading clubs started.",
+        "Libraries are buildings and books are paper.",
+        "I think books are good because yes.",
+        "Many students know many things."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q83",
+      "type": "multipleChoice",
+      "question": "Choose the most academic option.",
+      "options": [
+        "Many teenagers are keen to use shared study spaces.",
+        "Lots of teens are super into shared study spaces.",
+        "Teens kinda like study spaces.",
+        "Shared study spaces are cool stuff."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q84",
+      "type": "fillInTheBlank",
+      "question": "True or False: A topic sentence should introduce the paragraph's main idea.",
+      "answer": 1,
+      "acceptedAnswers": [
+        1
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q85",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best word: A strong paragraph needs a clear topic sentence and supporting ____.",
+      "answer": "details",
+      "acceptedAnswers": [
+        "details"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q86",
+      "type": "multipleChoice",
+      "question": "Choose the best transition for a result.",
+      "options": [
+        "as a result",
+        "for example",
+        "meanwhile",
+        "in contrast"
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q87",
+      "type": "multipleChoice",
+      "question": "Choose the best sentence: One reason public parks matter is that they give children a safe place to play.",
+      "options": [
+        "One reason public parks matter is that they give children a safe place to play.",
+        "Parks matter because parks matter.",
+        "Public parks because children play.",
+        "Children safe place parks play."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q88",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best word: A writer should ____ ideas before writing.",
+      "answer": "organize",
+      "acceptedAnswers": [
+        "organize"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q89",
+      "type": "multipleChoice",
+      "question": "Choose the best punctuation: Students should arrive early__ they can find their seats.",
+      "options": [
+        ";",
+        ",",
+        ".",
+        ":"
+      ],
+      "answer": 1,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest writing option."
+    },
+    {
+      "id": "q90",
+      "type": "fillInTheBlank",
+      "question": "True or False: Every email to a teacher should begin with slang.",
+      "answer": 0,
+      "acceptedAnswers": [
+        0
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q91",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best word: To restate your view at the end is to write a clear ____.",
+      "answer": "conclusion",
+      "acceptedAnswers": [
+        "conclusion"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key academic word."
+    },
+    {
+      "id": "q92",
+      "type": "prompt",
+      "question": "Write an email to your principal suggesting one improvement for the school library. Include a greeting, your reason, and a polite closing. Write 90-140 words.",
+      "difficulty": "hard",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q93",
+      "type": "prompt",
+      "question": "Write a paragraph explaining whether group projects are helpful for students. Include one example. Write 90-130 words.",
+      "difficulty": "medium",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q94",
+      "type": "prompt",
+      "question": "Write a short article for younger students about how to prepare for a test. Write 100-150 words.",
+      "difficulty": "hard",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q95",
+      "type": "prompt",
+      "question": "Write an email thanking a coach or teacher for helping you improve. Write 80-120 words.",
+      "difficulty": "medium",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q96",
+      "type": "prompt",
+      "question": "Write a paragraph about one environmental problem in your area and one realistic solution. Write 90-140 words.",
+      "difficulty": "hard",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q97",
+      "type": "prompt",
+      "question": "Write a message to a friend persuading them to join a school event. Write 80-120 words.",
+      "difficulty": "medium",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q98",
+      "type": "prompt",
+      "question": "Write a short article about a skill schools should teach more often. Write 100-150 words.",
+      "difficulty": "hard",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q99",
+      "type": "prompt",
+      "question": "Write a paragraph describing a memorable community activity you took part in. Write 90-130 words.",
+      "difficulty": "medium",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q100",
+      "type": "prompt",
+      "question": "Write a short formal note asking for permission to use a classroom after school. Write 70-110 words.",
+      "difficulty": "hard",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q101",
+      "type": "prompt",
+      "question": "Write a short opinion paragraph about whether homework should be different on weekends. Write 90-140 words.",
+      "difficulty": "medium",
+      "explanation": "Organize your ideas clearly and keep a polite tone when needed.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "80+ words",
+            "type": "minWords",
+            "value": 80
+          },
+          {
+            "id": "usesLinker",
+            "label": "Uses a linker (because/however/for example)",
+            "type": "includesAny",
+            "value": [
+              "because",
+              "however",
+              "for example",
+              "in addition"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Clear beginning, development, and ending.",
+              "developing": "Mostly clear but uneven.",
+              "needsWork": "Hard to follow."
+            }
+          },
+          {
+            "name": "Language Accuracy",
+            "descriptors": {
+              "meets": "Mostly correct sentences and punctuation.",
+              "developing": "Some errors, meaning clear.",
+              "needsWork": "Frequent errors."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q102",
+      "type": "essay",
+      "question": "Write one opinion essay: Should schools start later in the morning? Give reasons and examples. Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q103",
+      "type": "essay",
+      "question": "Write one opinion essay: Is it better for students to learn from mistakes or from examples? Explain. Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q104",
+      "type": "essay",
+      "question": "Write one opinion essay: Should every student take part in one community service activity each year? Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q105",
+      "type": "essay",
+      "question": "Write one opinion essay: Are school competitions more helpful or more stressful? Explain your view. Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q106",
+      "type": "essay",
+      "question": "Write one opinion essay: Should students have more choice in what they read in class? Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q107",
+      "type": "essay",
+      "question": "Write one opinion essay: Is online communication helping or hurting friendships? Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q108",
+      "type": "essay",
+      "question": "Write one opinion essay: Should schools spend more money on sports or on arts? Explain. Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q109",
+      "type": "essay",
+      "question": "Write one opinion essay: Is it important for teenagers to learn basic money skills early? Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q110",
+      "type": "essay",
+      "question": "Write one opinion essay: Should class presentations be done in groups or alone? Explain. Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "q111",
+      "type": "essay",
+      "question": "Write one opinion essay: Is travelling a good way for students to learn? Write 110-160 words.",
+      "difficulty": "hard",
+      "explanation": "State a clear opinion, give reasons, and support them with examples.",
+      "rubric": {
+        "checks": [
+          {
+            "id": "minWords",
+            "label": "110+ words",
+            "type": "minWords",
+            "value": 110
+          },
+          {
+            "id": "position",
+            "label": "States a position",
+            "type": "includesAny",
+            "value": [
+              "i think",
+              "in my opinion",
+              "i believe",
+              "should"
+            ]
+          },
+          {
+            "id": "example",
+            "label": "Includes an example",
+            "type": "includesAny",
+            "value": [
+              "for example",
+              "for instance",
+              "such as"
+            ]
+          }
+        ],
+        "criteria": [
+          {
+            "name": "Ideas",
+            "descriptors": {
+              "meets": "Clear opinion with support.",
+              "developing": "Opinion present but support is limited.",
+              "needsWork": "Opinion unclear or unsupported."
+            }
+          },
+          {
+            "name": "Organization",
+            "descriptors": {
+              "meets": "Logical paragraph flow.",
+              "developing": "Some structure but uneven.",
+              "needsWork": "Weak organization."
+            }
+          }
+        ]
+      }
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

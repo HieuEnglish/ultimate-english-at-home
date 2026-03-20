@@ -1041,6 +1041,506 @@
   );
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "w18",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What is one thing you enjoy doing before school?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w19",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What is your favourite place in your neighbourhood? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w20",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What snack do you like after school?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w21",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "Tell me about one classroom rule you think is important.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w22",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What book or comic do you enjoy reading?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w23",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What do you usually do when you finish homework?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w24",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "Who helps you most when you have a problem?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w25",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What is one thing you are good at?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "w26",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "Would you rather study in silence or with soft music? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d23",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe a busy market or shop you have visited.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d24",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe your ideal playground.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d25",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe a rainy day at home.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d26",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe your favourite celebration food.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d27",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe an animal that lives near water.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d28",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe your classroom during break time.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d29",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe your dream birthday party.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "d30",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe a picture of a beach or river.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "medium",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s18",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about finding something you lost.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s19",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about helping a friend.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s20",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about a funny mistake at school.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s21",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about a day when the weather changed suddenly.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s22",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about learning a new game.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s23",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about a trip to a park or zoo.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s24",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about a surprise visitor.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "s25",
+      "type": "prompt",
+      "section": "story",
+      "question": "Tell a short story about cooking with your family.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o23",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "Should children help with small jobs at home? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o24",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "Is it better to read a paper book or an e-book? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o25",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "Should schools have more sports time? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o26",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "Is it better to work alone or in a team? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o27",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "Should children have a bedtime on weekends? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o28",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "Is learning from games useful? Why?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o29",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "Should every class have a plant corner? Why or why not?",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    },
+    {
+      "id": "o30",
+      "type": "prompt",
+      "section": "opinion",
+      "question": "What is more useful: drawing or typing? Explain.",
+      "say": "Use 2 to 4 connected sentences.",
+      "model": "Use clear sentences and one detail.",
+      "difficulty": "hard",
+      "explanation": "Add at least one reason or example if you can.",
+      "targets": [
+        "2+ sentences",
+        "One detail",
+        "Clear voice"
+      ]
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

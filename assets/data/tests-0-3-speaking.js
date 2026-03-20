@@ -485,6 +485,551 @@
     }
   ];
 
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q52",
+      "type": "prompt",
+      "question": "Say: \"clap.\"",
+      "say": "clap",
+      "model": "clap",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q53",
+      "type": "prompt",
+      "question": "Say: \"jump.\"",
+      "say": "jump",
+      "model": "jump",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q54",
+      "type": "prompt",
+      "question": "Say: \"sit.\"",
+      "say": "sit",
+      "model": "sit",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q55",
+      "type": "prompt",
+      "question": "Say: \"stand.\"",
+      "say": "stand",
+      "model": "stand",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q56",
+      "type": "prompt",
+      "question": "Say: \"open.\"",
+      "say": "open",
+      "model": "open",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q57",
+      "type": "prompt",
+      "question": "Say: \"close.\"",
+      "say": "close",
+      "model": "close",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q58",
+      "type": "prompt",
+      "question": "Say: \"drink.\"",
+      "say": "drink",
+      "model": "drink",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q59",
+      "type": "prompt",
+      "question": "Say: \"eat.\"",
+      "say": "eat",
+      "model": "eat",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q60",
+      "type": "prompt",
+      "question": "Say: \"sleep.\"",
+      "say": "sleep",
+      "model": "sleep",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q61",
+      "type": "prompt",
+      "question": "Say: \"bath.\"",
+      "say": "bath",
+      "model": "bath",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q62",
+      "type": "prompt",
+      "question": "Say: \"book.\"",
+      "say": "book",
+      "model": "book",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q63",
+      "type": "prompt",
+      "question": "Say: \"ball.\"",
+      "say": "ball",
+      "model": "ball",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q64",
+      "type": "prompt",
+      "question": "Say: \"car.\"",
+      "say": "car",
+      "model": "car",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q65",
+      "type": "prompt",
+      "question": "Say: \"train.\"",
+      "say": "train",
+      "model": "train",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q66",
+      "type": "prompt",
+      "question": "Say: \"baby.\"",
+      "say": "baby",
+      "model": "baby",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q67",
+      "type": "prompt",
+      "question": "Say: \"mommy.\"",
+      "say": "mommy",
+      "model": "mommy",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q68",
+      "type": "prompt",
+      "question": "Say: \"daddy.\"",
+      "say": "daddy",
+      "model": "daddy",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q69",
+      "type": "prompt",
+      "question": "Say: \"happy.\"",
+      "say": "happy",
+      "model": "happy",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q70",
+      "type": "prompt",
+      "question": "Say: \"sad.\"",
+      "say": "sad",
+      "model": "sad",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q71",
+      "type": "prompt",
+      "question": "Say: \"hot.\"",
+      "say": "hot",
+      "model": "hot",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q72",
+      "type": "prompt",
+      "question": "Say: \"cold.\"",
+      "say": "cold",
+      "model": "cold",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q73",
+      "type": "prompt",
+      "question": "Say: \"red.\"",
+      "say": "red",
+      "model": "red",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q74",
+      "type": "prompt",
+      "question": "Say: \"blue.\"",
+      "say": "blue",
+      "model": "blue",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q75",
+      "type": "prompt",
+      "question": "Say: \"green.\"",
+      "say": "green",
+      "model": "green",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q76",
+      "type": "prompt",
+      "question": "Say: \"yellow.\"",
+      "say": "yellow",
+      "model": "yellow",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q77",
+      "type": "prompt",
+      "question": "Say: \"apple.\"",
+      "say": "apple",
+      "model": "apple",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q78",
+      "type": "prompt",
+      "question": "Say: \"banana.\"",
+      "say": "banana",
+      "model": "banana",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q79",
+      "type": "prompt",
+      "question": "Say: \"water.\"",
+      "say": "water",
+      "model": "water",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q80",
+      "type": "prompt",
+      "question": "Say: \"milk.\"",
+      "say": "milk",
+      "model": "milk",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q81",
+      "type": "prompt",
+      "question": "Say: \"cookie.\"",
+      "say": "cookie",
+      "model": "cookie",
+      "difficulty": "easy",
+      "explanation": "A clear try or part of the word counts."
+    },
+    {
+      "id": "q82",
+      "type": "prompt",
+      "question": "Say: \"I am happy.\"",
+      "say": "I am happy",
+      "model": "I am happy",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q83",
+      "type": "prompt",
+      "question": "Say: \"I am sleepy.\"",
+      "say": "I am sleepy",
+      "model": "I am sleepy",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q84",
+      "type": "prompt",
+      "question": "Say: \"I want water.\"",
+      "say": "I want water",
+      "model": "I want water",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q85",
+      "type": "prompt",
+      "question": "Say: \"I want milk.\"",
+      "say": "I want milk",
+      "model": "I want milk",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q86",
+      "type": "prompt",
+      "question": "Say: \"I see a cat.\"",
+      "say": "I see a cat",
+      "model": "I see a cat",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q87",
+      "type": "prompt",
+      "question": "Say: \"I see a dog.\"",
+      "say": "I see a dog",
+      "model": "I see a dog",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q88",
+      "type": "prompt",
+      "question": "Say: \"Big ball.\"",
+      "say": "Big ball",
+      "model": "Big ball",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q89",
+      "type": "prompt",
+      "question": "Say: \"Red car.\"",
+      "say": "Red car",
+      "model": "Red car",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q90",
+      "type": "prompt",
+      "question": "Say: \"Blue cup.\"",
+      "say": "Blue cup",
+      "model": "Blue cup",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q91",
+      "type": "prompt",
+      "question": "Say: \"My book.\"",
+      "say": "My book",
+      "model": "My book",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q92",
+      "type": "prompt",
+      "question": "Say: \"Open please.\"",
+      "say": "Open please",
+      "model": "Open please",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q93",
+      "type": "prompt",
+      "question": "Say: \"Help me.\"",
+      "say": "Help me",
+      "model": "Help me",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q94",
+      "type": "prompt",
+      "question": "Say: \"More please.\"",
+      "say": "More please",
+      "model": "More please",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q95",
+      "type": "prompt",
+      "question": "Say: \"All done.\"",
+      "say": "All done",
+      "model": "All done",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q96",
+      "type": "prompt",
+      "question": "Say: \"Good night.\"",
+      "say": "Good night",
+      "model": "Good night",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q97",
+      "type": "prompt",
+      "question": "Say: \"Good morning.\"",
+      "say": "Good morning",
+      "model": "Good morning",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q98",
+      "type": "prompt",
+      "question": "Say: \"Wash hands.\"",
+      "say": "Wash hands",
+      "model": "Wash hands",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q99",
+      "type": "prompt",
+      "question": "Say: \"Brush teeth.\"",
+      "say": "Brush teeth",
+      "model": "Brush teeth",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q100",
+      "type": "prompt",
+      "question": "Say: \"Put on shoes.\"",
+      "say": "Put on shoes",
+      "model": "Put on shoes",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q101",
+      "type": "prompt",
+      "question": "Say: \"Come here.\"",
+      "say": "Come here",
+      "model": "Come here",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q102",
+      "type": "prompt",
+      "question": "Say: \"Go there.\"",
+      "say": "Go there",
+      "model": "Go there",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q103",
+      "type": "prompt",
+      "question": "Say: \"My turn.\"",
+      "say": "My turn",
+      "model": "My turn",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q104",
+      "type": "prompt",
+      "question": "Say: \"Your turn.\"",
+      "say": "Your turn",
+      "model": "Your turn",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q105",
+      "type": "prompt",
+      "question": "Say: \"I love mom.\"",
+      "say": "I love mom",
+      "model": "I love mom",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q106",
+      "type": "prompt",
+      "question": "Say: \"I love dad.\"",
+      "say": "I love dad",
+      "model": "I love dad",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q107",
+      "type": "prompt",
+      "question": "Say: \"Baby bird.\"",
+      "say": "Baby bird",
+      "model": "Baby bird",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q108",
+      "type": "prompt",
+      "question": "Say: \"Little fish.\"",
+      "say": "Little fish",
+      "model": "Little fish",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q109",
+      "type": "prompt",
+      "question": "Say: \"Big bear.\"",
+      "say": "Big bear",
+      "model": "Big bear",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q110",
+      "type": "prompt",
+      "question": "Say: \"One cookie.\"",
+      "say": "One cookie",
+      "model": "One cookie",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    },
+    {
+      "id": "q111",
+      "type": "prompt",
+      "question": "Say: \"Two apples.\"",
+      "say": "Two apples",
+      "model": "Two apples",
+      "difficulty": "medium",
+      "explanation": "Say it together once, then let the child try."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

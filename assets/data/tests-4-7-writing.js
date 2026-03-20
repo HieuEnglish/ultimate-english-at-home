@@ -597,6 +597,421 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q72",
+      "type": "prompt",
+      "question": "Write your favourite animal word.",
+      "model": "cat",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q73",
+      "type": "prompt",
+      "question": "Write your favourite food word.",
+      "model": "rice",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q74",
+      "type": "prompt",
+      "question": "Copy the word: SUN",
+      "model": "SUN",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q75",
+      "type": "prompt",
+      "question": "Copy the word: BOOK",
+      "model": "BOOK",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q76",
+      "type": "prompt",
+      "question": "Copy the sentence: I like juice.",
+      "model": "I like juice.",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q77",
+      "type": "prompt",
+      "question": "Write 3 colour words.",
+      "model": "red, blue, green",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q78",
+      "type": "prompt",
+      "question": "Write 3 animal words.",
+      "model": "cat, dog, fish",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q79",
+      "type": "prompt",
+      "question": "Write a sentence about your bag.",
+      "model": "I have a blue bag.",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q80",
+      "type": "prompt",
+      "question": "Write a sentence about your favourite food.",
+      "model": "I like noodles.",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q81",
+      "type": "prompt",
+      "question": "Write a question to your friend.",
+      "model": "How are you?",
+      "difficulty": "easy",
+      "explanation": "Use clear letters and spaces."
+    },
+    {
+      "id": "q82",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: B _ G",
+      "answer": "a",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q83",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: S _ N",
+      "answer": "u",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q84",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: I am ____.",
+      "answer": "happy",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q85",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: The sky is ____.",
+      "answer": "blue",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q86",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: c _ p",
+      "answer": "u",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q87",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: We sit on a ____.",
+      "answer": "chair",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q88",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: d _ g",
+      "answer": "o",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q89",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: I see a ____.",
+      "answer": "bird",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q90",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: p _ n",
+      "answer": "e",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q91",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: I like to ____.",
+      "answer": "play",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q92",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: sh _ e",
+      "answer": "o",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q93",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: It is ____ today.",
+      "answer": "sunny",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q94",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: My name is ____.",
+      "answer": "Sam",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q95",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: tr _ e",
+      "answer": "e",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q96",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: A cat can ____.",
+      "answer": "run",
+      "difficulty": "easy",
+      "explanation": "Think about the missing word or letter."
+    },
+    {
+      "id": "q97",
+      "type": "multipleChoice",
+      "question": "Choose the correct sentence.",
+      "options": [
+        "i am tom",
+        "I am Tom.",
+        "I Am Tom",
+        "I am tom"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q98",
+      "type": "multipleChoice",
+      "question": "Choose the best capital letter: ___ like apples.",
+      "options": [
+        "i",
+        "I",
+        "L",
+        "A"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q99",
+      "type": "multipleChoice",
+      "question": "Choose the best end mark: What is your name__",
+      "options": [
+        ".",
+        "!",
+        ",",
+        "?"
+      ],
+      "answer": 3,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q100",
+      "type": "multipleChoice",
+      "question": "Choose the best word: We ____ books.",
+      "options": [
+        "read",
+        "reads",
+        "reading",
+        "reads."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q101",
+      "type": "multipleChoice",
+      "question": "Which one has spaces?",
+      "options": [
+        "Ihaveaball.",
+        "I have a ball.",
+        "Ihave a ball.",
+        "I haveaball."
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q102",
+      "type": "multipleChoice",
+      "question": "Choose the correct word order.",
+      "options": [
+        "I school go.",
+        "Go I school.",
+        "I go to school.",
+        "School I go."
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q103",
+      "type": "multipleChoice",
+      "question": "Choose the best word: The dog is ____.",
+      "options": [
+        "blue",
+        "happy",
+        "run",
+        "book"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q104",
+      "type": "multipleChoice",
+      "question": "Choose the correct sentence.",
+      "options": [
+        "She like cats.",
+        "She likes cats.",
+        "She liking cats.",
+        "She likes Cats"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q105",
+      "type": "multipleChoice",
+      "question": "Choose the correct punctuation: I have two pens__",
+      "options": [
+        ".",
+        "?",
+        ",",
+        ":"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q106",
+      "type": "multipleChoice",
+      "question": "Choose the best word: A baby cat is a ____.",
+      "options": [
+        "puppy",
+        "kitten",
+        "cub",
+        "calf"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q107",
+      "type": "multipleChoice",
+      "question": "Choose the best sentence start.",
+      "options": [
+        "because I am tired.",
+        "I am tired because",
+        "Because I am tired, I sleep.",
+        "I tired am."
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q108",
+      "type": "multipleChoice",
+      "question": "Choose the correct plural word.",
+      "options": [
+        "books",
+        "bookes",
+        "boox",
+        "book"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q109",
+      "type": "multipleChoice",
+      "question": "Choose the best word: We wash our ____.",
+      "options": [
+        "mouth",
+        "hands",
+        "rain",
+        "music"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q110",
+      "type": "multipleChoice",
+      "question": "Choose the correct sentence.",
+      "options": [
+        "The sun is hot.",
+        "the sun is hot.",
+        "The Sun is hot",
+        "The sun is Hot"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    },
+    {
+      "id": "q111",
+      "type": "multipleChoice",
+      "question": "Choose the best punctuation: Stop__",
+      "options": [
+        "?",
+        "!",
+        ".",
+        ","
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest writing form."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

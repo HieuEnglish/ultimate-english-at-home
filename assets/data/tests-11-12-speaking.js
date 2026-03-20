@@ -1243,6 +1243,291 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "w21",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What is one habit that helps you study better?",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "w22",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "Tell me about one place in your town that visitors should see.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "w23",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "What do you usually do when you feel stressed at school?",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "w24",
+      "type": "prompt",
+      "section": "warmup",
+      "question": "Which subject should have more class time? Why?",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "d19",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe a place where you can think quietly.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "d20",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe a useful app or website for students.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "d21",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe a team activity you enjoy.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "d22",
+      "type": "prompt",
+      "section": "describe",
+      "question": "Describe a family meal you remember well.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "r17",
+      "type": "prompt",
+      "section": "roleplay",
+      "question": "Role-play: Your friend forgot the homework. Explain the task and give advice.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "Helpful advice",
+        "Polite language"
+      ]
+    },
+    {
+      "id": "r18",
+      "type": "prompt",
+      "section": "roleplay",
+      "question": "Role-play: You are asking a teacher for extra time on a project.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "Explain reason",
+        "Polite request"
+      ]
+    },
+    {
+      "id": "r19",
+      "type": "prompt",
+      "section": "roleplay",
+      "question": "Role-play: You are inviting a classmate to join your club.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "Clear invitation",
+        "One reason"
+      ]
+    },
+    {
+      "id": "r20",
+      "type": "prompt",
+      "section": "roleplay",
+      "question": "Role-play: You are helping a visitor find the school office.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "Give directions",
+        "Clear sequence"
+      ]
+    },
+    {
+      "id": "l1",
+      "type": "prompt",
+      "section": "longturn",
+      "question": "Cue card: Describe a time you solved a problem by working with someone else.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "4+ sentences",
+        "One example"
+      ]
+    },
+    {
+      "id": "l2",
+      "type": "prompt",
+      "section": "longturn",
+      "question": "Cue card: Describe a skill you would like to improve this year.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "4+ sentences",
+        "Why it matters"
+      ]
+    },
+    {
+      "id": "l3",
+      "type": "prompt",
+      "section": "longturn",
+      "question": "Cue card: Describe a place that helps you learn.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "4+ sentences",
+        "Specific details"
+      ]
+    },
+    {
+      "id": "l4",
+      "type": "prompt",
+      "section": "longturn",
+      "question": "Cue card: Describe a challenge you overcame at school.",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "hard",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "4+ sentences",
+        "What you learned"
+      ]
+    },
+    {
+      "id": "x1",
+      "type": "prompt",
+      "section": "discussion",
+      "question": "Why do some students prefer learning in groups?",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "x2",
+      "type": "prompt",
+      "section": "discussion",
+      "question": "How can schools encourage students to read more?",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "x3",
+      "type": "prompt",
+      "section": "discussion",
+      "question": "Should homework be shorter or more challenging? Why?",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    },
+    {
+      "id": "x4",
+      "type": "prompt",
+      "section": "discussion",
+      "question": "How has technology changed communication between friends?",
+      "say": "Sample answer: develop your ideas clearly with one example.",
+      "model": "Use full sentences and a clear reason.",
+      "difficulty": "medium",
+      "explanation": "Try to add a reason or example.",
+      "targets": [
+        "3 sentences",
+        "One detail"
+      ]
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

@@ -827,6 +827,397 @@
   );
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q85",
+      "type": "listenChoice",
+      "context": "A boy is talking about music club.",
+      "question": "What day is the club?",
+      "say": "The music club is on Wednesday after school.",
+      "options": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q86",
+      "type": "listenChoice",
+      "context": "A teacher gives instructions.",
+      "question": "What do students need?",
+      "say": "Please bring a ruler and coloured pencils for tomorrow's map task.",
+      "options": [
+        "A ruler and coloured pencils",
+        "A calculator",
+        "A dictionary",
+        "A lunch box"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q87",
+      "type": "listenChoice",
+      "context": "Two friends plan a match.",
+      "question": "Where will they meet?",
+      "say": "Let's meet by the basketball court at half past four.",
+      "options": [
+        "At the library",
+        "At the basketball court",
+        "At the bus stop",
+        "At the canteen"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q88",
+      "type": "listenChoice",
+      "context": "A child talks about homework.",
+      "question": "Which subject is hardest?",
+      "say": "Maths is the hardest for me, but science is my favourite.",
+      "options": [
+        "Science",
+        "English",
+        "Maths",
+        "Art"
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q89",
+      "type": "listenChoice",
+      "context": "An announcement at school.",
+      "question": "Which room changed?",
+      "say": "Drama club has moved from Room 8 to Room 12 today.",
+      "options": [
+        "Room 4",
+        "Room 8",
+        "Room 10",
+        "Room 12"
+      ],
+      "answer": 3,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q90",
+      "type": "listenChoice",
+      "context": "Two friends talk about lunch.",
+      "question": "What will they eat?",
+      "say": "Let's share noodles and orange juice at lunch.",
+      "options": [
+        "Rice and water",
+        "Noodles and orange juice",
+        "Soup and tea",
+        "Bread and milk"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q91",
+      "type": "listenChoice",
+      "context": "A class captain speaks.",
+      "question": "When is the clean-up?",
+      "say": "Our class clean-up starts at 7:45 on Saturday morning.",
+      "options": [
+        "7:15",
+        "7:30",
+        "7:45",
+        "8:15"
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q92",
+      "type": "listenChoice",
+      "context": "A parent leaves a message.",
+      "question": "Why is Ben late?",
+      "say": "Ben will be late because his dentist appointment finished later than expected.",
+      "options": [
+        "He missed the bus",
+        "He was sick",
+        "He had a dentist appointment",
+        "He forgot his bag"
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q93",
+      "type": "listenChoice",
+      "context": "A coach gives advice.",
+      "question": "What should players do first?",
+      "say": "First stretch your legs, then jog two laps, and finally take a water break.",
+      "options": [
+        "Stretch",
+        "Drink water",
+        "Sit down",
+        "Kick the ball"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Listen for the key detail."
+    },
+    {
+      "id": "q94",
+      "type": "listenFillInTheBlank",
+      "context": "A librarian speaks.",
+      "question": "Type the day: The books are due on _____.",
+      "say": "Please return your library books on Monday before lunch.",
+      "answer": [
+        "monday"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q95",
+      "type": "listenFillInTheBlank",
+      "context": "A teacher gives a page number.",
+      "question": "Type the page number.",
+      "say": "Open your workbook to page thirty-six.",
+      "answer": [
+        "36",
+        "thirty six",
+        "thirty-six"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q96",
+      "type": "listenFillInTheBlank",
+      "context": "A friend leaves a note.",
+      "question": "Type the time.",
+      "say": "Meet me at 5:20 near the school gate.",
+      "answer": [
+        "5:20",
+        "5.20",
+        "five twenty"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q97",
+      "type": "listenFillInTheBlank",
+      "context": "A student talks about a project.",
+      "question": "Type the topic.",
+      "say": "Our group project is about recycling in the neighbourhood.",
+      "answer": [
+        "recycling"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q98",
+      "type": "listenFillInTheBlank",
+      "context": "A PE teacher speaks.",
+      "question": "Type the place.",
+      "say": "Today we will practise in the gym because the field is wet.",
+      "answer": [
+        "gym",
+        "the gym"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q99",
+      "type": "listenFillInTheBlank",
+      "context": "An art teacher speaks.",
+      "question": "Type the colour.",
+      "say": "Please paint the background light blue, not dark blue.",
+      "answer": [
+        "light blue"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q100",
+      "type": "listenFillInTheBlank",
+      "context": "A classmate shares a plan.",
+      "question": "Type the month.",
+      "say": "We are going to the museum in November.",
+      "answer": [
+        "november"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q101",
+      "type": "listenFillInTheBlank",
+      "context": "A shopkeeper speaks.",
+      "question": "Type the price.",
+      "say": "The notebook costs twelve thousand dong.",
+      "answer": [
+        "12000",
+        "12,000",
+        "twelve thousand dong"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q102",
+      "type": "listenFillInTheBlank",
+      "context": "A coach speaks.",
+      "question": "Type the number.",
+      "say": "Each team needs seven players for this game.",
+      "answer": [
+        "7",
+        "seven"
+      ],
+      "difficulty": "medium",
+      "explanation": "Type the exact word, time, or number you hear."
+    },
+    {
+      "id": "q103",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The art room is closed after school.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q104",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The weather is windy.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q105",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The trip starts on Friday.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q106",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The boy lost his lunch box.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q107",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The class will meet in the hall.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q108",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The soup is cheaper than the sandwich.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q109",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The girl practises piano every day.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q110",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The bus leaves at 6:15.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    },
+    {
+      "id": "q111",
+      "type": "listenTrueFalse",
+      "context": "Listen to the short statement.",
+      "question": "Listen. True or False?",
+      "say": "The teacher wants a full sentence.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Compare the spoken sentence with the statement."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

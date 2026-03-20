@@ -19,9 +19,19 @@ function nowIso() {
 
 function asUrl(base, p) {
   const u = new URL(base);
+  const raw = String(p || '');
+
+  if (raw.startsWith('/?')) {
+    const basePath = u.pathname.endsWith('/') ? u.pathname : u.pathname + '/';
+    u.pathname = basePath;
+    u.search = raw.slice(2);
+    u.hash = '';
+    return u.toString();
+  }
+
   // preserve basePath
   const basePath = u.pathname.endsWith('/') ? u.pathname.slice(0, -1) : u.pathname;
-  const path = String(p || '').startsWith('/') ? p : '/' + String(p || '');
+  const path = raw.startsWith('/') ? raw : '/' + raw;
   u.pathname = basePath + path;
   u.search = '';
   u.hash = '';
@@ -85,7 +95,7 @@ async function run() {
 
     // Click-through key CTAs on Home/Resources/Tests
     if (t.name === 'Home') {
-      const cards = page.locator('main li');
+      const cards = page.locator('main .card-grid > *');
       if ((await cards.count()) < 3) warnings.push({ area: 'ui', msg: 'Home: expected CTA cards list' });
       // Try click the Tests card heading if present
       const testsCard = page.getByRole('heading', { name: 'Tests' }).first();
@@ -107,10 +117,12 @@ async function run() {
       if (await anyCard.count()) {
         await page.goto(asUrl(base, '/?r=/tests/age-4-7-listening'), { waitUntil: 'domcontentloaded', timeout: 45000 });
         const start = page.getByRole('button', { name: 'Start' }).first();
+        await start.waitFor({ state: 'visible', timeout: 3000 }).catch(() => null);
         if (await start.count()) {
           await start.click();
           // Answer first question (click first option)
           const option = page.getByRole('button', { name: /Option 1:/ }).first();
+          await option.waitFor({ state: 'visible', timeout: 3000 }).catch(() => null);
           if (await option.count()) {
             await option.click();
           } else {

@@ -1149,6 +1149,320 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q92",
+      "partId": "p1",
+      "type": "listenFillInTheBlank",
+      "say": "Receptionist: Good afternoon, Northside Careers Centre. Student: Hello, I want to join the weekend interview skills workshop. Receptionist: Of course. What is your name? Student: Tran Bao Minh. Receptionist: Thank you. The workshop is on the 8th of June from 2 p.m. to 5 p.m. in Room 21. The fee is 280,000 dong, and you should bring a notebook and one printed CV.",
+      "context": "Part 1: A student books a workshop.",
+      "question": "Write the student's family name.",
+      "answer": "Tran",
+      "difficulty": "easy",
+      "explanation": "The student says Tran Bao Minh."
+    },
+    {
+      "id": "q93",
+      "partId": "p1",
+      "type": "listenFillInTheBlank",
+      "say": "Receptionist: Good afternoon, Northside Careers Centre. Student: Hello, I want to join the weekend interview skills workshop. Receptionist: Of course. What is your name? Student: Tran Bao Minh. Receptionist: Thank you. The workshop is on the 8th of June from 2 p.m. to 5 p.m. in Room 21. The fee is 280,000 dong, and you should bring a notebook and one printed CV.",
+      "context": "Part 1: A student books a workshop.",
+      "question": "Write the room number.",
+      "answer": [
+        "21",
+        "room 21"
+      ],
+      "difficulty": "easy",
+      "explanation": "The workshop is in Room 21."
+    },
+    {
+      "id": "q94",
+      "partId": "p1",
+      "type": "listenChoice",
+      "say": "Receptionist: Good afternoon, Northside Careers Centre. Student: Hello, I want to join the weekend interview skills workshop. Receptionist: Of course. What is your name? Student: Tran Bao Minh. Receptionist: Thank you. The workshop is on the 8th of June from 2 p.m. to 5 p.m. in Room 21. The fee is 280,000 dong, and you should bring a notebook and one printed CV.",
+      "context": "Part 1: A student books a workshop.",
+      "question": "What should the student bring besides a notebook?",
+      "options": [
+        "A laptop",
+        "A printed CV",
+        "A passport photo",
+        "A textbook"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "The student should bring one printed CV."
+    },
+    {
+      "id": "q95",
+      "partId": "p1",
+      "type": "listenChoice",
+      "say": "Receptionist: Good afternoon, Northside Careers Centre. Student: Hello, I want to join the weekend interview skills workshop. Receptionist: Of course. What is your name? Student: Tran Bao Minh. Receptionist: Thank you. The workshop is on the 8th of June from 2 p.m. to 5 p.m. in Room 21. The fee is 280,000 dong, and you should bring a notebook and one printed CV.",
+      "context": "Part 1: A student books a workshop.",
+      "question": "How long is the workshop?",
+      "options": [
+        "Two hours",
+        "Three hours",
+        "Four hours",
+        "Five hours"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "It runs from 2 to 5 p.m."
+    },
+    {
+      "id": "q96",
+      "partId": "p1",
+      "type": "listenTrueFalse",
+      "say": "Receptionist: Good afternoon, Northside Careers Centre. Student: Hello, I want to join the weekend interview skills workshop. Receptionist: Of course. What is your name? Student: Tran Bao Minh. Receptionist: Thank you. The workshop is on the 8th of June from 2 p.m. to 5 p.m. in Room 21. The fee is 280,000 dong, and you should bring a notebook and one printed CV.",
+      "context": "Part 1: A student books a workshop.",
+      "question": "The workshop takes place on a weekday.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "It is a weekend workshop."
+    },
+    {
+      "id": "q97",
+      "partId": "p2",
+      "type": "listenChoice",
+      "say": "Welcome to the Lakeside Science Festival. The robotics show starts at 10:15 in Hall B, while the climate talk begins at 11:00 in the main theatre. Food trucks are beside the east entrance, and reusable water stations are near the information desk. Students with a blue wristband can join the design lab for free.",
+      "context": "Part 2: Festival information.",
+      "question": "Where does the robotics show happen?",
+      "options": [
+        "Hall B",
+        "The main theatre",
+        "The east entrance",
+        "The design lab"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "The robotics show starts in Hall B."
+    },
+    {
+      "id": "q98",
+      "partId": "p2",
+      "type": "listenFillInTheBlank",
+      "say": "Welcome to the Lakeside Science Festival. The robotics show starts at 10:15 in Hall B, while the climate talk begins at 11:00 in the main theatre. Food trucks are beside the east entrance, and reusable water stations are near the information desk. Students with a blue wristband can join the design lab for free.",
+      "context": "Part 2: Festival information.",
+      "question": "Write the start time of the climate talk.",
+      "answer": [
+        "11:00",
+        "11.00",
+        "11"
+      ],
+      "difficulty": "medium",
+      "explanation": "The climate talk begins at 11:00."
+    },
+    {
+      "id": "q99",
+      "partId": "p2",
+      "type": "listenChoice",
+      "say": "Welcome to the Lakeside Science Festival. The robotics show starts at 10:15 in Hall B, while the climate talk begins at 11:00 in the main theatre. Food trucks are beside the east entrance, and reusable water stations are near the information desk. Students with a blue wristband can join the design lab for free.",
+      "context": "Part 2: Festival information.",
+      "question": "Who can join the design lab for free?",
+      "options": [
+        "Anyone with headphones",
+        "Students with a blue wristband",
+        "Only teachers",
+        "Children under six"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Students with a blue wristband can join for free."
+    },
+    {
+      "id": "q100",
+      "partId": "p2",
+      "type": "listenTrueFalse",
+      "say": "Welcome to the Lakeside Science Festival. The robotics show starts at 10:15 in Hall B, while the climate talk begins at 11:00 in the main theatre. Food trucks are beside the east entrance, and reusable water stations are near the information desk. Students with a blue wristband can join the design lab for free.",
+      "context": "Part 2: Festival information.",
+      "question": "Food trucks are beside the east entrance.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "That location is stated directly."
+    },
+    {
+      "id": "q101",
+      "partId": "p2",
+      "type": "listenTrueFalse",
+      "say": "Welcome to the Lakeside Science Festival. The robotics show starts at 10:15 in Hall B, while the climate talk begins at 11:00 in the main theatre. Food trucks are beside the east entrance, and reusable water stations are near the information desk. Students with a blue wristband can join the design lab for free.",
+      "context": "Part 2: Festival information.",
+      "question": "The climate talk starts before the robotics show.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "The robotics show starts earlier."
+    },
+    {
+      "id": "q102",
+      "partId": "p3",
+      "type": "listenChoice",
+      "say": "Ava: We need stronger evidence for our presentation on local transport. Ben: Then let's compare bus use before and after the new ticket app. Ava: Good idea. I'll interview ten students on Thursday lunchtime. Ben: I'll make a short online survey and summarise the results. Ava: Great. Let's meet in the media room at 3:40 to combine everything.",
+      "context": "Part 3: Two students plan a presentation.",
+      "question": "What topic are they investigating?",
+      "options": [
+        "School lunches",
+        "Local transport",
+        "Library design",
+        "Career choices"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "They are working on local transport."
+    },
+    {
+      "id": "q103",
+      "partId": "p3",
+      "type": "listenFillInTheBlank",
+      "say": "Ava: We need stronger evidence for our presentation on local transport. Ben: Then let's compare bus use before and after the new ticket app. Ava: Good idea. I'll interview ten students on Thursday lunchtime. Ben: I'll make a short online survey and summarise the results. Ava: Great. Let's meet in the media room at 3:40 to combine everything.",
+      "context": "Part 3: Two students plan a presentation.",
+      "question": "Write the meeting place.",
+      "answer": [
+        "media room",
+        "the media room"
+      ],
+      "difficulty": "medium",
+      "explanation": "They will meet in the media room."
+    },
+    {
+      "id": "q104",
+      "partId": "p3",
+      "type": "listenChoice",
+      "say": "Ava: We need stronger evidence for our presentation on local transport. Ben: Then let's compare bus use before and after the new ticket app. Ava: Good idea. I'll interview ten students on Thursday lunchtime. Ben: I'll make a short online survey and summarise the results. Ava: Great. Let's meet in the media room at 3:40 to combine everything.",
+      "context": "Part 3: Two students plan a presentation.",
+      "question": "What will Ava do?",
+      "options": [
+        "Write the survey",
+        "Interview ten students",
+        "Design the app",
+        "Print the slides"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Ava will interview ten students."
+    },
+    {
+      "id": "q105",
+      "partId": "p3",
+      "type": "listenTrueFalse",
+      "say": "Ava: We need stronger evidence for our presentation on local transport. Ben: Then let's compare bus use before and after the new ticket app. Ava: Good idea. I'll interview ten students on Thursday lunchtime. Ben: I'll make a short online survey and summarise the results. Ava: Great. Let's meet in the media room at 3:40 to combine everything.",
+      "context": "Part 3: Two students plan a presentation.",
+      "question": "Ben will summarise the survey results.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Ben says he will summarise the results."
+    },
+    {
+      "id": "q106",
+      "partId": "p3",
+      "type": "listenTrueFalse",
+      "say": "Ava: We need stronger evidence for our presentation on local transport. Ben: Then let's compare bus use before and after the new ticket app. Ava: Good idea. I'll interview ten students on Thursday lunchtime. Ben: I'll make a short online survey and summarise the results. Ava: Great. Let's meet in the media room at 3:40 to combine everything.",
+      "context": "Part 3: Two students plan a presentation.",
+      "question": "They plan to meet before lunchtime.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "They will meet at 3:40."
+    },
+    {
+      "id": "q107",
+      "partId": "p4",
+      "type": "listenChoice",
+      "say": "In this short lecture, we will look at why some cities create quiet zones. Constant noise can raise stress and make concentration harder, especially near hospitals and schools. One response is to lower traffic speed, because slower vehicles usually create less noise. Another is to use trees and sound-absorbing surfaces, which can soften the effect of traffic without closing roads completely. However, planners must balance quiet with access, since businesses still need deliveries and residents still need transport.",
+      "context": "Part 4: A short lecture about quiet zones.",
+      "question": "Why are quiet zones created?",
+      "options": [
+        "To make roads longer",
+        "To reduce stress and improve concentration",
+        "To stop all deliveries",
+        "To increase business opening hours"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "The lecturer links quiet zones to lower stress and better concentration."
+    },
+    {
+      "id": "q108",
+      "partId": "p4",
+      "type": "listenChoice",
+      "say": "In this short lecture, we will look at why some cities create quiet zones. Constant noise can raise stress and make concentration harder, especially near hospitals and schools. One response is to lower traffic speed, because slower vehicles usually create less noise. Another is to use trees and sound-absorbing surfaces, which can soften the effect of traffic without closing roads completely. However, planners must balance quiet with access, since businesses still need deliveries and residents still need transport.",
+      "context": "Part 4: A short lecture about quiet zones.",
+      "question": "Which measure can soften traffic noise without closing roads?",
+      "options": [
+        "Removing schools",
+        "Using trees and sound-absorbing surfaces",
+        "Building more car parks",
+        "Painting roads darker"
+      ],
+      "answer": 1,
+      "difficulty": "hard",
+      "explanation": "That measure is stated directly."
+    },
+    {
+      "id": "q109",
+      "partId": "p4",
+      "type": "listenFillInTheBlank",
+      "say": "In this short lecture, we will look at why some cities create quiet zones. Constant noise can raise stress and make concentration harder, especially near hospitals and schools. One response is to lower traffic speed, because slower vehicles usually create less noise. Another is to use trees and sound-absorbing surfaces, which can soften the effect of traffic without closing roads completely. However, planners must balance quiet with access, since businesses still need deliveries and residents still need transport.",
+      "context": "Part 4: A short lecture about quiet zones.",
+      "question": "Write one group named as especially affected by noise.",
+      "answer": [
+        "schools",
+        "hospitals"
+      ],
+      "difficulty": "medium",
+      "explanation": "The lecturer mentions hospitals and schools."
+    },
+    {
+      "id": "q110",
+      "partId": "p4",
+      "type": "listenTrueFalse",
+      "say": "In this short lecture, we will look at why some cities create quiet zones. Constant noise can raise stress and make concentration harder, especially near hospitals and schools. One response is to lower traffic speed, because slower vehicles usually create less noise. Another is to use trees and sound-absorbing surfaces, which can soften the effect of traffic without closing roads completely. However, planners must balance quiet with access, since businesses still need deliveries and residents still need transport.",
+      "context": "Part 4: A short lecture about quiet zones.",
+      "question": "Slower vehicles usually create less noise.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "The lecture says slower vehicles usually create less noise."
+    },
+    {
+      "id": "q111",
+      "partId": "p4",
+      "type": "listenTrueFalse",
+      "say": "In this short lecture, we will look at why some cities create quiet zones. Constant noise can raise stress and make concentration harder, especially near hospitals and schools. One response is to lower traffic speed, because slower vehicles usually create less noise. Another is to use trees and sound-absorbing surfaces, which can soften the effect of traffic without closing roads completely. However, planners must balance quiet with access, since businesses still need deliveries and residents still need transport.",
+      "context": "Part 4: A short lecture about quiet zones.",
+      "question": "The lecture says access and quiet must be balanced.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Planners must balance both needs."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

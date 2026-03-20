@@ -591,4 +591,127 @@
     });
   });
 
+  // Added to normalize this bank to 111 items.
+  bank.push(
+    {
+      "id": "g-p1-1",
+      "type": "prompt",
+      "setId": "set-g",
+      "setLabel": "A useful skill",
+      "order": 10,
+      "partId": "p1",
+      "kind": "interview",
+      "question": "What is one practical skill you think every teenager should learn?",
+      "minWords": 25,
+      "cues": {
+        "label": "Use a reason phrase (because / so / that's why)",
+        "anyOf": [
+          "because",
+          "so",
+          "that's why"
+        ]
+      }
+    },
+    {
+      "id": "g-p1-2",
+      "type": "prompt",
+      "setId": "set-g",
+      "setLabel": "A useful skill",
+      "order": 11,
+      "partId": "p1",
+      "kind": "interview",
+      "question": "Have you learned any skill outside school that has helped you?",
+      "minWords": 25,
+      "cues": {
+        "label": "Use a time phrase (when / while / recently)",
+        "anyOf": [
+          "when",
+          "while",
+          "recently"
+        ]
+      }
+    },
+    {
+      "id": "g-p1-3",
+      "type": "prompt",
+      "setId": "set-g",
+      "setLabel": "A useful skill",
+      "order": 12,
+      "partId": "p1",
+      "kind": "interview",
+      "question": "Do you prefer learning new skills alone or with guidance? Why?",
+      "minWords": 25,
+      "cues": {
+        "label": "Compare options (however / whereas / on the other hand)",
+        "anyOf": [
+          "however",
+          "whereas",
+          "on the other hand"
+        ]
+      }
+    },
+    {
+      "id": "g-p2-1",
+      "type": "prompt",
+      "setId": "set-g",
+      "setLabel": "A useful skill",
+      "order": 200,
+      "partId": "p2",
+      "kind": "cue",
+      "title": "Describe a useful skill you want to improve.",
+      "question": "You should say:\n? what the skill is\n? how you learned or started learning it\n? why it is useful\nand explain how improving this skill could help you in the future.",
+      "bullets": [
+        "Aim for 2 minutes of speaking.",
+        "Include one specific example of using the skill.",
+        "Explain a future benefit clearly."
+      ],
+      "minWords": 140,
+      "cues": {
+        "label": "Use an example phrase (for example / such as)",
+        "anyOf": [
+          "for example",
+          "for instance",
+          "such as"
+        ]
+      }
+    },
+    {
+      "id": "g-p2-2",
+      "type": "prompt",
+      "setId": "set-g",
+      "setLabel": "A useful skill",
+      "order": 210,
+      "partId": "p2",
+      "kind": "followup",
+      "question": "Is it better to learn practical skills at school or outside school? Why?",
+      "minWords": 40,
+      "cues": {
+        "label": "Compare options (on the one hand / on the other hand)",
+        "anyOf": [
+          "on the one hand",
+          "on the other hand"
+        ]
+      }
+    },
+    {
+      "id": "g-p3-1",
+      "type": "prompt",
+      "setId": "set-g",
+      "setLabel": "A useful skill",
+      "order": 300,
+      "partId": "p3",
+      "kind": "discussion",
+      "question": "How should education systems decide which life skills are most important to teach?",
+      "minWords": 70,
+      "cues": {
+        "label": "Use an evaluative phrase (depends on / should / important)",
+        "anyOf": [
+          "depends on",
+          "should",
+          "important"
+        ]
+      }
+    }
+  );
+
 })();

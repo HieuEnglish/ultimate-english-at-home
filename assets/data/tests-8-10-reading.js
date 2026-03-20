@@ -1052,6 +1052,417 @@
   );
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q78",
+      "type": "multipleChoice",
+      "passage": "Linh started a balcony garden with three pots, but after two months she had nine. She wrote the watering days on a small calendar and checked the leaves every evening. Her tomatoes grew slowly at first because the balcony only had sun in the morning. When she moved the pots closer to the rail, the plants became stronger and produced small yellow flowers.",
+      "question": "What is the main idea of Passage 1?",
+      "options": [
+        "A person learns or enjoys something through a simple activity.",
+        "A city is building a new train station.",
+        "A family moves to another country.",
+        "A storm destroys a school."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the overall message."
+    },
+    {
+      "id": "q79",
+      "type": "trueFalse",
+      "passage": "Linh started a balcony garden with three pots, but after two months she had nine. She wrote the watering days on a small calendar and checked the leaves every evening. Her tomatoes grew slowly at first because the balcony only had sun in the morning. When she moved the pots closer to the rail, the plants became stronger and produced small yellow flowers.",
+      "question": "Linh moved the pots to a sunnier place.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Check the statement against the passage."
+    },
+    {
+      "id": "q80",
+      "type": "fillInTheBlank",
+      "passage": "Linh started a balcony garden with three pots, but after two months she had nine. She wrote the watering days on a small calendar and checked the leaves every evening. Her tomatoes grew slowly at first because the balcony only had sun in the morning. When she moved the pots closer to the rail, the plants became stronger and produced small yellow flowers.",
+      "question": "Complete the sentence: Linh checked the leaves every ______.",
+      "answer": "evening",
+      "difficulty": "hard",
+      "explanation": "Use the exact word from the passage."
+    },
+    {
+      "id": "q81",
+      "type": "multipleChoice",
+      "passage": "Linh started a balcony garden with three pots, but after two months she had nine. She wrote the watering days on a small calendar and checked the leaves every evening. Her tomatoes grew slowly at first because the balcony only had sun in the morning. When she moved the pots closer to the rail, the plants became stronger and produced small yellow flowers.",
+      "question": "Which detail is mentioned in the passage?",
+      "options": [
+        "The plants had sun in the morning.",
+        "The garden was on a roof.",
+        "The tomatoes were blue.",
+        "The calendar was digital."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the exact detail."
+    },
+    {
+      "id": "q82",
+      "type": "multipleChoice",
+      "passage": "During the school charity fair, students sold bookmarks, juice, and handmade keychains. The bookmark table looked quiet at the beginning, but it became popular when one student offered to write a person's name on each one. By the end of the afternoon, the class had raised enough money to buy sports equipment for the younger grades.",
+      "question": "What is the main idea of Passage 2?",
+      "options": [
+        "A person learns or enjoys something through a simple activity.",
+        "A city is building a new train station.",
+        "A family moves to another country.",
+        "A storm destroys a school."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the overall message."
+    },
+    {
+      "id": "q83",
+      "type": "trueFalse",
+      "passage": "During the school charity fair, students sold bookmarks, juice, and handmade keychains. The bookmark table looked quiet at the beginning, but it became popular when one student offered to write a person's name on each one. By the end of the afternoon, the class had raised enough money to buy sports equipment for the younger grades.",
+      "question": "The class raised money for younger students.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Check the statement against the passage."
+    },
+    {
+      "id": "q84",
+      "type": "fillInTheBlank",
+      "passage": "During the school charity fair, students sold bookmarks, juice, and handmade keychains. The bookmark table looked quiet at the beginning, but it became popular when one student offered to write a person's name on each one. By the end of the afternoon, the class had raised enough money to buy sports equipment for the younger grades.",
+      "question": "Complete the sentence: The class raised money for sports ______.",
+      "answer": "equipment",
+      "difficulty": "hard",
+      "explanation": "Use the exact word from the passage."
+    },
+    {
+      "id": "q85",
+      "type": "multipleChoice",
+      "passage": "During the school charity fair, students sold bookmarks, juice, and handmade keychains. The bookmark table looked quiet at the beginning, but it became popular when one student offered to write a person's name on each one. By the end of the afternoon, the class had raised enough money to buy sports equipment for the younger grades.",
+      "question": "Which detail is mentioned in the passage?",
+      "options": [
+        "Students wrote names on bookmarks.",
+        "The fair lasted two days.",
+        "Parents sold bicycles.",
+        "The class bought computers."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the exact detail."
+    },
+    {
+      "id": "q86",
+      "type": "multipleChoice",
+      "passage": "Arun loves cycling to school because the trip wakes him up and helps him arrive on time. However, he checks the weather before leaving and keeps a light raincoat in his bag. On busy roads he rides more slowly, uses hand signals, and waits patiently at crossings instead of trying to hurry through traffic.",
+      "question": "What is the main idea of Passage 3?",
+      "options": [
+        "A person learns or enjoys something through a simple activity.",
+        "A city is building a new train station.",
+        "A family moves to another country.",
+        "A storm destroys a school."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the overall message."
+    },
+    {
+      "id": "q87",
+      "type": "trueFalse",
+      "passage": "Arun loves cycling to school because the trip wakes him up and helps him arrive on time. However, he checks the weather before leaving and keeps a light raincoat in his bag. On busy roads he rides more slowly, uses hand signals, and waits patiently at crossings instead of trying to hurry through traffic.",
+      "question": "Arun rides faster on busy roads.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Check the statement against the passage."
+    },
+    {
+      "id": "q88",
+      "type": "fillInTheBlank",
+      "passage": "Arun loves cycling to school because the trip wakes him up and helps him arrive on time. However, he checks the weather before leaving and keeps a light raincoat in his bag. On busy roads he rides more slowly, uses hand signals, and waits patiently at crossings instead of trying to hurry through traffic.",
+      "question": "Complete the sentence: Arun uses hand ______ on busy roads.",
+      "answer": "signals",
+      "difficulty": "hard",
+      "explanation": "Use the exact word from the passage."
+    },
+    {
+      "id": "q89",
+      "type": "multipleChoice",
+      "passage": "Arun loves cycling to school because the trip wakes him up and helps him arrive on time. However, he checks the weather before leaving and keeps a light raincoat in his bag. On busy roads he rides more slowly, uses hand signals, and waits patiently at crossings instead of trying to hurry through traffic.",
+      "question": "Which detail is mentioned in the passage?",
+      "options": [
+        "Arun keeps a light raincoat in his bag.",
+        "Arun cycles only on Sundays.",
+        "Arun never stops at crossings.",
+        "Arun rides without looking at weather."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the exact detail."
+    },
+    {
+      "id": "q90",
+      "type": "multipleChoice",
+      "passage": "On Friday evening, Mei's family played a board game during a power cut. At first her little brother complained because he wanted to watch cartoons, but soon he became the loudest player in the room. Without phones or television, the family noticed how quickly time passed when everyone was laughing and taking turns.",
+      "question": "What is the main idea of Passage 4?",
+      "options": [
+        "A person learns or enjoys something through a simple activity.",
+        "A city is building a new train station.",
+        "A family moves to another country.",
+        "A storm destroys a school."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the overall message."
+    },
+    {
+      "id": "q91",
+      "type": "trueFalse",
+      "passage": "On Friday evening, Mei's family played a board game during a power cut. At first her little brother complained because he wanted to watch cartoons, but soon he became the loudest player in the room. Without phones or television, the family noticed how quickly time passed when everyone was laughing and taking turns.",
+      "question": "Mei's brother enjoyed the game in the end.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Check the statement against the passage."
+    },
+    {
+      "id": "q92",
+      "type": "fillInTheBlank",
+      "passage": "On Friday evening, Mei's family played a board game during a power cut. At first her little brother complained because he wanted to watch cartoons, but soon he became the loudest player in the room. Without phones or television, the family noticed how quickly time passed when everyone was laughing and taking turns.",
+      "question": "Complete the sentence: The family laughed and took ______.",
+      "answer": "turns",
+      "difficulty": "hard",
+      "explanation": "Use the exact word from the passage."
+    },
+    {
+      "id": "q93",
+      "type": "multipleChoice",
+      "passage": "On Friday evening, Mei's family played a board game during a power cut. At first her little brother complained because he wanted to watch cartoons, but soon he became the loudest player in the room. Without phones or television, the family noticed how quickly time passed when everyone was laughing and taking turns.",
+      "question": "Which detail is mentioned in the passage?",
+      "options": [
+        "The family played a board game.",
+        "The power cut lasted a week.",
+        "The brother read a comic book.",
+        "The family went outside."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the exact detail."
+    },
+    {
+      "id": "q94",
+      "type": "multipleChoice",
+      "question": "Choose the best word meaning \"careful\".",
+      "options": [
+        "patient",
+        "careless",
+        "careful",
+        "tiny"
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q95",
+      "type": "multipleChoice",
+      "question": "Choose the best linking word: I wanted to go, ____ it was too late.",
+      "options": [
+        "and",
+        "but",
+        "so",
+        "because"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q96",
+      "type": "multipleChoice",
+      "question": "Which sentence shows a result?",
+      "options": [
+        "It rained because clouds were dark.",
+        "The rain stopped, so we left.",
+        "Although it was wet, we played.",
+        "While we walked, we talked."
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q97",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: A short coat for rain is a rain ____.",
+      "answer": "coat",
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q98",
+      "type": "fillInTheBlank",
+      "question": "True or False: A balcony is usually outside.",
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q99",
+      "type": "multipleChoice",
+      "question": "Choose the best meaning of \"complain\".",
+      "options": [
+        "say sorry",
+        "show anger or unhappiness",
+        "jump up",
+        "work hard"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q100",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: Students sold handmade ____ at the fair.",
+      "answer": "keychains",
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q101",
+      "type": "multipleChoice",
+      "question": "Choose the best answer: What helped the bookmark table become popular?",
+      "options": [
+        "Music",
+        "Lower prices",
+        "Writing names on bookmarks",
+        "A poster competition"
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q102",
+      "type": "fillInTheBlank",
+      "question": "True or False: Arun ignores traffic rules.",
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q103",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: The family played during a power ____.",
+      "answer": "cut",
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q104",
+      "type": "multipleChoice",
+      "question": "Choose the best synonym for \"noticed\".",
+      "options": [
+        "ignored",
+        "saw",
+        "forgot",
+        "hid"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q105",
+      "type": "multipleChoice",
+      "question": "Choose the best word: A person who waits calmly is ____.",
+      "options": [
+        "patient",
+        "noisy",
+        "messy",
+        "late"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q106",
+      "type": "fillInTheBlank",
+      "question": "True or False: Morning sun can help plants grow.",
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q107",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: Linh wrote watering days on a small ____.",
+      "answer": "calendar",
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q108",
+      "type": "multipleChoice",
+      "question": "Choose the best word order.",
+      "options": [
+        "Quickly time passed.",
+        "Time passed quickly.",
+        "Passed time quickly.",
+        "Time quickly passed it."
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q109",
+      "type": "multipleChoice",
+      "question": "Choose the best answer: What is a benefit of cycling to school for Arun?",
+      "options": [
+        "He arrives sleepy.",
+        "He wakes up.",
+        "He avoids all traffic.",
+        "He never checks weather."
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Use context to choose the best answer."
+    },
+    {
+      "id": "q110",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: Everyone was laughing and taking ____.",
+      "answer": "turns",
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    },
+    {
+      "id": "q111",
+      "type": "fillInTheBlank",
+      "question": "True or False: Board games always need electricity.",
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Write the key word."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

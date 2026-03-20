@@ -1067,6 +1067,184 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q100",
+      "type": "listenChoice",
+      "context": "A teacher announces a room change.",
+      "question": "Listen. Where is the debate club now?",
+      "say": "Debate club has moved from Room 9 to Room 15 this afternoon because the projector in Room 9 is broken.",
+      "options": [
+        "Room 5",
+        "Room 9",
+        "Room 12",
+        "Room 15"
+      ],
+      "answer": 3,
+      "difficulty": "medium",
+      "explanation": "The club has moved to Room 15."
+    },
+    {
+      "id": "q101",
+      "type": "listenChoice",
+      "context": "Two students talk about weekend plans.",
+      "question": "Listen. What will they do first?",
+      "say": "First we'll finish the poster, then we'll record the video, and after that we'll practise the presentation.",
+      "options": [
+        "Record the video",
+        "Finish the poster",
+        "Practise the presentation",
+        "Print the script"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "They will finish the poster first."
+    },
+    {
+      "id": "q102",
+      "type": "listenChoice",
+      "context": "A parent leaves a message for school.",
+      "question": "Listen. Why will the student miss PE?",
+      "say": "Nina cannot join PE today because she twisted her ankle during dance practice yesterday evening.",
+      "options": [
+        "She forgot her shoes",
+        "She twisted her ankle",
+        "She has a music lesson",
+        "She lost her timetable"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "The message says she twisted her ankle."
+    },
+    {
+      "id": "q103",
+      "type": "listenChoice",
+      "context": "An office worker gives trip details.",
+      "question": "Listen. What is included in the trip price?",
+      "say": "The museum trip costs 180,000 dong and includes transport and lunch, but students should bring their own water bottles.",
+      "options": [
+        "Lunch and transport",
+        "A water bottle",
+        "A guidebook",
+        "Only transport"
+      ],
+      "answer": 0,
+      "difficulty": "hard",
+      "explanation": "Transport and lunch are included."
+    },
+    {
+      "id": "q104",
+      "type": "listenFillInTheBlank",
+      "context": "A teacher shares a deadline.",
+      "question": "Type the day: The first draft is due on _____.",
+      "say": "Your first draft is due on Tuesday, but you can show me your plan on Monday if you want feedback.",
+      "answer": [
+        "tuesday"
+      ],
+      "difficulty": "easy",
+      "explanation": "The first draft is due on Tuesday."
+    },
+    {
+      "id": "q105",
+      "type": "listenFillInTheBlank",
+      "context": "A student talks about a meeting time.",
+      "question": "Type the time.",
+      "say": "Let's meet at quarter past two outside the language lab.",
+      "answer": [
+        "2:15",
+        "2.15",
+        "quarter past two",
+        "two fifteen"
+      ],
+      "difficulty": "medium",
+      "explanation": "Quarter past two means 2:15."
+    },
+    {
+      "id": "q106",
+      "type": "listenFillInTheBlank",
+      "context": "A coach gives team details.",
+      "question": "Type the number of players.",
+      "say": "For this practice game, each side needs six players and one substitute.",
+      "answer": [
+        "6",
+        "six"
+      ],
+      "difficulty": "medium",
+      "explanation": "Each side needs six players."
+    },
+    {
+      "id": "q107",
+      "type": "listenFillInTheBlank",
+      "context": "A student describes a location.",
+      "question": "Type the place name.",
+      "say": "The new reading corner is beside the school garden, just behind the art room.",
+      "answer": [
+        "school garden",
+        "garden"
+      ],
+      "difficulty": "hard",
+      "explanation": "The location given is beside the school garden."
+    },
+    {
+      "id": "q108",
+      "type": "listenTrueFalse",
+      "context": "A science teacher explains lab safety.",
+      "question": "Listen. True or False?",
+      "say": "Do not touch the glass beakers until I tell you they are cool enough to move.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Students should wait for permission before touching the beakers."
+    },
+    {
+      "id": "q109",
+      "type": "listenTrueFalse",
+      "context": "A club leader gives instructions.",
+      "question": "Listen. True or False?",
+      "say": "Please email me your article by Friday night; printed copies are not needed.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Printed copies are not needed."
+    },
+    {
+      "id": "q110",
+      "type": "listenTrueFalse",
+      "context": "A friend explains transport plans.",
+      "question": "Listen. True or False?",
+      "say": "We'll take the train because the bus takes much longer during the afternoon rush.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "hard",
+      "explanation": "They prefer the train because the bus is slower then."
+    },
+    {
+      "id": "q111",
+      "type": "listenTrueFalse",
+      "context": "A student talks about a book order.",
+      "question": "Listen. True or False?",
+      "say": "The history workbook arrived this morning, but the grammar workbook will come next week.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "hard",
+      "explanation": "Only the history workbook arrived this morning."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

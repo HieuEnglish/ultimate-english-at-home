@@ -1096,6 +1096,389 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q82",
+      "type": "multipleChoice",
+      "passage": "At Greenwood School, a small group of students started a lunchtime repair table for broken stationery and loose backpack straps. At first they expected only a few visitors, but within two weeks the queue stretched across the corridor. The group soon discovered that fixing items was only part of the job. They also had to explain why repair mattered, keep simple records, and decide when an item was too damaged to save. By the end of term, the team had repaired dozens of objects and persuaded the school to place a toolbox in the library.",
+      "question": "Which heading best matches the passage?",
+      "options": [
+        "People solve practical problems in a thoughtful way.",
+        "A sports team loses an important match.",
+        "A scientist discovers a new planet.",
+        "A shop lowers all prices for a week."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the overall message."
+    },
+    {
+      "id": "q83",
+      "type": "multipleChoice",
+      "passage": "At Greenwood School, a small group of students started a lunchtime repair table for broken stationery and loose backpack straps. At first they expected only a few visitors, but within two weeks the queue stretched across the corridor. The group soon discovered that fixing items was only part of the job. They also had to explain why repair mattered, keep simple records, and decide when an item was too damaged to save. By the end of term, the team had repaired dozens of objects and persuaded the school to place a toolbox in the library.",
+      "question": "What does the passage mainly show?",
+      "options": [
+        "Repair also needs planning and explanation.",
+        "The table closed after one day.",
+        "Students sold new backpacks.",
+        "The library refused to help."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Look for the key idea."
+    },
+    {
+      "id": "q84",
+      "type": "trueFalse",
+      "passage": "At Greenwood School, a small group of students started a lunchtime repair table for broken stationery and loose backpack straps. At first they expected only a few visitors, but within two weeks the queue stretched across the corridor. The group soon discovered that fixing items was only part of the job. They also had to explain why repair mattered, keep simple records, and decide when an item was too damaged to save. By the end of term, the team had repaired dozens of objects and persuaded the school to place a toolbox in the library.",
+      "question": "The repair group had to keep records.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Check the exact detail."
+    },
+    {
+      "id": "q85",
+      "type": "fillInTheBlank",
+      "passage": "At Greenwood School, a small group of students started a lunchtime repair table for broken stationery and loose backpack straps. At first they expected only a few visitors, but within two weeks the queue stretched across the corridor. The group soon discovered that fixing items was only part of the job. They also had to explain why repair mattered, keep simple records, and decide when an item was too damaged to save. By the end of term, the team had repaired dozens of objects and persuaded the school to place a toolbox in the library.",
+      "question": "Sentence completion: The school placed a toolbox in the ______.",
+      "answer": "library",
+      "difficulty": "hard",
+      "explanation": "Use the exact key word from the text."
+    },
+    {
+      "id": "q86",
+      "type": "multipleChoice",
+      "passage": "At Greenwood School, a small group of students started a lunchtime repair table for broken stationery and loose backpack straps. At first they expected only a few visitors, but within two weeks the queue stretched across the corridor. The group soon discovered that fixing items was only part of the job. They also had to explain why repair mattered, keep simple records, and decide when an item was too damaged to save. By the end of term, the team had repaired dozens of objects and persuaded the school to place a toolbox in the library.",
+      "question": "In the passage, the word \"trial\" or \"term\" is closest in meaning to...",
+      "options": [
+        "period",
+        "danger",
+        "bridge",
+        "museum"
+      ],
+      "answer": 0,
+      "difficulty": "hard",
+      "explanation": "Use context to infer meaning."
+    },
+    {
+      "id": "q87",
+      "type": "multipleChoice",
+      "passage": "At Greenwood School, a small group of students started a lunchtime repair table for broken stationery and loose backpack straps. At first they expected only a few visitors, but within two weeks the queue stretched across the corridor. The group soon discovered that fixing items was only part of the job. They also had to explain why repair mattered, keep simple records, and decide when an item was too damaged to save. By the end of term, the team had repaired dozens of objects and persuaded the school to place a toolbox in the library.",
+      "question": "Which detail is mentioned?",
+      "options": [
+        "The corridor queue became long.",
+        "The school sold toolboxes online.",
+        "Teachers banned backpacks.",
+        "The group met only at weekends."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the detail directly stated."
+    },
+    {
+      "id": "q88",
+      "type": "multipleChoice",
+      "passage": "When a heavy storm damaged the old footbridge near Hana's village, students had to take a longer route to school. The journey added almost twenty minutes, which meant some children arrived tired and late. Rather than waiting quietly for adults to solve everything, Hana's class measured the new route, interviewed parents, and created a short report for the local council. Their work did not rebuild the bridge by itself, but it showed how clearly presented information can help a community make decisions.",
+      "question": "Which heading best matches the passage?",
+      "options": [
+        "People solve practical problems in a thoughtful way.",
+        "A sports team loses an important match.",
+        "A scientist discovers a new planet.",
+        "A shop lowers all prices for a week."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the overall message."
+    },
+    {
+      "id": "q89",
+      "type": "multipleChoice",
+      "passage": "When a heavy storm damaged the old footbridge near Hana's village, students had to take a longer route to school. The journey added almost twenty minutes, which meant some children arrived tired and late. Rather than waiting quietly for adults to solve everything, Hana's class measured the new route, interviewed parents, and created a short report for the local council. Their work did not rebuild the bridge by itself, but it showed how clearly presented information can help a community make decisions.",
+      "question": "What does the passage mainly show?",
+      "options": [
+        "Students used information to support a local problem.",
+        "The bridge was never damaged.",
+        "Parents rebuilt the bridge alone.",
+        "The class changed schools."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Look for the key idea."
+    },
+    {
+      "id": "q90",
+      "type": "trueFalse",
+      "passage": "When a heavy storm damaged the old footbridge near Hana's village, students had to take a longer route to school. The journey added almost twenty minutes, which meant some children arrived tired and late. Rather than waiting quietly for adults to solve everything, Hana's class measured the new route, interviewed parents, and created a short report for the local council. Their work did not rebuild the bridge by itself, but it showed how clearly presented information can help a community make decisions.",
+      "question": "The longer route made the trip shorter.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Check the exact detail."
+    },
+    {
+      "id": "q91",
+      "type": "fillInTheBlank",
+      "passage": "When a heavy storm damaged the old footbridge near Hana's village, students had to take a longer route to school. The journey added almost twenty minutes, which meant some children arrived tired and late. Rather than waiting quietly for adults to solve everything, Hana's class measured the new route, interviewed parents, and created a short report for the local council. Their work did not rebuild the bridge by itself, but it showed how clearly presented information can help a community make decisions.",
+      "question": "Sentence completion: The students wrote a report for the local ______.",
+      "answer": "council",
+      "difficulty": "hard",
+      "explanation": "Use the exact key word from the text."
+    },
+    {
+      "id": "q92",
+      "type": "multipleChoice",
+      "passage": "When a heavy storm damaged the old footbridge near Hana's village, students had to take a longer route to school. The journey added almost twenty minutes, which meant some children arrived tired and late. Rather than waiting quietly for adults to solve everything, Hana's class measured the new route, interviewed parents, and created a short report for the local council. Their work did not rebuild the bridge by itself, but it showed how clearly presented information can help a community make decisions.",
+      "question": "In the passage, the word \"trial\" or \"term\" is closest in meaning to...",
+      "options": [
+        "period",
+        "danger",
+        "bridge",
+        "museum"
+      ],
+      "answer": 0,
+      "difficulty": "hard",
+      "explanation": "Use context to infer meaning."
+    },
+    {
+      "id": "q93",
+      "type": "multipleChoice",
+      "passage": "When a heavy storm damaged the old footbridge near Hana's village, students had to take a longer route to school. The journey added almost twenty minutes, which meant some children arrived tired and late. Rather than waiting quietly for adults to solve everything, Hana's class measured the new route, interviewed parents, and created a short report for the local council. Their work did not rebuild the bridge by itself, but it showed how clearly presented information can help a community make decisions.",
+      "question": "Which detail is mentioned?",
+      "options": [
+        "Students interviewed parents.",
+        "The class ignored the council.",
+        "The bridge was for trains.",
+        "The route became safer because of lights."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the detail directly stated."
+    },
+    {
+      "id": "q94",
+      "type": "multipleChoice",
+      "passage": "A museum in the city centre tested a new idea: instead of giving visitors a long printed guide, it offered short audio clips triggered by small QR codes. Some visitors enjoyed the freedom to choose which objects to hear about, and the museum liked that it could update the clips easily. However, the trial also showed problems. Not everyone had enough battery on their phone, and some rooms became noisy when visitors forgot headphones. In the end, the museum kept the QR system but also returned to offering a short paper map.",
+      "question": "Which heading best matches the passage?",
+      "options": [
+        "People solve practical problems in a thoughtful way.",
+        "A sports team loses an important match.",
+        "A scientist discovers a new planet.",
+        "A shop lowers all prices for a week."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the overall message."
+    },
+    {
+      "id": "q95",
+      "type": "multipleChoice",
+      "passage": "A museum in the city centre tested a new idea: instead of giving visitors a long printed guide, it offered short audio clips triggered by small QR codes. Some visitors enjoyed the freedom to choose which objects to hear about, and the museum liked that it could update the clips easily. However, the trial also showed problems. Not everyone had enough battery on their phone, and some rooms became noisy when visitors forgot headphones. In the end, the museum kept the QR system but also returned to offering a short paper map.",
+      "question": "What does the passage mainly show?",
+      "options": [
+        "Digital systems can help, but they may need simple backups.",
+        "Paper maps are always useless.",
+        "Visitors disliked every object in the museum.",
+        "The museum banned phones completely."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Look for the key idea."
+    },
+    {
+      "id": "q96",
+      "type": "trueFalse",
+      "passage": "A museum in the city centre tested a new idea: instead of giving visitors a long printed guide, it offered short audio clips triggered by small QR codes. Some visitors enjoyed the freedom to choose which objects to hear about, and the museum liked that it could update the clips easily. However, the trial also showed problems. Not everyone had enough battery on their phone, and some rooms became noisy when visitors forgot headphones. In the end, the museum kept the QR system but also returned to offering a short paper map.",
+      "question": "The museum removed all paper support after the trial.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Check the exact detail."
+    },
+    {
+      "id": "q97",
+      "type": "fillInTheBlank",
+      "passage": "A museum in the city centre tested a new idea: instead of giving visitors a long printed guide, it offered short audio clips triggered by small QR codes. Some visitors enjoyed the freedom to choose which objects to hear about, and the museum liked that it could update the clips easily. However, the trial also showed problems. Not everyone had enough battery on their phone, and some rooms became noisy when visitors forgot headphones. In the end, the museum kept the QR system but also returned to offering a short paper map.",
+      "question": "Sentence completion: Some rooms became noisy when visitors forgot their ______.",
+      "answer": "headphones",
+      "difficulty": "hard",
+      "explanation": "Use the exact key word from the text."
+    },
+    {
+      "id": "q98",
+      "type": "multipleChoice",
+      "passage": "A museum in the city centre tested a new idea: instead of giving visitors a long printed guide, it offered short audio clips triggered by small QR codes. Some visitors enjoyed the freedom to choose which objects to hear about, and the museum liked that it could update the clips easily. However, the trial also showed problems. Not everyone had enough battery on their phone, and some rooms became noisy when visitors forgot headphones. In the end, the museum kept the QR system but also returned to offering a short paper map.",
+      "question": "In the passage, the word \"trial\" or \"term\" is closest in meaning to...",
+      "options": [
+        "experiment",
+        "map",
+        "battery",
+        "visitor"
+      ],
+      "answer": 0,
+      "difficulty": "hard",
+      "explanation": "Use context to infer meaning."
+    },
+    {
+      "id": "q99",
+      "type": "multipleChoice",
+      "passage": "A museum in the city centre tested a new idea: instead of giving visitors a long printed guide, it offered short audio clips triggered by small QR codes. Some visitors enjoyed the freedom to choose which objects to hear about, and the museum liked that it could update the clips easily. However, the trial also showed problems. Not everyone had enough battery on their phone, and some rooms became noisy when visitors forgot headphones. In the end, the museum kept the QR system but also returned to offering a short paper map.",
+      "question": "Which detail is mentioned?",
+      "options": [
+        "Visitors needed battery on their phones.",
+        "QR codes were placed outdoors only.",
+        "The museum sold headphones with tickets.",
+        "Every clip was exactly ten minutes long."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the detail directly stated."
+    },
+    {
+      "id": "q100",
+      "type": "multipleChoice",
+      "question": "Choose the best linking word: The queue was long; ____, students stayed calm and organised.",
+      "options": [
+        "however",
+        "because",
+        "although",
+        "unless"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the best reading-based answer."
+    },
+    {
+      "id": "q101",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: A report should present information ____.",
+      "answer": "clearly",
+      "difficulty": "medium",
+      "explanation": "Use the exact word."
+    },
+    {
+      "id": "q102",
+      "type": "multipleChoice",
+      "question": "Choose the best meaning of \"persuaded\".",
+      "options": [
+        "convinced",
+        "measured",
+        "damaged",
+        "borrowed"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the best reading-based answer."
+    },
+    {
+      "id": "q103",
+      "type": "fillInTheBlank",
+      "question": "True or False: QR codes can be updated easily.",
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Use the exact word."
+    },
+    {
+      "id": "q104",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: The new route added almost twenty ____.",
+      "answer": "minutes",
+      "difficulty": "medium",
+      "explanation": "Use the exact word."
+    },
+    {
+      "id": "q105",
+      "type": "multipleChoice",
+      "question": "Choose the best answer: Why did the museum keep a paper map?",
+      "options": [
+        "Because some visitors needed a simple backup.",
+        "Because QR codes were illegal.",
+        "Because audio clips were too short.",
+        "Because staff disliked museums."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the best reading-based answer."
+    },
+    {
+      "id": "q106",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: The repair table also fixed loose backpack ____.",
+      "answer": "straps",
+      "difficulty": "medium",
+      "explanation": "Use the exact word."
+    },
+    {
+      "id": "q107",
+      "type": "multipleChoice",
+      "question": "Choose the best heading for a paragraph about clear data helping local decisions.",
+      "options": [
+        "Information can support action.",
+        "Why homework is boring.",
+        "A history of bridges.",
+        "Shopping for phones."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the best reading-based answer."
+    },
+    {
+      "id": "q108",
+      "type": "fillInTheBlank",
+      "question": "True or False: The class rebuilt the bridge themselves.",
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Use the exact word."
+    },
+    {
+      "id": "q109",
+      "type": "multipleChoice",
+      "question": "Choose the word closest to \"damaged\".",
+      "options": [
+        "broken",
+        "shiny",
+        "tiny",
+        "quick"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the best reading-based answer."
+    },
+    {
+      "id": "q110",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: Some visitors did not have enough ____ on their phone.",
+      "answer": "battery",
+      "difficulty": "medium",
+      "explanation": "Use the exact word."
+    },
+    {
+      "id": "q111",
+      "type": "multipleChoice",
+      "question": "Choose the best concluding sentence: Careful planning can turn a small idea into useful change.",
+      "options": [
+        "Careful planning can turn a small idea into useful change.",
+        "Many ideas are small and tools are metal.",
+        "Visitors are often hungry.",
+        "Councils like reports because they are long."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the best reading-based answer."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

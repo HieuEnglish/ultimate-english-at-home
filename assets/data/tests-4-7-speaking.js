@@ -663,6 +663,371 @@
 
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q72",
+      "type": "prompt",
+      "question": "Tell me your favourite animal and one reason.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q73",
+      "type": "prompt",
+      "question": "Say 3 fruits you like.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q74",
+      "type": "prompt",
+      "question": "What do you do in the morning before school?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q75",
+      "type": "prompt",
+      "question": "Tell me 2 things in your classroom.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q76",
+      "type": "prompt",
+      "question": "What is your favourite toy or game?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q77",
+      "type": "prompt",
+      "question": "Say a sentence about your mum or dad.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q78",
+      "type": "prompt",
+      "question": "What colour is your school bag?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q79",
+      "type": "prompt",
+      "question": "What do you like to drink?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q80",
+      "type": "prompt",
+      "question": "Count from 10 to 1.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q81",
+      "type": "prompt",
+      "question": "Tell me about your best friend.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q82",
+      "type": "prompt",
+      "question": "What can a bird do?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q83",
+      "type": "prompt",
+      "question": "What can a fish do?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q84",
+      "type": "prompt",
+      "question": "Say 2 foods you eat at lunch.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q85",
+      "type": "prompt",
+      "question": "What do you do at the park?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q86",
+      "type": "prompt",
+      "question": "Tell me about a rainy day.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q87",
+      "type": "prompt",
+      "question": "What is your favourite day of the week?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q88",
+      "type": "prompt",
+      "question": "Say 3 body parts.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q89",
+      "type": "prompt",
+      "question": "What do you wear on your feet?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q90",
+      "type": "prompt",
+      "question": "Tell me about your favourite book.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q91",
+      "type": "prompt",
+      "question": "What do you see in the sky in the day?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q92",
+      "type": "prompt",
+      "question": "What do you see in the sky at night?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q93",
+      "type": "prompt",
+      "question": "Say 3 classroom actions: read, write, listen, sit, stand.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q94",
+      "type": "prompt",
+      "question": "What is in your pencil case?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q95",
+      "type": "prompt",
+      "question": "Tell me about your bedroom.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q96",
+      "type": "prompt",
+      "question": "What game do you play with your friends?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q97",
+      "type": "prompt",
+      "question": "What do you do after dinner?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q98",
+      "type": "prompt",
+      "question": "Tell me one rule in your classroom.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q99",
+      "type": "prompt",
+      "question": "What animal is big and strong?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q100",
+      "type": "prompt",
+      "question": "What animal is small and cute?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q101",
+      "type": "prompt",
+      "question": "Tell me about your favourite colour.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q102",
+      "type": "prompt",
+      "question": "What do you do on the weekend?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q103",
+      "type": "prompt",
+      "question": "Say a sentence with \"I can...\".",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q104",
+      "type": "prompt",
+      "question": "Say a sentence with \"I like...\".",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q105",
+      "type": "prompt",
+      "question": "Tell me about your teacher.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q106",
+      "type": "prompt",
+      "question": "What do you bring to school?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q107",
+      "type": "prompt",
+      "question": "Tell me one thing that makes you happy.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q108",
+      "type": "prompt",
+      "question": "Say 3 things in the kitchen.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q109",
+      "type": "prompt",
+      "question": "What is your favourite song or rhyme?",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q110",
+      "type": "prompt",
+      "question": "Tell me about a family trip.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "medium",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    },
+    {
+      "id": "q111",
+      "type": "prompt",
+      "question": "Say hello, ask \"How are you?\", and answer it.",
+      "say": "Use 1 to 3 short sentences.",
+      "model": "Use 1 to 3 short sentences.",
+      "difficulty": "easy",
+      "explanation": "Any clear, age-appropriate answer is OK."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

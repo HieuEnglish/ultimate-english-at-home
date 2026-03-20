@@ -1225,6 +1225,550 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q80",
+      "type": "multipleChoice",
+      "question": "Choose the best opening sentence for a paragraph about a school trip.",
+      "options": [
+        "Last week our class visited the science museum and learned many interesting things.",
+        "Trips are fun and buses are blue.",
+        "My pencil is under the desk.",
+        "Sometimes students are tired."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q81",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best linking word: I was nervous, ____ I took a deep breath.",
+      "answer": [
+        "so"
+      ],
+      "acceptedAnswers": [
+        "so"
+      ],
+      "difficulty": "medium",
+      "explanation": "Use the word that best completes the sentence."
+    },
+    {
+      "id": "q82",
+      "type": "multipleChoice",
+      "question": "Choose the best punctuation: What did you see at the zoo__",
+      "options": [
+        "?",
+        "!",
+        ".",
+        ","
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q83",
+      "type": "multipleChoice",
+      "question": "Choose the correct pronoun: Jack and I finished the poster. ____ were proud.",
+      "options": [
+        "He",
+        "She",
+        "We",
+        "They"
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q84",
+      "type": "fillInTheBlank",
+      "question": "Fill in the plural word: one city, two ____.",
+      "answer": [
+        "cities"
+      ],
+      "acceptedAnswers": [
+        "cities"
+      ],
+      "difficulty": "medium",
+      "explanation": "Use the word that best completes the sentence."
+    },
+    {
+      "id": "q85",
+      "type": "multipleChoice",
+      "question": "Choose the best ending sentence for a paragraph about recycling.",
+      "options": [
+        "In conclusion, recycling helps protect the environment and keeps our school cleaner.",
+        "Recycling is green and bins are boxes.",
+        "I like football very much.",
+        "That is all about many things."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q86",
+      "type": "multipleChoice",
+      "question": "Choose the most formal option.",
+      "options": [
+        "Can you help me with question three, please?",
+        "Hey, tell me the answer now.",
+        "I dunno this thing.",
+        "This homework is kinda weird."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q87",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: First, wash the rice. ____, add water.",
+      "answer": [
+        "next"
+      ],
+      "acceptedAnswers": [
+        "next"
+      ],
+      "difficulty": "medium",
+      "explanation": "Use the word that best completes the sentence."
+    },
+    {
+      "id": "q88",
+      "type": "multipleChoice",
+      "question": "Choose the best verb: Our team ____ the game yesterday.",
+      "options": [
+        "win",
+        "wins",
+        "won",
+        "winning"
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q89",
+      "type": "multipleChoice",
+      "question": "Choose the best word order.",
+      "options": [
+        "At home I quietly read.",
+        "I quietly read at home.",
+        "Quietly I at home read.",
+        "Read I quietly at home."
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q90",
+      "type": "fillInTheBlank",
+      "question": "Fill in the contraction for \"I am\".",
+      "answer": [
+        "I'm"
+      ],
+      "acceptedAnswers": [
+        "i'm"
+      ],
+      "difficulty": "medium",
+      "explanation": "Use the word that best completes the sentence."
+    },
+    {
+      "id": "q91",
+      "type": "multipleChoice",
+      "question": "Choose the correct sentence.",
+      "options": [
+        "Because it rained, we stayed inside.",
+        "Because it rained we stayed inside",
+        "because it rained, We stayed inside.",
+        "Because it rained we stayed Inside."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q92",
+      "type": "multipleChoice",
+      "question": "Choose the best word: A sentence that tells the main idea is a ____ sentence.",
+      "options": [
+        "topic",
+        "tiny",
+        "traffic",
+        "travel"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q93",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: Please write your name ____ the top of the page.",
+      "answer": [
+        "at"
+      ],
+      "acceptedAnswers": [
+        "at"
+      ],
+      "difficulty": "medium",
+      "explanation": "Use the word that best completes the sentence."
+    },
+    {
+      "id": "q94",
+      "type": "multipleChoice",
+      "question": "Choose the best transition word: We packed snacks. ____, we boarded the bus.",
+      "options": [
+        "Finally",
+        "Then",
+        "However",
+        "Because"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q95",
+      "type": "multipleChoice",
+      "question": "Choose the best punctuation: Wow__ that model volcano is amazing!",
+      "options": [
+        ".",
+        "?",
+        "!",
+        ","
+      ],
+      "answer": 2,
+      "difficulty": "medium",
+      "explanation": "Choose the clearest, most accurate writing."
+    },
+    {
+      "id": "q96",
+      "type": "prompt",
+      "question": "Write 4-6 sentences about a memorable school morning.",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q97",
+      "type": "prompt",
+      "question": "Write 4-6 sentences about a game you enjoy playing with friends.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q98",
+      "type": "prompt",
+      "question": "Write a short email inviting a friend to your birthday party.",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q99",
+      "type": "prompt",
+      "question": "Write 4-6 sentences describing your dream classroom.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q100",
+      "type": "prompt",
+      "question": "Write a paragraph about one healthy habit you want to keep.",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q101",
+      "type": "prompt",
+      "question": "Write instructions for making your favourite snack.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q102",
+      "type": "prompt",
+      "question": "Write 4-6 sentences about a time you helped at home.",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q103",
+      "type": "prompt",
+      "question": "Write a short thank-you note to a teacher or coach.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q104",
+      "type": "prompt",
+      "question": "Write a short story that begins with: \"When I opened the box...\"",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q105",
+      "type": "prompt",
+      "question": "Write a paragraph about your favourite season and why you like it.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q106",
+      "type": "prompt",
+      "question": "Write 4-6 sentences about a place in your city that children would enjoy.",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q107",
+      "type": "prompt",
+      "question": "Write a short diary entry about a rainy weekend.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q108",
+      "type": "prompt",
+      "question": "Write a paragraph comparing two hobbies you know.",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q109",
+      "type": "prompt",
+      "question": "Write 4-6 sentences about a school club you would create.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q110",
+      "type": "prompt",
+      "question": "Write a short message asking for homework help politely.",
+      "difficulty": "easy",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    },
+    {
+      "id": "q111",
+      "type": "prompt",
+      "question": "Write a paragraph about how to be a good friend.",
+      "difficulty": "medium",
+      "explanation": "Use capitals, punctuation, and linking words where you can.",
+      "rubric": {
+        "minWords": 35,
+        "minSentences": 3,
+        "mustIncludeAny": [
+          [
+            "because",
+            "so",
+            "then",
+            "after that"
+          ]
+        ]
+      },
+      "model": "Plan a beginning, middle, and ending."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

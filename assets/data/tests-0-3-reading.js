@@ -688,6 +688,431 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q82",
+      "type": "multipleChoice",
+      "question": "Which picture shows a duck?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Duck = ??"
+    },
+    {
+      "id": "q83",
+      "type": "multipleChoice",
+      "question": "Which picture shows a lion?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "Lion = ??"
+    },
+    {
+      "id": "q84",
+      "type": "multipleChoice",
+      "question": "Which picture shows a monkey?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Monkey = ??"
+    },
+    {
+      "id": "q85",
+      "type": "multipleChoice",
+      "question": "Which picture shows a turtle?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Turtle = ??"
+    },
+    {
+      "id": "q86",
+      "type": "multipleChoice",
+      "question": "Which picture shows a orange?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Orange = ??"
+    },
+    {
+      "id": "q87",
+      "type": "multipleChoice",
+      "question": "Which picture shows a grapes?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "Grapes = ??"
+    },
+    {
+      "id": "q88",
+      "type": "multipleChoice",
+      "question": "Which picture shows a pear?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Pear = ??"
+    },
+    {
+      "id": "q89",
+      "type": "multipleChoice",
+      "question": "Which picture shows a bread?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "Bread = ??"
+    },
+    {
+      "id": "q90",
+      "type": "multipleChoice",
+      "question": "Which picture shows a egg?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "Egg = ??"
+    },
+    {
+      "id": "q91",
+      "type": "multipleChoice",
+      "question": "Which picture shows a cheese?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Cheese = ??"
+    },
+    {
+      "id": "q92",
+      "type": "multipleChoice",
+      "question": "Which picture shows a chair?",
+      "options": [
+        "???",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Chair = ??"
+    },
+    {
+      "id": "q93",
+      "type": "multipleChoice",
+      "question": "Which picture shows a door?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "???"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Door = ??"
+    },
+    {
+      "id": "q94",
+      "type": "multipleChoice",
+      "question": "Which picture shows a bed?",
+      "options": [
+        "??",
+        "??",
+        "???",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "Bed = ???"
+    },
+    {
+      "id": "q95",
+      "type": "multipleChoice",
+      "question": "Which picture shows a sock?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "Sock = ??"
+    },
+    {
+      "id": "q96",
+      "type": "multipleChoice",
+      "question": "Which picture shows a hat?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Hat = ??"
+    },
+    {
+      "id": "q97",
+      "type": "multipleChoice",
+      "question": "Which picture shows a glove?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Glove = ??"
+    },
+    {
+      "id": "q98",
+      "type": "multipleChoice",
+      "question": "Which picture shows a eye?",
+      "options": [
+        "??",
+        "???",
+        "??",
+        "?"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Eye = ???"
+    },
+    {
+      "id": "q99",
+      "type": "multipleChoice",
+      "question": "Which picture shows a ear?",
+      "options": [
+        "??",
+        "??",
+        "???",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Ear = ??"
+    },
+    {
+      "id": "q100",
+      "type": "multipleChoice",
+      "question": "Which picture shows a nose?",
+      "options": [
+        "??",
+        "??",
+        "?",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Nose = ??"
+    },
+    {
+      "id": "q101",
+      "type": "multipleChoice",
+      "question": "Which picture shows a star?",
+      "options": [
+        "?",
+        "?",
+        "?",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Star = ?"
+    },
+    {
+      "id": "q102",
+      "type": "multipleChoice",
+      "question": "Which picture shows a square?",
+      "options": [
+        "?",
+        "?",
+        "?",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Square = ?"
+    },
+    {
+      "id": "q103",
+      "type": "multipleChoice",
+      "question": "Which picture shows a triangle?",
+      "options": [
+        "??",
+        "?",
+        "?",
+        "?"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Triangle = ??"
+    },
+    {
+      "id": "q104",
+      "type": "multipleChoice",
+      "question": "Which picture shows a flower?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Flower = ??"
+    },
+    {
+      "id": "q105",
+      "type": "multipleChoice",
+      "question": "Which picture shows a tree?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Tree = ??"
+    },
+    {
+      "id": "q106",
+      "type": "multipleChoice",
+      "question": "Which picture shows a bus?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Bus = ??"
+    },
+    {
+      "id": "q107",
+      "type": "multipleChoice",
+      "question": "Which picture shows a train?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Train = ??"
+    },
+    {
+      "id": "q108",
+      "type": "multipleChoice",
+      "question": "Which picture shows a boat?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 2,
+      "difficulty": "easy",
+      "explanation": "Boat = ??"
+    },
+    {
+      "id": "q109",
+      "type": "multipleChoice",
+      "question": "Which picture shows a plane?",
+      "options": [
+        "??",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Plane = ??"
+    },
+    {
+      "id": "q110",
+      "type": "multipleChoice",
+      "question": "Which picture shows a sun?",
+      "options": [
+        "?",
+        "??",
+        "??",
+        "?"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Sun = ??"
+    },
+    {
+      "id": "q111",
+      "type": "multipleChoice",
+      "question": "Which picture shows a moon?",
+      "options": [
+        "??",
+        "??",
+        "?",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Moon = ??"
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

@@ -620,6 +620,491 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q72",
+      "type": "multipleChoice",
+      "question": "Which word means very small?",
+      "options": [
+        "tiny",
+        "tall",
+        "loud",
+        "slow"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q73",
+      "type": "multipleChoice",
+      "question": "Choose the best word: The fish can ___.",
+      "options": [
+        "fly",
+        "swim",
+        "hop",
+        "sing"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q74",
+      "type": "multipleChoice",
+      "question": "Which picture matches the word APPLE?",
+      "options": [
+        "??",
+        "??",
+        "?",
+        "??"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q75",
+      "type": "multipleChoice",
+      "question": "Choose the best sentence.",
+      "options": [
+        "The dog are big.",
+        "The dog is big.",
+        "Dog the is big.",
+        "The big are dog."
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q76",
+      "type": "multipleChoice",
+      "question": "Which word rhymes with SUN?",
+      "options": [
+        "book",
+        "run",
+        "tree",
+        "dog"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q77",
+      "type": "multipleChoice",
+      "question": "Choose the colour word.",
+      "options": [
+        "jump",
+        "purple",
+        "table",
+        "smile"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q78",
+      "type": "multipleChoice",
+      "question": "Which sentence is a question?",
+      "options": [
+        "I like cake.",
+        "Where is my bag?",
+        "Run to the gate.",
+        "The bus is late."
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q79",
+      "type": "multipleChoice",
+      "question": "Choose the best word: I ___ to school every day.",
+      "options": [
+        "go",
+        "goes",
+        "going",
+        "gone"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q80",
+      "type": "multipleChoice",
+      "question": "Which word means the same as HAPPY?",
+      "options": [
+        "glad",
+        "sad",
+        "cold",
+        "quiet"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q81",
+      "type": "multipleChoice",
+      "question": "Which picture shows something you can read?",
+      "options": [
+        "?",
+        "??",
+        "??",
+        "??"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q82",
+      "type": "multipleChoice",
+      "question": "Choose the best word: A baby dog is a ___.",
+      "options": [
+        "kitten",
+        "puppy",
+        "calf",
+        "cub"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q83",
+      "type": "multipleChoice",
+      "question": "Which sentence has a capital letter and full stop?",
+      "options": [
+        "we like music",
+        "We like music.",
+        "We like Music",
+        "we like music."
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q84",
+      "type": "multipleChoice",
+      "question": "Choose the best word: Birds have two ___.",
+      "options": [
+        "wings",
+        "wheels",
+        "fins",
+        "seats"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q85",
+      "type": "multipleChoice",
+      "question": "Which word belongs with school?",
+      "options": [
+        "eraser",
+        "pillow",
+        "shampoo",
+        "blanket"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q86",
+      "type": "multipleChoice",
+      "question": "Choose the best ending: Please open the ___.",
+      "options": [
+        "rain",
+        "door",
+        "banana",
+        "tiger"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q87",
+      "type": "multipleChoice",
+      "question": "Which word is a place?",
+      "options": [
+        "park",
+        "green",
+        "happy",
+        "under"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q88",
+      "type": "multipleChoice",
+      "question": "Which word means the opposite of HOT?",
+      "options": [
+        "warm",
+        "cold",
+        "big",
+        "fast"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q89",
+      "type": "multipleChoice",
+      "question": "Choose the best word: We wear ___ on our feet.",
+      "options": [
+        "gloves",
+        "shoes",
+        "hats",
+        "scarves"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q90",
+      "type": "multipleChoice",
+      "question": "Read: \"The bus is late.\" What is late?",
+      "options": [
+        "The train",
+        "The bus",
+        "The dog",
+        "The bell"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q91",
+      "type": "multipleChoice",
+      "question": "Which word can you eat?",
+      "options": [
+        "sandwich",
+        "pencil",
+        "socks",
+        "door"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Choose the best answer."
+    },
+    {
+      "id": "q92",
+      "type": "trueFalse",
+      "question": "A book has pages.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q93",
+      "type": "trueFalse",
+      "question": "A banana is blue.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q94",
+      "type": "trueFalse",
+      "question": "Children can play in a park.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q95",
+      "type": "trueFalse",
+      "question": "A teacher drives a train in class.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q96",
+      "type": "trueFalse",
+      "question": "Winter is usually cold.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q97",
+      "type": "trueFalse",
+      "question": "A fish walks to school.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q98",
+      "type": "trueFalse",
+      "question": "A rainbow has colours.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q99",
+      "type": "trueFalse",
+      "question": "You can sleep in a chair better than a bed.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q100",
+      "type": "trueFalse",
+      "question": "A pencil can help you write.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q101",
+      "type": "trueFalse",
+      "question": "A bus is smaller than a pencil.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "easy",
+      "explanation": "Read the sentence carefully."
+    },
+    {
+      "id": "q102",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: C _ KE",
+      "answer": "a",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q103",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: I drink ____.",
+      "answer": "water",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q104",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: _ ish (an animal in water)",
+      "answer": "f",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q105",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: The sun is very ____.",
+      "answer": "hot",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q106",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: tr _ e",
+      "answer": "e",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q107",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: We read a ____.",
+      "answer": "book",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q108",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing letter: sh _ e",
+      "answer": "o",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q109",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: A cat says ____.",
+      "answer": "meow",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q110",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: I see the moon at ____.",
+      "answer": "night",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    },
+    {
+      "id": "q111",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: We wear a coat when it is ____.",
+      "answer": "cold",
+      "difficulty": "medium",
+      "explanation": "Think about the word carefully."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

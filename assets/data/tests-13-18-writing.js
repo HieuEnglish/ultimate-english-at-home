@@ -1299,6 +1299,494 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q64",
+      "type": "multipleChoice",
+      "question": "Choose the best overview sentence for data showing cycling rose steadily while car use fell slightly.",
+      "options": [
+        "Overall, cycling increased over the period, whereas car use declined a little.",
+        "Overall, cars are interesting and people travel.",
+        "Overall, the chart has many numbers.",
+        "Overall, I think cycling is better."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q65",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best linker to show concession: ______ some students dislike uniforms, others believe they reduce pressure.",
+      "answer": "although",
+      "acceptedAnswers": [
+        "although"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q66",
+      "type": "multipleChoice",
+      "question": "Choose the most formal option.",
+      "options": [
+        "Many teenagers are keen to use shared study spaces.",
+        "Lots of teens are super into shared study spaces.",
+        "Teens kinda like study spaces.",
+        "Shared study spaces are cool stuff."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q67",
+      "type": "fillInTheBlank",
+      "question": "True or False: A Task 1 report should usually include an overview.",
+      "answer": 0,
+      "acceptedAnswers": [
+        0
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q68",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best noun: There was a sharp ______ in the number of buses using electric power.",
+      "answer": "increase",
+      "acceptedAnswers": [
+        "increase"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q69",
+      "type": "multipleChoice",
+      "question": "Choose the best paraphrase of \"public transport should be expanded\".",
+      "options": [
+        "Cities should reduce all roads immediately.",
+        "There should be more buses, trains, or other transport services for the public.",
+        "Public transport should be free for every person today.",
+        "Only tourists should use public transport."
+      ],
+      "answer": 1,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q70",
+      "type": "multipleChoice",
+      "question": "Choose the best sentence using contrast.",
+      "options": [
+        "Attendance improved. However, homework completion fell slightly.",
+        "Attendance improved however homework completion fell slightly",
+        "However attendance improved homework completion fell slightly.",
+        "Attendance improved, however homework completion fell slightly because."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q71",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best word: A paragraph should remain focused on one main ______.",
+      "answer": "idea",
+      "acceptedAnswers": [
+        "idea"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q72",
+      "type": "multipleChoice",
+      "question": "Choose the best conclusion for an opinion essay.",
+      "options": [
+        "In conclusion, schools should introduce the policy gradually because the long-term benefits outweigh the short-term challenges.",
+        "In conclusion, there are many words in this essay.",
+        "In conclusion, maybe yes maybe no maybe.",
+        "In conclusion, students are important."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q73",
+      "type": "fillInTheBlank",
+      "question": "True or False: Informal slang usually strengthens academic writing.",
+      "answer": 0,
+      "acceptedAnswers": [
+        0
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q74",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: Writers often ______ the question in the introduction using different words.",
+      "answer": "paraphrase",
+      "acceptedAnswers": [
+        "paraphrase"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q75",
+      "type": "multipleChoice",
+      "question": "Choose the best supporting example.",
+      "options": [
+        "For example, a later start time can help students arrive more alert and participate better in first-period lessons.",
+        "For example, schools are schools.",
+        "For example, there are many opinions.",
+        "For example, students sometimes go outside."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q76",
+      "type": "multipleChoice",
+      "question": "Choose the best transition for a result.",
+      "options": [
+        "as a result",
+        "for instance",
+        "in contrast",
+        "meanwhile"
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q77",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best adjective: The report should remain objective and ______.",
+      "answer": "formal",
+      "acceptedAnswers": [
+        "formal"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q78",
+      "type": "multipleChoice",
+      "question": "Choose the sentence that best compares two trends.",
+      "options": [
+        "Laptop use rose from 30% to 70%, while tablet use stayed almost unchanged.",
+        "Laptop use and tablet use are both technology.",
+        "Laptop use rose and tablet use because numbers.",
+        "Laptop use is modern and tablets are nice."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q79",
+      "type": "fillInTheBlank",
+      "question": "True or False: In a discussion essay, the writer should ignore both views and only describe a graph.",
+      "answer": 0,
+      "acceptedAnswers": [
+        0
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q80",
+      "type": "fillInTheBlank",
+      "question": "Fill in the best noun: Good body paragraphs include explanations and specific ______.",
+      "answer": "examples",
+      "acceptedAnswers": [
+        "examples"
+      ],
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Write the precise academic word."
+    },
+    {
+      "id": "q81",
+      "type": "multipleChoice",
+      "question": "Choose the best thesis sentence.",
+      "options": [
+        "This essay argues that practical life skills deserve more space in the school curriculum because they prepare students for everyday decisions.",
+        "Life skills are life and school is school.",
+        "I once learned a skill and it was good.",
+        "There are many classes in schools."
+      ],
+      "answer": 0,
+      "points": 1,
+      "difficulty": "medium",
+      "explanation": "Choose the strongest IELTS-style writing option."
+    },
+    {
+      "id": "q82",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes the average weekly hours spent on homework, exercise, gaming, and paid work by teenagers in 2015 and 2025.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q83",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes the percentage of households using four energy sources in 2008 and 2023.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q84",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes monthly rainfall in four cities across January, April, July, and October.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q85",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes the number of books borrowed from a school library by three year groups in 2012 and 2022.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q86",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes daily use of bicycles, buses, cars, and walking for school travel in one town in 2010 and 2024.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q87",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes the stages in producing reusable notebooks from collected paper.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q88",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes attendance at a community sports centre in the morning, afternoon, and evening before and after renovation.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q89",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes the proportion of students choosing science, arts, business, and technology electives in 2016 and 2026.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q90",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes water use in homes for cooking, washing, cleaning, and gardening in summer and winter.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q91",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes weekly screen time for study, social media, gaming, and video streaming among 14- to 18-year-olds in 2014 and 2024.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q92",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes visitor numbers to a museum, aquarium, gallery, and theatre over four weekends.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q93",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes the process of preparing coffee beans for export.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q94",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes classroom technology use in 2011 and 2021.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q95",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes hours spent by students on revision, sport, sleep, and commuting during exam week and non-exam week.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q96",
+      "type": "essay",
+      "task": "task1",
+      "question": "Writing Task 1 (Report)\n\nYou should spend about 20 minutes on this task.\nWrite at least 150 words.\n\nThe information below describes levels of waste recycled by paper, glass, metal, and plastic between 2013 and 2023.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "difficulty": "hard",
+      "explanation": "Include a clear overview and support it with comparisons or key stages."
+    },
+    {
+      "id": "q97",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nSome people think schools should assess students more through projects than exams. To what extent do you agree or disagree?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q98",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nYoung people spend more time online than in face-to-face activities. Is this a positive or negative development?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q99",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nPublic libraries should offer more practical services than printed books. Discuss both views and give your opinion.",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q100",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nSome argue that every teenager should learn basic financial management at school. Do you agree or disagree?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q101",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nThe best way to reduce traffic in cities is to improve public transport rather than build new roads. Discuss both views and give your opinion.",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q102",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nMany teenagers want to study or work abroad in the future. What are the advantages and disadvantages of this trend?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q103",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nSchools should make community service a required part of education. To what extent do you agree or disagree?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q104",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nSome people believe that artificial intelligence will improve education more than it will harm it. Discuss both views and give your own opinion.",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q105",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nPhysical education should receive the same amount of time as academic subjects. To what extent do you agree or disagree?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q106",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nParents should limit children's use of smart devices more strictly. Discuss both views and give your opinion.",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q107",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nTourism can benefit local communities but may also damage local culture. Discuss both views and give your opinion.",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q108",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nStudents learn more from collaboration than from competition. To what extent do you agree or disagree?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q109",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nUniversities should place more value on creativity than on test scores. Discuss both views and give your own opinion.",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q110",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nCities should create more car-free public spaces even if some drivers are inconvenienced. Do you agree or disagree?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    },
+    {
+      "id": "q111",
+      "type": "essay",
+      "task": "task2",
+      "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nWorking from home will become the normal model for many jobs in the future. What are the advantages and disadvantages?",
+      "difficulty": "hard",
+      "explanation": "State a clear position, explain your reasons, and support them with examples."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();

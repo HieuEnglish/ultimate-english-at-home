@@ -1180,6 +1180,249 @@
   ];
 
   // Global export (no build step)
+
+
+  // Added to normalize this bank to 111 items.
+  QUESTIONS.push(
+    {
+      "id": "q92",
+      "type": "multipleChoice",
+      "passage": "Passage 4: Neighbourhood Cooling Plans. A mid-sized city tested several ways to reduce summer heat in one busy district. Officials painted some roofs white, added shade trees along two streets, and changed one school yard from dark asphalt to a lighter surface. Early measurements suggested that the shaded streets felt more comfortable for pedestrians in the afternoon, but planners also noticed that trees needed regular watering during the driest weeks. The city concluded that no single measure solved every problem; instead, the best results came when several small changes were combined.",
+      "question": "Which heading best matches the passage?",
+      "options": [
+        "Small changes can work better when combined or managed clearly.",
+        "A farmer loses all crops in one storm.",
+        "The history of electric trains.",
+        "Why students should avoid libraries."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the main idea."
+    },
+    {
+      "id": "q93",
+      "type": "multipleChoice",
+      "passage": "Passage 4: Neighbourhood Cooling Plans. A mid-sized city tested several ways to reduce summer heat in one busy district. Officials painted some roofs white, added shade trees along two streets, and changed one school yard from dark asphalt to a lighter surface. Early measurements suggested that the shaded streets felt more comfortable for pedestrians in the afternoon, but planners also noticed that trees needed regular watering during the driest weeks. The city concluded that no single measure solved every problem; instead, the best results came when several small changes were combined.",
+      "question": "Which detail is mentioned?",
+      "options": [
+        "Trees needed regular watering.",
+        "All roofs were made of glass.",
+        "The district was closed to cars forever.",
+        "The city removed every school yard."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the stated detail."
+    },
+    {
+      "id": "q94",
+      "type": "trueFalse",
+      "passage": "Passage 4: Neighbourhood Cooling Plans. A mid-sized city tested several ways to reduce summer heat in one busy district. Officials painted some roofs white, added shade trees along two streets, and changed one school yard from dark asphalt to a lighter surface. Early measurements suggested that the shaded streets felt more comfortable for pedestrians in the afternoon, but planners also noticed that trees needed regular watering during the driest weeks. The city concluded that no single measure solved every problem; instead, the best results came when several small changes were combined.",
+      "question": "The city believed one measure solved every heat problem.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Check the passage carefully."
+    },
+    {
+      "id": "q95",
+      "type": "fillInTheBlank",
+      "passage": "Passage 4: Neighbourhood Cooling Plans. A mid-sized city tested several ways to reduce summer heat in one busy district. Officials painted some roofs white, added shade trees along two streets, and changed one school yard from dark asphalt to a lighter surface. Early measurements suggested that the shaded streets felt more comfortable for pedestrians in the afternoon, but planners also noticed that trees needed regular watering during the driest weeks. The city concluded that no single measure solved every problem; instead, the best results came when several small changes were combined.",
+      "question": "Sentence completion: Some roofs were painted ______.",
+      "answer": "white",
+      "difficulty": "hard",
+      "explanation": "Use the exact word from the passage."
+    },
+    {
+      "id": "q96",
+      "type": "multipleChoice",
+      "passage": "Passage 4: Neighbourhood Cooling Plans. A mid-sized city tested several ways to reduce summer heat in one busy district. Officials painted some roofs white, added shade trees along two streets, and changed one school yard from dark asphalt to a lighter surface. Early measurements suggested that the shaded streets felt more comfortable for pedestrians in the afternoon, but planners also noticed that trees needed regular watering during the driest weeks. The city concluded that no single measure solved every problem; instead, the best results came when several small changes were combined.",
+      "question": "What is the writer's attitude?",
+      "options": [
+        "Practical and balanced",
+        "Angry and emotional",
+        "Completely certain that one solution works",
+        "Uninterested in evidence"
+      ],
+      "answer": 0,
+      "difficulty": "hard",
+      "explanation": "The passage weighs benefits and limits."
+    },
+    {
+      "id": "q97",
+      "type": "multipleChoice",
+      "passage": "Passage 5: Shared Study Spaces. A college library redesigned one floor so students could choose different study zones. Silent desks were placed near the windows, while group tables were moved closer to power sockets and whiteboards. After the change, student satisfaction rose, but not every comment was positive. Some students liked the flexible layout, whereas others found it difficult to predict when collaborative areas would become noisy. The library responded by improving signs and setting clearer time rules for each zone.",
+      "question": "Which heading best matches the passage?",
+      "options": [
+        "Small changes can work better when combined or managed clearly.",
+        "A farmer loses all crops in one storm.",
+        "The history of electric trains.",
+        "Why students should avoid libraries."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Choose the main idea."
+    },
+    {
+      "id": "q98",
+      "type": "multipleChoice",
+      "passage": "Passage 5: Shared Study Spaces. A college library redesigned one floor so students could choose different study zones. Silent desks were placed near the windows, while group tables were moved closer to power sockets and whiteboards. After the change, student satisfaction rose, but not every comment was positive. Some students liked the flexible layout, whereas others found it difficult to predict when collaborative areas would become noisy. The library responded by improving signs and setting clearer time rules for each zone.",
+      "question": "Which detail is mentioned?",
+      "options": [
+        "Group tables were near power sockets and whiteboards.",
+        "Students were banned from working together.",
+        "The library removed all silent desks.",
+        "Only teachers could use the floor."
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Find the stated detail."
+    },
+    {
+      "id": "q99",
+      "type": "trueFalse",
+      "passage": "Passage 5: Shared Study Spaces. A college library redesigned one floor so students could choose different study zones. Silent desks were placed near the windows, while group tables were moved closer to power sockets and whiteboards. After the change, student satisfaction rose, but not every comment was positive. Some students liked the flexible layout, whereas others found it difficult to predict when collaborative areas would become noisy. The library responded by improving signs and setting clearer time rules for each zone.",
+      "question": "Student satisfaction rose after the redesign.",
+      "options": [
+        "False",
+        "True"
+      ],
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Check the passage carefully."
+    },
+    {
+      "id": "q100",
+      "type": "fillInTheBlank",
+      "passage": "Passage 5: Shared Study Spaces. A college library redesigned one floor so students could choose different study zones. Silent desks were placed near the windows, while group tables were moved closer to power sockets and whiteboards. After the change, student satisfaction rose, but not every comment was positive. Some students liked the flexible layout, whereas others found it difficult to predict when collaborative areas would become noisy. The library responded by improving signs and setting clearer time rules for each zone.",
+      "question": "Sentence completion: The library later improved ______ and set clearer time rules.",
+      "answer": "signs",
+      "difficulty": "hard",
+      "explanation": "Use the exact word from the passage."
+    },
+    {
+      "id": "q101",
+      "type": "multipleChoice",
+      "passage": "Passage 5: Shared Study Spaces. A college library redesigned one floor so students could choose different study zones. Silent desks were placed near the windows, while group tables were moved closer to power sockets and whiteboards. After the change, student satisfaction rose, but not every comment was positive. Some students liked the flexible layout, whereas others found it difficult to predict when collaborative areas would become noisy. The library responded by improving signs and setting clearer time rules for each zone.",
+      "question": "What is the writer's attitude?",
+      "options": [
+        "Practical and balanced",
+        "Angry and emotional",
+        "Completely certain that one solution works",
+        "Uninterested in evidence"
+      ],
+      "answer": 0,
+      "difficulty": "hard",
+      "explanation": "The passage weighs benefits and limits."
+    },
+    {
+      "id": "q102",
+      "type": "multipleChoice",
+      "question": "Choose the best meaning of \"flexible\" in the study-space passage.",
+      "options": [
+        "easy to change or adapt",
+        "made of metal",
+        "very expensive",
+        "strict and unchanging"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Use the passage and context."
+    },
+    {
+      "id": "q103",
+      "type": "multipleChoice",
+      "question": "Choose the best meaning of \"combined\" in the cooling passage.",
+      "options": [
+        "used together",
+        "thrown away",
+        "painted white",
+        "measured badly"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Use the passage and context."
+    },
+    {
+      "id": "q104",
+      "type": "fillInTheBlank",
+      "question": "True or False: Shade trees can make afternoon walking more comfortable.",
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Write the exact word."
+    },
+    {
+      "id": "q105",
+      "type": "fillInTheBlank",
+      "question": "True or False: Silent desks were moved next to whiteboards.",
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Write the exact word."
+    },
+    {
+      "id": "q106",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: The city changed one school yard from dark ______ to a lighter surface.",
+      "answer": "asphalt",
+      "difficulty": "medium",
+      "explanation": "Write the exact word."
+    },
+    {
+      "id": "q107",
+      "type": "fillInTheBlank",
+      "question": "Fill in the missing word: Some students wanted clearer time ______ for each zone.",
+      "answer": "rules",
+      "difficulty": "medium",
+      "explanation": "Write the exact word."
+    },
+    {
+      "id": "q108",
+      "type": "multipleChoice",
+      "question": "Choose the best inference: Why did the library improve signs?",
+      "options": [
+        "To make zone expectations clearer",
+        "To sell more notebooks",
+        "To close the group area",
+        "To reduce window light"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Use the passage and context."
+    },
+    {
+      "id": "q109",
+      "type": "multipleChoice",
+      "question": "Choose the best inference: Why did the city combine several changes?",
+      "options": [
+        "Because one change alone was not enough",
+        "Because trees never help",
+        "Because roofs were illegal",
+        "Because the district was too cold"
+      ],
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Use the passage and context."
+    },
+    {
+      "id": "q110",
+      "type": "fillInTheBlank",
+      "question": "True or False: The cooling plan report ignored the need for water.",
+      "answer": 0,
+      "difficulty": "medium",
+      "explanation": "Write the exact word."
+    },
+    {
+      "id": "q111",
+      "type": "fillInTheBlank",
+      "question": "True or False: Group tables were placed near power sockets.",
+      "answer": 1,
+      "difficulty": "medium",
+      "explanation": "Write the exact word."
+    }
+  );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
 })();
