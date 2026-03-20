@@ -245,6 +245,7 @@ class ConcentrationGame extends GameBase {
         this.addScore(100 + (this.combo * 10));
         this.updateScoreDisplay();
         this.showFeedback('🎉 Match!', 'success');
+        this.showScoreBurst('MATCH');
         this.confetti.explode(null, null, 20);
 
         if (this.matchedPairs === this.pairsToMatch) {
@@ -255,6 +256,7 @@ class ConcentrationGame extends GameBase {
         card1.classList.remove('flipped');
         card2.classList.remove('flipped');
         this.resetCombo();
+        this.showFeedback('Remember those cards and try again.', 'error');
       }
 
       this.flippedCards = [];

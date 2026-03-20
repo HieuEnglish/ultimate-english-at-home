@@ -375,6 +375,7 @@ class AlphabetSoupGame extends GameBase {
                 document.getElementById('score-val').textContent = this.score;
                 this.confetti.explode(null, null, 10);
                 this.speak(this.currentWordObj.word);
+                this.celebrateMove({ burst: this.currentWordObj.word.toUpperCase() });
                 setTimeout(() => this.nextRound(), 1500);
             }
         } else {
@@ -389,6 +390,7 @@ class AlphabetSoupGame extends GameBase {
 
             // Should we speak "Try again"? Maybe just a sound.
             // this.speak("Try again");
+            this.coachMove();
         }
     }
 

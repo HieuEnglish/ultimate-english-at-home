@@ -303,6 +303,7 @@ class ShapeSorterGame extends GameBase {
             document.getElementById('target-hole').style.opacity = '1';
 
             this.speak("Good job!");
+            this.celebrateMove({ burst: this.currentShape.match });
             this.confetti.explode(null, null, 10);
 
             setTimeout(() => this.nextRound(), 1500);
@@ -310,6 +311,7 @@ class ShapeSorterGame extends GameBase {
             // Wrong
             opt.classList.add('wrong');
             this.speak("Not that one!");
+            this.coachMove();
         }
     }
 

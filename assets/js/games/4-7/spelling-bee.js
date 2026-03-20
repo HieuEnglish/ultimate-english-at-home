@@ -646,6 +646,7 @@ class SpellingBeeGame extends GameBase {
 
       slots.forEach(slot => slot.classList.add('correct'));
       this.showFeedback('🎉', 'Amazing!', `+${points} points`);
+      this.celebrateMove({ burst: this.currentWord.word.toUpperCase() });
 
       // Confetti for combos
       if (this.combo >= 3) {
@@ -665,6 +666,7 @@ class SpellingBeeGame extends GameBase {
 
       slots.forEach(slot => slot.classList.add('wrong'));
       this.showFeedback('😅', `It was "${this.currentWord.word}"`, 'Try the next one!');
+      this.coachMove(`That word was ${this.currentWord.word}. Watch the letters and try the next round.`, 1100);
 
       document.getElementById('mascot-speech').textContent = "Good try! 🐝";
 

@@ -385,6 +385,7 @@ class ColorMatchGame extends GameBase {
       document.getElementById('score-val').textContent = this.score;
       btn.classList.add('correct');
       document.getElementById('guide-char').textContent = '🤩';
+      this.celebrateMove({ burst: this.currentColor.name.toUpperCase() });
 
       // 3D Explosion
       this.threeHelper.createExplosion(this.currentColor.hex);
@@ -398,6 +399,7 @@ class ColorMatchGame extends GameBase {
       btn.classList.add('wrong');
       document.getElementById('guide-char').textContent = '🤔';
       this.speak("Try again");
+      this.coachMove();
     }
   }
 

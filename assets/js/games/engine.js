@@ -42,6 +42,128 @@ function getTheme(config = {}) {
     return AGE_THEMES[config.age] || AGE_THEMES.default;
 }
 
+const GAME_FLAVORS = {
+    "action-beats": {
+        start: "Tap a beat pad and make the DJ move.",
+        success: "The dance floor is lighting up.",
+        warning: "Try another beat and keep the party moving.",
+    },
+    "animal-dance": {
+        start: "Wake up the animals and start a mini dance parade.",
+        success: "That animal is dancing with you.",
+        warning: "Try a different animal to keep the party lively.",
+    },
+    "animal-sounds": {
+        start: "Listen closely and find the noisy animal friend.",
+        success: "You found the animal making that sound.",
+        warning: "Listen again and follow the sound.",
+    },
+    "baby-piano": {
+        start: "Tap the rainbow keys to build a tiny concert.",
+        success: "Lovely note. Keep the melody going.",
+        warning: "Try another key and explore a new sound.",
+    },
+    "body-parts": {
+        start: "Listen to the body-part clue and tap the right picture.",
+        success: "Nice job. You found the right body part.",
+        warning: "Good try. Listen again and look carefully.",
+    },
+    "color-match": {
+        start: "Match the color clue to the right bright button.",
+        success: "Color match made. The stage is glowing.",
+        warning: "Not that color. Try the bright clue again.",
+    },
+    "fruit-basket": {
+        start: "Pick the fruit the picnic host is asking for.",
+        success: "Yum. That fruit goes right in the basket.",
+        warning: "That one does not belong in the basket yet.",
+    },
+    "peekaboo-pets": {
+        start: "Find the hiding pet and listen for the clue.",
+        success: "Peekaboo. You found the right pet.",
+        warning: "That pet is cute, but not the hiding one.",
+    },
+    "shape-sorter": {
+        start: "Match the shape to its special home.",
+        success: "Perfect fit. The shape found its spot.",
+        warning: "That shape does not fit there. Try another one.",
+    },
+    "tap-the-sound": {
+        start: "Play the sound, then tap the matching picture.",
+        success: "Great listening. You matched the sound.",
+        warning: "That picture does not match the sound yet.",
+    },
+    "alphabet-soup": {
+        start: "Fish the right letters out of the soup bowl.",
+        success: "Nice scoop. That letter belongs in the word.",
+        warning: "That noodle letter does not fit the word yet.",
+    },
+    "balloon-pop": {
+        start: "Pop the right letters to finish each word.",
+        success: "Pop. That was the right letter.",
+        warning: "That balloon was the wrong letter. Watch the target.",
+    },
+    "concentration": {
+        start: "Flip carefully and remember where each match lives.",
+        success: "Perfect memory match.",
+        warning: "Those cards do not match. Try to remember them.",
+    },
+    "memory-match": {
+        start: "Match the picture cards and word cards together.",
+        success: "Brilliant match. Your memory is warming up.",
+        warning: "No match this time. Keep tracking the cards.",
+    },
+    "phonics-pop": {
+        start: "Listen to the word and pop the starting sound.",
+        success: "Pop. You caught the right sound.",
+        warning: "Try again and listen to the first sound.",
+    },
+    "picture-bingo": {
+        start: "Listen to the call and mark the matching picture.",
+        success: "Nice mark. Your bingo card is getting stronger.",
+        warning: "That square is not the called picture yet.",
+    },
+    "picture-pairs": {
+        start: "Flip over the cards and chase matching pictures.",
+        success: "You found a picture pair.",
+        warning: "Those cards do not match. Keep looking.",
+    },
+    "rhyme-rocket": {
+        start: "Find rhymes to fuel the rocket for blastoff.",
+        success: "That rhyme adds fuel to the rocket.",
+        warning: "That word does not rhyme. Try another fuel word.",
+    },
+    "rhyme-time": {
+        start: "Match pictures and words that rhyme together.",
+        success: "Nice rhyme. That pair sounds right.",
+        warning: "That choice does not rhyme. Listen for the ending sound.",
+    },
+    "sight-word-safari": {
+        start: "Spot the sight word hiding with the safari animals.",
+        success: "Safari success. You found the right sight word.",
+        warning: "That sign is not the target word yet.",
+    },
+    "spelling-bee": {
+        start: "Build the word one letter at a time like a spelling champion.",
+        success: "Sweet spelling. That word is complete.",
+        warning: "Good try. Watch the letters and try the next round.",
+    },
+    "story-stones": {
+        start: "Choose the best story stone to complete the sentence.",
+        success: "Nice storytelling. That word fits the sentence.",
+        warning: "That stone does not fit the sentence yet.",
+    },
+    "word-detective": {
+        start: "Solve the clue by finding the missing letter.",
+        success: "Case solved. You found the missing clue.",
+        warning: "Not quite. Look at the missing spot again.",
+    },
+};
+
+function getGameFlavor(config = {}) {
+    return GAME_FLAVORS[config.slug] || null;
+}
+
 // Confetti explosion for high scores 🎉
 class ConfettiExplosion {
     constructor(container) {
@@ -261,6 +383,7 @@ class GameBase {
         this.timeouts = new Set();
         this.timerWarningShown = false;
         this.theme = getTheme(config);
+        this.flavor = getGameFlavor(config);
 
         this.applyTheme();
     }
@@ -291,6 +414,41 @@ class GameBase {
             bubbles: true,
             detail: { label, message, kind },
         }));
+    }
+
+    getFlavorMessage(key, fallback) {
+        return this.flavor?.[key] || fallback;
+    }
+
+    announceStart(message = null) {
+        const startMessage = message || this.getFlavorMessage(
+            "start",
+            this.config.hasTimer ? "Stage live - race the clock" : "Stage live - have fun"
+        );
+
+        this.showEngineFeedback(startMessage, "info", 1200);
+        this.emitStatus(
+            "Game live",
+            message || `${this.config.title || "The game"} has started. ${startMessage}`,
+            "active"
+        );
+    }
+
+    celebrateMove({ message = null, burst = null, tone = "success", duration = 900 } = {}) {
+        const successMessage = message || this.getFlavorMessage("success", "Nice move.");
+        this.showEngineFeedback(successMessage, tone, duration);
+        if (burst) {
+            this.showScoreBurst(burst, null, null, tone);
+        }
+        if (tone === "success") {
+            this.pulseStage("success");
+        }
+    }
+
+    coachMove(message = null, duration = 900) {
+        const warningMessage = message || this.getFlavorMessage("warning", "Try again.");
+        this.showEngineFeedback(warningMessage, "warning", duration);
+        this.pulseStage("warning");
     }
 
     ensureEffectsLayer() {
@@ -330,7 +488,7 @@ class GameBase {
         return { ambientLayer, feedbackStack, burstLayer };
     }
 
-    showFeedback(message, tone = "info", duration = 1600) {
+    showEngineFeedback(message, tone = "info", duration = 1600) {
         const layers = this.ensureEffectsLayer();
         if (!layers || !message) return;
 
@@ -345,6 +503,10 @@ class GameBase {
             chip.classList.remove("is-visible");
             this.schedule(() => chip.remove(), 220);
         }, duration);
+    }
+
+    showFeedback(message, tone = "info", duration = 1600) {
+        this.showEngineFeedback(message, tone, duration);
     }
 
     showScoreBurst(text, x = null, y = null, tone = "success") {
@@ -478,12 +640,10 @@ class GameBase {
             this.timer.start();
         }
 
-        this.showFeedback(this.config.hasTimer ? "Stage live - race the clock" : "Stage live - have fun", "info", 1200);
-        this.emitStatus(
-            "Game live",
-            `${this.config.title || "The game"} has started. Build momentum and chase your best run.`,
-            "active"
-        );
+        this.announceStart(this.getFlavorMessage(
+            "start",
+            `${this.config.title || "The game"} has started. Build momentum and chase your best run.`
+        ));
     }
 
     pause() {
@@ -552,7 +712,7 @@ class GameBase {
         this.updateComboDisplay();
 
         if (this.combo > 0 && this.combo % 3 === 0) {
-            this.showFeedback(`${this.combo}x combo streak`, "success", 1200);
+            this.showEngineFeedback(`${this.combo}x combo streak`, "success", 1200);
             this.pulseStage("success");
         }
     }
@@ -575,7 +735,7 @@ class GameBase {
 
         if (remaining <= 10 && !this.timerWarningShown) {
             this.timerWarningShown = true;
-            this.showFeedback("Final 10 seconds", "warning", 1000);
+            this.showEngineFeedback("Final 10 seconds", "warning", 1000);
             this.emitStatus(
                 "Final countdown",
                 `Only ${remaining} seconds left. Finish strong.`,
@@ -614,9 +774,9 @@ class GameBase {
         // Trigger confetti for high scores! 🎉
         if (safeHighScore && this.score > 0) {
             this.confetti.explode();
-            this.showFeedback("Personal best unlocked", "success", 1500);
+            this.showEngineFeedback("Personal best unlocked", "success", 1500);
         } else {
-            this.showFeedback("Round complete", "info", 1000);
+            this.showEngineFeedback("Round complete", "info", 1000);
         }
 
         const resultsHtml = `

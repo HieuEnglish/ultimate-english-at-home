@@ -303,6 +303,7 @@ class PicturePairsGame extends GameBase {
                 document.getElementById('pairs-count').textContent = this.matchedPairs;
                 this.speak(c1.data.word);
                 this.confetti.explode(null, null, 10);
+                this.celebrateMove({ burst: c1.data.word.toUpperCase() });
 
                 this.flippedCards = [];
                 this.isLocked = false;
@@ -313,6 +314,7 @@ class PicturePairsGame extends GameBase {
             }, 600);
         } else {
             // No match
+            this.coachMove('Those pictures do not match yet. Flip again and remember them.');
             setTimeout(() => {
                 c1.element.classList.remove('flipped');
                 c2.element.classList.remove('flipped');

@@ -267,6 +267,7 @@ class RhymeRocketGame extends GameBase {
             // Correct
             btn.classList.add('correct');
             this.playSound('success');
+            this.celebrateMove({ burst: word.toUpperCase() });
 
             // Add Fuel
             this.fuelLevel++;
@@ -280,6 +281,7 @@ class RhymeRocketGame extends GameBase {
             // Wrong
             btn.classList.add('wrong');
             this.speak("Try again");
+            this.coachMove();
         }
     }
 

@@ -203,12 +203,16 @@ class PictureBingoGame extends GameBase {
         if (item.word === this.currentTarget.word) {
             // Correct
             this.markCell(index, cell);
+            this.celebrateMove({ burst: item.emoji || item.word.toUpperCase() });
             this.checkWin();
         } else {
             // Wrong
             cell.style.backgroundColor = "#ffcccc";
-            setTimeout(() => cell.style.backgroundColor = "#ecf0f1", 400);
+            setTimeout(() => {
+                cell.style.backgroundColor = "#ecf0f1";
+            }, 400);
             this.speak("Try again!");
+            this.coachMove();
         }
     }
 

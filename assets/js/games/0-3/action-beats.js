@@ -235,6 +235,8 @@ class ActionBeatsGame extends GameBase {
 
     // Speak
     this.speak(verb);
+    this.incrementCombo();
+    this.celebrateMove({ burst: verb.toUpperCase(), duration: 700 });
 
     // Timeout to "stop" the music visually after a bit (or keep it going!)
     // For 0-3, instant reaction is best. Let it loop for 3s then stop.

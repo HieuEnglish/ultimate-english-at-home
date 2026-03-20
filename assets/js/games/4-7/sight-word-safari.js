@@ -317,6 +317,7 @@ class SightWordSafariGame extends GameBase {
             document.getElementById('score-val').textContent = this.score;
             document.getElementById('target-word').textContent = this.currentWord;
             document.getElementById('target-word').classList.add('revealed');
+            this.celebrateMove({ burst: this.currentWord.toUpperCase() });
 
             this.threeHelper.createExplosion('#55efc4');
             this.confetti.explode(null, null, 10);
@@ -327,6 +328,7 @@ class SightWordSafariGame extends GameBase {
             // Wrong
             card.classList.add('wrong');
             this.speak("Try again.");
+            this.coachMove();
         }
     }
 

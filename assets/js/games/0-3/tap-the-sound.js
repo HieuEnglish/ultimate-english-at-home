@@ -453,6 +453,7 @@ class TapTheSoundGame extends GameBase {
       this.speak("Great job! " + this.targetWord.sentence);
       this.incrementCombo();
       this.addScore(50);
+      this.celebrateMove({ burst: this.targetWord.emoji || this.targetWord.word.toUpperCase() });
 
       const card = document.getElementById('main-card');
       card.classList.add('correct-anim');
@@ -468,6 +469,7 @@ class TapTheSoundGame extends GameBase {
     } else {
       // Wrong
       this.speak(`That is a ${this.currentWord.word}. Try again!`);
+      this.coachMove(`That picture is ${this.currentWord.word}. Play the sound and try again.`);
       const card = document.getElementById('main-card');
       card.classList.remove('wiggle-anim');
       void card.offsetWidth;

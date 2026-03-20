@@ -232,6 +232,7 @@ class PhonicsPopGame extends GameBase {
             this.correctAnswers++;
             this.updateScoreDisplay();
             this.showFeedback(`🎈 Pop! "${this.currentWord}" starts with "${this.correctSound}"!`, 'success');
+            this.celebrateMove({ burst: this.correctSound.toUpperCase() });
 
             setTimeout(() => {
                 if (this.isRunning) this.nextRound();
@@ -240,6 +241,7 @@ class PhonicsPopGame extends GameBase {
             element.classList.add('is-wrong');
             this.resetCombo();
             this.showFeedback(`Try again! Listen to the word...`, 'error');
+            this.coachMove();
             this.speakWord();
 
             setTimeout(() => element.classList.remove('is-wrong'), 500);

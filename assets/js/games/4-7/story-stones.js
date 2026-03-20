@@ -331,12 +331,14 @@ class StoryStonesGame extends GameBase {
 
             this.speak(`Correct! ${this.currentSentence.text.replace("__", word)}`);
             this.confetti.explode(null, null, 15);
+            this.celebrateMove({ burst: word.toUpperCase() });
 
             setTimeout(() => this.nextRound(), 2500);
         } else {
             // Wrong
             btn.classList.add('wrong');
             this.speak("Try again.");
+            this.coachMove();
         }
     }
 

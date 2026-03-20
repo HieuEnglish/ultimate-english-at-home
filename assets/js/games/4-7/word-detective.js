@@ -316,6 +316,7 @@ class WordDetectiveGame extends GameBase {
             document.getElementById('score-val').textContent = this.score;
             document.getElementById('missing-slot').textContent = char;
             document.getElementById('missing-slot').style.color = '#00b894';
+            this.celebrateMove({ burst: char.toUpperCase() });
 
             this.speak(`Correct! ${this.currentCase.word}`);
             this.confetti.explode(null, null, 10);
@@ -325,6 +326,7 @@ class WordDetectiveGame extends GameBase {
             // Wrong
             opt.classList.add('wrong');
             this.speak("Try again.");
+            this.coachMove();
         }
     }
 

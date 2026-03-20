@@ -277,6 +277,7 @@ class RhymeTimeGame extends GameBase {
             btn.classList.add('correct');
             this.addScore(100);
             document.getElementById('score-val').textContent = this.score;
+            this.celebrateMove({ burst: word.toUpperCase() });
 
             this.speak(`Yes! ${word} rhymes with ${this.currentRhyme.target}!`);
             this.confetti.explode(null, null, 10);
@@ -286,6 +287,7 @@ class RhymeTimeGame extends GameBase {
             // Wrong
             btn.classList.add('wrong');
             this.speak("Doesn't rhyme!");
+            this.coachMove();
         }
     }
 

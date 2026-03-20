@@ -166,6 +166,7 @@ class AnimalDanceGame extends GameBase {
             card.onclick = () => {
                 this.toggleDance(card);
                 this.speak(card.dataset.id);
+                this.celebrateMove({ burst: card.dataset.id.toUpperCase(), duration: 700 });
             };
         });
 
@@ -176,6 +177,7 @@ class AnimalDanceGame extends GameBase {
             });
             this.speak("Party Time!");
             this.confetti.explode();
+            this.celebrateMove({ message: "Party time. Every animal is dancing.", burst: "PARTY", duration: 1100 });
         };
 
         this.container.querySelector('#stop-btn').onclick = () => {
@@ -184,6 +186,7 @@ class AnimalDanceGame extends GameBase {
                 card.classList.remove(card.dataset.dance);
             });
             this.speak("Stop!");
+            this.coachMove("Tap another animal whenever you want the dance to start again.", 1000);
         };
     }
 

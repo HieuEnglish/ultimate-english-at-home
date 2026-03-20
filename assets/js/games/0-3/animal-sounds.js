@@ -314,6 +314,7 @@ class AnimalSoundsGame extends GameBase {
       document.getElementById('score-val').textContent = this.score;
       btn.classList.add('correct');
       document.getElementById('instruction-text').textContent = `Correct! It's the ${animalName}!`;
+      this.celebrateMove({ burst: this.currentAnimal.emoji });
 
       this.confetti.explode(null, null, 30);
       setTimeout(() => this.nextRound(), 1500);
@@ -321,6 +322,7 @@ class AnimalSoundsGame extends GameBase {
       // Wrong
       btn.classList.add('wrong');
       this.speak("Try again");
+      this.coachMove();
     }
   }
 

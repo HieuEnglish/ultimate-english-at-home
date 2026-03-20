@@ -363,6 +363,7 @@ class BalloonPopGame extends GameBase {
             this.currentLetterIndex++;
             this.updateScore();
             this.renderWord();
+            this.celebrateMove({ burst: letter });
 
             // Word complete?
             if (this.currentLetterIndex >= this.currentWord.word.length) {
@@ -377,6 +378,7 @@ class BalloonPopGame extends GameBase {
         } else {
             this.resetCombo();
             Animations.shake(document.getElementById('word-slots'));
+            this.coachMove();
         }
     }
 

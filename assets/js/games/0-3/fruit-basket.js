@@ -261,12 +261,14 @@ class FruitBasketGame extends GameBase {
             this.threeHelper.createExplosion(this.currentFruit.color);
             this.confetti.explode(null, null, 10);
             this.speak("Yummy!");
+            this.celebrateMove({ burst: this.currentFruit.emoji || this.currentFruit.name.toUpperCase() });
 
             setTimeout(() => this.nextRound(), 1500);
         } else {
             // Wrong
             item.classList.add('wrong');
             this.speak("Try again!");
+            this.coachMove();
         }
     }
 

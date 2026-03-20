@@ -157,6 +157,12 @@ class BabyPianoGame extends GameBase {
             this.playNote(noteData.freq);
             this.animateKey(keyEl);
             this.spawnNote(keyEl, noteData.color);
+            this.incrementCombo();
+            if (this.combo % 4 === 0) {
+                this.celebrateMove({ message: `Mini concert. ${noteData.label} is ringing out.`, burst: noteData.note, duration: 700 });
+            } else {
+                this.showScoreBurst(noteData.note);
+            }
         };
 
         keys.forEach((key, i) => {

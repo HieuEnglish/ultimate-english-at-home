@@ -354,6 +354,7 @@ class BodyPartsGame extends GameBase {
       document.getElementById('score-val').textContent = this.score;
       btn.classList.add('correct');
       document.getElementById('main-char').textContent = '🤗';
+      this.celebrateMove({ burst: this.currentPart.emoji || this.currentPart.name.toUpperCase() });
 
       this.confetti.explode(null, null, 30);
       setTimeout(() => this.nextRound(), 1200);
@@ -361,6 +362,7 @@ class BodyPartsGame extends GameBase {
       // Wrong
       btn.classList.add('wrong');
       this.speak("Try again");
+      this.coachMove();
     }
   }
 

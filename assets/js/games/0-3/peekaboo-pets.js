@@ -274,6 +274,7 @@ class PeekabooPetsGame extends GameBase {
             document.getElementById('score-val').textContent = this.score;
             this.speak(`Found the ${pet.name}!`);
             this.confetti.explode(null, null, 15);
+            this.celebrateMove({ burst: pet.emoji || pet.name.toUpperCase() });
 
             setTimeout(() => {
                 this.nextRound();
@@ -281,6 +282,7 @@ class PeekabooPetsGame extends GameBase {
         } else {
             // Wrong
             this.speak(`That is a ${pet.name}. Try again!`);
+            this.coachMove(`That is the ${pet.name}. Keep looking for the hiding pet.`);
             setTimeout(() => {
                 card.classList.remove('revealed');
             }, 1500);

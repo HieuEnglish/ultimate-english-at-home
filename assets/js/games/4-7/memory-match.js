@@ -314,6 +314,7 @@ class MemoryMatchGame extends GameBase {
             this.incrementCombo();
             this.addScore(100 + this.combo * 20);
             this.updateHUD();
+            this.celebrateMove({ burst: 'PAIR' });
 
             card1.classList.add('matched');
             card2.classList.add('matched');
@@ -336,6 +337,7 @@ class MemoryMatchGame extends GameBase {
         } else {
             // No match
             this.resetCombo();
+            this.coachMove('Those cards do not match yet. Keep tracking them.');
 
             setTimeout(() => {
                 card1.classList.remove('flipped');
