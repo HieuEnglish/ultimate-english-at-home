@@ -271,9 +271,11 @@ class EssayBuilderGame extends GameBase {
             this.addScore(200);
             this.correctAnswers++;
             this.updateScoreDisplay();
+            this.celebrateMove({ burst: 'FLOW', duration: 700 });
             this.showFeedback('🎉 Perfect essay order!', 'success');
         } else {
             this.resetCombo();
+            this.coachMove();
             this.showFeedback('Not quite. Study the correct order!', 'error');
         }
 

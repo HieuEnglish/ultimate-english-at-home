@@ -148,6 +148,7 @@ class NewsEditor extends GameBase {
         if (input === correct) {
             this.score += 250;
             this.container.querySelector('#score').textContent = this.score;
+            this.celebrateMove({ burst: 'APPROVED', duration: 800 });
 
             stamp.textContent = 'APPROVED';
             stamp.style.color = '#27ae60';
@@ -169,6 +170,7 @@ class NewsEditor extends GameBase {
             stamp.style.borderColor = '#c0392b';
             stamp.style.opacity = '1';
             stamp.style.transform = 'translate(-50%, -50%) rotate(15deg) scale(1.1)';
+            this.coachMove();
 
             this.logWire(`ERROR: Failed to correct headline. Try again.`);
 

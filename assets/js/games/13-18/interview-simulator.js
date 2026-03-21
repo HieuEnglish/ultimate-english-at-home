@@ -146,9 +146,11 @@ class InterviewSimulator extends GameBase {
         if (isPerfect) {
             btn.style.borderColor = '#27ae60';
             btn.style.background = '#fafffa';
+            this.celebrateMove({ burst: 'HIRED', duration: 700 });
         } else {
             btn.style.borderColor = '#e74c3c';
             btn.style.background = '#fffafa';
+            this.coachMove("Sharper professional phrasing would land better here.", 900);
         }
 
         this.score += opt.points;

@@ -172,6 +172,7 @@ class TransitionTitan extends GameBase {
             portal.style.borderStyle = "solid";
             this.container.querySelector('#score').textContent = this.score;
             this.speak("Connection established. Flow optimized.");
+            this.celebrateMove({ burst: opt.text.toUpperCase(), duration: 700 });
 
             setTimeout(() => {
                 this.currentLvl++;
@@ -181,6 +182,7 @@ class TransitionTitan extends GameBase {
             portal.style.color = "#ff4444";
             this.speak("Error. Logical disconnect detected.");
             Animations.shake(portal);
+            this.coachMove();
         }
     }
 

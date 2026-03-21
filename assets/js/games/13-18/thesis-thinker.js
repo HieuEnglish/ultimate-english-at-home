@@ -160,9 +160,11 @@ class ThesisThinker extends GameBase {
                 draft.classList.add('active');
                 if (claim === currentQ.claim) {
                     this.addScore(100);
+                    this.celebrateMove({ burst: 'CLAIM', duration: 700 });
                     this.showRationaleSelection();
                 } else {
                     this.speak("That claim lacks precision or debated weight. Try again.");
+                    this.coachMove();
                 }
             };
             grid.appendChild(btn);
@@ -196,12 +198,14 @@ class ThesisThinker extends GameBase {
                     this.addScore(200);
                     this.container.querySelector('#score').textContent = this.score;
                     this.speak("Excellent thesis construction!");
+                    this.celebrateMove({ burst: 'THESIS', duration: 800 });
                     setTimeout(() => {
                         this.currentQ++;
                         this.loadRound();
                     }, 2000);
                 } else {
                     this.speak("This rationale doesn't fully support your claim. Try again.");
+                    this.coachMove();
                 }
             };
             grid.appendChild(btn);

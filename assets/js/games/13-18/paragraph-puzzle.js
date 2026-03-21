@@ -163,9 +163,11 @@ class ParagraphPuzzle extends GameBase {
             this.score += 500;
             this.container.querySelector('#score').textContent = this.score;
             this.speak("System integrity verified. Paragraph structure complete.");
+            this.celebrateMove({ burst: 'VERIFIED', duration: 800 });
             setTimeout(() => this.end(), 2000);
         } else {
             this.speak("Logic error detected in sequence. Adjust nodes.");
+            this.coachMove();
         }
     }
 

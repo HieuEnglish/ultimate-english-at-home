@@ -411,6 +411,7 @@ class VocabQuestGame extends GameBase {
       btn.classList.add('correct');
       this.incrementCombo();
       this.addScore(50);
+      this.celebrateMove({ burst: this.currentQuestion.word.toUpperCase(), duration: 700 });
 
       // Damage monster
       this.monsterHP--;
@@ -443,6 +444,7 @@ class VocabQuestGame extends GameBase {
     } else {
       btn.classList.add('wrong');
       this.resetCombo();
+      this.coachMove();
 
       // Player takes damage
       this.playerHP--;

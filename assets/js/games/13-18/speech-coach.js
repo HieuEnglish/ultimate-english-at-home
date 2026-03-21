@@ -191,11 +191,14 @@ class SpeechCoach extends GameBase {
             this.score += Math.round(accuracy * 1000);
             this.container.querySelector('#score').textContent = this.score;
             this.showFeedback("ELOQUENT!");
+            this.celebrateMove({ burst: 'ELOQUENT', duration: 800 });
 
             setTimeout(() => {
                 this.currentQ++;
                 this.loadScript();
             }, 2000);
+        } else {
+            this.coachMove();
         }
     }
 

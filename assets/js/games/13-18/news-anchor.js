@@ -274,6 +274,7 @@ class NewsAnchorGame extends GameBase {
   checkAnswer(btn, word, data) {
     if (word === data.correct) {
       this.score += 100;
+      this.celebrateMove({ burst: word.toUpperCase(), duration: 700 });
       document.getElementById('prompter-text').innerHTML = data.headline.replace("____", `<span style='color:#2ecc71'>${word.toUpperCase()}</span>`);
 
       const optionsEl = document.getElementById('news-options');
@@ -287,6 +288,7 @@ class NewsAnchorGame extends GameBase {
       btn.style.color = "white";
       Animations.shake(btn);
       this.speak("Cut! Try again!");
+      this.coachMove();
     }
   }
 

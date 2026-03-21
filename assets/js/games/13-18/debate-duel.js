@@ -191,6 +191,7 @@ class DebateDuel extends GameBase {
             feedback.style.color = '#27ae60';
             this.showScoreBurst(`+${earned}`);
             this.showFeedback('Strong rebuttal', 'success', 900);
+            this.celebrateMove({ burst: 'REBUTTAL', duration: 800 });
         } else {
             this.persuasion = Math.max(0, this.persuasion - 15);
             btn.style.background = 'rgba(192, 57, 43, 0.3)';
@@ -199,6 +200,7 @@ class DebateDuel extends GameBase {
             feedback.style.color = '#e67e22';
             this.showFeedback('Pressure rising', 'warning', 900);
             this.pulseStage('warning');
+            this.coachMove("That counterpoint did not land. Tighten the logic.", 900);
         }
 
         this.container.querySelector('#persuasion-bar').style.width = `${this.persuasion}%`;

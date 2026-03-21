@@ -371,11 +371,13 @@ class LogicTowerGame extends GameBase {
             document.querySelector('.roof-cap').classList.add('complete');
             this.showFeedback("Tower Stable! 🎉");
             this.confetti.explode(null, null, 30);
+            this.celebrateMove({ burst: 'STABLE', duration: 800 });
 
             setTimeout(() => this.nextTower(), 2000);
         } else {
             this.showFeedback("Unstable! Structure incorrect.");
             this.resetCombo();
+            this.coachMove();
             setTimeout(() => {
                 blocks.forEach(b => b.classList.remove('wrong', 'correct'));
             }, 1500);

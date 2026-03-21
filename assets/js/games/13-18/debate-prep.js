@@ -369,9 +369,11 @@ class DebatePrepGame extends GameBase {
       this.addScore(250);
       this.correctAnswers++;
       this.updateScoreDisplay();
+      this.celebrateMove({ burst: 'CASE READY', duration: 800 });
       this.showFeedback('🎉 Perfect debate prep!', 'success');
     } else {
       this.resetCombo();
+      this.coachMove();
       this.showFeedback(`${correct}/${totalToSort} correct. Study the positions!`, 'error');
     }
 

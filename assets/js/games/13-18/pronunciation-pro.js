@@ -332,18 +332,22 @@ class PronunciationProGame extends GameBase {
             this.addScore(100 + (this.currentChallenge.difficulty * 20));
             this.correctAnswers++;
             this.updateScoreDisplay();
+            this.celebrateMove({ burst: 'CLEAR', duration: 700 });
             this.showFeedback('🎉 Excellent pronunciation!', 'success');
             setTimeout(() => this.nextRound(), 1500);
         } else if (accuracy >= 0.5) {
             // Close
             this.showFeedback('Close! Listen again and try once more.', 'warning');
+            this.coachMove("Closer. Tighten the sounds and try again.", 900);
             this.speakChallenge();
         } else if (this.attempts < this.maxAttempts) {
             // Not quite
             this.showFeedback(`Try again! (Attempt ${this.attempts}/${this.maxAttempts})`, 'error');
+            this.coachMove();
         } else {
             // Max attempts
             this.resetCombo();
+            this.coachMove("Reset the mouth shape and attack the next word cleanly.", 900);
             this.showFeedback('Good effort! Moving to next word.', 'warning');
             setTimeout(() => this.nextRound(), 1500);
         }

@@ -54,6 +54,55 @@ const FALLBACK_QUESTIONS = [
     { level: 8, type: 'grammar', question: 'On no account ___ you enter.', answer: 'should', distractors: ['will', 'can'] },
 ];
 
+const IELTS_LEVEL_BRIEFINGS = {
+    1: { focus: "Starter control", note: "Warm up with basic lexis, spelling, and sentence control.", finish: "You locked in the core foundations for smoother higher-band runs." },
+    2: { focus: "Core fluency", note: "Push everyday accuracy while the speed starts to climb.", finish: "Your control held through the first real pace increase." },
+    3: { focus: "Band builder", note: "Mix sharper vocabulary with cleaner tense choices.", finish: "You kept the run stable as the language became less obvious." },
+    4: { focus: "IELTS ridge", note: "Shift into exam-style choices with tighter precision under pressure.", finish: "That section felt much closer to an IELTS-style response pace." },
+    5: { focus: "Proficiency push", note: "Advanced vocabulary and conditional grammar start showing up fast.", finish: "You handled a noticeably more academic and precise stage." },
+    6: { focus: "Fluency under load", note: "Maintain accuracy while the track gets denser and faster.", finish: "You stayed composed while difficulty and decision speed both rose." },
+    7: { focus: "Expert language", note: "Expect nuanced wording, sharper grammar traps, and less recovery time.", finish: "The advanced section held up because your decisions stayed disciplined." },
+    8: { focus: "Champion summit", note: "Final-stage mastery. Precision, stamina, and calm execution matter most.", finish: "You completed the highest-pressure IELTS campaign stage in the game." }
+};
+
+const QUESTION_TYPE_META = {
+    vocab: {
+        badge: "Lexis Gate",
+        helper: "Read for exact meaning, not just a familiar-looking word.",
+        success: "Lexis secured.",
+        warning: "Meaning drifted there. Read the word more precisely.",
+        colors: ["#6a5cff", "#8f7bff"],
+    },
+    grammar: {
+        badge: "Grammar Gate",
+        helper: "Watch agreement, tense, and sentence logic before you tap.",
+        success: "Structure held.",
+        warning: "Grammar slipped. Rebuild the sentence logic.",
+        colors: ["#00b894", "#55efc4"],
+    },
+    spelling: {
+        badge: "Spelling Gate",
+        helper: "Scan every letter pattern carefully before committing.",
+        success: "Spelling locked in.",
+        warning: "That form breaks on detail. Check the letter sequence.",
+        colors: ["#ff9f43", "#ffd166"],
+    },
+    listening: {
+        badge: "Listening Gate",
+        helper: "Listen for the exact cue and avoid the tempting distractor.",
+        success: "Listening cue nailed.",
+        warning: "The cue was missed. Listen for the exact signal.",
+        colors: ["#0984e3", "#74b9ff"],
+    },
+    default: {
+        badge: "Knowledge Gate",
+        helper: "Stay sharp and answer with control.",
+        success: "Good decision.",
+        warning: "Reset and take the next gate cleanly.",
+        colors: ["#667eea", "#764ba2"],
+    }
+};
+
 export class IeltsRunnerGame {
     constructor(container, config) {
         this.container = container;
@@ -69,6 +118,8 @@ export class IeltsRunnerGame {
         this.isPaused = false;
         this.gameTime = 0;
         this.questionsAnswered = 0;
+        this.questionsCorrect = 0;
+        this.currentQuestionMeta = QUESTION_TYPE_META.default;
 
         // Power-ups
         this.hasShield = false;
@@ -187,6 +238,7 @@ export class IeltsRunnerGame {
         // Canvas refs
         this.canvas = null;
         this.ctx = null;
+        this.bannerTimeout = null;
     }
 
     async init() {
@@ -204,6 +256,7 @@ export class IeltsRunnerGame {
 
     createDOM() {
         const levelConf = this.levelConfig[this.level];
+        const levelBrief = IELTS_LEVEL_BRIEFINGS[this.level] || IELTS_LEVEL_BRIEFINGS[1];
 
         // Generate Campaign Map HTML
         let mapHtml = '<div class="campaign-map">';
@@ -252,6 +305,21 @@ export class IeltsRunnerGame {
                         </div>
                     </div>
                     
+                    <div class="runner-banner" id="runner-banner"></div>
+                    
+                    <div class="status-rail">
+                        <div class="status-card">
+                            <span class="status-label">Focus</span>
+                            <strong class="status-value" id="focus-title">${levelBrief.focus}</strong>
+                            <span class="status-note" id="focus-note">${levelBrief.note}</span>
+                        </div>
+                        <div class="status-card status-card--streak" id="streak-card">
+                            <span class="status-label">Streak</span>
+                            <strong class="status-value" id="streak-count">1x</strong>
+                            <span class="status-note" id="streak-label">Build momentum</span>
+                        </div>
+                    </div>
+                    
                     <!-- Start Screen -->
                     <div class="start-screen" id="start-screen">
                         <div class="start-content">
@@ -268,6 +336,8 @@ export class IeltsRunnerGame {
                                 <div class="level-info">
                                     <h2>${levelConf.title}</h2>
                                     <p>🎯 ${levelConf.length}m to complete</p>
+                                    <div class="level-focus" id="start-focus-title">${levelBrief.focus}</div>
+                                    <div class="level-focus-note" id="start-focus-note">${levelBrief.note}</div>
                                 </div>
                             </div>
                             
@@ -294,6 +364,7 @@ export class IeltsRunnerGame {
                                 </div>
                             </div>
                             <h3 class="question-text" id="q-text">Loading question...</h3>
+                            <p class="question-helper" id="q-helper">Stay calm and choose the strongest answer.</p>
                             <div class="question-options" id="q-options"></div>
                         </div>
                     </div>
@@ -306,8 +377,10 @@ export class IeltsRunnerGame {
                             <div class="complete-stats">
                                 <div class="stat">Score: <span id="final-score">0</span></div>
                                 <div class="stat">Questions: <span id="final-questions">0</span></div>
+                                <div class="stat">Accuracy: <span id="final-accuracy">0%</span></div>
                             </div>
                             <div class="certificate-award" id="cert-award"></div>
+                            <div class="complete-note" id="final-note"></div>
                             <button class="play-btn" id="next-level-btn">NEXT LEVEL →</button>
                         </div>
                     </div>
@@ -462,6 +535,81 @@ export class IeltsRunnerGame {
                 margin-top: 4px;
                 font-weight: 600;
             }
+            .runner-banner {
+                position: absolute;
+                top: 106px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 240px;
+                max-width: min(520px, calc(100% - 40px));
+                padding: 10px 18px;
+                border-radius: 999px;
+                background: rgba(10, 14, 32, 0.78);
+                border: 1px solid rgba(255,255,255,0.14);
+                color: white;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.01em;
+                text-align: center;
+                opacity: 0;
+                transition: opacity 0.25s ease, transform 0.25s ease;
+                pointer-events: none;
+                z-index: 20;
+                backdrop-filter: blur(14px);
+                box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+            }
+            .runner-banner.active {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            .runner-banner.success { background: rgba(31, 89, 52, 0.86); }
+            .runner-banner.warning { background: rgba(115, 57, 24, 0.88); }
+            .runner-banner.info { background: rgba(28, 56, 122, 0.86); }
+            .status-rail {
+                position: absolute;
+                top: 142px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: grid;
+                grid-template-columns: minmax(220px, 1fr) minmax(140px, 180px);
+                gap: 12px;
+                width: min(680px, calc(100% - 40px));
+                pointer-events: none;
+            }
+            .status-card {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                padding: 12px 16px;
+                border-radius: 18px;
+                background: rgba(255,255,255,0.22);
+                border: 1px solid rgba(255,255,255,0.2);
+                box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+                backdrop-filter: blur(14px);
+                color: #182033;
+            }
+            .status-card--streak.active {
+                background: rgba(255, 232, 163, 0.92);
+                border-color: rgba(255, 177, 66, 0.45);
+                box-shadow: 0 14px 36px rgba(255, 177, 66, 0.22);
+            }
+            .status-label {
+                font-size: 11px;
+                font-weight: 800;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: rgba(24, 32, 51, 0.62);
+            }
+            .status-value {
+                font-size: 16px;
+                font-weight: 800;
+                line-height: 1.15;
+            }
+            .status-note {
+                font-size: 12px;
+                line-height: 1.35;
+                color: rgba(24, 32, 51, 0.72);
+            }
             
             /* Start Screen */
             .start-screen {
@@ -514,6 +662,26 @@ export class IeltsRunnerGame {
             }
             .level-info h2 { margin: 0; font-size: 20px; color: #333; }
             .level-info p { margin: 5px 0 0; color: #888; font-size: 14px; }
+            .level-focus {
+                margin-top: 10px;
+                display: inline-flex;
+                align-items: center;
+                padding: 6px 12px;
+                border-radius: 999px;
+                background: rgba(102,126,234,0.12);
+                color: #4f46e5;
+                font-size: 12px;
+                font-weight: 800;
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+            }
+            .level-focus-note {
+                margin-top: 8px;
+                max-width: 34ch;
+                color: #667085;
+                font-size: 13px;
+                line-height: 1.45;
+            }
             
             .play-btn {
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -613,6 +781,12 @@ export class IeltsRunnerGame {
                 margin: 0 0 25px;
                 line-height: 1.4;
             }
+            .question-helper {
+                margin: -12px 0 20px;
+                font-size: 14px;
+                line-height: 1.5;
+                color: #6b7280;
+            }
             .question-options {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -703,6 +877,13 @@ export class IeltsRunnerGame {
                 color: #ccc;
             }
             .stat span { color: white; font-weight: 700; }
+            .complete-note {
+                max-width: 42ch;
+                margin: 0 auto 24px;
+                color: rgba(255,255,255,0.78);
+                font-size: 15px;
+                line-height: 1.55;
+            }
             .certificate-award {
                 background: linear-gradient(135deg, #FFD700, #FFA500);
                 color: #333;
@@ -745,6 +926,23 @@ export class IeltsRunnerGame {
             }
             .ctrl-jump {
                 background: linear-gradient(135deg, #667eea, #764ba2);
+            }
+            
+            @media (max-width: 760px) {
+                .status-rail {
+                    top: 138px;
+                    grid-template-columns: 1fr;
+                }
+                .status-card--streak {
+                    min-height: 0;
+                }
+                .runner-banner {
+                    top: 100px;
+                    font-size: 12px;
+                }
+                .question-options {
+                    grid-template-columns: 1fr;
+                }
             }
             
             /* Floating Text */
@@ -920,6 +1118,7 @@ export class IeltsRunnerGame {
         this.planks = 3;
         this.score = 0;
         this.questionsAnswered = 0;
+        this.questionsCorrect = 0;
         this.speed = 5;
         this.gameTime = 0;
 
@@ -952,8 +1151,10 @@ export class IeltsRunnerGame {
         this.comboTimer = 0;
         this.shakeAmount = 0;
         this.flashAlpha = 0;
+        this.currentQuestionMeta = QUESTION_TYPE_META.default;
 
         this.updateHUD();
+        this.showBanner(`Level ${this.level}: ${this.getLevelBriefing().focus}. ${this.getLevelBriefing().note}`, 'info', 2200);
         this.spawnInitialObstacles();
         this.lastTime = performance.now();
         this.gameLoop();
@@ -1131,6 +1332,7 @@ export class IeltsRunnerGame {
         if (this.distance > this.milestoneNext) {
             this.showFloatText(`🏁 ${this.milestoneNext}m! +${this.milestoneNext} ⭐`, 'success');
             this.score += this.milestoneNext;
+            this.showBanner(`Milestone reached: ${this.milestoneNext}m. Keep the exam rhythm going.`, 'success', 1600);
             this.milestoneNext += 100;
             this.playSound('powerup');
         }
@@ -2395,12 +2597,42 @@ export class IeltsRunnerGame {
         return `rgb(${r},${g},${b})`;
     }
 
+    getLevelBriefing(level = this.level) {
+        return IELTS_LEVEL_BRIEFINGS[level] || IELTS_LEVEL_BRIEFINGS[1];
+    }
+
+    getQuestionMeta(type) {
+        return QUESTION_TYPE_META[type] || QUESTION_TYPE_META.default;
+    }
+
+    getComboLabel() {
+        if (this.combo >= 8) return 'Band-push streak';
+        if (this.combo >= 5) return 'Locked in';
+        if (this.combo >= 3) return 'Strong rhythm';
+        if (this.combo >= 2) return 'Building pace';
+        return 'Build momentum';
+    }
+
+    showBanner(message, tone = 'info', duration = 1800) {
+        const banner = this.container.querySelector('#runner-banner');
+        if (!banner) return;
+
+        banner.textContent = message;
+        banner.className = `runner-banner ${tone} active`;
+
+        if (this.bannerTimeout) clearTimeout(this.bannerTimeout);
+        this.bannerTimeout = setTimeout(() => {
+            banner.classList.remove('active');
+        }, duration);
+    }
+
     collectCoin() {
         const points = 10 * Math.max(1, this.combo);
         this.score += points;
         this.updateHUD();
         this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#FFD700', 5);
         this.playSound('collect'); // Using collect sound for coin
+        if (points >= 20) this.showBanner(`Bonus pickup. +${points} score banked.`, 'info', 1200);
     }
 
     collectPlank() {
@@ -2411,6 +2643,7 @@ export class IeltsRunnerGame {
         this.showFloatText(`+1 🧱 ${comboMult > 1 ? `(${comboMult}x)` : ''}`, 'success');
         this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#FFD700', 15);
         this.playSound('collect');
+        if (comboMult > 1) this.showBanner('Bridge stock rising. Combo is multiplying plank value.', 'success', 1300);
     }
 
     hitBarrier() {
@@ -2420,6 +2653,7 @@ export class IeltsRunnerGame {
             this.showFloatText('🛡️ Shield blocked!', 'info');
             this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#4FC3F7', 20);
             this.playSound('powerup');
+            this.showBanner('Shield absorbed the impact. Keep the run alive.', 'info', 1400);
             return;
         }
         if (this.planks > 0) {
@@ -2433,6 +2667,7 @@ export class IeltsRunnerGame {
         this.flashColor = 'rgba(244,67,54,0.5)';
         this.createParticles(this.canvasWidth / 2, this.canvasHeight * 0.7, '#F44336', 10);
         this.playSound('hit');
+        this.showBanner('Barrier hit. Your bridge stock and streak took a hit.', 'warning', 1500);
     }
 
     collectPowerUp(powerType) {
@@ -2445,18 +2680,21 @@ export class IeltsRunnerGame {
                 this.shieldTimer = 15;
                 this.flashColor = 'rgba(79,195,247,0.3)';
                 this.showFloatText('🛡️ SHIELD!', 'success');
+                this.showBanner('Shield active. One mistake can be absorbed.', 'success');
                 break;
             case 'speedboost':
                 this.speedBoost = true;
                 this.speedBoostTimer = 5;
                 this.flashColor = 'rgba(255,215,64,0.3)';
                 this.showFloatText('⚡ SPEED BOOST!', 'success');
+                this.showBanner('Speed boost online. Ride the pace while it lasts.', 'success');
                 break;
             case 'magnet':
                 this.hasMagnet = true;
                 this.magnetTimer = 8;
                 this.flashColor = 'rgba(224,64,251,0.3)';
                 this.showFloatText('🧲 MAGNET!', 'success');
+                this.showBanner('Magnet online. Pull every pickup you can.', 'success');
                 break;
         }
     }
@@ -2469,6 +2707,7 @@ export class IeltsRunnerGame {
         const modal = this.container.querySelector('#question-modal');
         const qText = this.container.querySelector('#q-text');
         const qCategory = this.container.querySelector('#q-category');
+        const qHelper = this.container.querySelector('#q-helper');
         const qOptions = this.container.querySelector('#q-options');
         const timerBar = this.container.querySelector('#timer-bar');
 
@@ -2486,6 +2725,13 @@ export class IeltsRunnerGame {
             qCategory.textContent = categoryLabel;
             // distinct colors could be added here if needed
         }
+        const meta = this.getQuestionMeta(q.type);
+        this.currentQuestionMeta = meta;
+        if (qCategory) {
+            qCategory.textContent = meta.badge;
+            qCategory.style.background = `linear-gradient(135deg, ${meta.colors[0]}, ${meta.colors[1]})`;
+        }
+        if (qHelper) qHelper.textContent = `${meta.helper} Level ${this.level} pressure is active.`;
 
         const allOpts = [q.answer, ...q.distractors].sort(() => Math.random() - 0.5);
         qOptions.innerHTML = allOpts.map(opt =>
@@ -2503,6 +2749,7 @@ export class IeltsRunnerGame {
             if (timeLeft < 3) timerBar.classList.add('warning');
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
+                this.showBanner('Time pressure won that gate. Reset and take the next one faster.', 'warning', 1500);
                 this.answerQuestion(false, modal);
             }
         }, 100);
@@ -2535,6 +2782,7 @@ export class IeltsRunnerGame {
         this.questionsAnswered++;
 
         if (correct) {
+            this.questionsCorrect++;
             this.combo++;
             this.comboTimer = 10;
             if (this.combo > this.maxCombo) this.maxCombo = this.combo;
@@ -2548,6 +2796,7 @@ export class IeltsRunnerGame {
             this.flashColor = 'rgba(76,175,80,0.4)';
             this.playSound('correct');
             if (this.combo > 1) this.playSound('combo');
+            this.showBanner(`${this.currentQuestionMeta.success} +${points} score and +3 planks.`, 'success', 1600);
         } else {
             this.combo = 0;
             this.comboTimer = 0;
@@ -2555,6 +2804,7 @@ export class IeltsRunnerGame {
             this.createParticles(this.canvasWidth / 2, this.canvasHeight / 2, '#F44336', 10);
             this.shakeAmount = 8;
             this.playSound('wrong');
+            this.showBanner(this.currentQuestionMeta.warning, 'warning', 1700);
         }
 
         this.updateHUD();
@@ -2579,10 +2829,20 @@ export class IeltsRunnerGame {
         const scoreEl = this.container.querySelector('#score-count');
         const distanceEl = this.container.querySelector('#distance-text');
         const progressBar = this.container.querySelector('.progress-bar');
+        const focusTitleEl = this.container.querySelector('#focus-title');
+        const focusNoteEl = this.container.querySelector('#focus-note');
+        const streakCardEl = this.container.querySelector('#streak-card');
+        const streakCountEl = this.container.querySelector('#streak-count');
+        const streakLabelEl = this.container.querySelector('#streak-label');
 
         if (plankEl) plankEl.textContent = this.planks;
         if (scoreEl) scoreEl.textContent = this.score;
         if (distanceEl) distanceEl.textContent = Math.floor(this.distance) + 'm';
+        if (focusTitleEl) focusTitleEl.textContent = this.getLevelBriefing().focus;
+        if (focusNoteEl) focusNoteEl.textContent = this.getLevelBriefing().note;
+        if (streakCountEl) streakCountEl.textContent = `${Math.max(1, this.combo)}x`;
+        if (streakLabelEl) streakLabelEl.textContent = this.getComboLabel();
+        if (streakCardEl) streakCardEl.classList.toggle('active', this.combo > 1);
 
         if (progressBar) {
             const levelConf = this.levelConfig[this.level];
@@ -2632,6 +2892,10 @@ export class IeltsRunnerGame {
         const modal = this.container.querySelector('#level-complete');
         this.container.querySelector('#final-score').textContent = this.score;
         this.container.querySelector('#final-questions').textContent = this.questionsAnswered;
+        this.container.querySelector('#final-accuracy').textContent = this.questionsAnswered
+            ? `${Math.round((this.questionsCorrect / this.questionsAnswered) * 100)}%`
+            : '0%';
+        this.container.querySelector('#final-note').textContent = this.getLevelBriefing().finish;
 
         if (config.award) {
             this.container.querySelector('#cert-award').textContent = `🏆 ${config.award}`;
@@ -2650,10 +2914,11 @@ export class IeltsRunnerGame {
         }
 
         modal.classList.add('active');
+        this.showBanner(`Level cleared. ${this.getLevelBriefing().finish}`, 'success', 2200);
 
         // Next level button
         this.container.querySelector('#next-level-btn').onclick = () => {
-            if (this.level < 5) this.level++;
+            if (this.level < 8) this.level++;
             this.saveProgress();
             // Reload game
             this.container.querySelector('#level-complete').classList.remove('active');
@@ -2666,11 +2931,14 @@ export class IeltsRunnerGame {
             this.container.querySelector('.level-badge').style.background = levelConf.trackColor;
             this.container.querySelector('.level-badge').textContent = `Level ${this.level}`;
             this.container.querySelector('.level-info h2').textContent = levelConf.title;
+            this.container.querySelector('#start-focus-title').textContent = this.getLevelBriefing().focus;
+            this.container.querySelector('#start-focus-note').textContent = this.getLevelBriefing().note;
             this.container.querySelector('.level-info p').textContent = `🎯 ${levelConf.length}m to complete`;
 
             // Update sky colors
             const game = this.container.querySelector('.runner-game');
             game.style.background = `linear-gradient(180deg, ${levelConf.skyTop} 0%, ${levelConf.skyBottom} 100%)`;
+            this.updateHUD();
         };
     }
 
@@ -2701,6 +2969,7 @@ export class IeltsRunnerGame {
 
     cleanup() {
         if (this.frameId) cancelAnimationFrame(this.frameId);
+        if (this.bannerTimeout) clearTimeout(this.bannerTimeout);
         document.removeEventListener('keydown', this.keyHandler);
         const style = this.container.querySelector('#runner-styles');
         if (style) style.remove();

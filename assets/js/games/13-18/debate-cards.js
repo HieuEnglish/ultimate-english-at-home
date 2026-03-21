@@ -324,10 +324,12 @@ class DebateCardsGame extends GameBase {
             this.cardsSorted++;
             this.addScore(50 + (this.streak * 10));
             this.highlightZone(direction === 'for' ? 'for-zone' : 'against-zone', 'correct');
+            this.celebrateMove({ burst: direction.toUpperCase(), duration: 700 });
         } else {
             this.streak = 0;
             Animations.shake(this.container);
             this.highlightZone(direction === 'for' ? 'for-zone' : 'against-zone', 'wrong');
+            this.coachMove();
         }
 
         this.updateHUD();

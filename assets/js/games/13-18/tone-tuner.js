@@ -183,6 +183,7 @@ class ToneTuner extends GameBase {
             btn.style.background = 'rgba(3, 218, 198, 0.1)';
             feedback.textContent = 'SIGNAL MATCHED: CLEAR RECEPTION';
             feedback.style.color = '#03dac6';
+            this.celebrateMove({ burst: correctTone.toUpperCase(), duration: 700 });
 
             setTimeout(() => {
                 feedback.style.opacity = '0';
@@ -194,6 +195,7 @@ class ToneTuner extends GameBase {
             btn.style.background = 'rgba(207, 102, 121, 0.1)';
             feedback.textContent = 'SIGNAL INTERFERENCE: WRONG FREQUENCY';
             feedback.style.color = '#cf6679';
+            this.coachMove();
 
             setTimeout(() => {
                 feedback.style.opacity = '0';

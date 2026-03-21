@@ -293,6 +293,81 @@ const GAME_FLAVORS = {
         success: "Segment cleared. Your pace is climbing.",
         warning: "You lost the line. Reset and type it cleanly.",
     },
+    "debate-cards": {
+        start: "Sort each argument fast and keep the case balanced.",
+        success: "Sharp read. That point landed in the right camp.",
+        warning: "That claim was misread. Reassess the side before you sort.",
+    },
+    "debate-duel": {
+        start: "Read the argument, choose the strongest rebuttal, and control the room.",
+        success: "Strong rebuttal. The judges felt that point.",
+        warning: "Pressure is building. Tighten the logic and answer again.",
+    },
+    "debate-prep": {
+        start: "Sort the arguments cleanly and prep the case like a strategist.",
+        success: "Case prep complete. The positions are locked in.",
+        warning: "Some arguments are out of place. Rebuild the case.",
+    },
+    "essay-builder": {
+        start: "Arrange the paragraphs into a clear, convincing essay flow.",
+        success: "Strong structure. The essay reads with purpose.",
+        warning: "The structure slips there. Recheck the progression.",
+    },
+    "interview-simulator": {
+        start: "Answer with clarity, composure, and professional judgment.",
+        success: "Confident answer. That response raised your standing.",
+        warning: "That answer weakens the impression. Refine the tone.",
+    },
+    "logic-tower": {
+        start: "Stack the reasoning in the right order and keep the tower stable.",
+        success: "Stable logic. The tower holds under pressure.",
+        warning: "The structure is off. Rebuild the reasoning chain.",
+    },
+    "news-anchor": {
+        start: "Deliver the headline cleanly and choose the right newsroom word.",
+        success: "Broadcast ready. That headline reads clean.",
+        warning: "That cue does not fit the headline. Reset the line.",
+    },
+    "news-editor": {
+        start: "Clean the headline before it hits the wire.",
+        success: "Approved for print. The correction is newsroom solid.",
+        warning: "That edit does not hold. Recheck the copy.",
+    },
+    "paragraph-puzzle": {
+        start: "Reorder the paragraph with logic tight enough to survive review.",
+        success: "Blueprint locked. The paragraph now flows cleanly.",
+        warning: "The sequence breaks the logic. Reorder the nodes.",
+    },
+    "pronunciation-pro": {
+        start: "Listen closely, speak with control, and sharpen every sound.",
+        success: "Clean pronunciation. That delivery was strong.",
+        warning: "The sounds are close, but not settled yet. Try again.",
+    },
+    "speech-coach": {
+        start: "Deliver the script with strong pacing and clear key phrases.",
+        success: "Strong delivery. Your phrasing carried the script.",
+        warning: "Push the core phrases more clearly and try again.",
+    },
+    "thesis-thinker": {
+        start: "Build a thesis with a precise claim and a credible rationale.",
+        success: "Strong thesis move. That argument has weight.",
+        warning: "That choice weakens the thesis. Tighten the reasoning.",
+    },
+    "tone-tuner": {
+        start: "Match the tone precisely and keep the message on frequency.",
+        success: "Tone matched. The signal came through clearly.",
+        warning: "Wrong frequency. Adjust the tone and resend.",
+    },
+    "transition-titan": {
+        start: "Bridge the ideas with the transition that truly fits.",
+        success: "Connection established. The flow is now seamless.",
+        warning: "That bridge does not hold. Try a stronger transition.",
+    },
+    "vocab-quest": {
+        start: "Use the right meaning to win each vocabulary battle.",
+        success: "Direct hit. That definition weakened the monster.",
+        warning: "That answer costs momentum. Reassess the word.",
+    },
 };
 
 function getGameFlavor(config = {}) {
