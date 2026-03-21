@@ -106,33 +106,46 @@ async function run() {
     }
 
     if (t.name === 'Tests') {
-      // If server doesn’t support SPA pushState, /tests can 404 on static servers.
+      // If the server doesn't support SPA pushState, /tests can 404 on static servers.
       // The app supports deep-link restore via /?r=/tests. Prefer that.
       if (r.http === 404) {
         warnings.push({ area: 'routing', msg: 'Tests: direct /tests returned 404 (static server may not support SPA routes). Use /?r=/tests.' });
       }
 
-      // If Tests page loaded, try open one test runner via deep link
-      const anyCard = page.getByRole('heading', { name: /Listening \(4–7\)|Listening \(4-7\)/ }).first();
-      if (await anyCard.count()) {
+      // Smoke-check the Tests index and then open a known runner directly.
+      const testCards = page.locator('main .card-grid .card');
+      if ((await testCards.count()) > 0) {
         await page.goto(asUrl(base, '/?r=/tests/age-4-7-listening'), { waitUntil: 'domcontentloaded', timeout: 45000 });
-        const start = page.getByRole('button', { name: 'Start' }).first();
+
+        const start = page.getByRole('button', { name: /^Start$/i }).first();
         await start.waitFor({ state: 'visible', timeout: 3000 }).catch(() => null);
         if (await start.count()) {
           await start.click();
-          // Answer first question (click first option)
-          const option = page.getByRole('button', { name: /Option 1:/ }).first();
-          await option.waitFor({ state: 'visible', timeout: 3000 }).catch(() => null);
-          if (await option.count()) {
-            await option.click();
-          } else {
-            warnings.push({ area: 'tests', msg: 'Runner: could not find answer option buttons' });
+
+          // Click the first actionable button inside the runner after starting.
+          const runnerButtons = page.locator('[data-test-runner-root] button:not([disabled])');
+          await runnerButtons.first().waitFor({ state: 'visible', timeout: 3000 }).catch(() => null);
+
+          const buttonCount = await runnerButtons.count().catch(() => 0);
+          let clicked = false;
+          for (let i = 0; i < buttonCount; i++) {
+            const label = ((await runnerButtons.nth(i).textContent().catch(() => '')) || '').trim();
+            if (!label || /^Start$/i.test(label) || /^Back$/i.test(label) || /^Stop$/i.test(label) || /^Test voice$/i.test(label)) {
+              continue;
+            }
+            await runnerButtons.nth(i).click().catch(() => null);
+            clicked = true;
+            break;
+          }
+
+          if (!clicked) {
+            warnings.push({ area: 'tests', msg: 'Runner: could not find an actionable answer/control button' });
           }
         } else {
           warnings.push({ area: 'tests', msg: 'Runner: Start button not found' });
         }
       } else {
-        warnings.push({ area: 'tests', msg: 'Tests page: could not locate a known test card' });
+        warnings.push({ area: 'tests', msg: 'Tests page: could not locate any test cards' });
       }
     }
 
