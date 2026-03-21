@@ -421,6 +421,7 @@ class WordScrambleGame extends GameBase {
             this.addScore(100);
             this.wordsCompleted++;
             this.updateHUD();
+            this.celebrateMove({ burst: this.currentWord.word.toUpperCase() });
 
             slots.forEach(s => s.classList.add('correct'));
             this.showFeedback('🎉 Perfect!', 'success');
@@ -433,6 +434,7 @@ class WordScrambleGame extends GameBase {
             slots.forEach(s => s.classList.add('wrong'));
             this.showFeedback('Try again!', 'error');
             this.updateHUD();
+            this.coachMove();
 
             setTimeout(() => this.clearAnswer(), 800);
         }

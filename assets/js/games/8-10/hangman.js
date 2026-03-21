@@ -471,6 +471,7 @@ class HangmanGame extends GameBase {
       this.incrementCombo();
       this.addScore(30);
       this.updateHUD();
+      this.celebrateMove({ burst: this.currentWord.word.toUpperCase() });
 
       // Reveal letters with animation
       const slots = document.querySelectorAll('.letter-slot');
@@ -522,6 +523,7 @@ class HangmanGame extends GameBase {
     } else if (this.wrongGuesses >= this.maxWrong) {
       // Show sad face
       this.container.querySelector('.face').style.opacity = '1';
+      this.coachMove(`Round over. The word was ${this.currentWord.word.toUpperCase()}.`);
       this.showFeedback('😢', this.currentWord.word.toUpperCase());
 
       setTimeout(() => {

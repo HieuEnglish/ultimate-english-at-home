@@ -182,6 +182,7 @@ class PhrasalPhantom extends GameBase {
             // Success
             this.score += 100;
             this.container.querySelector('#score').textContent = this.score;
+            this.celebrateMove({ burst: correct.toUpperCase(), duration: 700 });
 
             // Visual feedback
             element.innerHTML = `<div style="font-size: 80px;">💥</div>`;
@@ -193,6 +194,7 @@ class PhrasalPhantom extends GameBase {
             // Fail
             element.style.opacity = 0.5;
             element.style.pointerEvents = 'none'; // Disable click
+            this.coachMove();
             // Shake effect?
         }
     }

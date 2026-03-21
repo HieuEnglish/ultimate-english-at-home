@@ -153,12 +153,14 @@ class AccentAce extends GameBase {
         if (selectedId === correctId) {
             this.score += 150;
             this.container.querySelector('#score').textContent = this.score;
+            this.celebrateMove({ burst: String(selectedId).toUpperCase(), duration: 700 });
             btn.style.background = '#2ecc40';
             btn.style.color = 'white';
             btn.style.borderColor = '#2ecc40';
             feedback.textContent = "✅ Excellent Ear!";
             feedback.style.color = "#2ecc40";
         } else {
+            this.coachMove();
             btn.style.background = '#ff4136';
             btn.style.color = 'white';
             btn.style.borderColor = '#ff4136';

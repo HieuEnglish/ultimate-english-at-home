@@ -351,6 +351,7 @@ class WordSearchGame extends GameBase {
         this.addScore(100);
         this.updateScoreDisplay();
         this.confetti.explode(null, null, 20);
+        this.celebrateMove({ burst: word.toUpperCase(), duration: 700 });
 
         if (this.foundWords.length === this.words.length) {
             setTimeout(() => this.end(), 1000);

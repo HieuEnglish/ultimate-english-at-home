@@ -364,6 +364,7 @@ class TypeRacerGame extends GameBase {
                 } else {
                     this.renderSentence();
                     this.confetti.explode(null, null, 20); // Mini celebration
+                    this.celebrateMove({ burst: 'SPLIT', duration: 700 });
                 }
             }
         } else {
@@ -415,6 +416,7 @@ class TypeRacerGame extends GameBase {
             document.getElementById('final-wpm').textContent = this.wpm;
             document.getElementById('final-time').textContent = timeSeconds;
 
+            this.coachMove("The rival got there first. Clean typing wins the rematch.", 900);
             const popup = document.getElementById('victory-popup');
             popup.querySelector('.victory-title').textContent = "You Won!";
             popup.classList.add('visible');

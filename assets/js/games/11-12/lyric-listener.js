@@ -140,6 +140,7 @@ class LyricListener extends GameBase {
         if (input === correct) {
             this.score += 100;
             this.container.querySelector('#score-val').textContent = this.score;
+            this.celebrateMove({ burst: correct.toUpperCase(), duration: 700 });
             feedback.textContent = "✨ Correct! You're a star!";
             feedback.style.color = "#00ff88";
             this.container.querySelector('#submit-btn').disabled = true;
@@ -152,6 +153,7 @@ class LyricListener extends GameBase {
         } else {
             feedback.textContent = "❌ Oops! Listen again!";
             feedback.style.color = "#ff4d4d";
+            this.coachMove();
             // Shake effect
             const card = this.container.querySelector('#lyric-card');
             card.style.transform = 'translateX(10px)';

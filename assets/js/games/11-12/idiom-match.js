@@ -212,6 +212,7 @@ class IdiomAlchemistGame extends GameBase {
         document.getElementById('status-msg').textContent = "Gold Created! ✨";
         document.getElementById('potion').style.background = "gold";
         this.confetti.explode(cauldron, null, 20);
+        this.celebrateMove({ burst: 'GOLD', duration: 700 });
 
         // Clear after delay
         setTimeout(() => this.resetCauldron(true), 1500);
@@ -220,6 +221,7 @@ class IdiomAlchemistGame extends GameBase {
         document.getElementById('status-msg').textContent = "EXPLOSION! 💥";
         document.getElementById('potion').style.background = "#444";
         Animations.shake(cauldron);
+        this.coachMove();
 
         // Return items
         setTimeout(() => this.resetCauldron(false), 1500);

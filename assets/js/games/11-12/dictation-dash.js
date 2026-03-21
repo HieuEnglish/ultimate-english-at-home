@@ -186,6 +186,7 @@ class DictationDash extends GameBase {
 
         this.score += 200;
         this.container.querySelector('#score-num').textContent = this.score;
+        this.celebrateMove({ burst: `LAP ${this.currentLap + 1}`, duration: 700 });
 
         setTimeout(() => {
             feedback.style.opacity = 0;

@@ -300,12 +300,14 @@ class SoundLabGame extends GameBase {
             this.score += 100;
             this.correctAnswers++;
             this.incrementCombo();
+            this.celebrateMove({ burst: this.correctWord.toUpperCase(), duration: 700 });
             if (this.combo >= 3) this.confetti.explode(null, null, 20);
         } else {
             btn.classList.add('wrong');
             feedback.textContent = `Target was: ${this.correctWord}`;
             feedback.style.color = '#ff7675';
             this.resetCombo();
+            this.coachMove();
 
             // Highlight correct one
             document.querySelectorAll('.option-btn').forEach(b => {

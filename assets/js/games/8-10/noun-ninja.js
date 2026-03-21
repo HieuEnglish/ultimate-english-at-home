@@ -261,6 +261,7 @@ class NounNinjaGame extends GameBase {
             this.playSound('slash');
             document.getElementById('score-val').textContent = this.score;
             this.confetti.explode(w.el, null, 5);
+            this.celebrateMove({ burst: w.data.text.toUpperCase(), duration: 700 });
         } else {
             // Bad slice
             w.el.classList.add('wrong-slice');
@@ -271,6 +272,7 @@ class NounNinjaGame extends GameBase {
             // Penalty?
             this.score = Math.max(0, this.score - 50);
             document.getElementById('score-val').textContent = this.score;
+            this.coachMove();
         }
     }
 

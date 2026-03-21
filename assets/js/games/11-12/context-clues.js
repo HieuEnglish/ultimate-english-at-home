@@ -232,9 +232,11 @@ class ContextClues extends GameBase {
             feedbackIcon.textContent = '✅';
             feedbackText.textContent = 'Correct! Case Closed.';
             this.score += 100;
+            this.celebrateMove({ burst: String(correct).toUpperCase(), duration: 700 });
         } else {
             feedbackIcon.textContent = '❌';
             feedbackText.textContent = `Incorrect. It meant: "${correct}"`;
+            this.coachMove();
         }
 
         this.container.querySelector('#score-display').textContent = this.score;

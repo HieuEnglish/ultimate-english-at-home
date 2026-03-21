@@ -158,6 +158,141 @@ const GAME_FLAVORS = {
         success: "Case solved. You found the missing clue.",
         warning: "Not quite. Look at the missing spot again.",
     },
+    "antonym-archer": {
+        start: "Aim for the true antonym before the targets escape.",
+        success: "Bullseye. That antonym hit the mark.",
+        warning: "That target was off. Scan the antonym clue again.",
+    },
+    "fast-phrases": {
+        start: "Build the sentence brick by brick before the wall collapses.",
+        success: "Strong build. That sentence holds together.",
+        warning: "That build is shaky. Reorder the phrase and try again.",
+    },
+    hangman: {
+        start: "Crack the mystery word before the sketch is complete.",
+        success: "Nice deduction. The mystery word is yours.",
+        warning: "Careful. That guess adds pressure to the board.",
+    },
+    "noun-ninja": {
+        start: "Slice only the nouns and keep the dojo sharp.",
+        success: "Clean slice. That noun is gone.",
+        warning: "That cut hit the wrong word. Stay focused.",
+    },
+    "sentence-surgeon": {
+        start: "Repair each sentence with the right fix from your toolkit.",
+        success: "Surgery complete. That sentence is healthy again.",
+        warning: "That fix missed the error. Examine the sentence again.",
+    },
+    "speed-typing": {
+        start: "Type fast, stay accurate, and stack your streak.",
+        success: "Speed locked in. That word is cleared.",
+        warning: "Reset and retype carefully to keep the pace.",
+    },
+    "synonym-sprint": {
+        start: "Pick the synonym and clear each hurdle in stride.",
+        success: "Smooth jump. That synonym keeps the run alive.",
+        warning: "That choice trips the run. Watch the meaning.",
+    },
+    "verb-viper": {
+        start: "Feed the viper only verbs and survive the grid.",
+        success: "Nice catch. That verb fuels the viper.",
+        warning: "That word was a trap. Steady the run.",
+    },
+    "vocab-volcano": {
+        start: "Answer fast to cool the volcano before it erupts.",
+        success: "Pressure dropping. That meaning was correct.",
+        warning: "The lava is rising. Re-read the clue.",
+    },
+    "word-ladder": {
+        start: "Climb the ladder one smart word change at a time.",
+        success: "Strong step. You climbed to the next rung.",
+        warning: "That rung does not fit. Change the word again.",
+    },
+    "word-scramble": {
+        start: "Unscramble the letters before the timer eats the round.",
+        success: "Puzzle solved. That word is unlocked.",
+        warning: "That spelling is off. Rearrange and retry.",
+    },
+    "word-search": {
+        start: "Track the hidden words and sweep the grid clean.",
+        success: "Found it. That word is locked in.",
+        warning: "That path is not one of the target words yet.",
+    },
+    "word-wizard": {
+        start: "Cast each spelling spell to defeat the monster.",
+        success: "Spell cast. The monster took damage.",
+        warning: "That rune broke the spell. Focus on the next letter.",
+    },
+    "accent-ace": {
+        start: "Listen for the accent, trust the details, and choose with confidence.",
+        success: "Sharp ear. You picked the right accent.",
+        warning: "Close, but that accent was different. Listen again.",
+    },
+    "code-breaker": {
+        start: "Decode each corrupted line and unlock the terminal.",
+        success: "Access granted. That decryption was clean.",
+        warning: "Decryption failed. Check the pattern and try again.",
+    },
+    "context-clues": {
+        start: "Use the sentence clues to pin down the right meaning.",
+        success: "Case closed. The context fit perfectly.",
+        warning: "That meaning does not fit the context. Read the clue again.",
+    },
+    "dictation-dash": {
+        start: "Replay the line, type cleanly, and chase a perfect lap.",
+        success: "Lap complete. Your dictation stayed sharp.",
+        warning: "That transcript drifted off. Reset and listen again.",
+    },
+    "grammar-gladiator": {
+        start: "Choose the strongest grammar strike and win the arena.",
+        success: "Direct hit. That grammar move landed cleanly.",
+        warning: "Blocked. The grammar choice left you open.",
+    },
+    "grammar-ninja": {
+        start: "Spot whether the sentence is right or wrong before it gets past you.",
+        success: "Fast read. You judged the sentence correctly.",
+        warning: "That call was off. Check the grammar signal again.",
+    },
+    "idiom-match": {
+        start: "Pair each idiom with its meaning and brew the right mix.",
+        success: "Golden mix. That idiom pair clicked.",
+        warning: "That mixture exploded. Recheck the idiom meaning.",
+    },
+    "lyric-listener": {
+        start: "Catch the missing lyric and fill the gap with precision.",
+        success: "Nice ear. That lyric landed perfectly.",
+        warning: "That lyric missed the beat. Listen again.",
+    },
+    "phrasal-verb-phantom": {
+        start: "Catch the right phrasal verb before it disappears.",
+        success: "Ghost tagged. That phrasal verb fits.",
+        warning: "That ghost was a decoy. Watch the sentence.",
+    },
+    "root-racer": {
+        start: "Use the root meaning to accelerate past each challenge.",
+        success: "Great read. That root powered the car forward.",
+        warning: "That root slows the run. Recheck the clue.",
+    },
+    "sentence-shuffle": {
+        start: "Rebuild the sentence in the right order before the fridge resets.",
+        success: "Locked in. That sentence flows correctly.",
+        warning: "That order is off. Rearrange the magnets.",
+    },
+    "sound-lab": {
+        start: "Match sound to spelling and tune the lab precisely.",
+        success: "Clean match. That sound pattern is right.",
+        warning: "The sound map is off. Compare the spelling again.",
+    },
+    "tense-race": {
+        start: "Shift the sentence into the target tense and keep your speed.",
+        success: "Turbo on. That tense change is correct.",
+        warning: "That tense stalls the car. Rebuild the sentence.",
+    },
+    "type-racer": {
+        start: "Type clean, finish each segment, and beat the rival car.",
+        success: "Segment cleared. Your pace is climbing.",
+        warning: "You lost the line. Reset and type it cleanly.",
+    },
 };
 
 function getGameFlavor(config = {}) {

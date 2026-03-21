@@ -324,6 +324,7 @@ class TenseRaceGame extends GameBase {
       // Correct - Boost!
       this.speed = Math.min(this.speed + 80, this.maxSpeed);
       this.playSound('success');
+      this.celebrateMove({ burst: 'BOOST', duration: 700 });
 
       // Visual feedback
       const feedback = document.createElement('div');
@@ -338,6 +339,7 @@ class TenseRaceGame extends GameBase {
       // Wrong - Stall
       this.speed = Math.max(0, this.speed - 30);
       this.playSound('error');
+      this.coachMove();
       input.classList.add('shake');
       setTimeout(() => input.classList.remove('shake'), 500);
     }

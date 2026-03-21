@@ -252,6 +252,7 @@ class SynonymSprintGame extends GameBase {
     if (!isCorrect) {
       btn.style.backgroundColor = '#ff7675';
       btn.style.borderColor = '#d63031';
+      this.coachMove();
       return; // Don't jump
     }
 
@@ -261,6 +262,7 @@ class SynonymSprintGame extends GameBase {
 
     this.addScore(100);
     this.confetti.explode(btn, null, 10);
+    this.celebrateMove({ burst: btn.dataset.word.toUpperCase(), duration: 700 });
 
     setTimeout(() => {
       runner.classList.remove('jump');

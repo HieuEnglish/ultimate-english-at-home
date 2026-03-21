@@ -264,12 +264,14 @@ class AntonymArcherGame extends GameBase {
             document.getElementById('score-val').textContent = this.score;
             this.playSound('success');
             this.confetti.explode(target, null, 10);
+            this.celebrateMove({ burst: this.currentData.antonym.toUpperCase(), duration: 700 });
 
             // Pick new word
             this.pickNewWord();
         } else {
             effect.textContent = '❌';
             this.playSound('error');
+            this.coachMove();
         }
 
         this.container.querySelector('.range-area').appendChild(effect);

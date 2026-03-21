@@ -280,11 +280,13 @@ class VerbViperGame extends GameBase {
                 this.score++;
                 document.getElementById('score-val').textContent = this.score;
                 this.playSound('eat');
+                this.celebrateMove({ burst: this.food.text.toUpperCase(), duration: 700 });
                 this.spawnFood();
                 // Don't pop tail = grow
             } else {
                 // Bad!
                 this.playSound('error');
+                this.coachMove();
                 this.gameOver();
             }
         } else {

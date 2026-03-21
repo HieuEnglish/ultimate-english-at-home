@@ -380,6 +380,7 @@ class SpeedTypingGame extends GameBase {
     }
 
     completeWord() {
+        const completedWord = this.currentWord;
         this.wordsCompleted++;
         this.incrementCombo();
 
@@ -397,6 +398,8 @@ class SpeedTypingGame extends GameBase {
             this.confetti.explode(null, null, 20);
         }
 
+        this.celebrateMove({ burst: completedWord.toUpperCase(), duration: 700 });
+
         this.nextWord();
     }
 
@@ -406,6 +409,7 @@ class SpeedTypingGame extends GameBase {
 
         Animations.shake(document.querySelector('.word-zone'));
         this.updateStats();
+        this.coachMove();
 
         setTimeout(() => {
             this.typedText = '';

@@ -225,6 +225,7 @@ class VocabVolcanoGame extends GameBase {
             document.getElementById('score-val').textContent = this.score;
 
             this.confetti.explode(btn, null, 10);
+            this.celebrateMove({ burst: btn.dataset.text.toUpperCase(), duration: 700 });
 
             setTimeout(() => this.nextQuestion(), 1000);
         } else {
@@ -235,6 +236,7 @@ class VocabVolcanoGame extends GameBase {
             // Raise lava!
             this.lavaLevel += 15;
             Animations.shake(document.querySelector('.game-wrapper'));
+            this.coachMove();
         }
     }
 

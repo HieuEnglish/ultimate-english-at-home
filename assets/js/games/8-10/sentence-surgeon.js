@@ -282,6 +282,7 @@ class SentenceSurgeonGame extends GameBase {
             btn.style.color = "white";
             this.playSound('error');
             Animations.shake(document.getElementById('patient-sentence'));
+            this.coachMove();
         }
     }
 
@@ -291,6 +292,7 @@ class SentenceSurgeonGame extends GameBase {
         this.addScore(100);
         document.getElementById('score-val').textContent = this.score;
         this.confetti.explode(null, null, 15);
+        this.celebrateMove({ burst: 'FIXED', duration: 700 });
 
         setTimeout(() => {
             overlay.classList.remove('visible');

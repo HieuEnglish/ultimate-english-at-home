@@ -266,6 +266,7 @@ class WordWizardGame extends GameBase {
                 this.inputBuffer = this.inputBuffer.slice(0, -1);
                 // Feedback
                 Animations.shake(document.getElementById('spell-display'));
+                this.coachMove("That rune does not fit the spell.", 700);
                 this.takeDamage(10);
             }
         }
@@ -273,6 +274,7 @@ class WordWizardGame extends GameBase {
 
     castSpell() {
         this.playSound('success');
+        this.celebrateMove({ burst: this.currentSpell.word.toUpperCase(), duration: 800 });
 
         // Visuals
         const pEffect = document.getElementById('player-effect');

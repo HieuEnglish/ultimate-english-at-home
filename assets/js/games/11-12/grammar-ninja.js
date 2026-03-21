@@ -365,6 +365,7 @@ class GrammarNinjaGame extends GameBase {
             this.streak++;
             this.incrementCombo();
             this.addScore(50 + this.streak * 10);
+            this.celebrateMove({ burst: wasWrong ? 'SLICE' : 'CLEAR', duration: 700 });
 
             if (wasWrong) {
                 this.sliced++;
@@ -384,6 +385,7 @@ class GrammarNinjaGame extends GameBase {
         } else {
             this.streak = 0;
             this.resetCombo();
+            this.coachMove();
 
             document.getElementById('ninja-speech').textContent = wasWrong ? 'It was wrong! 😅' : 'It was correct! 🤔';
             document.getElementById('sentence-hint').textContent = wasWrong

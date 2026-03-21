@@ -320,6 +320,7 @@ class FastPhrasesGame extends GameBase {
       this.incrementCombo();
       this.addScore(100);
       this.correctAnswers++;
+      this.celebrateMove({ burst: 'BUILD', duration: 700 });
 
       // Cementing animation
       document.querySelectorAll('.brick').forEach((b, i) => {
@@ -334,6 +335,7 @@ class FastPhrasesGame extends GameBase {
       // Collapse
       this.resetCombo();
       this.speak("Structure unstable!");
+      this.coachMove();
 
       document.querySelectorAll('.brick').forEach(b => b.classList.add('wrong'));
 

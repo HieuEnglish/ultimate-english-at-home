@@ -205,10 +205,12 @@ class RootRacer extends GameBase {
         if (isCorrect) {
             this.score += 100;
             this.container.querySelector('#score').textContent = this.score;
+            this.celebrateMove({ burst: String(selected).toUpperCase(), duration: 700 });
             feedback.textContent = '✅';
             feedback.style.color = '#4CAF50';
             btnElement.style.background = '#4CAF50';
             btnElement.style.color = 'white';
+            this.coachMove();
             this.speed = 1.5; // Speed up effect
             setTimeout(() => this.speed = 0.5, 500);
         } else {

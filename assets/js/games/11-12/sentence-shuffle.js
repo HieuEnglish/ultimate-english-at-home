@@ -288,6 +288,7 @@ class SentenceShuffleGame extends GameBase {
       this.incrementCombo();
       this.addScore(150);
       this.correctAnswers++;
+      this.celebrateMove({ burst: 'ORDER', duration: 700 });
 
       Array.from(magnetRow.children).forEach(el => el.classList.add('correct'));
       this.confetti.explode(null, null, 20);
@@ -296,6 +297,7 @@ class SentenceShuffleGame extends GameBase {
     } else {
       this.resetCombo();
       this.speak("Not quite right.");
+      this.coachMove();
       Array.from(magnetRow.children).forEach(el => el.classList.add('wrong'));
       setTimeout(() => {
         Array.from(magnetRow.children).forEach(el => el.classList.remove('wrong'));

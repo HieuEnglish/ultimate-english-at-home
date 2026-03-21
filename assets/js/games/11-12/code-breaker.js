@@ -222,6 +222,7 @@ class CodeBreakerGame extends GameBase {
     if (val.toLowerCase() === this.currentCode.answer.toLowerCase()) {
       this.log("Decryption successful. Access granted.");
       this.addScore(200);
+      this.celebrateMove({ burst: 'ACCESS', duration: 700 });
 
       document.getElementById('cipher-text').style.color = "#fff"; // Flash white
       input.disabled = true; // Prevent double submit
@@ -233,6 +234,7 @@ class CodeBreakerGame extends GameBase {
       }, 1000);
     } else {
       this.log("ERROR: Decryption failed. Invalid syntax.");
+      this.coachMove();
       this.container.querySelector('.terminal-window').classList.add('glitch');
       setTimeout(() => this.container.querySelector('.terminal-window').classList.remove('glitch'), 500);
       input.value = "";

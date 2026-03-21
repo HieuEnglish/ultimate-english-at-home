@@ -198,12 +198,14 @@ class GrammarGladiatorGame extends GameBase {
             }, 250);
 
             this.addScore(100);
+            this.celebrateMove({ burst: word.toUpperCase(), duration: 700 });
 
             setTimeout(() => this.nextTurn(), 1000);
 
         } else {
             btn.classList.add('wrong');
             this.playSound('shield_block'); // Or error
+            this.coachMove();
 
             // Enemy attacks back!
             setTimeout(() => {

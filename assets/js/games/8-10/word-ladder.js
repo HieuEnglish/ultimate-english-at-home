@@ -387,6 +387,7 @@ class LadderClimberGame extends GameBase {
             if (this.currentInput === target) {
                 // Correct
                 this.playSound('success');
+                this.celebrateMove({ burst: target.toUpperCase(), duration: 700 });
                 this.currentRungIndex++;
                 this.currentInput = "";
                 this.updateClimber();
@@ -409,6 +410,7 @@ class LadderClimberGame extends GameBase {
                 this.playSound('error');
                 const rung = document.querySelector('.rung-container.current');
                 Animations.shake(rung);
+                this.coachMove();
                 this.currentInput = "";
                 setTimeout(() => this.renderLadder(), 500);
             }
