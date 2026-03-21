@@ -2057,6 +2057,106 @@
         focus: "routine, confidence, performance",
         time: "10–15 min/day",
         level: "caregiver-led or independent"
+      },
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "8-10-reading-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Reading)",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=reading",
+        format: "site",
+        description:
+          "A free reading activity hub with short texts and questions; choose basic and independent tasks for this age band.",
+        details: {
+          type: "Skill activity hub",
+          teaches: "Reading for gist, details, and simple vocabulary in context.",
+          howTo: [
+            "Filter for reading and pick a short activity.",
+            "Read once for the main idea and once for the questions.",
+            "Review two or three new words after each task."
+          ],
+          whyTopPick: "Large free bank with clear skill focus.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Good fit for 8-10 with light support if needed."
+        },
+        focus: "gist, details, vocabulary",
+        time: "8-12 min",
+        level: "caregiver-led or independent"
+      },
+      {
+        age: "8-10",
+        skill: "listening",
+        slug: "8-10-listening-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Listening)",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=listening",
+        format: "site",
+        description:
+          "Short listening tasks with questions and replay options, useful for building attention to key information.",
+        details: {
+          type: "Skill activity hub",
+          teaches: "Listening for main ideas, details, and familiar vocabulary.",
+          howTo: [
+            "Pick one short listening task.",
+            "Listen once without stopping, then replay for answers.",
+            "End with a one-sentence summary or quick retell."
+          ],
+          whyTopPick: "Easy to fit into short daily practice.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Good fit for 8-10."
+        },
+        focus: "details, replay, retell",
+        time: "8-10 min",
+        level: "caregiver-led or independent"
+      },
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "8-10-writing-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Writing)",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=writing",
+        format: "site",
+        description:
+          "Free writing activities that help children write short responses, descriptions, and messages with support.",
+        details: {
+          type: "Skill activity hub",
+          teaches: "Sentence building, short messages, and simple paragraph practice.",
+          howTo: [
+            "Pick one writing activity at the right level.",
+            "Draft the answer once, then improve one thing.",
+            "Check punctuation and one target grammar point before finishing."
+          ],
+          whyTopPick: "Simple, focused tasks that are easy to repeat.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Good fit for 8-10 with support as needed."
+        },
+        focus: "sentence building, short responses",
+        time: "10-12 min",
+        level: "caregiver-led or independent"
+      },
+      {
+        age: "8-10",
+        skill: "speaking",
+        slug: "8-10-speaking-american-english-guess-what",
+        title: "American English - Guess What? Mime the Words",
+        link: "https://americanenglish.state.gov/resources/guess-what-mime-words",
+        format: "site",
+        description:
+          "A free game-based activity that gets children speaking through actions, clues, and quick guessing turns.",
+        details: {
+          type: "Speaking game activity",
+          teaches: "Action words, clear clues, and quick oral responses.",
+          howTo: [
+            "Choose a few easy words or actions.",
+            "Act one out or give a clue while others guess in English.",
+            "Swap roles so every child gets a speaking turn."
+          ],
+          whyTopPick: "Playful format that lowers speaking pressure.",
+          freeAccess: "Free American English resource.",
+          ageCheck: "Good fit for 8-10."
+        },
+        focus: "clues, action words, turn-taking",
+        time: "8-10 min",
+        level: "caregiver-led or independent"
       }
     ]
   };

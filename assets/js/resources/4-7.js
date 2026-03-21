@@ -1972,6 +1972,106 @@
         focus: "expressive speaking, retell",
         time: "5-10 min",
         level: "caregiver-led"
+      },
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "4-7-reading-reading-rockets-tips-for-parents-of-preschoolers",
+        title: "Reading Rockets - Reading Tips for Parents of Preschoolers",
+        link: "https://www.readingrockets.org/topics/activities/articles/reading-tips-parents-preschoolers",
+        format: "site",
+        description:
+          "Short parent tips for picture walks, print awareness, and fun book routines before formal reading starts.",
+        details: {
+          type: "Parent tip sheet",
+          teaches: "Vocabulary, book handling, and early comprehension habits.",
+          howTo: [
+            "Preview the cover and pictures before reading.",
+            "Ask one easy question per page such as 'What do you see?'",
+            "Reread favorite books to build confidence."
+          ],
+          whyTopPick: "Friendly guidance that is easy to use at home.",
+          freeAccess: "Free article on Reading Rockets.",
+          ageCheck: "Good fit for preschool and early primary ages."
+        },
+        focus: "picture talk, rereading, comprehension",
+        time: "5-10 min",
+        level: "caregiver-led"
+      },
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "4-7-listening-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Listening)",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=listening",
+        format: "site",
+        description:
+          "Free listening practice page with short activities; adults can choose the easiest A1-A2 tasks for this age.",
+        details: {
+          type: "Skill activity hub",
+          teaches: "Listening for key words, short details, and simple meaning.",
+          howTo: [
+            "Open the listening filter and choose a short basic activity.",
+            "Play it once for overall meaning and once for details.",
+            "Finish with one oral retell or picture-pointing task."
+          ],
+          whyTopPick: "Large free library with filters for easier tasks.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Works best with adult guidance for 4-7."
+        },
+        focus: "short listening, key words, repeat play",
+        time: "5-8 min",
+        level: "caregiver-led"
+      },
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "4-7-writing-crayola-free-coloring-pages",
+        title: "Crayola - Free Coloring Pages",
+        link: "https://www.crayola.com/free-coloring-pages/",
+        format: "site",
+        description:
+          "Printable coloring pages that work well for tracing, labeling, and short sentence writing with young learners.",
+        details: {
+          type: "Printable pages",
+          teaches: "Pencil control, labeling, and simple sentence follow-up.",
+          howTo: [
+            "Print one page your child likes.",
+            "Add one label or short sentence after coloring.",
+            "Use dotted models first if your child still needs tracing."
+          ],
+          whyTopPick: "Easy to reuse for many themes and interests.",
+          freeAccess: "Free printable pages on Crayola.",
+          ageCheck: "Good fit for 4-7 with adult support for writing."
+        },
+        focus: "tracing, labeling, short writing",
+        time: "5-10 min",
+        level: "caregiver-led"
+      },
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "4-7-speaking-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Speaking)",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=speaking",
+        format: "site",
+        description:
+          "Free speaking page with short tasks; adults can pick simple A1-A2 prompts for repeating, naming, and short answers.",
+        details: {
+          type: "Skill activity hub",
+          teaches: "Short responses, sentence frames, and speaking confidence.",
+          howTo: [
+            "Choose one very short speaking activity.",
+            "Model the answer first, then let your child copy it.",
+            "Repeat the same task later in the week for fluency."
+          ],
+          whyTopPick: "Flexible source for quick home speaking practice.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Best used with adult support for 4-7."
+        },
+        focus: "short answers, repetition, fluency",
+        time: "5-8 min",
+        level: "caregiver-led"
       }
     ]
   };

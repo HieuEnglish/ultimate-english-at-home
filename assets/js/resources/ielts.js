@@ -1137,6 +1137,90 @@
           freeAccess: "💸 Free app/web tool (British Council).",
           ageCheck: "👤 Suitable for all IELTS candidates."
         }
+      },
+      {
+        age: "ielts",
+        skill: "reading",
+        slug: "ielts-reading-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Reading)",
+        description: "Supplementary free reading practice for building speed, gist, and detail handling between full IELTS tests.",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=reading",
+        format: "site",
+        details: {
+          type: "Free supplementary skill hub",
+          teaches: "Reading for gist, details, and vocabulary in context",
+          howTo: [
+            "Pick one B1-C1 reading task between full IELTS practices.",
+            "Time yourself lightly, then review question errors.",
+            "Write down useful paraphrases after each activity."
+          ],
+          whyTopPick: "Good filler practice when you do not want a full test.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Teen/adult; useful as extra skill practice."
+        }
+      },
+      {
+        age: "ielts",
+        skill: "listening",
+        slug: "ielts-listening-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Listening)",
+        description: "Supplementary free listening practice for catching key words, details, and meaning before full IELTS listening sets.",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=listening",
+        format: "site",
+        details: {
+          type: "Free supplementary skill hub",
+          teaches: "Main ideas, detail listening, and replay review habits",
+          howTo: [
+            "Choose one short listening task at B1-C1 level.",
+            "Listen once for meaning and once for details.",
+            "Note any phrases you missed and replay them."
+          ],
+          whyTopPick: "Useful short practice on busy days.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Teen/adult; useful as extra listening work."
+        }
+      },
+      {
+        age: "ielts",
+        skill: "writing",
+        slug: "ielts-writing-american-english-developing-writing",
+        title: "American English - Developing Writing",
+        description: "A free writing resource for building clearer sentences and paragraphs that support IELTS writing accuracy.",
+        link: "https://americanenglish.state.gov/resources/developing-writing",
+        format: "site",
+        details: {
+          type: "Supplementary writing resource",
+          teaches: "Sentence control, organization, and clarity",
+          howTo: [
+            "Use one short task as a warm-up before IELTS Task 1 or Task 2.",
+            "Revise one paragraph for linking and grammar accuracy.",
+            "Compare the first draft with the improved version."
+          ],
+          whyTopPick: "Helpful for building clean writing habits outside test mode.",
+          freeAccess: "Free American English resource.",
+          ageCheck: "Teen/adult; suitable for IELTS preparation."
+        }
+      },
+      {
+        age: "ielts",
+        skill: "speaking",
+        slug: "ielts-speaking-american-english-more-dialogs-everyday-use",
+        title: "American English - More Dialogs for Everyday Use",
+        description: "Free role-play dialogues that help IELTS learners build fluency, natural phrasing, and response speed in spoken English.",
+        link: "https://americanenglish.state.gov/resources/more-dialogs-everyday-use",
+        format: "site",
+        details: {
+          type: "Supplementary speaking resource",
+          teaches: "Fluency, natural responses, and everyday phrase control",
+          howTo: [
+            "Practice one dialogue aloud twice.",
+            "Paraphrase one line in your own words.",
+            "Add one follow-up answer to extend the turn."
+          ],
+          whyTopPick: "Useful speaking fluency work beyond direct exam prompts.",
+          freeAccess: "Free American English resource.",
+          ageCheck: "Teen/adult; suitable for IELTS preparation."
+        }
       }
     ],
   };

@@ -1863,6 +1863,106 @@
         focus: "serve & return, imitation, choices",
         time: "10 min/day",
         level: "caregiver-led"
+      },
+      {
+        age: "0-3",
+        skill: "reading",
+        slug: "0-3-reading-reading-rockets-tips-for-parents-of-babies",
+        title: "Reading Rockets - Reading Tips for Parents of Babies",
+        link: "https://www.readingrockets.org/topics/activities/articles/reading-tips-parents-babies",
+        format: "site",
+        description:
+          "Simple parent tips for making shared reading warm, short, and repeatable with babies and young toddlers.",
+        details: {
+          type: "Parent tip sheet",
+          teaches: "Book routine, naming, pointing, and early language during shared reading.",
+          howTo: [
+            "Choose one short book and repeat it for several days.",
+            "Point to one picture at a time and say the word slowly.",
+            "Pause for your child to look, point, or copy a sound."
+          ],
+          whyTopPick: "Clear, realistic advice for very young children.",
+          freeAccess: "Free article on Reading Rockets.",
+          ageCheck: "Good fit for 0-3 with caregiver support."
+        },
+        focus: "shared reading, naming, routine",
+        time: "3-5 min",
+        level: "caregiver-led"
+      },
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "0-3-listening-zero-to-three-language-literacy-12-24-months",
+        title: "ZERO TO THREE - Supporting Language and Literacy Skills (12-24 Months)",
+        link: "https://www.zerotothree.org/resource/supporting-language-and-literacy-skills-from-12-24-months/",
+        format: "site",
+        description:
+          "A short guide to everyday listening and language routines for toddlers, including songs, naming, and back-and-forth talk.",
+        details: {
+          type: "Parent guide",
+          teaches: "Listening attention, vocabulary growth, and simple follow-along routines.",
+          howTo: [
+            "Pick one daily routine such as meals, bath, or book time.",
+            "Repeat the same words and short phrases each day.",
+            "Add pointing, gestures, and pauses so your child can respond."
+          ],
+          whyTopPick: "Easy to use in normal family routines.",
+          freeAccess: "Free article on ZERO TO THREE.",
+          ageCheck: "Strong fit for toddlers in the 0-3 range."
+        },
+        focus: "listening routines, vocabulary, repetition",
+        time: "3-5 min",
+        level: "caregiver-led"
+      },
+      {
+        age: "0-3",
+        skill: "writing",
+        slug: "0-3-writing-zero-to-three-developing-early-writing-skills",
+        title: "ZERO TO THREE - Developing Early Writing Skills",
+        link: "https://www.zerotothree.org/resource/developing-early-writing-skills-gather-round-activities/",
+        format: "site",
+        description:
+          "Play-based ideas for scribbling, drawing, and hand control that match the earliest stages of writing readiness.",
+        details: {
+          type: "Parent activity guide",
+          teaches: "Scribbling, hand strength, and early mark-making habits.",
+          howTo: [
+            "Offer chunky crayons or washable markers on big paper.",
+            "Model one simple movement such as up/down or round/round.",
+            "Praise the action and keep sessions very short."
+          ],
+          whyTopPick: "Practical and developmentally appropriate for toddlers.",
+          freeAccess: "Free article on ZERO TO THREE.",
+          ageCheck: "Appropriate for 0-3 with close supervision."
+        },
+        focus: "scribbling, grip, early marks",
+        time: "2-5 min",
+        level: "caregiver-led"
+      },
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "0-3-speaking-zero-to-three-supporting-language-development",
+        title: "ZERO TO THREE - Supporting Language Development",
+        link: "https://www.zerotothree.org/resource/supporting-language-development-gather-round-activities/",
+        format: "site",
+        description:
+          "Simple talk ideas that help adults build turn-taking, imitation, and first-word routines during play.",
+        details: {
+          type: "Parent activity guide",
+          teaches: "Serve-and-return talk, imitation, and first words.",
+          howTo: [
+            "Follow your child's focus during play.",
+            "Use one short phrase and repeat it many times.",
+            "Pause and wait so your child has a turn to copy or answer."
+          ],
+          whyTopPick: "Very usable for daily play and routines.",
+          freeAccess: "Free article on ZERO TO THREE.",
+          ageCheck: "Designed for very young children with adult interaction."
+        },
+        focus: "turn-taking, imitation, first words",
+        time: "3-5 min",
+        level: "caregiver-led"
       }
     ]
   };

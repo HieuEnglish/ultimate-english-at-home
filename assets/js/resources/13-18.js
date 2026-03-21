@@ -1957,6 +1957,106 @@
           "sounds-right-phonemic-chart",
           "wheel-of-names-random-speaker-picker"
         ]
+      },
+      {
+        age: "13-18",
+        skill: "reading",
+        slug: "13-18-reading-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Reading)",
+        description:
+          "Free reading tasks with level filters, useful for building faster comprehension and vocabulary in context.",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=reading",
+        format: "site",
+        focus: "comprehension, vocabulary, timed reading",
+        time: "10-15 min",
+        level: "B1-B2",
+        details: {
+          type: "Skill activity hub",
+          teaches: "Reading for gist, detail, and meaning in context.",
+          howTo: [
+            "Choose one reading task at the right level.",
+            "Read once for the main point and once for detail questions.",
+            "Summarize the text in two sentences after finishing."
+          ],
+          whyTopPick: "Flexible free practice that fits teen independent study.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Good fit for teens."
+        }
+      },
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "13-18-listening-cambridge-activities-for-learners",
+        title: "Cambridge English - Activities for Learners (Listening)",
+        description:
+          "Free listening tasks with replay and level filters, useful for building more accurate listening under light time pressure.",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=listening",
+        format: "site",
+        focus: "main ideas, detail, replay strategy",
+        time: "10-15 min",
+        level: "B1-B2",
+        details: {
+          type: "Skill activity hub",
+          teaches: "Listening for overall meaning, key details, and follow-up review.",
+          howTo: [
+            "Do the first listen without pausing.",
+            "Replay for missed details and check answers.",
+            "Note one phrase or pronunciation feature to reuse."
+          ],
+          whyTopPick: "Good short-form listening practice for teen learners.",
+          freeAccess: "Free Cambridge English activities.",
+          ageCheck: "Good fit for teens."
+        }
+      },
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "13-18-writing-american-english-picture-paraphrase-it",
+        title: "American English - Picture This: Paraphrase It!",
+        description:
+          "A free activity that turns ideas into new wording, which helps teens practise paraphrasing and clearer writing.",
+        link: "https://americanenglish.state.gov/resources/picture-paraphrase-it",
+        format: "site",
+        focus: "paraphrasing, sentence variety, clarity",
+        time: "15 min",
+        level: "B1-B2",
+        details: {
+          type: "Writing activity",
+          teaches: "Paraphrasing, sentence flexibility, and clearer expression.",
+          howTo: [
+            "Choose one prompt or picture.",
+            "Write the idea in one simple sentence.",
+            "Rewrite it two more ways using different words or structure."
+          ],
+          whyTopPick: "Useful bridge from controlled practice to stronger teen writing.",
+          freeAccess: "Free American English resource.",
+          ageCheck: "Good fit for 13-18."
+        }
+      },
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "13-18-speaking-american-english-more-dialogs-everyday-use",
+        title: "American English - More Dialogs for Everyday Use",
+        description:
+          "Extra role-play dialogues for building fluency, natural phrases, and stronger speaking confidence in everyday situations.",
+        link: "https://americanenglish.state.gov/resources/more-dialogs-everyday-use",
+        format: "site",
+        focus: "role-play, fluency, natural phrases",
+        time: "10-15 min",
+        level: "B1-B2",
+        details: {
+          type: "Dialogue practice",
+          teaches: "Everyday speaking, fluency, and clearer spoken responses.",
+          howTo: [
+            "Read one dialogue aloud twice.",
+            "Swap roles and perform it more naturally the second time.",
+            "Add one follow-up question to extend the conversation."
+          ],
+          whyTopPick: "Practical speaking work without heavy setup.",
+          freeAccess: "Free American English resource.",
+          ageCheck: "Good fit for teens with topic preview."
+        }
       }
     ]
   };

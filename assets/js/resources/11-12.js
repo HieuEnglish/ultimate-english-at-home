@@ -1999,6 +1999,102 @@
           "baamboozle-speaking-games",
           "vocaroo"
         ]
+      },
+      {
+        "age": "11-12",
+        "skill": "reading",
+        "slug": "11-12-reading-cambridge-activities-for-learners",
+        "title": "Cambridge English - Activities for Learners (Reading)",
+        "description": "Free reading tasks with questions and level filters that work well for upper-primary and lower-secondary learners.",
+        "link": "https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=reading",
+        "format": "site",
+        "level": "A2-B1",
+        "time": "10-15 min",
+        "focus": "reading for gist, details, vocabulary",
+        "details": {
+          "type": "Skill activity hub",
+          "teaches": "Short text reading, question practice, and vocabulary in context",
+          "howTo": [
+            "Choose one reading activity at A2 or B1 level.",
+            "Read once for meaning and again for the questions.",
+            "Write down two useful new words after each task."
+          ],
+          "whyTopPick": "Easy way to add structured free reading practice.",
+          "freeAccess": "Free Cambridge English activities.",
+          "ageCheck": "Good fit for 11-12 learners."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "listening",
+        "slug": "11-12-listening-american-english-around-town",
+        "title": "American English - Everyday Conversations: Around Town",
+        "description": "Short real-life dialogues that help learners catch key words, places, and everyday meaning.",
+        "link": "https://americanenglish.state.gov/resources/around-town",
+        "format": "site",
+        "level": "A2-B1",
+        "time": "10 min",
+        "focus": "real-life listening, key details",
+        "details": {
+          "type": "Dialogue practice",
+          "teaches": "Everyday listening, useful phrases, and listening for details",
+          "howTo": [
+            "Listen to one short dialogue.",
+            "Repeat key lines and identify the main situation.",
+            "Answer two or three detail questions after listening."
+          ],
+          "whyTopPick": "Clear everyday English that is easy to reuse for home practice.",
+          "freeAccess": "Free American English resource.",
+          "ageCheck": "Good fit for 11-12 with topic preview."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "writing",
+        "slug": "11-12-writing-american-english-developing-writing",
+        "title": "American English - Developing Writing",
+        "description": "A free writing resource that supports sentence expansion, paragraph building, and clearer written ideas.",
+        "link": "https://americanenglish.state.gov/resources/developing-writing",
+        "format": "site",
+        "level": "A2-B1",
+        "time": "15 min",
+        "focus": "paragraphs, organization, clarity",
+        "details": {
+          "type": "Writing practice resource",
+          "teaches": "Sentence building, paragraph organization, and guided writing practice",
+          "howTo": [
+            "Choose one short writing task.",
+            "Draft first, then improve one area such as linking words or punctuation.",
+            "Read the final version aloud to check if it sounds clear."
+          ],
+          "whyTopPick": "Practical writing support without a paywall.",
+          "freeAccess": "Free American English resource.",
+          "ageCheck": "Suitable for 11-12 with light support."
+        }
+      },
+      {
+        "age": "11-12",
+        "skill": "speaking",
+        "slug": "11-12-speaking-american-english-dialogs-everyday-use",
+        "title": "American English - Dialogs for Everyday Use",
+        "description": "Short everyday role-plays that build useful phrases, pronunciation, and confidence in simple speaking situations.",
+        "link": "https://americanenglish.state.gov/resources/dialogs-everyday-use",
+        "format": "site",
+        "level": "A2-B1",
+        "time": "10-15 min",
+        "focus": "role-play, useful phrases, fluency",
+        "details": {
+          "type": "Dialogue practice",
+          "teaches": "Role-play, spoken phrases, and conversational confidence",
+          "howTo": [
+            "Pick one short dialogue and read it together.",
+            "Swap roles and repeat it with clear pronunciation.",
+            "Change one detail so the learner has to speak more freely."
+          ],
+          "whyTopPick": "Easy structure for speaking practice at home or in pairs.",
+          "freeAccess": "Free American English resource.",
+          "ageCheck": "Good fit for 11-12 with topic preview."
+        }
       }
     ]
   };
