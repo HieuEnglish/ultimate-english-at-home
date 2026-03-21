@@ -4,21 +4,24 @@
    Goals:
    - Keep everything free + client-only (GitHub Pages compatible)
    - Choose a better default English voice when available
-   - Let user persist voice + speed (rate) via localStorage
+   - Prefer Microsoft natural voices when the browser exposes them
+   - Let users persist voice + speed (rate) via localStorage
    - Provide a single API used by all listening/speaking runners
 
    Exposes: window.UEAH_TTS
      - isSupported()
-     - ready() -> Promise<void>   (voices loaded best-effort)
+     - ready() -> Promise<void>
      - getVoices() -> SpeechSynthesisVoice[]
      - getSettings() -> { voiceURI, rate }
      - setSettings({ voiceURI?, rate? }) -> { voiceURI, rate }
      - pickBestVoice(preferredLang?) -> SpeechSynthesisVoice|null
+     - getVoiceMeta(voiceOrURI?, preferredLang?) -> metadata object
+     - getPreferredVoiceMeta(preferredLang?) -> metadata object
      - speak(text, opts?) -> boolean
      - speakAsync(text, opts?) -> Promise<boolean>
      - stop()
      - isSpeaking() -> boolean
-*/
+ */
 
 (function () {
   "use strict";
@@ -26,14 +29,13 @@
   if (window.UEAH_TTS) return;
 
   const STORAGE_KEY = "ueah:tts:settings:v1";
+  const RATE_MIN = 0.7;
+  const RATE_MAX = 1.2;
 
   const DEFAULTS = {
     voiceURI: "",
-    rate: 1.0, // Most voices sound natural around ~0.95–1.05
+    rate: 0.95,
   };
-
-  const RATE_MIN = 0.7;
-  const RATE_MAX = 1.2;
 
   const EVENTS = {
     voicesChanged: "ueah:tts-voices-changed",
@@ -58,7 +60,6 @@
     try {
       window.dispatchEvent(new CustomEvent(name, { detail }));
     } catch (_) {
-      // Older browsers fallback (unlikely needed in target browsers)
       try {
         const ev = document.createEvent("CustomEvent");
         ev.initCustomEvent(name, false, false, detail);
@@ -71,12 +72,6 @@
     return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
   }
 
-  // -----------------------------
-  // Settings (localStorage)
-  // -----------------------------
-
-  let settings = loadSettings();
-
   function loadSettings() {
     const raw = safeParseJSON(localStorage.getItem(STORAGE_KEY) || "");
     const out = { ...DEFAULTS };
@@ -86,19 +81,17 @@
       if (raw.rate != null) out.rate = clamp(raw.rate, RATE_MIN, RATE_MAX);
     }
 
-    // Ensure defaults always valid
     out.voiceURI = String(out.voiceURI || "").trim();
     out.rate = clamp(out.rate, RATE_MIN, RATE_MAX);
-
     return out;
   }
+
+  let settings = loadSettings();
 
   function persistSettings() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-    } catch (_) {
-      // ignore storage errors (private mode, quota, etc.)
-    }
+    } catch (_) {}
   }
 
   function getSettings() {
@@ -121,13 +114,8 @@
     return getSettings();
   }
 
-  // -----------------------------
-  // Voices (async load quirks)
-  // -----------------------------
-
   let voices = [];
   let readyResolved = false;
-
   let readyResolve = null;
   let readyReject = null;
 
@@ -140,7 +128,9 @@
     if (!isSupported()) return [];
 
     try {
-      const list = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+      const list = typeof window.speechSynthesis.getVoices === "function"
+        ? window.speechSynthesis.getVoices()
+        : [];
       voices = Array.isArray(list) ? list.slice() : [];
     } catch (_) {
       voices = [];
@@ -164,27 +154,17 @@
       window.speechSynthesis.onvoiceschanged = function () {
         refreshVoices();
       };
-    } catch (_) {
-      // ignore
-    }
+    } catch (_) {}
   }
 
   function primeVoices() {
-    // Many browsers require calling getVoices() once to populate.
     refreshVoices();
 
-    // If still empty, try again shortly (common in Chrome/Edge).
     if (!voices.length) {
-      setTimeout(() => {
-        refreshVoices();
-      }, 150);
-      setTimeout(() => {
-        refreshVoices();
-      }, 600);
+      setTimeout(() => refreshVoices(), 150);
+      setTimeout(() => refreshVoices(), 600);
     }
 
-    // If still empty, resolve ready() anyway after a timeout; app can still speak
-    // (browser may pick a default voice lazily).
     setTimeout(() => {
       if (!readyResolved) {
         readyResolved = true;
@@ -199,47 +179,123 @@
     return readyPromise;
   }
 
-  // -----------------------------
-  // Voice picking
-  // -----------------------------
-
   function norm(s) {
     return String(s || "").trim().toLowerCase();
   }
 
-  function scoreVoice(v, preferredLang) {
+  function resolveVoice(voiceOrURI, preferredLang) {
+    const list = voices.length ? voices : refreshVoices();
+    if (!list.length) return null;
+
+    if (typeof voiceOrURI === "string" && voiceOrURI.trim()) {
+      return list.find((v) => String(v.voiceURI || "") === voiceOrURI.trim()) || null;
+    }
+
+    if (voiceOrURI && typeof voiceOrURI === "object") {
+      return voiceOrURI;
+    }
+
+    return pickBestVoice(preferredLang);
+  }
+
+  function getVoiceMeta(voiceOrURI, preferredLang) {
+    const v = resolveVoice(voiceOrURI, preferredLang);
+    const pref = norm(preferredLang || "en-US");
+    const primaryPref = pref.split("-")[0] || "en";
     const lang = norm(v && v.lang);
-    const name = norm(v && v.name);
-    const uri = norm(v && v.voiceURI);
+    const name = String((v && v.name) || "").trim();
+    const uri = String((v && v.voiceURI) || "").trim();
+    const nameNorm = norm(name);
+    const uriNorm = norm(uri);
+
+    const isEnglish = lang.startsWith("en");
+    const isExactLang = !!(lang && pref && lang === pref);
+    const isPrimaryLang = !!(lang && primaryPref && lang.startsWith(primaryPref));
+    const isMicrosoft = nameNorm.includes("microsoft") || uriNorm.includes("microsoft");
+    const isGoogle = nameNorm.includes("google") || uriNorm.includes("google");
+    const isNatural = nameNorm.includes("natural") || nameNorm.includes("neural");
+    const isOnline = nameNorm.includes("online") || uriNorm.includes("online");
+    const isEdgeNatural = isMicrosoft && (isNatural || isOnline);
+    const isUserSelected = !!(settings.voiceURI && uri && norm(settings.voiceURI) === uriNorm);
+
+    let provider = "Browser";
+    if (isMicrosoft) provider = "Microsoft";
+    else if (isGoogle) provider = "Google";
+    else if (v && v.localService) provider = "Device";
+
+    let quality = "Standard";
+    if (isEdgeNatural) quality = "Microsoft Natural";
+    else if (isMicrosoft && isNatural) quality = "Microsoft Enhanced";
+    else if (isNatural) quality = "Enhanced";
+
+    let summary = "Using the browser's available voice.";
+    if (isEdgeNatural) {
+      summary = "Using a Microsoft natural voice for more lifelike playback.";
+    } else if (isMicrosoft) {
+      summary = "Using a Microsoft voice. Natural Microsoft voices sound best when available.";
+    } else if (isGoogle && isNatural) {
+      summary = "Using an enhanced Google voice from the browser.";
+    } else if (isNatural) {
+      summary = "Using an enhanced voice exposed by the browser.";
+    } else if (isEnglish) {
+      summary = "Using a standard English browser voice.";
+    }
+
+    const displayName = v
+      ? `${name || "Voice"} (${lang || "unknown"})${isEdgeNatural ? " - Microsoft natural" : isMicrosoft ? " - Microsoft" : ""}`
+      : "Automatic browser voice";
+
+    return {
+      voice: v || null,
+      voiceURI: uri,
+      name,
+      lang,
+      provider,
+      quality,
+      displayName,
+      summary,
+      isEnglish,
+      isExactLang,
+      isPrimaryLang,
+      isMicrosoft,
+      isGoogle,
+      isNatural,
+      isOnline,
+      isEdgeNatural,
+      isUserSelected,
+    };
+  }
+
+  function scoreVoice(v, preferredLang) {
+    const meta = getVoiceMeta(v, preferredLang);
+    const lang = meta.lang;
+    const name = norm(meta.name);
+    const uri = norm(meta.voiceURI);
 
     let score = 0;
+    const pref = norm(preferredLang || "en-US");
 
-    // Language preference
-    const pref = norm(preferredLang || "en-us");
     if (lang === pref) score += 120;
-    else if (lang && pref && lang.startsWith(pref.split("-")[0])) score += 90; // "en"
+    else if (lang && pref && lang.startsWith(pref.split("-")[0])) score += 90;
     else if (lang.startsWith("en")) score += 70;
     else score -= 50;
 
-    // Default voice gets a bump
+    if (meta.isEdgeNatural) score += 140;
+    else if (meta.isMicrosoft && meta.isNatural) score += 100;
+    else if (meta.isMicrosoft) score += 55;
+    else if (meta.isGoogle && meta.isNatural) score += 45;
+    else if (meta.isGoogle) score += 25;
+    else if (meta.isNatural) score += 30;
+
     if (v && v.default) score += 10;
+    if (v && v.localService && !meta.isEdgeNatural) score += 4;
+    if (meta.isOnline) score += 10;
 
-    // Prefer localService voices (often higher quality / more stable)
-    if (v && v.localService) score += 6;
-
-    // Name hints (best-effort; varies by OS/browser)
-    const goodTokens = ["natural", "neural", "premium", "enhanced", "google", "microsoft"];
-    for (const t of goodTokens) {
-      if (name.includes(t)) score += 6;
-    }
-
-    // Penalize obvious low-quality/legacy tokens (best-effort)
     const badTokens = ["espeak", "mbrola", "festival", "robot"];
     for (const t of badTokens) {
       if (name.includes(t)) score -= 8;
     }
 
-    // If user previously chose it (voiceURI stored), treat as top priority
     if (settings.voiceURI && uri && uri === norm(settings.voiceURI)) score += 1000;
 
     return score;
@@ -249,7 +305,6 @@
     const list = voices.length ? voices : refreshVoices();
     if (!list.length) return null;
 
-    // If the stored voiceURI is available, use it.
     if (settings.voiceURI) {
       const chosen = list.find((v) => String(v.voiceURI || "") === settings.voiceURI);
       if (chosen) return chosen;
@@ -274,9 +329,9 @@
     return voices.slice();
   }
 
-  // -----------------------------
-  // Speaking (with optional chunking)
-  // -----------------------------
+  function getPreferredVoiceMeta(preferredLang) {
+    return getVoiceMeta(null, preferredLang);
+  }
 
   let speakJobId = 0;
 
@@ -306,10 +361,10 @@
   function splitIntoChunks(text, maxLen) {
     const t = cleanText(text);
     if (!t) return [];
+
     const limit = Math.max(80, Number(maxLen) || 180);
     if (t.length <= limit) return [t];
 
-    // Split into sentences without lookbehind for compatibility.
     const sentences = [];
     let buf = "";
     for (let i = 0; i < t.length; i++) {
@@ -318,17 +373,16 @@
 
       const isEnd = ch === "." || ch === "!" || ch === "?";
       const next = t[i + 1] || "";
-
       if (isEnd && (next === " " || next === "\n" || next === "\t")) {
         const s = buf.trim();
         if (s) sentences.push(s);
         buf = "";
       }
     }
+
     const tail = buf.trim();
     if (tail) sentences.push(tail);
 
-    // Now pack sentences into <= limit chunks.
     const chunks = [];
     let cur = "";
 
@@ -353,7 +407,6 @@
     }
     pushCur();
 
-    // If any chunk is still too long (no punctuation), split by commas/spaces.
     const finalChunks = [];
     for (const c of chunks) {
       if (c.length <= limit) {
@@ -379,7 +432,6 @@
         continue;
       }
 
-      // Fallback: hard wrap by words
       const words = c.split(/\s+/);
       let wbuf = "";
       for (const w of words) {
@@ -402,18 +454,15 @@
     if (!isSupported()) return Promise.resolve(false);
 
     const jobId = (speakJobId += 1);
-
     const options = opts && typeof opts === "object" ? opts : {};
     const lang = String(options.lang || "en-US");
     const rate = clamp(options.rate != null ? options.rate : settings.rate, RATE_MIN, RATE_MAX);
     const pitch = clamp(options.pitch != null ? options.pitch : 1.0, 0.5, 2.0);
     const volume = clamp(options.volume != null ? options.volume : 1.0, 0.0, 1.0);
-
-    const chunk = options.chunk !== false; // default true for better reliability
+    const chunk = options.chunk !== false;
     const chunkSize = Number(options.chunkSize) || 180;
     const chunks = chunk ? splitIntoChunks(t, chunkSize) : [t];
 
-    // Ensure voices are primed best-effort before picking one.
     return ready()
       .catch(() => {})
       .then(() => {
@@ -423,7 +472,6 @@
           const synth = window.speechSynthesis;
           synth.cancel();
 
-          // Some browsers need resume() if paused.
           try {
             if (typeof synth.resume === "function") synth.resume();
           } catch (_) {}
@@ -447,31 +495,28 @@
               }
 
               const part = chunks[i++];
-              const u = new SpeechSynthesisUtterance(part);
-
-              u.lang = lang;
-              u.rate = rate;
-              u.pitch = pitch;
-              u.volume = volume;
+              const utterance = new SpeechSynthesisUtterance(part);
+              utterance.lang = lang;
+              utterance.rate = rate;
+              utterance.pitch = pitch;
+              utterance.volume = volume;
 
               if (voice) {
                 try {
-                  u.voice = voice;
+                  utterance.voice = voice;
                 } catch (_) {}
               }
 
-              u.onend = () => {
-                // Small gap can help some voices sound more natural
+              utterance.onend = () => {
                 setTimeout(speakNext, 10);
               };
 
-              u.onerror = () => {
-                // If a chunk errors, stop the chain.
+              utterance.onerror = () => {
                 resolve(false);
               };
 
               try {
-                synth.speak(u);
+                synth.speak(utterance);
               } catch (_) {
                 resolve(false);
               }
@@ -486,11 +531,8 @@
   }
 
   function speak(text, opts) {
-    // Fire-and-forget; returns boolean "queued" (best-effort).
     const t = cleanText(text);
     if (!t || !isSupported()) return false;
-
-    // Start async chain; caller can ignore.
     speakInternal(t, opts);
     return true;
   }
@@ -499,12 +541,8 @@
     return speakInternal(text, opts);
   }
 
-  // -----------------------------
-  // Init
-  // -----------------------------
-
   attachVoicesChangedListener();
-  // Prime as soon as script loads (defer script runs after parse)
+
   if (isSupported()) {
     try {
       primeVoices();
@@ -514,7 +552,6 @@
       } catch (__) {}
     }
   } else {
-    // Resolve ready() quickly for unsupported browsers.
     readyResolved = true;
     try {
       readyResolve();
@@ -528,6 +565,8 @@
     getSettings,
     setSettings,
     pickBestVoice,
+    getVoiceMeta,
+    getPreferredVoiceMeta,
     speak,
     speakAsync,
     stop,

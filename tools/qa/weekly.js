@@ -113,7 +113,8 @@ async function run() {
       }
 
       // Smoke-check the Tests index and then open a known runner directly.
-      const testCards = page.locator('main .card-grid .card');
+      await page.waitForSelector('main .card-grid', { timeout: 3000 }).catch(() => null);
+      const testCards = page.locator('main .card-grid .card, main .card-grid a[role="listitem"]');
       if ((await testCards.count()) > 0) {
         await page.goto(asUrl(base, '/?r=/tests/age-4-7-listening'), { waitUntil: 'domcontentloaded', timeout: 45000 });
 
