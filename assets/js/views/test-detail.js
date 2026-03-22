@@ -4,12 +4,125 @@
    the test cannot be found, delegates to appropriate fallback views.
 */
 
-import { breadcrumbs, escapeHtml, iconSkill } from '../common.js';
+import { breadcrumbs, escapeHtml, iconAge, iconSkill } from '../common.js';
 import { getTestsMissingView } from './error.js';
 import { getView as getNotFoundView } from './not-found.js';
 
 function isAudioSkill(skill) {
   return skill === 'listening' || skill === 'speaking';
+}
+
+function skillLabel(skill) {
+  const key = String(skill || '').trim().toLowerCase();
+  if (!key) return 'Practice';
+  return key.charAt(0).toUpperCase() + key.slice(1);
+}
+
+function ageKeyForTest(test) {
+  const raw = String(test && test.age ? test.age : '').trim().toLowerCase();
+  if (raw) return raw;
+  return String(test && test.slug ? test.slug : '').startsWith('iels-') ? 'ielts' : '13-18';
+}
+
+function ageTheme(ageKey) {
+  if (ageKey === '0-3') {
+    return {
+      label: 'Ages 0-3',
+      vibe: 'Tiny steps, bright wins',
+      accent: '#ff9e6d',
+      soft: 'rgba(255, 158, 109, .20)'
+    };
+  }
+  if (ageKey === '4-7') {
+    return {
+      label: 'Ages 4-7',
+      vibe: 'Playful and high-energy',
+      accent: '#ffd166',
+      soft: 'rgba(255, 209, 102, .20)'
+    };
+  }
+  if (ageKey === '8-10') {
+    return {
+      label: 'Ages 8-10',
+      vibe: 'Curious and adventurous',
+      accent: '#34d4c2',
+      soft: 'rgba(52, 212, 194, .20)'
+    };
+  }
+  if (ageKey === '11-12') {
+    return {
+      label: 'Ages 11-12',
+      vibe: 'Focused and confident',
+      accent: '#59c3ff',
+      soft: 'rgba(89, 195, 255, .20)'
+    };
+  }
+  if (ageKey === 'ielts') {
+    return {
+      label: 'IELTS track',
+      vibe: 'Exam-style momentum',
+      accent: '#2dd4bf',
+      soft: 'rgba(45, 212, 191, .18)'
+    };
+  }
+  return {
+    label: 'Ages 13-18',
+    vibe: 'Sharp and expressive',
+    accent: '#8d83ff',
+    soft: 'rgba(141, 131, 255, .20)'
+  };
+}
+
+function skillTheme(skill) {
+  const key = String(skill || '').trim().toLowerCase();
+  if (key === 'reading') {
+    return {
+      label: 'Reading focus',
+      accent: '#6c63ff',
+      accentAlt: '#ff8a65',
+      summary: 'Visual prompts, focused choices, and clearer reading flow.'
+    };
+  }
+  if (key === 'listening') {
+    return {
+      label: 'Listening focus',
+      accent: '#00c2a8',
+      accentAlt: '#5c7cff',
+      summary: 'Audio-led practice with faster controls and stronger cues.'
+    };
+  }
+  if (key === 'writing') {
+    return {
+      label: 'Writing focus',
+      accent: '#ff8f5b',
+      accentAlt: '#ff5fa2',
+      summary: 'Cleaner prompts, warmer feedback, and a brighter writing studio.'
+    };
+  }
+  return {
+    label: 'Speaking focus',
+    accent: '#ff5fa2',
+    accentAlt: '#6f8bff',
+    summary: 'More confident speaking flow, richer prompts, and clearer coaching.'
+  };
+}
+
+function testTheme(test) {
+  const ageKey = ageKeyForTest(test);
+  const age = ageTheme(ageKey);
+  const skill = skillTheme(test && test.skill);
+  return {
+    ageKey,
+    ageLabel: age.label,
+    vibe: age.vibe,
+    ageAccent: age.accent,
+    ageSoft: age.soft,
+    skillLabel: skill.label,
+    accent: skill.accent,
+    accentAlt: skill.accentAlt,
+    summary: skill.summary,
+    mode: isAudioSkill(test && test.skill) ? 'Audio-guided practice' : 'Interactive practice'
+  };
 }
 
 function audioSettingsPanelHtml(slug) {
@@ -19,7 +132,7 @@ function audioSettingsPanelHtml(slug) {
 
   return `
     <div
-      class="note"
+      class="note test-audio-panel"
       data-tts-panel="${slug}"
       role="region"
       aria-label="Audio settings"
@@ -111,6 +224,13 @@ export async function getView(ctx, slug) {
   const { hrefFor } = ctx;
   const safeTitle = test.title || 'Test';
   const safeSubtitle = test.subtitle || 'Test your ability';
+  const theme = testTheme(test);
+  const themeStyle = [
+    `--test-accent:${theme.accent}`,
+    `--test-accent-2:${theme.accentAlt}`,
+    `--test-accent-soft:${theme.ageSoft}`,
+    `--test-accent-age:${theme.ageAccent}`
+  ].join(';');
 
   const title = `${safeTitle} - UEAH`;
   const description = test.subtitle ? `${safeTitle}: ${safeSubtitle}` : `${safeTitle} practice test.`;
@@ -141,29 +261,70 @@ export async function getView(ctx, slug) {
   } catch (_) {}
 
   const html = `
-    <section class="page-top tests-page">
+    <section class="page-top tests-page test-detail-page" style="${themeStyle}" data-test-age="${escapeHtml(theme.ageKey)}" data-test-skill="${escapeHtml(test.skill || '')}">
       ${breadcrumb}
-      <h1 class="page-title">${escapeHtml(safeTitle)}</h1>
-      <p class="page-subtitle">${escapeHtml(safeSubtitle)}</p>
 
-      <div class="detail-card" role="region" aria-label="Test details">
-        <div style="display:flex; gap:12px; align-items:flex-start">
-          <div class="card-icon" aria-hidden="true" style="width:44px; height:44px">${iconSkill(test.skill)}</div>
-          <div>
-            <h2 class="detail-title" style="font-size:18px; margin:0">Test</h2>
-            <p class="detail-desc" style="margin-top:10px">${escapeHtml(safeSubtitle)}</p>
+      <div class="test-hero">
+        <div class="test-hero__copy">
+          <div class="test-hero__eyebrow">Practice lane</div>
+          <h1 class="page-title test-hero__title">${escapeHtml(safeTitle)}</h1>
+          <p class="page-subtitle test-hero__subtitle">${escapeHtml(safeSubtitle)}</p>
+
+          <div class="test-chip-row" aria-label="Test summary">
+            <span class="test-chip">${escapeHtml(theme.ageLabel)}</span>
+            <span class="test-chip">${escapeHtml(skillLabel(test.skill))}</span>
+            <span class="test-chip">${escapeHtml(theme.mode)}</span>
           </div>
+
+          <div class="test-stat-grid" aria-label="Test highlights">
+            <div class="test-stat-card">
+              <span class="test-stat-card__label">Energy</span>
+              <strong>${escapeHtml(theme.vibe)}</strong>
+            </div>
+            <div class="test-stat-card">
+              <span class="test-stat-card__label">Focus</span>
+              <strong>${escapeHtml(theme.skillLabel)}</strong>
+            </div>
+            <div class="test-stat-card">
+              <span class="test-stat-card__label">Feel</span>
+              <strong>${escapeHtml(theme.summary)}</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-hero__art" aria-hidden="true">
+          <div class="test-hero__orb test-hero__orb--one"></div>
+          <div class="test-hero__orb test-hero__orb--two"></div>
+          <div class="test-hero__orb test-hero__orb--three"></div>
+          <div class="test-hero__spark test-hero__spark--one"></div>
+          <div class="test-hero__spark test-hero__spark--two"></div>
+          <div class="test-hero__panel test-hero__panel--main">${iconSkill(test.skill)}</div>
+          <div class="test-hero__panel test-hero__panel--side">${iconAge(theme.ageKey)}</div>
+        </div>
+      </div>
+
+      <div class="detail-card test-detail-shell" role="region" aria-label="Test details">
+        <div class="test-detail-shell__header">
+          <div class="test-detail-shell__summary">
+            <div class="card-icon test-detail-shell__icon" aria-hidden="true">${iconSkill(test.skill)}</div>
+            <div>
+              <h2 class="detail-title test-detail-shell__title">Ready to practice</h2>
+              <p class="detail-desc test-detail-shell__desc">${escapeHtml(theme.summary)}</p>
+            </div>
+          </div>
+
+          <div class="test-stage-pill">${escapeHtml(theme.vibe)}</div>
         </div>
 
         ${showAudioPanel ? audioSettingsPanelHtml(slug) : ''}
 
-        <div style="margin-top:14px">
+        <div class="test-runner-shell">
           <div data-test-runner-root="${slug}">
             ${runnerHtml}
           </div>
         </div>
 
-        <div class="actions" style="margin-top:16px">
+        <div class="actions actions--test-footer" style="margin-top:16px">
           <a class="btn" href="${hrefFor('/tests')}" data-nav>← Back</a>
         </div>
       </div>
