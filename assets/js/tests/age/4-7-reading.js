@@ -52,6 +52,16 @@
       .replaceAll("'", "&#39;");
   }
 
+  function isEmojiish(v) {
+    return /[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/u.test(String(v == null ? "" : v));
+  }
+
+  function renderInlineChoice(v, style) {
+    const className = isEmojiish(v) ? ' class="emoji"' : "";
+    const inlineStyle = style ? ` style="${style}"` : "";
+    return `<span${className}${inlineStyle}>${safeText(v)}</span>`;
+  }
+
   function nowIso() {
     return new Date().toISOString();
   }
@@ -270,10 +280,11 @@
     const optionsHtml = options
       .map((opt, i) => {
         const id = `opt-${SLUG}-${qid}-${i}`;
+        const style = isEmojiish(opt) ? "font-size:28px" : "";
         return `
           <label for="${id}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--border); border-radius:14px; background: var(--surface2); cursor:pointer">
             <input id="${id}" type="radio" name="choice" value="${i}" required style="margin:0" />
-            <span>${safeText(opt)}</span>
+            ${renderInlineChoice(opt, style)}
           </label>
         `;
       })

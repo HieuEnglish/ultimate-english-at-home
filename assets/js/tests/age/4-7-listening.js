@@ -55,6 +55,16 @@
       .replaceAll("'", "&#39;");
   }
 
+  function isEmojiish(v) {
+    return /[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/u.test(String(v == null ? "" : v));
+  }
+
+  function renderInlineChoice(v, style) {
+    const className = isEmojiish(v) ? ' class="emoji"' : "";
+    const inlineStyle = style ? ` style="${style}"` : "";
+    return `<span${className}${inlineStyle}>${safeText(v)}</span>`;
+  }
+
   function nowIso() {
     return new Date().toISOString();
   }
@@ -307,8 +317,7 @@
     const opts = Array.isArray(options) ? options : [];
     return opts
       .map((opt, i) => {
-        const isEmojiish = /[\u{1F300}-\u{1FAFF}]/u.test(String(opt));
-        const big = isEmojiish ? "font-size:30px" : "font-size:18px; line-height:1.25";
+        const big = isEmojiish(opt) ? "font-size:30px" : "font-size:18px; line-height:1.25";
         return `
           <button
             class="btn"
@@ -318,7 +327,7 @@
             data-choice="${i}"
             style="justify-content:center; padding:14px 14px; min-height:54px"
             aria-label="Option ${i + 1}: ${safeText(opt)}"
-          ><span style="${big}">${safeText(opt)}</span></button>
+          >${renderInlineChoice(opt, big)}</button>
         `;
       })
       .join("");
@@ -360,7 +369,7 @@
 
       <div class="note" style="margin:12px 0 0; padding:12px 14px">
         <strong>Look</strong>
-        <div style="font-size:52px; line-height:1.1; margin-top:10px" aria-label="Picture">${safeText(
+        <div style="font-size:52px; line-height:1.1; margin-top:10px" aria-label="Picture">${renderInlineChoice(
           picture
         )}</div>
       </div>
@@ -408,7 +417,7 @@
     const icon = ok ? "✅" : "❌";
 
     const extra = q.picture
-      ? `<p style="margin:8px 0 0">Picture: <span style="font-size:22px">${safeText(q.picture)}</span></p>`
+      ? `<p style="margin:8px 0 0">Picture: ${renderInlineChoice(q.picture, "font-size:22px")}</p>`
       : "";
 
     const hasSay = !!(q && String(q.say || "").trim());

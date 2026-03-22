@@ -63,6 +63,16 @@
       .replaceAll("'", "&#39;");
   }
 
+  function isEmojiish(v) {
+    return /[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/u.test(String(v == null ? "" : v));
+  }
+
+  function renderInlineChoice(v, style) {
+    const className = isEmojiish(v) ? ' class="emoji"' : "";
+    const inlineStyle = style ? ` style="${style}"` : "";
+    return `<span${className}${inlineStyle}>${safeText(v)}</span>`;
+  }
+
   function optionAt(q, idx) {
     if (!q || !Array.isArray(q.options)) return "";
     const n = Number(idx);
@@ -166,9 +176,7 @@
 
     const optionButtons = options
       .map((opt, i) => {
-        // Simple heuristic for emoji-like options (keeps compatibility across browsers)
-        const isEmojiish = /[\u{1F300}-\u{1FAFF}]/u.test(String(opt));
-        const big = isEmojiish ? "font-size:28px" : "font-size:22px; letter-spacing:.3px";
+        const big = isEmojiish(opt) ? "font-size:28px" : "font-size:22px; letter-spacing:.3px";
         return `
           <button
             class="btn"
@@ -178,7 +186,7 @@
             data-choice="${i}"
             style="justify-content:center; padding:14px 14px; min-height:54px"
             aria-label="Option ${i + 1}: ${safeText(opt)}"
-          ><span style="${big}">${safeText(opt)}</span></button>
+          >${renderInlineChoice(opt, big)}</button>
         `;
       })
       .join("");
