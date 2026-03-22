@@ -1,22 +1,22 @@
 /* assets/js/tts.js
-   Shared Text-to-Speech helper for UEAH (Web Speech API).
+   Shared Text-to-Speech helper for UEAH.
 
-   Goals:
-   - Keep everything free + client-only (GitHub Pages compatible)
-   - Choose a better default English voice when available
-   - Prefer Microsoft natural voices when the browser exposes them
-   - Let users persist voice + speed (rate) via localStorage
-   - Provide a single API used by all listening/speaking runners
+   Supports:
+   - Pre-generated local audio clips (preferred when available)
+   - Browser speech synthesis (Web Speech API)
+   - Optional external Microsoft/Edge-style neural endpoint configured in
+     assets/js/tts-config.js
 
    Exposes: window.UEAH_TTS
      - isSupported()
      - ready() -> Promise<void>
      - getVoices() -> SpeechSynthesisVoice[]
-     - getSettings() -> { voiceURI, rate }
-     - setSettings({ voiceURI?, rate? }) -> { voiceURI, rate }
+     - getSettings() -> { provider, voiceURI, rate }
+     - setSettings({ provider?, voiceURI?, rate? }) -> { provider, voiceURI, rate }
      - pickBestVoice(preferredLang?) -> SpeechSynthesisVoice|null
      - getVoiceMeta(voiceOrURI?, preferredLang?) -> metadata object
      - getPreferredVoiceMeta(preferredLang?) -> metadata object
+     - getProviderMeta(preferredLang?) -> metadata object
      - speak(text, opts?) -> boolean
      - speakAsync(text, opts?) -> Promise<boolean>
      - stop()
@@ -28,19 +28,27 @@
 
   if (window.UEAH_TTS) return;
 
-  const STORAGE_KEY = "ueah:tts:settings:v1";
+  const STORAGE_KEY = "ueah:tts:settings:v2";
   const RATE_MIN = 0.7;
   const RATE_MAX = 1.2;
-
-  const DEFAULTS = {
-    voiceURI: "",
-    rate: 0.95,
+  const SCRIPT_URL = (() => {
+    try {
+      if (document.currentScript && document.currentScript.src) {
+        return new URL(document.currentScript.src, window.location.href);
+      }
+    } catch (_) {}
+    return new URL("assets/js/tts.js", window.location.href);
+  })();
+  const STATIC_MANIFEST_URL = new URL("../audio/tts/manifest.json", SCRIPT_URL).toString();
+  const PROVIDERS = {
+    auto: "auto",
+    browser: "browser",
+    edge: "edge",
   };
 
-  const EVENTS = {
-    voicesChanged: "ueah:tts-voices-changed",
-    settingsChanged: "ueah:tts-settings-changed",
-  };
+  function norm(s) {
+    return String(s || "").trim().toLowerCase();
+  }
 
   function clamp(n, min, max) {
     const x = Number(n);
@@ -56,6 +64,52 @@
     }
   }
 
+  function cleanHeaders(input) {
+    if (!input || typeof input !== "object") return {};
+    const out = {};
+    for (const [k, v] of Object.entries(input)) {
+      const key = String(k || "").trim();
+      if (!key) continue;
+      out[key] = String(v == null ? "" : v);
+    }
+    return out;
+  }
+
+  function loadRuntimeConfig() {
+    const raw = window.UEAH_TTS_CONFIG && typeof window.UEAH_TTS_CONFIG === "object"
+      ? window.UEAH_TTS_CONFIG
+      : {};
+    const edge = raw.edge && typeof raw.edge === "object" ? raw.edge : {};
+    const preferredProvider = norm(raw.preferredProvider);
+    const endpoint = String(edge.endpoint || "").trim();
+
+    return {
+      preferredProvider:
+        preferredProvider === PROVIDERS.edge || preferredProvider === PROVIDERS.browser
+          ? preferredProvider
+          : PROVIDERS.auto,
+      edge: {
+        endpoint,
+        voice: String(edge.voice || "en-US-AriaNeural").trim() || "en-US-AriaNeural",
+        format: String(edge.format || "audio-24khz-48kbitrate-mono-mp3").trim() || "audio-24khz-48kbitrate-mono-mp3",
+        headers: cleanHeaders(edge.headers),
+      },
+    };
+  }
+
+  const runtimeConfig = loadRuntimeConfig();
+
+  const DEFAULTS = {
+    provider: runtimeConfig.preferredProvider,
+    voiceURI: "",
+    rate: 0.95,
+  };
+
+  const EVENTS = {
+    voicesChanged: "ueah:tts-voices-changed",
+    settingsChanged: "ueah:tts-settings-changed",
+  };
+
   function dispatch(name, detail) {
     try {
       window.dispatchEvent(new CustomEvent(name, { detail }));
@@ -68,8 +122,26 @@
     }
   }
 
-  function isSupported() {
+  function hasBrowserSpeech() {
     return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+  }
+
+  function hasStaticAudioCatalog() {
+    return true;
+  }
+
+  function isSupported() {
+    return hasStaticAudioCatalog() || hasBrowserSpeech() || hasEdgeEndpoint();
+  }
+
+  function hasEdgeEndpoint() {
+    return !!runtimeConfig.edge.endpoint;
+  }
+
+  function normalizeProvider(value) {
+    const v = norm(value);
+    if (v === PROVIDERS.browser || v === PROVIDERS.edge) return v;
+    return PROVIDERS.auto;
   }
 
   function loadSettings() {
@@ -77,10 +149,12 @@
     const out = { ...DEFAULTS };
 
     if (raw && typeof raw === "object") {
+      if (typeof raw.provider === "string") out.provider = normalizeProvider(raw.provider);
       if (typeof raw.voiceURI === "string") out.voiceURI = raw.voiceURI.trim();
       if (raw.rate != null) out.rate = clamp(raw.rate, RATE_MIN, RATE_MAX);
     }
 
+    out.provider = normalizeProvider(out.provider);
     out.voiceURI = String(out.voiceURI || "").trim();
     out.rate = clamp(out.rate, RATE_MIN, RATE_MAX);
     return out;
@@ -101,6 +175,10 @@
   function setSettings(next) {
     if (!next || typeof next !== "object") return getSettings();
 
+    if (typeof next.provider === "string") {
+      settings.provider = normalizeProvider(next.provider);
+    }
+
     if (typeof next.voiceURI === "string") {
       settings.voiceURI = next.voiceURI.trim();
     }
@@ -110,7 +188,7 @@
     }
 
     persistSettings();
-    dispatch(EVENTS.settingsChanged, { settings: getSettings() });
+    dispatch(EVENTS.settingsChanged, { settings: getSettings(), provider: getProviderMeta("en-US") });
     return getSettings();
   }
 
@@ -118,14 +196,123 @@
   let readyResolved = false;
   let readyResolve = null;
   let readyReject = null;
+  let speakJobId = 0;
+  let activeAudio = null;
+  let activeAudioUrl = "";
+  let activeAudioJobId = 0;
+  let activeFetchController = null;
+  let staticManifestState = "idle";
+  let staticManifestPromise = null;
+  let staticManifestEntries = null;
+  let staticManifestBaseUrl = STATIC_MANIFEST_URL;
 
   const readyPromise = new Promise((resolve, reject) => {
     readyResolve = resolve;
     readyReject = reject;
   });
 
+  function stopExternalAudio() {
+    activeAudioJobId += 1;
+
+    if (activeFetchController) {
+      try {
+        activeFetchController.abort();
+      } catch (_) {}
+      activeFetchController = null;
+    }
+
+    if (activeAudio) {
+      try {
+        activeAudio.pause();
+      } catch (_) {}
+      try {
+        activeAudio.src = "";
+      } catch (_) {}
+      activeAudio = null;
+    }
+
+    if (activeAudioUrl) {
+      try {
+        URL.revokeObjectURL(activeAudioUrl);
+      } catch (_) {}
+      activeAudioUrl = "";
+    }
+  }
+
+  function normalizePromptKey(text) {
+    return String(text == null ? "" : text)
+      .replace(/[\s\u00A0]+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
+
+  function normalizeManifestData(data) {
+    const items = data && typeof data === "object" && data.items && typeof data.items === "object"
+      ? data.items
+      : data && typeof data === "object"
+        ? data
+        : {};
+
+    const out = Object.create(null);
+    for (const [key, value] of Object.entries(items)) {
+      const normalizedKey = normalizePromptKey(key);
+      if (!normalizedKey) continue;
+
+      if (typeof value === "string" && value.trim()) {
+        out[normalizedKey] = { src: value.trim() };
+        continue;
+      }
+
+      if (value && typeof value === "object" && typeof value.src === "string" && value.src.trim()) {
+        out[normalizedKey] = {
+          src: value.src.trim(),
+          text: typeof value.text === "string" ? value.text : "",
+          duration: Number(value.duration) || 0,
+        };
+      }
+    }
+
+    return out;
+  }
+
+  function loadStaticManifest() {
+    if (staticManifestState === "loaded") {
+      return Promise.resolve(staticManifestEntries || Object.create(null));
+    }
+
+    if (staticManifestPromise) return staticManifestPromise;
+
+    staticManifestState = "loading";
+    staticManifestPromise = fetch(STATIC_MANIFEST_URL, { cache: "no-cache" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Manifest request failed: ${response.status}`);
+        }
+        staticManifestBaseUrl = response.url || STATIC_MANIFEST_URL;
+        return response.json();
+      })
+      .then((data) => {
+        staticManifestEntries = normalizeManifestData(data);
+        staticManifestState = "loaded";
+        return staticManifestEntries;
+      })
+      .catch(() => {
+        staticManifestEntries = Object.create(null);
+        staticManifestState = "failed";
+        return staticManifestEntries;
+      });
+
+    return staticManifestPromise;
+  }
+
+  function getStaticAudioEntry(text) {
+    const key = normalizePromptKey(text);
+    if (!key || !staticManifestEntries) return null;
+    return staticManifestEntries[key] || null;
+  }
+
   function refreshVoices() {
-    if (!isSupported()) return [];
+    if (!hasBrowserSpeech()) return [];
 
     try {
       const list = typeof window.speechSynthesis.getVoices === "function"
@@ -143,15 +330,28 @@
       } catch (_) {}
     }
 
-    dispatch(EVENTS.voicesChanged, { voices: voices.slice() });
+    dispatch(EVENTS.voicesChanged, {
+      voices: voices.slice(),
+      provider: getProviderMeta("en-US"),
+    });
     return voices.slice();
   }
 
   function attachVoicesChangedListener() {
-    if (!isSupported()) return;
+    if (!hasBrowserSpeech()) return;
+
+    const synth = window.speechSynthesis;
+    if (!synth) return;
 
     try {
-      window.speechSynthesis.onvoiceschanged = function () {
+      if (typeof synth.addEventListener === "function") {
+        synth.addEventListener("voiceschanged", refreshVoices);
+        return;
+      }
+    } catch (_) {}
+
+    try {
+      synth.onvoiceschanged = function () {
         refreshVoices();
       };
     } catch (_) {}
@@ -177,10 +377,6 @@
 
   function ready() {
     return readyPromise;
-  }
-
-  function norm(s) {
-    return String(s || "").trim().toLowerCase();
   }
 
   function resolveVoice(voiceOrURI, preferredLang) {
@@ -230,9 +426,9 @@
 
     let summary = "Using the browser's available voice.";
     if (isEdgeNatural) {
-      summary = "Using a Microsoft natural voice for more lifelike playback.";
+      summary = "Using a Microsoft natural browser voice for more lifelike playback.";
     } else if (isMicrosoft) {
-      summary = "Using a Microsoft voice. Natural Microsoft voices sound best when available.";
+      summary = "Using a Microsoft browser voice. Natural Microsoft voices sound best when available.";
     } else if (isGoogle && isNatural) {
       summary = "Using an enhanced Google voice from the browser.";
     } else if (isNatural) {
@@ -291,8 +487,7 @@
     if (v && v.localService && !meta.isEdgeNatural) score += 4;
     if (meta.isOnline) score += 10;
 
-    const badTokens = ["espeak", "mbrola", "festival", "robot"];
-    for (const t of badTokens) {
+    for (const t of ["espeak", "mbrola", "festival", "robot"]) {
       if (name.includes(t)) score -= 8;
     }
 
@@ -333,10 +528,66 @@
     return getVoiceMeta(null, preferredLang);
   }
 
-  let speakJobId = 0;
+  function resolveProvider(requestedProvider) {
+    const desired = normalizeProvider(requestedProvider || settings.provider || runtimeConfig.preferredProvider);
+
+    if (desired === PROVIDERS.browser) {
+      return PROVIDERS.browser;
+    }
+
+    if (desired === PROVIDERS.edge) {
+      return hasEdgeEndpoint() ? PROVIDERS.edge : PROVIDERS.browser;
+    }
+
+    return hasEdgeEndpoint() ? PROVIDERS.edge : PROVIDERS.browser;
+  }
+
+  function getProviderMeta(preferredLang) {
+    const selectedProvider = normalizeProvider(settings.provider || runtimeConfig.preferredProvider);
+    const resolvedProvider = resolveProvider(selectedProvider);
+    const browserMeta = getPreferredVoiceMeta(preferredLang || "en-US");
+    const edgeVoice = runtimeConfig.edge.voice;
+    const edgeConfigured = hasEdgeEndpoint();
+    const staticCatalogAvailable = hasStaticAudioCatalog();
+
+    let summary = "";
+    let quality = "";
+
+    if (resolvedProvider === PROVIDERS.edge && edgeConfigured) {
+      quality = "Edge Neural";
+      summary = `Using the configured Edge-style neural endpoint with ${edgeVoice}.`;
+    } else if (browserMeta && browserMeta.voice) {
+      quality = browserMeta.quality || "Standard";
+      summary = browserMeta.summary;
+      if (selectedProvider === PROVIDERS.edge && !edgeConfigured) {
+        summary = "Edge neural playback is not configured yet, so the app is falling back to browser voices.";
+      }
+    } else if (selectedProvider === PROVIDERS.edge && !edgeConfigured) {
+      quality = "Browser fallback";
+      summary = "Edge neural playback is not configured yet, and no browser voices were detected.";
+    } else {
+      quality = "Browser fallback";
+      summary = "Using browser speech synthesis because no external Edge-style endpoint is configured.";
+    }
+
+    return {
+      selectedProvider,
+      resolvedProvider,
+      edgeConfigured,
+      edgeEndpoint: runtimeConfig.edge.endpoint,
+      edgeVoice,
+      staticCatalogAvailable,
+      browserMeta,
+      quality,
+      summary,
+      usesExternalAudio: resolvedProvider === PROVIDERS.edge && edgeConfigured,
+      usesBrowserVoices: resolvedProvider === PROVIDERS.browser,
+    };
+  }
 
   function stop() {
     speakJobId += 1;
+    stopExternalAudio();
     try {
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
@@ -345,11 +596,16 @@
   }
 
   function isSpeaking() {
-    try {
-      return !!(window.speechSynthesis && window.speechSynthesis.speaking);
-    } catch (_) {
-      return false;
-    }
+    const browserSpeaking = (() => {
+      try {
+        return !!(window.speechSynthesis && window.speechSynthesis.speaking);
+      } catch (_) {
+        return false;
+      }
+    })();
+
+    const externalSpeaking = !!(activeAudio && !activeAudio.paused && !activeAudio.ended);
+    return browserSpeaking || externalSpeaking;
   }
 
   function cleanText(text) {
@@ -448,20 +704,153 @@
     return finalChunks;
   }
 
-  function speakInternal(text, opts) {
-    const t = cleanText(text);
-    if (!t) return Promise.resolve(false);
-    if (!isSupported()) return Promise.resolve(false);
+  async function getEdgeAudioSource(response) {
+    const contentType = String(response.headers.get("content-type") || "").toLowerCase();
 
-    const jobId = (speakJobId += 1);
-    const options = opts && typeof opts === "object" ? opts : {};
+    if (contentType.startsWith("audio/")) {
+      const blob = await response.blob();
+      return {
+        kind: "blob",
+        blob,
+        mimeType: blob.type || contentType || "audio/mpeg",
+      };
+    }
+
+    const data = await response.json();
+    if (data && typeof data.audioUrl === "string" && data.audioUrl.trim()) {
+      return {
+        kind: "url",
+        audioUrl: data.audioUrl.trim(),
+        mimeType: String(data.mimeType || "").trim() || "audio/mpeg",
+      };
+    }
+
+    const audioBase64 = data && typeof data.audioBase64 === "string" ? data.audioBase64.trim() : "";
+    if (!audioBase64) {
+      throw new Error("No audio payload returned from Edge TTS endpoint.");
+    }
+
+    const mimeType = String((data && data.mimeType) || "audio/mpeg").trim() || "audio/mpeg";
+    const binary = atob(audioBase64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+
+    return {
+      kind: "blob",
+      blob: new Blob([bytes], { type: mimeType }),
+      mimeType,
+    };
+  }
+
+  function playExternalAudio(source, jobId) {
+    stopExternalAudio();
+    activeAudioJobId = jobId;
+
+    return new Promise((resolve) => {
+      if (jobId !== speakJobId) {
+        resolve(false);
+        return;
+      }
+
+      const audio = new Audio();
+      activeAudio = audio;
+
+      let objectUrl = "";
+      if (source.kind === "blob") {
+        objectUrl = URL.createObjectURL(source.blob);
+        activeAudioUrl = objectUrl;
+        audio.src = objectUrl;
+      } else {
+        audio.src = source.audioUrl;
+      }
+
+      const cleanup = (ok) => {
+        if (activeAudio === audio) {
+          activeAudio = null;
+        }
+        if (activeAudioJobId === jobId) {
+          activeAudioJobId += 1;
+        }
+        if (objectUrl) {
+          try {
+            URL.revokeObjectURL(objectUrl);
+          } catch (_) {}
+          if (activeAudioUrl === objectUrl) activeAudioUrl = "";
+        }
+        resolve(ok);
+      };
+
+      audio.onended = () => cleanup(true);
+      audio.onerror = () => cleanup(false);
+
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.catch(() => cleanup(false));
+      }
+    });
+  }
+
+  function speakWithStaticAudio(text, jobId) {
+    return loadStaticManifest()
+      .then(() => {
+        const entry = getStaticAudioEntry(text);
+        if (!entry || !entry.src) return false;
+        const audioUrl = new URL(entry.src, staticManifestBaseUrl).toString();
+        return playExternalAudio({ kind: "url", audioUrl }, jobId);
+      })
+      .catch(() => false);
+  }
+
+  async function speakWithEdge(text, options, jobId) {
+    if (!hasEdgeEndpoint()) return false;
+
+    const controller = new AbortController();
+    activeFetchController = controller;
+
+    try {
+      const response = await fetch(runtimeConfig.edge.endpoint, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          ...runtimeConfig.edge.headers,
+        },
+        body: JSON.stringify({
+          text,
+          lang: options.lang,
+          rate: options.rate,
+          pitch: options.pitch,
+          volume: options.volume,
+          voice: String(options.voiceName || runtimeConfig.edge.voice || "").trim() || "en-US-AriaNeural",
+          format: runtimeConfig.edge.format,
+        }),
+        signal: controller.signal,
+      });
+
+      if (jobId !== speakJobId) return false;
+      if (!response.ok) return false;
+
+      const source = await getEdgeAudioSource(response);
+      if (jobId !== speakJobId) return false;
+
+      return playExternalAudio(source, jobId);
+    } catch (_) {
+      return false;
+    } finally {
+      if (activeFetchController === controller) {
+        activeFetchController = null;
+      }
+    }
+  }
+
+  function speakWithBrowser(text, options, jobId) {
+    if (!hasBrowserSpeech()) return Promise.resolve(false);
+
     const lang = String(options.lang || "en-US");
-    const rate = clamp(options.rate != null ? options.rate : settings.rate, RATE_MIN, RATE_MAX);
-    const pitch = clamp(options.pitch != null ? options.pitch : 1.0, 0.5, 2.0);
-    const volume = clamp(options.volume != null ? options.volume : 1.0, 0.0, 1.0);
     const chunk = options.chunk !== false;
     const chunkSize = Number(options.chunkSize) || 180;
-    const chunks = chunk ? splitIntoChunks(t, chunkSize) : [t];
+    const chunks = chunk ? splitIntoChunks(text, chunkSize) : [text];
 
     return ready()
       .catch(() => {})
@@ -470,8 +859,9 @@
 
         try {
           const synth = window.speechSynthesis;
-          synth.cancel();
+          if (!synth) return false;
 
+          synth.cancel();
           try {
             if (typeof synth.resume === "function") synth.resume();
           } catch (_) {}
@@ -497,9 +887,9 @@
               const part = chunks[i++];
               const utterance = new SpeechSynthesisUtterance(part);
               utterance.lang = lang;
-              utterance.rate = rate;
-              utterance.pitch = pitch;
-              utterance.volume = volume;
+              utterance.rate = options.rate;
+              utterance.pitch = options.pitch;
+              utterance.volume = options.volume;
 
               if (voice) {
                 try {
@@ -530,9 +920,48 @@
       });
   }
 
+  function speakInternal(text, opts) {
+    const t = cleanText(text);
+    if (!t) return Promise.resolve(false);
+
+    const jobId = (speakJobId += 1);
+    const options = opts && typeof opts === "object" ? opts : {};
+    const resolved = {
+      provider: resolveProvider(options.provider),
+      lang: String(options.lang || "en-US"),
+      rate: clamp(options.rate != null ? options.rate : settings.rate, RATE_MIN, RATE_MAX),
+      pitch: clamp(options.pitch != null ? options.pitch : 1.0, 0.5, 2.0),
+      volume: clamp(options.volume != null ? options.volume : 1.0, 0.0, 1.0),
+      chunk: options.chunk !== false,
+      chunkSize: Number(options.chunkSize) || 180,
+      voiceURI: typeof options.voiceURI === "string" ? options.voiceURI : settings.voiceURI,
+      voiceName: typeof options.voiceName === "string" ? options.voiceName : runtimeConfig.edge.voice,
+    };
+
+    stopExternalAudio();
+    try {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    } catch (_) {}
+
+    return speakWithStaticAudio(t, jobId).then((ok) => {
+      if (ok) return true;
+
+      if (resolved.provider === PROVIDERS.edge) {
+        return speakWithEdge(t, resolved, jobId).then((edgeOk) => {
+          if (edgeOk) return true;
+          return speakWithBrowser(t, { ...resolved, provider: PROVIDERS.browser }, jobId);
+        });
+      }
+
+      return speakWithBrowser(t, resolved, jobId);
+    });
+  }
+
   function speak(text, opts) {
     const t = cleanText(text);
-    if (!t || !isSupported()) return false;
+    if (!t) return false;
     speakInternal(t, opts);
     return true;
   }
@@ -543,7 +972,7 @@
 
   attachVoicesChangedListener();
 
-  if (isSupported()) {
+  if (hasBrowserSpeech()) {
     try {
       primeVoices();
     } catch (_) {
@@ -567,6 +996,7 @@
     pickBestVoice,
     getVoiceMeta,
     getPreferredVoiceMeta,
+    getProviderMeta,
     speak,
     speakAsync,
     stop,

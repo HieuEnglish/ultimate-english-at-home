@@ -82,6 +82,20 @@ To keep the app aligned with its mission:
 
 ---
 
+## 🔊 TTS Notes
+
+- Pre-generated local audio clips are preferred when a matching clip exists  
+- The current test audio pack lives under `assets/audio/tts/`  
+- The current pack covers fixed test prompts plus reusable game words, phrases, and simple template expansions  
+- To rebuild the prompt list, run `node tools/tts/export-prompts.js`  
+- To regenerate clips, run `python tools/tts/generate-prebuilt-audio.py` after installing `edge-tts`  
+- Browser-only speech uses the voices exposed by the current device/browser  
+- For more natural Microsoft-style neural speech, configure an endpoint in `assets/js/tts-config.js`  
+- That endpoint should synthesize audio server-side and return audio or a playable audio URL  
+- Without that endpoint, the app safely falls back to browser speech on GitHub Pages  
+
+---
+
 ## 📁 Project Structure (high level)
 
 - `assets/` — app code, styles, and resource data  

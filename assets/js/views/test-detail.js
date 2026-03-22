@@ -13,6 +13,7 @@ function isAudioSkill(skill) {
 }
 
 function audioSettingsPanelHtml(slug) {
+  const providerId = `tts-provider-${slug}`;
   const voiceId = `tts-voice-${slug}`;
   const rateId = `tts-rate-${slug}`;
 
@@ -27,15 +28,28 @@ function audioSettingsPanelHtml(slug) {
       <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap">
         <div style="min-width:240px; flex:1">
           <strong>Audio settings</strong>
+          <small style="display:block; margin-top:6px; opacity:.85">
+            These settings apply across tests and games. Pre-generated clips are used automatically when available.
+          </small>
           <div style="margin-top:10px; display:grid; gap:12px">
             <div style="display:grid; gap:6px">
-              <label for="${voiceId}">Voice</label>
+              <label for="${providerId}">Playback engine</label>
+              <select id="${providerId}" data-tts-provider-select aria-label="Playback engine" style="min-height:38px">
+                <option value="auto">Auto</option>
+                <option value="browser">Browser voice</option>
+                <option value="edge">Edge neural</option>
+              </select>
+              <small data-tts-provider-hint style="opacity:.9"></small>
+            </div>
+
+            <div style="display:grid; gap:6px">
+              <label for="${voiceId}">Browser voice</label>
               <select id="${voiceId}" data-tts-voice-select aria-label="Voice selection" style="min-height:38px">
                 <option value="">Loading voices...</option>
               </select>
               <small data-tts-quality style="opacity:.9"></small>
               <small data-tts-voice-hint style="opacity:.85">
-                Tip: If you do not see many voices, try Microsoft Edge or another device.
+                Tip: Browser voice choice is only used when playback is on Browser voice or Auto falls back to browser speech.
               </small>
             </div>
 
@@ -178,6 +192,8 @@ export async function getView(ctx, slug) {
       const tts = window.UEAH_TTS;
 
       const unsupportedEl = panel?.querySelector('[data-tts-unsupported]');
+      const providerSelect = panel?.querySelector('[data-tts-provider-select]');
+      const providerHint = panel?.querySelector('[data-tts-provider-hint]');
       const voiceSelect = panel?.querySelector('[data-tts-voice-select]');
       const rateInput = panel?.querySelector('[data-tts-rate]');
       const rateValue = panel?.querySelector('[data-tts-rate-value]');
@@ -219,8 +235,43 @@ export async function getView(ctx, slug) {
           return 6;
         };
 
+        const populateProviders = () => {
+          if (!providerSelect || !tts) return;
+
+          const settings = typeof tts.getSettings === 'function'
+            ? tts.getSettings()
+            : { provider: 'auto' };
+          const providerMeta = typeof tts.getProviderMeta === 'function'
+            ? tts.getProviderMeta(preferredLang)
+            : null;
+          const edgeConfigured = !!providerMeta?.edgeConfigured;
+
+          providerSelect.innerHTML = '';
+
+          const options = [
+            { value: 'auto', label: edgeConfigured ? 'Auto (prefer Edge neural)' : 'Auto (browser fallback)' },
+            { value: 'browser', label: 'Browser voice' },
+            { value: 'edge', label: edgeConfigured ? `Edge neural (${providerMeta.edgeVoice || 'configured'})` : 'Edge neural (needs endpoint)', disabled: !edgeConfigured },
+          ];
+
+          for (const option of options) {
+            const el = document.createElement('option');
+            el.value = option.value;
+            el.textContent = option.label;
+            if (option.disabled) el.disabled = true;
+            providerSelect.appendChild(el);
+          }
+
+          const current = String(settings.provider || 'auto');
+          providerSelect.value = current === 'edge' && !edgeConfigured ? 'auto' : current;
+        };
+
         const updateVoiceMessaging = () => {
-          if (!voiceHint && !qualityEl) return;
+          if (!voiceHint && !qualityEl && !providerHint) return;
+
+          const providerMeta = typeof tts.getProviderMeta === 'function'
+            ? tts.getProviderMeta(preferredLang)
+            : null;
 
           const selectedVoiceURI = voiceSelect ? String(voiceSelect.value || '') : '';
           const selectedMeta = typeof tts.getVoiceMeta === 'function'
@@ -231,8 +282,26 @@ export async function getView(ctx, slug) {
             : null;
 
           const activeMeta = selectedVoiceURI ? selectedMeta : autoMeta;
+          const usesBrowserVoices = !!providerMeta?.usesBrowserVoices;
+
+          if (providerHint) {
+            if (!providerMeta) {
+              providerHint.textContent = 'Playback provider information is not available yet.';
+            } else if (providerMeta.usesExternalAudio) {
+              providerHint.textContent = `Edge neural playback is active with ${providerMeta.edgeVoice}. Games and tests will use it app-wide.`;
+            } else if (providerMeta.selectedProvider === 'edge' && !providerMeta.edgeConfigured) {
+              providerHint.textContent = 'Edge neural was requested, but no endpoint is configured yet, so the app is falling back to browser speech.';
+            } else if (providerMeta.edgeConfigured) {
+              providerHint.textContent = `Edge neural is available. Auto will prefer ${providerMeta.edgeVoice} for tests and games.`;
+            } else {
+              providerHint.textContent = 'This static build will use pre-generated clips when available, and browser speech for everything else. Add an Edge/Azure-style endpoint in assets/js/tts-config.js for live neural playback.';
+            }
+          }
+
           if (qualityEl) {
-            if (activeMeta && activeMeta.voice) {
+            if (providerMeta?.usesExternalAudio) {
+              qualityEl.textContent = `Playback engine: Edge neural. ${providerMeta.summary}`;
+            } else if (activeMeta && activeMeta.voice) {
               qualityEl.textContent = selectedVoiceURI
                 ? `Current voice: ${activeMeta.displayName}. ${activeMeta.summary}`
                 : `Auto voice: ${activeMeta.displayName}. ${activeMeta.summary}`;
@@ -242,7 +311,9 @@ export async function getView(ctx, slug) {
           }
 
           if (voiceHint) {
-            if (!autoMeta || !autoMeta.voice) {
+            if (!usesBrowserVoices) {
+              voiceHint.textContent = 'Browser voice choice is ignored while Edge neural playback is active.';
+            } else if (!autoMeta || !autoMeta.voice) {
               voiceHint.textContent = 'No browser voices were detected yet. Try Microsoft Edge or wait a moment for voices to load.';
             } else if (autoMeta.isEdgeNatural) {
               voiceHint.textContent = 'Auto is already preferring a Microsoft natural voice on this device.';
@@ -258,7 +329,12 @@ export async function getView(ctx, slug) {
           if (!voiceSelect || !tts) return;
 
           const list = typeof tts.getVoices === 'function' ? tts.getVoices() : [];
-          const current = typeof tts.getSettings === 'function' ? tts.getSettings() : { voiceURI: '', rate: 0.95 };
+          const current = typeof tts.getSettings === 'function'
+            ? tts.getSettings()
+            : { provider: 'auto', voiceURI: '', rate: 0.95 };
+          const providerMeta = typeof tts.getProviderMeta === 'function'
+            ? tts.getProviderMeta(preferredLang)
+            : null;
           const selectedValue = voiceSelect.value;
 
           voiceSelect.innerHTML = '';
@@ -274,6 +350,7 @@ export async function getView(ctx, slug) {
             opt.textContent = 'No voices found (browser default may still work)';
             voiceSelect.appendChild(opt);
             voiceSelect.value = '';
+            voiceSelect.disabled = !(providerMeta?.usesBrowserVoices);
             updateVoiceMessaging();
             return;
           }
@@ -310,26 +387,41 @@ export async function getView(ctx, slug) {
           const hasSelected = selectedValue && sorted.some((v) => String(v.voiceURI || '') === selectedValue);
 
           voiceSelect.value = hasStored ? storedVoice : hasSelected ? selectedValue : '';
+          voiceSelect.disabled = !(providerMeta?.usesBrowserVoices);
           updateVoiceMessaging();
         };
 
         try {
           const s = typeof tts.getSettings === 'function' ? tts.getSettings() : { voiceURI: '', rate: 0.95 };
           applyRateUI(Number(s.rate || 0.95));
+          populateProviders();
           populateVoices();
         } catch (_) {}
 
         try {
           if (typeof tts.ready === 'function') {
-            tts.ready().then(() => populateVoices()).catch(() => {});
+            tts.ready().then(() => {
+              populateProviders();
+              populateVoices();
+            }).catch(() => {});
           }
         } catch (_) {}
 
-        const onVoicesChanged = () => populateVoices();
+        const onVoicesChanged = () => {
+          populateProviders();
+          populateVoices();
+        };
         const voicesEventName = tts?.EVENTS?.voicesChanged;
         if (voicesEventName) {
           window.addEventListener(voicesEventName, onVoicesChanged);
         }
+
+        const onProviderChange = () => {
+          if (!tts || typeof tts.setSettings !== 'function' || !providerSelect) return;
+          tts.setSettings({ provider: String(providerSelect.value || 'auto') });
+          populateProviders();
+          populateVoices();
+        };
 
         const onVoiceChange = () => {
           if (!tts || typeof tts.setSettings !== 'function' || !voiceSelect) return;
@@ -348,6 +440,7 @@ export async function getView(ctx, slug) {
         const onTest = () => {
           if (!tts || typeof tts.speak !== 'function') return;
           const s = typeof tts.getSettings === 'function' ? tts.getSettings() : { voiceURI: '', rate: 0.95 };
+          const provider = providerSelect ? String(providerSelect.value || 'auto') : String(s.provider || 'auto');
           const voiceURI = voiceSelect ? String(voiceSelect.value || '') : String(s.voiceURI || '');
           const rate = rateInput ? Number(rateInput.value) : Number(s.rate || 0.95);
 
@@ -355,6 +448,7 @@ export async function getView(ctx, slug) {
           tts.speak('Hello! This is your selected voice. Adjust the speed if needed.', {
             lang: preferredLang,
             chunk: false,
+            provider,
             rate,
             voiceURI: voiceURI || undefined,
           });
@@ -364,6 +458,7 @@ export async function getView(ctx, slug) {
           tts.stop?.();
         };
 
+        if (providerSelect) providerSelect.addEventListener('change', onProviderChange);
         if (voiceSelect) voiceSelect.addEventListener('change', onVoiceChange);
         if (rateInput) rateInput.addEventListener('input', onRateInput);
         if (btnTest) btnTest.addEventListener('click', onTest);
@@ -381,6 +476,7 @@ export async function getView(ctx, slug) {
           }
 
           try {
+            if (providerSelect) providerSelect.removeEventListener('change', onProviderChange);
             if (voiceSelect) voiceSelect.removeEventListener('change', onVoiceChange);
             if (rateInput) rateInput.removeEventListener('input', onRateInput);
             if (btnTest) btnTest.removeEventListener('click', onTest);
