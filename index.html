@@ -6,6 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UEAH — Ultimate English At Home</title>
 
+  <script>
+    (function () {
+      var hostname = window.location.hostname || '';
+      var pathname = window.location.pathname || '/';
+      var baseHref = '/';
+
+      if (hostname.endsWith('github.io')) {
+        var parts = pathname.split('/').filter(Boolean);
+        baseHref = parts.length ? '/' + parts[0] + '/' : '/';
+      }
+
+      document.write('<base href="' + baseHref + '">');
+    })();
+  </script>
+
   <!-- Core SEO -->
   <meta name="description"
     content="A dark, neon, responsive English learning hub for all ages. Browse resources, games, and tests by age group and skill." />

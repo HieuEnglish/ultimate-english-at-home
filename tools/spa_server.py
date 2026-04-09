@@ -1,5 +1,6 @@
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
+from urllib.parse import quote
 import os
 import posixpath
 import sys
@@ -23,24 +24,39 @@ class SPARequestHandler(SimpleHTTPRequestHandler):
             p = p / word
         return str(p)
 
-    def _rewrite_for_spa(self):
+    def _spa_redirect_target(self):
         requested = Path(self.translate_path(self.path))
 
-        # Serve existing files normally
         if requested.exists() and requested.is_file():
-            return
+            return None
 
-        # Serve index.html for extensionless SPA routes
         route = self.path.split('?', 1)[0].split('#', 1)[0]
+        if route == '/':
+            return None
+
         if not Path(route).suffix:
-            self.path = '/index.html'
+            return f'/?r={quote(route, safe="/-_~")}'
+
+        return None
+
+    def _send_spa_redirect(self):
+        target = self._spa_redirect_target()
+        if not target:
+            return False
+
+        self.send_response(302)
+        self.send_header('Location', target)
+        self.end_headers()
+        return True
 
     def do_GET(self):
-        self._rewrite_for_spa()
+        if self._send_spa_redirect():
+            return
         return super().do_GET()
 
     def do_HEAD(self):
-        self._rewrite_for_spa()
+        if self._send_spa_redirect():
+            return
         return super().do_HEAD()
 
 
