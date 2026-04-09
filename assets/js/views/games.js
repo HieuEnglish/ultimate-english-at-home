@@ -3,22 +3,25 @@
 */
 
 import { GAME_AGE_GROUPS } from '../constants.js';
-import { breadcrumbs, card, ageGroupLabel } from '../common.js';
+import { breadcrumbs } from '../common.js';
 
-// Age group icons and labels with emojis
 const AGE_INFO = {
-  "0-3": { emoji: "👶", label: "Ages 0-3", sublabel: "Tap + Listen", glow: "green" },
-  "4-7": { emoji: "🧒", label: "Ages 4-7", sublabel: "Early Reading", glow: "yellow" },
-  "8-10": { emoji: "🧑", label: "Ages 8-10", sublabel: "Vocabulary Builder", glow: "red" },
-  "11-12": { emoji: "🧑‍🎓", label: "Ages 11-12", sublabel: "Grammar Master", glow: "blue" },
-  "13-18": { emoji: "🧑‍💻", label: "Ages 13-18", sublabel: "Speaking Pro", glow: "pink" },
+  '0-3': { emoji: '🧒', label: 'Kids', range: '0-3', sublabel: 'Tap, listen, and playful first wins', glow: 'green' },
+  '4-7': { emoji: '🎨', label: 'Kids+', range: '4-7', sublabel: 'Phonics, early reading, and quick fun loops', glow: 'yellow' },
+  '8-10': { emoji: '🚀', label: 'Pre-Teens', range: '8-10', sublabel: 'Vocabulary building and confidence games', glow: 'blue' },
+  '11-12': { emoji: '🧠', label: 'Teens', range: '11-12', sublabel: 'Grammar, strategy, and sharper challenge play', glow: 'purple' },
+  '13-18': { emoji: '🎓', label: 'Adults', range: '13-18', sublabel: 'Advanced speaking and stronger skill drills', glow: 'pink' },
 };
 
-// Generate age icon SVG
-function iconAge(age) {
-  const info = AGE_INFO[age];
-  if (!info) return "";
-  return `<span class="game-age-emoji" aria-hidden="true">${info.emoji}</span>`;
+function buildStats() {
+  if (!window.UEAH_GAME_SCORES) return null;
+  const stats = window.UEAH_GAME_SCORES.getTotalStats();
+  if (!stats || stats.totalPlays <= 0) return null;
+
+  return {
+    gamesPlayed: Number(stats.gamesPlayed || 0),
+    totalScore: Number(stats.totalScore || 0),
+  };
 }
 
 export function getView(ctx) {
@@ -31,61 +34,78 @@ export function getView(ctx) {
     { label: 'Games' },
   ]);
 
-  // Build age selection cards
-  const cardsHtml = GAME_AGE_GROUPS.map((age) => {
-    const info = AGE_INFO[age] || { emoji: "🎮", label: age, sublabel: "Games", glow: "green" };
+  const ageCards = GAME_AGE_GROUPS.map((age) => {
+    const info = AGE_INFO[age] || { emoji: '🎮', label: age, range: age, sublabel: 'Games', glow: 'green' };
     return `
-      <a class="card" href="${hrefFor(`/games/${age}`)}" data-nav role="listitem" data-glow="${info.glow}">
-        <div class="card-icon game-age-icon" aria-hidden="true">
-          <span class="game-age-emoji">${info.emoji}</span>
+      <a class="games-hub-card" href="${hrefFor(`/games/${age}`)}" data-nav role="listitem" data-glow="${info.glow}">
+        <div class="games-hub-card__avatar" aria-hidden="true">${info.emoji}</div>
+        <div class="games-hub-card__meta">
+          <span class="games-hub-card__range">${info.range}</span>
+          <span class="games-hub-card__badge">❤</span>
         </div>
-        <div class="card-body">
-          <h2 class="card-title">${info.label}</h2>
-          <p class="card-text">${info.sublabel}</p>
-        </div>
+        <h2 class="games-hub-card__title">${info.label}</h2>
+        <p class="games-hub-card__desc">${info.sublabel}</p>
       </a>
     `;
-  }).join("");
+  }).join('');
 
-  // IELTS Game card (styled like IELTS test cards)
-  const ieltsCard = `
-    <a class="card" href="${hrefFor('/games/featured/comprehensive/ielts-runner')}" data-nav role="listitem" data-glow="iels">
-      <div class="card-icon game-age-icon" aria-hidden="true">
-        <span class="game-age-emoji">🏆</span>
-      </div>
-      <div class="card-body">
-        <h2 class="card-title">IELTS BuildUp</h2>
-        <p class="card-text">The Ultimate Challenge</p>
+  const featuredCard = `
+    <a class="games-featured-banner" href="${hrefFor('/games/featured/comprehensive/ielts-runner')}" data-nav role="listitem">
+      <div class="games-featured-banner__scroll"></div>
+      <div class="games-featured-banner__content">
+        <h2 class="games-featured-banner__title">IELTS BuildUp</h2>
+        <p class="games-featured-banner__desc">Skill-based test practice with a premium challenge feel.</p>
+        <span class="games-featured-banner__cta">Play Now</span>
       </div>
     </a>
   `;
 
-  // Get stats if available
-  let statsHtml = "";
-  if (window.UEAH_GAME_SCORES) {
-    const stats = window.UEAH_GAME_SCORES.getTotalStats();
-    if (stats.totalPlays > 0) {
-      statsHtml = `
-        <div class="games-stats-summary">
-          <div class="stat-pill"><span class="stat-emoji">🎮</span> ${stats.gamesPlayed} games played</div>
-          <div class="stat-pill"><span class="stat-emoji">🏆</span> ${stats.totalScore} total points</div>
+  const stats = buildStats();
+  const statsHtml = stats
+    ? `
+      <section class="games-dashboard">
+        <h2 class="games-dashboard__title">Game Stats</h2>
+        <div class="games-dashboard__grid">
+          <div class="games-dashboard__panel games-dashboard__panel--violet">
+            <div class="games-dashboard__ring">🎮</div>
+            <div class="games-dashboard__content">
+              <div class="games-dashboard__row"><strong>Games played</strong><span>${stats.gamesPlayed}</span></div>
+              <div class="games-dashboard__bar"><span style="width:${Math.min(100, stats.gamesPlayed * 8)}%"></span></div>
+            </div>
+          </div>
+          <div class="games-dashboard__panel games-dashboard__panel--gold">
+            <div class="games-dashboard__ring">🏆</div>
+            <div class="games-dashboard__content">
+              <div class="games-dashboard__row"><strong>Total points</strong><span>${stats.totalScore}</span></div>
+              <div class="games-dashboard__bar"><span style="width:${Math.min(100, Math.max(10, stats.totalScore / 10))}%"></span></div>
+            </div>
+          </div>
+          <div class="games-dashboard__achievements">
+            <div class="games-badge-card"><span aria-hidden="true">🏆</span><strong>Champion</strong></div>
+            <div class="games-badge-card"><span aria-hidden="true">💎</span><strong>Perfect Streak</strong></div>
+            <div class="games-badge-card"><span aria-hidden="true">💡</span><strong>Fast Learner</strong></div>
+          </div>
         </div>
-      `;
-    }
-  }
+      </section>
+    `
+    : '';
 
   const html = `
-    <section class="page-top games-page games-nextgen">
+    <section class="page-top games-page games-nextgen games-hub">
       ${breadcrumb}
-      <div class="subpage-hero">
-        <h1 class="page-title"><span class="emoji" aria-hidden="true">🎮</span> Games</h1>
-        <p class="page-subtitle">Choose your age group to find fun learning games!</p>
+      <div class="subpage-hero games-hub__hero">
+        <span class="resources-hero__label">Play + practice</span>
+        <h1 class="page-title">Next-Gen Games</h1>
+        <p class="page-subtitle">Learning English through play and skill-building games.</p>
       </div>
+
+      <div class="games-hub-grid" role="list">
+        <div class="games-hub-grid__ages">${ageCards}</div>
+        <div class="games-hub-grid__featured">${featuredCard}</div>
+      </div>
+
       ${statsHtml}
-      <div class="card-grid games-age-grid" role="list">
-        ${cardsHtml}
-        ${ieltsCard}
-      </div>
+
       <div class="actions">
         <a class="btn" href="${hrefFor('/')}" data-nav>← Back to Home</a>
       </div>

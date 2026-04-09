@@ -35,42 +35,39 @@ export function getView(ctx, age) {
         { label: ageLabel },
     ]);
 
-    // Get skills that have games for this age
     let availableSkills = GAME_SKILLS;
     if (window.UEAH_GAMES_STORE) {
         availableSkills = window.UEAH_GAMES_STORE.getSkillsForAge(age);
     }
 
-    // Build skill cards
     const cardsHtml = availableSkills.map((skill) => {
-        const info = SKILL_INFO[skill] || { emoji: "🎮", label: capitalize(skill), description: "Games", glow: "green" };
+        const info = SKILL_INFO[skill] || { emoji: '🎮', label: capitalize(skill), description: 'Games', glow: 'green' };
 
-        // Get game count for this skill
         let gameCount = 0;
         if (window.UEAH_GAMES_STORE) {
             gameCount = window.UEAH_GAMES_STORE.getGamesByAgeSkill(age, skill).length;
         }
 
         return `
-      <a class="card" href="${hrefFor(`/games/${age}/${skill}`)}" data-nav role="listitem" data-glow="${info.glow}">
-        <div class="card-icon" aria-hidden="true">
-          <span class="emoji">${info.emoji}</span>
-        </div>
-        <div class="card-body">
-          <h2 class="card-title">${info.label}</h2>
-          <p class="card-text">${info.description}</p>
-          ${gameCount > 0 ? `<span class="game-count-badge">${gameCount} game${gameCount > 1 ? 's' : ''}</span>` : ''}
-        </div>
+      <a class="games-skill-card" href="${hrefFor(`/games/${age}/${skill}`)}" data-nav role="listitem" data-glow="${info.glow}">
+        <div class="games-skill-card__icon" aria-hidden="true">${info.emoji}</div>
+        <div class="games-skill-card__count">${gameCount} game${gameCount === 1 ? '' : 's'}</div>
+        <h2 class="games-skill-card__title">${info.label}</h2>
+        <p class="games-skill-card__desc">${info.description}</p>
+        <span class="games-skill-card__cta">Explore skill</span>
       </a>
     `;
-    }).join("");
+    }).join('');
 
     const html = `
-    <section class="page-top games-page">
+    <section class="page-top games-page games-age-nextgen">
       ${breadcrumb}
-      <h1 class="page-title"><span class="emoji" aria-hidden="true">🎮</span> ${ageLabel} Games</h1>
-      <p class="page-subtitle">Choose a skill to practice!</p>
-      <div class="card-grid" role="list">
+      <div class="subpage-hero games-age-nextgen__hero">
+        <span class="resources-hero__label">${ageLabel}</span>
+        <h1 class="page-title">${ageLabel} Games</h1>
+        <p class="page-subtitle">Choose a skill to practice and open a more focused game path.</p>
+      </div>
+      <div class="games-skill-grid" role="list">
         ${cardsHtml}
       </div>
       <div class="actions">

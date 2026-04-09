@@ -108,16 +108,21 @@ export async function getView(ctx, age, skill, slug) {
       title: "Game Not Found - UEAH",
       description: "This game could not be found.",
       html: `
-        <section class="page-top games-page">
+        <section class="page-top games-page game-play-page game-play-page--missing">
           ${breadcrumbs([
             { label: "Home", href: hrefFor("/") },
             { label: "Games", href: hrefFor("/games") },
             { label: "Not Found" },
           ])}
-          <h1 class="page-title">Game Not Found</h1>
-          <p class="page-subtitle">Sorry, this game does not exist.</p>
-          <div class="actions">
-            <a class="btn btn--primary" href="${hrefFor(`/games/${age}/${skill}`)}" data-nav>Back to Games</a>
+          <div class="game-missing-card">
+            <div class="game-missing-card__icon" aria-hidden="true">🕹️</div>
+            <span class="resources-hero__label">Missing game</span>
+            <h1 class="page-title">Game Not Found</h1>
+            <p class="page-subtitle">Sorry, this game does not exist or is still being prepared for launch.</p>
+            <div class="game-missing-card__actions actions">
+              <a class="btn btn--primary" href="${hrefFor(`/games/${age}/${skill}`)}" data-nav>Back to Games</a>
+              <a class="btn" href="${hrefFor('/games')}" data-nav>All Game Categories</a>
+            </div>
           </div>
         </section>
       `,
@@ -233,7 +238,7 @@ export async function getView(ctx, age, skill, slug) {
 
           <div class="game-controls">
             <button class="btn btn--primary game-start-btn" id="game-start-btn">
-              <span class="emoji">▶</span> Launch challenge
+              <span class="emoji">▶</span> ${getStartButtonLabel(game, false)}
             </button>
             <button class="btn game-refresh-btn" id="game-refresh-btn" disabled>
               <span class="emoji">↻</span> Refresh stage
@@ -244,30 +249,51 @@ export async function getView(ctx, age, skill, slug) {
           </div>
         </div>
 
-        <aside class="game-tip-card">
-          <div class="game-tip-card__eyebrow">Quick prep</div>
-          <h2 class="game-tip-card__title">How this game should feel</h2>
-          <p class="game-tip-card__text">${SKILL_HINTS[skill] || "Stay curious, keep moving, and learn from each round."}</p>
-          <div class="game-tip-card__facts">
-            <div class="game-tip-fact">
-              <span class="game-tip-fact__label">Mode</span>
-              <strong>${getChallengeMode(game)}</strong>
+        <aside class="game-tip-stack">
+          <section class="game-tip-card">
+            <div class="game-tip-card__eyebrow">Quick prep</div>
+            <h2 class="game-tip-card__title">How this game should feel</h2>
+            <p class="game-tip-card__text">${SKILL_HINTS[skill] || "Stay curious, keep moving, and learn from each round."}</p>
+            <div class="game-tip-card__facts">
+              <div class="game-tip-fact">
+                <span class="game-tip-fact__label">Mode</span>
+                <strong>${getChallengeMode(game)}</strong>
+              </div>
+              <div class="game-tip-fact">
+                <span class="game-tip-fact__label">Target player</span>
+                <strong>${ageLabel}</strong>
+              </div>
+              <div class="game-tip-fact">
+                <span class="game-tip-fact__label">Session energy</span>
+                <strong>${game.hasTimer ? "Fast and focused" : "Calm and playful"}</strong>
+              </div>
             </div>
-            <div class="game-tip-fact">
-              <span class="game-tip-fact__label">Target player</span>
-              <strong>${ageLabel}</strong>
+            ${game.usesMicrophone ? `
+              <div class="note game-mic-note">
+                <span class="emoji">🎤</span> This game uses your microphone for speech recognition.
+                You will be asked for permission when you start.
+              </div>
+            ` : ""}
+          </section>
+
+          <section class="game-side-card game-side-card--checklist">
+            <div class="game-side-card__eyebrow">Before you start</div>
+            <h2 class="game-side-card__title">Quick checklist</h2>
+            <ul class="game-checklist">
+              <li>${game.hasTimer ? '⏱ Be ready for quick rounds and fast choices.' : '🌈 Take your time and explore each round.'}</li>
+              <li>${game.usesMicrophone ? '🎤 Allow microphone access when prompted.' : '🖱 Use touch, mouse, or taps to interact.'}</li>
+              <li>🏆 Try to beat your best score with one more replay.</li>
+            </ul>
+          </section>
+
+          <section class="game-side-card game-side-card--support">
+            <div class="game-side-card__eyebrow">Need another route?</div>
+            <h2 class="game-side-card__title">Keep exploring</h2>
+            <div class="game-side-card__links">
+              <a class="btn btn--small" href="${hrefFor(age === 'featured' ? '/games' : `/games/${age}/${skill}`)}" data-nav>More ${skillLabel} games</a>
+              <a class="btn btn--small" href="${hrefFor('/resources')}" data-nav>Learning resources</a>
             </div>
-            <div class="game-tip-fact">
-              <span class="game-tip-fact__label">Session energy</span>
-              <strong>${game.hasTimer ? "Fast and focused" : "Calm and playful"}</strong>
-            </div>
-          </div>
-          ${game.usesMicrophone ? `
-            <div class="note game-mic-note">
-              <span class="emoji">🎤</span> This game uses your microphone for speech recognition.
-              You will be asked for permission when you start.
-            </div>
-          ` : ""}
+          </section>
         </aside>
       </div>
     </section>

@@ -52,51 +52,49 @@ export function getView(ctx, age, skill) {
         { label: skillLabel },
     ]);
 
-    // Get games for this age + skill
     let games = [];
     if (window.UEAH_GAMES_STORE) {
         games = window.UEAH_GAMES_STORE.getGamesByAgeSkill(age, skill);
     }
 
-    // Build game cards
     const cardsHtml = games.length > 0
         ? games.map((game) => {
-            // Get high score if available
             let highScore = 0;
             if (window.UEAH_GAME_SCORES) {
                 highScore = window.UEAH_GAME_SCORES.getHighScore(game.slug);
             }
 
-            const glow = DIFFICULTY_GLOW[game.difficulty] || "green";
+            const glow = DIFFICULTY_GLOW[game.difficulty] || 'green';
 
             return `
-          <a class="card game-card" href="${hrefFor(`/games/${age}/${skill}/${game.slug}`)}" data-nav role="listitem" data-glow="${glow}">
-            <div class="card-icon game-emoji-icon" aria-hidden="true">
-              <span class="game-emoji">${game.emoji}</span>
+          <a class="games-list-card" href="${hrefFor(`/games/${age}/${skill}/${game.slug}`)}" data-nav role="listitem" data-glow="${glow}">
+            <div class="games-list-card__icon" aria-hidden="true">${game.emoji}</div>
+            <div class="games-list-card__top">
+              <span class="games-list-card__difficulty">${renderDifficulty(game.difficulty)}</span>
+              ${highScore > 0 ? `<span class="games-list-card__score">🏆 ${highScore}</span>` : '<span class="games-list-card__score is-muted">New</span>'}
             </div>
-            <div class="card-body">
-              <h2 class="card-title">${game.title}</h2>
-              <p class="card-text">${game.description}</p>
-              <div class="game-meta">
-                ${renderDifficulty(game.difficulty)}
-                ${highScore > 0 ? `<span class="high-score-badge">🏆 ${highScore}</span>` : ''}
-                ${game.usesMicrophone ? '<span class="mic-badge" title="Uses microphone">🎤</span>' : ''}
-              </div>
+            <h2 class="games-list-card__title">${game.title}</h2>
+            <p class="games-list-card__desc">${game.description}</p>
+            <div class="games-list-card__chips">
+              <span class="games-list-card__chip">${skillLabel}</span>
+              ${game.usesMicrophone ? '<span class="games-list-card__chip">🎤 Mic</span>' : ''}
+              ${game.hasTimer ? '<span class="games-list-card__chip">⏱ Timed</span>' : '<span class="games-list-card__chip">✨ Replayable</span>'}
             </div>
+            <span class="games-list-card__cta">Play game</span>
           </a>
         `;
-        }).join("")
+        }).join('')
         : `<div class="note">No games available for this skill yet. Check back soon!</div>`;
 
     const html = `
-    <section class="page-top games-page">
+    <section class="page-top games-page games-skill-nextgen">
       ${breadcrumb}
-      <h1 class="page-title">
-        <span class="emoji" aria-hidden="true">🎮</span> 
-        ${skillLabel} Games
-      </h1>
-      <p class="page-subtitle">Choose a game to play!</p>
-      <div class="card-grid games-list" role="list">
+      <div class="subpage-hero games-skill-nextgen__hero">
+        <span class="resources-hero__label">${ageLabel} • ${skillLabel}</span>
+        <h1 class="page-title">${skillLabel} Games</h1>
+        <p class="page-subtitle">Choose a game to play and jump into a more polished challenge screen.</p>
+      </div>
+      <div class="games-list-grid" role="list">
         ${cardsHtml}
       </div>
       <div class="actions">
