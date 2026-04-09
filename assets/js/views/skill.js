@@ -14,6 +14,12 @@ import {
 } from '../common.js';
 import { getStoreMissingView } from './error.js';
 
+function emojiSpan(e) {
+  const t = String(e || '').trim();
+  if (!t) return '';
+  return `<span aria-hidden="true">${escapeHtml(t)}</span>`;
+}
+
 /**
  * Build the skill page for an age group and skill.
  * This function is async because resources may need to be lazy-loaded.
@@ -67,6 +73,11 @@ export async function getView(ctx, age, skill) {
           groupLabel
         )}</span>`;
 
+  const skillEmoji =
+    skill === 'reading' ? '📖' :
+    skill === 'listening' ? '🎧' :
+    skill === 'writing' ? '✍️' : '🗣️';
+
   // Keep the subtitle short; the full pack overview is rendered inside the Overview card.
   const subtitle =
     pack && pack.subtitle
@@ -86,14 +97,14 @@ export async function getView(ctx, age, skill) {
     const objectives =
       Array.isArray(pack.objectives) && pack.objectives.length
         ? `<div class="detail-section"><h2>Objectives</h2><ul>${pack.objectives
-            .map((o) => `<li>${escapeHtml(o)}</li>`)
+            .map((o, i) => `<li>${friendlyPoint('objectives', o, i)}</li>`)
             .join('')}</ul></div>`
         : '';
 
     const materials =
       Array.isArray(pack.materials) && pack.materials.length
         ? `<div class="detail-section"><h2>Materials / Resources</h2><ul>${pack.materials
-            .map((m) => `<li>${escapeHtml(m)}</li>`)
+            .map((m, i) => `<li>${friendlyPoint('materials', m, i)}</li>`)
             .join('')}</ul></div>`
         : '';
 
@@ -160,15 +171,20 @@ export async function getView(ctx, age, skill) {
               : `<span class="btn btn--small btn--disabled" aria-disabled="true">MISSING LINK</span>`;
 
             return `
-              <article class="resource-item${isFeatured}" role="listitem">
-                <button class="resource-card" type="button" data-nav-to="${escapeAttr(
+              <article class="resource-item skill-nextgen__resource${isFeatured}" role="listitem">
+                <button class="resource-card skill-nextgen__resource-card" type="button" data-nav-to="${escapeAttr(
                   detailPath
                 )}" aria-label="View details: ${escapeAttr(r.title)}">
+                  <div class="skill-nextgen__resource-top">
+                    <span class="skill-nextgen__resource-skill">${skillEmoji} ${skillLabel}</span>
+                    ${r.isBestSet ? '<span class="skill-nextgen__resource-featured">Best set</span>' : ''}
+                  </div>
                   <h2 class="resource-title">${escapeHtml(r.title)}</h2>
                   <p class="resource-desc">${escapeHtml(desc)}</p>
                   ${chips}
+                  <span class="skill-nextgen__resource-link">View details →</span>
                 </button>
-                <div class="resource-actions" aria-label="Resource actions">
+                <div class="resource-actions skill-nextgen__resource-actions" aria-label="Resource actions">
                   <a class="btn btn--small" href="${detailHref}" data-nav>Details →</a>
                   ${openBtn}
                   ${favBtn}
@@ -209,12 +225,21 @@ export async function getView(ctx, age, skill) {
   const html = `
     <section class="page-top skill-nextgen">
       ${breadcrumb}
-      <div class="subpage-hero">
+      <div class="subpage-hero skill-nextgen__hero">
+        <span class="resources-hero__label">${skillEmoji} ${skillLabel} path</span>
         <h1 class="page-title">${heading}</h1>
         <p class="page-subtitle">${subtitle}</p>
+        <div class="skill-nextgen__stats">
+          <div class="skill-nextgen__stat"><strong>${resources.length}</strong><span>resources</span></div>
+          <div class="skill-nextgen__stat"><strong>${groupLabel}</strong><span>age group</span></div>
+          <div class="skill-nextgen__stat"><strong>${skillLabel}</strong><span>focus</span></div>
+        </div>
       </div>
       ${packHtml}
-      <h2 class="page-title" style="margin-top:22px; font-size:20px">Resources</h2>
+      <div class="skill-nextgen__section-head">
+        <h2 class="page-title" style="margin-top:22px; font-size:20px">Resources</h2>
+        <p class="muted">Open a card for details, or jump straight to the resource.</p>
+      </div>
       ${gridHtml}
       ${bestSetNote}
       <div class="actions">
@@ -279,14 +304,39 @@ export async function getView(ctx, age, skill) {
 
     const items = splitOverviewIntoItems(text);
     if (items.length <= 1) {
-      return `<p class="detail-desc" style="margin-top:10px">${escapeHtml(text)}</p>`;
+      return `<p class="detail-desc" style="margin-top:10px">${friendlyPoint('overview', text, 0)}</p>`;
     }
 
     return `
       <ul class="overview-list" style="margin-top:10px">
-        ${items.map((it) => `<li>${escapeHtml(it)}</li>`).join('')}
+        ${items.map((it, i) => `<li>${friendlyPoint('overview', it, i)}</li>`).join('')}
       </ul>
     `;
+  }
+
+  function friendlyPoint(section, text, index) {
+    const raw = String(text || '').trim();
+    const safe = escapeHtml(raw);
+    const lower = raw.toLowerCase();
+
+    const bySection = {
+      overview: ['🧭', '✨', '🌟', '📘', '💡', '🎈'],
+      objectives: ['🎯', '✅', '🚀', '🧠', '🌱', '🏆'],
+      materials: ['🧰', '📚', '📝', '🎧', '🖍️', '🧩'],
+    };
+
+    let emoji = (bySection[section] || ['✨'])[index % (bySection[section] || ['✨']).length];
+
+    if (lower.includes('listen') || lower.includes('audio') || lower.includes('song')) emoji = '🎧';
+    else if (lower.includes('read') || lower.includes('book') || lower.includes('story')) emoji = '📖';
+    else if (lower.includes('write') || lower.includes('trace') || lower.includes('worksheet')) emoji = '✍️';
+    else if (lower.includes('speak') || lower.includes('talk') || lower.includes('pronunciation')) emoji = '🗣️';
+    else if (lower.includes('game') || lower.includes('play')) emoji = '🎮';
+    else if (lower.includes('video')) emoji = '🎬';
+    else if (lower.includes('vocabulary') || lower.includes('word')) emoji = '🧠';
+    else if (lower.includes('phonics') || lower.includes('sound')) emoji = '🔤';
+
+    return `<span class="friendly-point">${emojiSpan(emoji)} <span>${safe}</span></span>`;
   }
 
   function cleanOverviewText(input) {

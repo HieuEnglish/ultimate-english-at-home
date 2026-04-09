@@ -3245,7 +3245,8 @@ body {
   .resources-age-grid,
   .profile-stat-pills,
   .profile-achievements-grid,
-  .profile-form-grid {
+  .profile-form-grid,
+  .skill-nextgen__stats {
     grid-template-columns: 1fr;
   }
 
@@ -3659,6 +3660,123 @@ body {
   border-radius: 18px;
   padding: 1rem 1.1rem;
   margin-top: 1rem;
+}
+
+.skill-nextgen .detail-section ul,
+.skill-nextgen .overview-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.friendly-point {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  line-height: 1.7;
+}
+
+.friendly-point > span[aria-hidden="true"] {
+  flex-shrink: 0;
+  display: inline-flex;
+  width: 1.4rem;
+  justify-content: center;
+}
+
+.skill-nextgen__hero {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.skill-nextgen__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.skill-nextgen__stat {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.skill-nextgen__stat strong {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.skill-nextgen__stat span {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.skill-nextgen__section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.skill-nextgen__resource {
+  gap: 0.85rem;
+}
+
+.skill-nextgen__resource-card {
+  background: linear-gradient(180deg, rgba(20,16,62,0.96), rgba(13,13,43,0.92));
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 52px rgba(0,0,0,0.24);
+}
+
+.skill-nextgen__resource-card:hover {
+  border-color: rgba(124,92,252,0.28);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.28), 0 0 24px rgba(124,92,252,0.08);
+}
+
+.skill-nextgen__resource-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.skill-nextgen__resource-skill,
+.skill-nextgen__resource-featured {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.skill-nextgen__resource-skill {
+  background: rgba(124,92,252,0.12);
+  border: 1px solid rgba(124,92,252,0.24);
+  color: #d7d3ff;
+}
+
+.skill-nextgen__resource-featured {
+  background: rgba(251,191,36,0.14);
+  border: 1px solid rgba(251,191,36,0.24);
+  color: #ffe49f;
+}
+
+.skill-nextgen__resource-link {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: #d8d2ff;
+  font-weight: 700;
+}
+
+.skill-nextgen__resource-actions {
+  gap: 0.7rem;
 }
 
 .age-nextgen__hero {
