@@ -4,7 +4,7 @@
 */
 
 import { SKILLS } from '../constants.js';
-import { breadcrumbs, card, iconSkill, capitalize, ageGroupLabel, ageGroupHeading } from '../common.js';
+import { breadcrumbs, iconSkill, capitalize, ageGroupLabel, ageGroupHeading } from '../common.js';
 
 /**
  * Build the page for a specific age group.
@@ -26,30 +26,48 @@ export function getView(ctx, age) {
     { label: label },
   ]);
 
-  const glowBySkill = {
-    reading: 'blue',
-    listening: 'green',
-    writing: 'yellow',
-    speaking: 'red',
+  const skillMeta = {
+    reading: {
+      desc: 'Stories, comprehension, vocabulary, and reading confidence.',
+      cta: 'Open reading',
+    },
+    listening: {
+      desc: 'Songs, audio practice, attention, and understanding spoken English.',
+      cta: 'Open listening',
+    },
+    writing: {
+      desc: 'Tracing, sentences, structure, and written expression practice.',
+      cta: 'Open writing',
+    },
+    speaking: {
+      desc: 'Pronunciation, responses, confidence, and spoken communication.',
+      cta: 'Open speaking',
+    },
   };
 
-  const cardsHtml = SKILLS.map((skill) =>
-    card({
-      href: hrefFor(`/resources/${age}/${skill}`),
-      title: capitalize(skill),
-      text: 'Open this skill page.',
-      icon: iconSkill(skill),
-      ctaText: '',
-      glow: glowBySkill[skill] || 'green',
-    })
-  ).join('');
+  const cardsHtml = SKILLS.map((skill) => {
+    const meta = skillMeta[skill] || { desc: 'Explore this skill area.', cta: 'Open skill' };
+    return `
+      <a class="skill-card age-skill-card" href="${hrefFor(`/resources/${age}/${skill}`)}" data-nav role="listitem" data-skill="${skill}">
+        <div class="skill-card__icon" aria-hidden="true">${iconSkill(skill)}</div>
+        <div class="age-skill-card__body">
+          <h2 class="skill-card__name">${capitalize(skill)}</h2>
+          <p class="age-skill-card__desc">${meta.desc}</p>
+          <span class="age-skill-card__cta">${meta.cta}</span>
+        </div>
+      </a>
+    `;
+  }).join('');
 
   const html = `
-    <section class="page-top">
+    <section class="page-top age-nextgen">
       ${breadcrumb}
-      <h1 class="page-title">${heading}</h1>
-      <p class="page-subtitle">Choose a skill area.</p>
-      <div class="card-grid" role="list">
+      <div class="subpage-hero age-nextgen__hero">
+        <span class="resources-hero__label">Skill paths</span>
+        <h1 class="page-title">${heading}</h1>
+        <p class="page-subtitle">Choose a skill area and jump into a more visual learning path for this group.</p>
+      </div>
+      <div class="skill-grid age-nextgen__grid" role="list">
         ${cardsHtml}
       </div>
       <div class="actions">

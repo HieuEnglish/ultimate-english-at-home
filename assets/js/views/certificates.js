@@ -265,11 +265,9 @@ function svgCertificateMarkup(data, svgId) {
   const ieltsLine = safeText(data.ieltsLine || '');
   const disclaimer = safeText(data.disclaimer || '');
 
-  // Split skill summary into 2 readable lines to prevent squashing/overlap.
   const skillsTop = safeText(skillLine(data, ['reading', 'listening']));
   const skillsBottom = safeText(skillLine(data, ['writing', 'speaking']));
 
-  // A4 landscape-ish viewBox (print-friendly)
   return `
     <svg
       id="${safeText(svgId)}"
@@ -282,131 +280,77 @@ function svgCertificateMarkup(data, svgId) {
     >
       <defs>
         <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#f7f8ff"/>
-          <stop offset="1" stop-color="#fff7fb"/>
+          <stop offset="0" stop-color="#0b0824"/>
+          <stop offset="1" stop-color="#1b0f43"/>
         </linearGradient>
 
         <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#8be9c5"/>
-          <stop offset="0.5" stop-color="#a8c9ff"/>
-          <stop offset="1" stop-color="#ffb3d9"/>
+          <stop offset="0" stop-color="#7c5cfc"/>
+          <stop offset="0.5" stop-color="#4fc3f7"/>
+          <stop offset="1" stop-color="#f7b2ff"/>
         </linearGradient>
 
         <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b1020" flood-opacity="0.12"/>
+          <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.35"/>
         </filter>
       </defs>
 
-      <!-- Background -->
       <rect x="0" y="0" width="1120" height="792" fill="url(#bgGrad)"/>
+      <circle cx="140" cy="150" r="125" fill="#7c5cfc" opacity="0.16"/>
+      <circle cx="990" cy="150" r="160" fill="#f472b6" opacity="0.12"/>
+      <circle cx="980" cy="660" r="180" fill="#4fc3f7" opacity="0.10"/>
+      <circle cx="140" cy="650" r="150" fill="#7c5cfc" opacity="0.10"/>
 
-      <!-- Decorative blobs -->
-      <circle cx="120" cy="120" r="95" fill="#a8c9ff" opacity="0.22"/>
-      <circle cx="1030" cy="120" r="120" fill="#ffb3d9" opacity="0.18"/>
-      <circle cx="1030" cy="690" r="140" fill="#8be9c5" opacity="0.16"/>
-      <circle cx="130" cy="680" r="120" fill="#ffd98a" opacity="0.14"/>
+      <rect x="70" y="58" width="980" height="676" rx="26" fill="rgba(24, 16, 64, 0.88)" filter="url(#softShadow)"/>
+      <rect x="92" y="80" width="936" height="632" rx="22" fill="none" stroke="url(#accentGrad)" stroke-width="4"/>
 
-      <!-- Outer card -->
-      <rect x="70" y="58" width="980" height="676" rx="26" fill="#ffffff" filter="url(#softShadow)"/>
-
-      <!-- Border -->
-      <rect x="92" y="80" width="936" height="632" rx="22" fill="none" stroke="url(#accentGrad)" stroke-width="6"/>
-
-      <!-- Header -->
-      <text x="560" y="155" text-anchor="middle" font-size="44" font-weight="800" fill="#1d2440">
-        Certificate of Achievement
+      <text x="560" y="128" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff" opacity="0.95">
+        💜 ULTIMATE ENGLISH AT HOME
       </text>
-      <text x="560" y="192" text-anchor="middle" font-size="16" font-weight="600" fill="#4a5270" opacity="0.95">
-        Ultimate English At Home (UEAH)
+      <text x="560" y="210" text-anchor="middle" font-size="44" font-weight="500" font-family="Georgia, serif" fill="#ffffff">
+        CERTIFICATE OF ACHIEVEMENT
       </text>
-
-      <!-- Ribbon accent -->
-      <rect x="92" y="220" width="936" height="12" rx="6" fill="url(#accentGrad)" opacity="0.9"/>
-
-      <!-- Body -->
-      <text x="560" y="290" text-anchor="middle" font-size="18" font-weight="600" fill="#4a5270">
-        This certifies that
+      <text x="560" y="286" text-anchor="middle" font-size="18" font-weight="500" fill="#d6d4f1" opacity="0.96">
+        Presented to
       </text>
-
-      <text x="560" y="350" text-anchor="middle" font-size="54" font-weight="900" fill="#141a34">
+      <text x="560" y="420" text-anchor="middle" font-size="72" font-weight="400" font-family="Georgia, serif" fill="#ffffff">
         ${name}
       </text>
-
-      ${email ? `<text x="560" y="382" text-anchor="middle" font-size="14" font-weight="600" fill="#4a5270" opacity="0.9">${email}</text>` : ''}
-
-      <text x="560" y="430" text-anchor="middle" font-size="18" font-weight="600" fill="#4a5270">
-        has achieved a level of
+      ${email ? `<text x="560" y="450" text-anchor="middle" font-size="15" font-weight="600" fill="#b9b6de" opacity="0.92">${email}</text>` : ''}
+      <rect x="250" y="470" width="620" height="2" rx="1" fill="url(#accentGrad)" opacity="0.65"/>
+      <text x="560" y="540" text-anchor="middle" font-size="20" font-weight="500" fill="#f0eefb">
+        For outstanding achievement
+      </text>
+      <text x="560" y="584" text-anchor="middle" font-size="22" font-weight="500" fill="#f0eefb">
+        in ${ageLabel} English language learning
       </text>
 
-      <text x="560" y="482" text-anchor="middle" font-size="36" font-weight="900" fill="#1d2440">
-        ${overallTitle}
-      </text>
+      <rect x="200" y="620" width="720" height="86" rx="20" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="235" y="656" text-anchor="start" font-size="15" font-weight="800" fill="#dcd9fb">Overall score</text>
+      <text x="235" y="685" text-anchor="start" font-size="28" font-weight="900" fill="#ffffff">${overallScore}/100</text>
+      <text x="905" y="653" text-anchor="end" font-size="13" font-weight="700" fill="#d0ccef" opacity="0.96">${skillsTop}</text>
+      <text x="905" y="676" text-anchor="end" font-size="13" font-weight="700" fill="#d0ccef" opacity="0.96">${skillsBottom}</text>
+      <text x="905" y="698" text-anchor="end" font-size="12" font-weight="700" fill="#9e97cf" opacity="0.92">${overallTitle}</text>
 
-      <text x="560" y="518" text-anchor="middle" font-size="16" font-weight="600" fill="#4a5270">
-        in ${ageLabel}
-      </text>
-
-      <!-- Score row (taller so skill lines never squash) -->
-      <rect x="200" y="540" width="720" height="82" rx="16" fill="#f6f7ff" stroke="#e7e9f6"/>
-
-      <!-- Left: overall -->
-      <text x="235" y="582" text-anchor="start" font-size="16" font-weight="800" fill="#1d2440">
-        Overall score:
-      </text>
-      <text x="405" y="582" text-anchor="start" font-size="20" font-weight="900" fill="#141a34">
-        ${overallScore}/100
-      </text>
-
-      <!-- Right: skills split into 2 lines (readable) -->
-      <text x="905" y="572" text-anchor="end" font-size="13" font-weight="800" fill="#4a5270" opacity="0.96">
-        ${skillsTop}
-      </text>
-      <text x="905" y="594" text-anchor="end" font-size="13" font-weight="800" fill="#4a5270" opacity="0.96">
-        ${skillsBottom}
-      </text>
-
-      <!-- Recognition -->
-      <text x="560" y="642" text-anchor="middle" font-size="14" font-weight="700" fill="#4a5270">
-        ${ieltsLine}
-      </text>
-
-      <text x="560" y="666" text-anchor="middle" font-size="12" font-weight="600" fill="#4a5270" opacity="0.85">
-        ${disclaimer}
-      </text>
-
-      <!-- Footer -->
-      <text x="120" y="700" text-anchor="start" font-size="12" font-weight="700" fill="#4a5270" opacity="0.9">
-        Date issued: ${date}
-      </text>
-
-      <text x="1000" y="700" text-anchor="end" font-size="12" font-weight="700" fill="#4a5270" opacity="0.9">
-        UEAH • Practice Certificate
-      </text>
-
-      <!-- Signature lines -->
-      <line x1="160" y1="655" x2="410" y2="655" stroke="#d7dbef" stroke-width="2"/>
-      <text x="160" y="675" text-anchor="start" font-size="12" font-weight="700" fill="#4a5270" opacity="0.9">
-        Teacher / Parent
-      </text>
-
-      <line x1="710" y1="655" x2="960" y2="655" stroke="#d7dbef" stroke-width="2"/>
-      <text x="960" y="675" text-anchor="end" font-size="12" font-weight="700" fill="#4a5270" opacity="0.9">
-        UEAH
-      </text>
+      <text x="560" y="740" text-anchor="middle" font-size="12" font-weight="600" fill="#b4addd" opacity="0.92">${ieltsLine} ${disclaimer}</text>
+      <text x="120" y="740" text-anchor="start" font-size="12" font-weight="700" fill="#b4addd" opacity="0.92">Date issued: ${date}</text>
+      <text x="1000" y="740" text-anchor="end" font-size="12" font-weight="700" fill="#b4addd" opacity="0.92">UEAH • Practice Certificate</text>
     </svg>
   `;
 }
 
 function pageLockedHtml(ctx, titleText, message) {
   return `
-    <section class="page-top certificates-page">
+    <section class="page-top certificates-page certificates-nextgen certificates-nextgen--locked">
       ${breadcrumbs([
         { label: 'Home', href: ctx.hrefFor('/') },
         { label: 'Profile', href: ctx.hrefFor('/profile') },
         { label: 'Certificate' },
       ])}
-      <h1 class="page-title">${emojiSpan('🏆')} ${safeText(titleText || 'Certificate')}</h1>
-      <p class="page-subtitle">${emojiSpan('🔒')} Locked</p>
+      <div class="certificates-nextgen__hero">
+        <h1 class="page-title">${emojiSpan('🏆')} ${safeText(titleText || 'Certificate')}</h1>
+        <p class="page-subtitle">${emojiSpan('🔒')} Locked</p>
+      </div>
 
       <div class="note" style="margin-top:12px">
         <strong>${emojiSpan('✅')} Unlock rule</strong>
@@ -672,7 +616,7 @@ export async function getView(ctx, mode) {
     .join('');
 
   const html = `
-    <section class="page-top certificates-page">
+    <section class="page-top certificates-page certificates-nextgen">
       ${breadcrumbs([
         { label: 'Home', href: hrefFor('/') },
         { label: 'Profile', href: hrefFor('/profile') },

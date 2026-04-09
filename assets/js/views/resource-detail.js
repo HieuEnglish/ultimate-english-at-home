@@ -196,11 +196,13 @@ export async function getView(ctx, age, skill, slug) {
   }
 
   const html = `
-    <section class="page-top">
+    <section class="page-top resource-detail-nextgen">
       ${breadcrumb}
-      <div class="detail-card">
-        <h1 class="detail-title">${escapeHtml(resource.title)}</h1>
-        <p class="detail-desc">${escapeHtml(resource.description || `Practice resource for ${skill}.`)}</p>
+      <div class="detail-card resource-detail-nextgen__card">
+        <div class="subpage-hero subpage-hero--left">
+          <h1 class="detail-title">${escapeHtml(resource.title)}</h1>
+          <p class="detail-desc">${escapeHtml(resource.description || `Practice resource for ${skill}.`)}</p>
+        </div>
         ${chips}
         <div class="actions" style="margin-top:14px">
           <a class="btn" href="${ctx.hrefFor(`/resources/${age}/${skill}`)}" data-nav>← Back</a>

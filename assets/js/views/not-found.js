@@ -21,13 +21,17 @@ export function getView(ctx, path) {
   ]);
 
   const html = `
-    <section class="page-top">
+    <section class="page-top error-nextgen">
       ${breadcrumb}
-      <h1 class="page-title">Page not found</h1>
-      <p class="page-subtitle">We couldn’t find: <code>${escapeHtml(path)}</code></p>
-      <div class="actions">
-        <a class="btn btn--primary" href="${hrefFor('/') }" data-nav>Go Home</a>
-        <a class="btn" href="${hrefFor('/resources') }" data-nav>Resources</a>
+      <div class="error-nextgen__shell">
+        <div class="error-nextgen__code">404</div>
+        <h1 class="page-title error-nextgen__title">Oops! Page not found</h1>
+        <p class="page-subtitle error-nextgen__subtitle">We couldn’t find: <code>${escapeHtml(path)}</code></p>
+        <div class="error-nextgen__owl" aria-hidden="true">🦉</div>
+        <div class="error-nextgen__actions">
+          <a class="btn btn--primary error-nextgen__btn" href="${hrefFor('/')}" data-nav>Go Home</a>
+          <a class="btn error-nextgen__btn" href="${hrefFor('/contact')}" data-nav>Contact Us</a>
+        </div>
       </div>
     </section>
   `;

@@ -61,100 +61,109 @@ export function getView(ctx) {
   ]);
 
   const html = `
-    <section class="page-top">
+    <section class="page-top contact-nextgen">
       ${breadcrumb}
-      <h1 class="page-title"><span class="emoji" aria-hidden="true">💌</span> Contact</h1>
-      <p class="page-subtitle">
-        Share an idea <span class="emoji" aria-hidden="true">💡</span>, report a bug <span class="emoji" aria-hidden="true">🐞</span>, or ask a question <span class="emoji" aria-hidden="true">❓</span>
-      </p>
 
-      <div class="detail-card" role="region" aria-label="Contact form">
-        <div class="chips" style="margin: 0 0 12px" aria-label="Quick subject presets">
-          <button class="chip" type="button" data-preset="Idea" aria-label="Preset: Idea" aria-pressed="false">
-            <span class="emoji" aria-hidden="true">💡</span> Idea
-          </button>
-          <button class="chip" type="button" data-preset="Bug" aria-label="Preset: Bug" aria-pressed="false">
-            <span class="emoji" aria-hidden="true">🐞</span> Bug
-          </button>
-          <button class="chip" type="button" data-preset="Question" aria-label="Preset: Question" aria-pressed="false">
-            <span class="emoji" aria-hidden="true">❓</span> Question
-          </button>
-          <span class="chip">
-            <span class="emoji" aria-hidden="true">✨</span> No login needed
-          </span>
+      <div class="contact-nextgen__shell">
+        <div class="contact-nextgen__card" role="region" aria-label="Contact form">
+          <h1 class="page-title contact-nextgen__title">Contact Us</h1>
+          <p class="page-subtitle contact-nextgen__subtitle">Get in touch with us for questions, feedback, or support.</p>
+
+          <form id="contact-form" novalidate>
+            <div id="contact-error-summary" class="field-error" role="alert" aria-live="polite" style="margin: 0 0 12px; display:none;"></div>
+
+            <div class="contact-nextgen__chips" aria-label="Quick subject presets">
+              <button class="contact-pill contact-pill--idea" type="button" data-preset="Idea" aria-label="Preset: Idea" aria-pressed="false">
+                <span class="emoji" aria-hidden="true">💡</span> Idea
+              </button>
+              <button class="contact-pill contact-pill--bug" type="button" data-preset="Bug" aria-label="Preset: Bug" aria-pressed="false">
+                <span class="emoji" aria-hidden="true">🐞</span> Bug
+              </button>
+              <button class="contact-pill contact-pill--question" type="button" data-preset="Question" aria-label="Preset: Question" aria-pressed="false">
+                <span class="emoji" aria-hidden="true">❓</span> Question
+              </button>
+            </div>
+
+            <div class="contact-nextgen__form">
+              <div class="field contact-nextgen__full" data-field>
+                <label class="label" for="contact-email">Your email</label>
+                <input
+                  class="input contact-nextgen__input"
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  maxlength="120"
+                  placeholder="Your email"
+                />
+              </div>
+
+              <div class="field contact-nextgen__full" data-field>
+                <label class="label" for="contact-name">Your name (optional)</label>
+                <input
+                  class="input contact-nextgen__input"
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  maxlength="${MAX_NAME}"
+                  placeholder="Your name"
+                  aria-describedby="contact-name-error"
+                />
+                <div class="field-error" id="contact-name-error" data-error aria-live="polite"></div>
+              </div>
+
+              <div class="field contact-nextgen__full" data-field>
+                <label class="label" for="contact-subject">Subject</label>
+                <input
+                  class="input contact-nextgen__input"
+                  id="contact-subject"
+                  name="subject"
+                  type="text"
+                  required
+                  maxlength="${MAX_SUBJECT}"
+                  placeholder="Subject"
+                  aria-describedby="contact-subject-error"
+                />
+                <div class="field-error" id="contact-subject-error" data-error aria-live="polite"></div>
+              </div>
+
+              <div class="field contact-nextgen__full" data-field>
+                <label class="label" for="contact-message">Message</label>
+                <textarea
+                  class="textarea contact-nextgen__textarea"
+                  id="contact-message"
+                  name="message"
+                  rows="7"
+                  required
+                  maxlength="${MAX_MESSAGE}"
+                  placeholder="Message"
+                  aria-describedby="contact-message-error"
+                ></textarea>
+                <div class="field-error" id="contact-message-error" data-error aria-live="polite"></div>
+              </div>
+            </div>
+
+            <div class="contact-nextgen__actions">
+              <button class="contact-nextgen__send" type="submit">Send</button>
+              <button class="btn" type="button" id="contact-copy"><span class="emoji" aria-hidden="true">📋</span> Copy</button>
+              <a class="btn" href="${hrefFor('/')}" data-nav><span class="emoji" aria-hidden="true">🏠</span> Home</a>
+            </div>
+
+            <p class="muted" style="margin:12px 0 0">
+              When you press <strong>Send</strong>, this opens a Google Form in a new tab so you can review everything before submitting.
+            </p>
+
+            <div id="contact-fallback" class="muted" style="margin:10px 0 0; display:none;">
+              If a popup blocker stops the new tab, use this link:
+              <a id="contact-fallback-link" href="#" target="_blank" rel="noopener noreferrer">Open the form</a>.
+            </div>
+
+            <p id="contact-status" class="muted" style="margin:12px 0 0" aria-live="polite"></p>
+          </form>
         </div>
 
-        <form id="contact-form" novalidate>
-          <div id="contact-error-summary" class="field-error" role="alert" aria-live="polite" style="margin: 0 0 12px; display:none;"></div>
-
-          <div class="form-grid">
-            <div class="field" data-field>
-              <label class="label" for="contact-name"><span class="emoji" aria-hidden="true">🙋</span> Your name (optional)</label>
-              <input
-                class="input"
-                id="contact-name"
-                name="name"
-                type="text"
-                autocomplete="name"
-                maxlength="${MAX_NAME}"
-                placeholder="e.g., Alex"
-                aria-describedby="contact-name-hint contact-name-error"
-              />
-              <p id="contact-name-hint" class="muted" style="margin:8px 0 10px;">Add a name if you want it included in the message.</p>
-              <div class="field-error" id="contact-name-error" data-error aria-live="polite"></div>
-            </div>
-
-            <div class="field" data-field>
-              <label class="label" for="contact-subject"><span class="emoji" aria-hidden="true">🏷️</span> Subject</label>
-              <input
-                class="input"
-                id="contact-subject"
-                name="subject"
-                type="text"
-                required
-                maxlength="${MAX_SUBJECT}"
-                placeholder="What is this about?"
-                aria-describedby="contact-subject-hint contact-subject-error"
-              />
-              <p id="contact-subject-hint" class="muted" style="margin:8px 0 10px;">Short summary (max ${MAX_SUBJECT} characters).</p>
-              <div class="field-error" id="contact-subject-error" data-error aria-live="polite"></div>
-            </div>
-
-            <div class="field" data-field style="grid-column: 1 / -1">
-              <label class="label" for="contact-message"><span class="emoji" aria-hidden="true">📝</span> Message</label>
-              <textarea
-                class="textarea"
-                id="contact-message"
-                name="message"
-                rows="7"
-                required
-                maxlength="${MAX_MESSAGE}"
-                placeholder="Tell us what happened, what you want to see, or what we should improve…"
-                aria-describedby="contact-message-hint contact-message-error"
-              ></textarea>
-              <p id="contact-message-hint" class="muted" style="margin:8px 0 10px;">Details help a lot! (max ${MAX_MESSAGE} characters) <span class="emoji" aria-hidden="true">🙏</span></p>
-              <div class="field-error" id="contact-message-error" data-error aria-live="polite"></div>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn--primary" type="submit"><span class="emoji" aria-hidden="true">🚀</span> Send</button>
-            <button class="btn" type="button" id="contact-copy"><span class="emoji" aria-hidden="true">📋</span> Copy</button>
-            <a class="btn" href="${hrefFor('/')}" data-nav><span class="emoji" aria-hidden="true">🏠</span> Home</a>
-          </div>
-
-          <p class="muted" style="margin:12px 0 0">
-            When you press <strong>Send</strong>, this opens a Google Form in a new tab so you can review everything before submitting.
-            <span class="emoji" aria-hidden="true">🔗</span>
-          </p>
-
-          <div id="contact-fallback" class="muted" style="margin:10px 0 0; display:none;">
-            If a popup blocker stops the new tab, use this link:
-            <a id="contact-fallback-link" href="#" target="_blank" rel="noopener noreferrer">Open the form</a>.
-          </div>
-
-          <p id="contact-status" class="muted" style="margin:12px 0 0" aria-live="polite"></p>
-        </form>
+        <div class="contact-nextgen__art" aria-hidden="true">✉️</div>
       </div>
     </section>
   `;
@@ -163,6 +172,7 @@ export function getView(ctx) {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
+    const emailEl = document.getElementById('contact-email');
     const nameEl = document.getElementById('contact-name');
     const subjectEl = document.getElementById('contact-subject');
     const messageEl = document.getElementById('contact-message');
@@ -197,6 +207,7 @@ export function getView(ctx) {
     // Prefill the name field from the profile store if available
     const prof = typeof profileGet === 'function' ? profileGet() || {} : {};
     if (prof.name && nameEl && !nameEl.value) nameEl.value = String(prof.name);
+    if (prof.email && emailEl && !emailEl.value) emailEl.value = String(prof.email);
 
     function setStatus(text) {
       if (statusEl) statusEl.textContent = text || '';
@@ -214,7 +225,7 @@ export function getView(ctx) {
     }
 
     function clearErrors() {
-      [nameEl, subjectEl, messageEl].forEach((el) => {
+      [emailEl, nameEl, subjectEl, messageEl].forEach((el) => {
         if (!el) return;
         el.removeAttribute('aria-invalid');
       });
@@ -336,6 +347,7 @@ export function getView(ctx) {
     if (copyBtn) {
       copyBtn.addEventListener('click', async () => {
         clearErrors();
+        const emailVal = emailEl ? sanitizeText(emailEl.value, 120) : '';
         const nameVal = nameEl ? sanitizeText(nameEl.value, MAX_NAME) : '';
         const subjVal = subjectEl ? sanitizeText(subjectEl.value, MAX_SUBJECT) : '';
         const msgVal = messageEl ? sanitizeText(messageEl.value, MAX_MESSAGE) : '';
@@ -351,7 +363,7 @@ export function getView(ctx) {
             category: selectedCategory || inferCategoryFromSubject(subjVal),
             name: nameVal,
             subject: subjVal,
-            message: msgVal,
+            message: emailVal ? `Email: ${emailVal}\n\n${msgVal}` : msgVal,
             pageUrl: safePageUrl(),
           })
         );
@@ -365,6 +377,7 @@ export function getView(ctx) {
       clearErrors();
 
       const { ok, nameVal, subjVal, msgVal } = validate();
+      const emailVal = emailEl ? sanitizeText(emailEl.value, 120) : '';
       if (!ok) {
         const firstInvalid = [subjectEl, messageEl, nameEl].find(
           (el) => el && el.getAttribute('aria-invalid') === 'true'
@@ -377,7 +390,8 @@ export function getView(ctx) {
       try {
         if (typeof contactSend === 'function') {
           const categoryVal = selectedCategory || inferCategoryFromSubject(subjVal) || 'Question';
-          const res = contactSend({ category: categoryVal, name: nameVal, subject: subjVal, message: msgVal });
+          const mergedMessage = emailVal ? `Email: ${emailVal}\n\n${msgVal}` : msgVal;
+          const res = contactSend({ category: categoryVal, name: nameVal, email: emailVal, subject: subjVal, message: mergedMessage });
           const url = res && typeof res === 'object' ? String(res.url || '') : '';
           if (url && fallbackLink) fallbackLink.setAttribute('href', url);
           if (url && fallbackWrap) fallbackWrap.style.display = 'block';
@@ -393,6 +407,7 @@ export function getView(ctx) {
 
     // Clear per-field error on input
     [
+      [emailEl, null],
       [nameEl, errName],
       [subjectEl, errSubject],
       [messageEl, errMessage],

@@ -36,6 +36,15 @@ export function getView(ctx) {
     speaking: 'purple',
   };
 
+  const HERO_META = {
+    '0-3': { label: 'Kids', emoji: '🤖', glow: 'blue', desc: 'Tests designed for younger learners', jump: 'age-0-3' },
+    '4-7': { label: 'Kids+', emoji: '🪁', glow: 'yellow', desc: 'Early foundation tests for beginner readers and listeners', jump: 'age-4-7' },
+    '8-10': { label: 'Pre-Teens', emoji: '🚀', glow: 'orange', desc: 'Tests tailored for learners building stronger core skills', jump: 'age-8-10' },
+    '11-12': { label: 'Teens', emoji: '🧳', glow: 'blue', desc: 'Tests focused on more independent practice', jump: 'age-11-12' },
+    '13-18': { label: 'Adults', emoji: '📋', glow: 'purple', desc: 'Tests suited for advanced learners and exam pathways', jump: 'age-13-18' },
+    ielts: { label: 'All Ages', emoji: '🎯', glow: 'purple', desc: 'IELTS-style practice suitable for any advanced learner', jump: 'age-ielts' },
+  };
+
   function isIeltsTest(t) {
     const slug = String(t?.slug || '').toLowerCase();
     return slug.startsWith('iels-') || slug.startsWith('ielts-');
@@ -63,7 +72,6 @@ export function getView(ctx) {
     });
   }
 
-  // Split IELTS tests (always last)
   const ieltsTests = [];
   const regularTests = [];
 
@@ -72,7 +80,6 @@ export function getView(ctx) {
     else regularTests.push(t);
   });
 
-  // Group regular tests by age
   const byAge = new Map();
   AGE_ORDER.forEach((age) => byAge.set(age, []));
 
@@ -82,7 +89,6 @@ export function getView(ctx) {
     byAge.get(age).push(t);
   });
 
-  // Sort each age group by skill order, then title
   for (const [, group] of byAge.entries()) {
     group.sort((a, b) => {
       const aSkill = safeSkillKey(a.skill);
@@ -99,7 +105,6 @@ export function getView(ctx) {
     });
   }
 
-  // Sort IELTS tests (keep stable, but also consistent order)
   ieltsTests.sort((a, b) => {
     const aSkill = safeSkillKey(a.skill);
     const bSkill = safeSkillKey(b.skill);
@@ -114,10 +119,32 @@ export function getView(ctx) {
     return at.localeCompare(bt);
   });
 
+  const heroCards = [
+    ...AGE_ORDER.filter((age) => (byAge.get(age) || []).length).slice(0, 4),
+    ...(ieltsTests.length ? ['ielts'] : []),
+  ].slice(0, 4);
+
+  const heroHtml = heroCards
+    .map((key) => {
+      const meta = HERO_META[key];
+      const count = key === 'ielts' ? ieltsTests.length : (byAge.get(key) || []).length;
+      return `
+        <a class="tests-hero-card" href="#${meta.jump}" data-tests-jump data-glow="${meta.glow}" aria-label="Open ${meta.label} tests">
+          <div class="tests-hero-card__icon" aria-hidden="true">${meta.emoji}</div>
+          <h2 class="tests-hero-card__title">${meta.label}</h2>
+          <p class="tests-hero-card__desc">${meta.desc}</p>
+          <div class="tests-hero-card__footer">
+            <span class="tests-hero-card__count">${count} test${count === 1 ? '' : 's'}</span>
+            <span class="tests-hero-card__cta">Start Test</span>
+          </div>
+        </a>
+      `;
+    })
+    .join('');
+
   let sectionsHtml = '';
 
   if (hasTests) {
-    // Preferred: 5 age sections (only if there are tests for that age)
     AGE_ORDER.forEach((age) => {
       const group = byAge.get(age) || [];
       if (!group.length) return;
@@ -126,14 +153,16 @@ export function getView(ctx) {
       const cardsHtml = group.map((t) => renderTestCard(t)).join('');
 
       sectionsHtml += `
-        <section class="tests-section" aria-label="Tests for ages ${ageLabel}">
-          <h2 class="section-title">Ages ${ageLabel}</h2>
+        <section id="age-${age}" class="tests-section tests-section--nextgen" aria-label="Tests for ages ${ageLabel}">
+          <div class="tests-section__head">
+            <h2 class="section-title">Ages ${ageLabel}</h2>
+            <p class="tests-section__meta">${group.length} test${group.length === 1 ? '' : 's'} available</p>
+          </div>
           <div class="card-grid" role="list">${cardsHtml}</div>
         </section>
       `;
     });
 
-    // Any additional (non-standard) ages, if present
     for (const [age, group] of byAge.entries()) {
       if (AGE_ORDER.includes(age)) continue;
       if (!group.length) continue;
@@ -142,22 +171,24 @@ export function getView(ctx) {
       const cardsHtml = group.map((t) => renderTestCard(t)).join('');
 
       sectionsHtml += `
-        <section class="tests-section" aria-label="Tests for ages ${ageLabel}">
-          <h2 class="section-title">Ages ${ageLabel}</h2>
+        <section id="age-${age}" class="tests-section tests-section--nextgen" aria-label="Tests for ages ${ageLabel}">
+          <div class="tests-section__head">
+            <h2 class="section-title">Ages ${ageLabel}</h2>
+            <p class="tests-section__meta">${group.length} test${group.length === 1 ? '' : 's'} available</p>
+          </div>
           <div class="card-grid" role="list">${cardsHtml}</div>
         </section>
       `;
     }
 
-    // IELTS section last (robust even if load order changes)
     if (ieltsTests.length) {
-      const ieltsCards = ieltsTests
-        .map((t) => renderTestCard(t, { glow: 'iels' }))
-        .join('');
-
+      const ieltsCards = ieltsTests.map((t) => renderTestCard(t, { glow: 'purple' })).join('');
       sectionsHtml += `
-        <section class="tests-section" aria-label="IELTS tests">
-          <h2 class="section-title">IELTS</h2>
+        <section id="age-ielts" class="tests-section tests-section--nextgen" aria-label="IELTS tests">
+          <div class="tests-section__head">
+            <h2 class="section-title">IELTS</h2>
+            <p class="tests-section__meta">${ieltsTests.length} test${ieltsTests.length === 1 ? '' : 's'} available</p>
+          </div>
           <div class="card-grid" role="list">${ieltsCards}</div>
         </section>
       `;
@@ -165,21 +196,26 @@ export function getView(ctx) {
   }
 
   const html = `
-    <section class="page-top tests-page">
+    <section class="page-top tests-page tests-nextgen">
       ${breadcrumb}
-      <h1 class="page-title">Tests</h1>
-      <p class="page-subtitle">
-        Tests match the expected level for each age group. Complete all four skill tests for an age group to get an overall score in your profile.
-      </p>
+      <div class="tests-hero">
+        <h1 class="page-title tests-hero__title">Premium English Tests</h1>
+        <p class="page-subtitle tests-hero__subtitle">
+          Practice advanced English skills through age-specific, IELTS-inspired tests designed for confident home learning.
+        </p>
+      </div>
 
       ${
         hasTests
-          ? `<div aria-label="Tests">${sectionsHtml}</div>`
+          ? `
+            <div class="tests-hero-grid" aria-label="Featured test paths">${heroHtml}</div>
+            <div class="tests-sections-wrap" aria-label="Tests">${sectionsHtml}</div>
+          `
           : `
-        <div class="note">
-          <strong>Coming soon:</strong> tests will appear here.
-        </div>
-      `
+            <div class="note">
+              <strong>Coming soon:</strong> tests will appear here.
+            </div>
+          `
       }
 
       <div class="actions">
@@ -189,5 +225,19 @@ export function getView(ctx) {
     </section>
   `;
 
-  return { title, description, html };
+  const afterRender = () => {
+    const links = Array.from(document.querySelectorAll('[data-tests-jump]'));
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = String(link.getAttribute('href') || '');
+        if (!href.startsWith('#')) return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  };
+
+  return { title, description, html, afterRender };
 }

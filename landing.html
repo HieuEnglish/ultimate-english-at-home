@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>UEAH — Ultimate English At Home | Free English Learning for All Ages</title>
+<meta name="description" content="Free English practice for kids, teens and adults. Age-specific resources, games, and IELTS-inspired tests — all at home, all free."/>
+<meta name="theme-color" content="#07071a"/>
+<meta name="color-scheme" content="dark"/>
+<meta property="og:title" content="UEAH — Ultimate English At Home"/>
+<meta property="og:description" content="Free English practice for all ages. Resources, games, and tests — age-specific and IELTS-inspired."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://hieuenglish.github.io/ultimate-english-at-home/landing.html"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:        #07071a;
+  --bg-card:   #0f0f30;
+  --bg-glass:  rgba(255,255,255,0.05);
+  --text:      #ffffff;
+  --text-sec:  #b0b3d6;
+  --text-muted:#6a6d9a;
+  --purple:    #7c5cfc;
+  --blue:      #4fc3f7;
+  --cyan:      #00e5ff;
+  --pink:      #f472b6;
+  --orange:    #fb923c;
+  --yellow:    #fbbf24;
+  --green:     #34d399;
+  --border:    rgba(255,255,255,0.08);
+  --radius:    20px;
+  --font:      'Inter', system-ui, sans-serif;
+  --display:   'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --trans:     0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Nebula background */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(ellipse 90% 60% at 15% -5%,  rgba(124,92,252,0.2)  0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 85% 10%,  rgba(79,195,247,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(244,114,182,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 70% 50%,  rgba(52,211,153,0.06) 0%, transparent 50%),
+    var(--bg);
+  pointer-events:none;
+}
+
+/* Stars */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background-image:
+    radial-gradient(1px 1px at 8%  12%, rgba(255,255,255,.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 22% 4%,  rgba(255,255,255,.35)0%,transparent 100%),
+    radial-gradient(1px 1px at 42% 22%, rgba(255,255,255,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 68% 7%,  rgba(255,255,255,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 88% 18%, rgba(255,255,255,.35)0%,transparent 100%),
+    radial-gradient(1px 1px at 14% 42%, rgba(255,255,255,.25)0%,transparent 100%),
+    radial-gradient(1px 1px at 58% 58%, rgba(255,255,255,.2) 0%,transparent 100%),
+    radial-gradient(1px 1px at 78% 52%, rgba(255,255,255,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 28% 78%, rgba(255,255,255,.2) 0%,transparent 100%),
+    radial-gradient(1px 1px at 62% 83%, rgba(255,255,255,.3) 0%,transparent 100%),
+    radial-gradient(2px 2px at 35% 35%, rgba(124,92,252,.4) 0%,transparent 100%),
+    radial-gradient(2px 2px at 75% 30%, rgba(79,195,247,.3)  0%,transparent 100%);
+  pointer-events:none;
+}
+
+section, header, footer, nav, main { position: relative; z-index: 1; }
+
+/* ── LAYOUT ── */
+.container { width:100%; max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+
+/* ── NAV ── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(7,7,26,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(124,92,252,0.15);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-sec);
+  text-decoration: none;
+  transition: all var(--trans);
+  border: 1px solid transparent;
+}
+.nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.07); }
+
+.nav-cta {
+  padding: 0.5rem 1.25rem !important;
+  background: linear-gradient(135deg, var(--purple), rgba(79,195,247,0.8)) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 20px rgba(124,92,252,0.3);
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(124,92,252,0.4) !important; }
+
+@media(max-width:640px){ .nav-links{display:none} }
+
+/* ── HERO ── */
+.hero {
+  padding: 6rem 0 5rem;
+  text-align: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 1rem;
+  border-radius: 100px;
+  background: rgba(124,92,252,0.12);
+  border: 1px solid rgba(124,92,252,0.3);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--purple);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .grad {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 50%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-sec);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2.25rem;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all var(--trans);
+  cursor: pointer;
+}
+
+.btn-hero--primary {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+  border: none;
+  box-shadow: 0 6px 32px rgba(124,92,252,0.4);
+}
+.btn-hero--primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(124,92,252,0.5); }
+
+.btn-hero--outline {
+  background: transparent;
+  border: 1px solid rgba(124,92,252,0.4);
+  color: var(--text);
+}
+.btn-hero--outline:hover { background: rgba(124,92,252,0.12); border-color: var(--purple); }
+
+.hero-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+}
+
+/* Floating age pill badges */
+.hero-pills {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.hero-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 100px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero-pill:nth-child(2) { animation-delay: 0.4s; }
+.hero-pill:nth-child(3) { animation-delay: 0.8s; }
+.hero-pill:nth-child(4) { animation-delay: 1.2s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+@media(max-width:640px){ .stats-inner { grid-template-columns: repeat(2,1fr); } }
+
+.stat-num {
+  font-family: var(--display);
+  font-size: 2.25rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-sec);
+  margin-top: 0.25rem;
+}
+
+/* ── FEATURES SECTION ── */
+.features { padding: 5rem 0; }
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  color: var(--text-sec);
+  font-size: 1rem;
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media(max-width:800px){ .features-grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:500px){ .features-grid{grid-template-columns:1fr} }
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: all var(--trans);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color, var(--purple)), transparent);
+  opacity: 0;
+  transition: opacity var(--trans);
+}
+
+.feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.14); }
+.feature-card:hover::before { opacity: 1; }
+
+.feature-card[data-accent="green"]  { --accent-color: var(--green);  }
+.feature-card[data-accent="blue"]   { --accent-color: var(--blue);   }
+.feature-card[data-accent="purple"] { --accent-color: var(--purple); }
+.feature-card[data-accent="orange"] { --accent-color: var(--orange); }
+.feature-card[data-accent="pink"]   { --accent-color: var(--pink);   }
+.feature-card[data-accent="yellow"] { --accent-color: var(--yellow); }
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
+}
+
+.feature-card[data-accent="green"]  .feature-icon { background:rgba(52,211,153,0.1);  border-color:rgba(52,211,153,0.2);  }
+.feature-card[data-accent="blue"]   .feature-icon { background:rgba(79,195,247,0.1);  border-color:rgba(79,195,247,0.2);  }
+.feature-card[data-accent="purple"] .feature-icon { background:rgba(124,92,252,0.1);  border-color:rgba(124,92,252,0.2);  }
+.feature-card[data-accent="orange"] .feature-icon { background:rgba(251,146,60,0.1);  border-color:rgba(251,146,60,0.2);  }
+.feature-card[data-accent="pink"]   .feature-icon { background:rgba(244,114,182,0.1); border-color:rgba(244,114,182,0.2); }
+.feature-card[data-accent="yellow"] .feature-icon { background:rgba(251,191,36,0.1);  border-color:rgba(251,191,36,0.2);  }
+
+.feature-title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.feature-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.65; }
+
+/* ── AGE PATHS ── */
+.age-section { padding: 5rem 0; }
+
+.age-paths-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+@media(max-width:900px)  { .age-paths-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:500px)  { .age-paths-grid { grid-template-columns: 1fr; } }
+
+.age-path-card {
+  border-radius: 24px;
+  padding: 0 0 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  transition: all var(--trans);
+  display: flex;
+  flex-direction: column;
+}
+.age-path-card:hover { transform: translateY(-5px); box-shadow: 0 16px 60px rgba(0,0,0,0.5); border-color: rgba(124,92,252,0.35); }
+
+.age-path-card__top {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  position: relative;
+}
+
+.age-path-card[data-age="0-3"]  .age-path-card__top { background: linear-gradient(135deg,rgba(251,146,60,0.15),rgba(251,191,36,0.08)); border-bottom: 1px solid rgba(251,146,60,0.2); }
+.age-path-card[data-age="4-7"]  .age-path-card__top { background: linear-gradient(135deg,rgba(244,114,182,0.15),rgba(167,139,250,0.08)); border-bottom: 1px solid rgba(244,114,182,0.2); }
+.age-path-card[data-age="8-12"] .age-path-card__top { background: linear-gradient(135deg,rgba(79,195,247,0.15),rgba(0,229,255,0.08)); border-bottom: 1px solid rgba(79,195,247,0.2); }
+.age-path-card[data-age="13+"]  .age-path-card__top { background: linear-gradient(135deg,rgba(124,92,252,0.15),rgba(167,139,250,0.08)); border-bottom: 1px solid rgba(124,92,252,0.2); }
+
+.age-path-card__range {
+  padding: 1.25rem 1.25rem 0.3rem;
+  font-size: 1.6rem;
+  font-family: var(--display);
+  font-weight: 900;
+}
+
+.age-path-card__title {
+  padding: 0 1.25rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-sec);
+  flex: 1;
+  line-height: 1.6;
+}
+
+.age-path-card__cta {
+  margin: 0 1.25rem;
+  padding: 0.55rem 0;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+  transition: all var(--trans);
+}
+.age-path-card:hover .age-path-card__cta {
+  background: rgba(124,92,252,0.2);
+  border-color: var(--purple);
+}
+
+/* ── HOW IT WORKS ── */
+.how-section { padding: 5rem 0; }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  position: relative;
+}
+@media(max-width:700px){ .steps-grid { grid-template-columns: 1fr; } }
+
+/* Connecting line */
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan));
+  opacity: 0.25;
+  z-index: 0;
+}
+@media(max-width:700px){ .steps-grid::before { display:none; } }
+
+.step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.step__num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  box-shadow: 0 0 24px rgba(124,92,252,0.4);
+}
+
+.step__title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.step__desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.65; }
+
+/* ── SKILLS SECTION ── */
+.skills-section { padding: 5rem 0; }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+@media(max-width:800px) { .skills-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:480px) { .skills-grid { grid-template-columns: 1fr; } }
+
+.skill-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all var(--trans);
+}
+.skill-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+
+.skill-pill__icon { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
+
+.skill-pill__name {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.skill-pill[data-skill="reading"]   { border-top: 2px solid var(--green);  }
+.skill-pill[data-skill="listening"] { border-top: 2px solid var(--blue);   }
+.skill-pill[data-skill="writing"]   { border-top: 2px solid var(--orange); }
+.skill-pill[data-skill="speaking"]  { border-top: 2px solid var(--purple); }
+.skill-pill[data-skill="reading"]   .skill-pill__name { color: var(--green); }
+.skill-pill[data-skill="listening"] .skill-pill__name { color: var(--blue); }
+.skill-pill[data-skill="writing"]   .skill-pill__name { color: var(--orange); }
+.skill-pill[data-skill="speaking"]  .skill-pill__name { color: var(--purple); }
+
+.skill-pill__desc { font-size: 0.8rem; color: var(--text-sec); }
+
+/* ── TESTIMONIALS ── */
+.testimonials { padding: 5rem 0; }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+@media(max-width:800px){ .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 3rem auto 0; } }
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: all var(--trans);
+}
+.testimonial-card:hover { transform: translateY(-2px); border-color: rgba(124,92,252,0.25); }
+
+.testimonial-stars { color: var(--yellow); font-size: 0.9rem; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+
+.testimonial-text {
+  font-size: 0.9rem;
+  color: var(--text-sec);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+
+.testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+.testimonial-avatar { font-size: 2rem; }
+.testimonial-name { font-weight: 700; font-size: 0.9rem; }
+.testimonial-role { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ── CTA SECTION ── */
+.cta-section {
+  padding: 5rem 0 6rem;
+  text-align: center;
+}
+
+.cta-card {
+  background: linear-gradient(135deg, rgba(124,92,252,0.12), rgba(79,195,247,0.06));
+  border: 1px solid rgba(124,92,252,0.25);
+  border-radius: 32px;
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 20% 50%, rgba(124,92,252,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 50%, rgba(79,195,247,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.cta-sub {
+  font-size: 1.1rem;
+  color: var(--text-sec);
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.cta-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  position: relative;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 2rem;
+  background: rgba(7,7,26,0.85);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+@media(max-width:800px){ .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:500px){ .footer-grid { grid-template-columns: 1fr; } }
+
+.footer-brand-desc {
+  font-size: 0.85rem;
+  color: var(--text-sec);
+  margin-top: 0.75rem;
+  line-height: 1.7;
+}
+
+.footer-col-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-sec);
+  text-decoration: none;
+  transition: color var(--trans);
+}
+.footer-links a:hover { color: var(--text); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-bottom a { color: var(--text-muted); text-decoration: none; }
+.footer-bottom a:hover { color: var(--text-sec); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(124,92,252,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(124,92,252,0.5); }
+</style>
+</head>
+
+<body>
+
+<!-- ── NAV ── -->
+<nav class="site-nav" role="navigation">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">💜 UEAH</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#ages">Age Groups</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="index.html" class="nav-cta">Open App →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">✨ 100% Free · No sign-up required</div>
+
+    <h1 class="hero-title">
+      Learn English<br>
+      <span class="grad">at any age, at home</span>
+    </h1>
+
+    <p class="hero-sub">
+      UEAH gives kids, teens, and adults free access to age-specific English resources,
+      games, and IELTS-inspired tests — all designed to make practice fun and effective.
+    </p>
+
+    <div class="hero-actions">
+      <a href="index.html" class="btn-hero btn-hero--primary">
+        🚀 Start Learning Free
+      </a>
+      <a href="#features" class="btn-hero btn-hero--outline">
+        Learn More →
+      </a>
+    </div>
+    <p class="hero-note">No account needed · Works on any device · Always free</p>
+
+    <div class="hero-pills">
+      <div class="hero-pill">🧸 Ages 0–3</div>
+      <div class="hero-pill">🎨 Ages 4–7</div>
+      <div class="hero-pill">🤖 Ages 8–12</div>
+      <div class="hero-pill">🎧 Ages 13+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-inner">
+      <div>
+        <span class="stat-num">4</span>
+        <p class="stat-label">Age Groups</p>
+      </div>
+      <div>
+        <span class="stat-num">4</span>
+        <p class="stat-label">Core Skills</p>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <p class="stat-label">Free Forever</p>
+      </div>
+      <div>
+        <span class="stat-num">∞</span>
+        <p class="stat-label">Practice Sessions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="features" id="features">
+  <div class="container">
+    <span class="section-label">What you get</span>
+    <h2 class="section-title">Everything you need to<br>master English at home</h2>
+    <p class="section-sub">
+      A complete learning toolkit — resources, interactive games, and timed tests — all
+      tailored to age and skill level.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card" data-accent="green">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title">Curated Resources</h3>
+        <p class="feature-desc">Hand-picked free resources for every age group and skill — reading, listening, writing, and speaking.</p>
+      </div>
+      <div class="feature-card" data-accent="yellow">
+        <div class="feature-icon">🎮</div>
+        <h3 class="feature-title">Learning Games</h3>
+        <p class="feature-desc">Interactive games that make vocabulary, grammar, and comprehension practice genuinely fun.</p>
+      </div>
+      <div class="feature-card" data-accent="blue">
+        <div class="feature-icon">🧪</div>
+        <h3 class="feature-title">IELTS-Inspired Tests</h3>
+        <p class="feature-desc">Age-appropriate practice tests modelled on real IELTS standards to build confidence over time.</p>
+      </div>
+      <div class="feature-card" data-accent="orange">
+        <div class="feature-icon">👤</div>
+        <h3 class="feature-title">Progress Tracking</h3>
+        <p class="feature-desc">Save scores, earn certificates, and track your IELTS progress across every skill area.</p>
+      </div>
+      <div class="feature-card" data-accent="pink">
+        <div class="feature-icon">⭐</div>
+        <h3 class="feature-title">Favourites</h3>
+        <p class="feature-desc">Bookmark your favourite resources and games so you can pick up exactly where you left off.</p>
+      </div>
+      <div class="feature-card" data-accent="purple">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Certificates</h3>
+        <p class="feature-desc">Earn printable achievement certificates as you level up through the scoring plan for each age group.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AGE PATHS ── -->
+<section class="age-section" id="ages">
+  <div class="container">
+    <span class="section-label">For every learner</span>
+    <h2 class="section-title">Learning paths built<br>for every age</h2>
+    <p class="section-sub">
+      Content is matched to the expected skill level for each stage of development — from
+      toddlers to adults preparing for IELTS.
+    </p>
+
+    <div class="age-paths-grid">
+      <a class="age-path-card" href="index.html" data-age="0-3">
+        <div class="age-path-card__top">🧸</div>
+        <div class="age-path-card__range">0–3 years</div>
+        <div class="age-path-card__title">First words, sounds, and simple patterns through songs and play.</div>
+        <div class="age-path-card__cta">Explore →</div>
+      </a>
+
+      <a class="age-path-card" href="index.html" data-age="4-7">
+        <div class="age-path-card__top">🎨</div>
+        <div class="age-path-card__range">4–7 years</div>
+        <div class="age-path-card__title">Phonics, early reading, basic vocabulary and simple sentence building.</div>
+        <div class="age-path-card__cta">Explore →</div>
+      </a>
+
+      <a class="age-path-card" href="index.html" data-age="8-12">
+        <div class="age-path-card__top">🤖</div>
+        <div class="age-path-card__range">8–12 years</div>
+        <div class="age-path-card__title">Reading comprehension, listening, writing skills and growing vocabulary.</div>
+        <div class="age-path-card__cta">Explore →</div>
+      </a>
+
+      <a class="age-path-card" href="index.html" data-age="13+">
+        <div class="age-path-card__top">🎧</div>
+        <div class="age-path-card__range">13+ years</div>
+        <div class="age-path-card__title">Advanced skills, IELTS preparation, complex texts and academic writing.</div>
+        <div class="age-path-card__cta">Explore →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="how">
+  <div class="container">
+    <span class="section-label">Simple & fast</span>
+    <h2 class="section-title">Get started in seconds</h2>
+    <p class="section-sub">No sign-up, no payment, no friction — just open and start practising.</p>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step__num">1</div>
+        <h3 class="step__title">Choose your age group</h3>
+        <p class="step__desc">Pick the age range that fits the learner — content and difficulty automatically adjust.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">2</div>
+        <h3 class="step__title">Pick a skill</h3>
+        <p class="step__desc">Focus on Reading, Listening, Writing, or Speaking — or mix them all up for a complete session.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">3</div>
+        <h3 class="step__title">Learn & track progress</h3>
+        <p class="step__desc">Complete resources, play games, take tests, and save scores to your free profile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section class="skills-section" id="skills">
+  <div class="container">
+    <span class="section-label">Core skills</span>
+    <h2 class="section-title">All four IELTS skills covered</h2>
+    <p class="section-sub">Every resource and test is mapped to one of the four core English skills — the same ones assessed in real IELTS exams.</p>
+
+    <div class="skills-grid">
+      <div class="skill-pill" data-skill="reading">
+        <span class="skill-pill__icon">📖</span>
+        <div class="skill-pill__name">Reading</div>
+        <p class="skill-pill__desc">Comprehension, vocabulary in context, and critical reading</p>
+      </div>
+      <div class="skill-pill" data-skill="listening">
+        <span class="skill-pill__icon">🎧</span>
+        <div class="skill-pill__name">Listening</div>
+        <p class="skill-pill__desc">Audio comprehension, note-taking, and phonics practice</p>
+      </div>
+      <div class="skill-pill" data-skill="writing">
+        <span class="skill-pill__icon">✍️</span>
+        <div class="skill-pill__name">Writing</div>
+        <p class="skill-pill__desc">Spelling, grammar, sentence structure, and composition</p>
+      </div>
+      <div class="skill-pill" data-skill="speaking">
+        <span class="skill-pill__icon">🎙️</span>
+        <div class="skill-pill__name">Speaking</div>
+        <p class="skill-pill__desc">Pronunciation, fluency, and spoken expression exercises</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials">
+  <div class="container">
+    <span class="section-label">Loved by learners</span>
+    <h2 class="section-title">What people are saying</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"My daughter loves the games — she doesn't even realise she's learning. Her reading has improved so much in just a few weeks!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👩</div>
+          <div>
+            <div class="testimonial-name">Sarah M.</div>
+            <div class="testimonial-role">Parent of a 7-year-old</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"As a teacher I recommend UEAH to all my students for home practice. The IELTS-aligned tests are exactly what they need."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👨‍🏫</div>
+          <div>
+            <div class="testimonial-name">Mr. Nguyen</div>
+            <div class="testimonial-role">English Teacher</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Free, fast, and actually works. I use it every day to prep for my IELTS exam. The scoring plan keeps me motivated."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🧑‍🎓</div>
+          <div>
+            <div class="testimonial-name">Linh T.</div>
+            <div class="testimonial-role">University Student, 19</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-card">
+      <h2 class="cta-title">Ready to start learning? 🚀</h2>
+      <p class="cta-sub">
+        Jump in instantly — no account, no payment, no waiting. Just free English practice for everyone.
+      </p>
+      <div class="cta-actions">
+        <a href="index.html" class="btn-hero btn-hero--primary">Open UEAH Free →</a>
+        <a href="https://github.com/HieuEnglish/ultimate-english-at-home" target="_blank" rel="noreferrer" class="btn-hero btn-hero--outline">⭐ Star on GitHub</a>
+      </div>
+      <p class="cta-note">Made with ❤️ for learners, families, and teachers · MIT License</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-family:var(--display);font-weight:800;font-size:1.1rem;margin-bottom:0.5rem;">💜 UEAH</div>
+        <p class="footer-brand-desc">
+          Ultimate English At Home — free English practice for learners of all ages.
+          Age-specific resources, games, and IELTS-inspired tests.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">App</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html">Resources</a></li>
+          <li><a href="index.html">Games</a></li>
+          <li><a href="index.html">Tests</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">More</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Profile</a></li>
+          <li><a href="index.html">Scoring Plan</a></li>
+          <li><a href="index.html">Favourites</a></li>
+          <li><a href="index.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Project</div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/HieuEnglish/ultimate-english-at-home" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a href="https://github.com/HieuEnglish/ultimate-english-at-home/issues" target="_blank" rel="noreferrer">Report a Bug</a></li>
+          <li><a href="https://github.com/HieuEnglish/ultimate-english-at-home/pulls" target="_blank" rel="noreferrer">Contribute</a></li>
+          <li><a href="https://github.com/HieuEnglish/ultimate-english-at-home/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT License</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Ultimate English At Home · Made with ❤️</span>
+      <span>
+        <a href="https://github.com/HieuEnglish/ultimate-english-at-home" target="_blank" rel="noreferrer">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="index.html">Open App</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Intersection observer for scroll-in animations
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .age-path-card, .step, .skill-pill, .testimonial-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>

@@ -277,108 +277,176 @@ export function getView(ctx) {
   const canSync = typeof syncExport === 'function' && typeof syncImport === 'function';
 
   const html = `
-    <section class="page-top profile-page">
+    <section class="page-top profile-page profile-nextgen">
       ${breadcrumb}
-      <h1 class="page-title">${emojiSpan('👤')} Profile</h1>
-      <p class="page-subtitle">${emojiSpan('📱')} Saved on this device.</p>
 
-      <div class="detail-card" role="region" aria-label="Profile form">
-        <form id="profile-form" novalidate>
-          <div class="detail-section field">
-            <label class="label" for="profile-email">${emojiSpan('📧')} Email</label>
-            <p class="muted" id="profile-email-help">Used for score tracking and contact.</p>
-            <input
-              id="profile-email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              inputmode="email"
-              class="input"
-              placeholder="name@example.com"
-              aria-describedby="profile-email-help"
-            />
+      <div class="profile-hero-shell">
+        <div class="profile-panel profile-panel--identity" role="region" aria-label="Profile form">
+          <div class="profile-identity-head">
+            <div class="profile-avatar-xl" id="profile-avatar-xl" aria-hidden="true">👤</div>
+            <div>
+              <p class="profile-kicker">Learner profile</p>
+              <h1 class="page-title profile-nextgen__title" id="profile-hero-name">Your profile</h1>
+              <p class="profile-nextgen__subtitle" id="profile-hero-email">Saved on this device.</p>
+            </div>
           </div>
 
-          <div class="detail-section field">
-            <label class="label" for="profile-name">${emojiSpan('🏷️')} Display name</label>
-            <input
-              id="profile-name"
-              name="name"
-              type="text"
-              autocomplete="name"
-              class="input"
-              placeholder="Optional"
-            />
-          </div>
+          <form id="profile-form" novalidate class="profile-form-grid">
+            <div class="detail-section field">
+              <label class="label" for="profile-email">${emojiSpan('📧')} Email</label>
+              <p class="muted" id="profile-email-help">Used for score tracking and contact.</p>
+              <input
+                id="profile-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                class="input"
+                placeholder="name@example.com"
+                aria-describedby="profile-email-help"
+              />
+            </div>
 
-          <div class="detail-section field">
-            <label class="label" for="profile-target">${emojiSpan('🎯')} Target IELTS score</label>
-            <p class="muted" id="profile-target-help">For Ages 13–18 and IELTS Practice only (practice).</p>
-            <input
-              id="profile-target"
-              name="targetScore"
-              type="number"
-              inputmode="decimal"
-              min="0"
-              max="9"
-              step="0.5"
-              class="input"
-              placeholder="Optional (e.g., 6.5)"
-              aria-describedby="profile-target-help"
-            />
-          </div>
+            <div class="detail-section field">
+              <label class="label" for="profile-name">${emojiSpan('🏷️')} Display name</label>
+              <input
+                id="profile-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                class="input"
+                placeholder="Optional"
+              />
+            </div>
 
-          <div class="actions">
-            <button class="btn btn--primary" type="submit" aria-label="Save profile">${emojiSpan('💾')} Save</button>
-            <button class="btn" type="button" id="profile-clear" aria-label="Reset profile on this device">${emojiSpan('🔄')} Reset profile</button>
-            <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">${emojiSpan('📋')} Scoring plan</a>
-            <a class="btn" href="${hrefFor('/')}" data-nav>${emojiSpan('🏠')} Home</a>
-          </div>
+            <div class="detail-section field profile-form-grid__full">
+              <label class="label" for="profile-target">${emojiSpan('🎯')} Target IELTS score</label>
+              <p class="muted" id="profile-target-help">For Ages 13–18 and IELTS Practice only (practice).</p>
+              <input
+                id="profile-target"
+                name="targetScore"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                max="9"
+                step="0.5"
+                class="input"
+                placeholder="Optional (e.g., 6.5)"
+                aria-describedby="profile-target-help"
+              />
+            </div>
 
-          <p id="profile-status" class="muted" style="margin:12px 0 0" aria-live="polite" role="status"></p>
-        </form>
-      </div>
+            <div class="profile-actions-bar profile-form-grid__full">
+              <button class="btn btn--primary" type="submit" aria-label="Save profile">${emojiSpan('💾')} Save</button>
+              <button class="btn" type="button" id="profile-clear" aria-label="Reset profile on this device">${emojiSpan('🔄')} Reset profile</button>
+              <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">${emojiSpan('📋')} Scoring plan</a>
+              <a class="btn" href="${hrefFor('/')}" data-nav>${emojiSpan('🏠')} Home</a>
+            </div>
 
-      <div class="detail-card" style="margin-top:18px" role="region" aria-labelledby="progress-title">
-        <h2 class="detail-title" id="progress-title" style="font-size:18px; margin:0">${emojiSpan('📈')} Progress & certifications</h2>
-        <p class="detail-desc" id="progress-desc" style="margin-top:10px">
-          Save scores from skill tests to track progress by age group (${emojiSpan('📖')} Reading / ${emojiSpan('🎧')} Listening / ${emojiSpan('✍️')} Writing / ${emojiSpan('🗣️')} Speaking).
-        </p>
-
-        <div id="profile-progress" style="margin-top:12px" aria-describedby="progress-desc"></div>
-
-        <div class="actions" style="margin-top:12px; flex-wrap:wrap">
-          <button type="button" class="btn" id="progress-reset-all" aria-controls="profile-progress">
-            ${emojiSpan('🧹')} Reset all saved scores
-          </button>
-          <a class="btn" href="${hrefFor('/tests')}" data-nav>${emojiSpan('🧪')} Go to Tests</a>
-          <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">${emojiSpan('📋')} Scoring plan</a>
+            <p id="profile-status" class="muted profile-form-grid__full" aria-live="polite" role="status"></p>
+          </form>
         </div>
 
-        <p class="muted" id="progress-status" aria-live="polite" role="status" style="margin:10px 0 0"></p>
+        <div class="profile-panel profile-panel--dashboard" role="region" aria-label="Progress overview">
+          <div class="profile-dashboard-grid">
+            <div class="profile-score-card">
+              <div class="profile-score-ring" id="profile-score-ring">
+                <div class="profile-score-ring__inner">
+                  <span class="profile-score-ring__number" id="profile-best-score">—</span>
+                  <span class="profile-score-ring__label" id="profile-best-label">Best overall score</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-achievements-block">
+              <p class="profile-kicker">Overview</p>
+              <div class="profile-stat-pills">
+                <div class="profile-stat-pill">
+                  <span class="profile-stat-pill__value" id="profile-saved-skills">0</span>
+                  <span class="profile-stat-pill__label">Saved skills</span>
+                </div>
+                <div class="profile-stat-pill">
+                  <span class="profile-stat-pill__value" id="profile-active-paths">0</span>
+                  <span class="profile-stat-pill__label">Active paths</span>
+                </div>
+                <div class="profile-stat-pill">
+                  <span class="profile-stat-pill__value" id="profile-cert-count">0</span>
+                  <span class="profile-stat-pill__label">Certificates</span>
+                </div>
+              </div>
+
+              <div class="profile-achievements-grid">
+                <div class="profile-achievement-card" data-accent="blue">
+                  <div class="profile-achievement-card__icon">🎯</div>
+                  <div>
+                    <div class="profile-achievement-card__title">Target</div>
+                    <div class="profile-achievement-card__text" id="profile-hero-target">Not set yet</div>
+                  </div>
+                </div>
+                <div class="profile-achievement-card" data-accent="pink">
+                  <div class="profile-achievement-card__icon">📚</div>
+                  <div>
+                    <div class="profile-achievement-card__title">Learning paths</div>
+                    <div class="profile-achievement-card__text" id="profile-hero-active">No saved progress yet</div>
+                  </div>
+                </div>
+                <a class="profile-quick-link" href="${hrefFor('/resources')}" data-nav>
+                  <span aria-hidden="true">📚</span>
+                  <span>Resources</span>
+                </a>
+                <a class="profile-quick-link" href="${hrefFor('/favourites')}" data-nav>
+                  <span aria-hidden="true">⭐</span>
+                  <span>Favourites</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="detail-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
-        <h2 class="detail-title" style="font-size:18px; margin:0">${emojiSpan('🔁')} Move to another device</h2>
-        <p class="detail-desc" style="margin-top:10px">
-          Save your <strong>Profile + Favourites</strong> to a file. On your other device, load the file to copy them.
-        </p>
+      <div class="profile-panel profile-panel--progress" role="region" aria-labelledby="progress-title">
+        <div class="profile-panel__header">
+          <div>
+            <h2 class="detail-title" id="progress-title">${emojiSpan('📈')} Progress & certifications</h2>
+            <p class="detail-desc" id="progress-desc">
+              Save scores from skill tests to track progress by age group (${emojiSpan('📖')} Reading / ${emojiSpan('🎧')} Listening / ${emojiSpan('✍️')} Writing / ${emojiSpan('🗣️')} Speaking).
+            </p>
+          </div>
+          <div class="profile-actions-bar">
+            <button type="button" class="btn" id="progress-reset-all" aria-controls="profile-progress">
+              ${emojiSpan('🧹')} Reset all saved scores
+            </button>
+            <a class="btn" href="${hrefFor('/tests')}" data-nav>${emojiSpan('🧪')} Go to Tests</a>
+            <a class="btn" href="${hrefFor('/scoring')}" data-nav aria-label="Open scoring plan">${emojiSpan('📋')} Scoring plan</a>
+          </div>
+        </div>
+
+        <div id="profile-progress" class="profile-progress-host" aria-describedby="progress-desc"></div>
+        <p class="muted profile-status-line" id="progress-status" aria-live="polite" role="status"></p>
+      </div>
+
+      <div class="profile-panel profile-panel--sync" role="region" aria-label="Move profile and favourites to another device">
+        <div class="profile-panel__header">
+          <div>
+            <h2 class="detail-title">${emojiSpan('🔁')} Move to another device</h2>
+            <p class="detail-desc">Save your <strong>Profile + Favourites</strong> to a file, then load it on another device.</p>
+          </div>
+        </div>
 
         ${
           canSync
             ? `
-              <div class="actions" style="margin-top:12px; flex-wrap:wrap">
+              <div class="profile-actions-bar">
                 <button type="button" class="btn btn--primary" data-sync-export>
                   ${emojiSpan('📤')} Save to file
                 </button>
 
-                <label class="btn" style="position:relative; overflow:hidden">
+                <label class="btn profile-file-btn">
                   ${emojiSpan('📥')} Load from file
                   <input
                     type="file"
                     accept=".json,application/json"
                     data-sync-import
-                    style="position:absolute; inset:0; opacity:0; cursor:pointer"
                     aria-label="Load a saved file to copy your profile and favourites"
                   />
                 </label>
@@ -388,21 +456,15 @@ export function getView(ctx) {
                 </button>
               </div>
 
-              <p class="muted" id="sync-status" aria-live="polite" role="status" style="margin:10px 0 0"></p>
+              <p class="muted profile-status-line" id="sync-status" aria-live="polite" role="status"></p>
             `
             : `
-              <div class="note" style="margin-top:12px">
+              <div class="note">
                 <strong>Not available.</strong>
                 <p style="margin:8px 0 0">This feature is not available in this build.</p>
               </div>
             `
         }
-      </div>
-
-      <div class="actions">
-        <a class="btn" href="${hrefFor('/favourites')}" data-nav>${emojiSpan('⭐')} Favourites</a>
-        <a class="btn" href="${hrefFor('/scoring')}" data-nav>${emojiSpan('📋')} Scoring plan</a>
-        <a class="btn" href="${hrefFor('/resources')}" data-nav>${emojiSpan('📚')} Resources</a>
       </div>
     </section>
   `;
@@ -447,6 +509,71 @@ export function getView(ctx) {
       targetEl.value = typeof p.targetScore === 'number' ? String(p.targetScore) : p.targetScore || '';
     }
 
+    function renderOverview(profile) {
+      const p = profile || {};
+      const resultsByAge = getResultsByAge(p);
+      const unlockedAges = getUnlockedAges(resultsByAge);
+
+      const name = String(p.name || '').trim() || 'Your profile';
+      const email = String(p.email || '').trim() || 'Saved on this device.';
+      const initials = name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part.charAt(0).toUpperCase())
+        .join('') || '👤';
+
+      const activeAges = AGE_GROUPS.filter((age) => SKILLS.some((skill) => !!getLastScore(resultsByAge, age, skill)));
+      const savedSkills = AGE_GROUPS.reduce(
+        (total, age) => total + SKILLS.filter((skill) => !!getLastScore(resultsByAge, age, skill)).length,
+        0
+      );
+
+      let bestOverall = null;
+      let bestAge = '';
+      AGE_GROUPS.forEach((age) => {
+        const overall = getOverall(resultsByAge, age);
+        if (!overall) return;
+        if (!bestOverall || Number(overall.score) > Number(bestOverall.score)) {
+          bestOverall = overall;
+          bestAge = age;
+        }
+      });
+
+      const avatarEl = document.getElementById('profile-avatar-xl');
+      const nameElView = document.getElementById('profile-hero-name');
+      const emailElView = document.getElementById('profile-hero-email');
+      const targetElView = document.getElementById('profile-hero-target');
+      const activeElView = document.getElementById('profile-hero-active');
+      const bestScoreEl = document.getElementById('profile-best-score');
+      const bestLabelEl = document.getElementById('profile-best-label');
+      const savedSkillsEl = document.getElementById('profile-saved-skills');
+      const activePathsEl = document.getElementById('profile-active-paths');
+      const certCountEl = document.getElementById('profile-cert-count');
+      const scoreRingEl = document.getElementById('profile-score-ring');
+
+      if (avatarEl) avatarEl.textContent = initials;
+      if (nameElView) nameElView.textContent = name;
+      if (emailElView) emailElView.textContent = email;
+      if (targetElView) {
+        targetElView.textContent = p.targetScore || p.targetScore === 0 ? `IELTS target ${formatScore(p.targetScore)}` : 'Not set yet';
+      }
+      if (activeElView) {
+        activeElView.textContent = activeAges.length ? `${activeAges.length} path${activeAges.length === 1 ? '' : 's'} in progress` : 'No saved progress yet';
+      }
+      if (bestScoreEl) bestScoreEl.textContent = bestOverall ? formatScore(bestOverall.score) : '—';
+      if (bestLabelEl) {
+        bestLabelEl.textContent = bestOverall && bestAge ? `${ageLabelFor(bestAge)} best overall` : 'Best overall score';
+      }
+      if (savedSkillsEl) savedSkillsEl.textContent = String(savedSkills);
+      if (activePathsEl) activePathsEl.textContent = String(activeAges.length);
+      if (certCountEl) certCountEl.textContent = String(unlockedAges.length);
+      if (scoreRingEl) {
+        const score = bestOverall ? Math.max(0, Math.min(100, Number(bestOverall.score) || 0)) : 0;
+        scoreRingEl.style.setProperty('--score-angle', `${score * 3.6}deg`);
+      }
+    }
+
     function renderProgress(profile) {
       const p = profile || {};
       const resultsByAge = getResultsByAge(p);
@@ -462,13 +589,9 @@ export function getView(ctx) {
         const unlockedCount = unlockedAges.length;
         const canPrintBest = unlockedCount >= 1;
         const canPrintAll = unlockedCount >= 2;
-
         const bestLabel = bestUnlockedAge ? ageLabelFor(bestUnlockedAge) : '';
         const ruleLine =
           'Printing unlocks only when all 4 skills are saved and each score is 100/100 for an age group.';
-
-        const bestBtnStyle = canPrintBest ? '' : 'pointer-events:none; opacity:.55; filter:saturate(.6)';
-        const allBtnStyle = canPrintAll ? '' : 'pointer-events:none; opacity:.55; filter:saturate(.6)';
 
         const bestAria = canPrintBest
           ? `View and print your best unlocked certificate${bestLabel ? ` (${bestLabel})` : ''}`
@@ -479,13 +602,14 @@ export function getView(ctx) {
           : 'Locked. Unlock at least two age groups to print all certificates at once.';
 
         return `
-          <div class="note" style="margin-top:0; padding:12px 12px" role="region" aria-label="Certification printing">
-            <strong>${emojiSpan('🏆')} Certification</strong>
-            <p style="margin:8px 0 0; opacity:.92">
-              ${safeText(ruleLine)}
-            </p>
+          <div class="profile-cert-panel" role="region" aria-label="Certification printing">
+            <div>
+              <p class="profile-kicker">Certification hub</p>
+              <h3 class="profile-cert-panel__title">${emojiSpan('🏆')} Print-ready milestones</h3>
+              <p class="profile-cert-panel__text">${safeText(ruleLine)}</p>
+            </div>
 
-            <div class="actions" style="margin-top:12px; flex-wrap:wrap">
+            <div class="profile-actions-bar">
               <a
                 class="btn btn--primary"
                 href="${hrefFor('/profile/certificates')}"
@@ -493,7 +617,7 @@ export function getView(ctx) {
                 aria-label="${safeText(bestAria)}"
                 aria-disabled="${canPrintBest ? 'false' : 'true'}"
                 data-disabled="${canPrintBest ? 'false' : 'true'}"
-                style="${bestBtnStyle}"
+                style="${canPrintBest ? '' : 'pointer-events:none; opacity:.55; filter:saturate(.6)'}"
               >
                 ${emojiSpan('🖨️')} Print / Save PDF (best)
               </a>
@@ -505,13 +629,13 @@ export function getView(ctx) {
                 aria-label="${safeText(allAria)}"
                 aria-disabled="${canPrintAll ? 'false' : 'true'}"
                 data-disabled="${canPrintAll ? 'false' : 'true'}"
-                style="${allBtnStyle}"
+                style="${canPrintAll ? '' : 'pointer-events:none; opacity:.55; filter:saturate(.6)'}"
               >
                 ${emojiSpan('🧾')} Print all unlocked
               </a>
             </div>
 
-            <p class="muted" style="margin:10px 0 0">
+            <p class="muted profile-cert-panel__meta">
               ${
                 canPrintBest
                   ? `Unlocked: <strong>${safeText(String(unlockedCount))}</strong> age group${unlockedCount === 1 ? '' : 's'}.${
@@ -527,7 +651,7 @@ export function getView(ctx) {
       if (!anySaved) {
         progressHost.innerHTML = `
           ${certPanel}
-          <div class="note" style="margin-top:12px">
+          <div class="note">
             <strong>${emojiSpan('📝')} No saved scores yet</strong>
             <p style="margin:8px 0 0; opacity:.92">
               Complete a skill test and click <strong>Save score to Profile</strong> to track progress here.
@@ -540,19 +664,16 @@ export function getView(ctx) {
       const cards = AGE_GROUPS
         .map((age) => {
           const label = ageLabelFor(age);
-
           const savedSkills = SKILLS.map((skill) => ({
             skill,
             last: getLastScore(resultsByAge, age, skill),
           }));
-
           const completedCount = savedSkills.filter((x) => !!x.last).length;
-
           const overall = completedCount === SKILLS.length ? getOverall(resultsByAge, age) : null;
           const overallWhen = overall && overall.at ? formatDateTime(overall.at) : '';
-
           const certStatus = ageCertificateStatus(resultsByAge, age);
           const unlocked = certStatus.allPerfect;
+          const completionPct = Math.round((completedCount / SKILLS.length) * 100);
 
           const skillGrid = savedSkills
             .map(({ skill, last }) => {
@@ -561,78 +682,50 @@ export function getView(ctx) {
               const skLabelDisplay = skIcon ? `${skIcon} ${skLabelPlain}` : skLabelPlain;
 
               if (last) {
-                const when = last.at ? formatDateTime(last.at) : '';
-                const levelLine = last.levelTitle
-                  ? ` • <span style="opacity:.92">${safeText(last.levelTitle)}</span>`
-                  : '';
-                const aria = `${skLabelPlain} saved. Score ${formatScore(last.score)} out of 100.`;
-
+                const when = last.at ? formatDateTime(last.at) : 'Saved';
+                const levelLine = last.levelTitle ? ` • ${safeText(last.levelTitle)}` : '';
                 const ok = isPerfectScore(last.score);
-                const chipClass = ok ? 'chip chip--ok' : 'chip';
-
                 return `
-                <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
-                  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
-                    <div>
-                      <div style="font-weight:900">${safeText(skLabelDisplay)}</div>
-                      <div style="margin-top:6px; opacity:.92">
-                        Score: <strong>${safeText(formatScore(last.score))}</strong>/100
-                        ${levelLine}
+                  <div class="profile-skill-card profile-skill-card--saved" data-state="${ok ? 'perfect' : 'saved'}">
+                    <div class="profile-skill-card__top">
+                      <div>
+                        <div class="profile-skill-card__title">${safeText(skLabelDisplay)}</div>
+                        <div class="profile-skill-card__score">${safeText(formatScore(last.score))}/100${levelLine}</div>
                       </div>
-                      ${
-                        when
-                          ? `<div class="muted" style="margin-top:4px">${safeText(when)}</div>`
-                          : `<div class="muted" style="margin-top:4px">Saved</div>`
-                      }
+                      <span class="profile-skill-card__badge">${ok ? '✓' : 'Saved'}</span>
                     </div>
-                    <span class="${chipClass}" style="font-weight:900" aria-label="${safeText(
-                      aria
-                    )}" title="${safeText(aria)}">${ok ? '✓' : '•'}</span>
+                    <div class="profile-skill-card__meta">${safeText(when)}</div>
                   </div>
-                </div>
-              `;
+                `;
               }
 
-              const aria = `${skLabelPlain} not saved.`;
               const testSlug = testSlugFor(age, skill);
               const testPath = testSlug ? `/tests/${testSlug}` : '/tests';
               const testAria = testSlug ? `Go to ${skLabelPlain} test for ${label}` : 'Go to test';
 
               return `
-              <div style="border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: var(--surface2)">
-                <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
-                  <div>
-                    <div style="font-weight:900">${safeText(skLabelDisplay)}</div>
-                    <div class="muted" style="margin-top:6px">No score saved yet</div>
+                <div class="profile-skill-card">
+                  <div class="profile-skill-card__top">
+                    <div>
+                      <div class="profile-skill-card__title">${safeText(skLabelDisplay)}</div>
+                      <div class="profile-skill-card__meta">No score saved yet</div>
+                    </div>
+                    <span class="profile-skill-card__badge profile-skill-card__badge--muted">—</span>
                   </div>
-                  <span class="chip" style="font-weight:900" aria-label="${safeText(
-                    aria
-                  )}" title="${safeText(aria)}">—</span>
-                </div>
-                <div style="margin-top:10px">
-                  <a class="btn btn--small" href="${hrefFor(
-                    testPath
-                  )}" data-nav aria-label="${safeText(testAria)}">
+                  <a class="btn btn--small" href="${hrefFor(testPath)}" data-nav aria-label="${safeText(testAria)}">
                     ${emojiSpan('🧪')} Go to test
                   </a>
                 </div>
-              </div>
-            `;
+              `;
             })
             .join('');
-
-          const progressLabel = `Completion for ${label}: ${completedCount} of ${SKILLS.length} skills.`;
 
           const certHints = (() => {
             if (unlocked) {
               return `
-                <p style="margin:8px 0 0; opacity:.92">
-                  ${emojiSpan('✅')} Unlocked for printing (all skills are 100/100).
-                </p>
-                <div class="actions" style="margin-top:10px; flex-wrap:wrap">
-                  <a class="btn btn--small btn--primary" href="${hrefFor(
-                    `/profile/certificates/${age}`
-                  )}" data-nav aria-label="View and print certificate for ${safeText(label)}">
+                <p class="profile-cert-status profile-cert-status--ok">${emojiSpan('✅')} Unlocked for printing (all skills are 100/100).</p>
+                <div class="profile-actions-bar">
+                  <a class="btn btn--small btn--primary" href="${hrefFor(`/profile/certificates/${age}`)}" data-nav aria-label="View and print certificate for ${safeText(label)}">
                     ${emojiSpan('🖨️')} View / Print certificate
                   </a>
                 </div>
@@ -642,104 +735,87 @@ export function getView(ctx) {
             if (certStatus.allSaved) {
               const needs = certStatus.notPerfect.map(titleCase).join(', ');
               return `
-                <p style="margin:8px 0 0; opacity:.92">
-                  ${emojiSpan('🔒')} Locked for printing.
-                </p>
-                <p class="muted" style="margin:8px 0 0">
-                  All skills are saved, but certificates require <strong>100/100</strong> in each skill.
-                  ${
-                    needs ? `Skills to improve: <strong>${safeText(needs)}</strong>.` : ''
-                  }
-                </p>
+                <p class="profile-cert-status">${emojiSpan('🔒')} Locked for printing.</p>
+                <p class="muted">All skills are saved, but certificates require <strong>100/100</strong> in each skill.${
+                  needs ? ` Skills to improve: <strong>${safeText(needs)}</strong>.` : ''
+                }</p>
               `;
             }
 
             const missing = certStatus.missing.map(titleCase).join(', ');
             return `
-              <p style="margin:8px 0 0; opacity:.92">
-                ${emojiSpan('🔒')} Locked for printing.
-              </p>
-              <p class="muted" style="margin:8px 0 0">
-                Save all 4 skills to unlock certification.
-                ${missing ? `Missing: <strong>${safeText(missing)}</strong>.` : ''}
-              </p>
+              <p class="profile-cert-status">${emojiSpan('🔒')} Locked for printing.</p>
+              <p class="muted">Save all 4 skills to unlock certification.${missing ? ` Missing: <strong>${safeText(missing)}</strong>.` : ''}</p>
             `;
           })();
 
           const overallBlock = overall
             ? `
-            <div class="note" style="margin:12px 0 0; padding:10px 12px">
-              <strong>${emojiSpan('🏆')} Certification</strong>
-              <p style="margin:8px 0 0; opacity:.92">
-                Overall score: <strong>${safeText(formatScore(overall.score))}</strong>/100
-                ${overall.title ? ` • <span style="opacity:.92">${safeText(overall.title)}</span>` : ''}
-              </p>
-              ${
-                isIeltsLikeAge(age)
-                  ? `<p class="muted" style="margin:8px 0 0">Bands shown are practice estimates (not official IELTS).</p>`
-                  : ''
-              }
-              ${overallWhen ? `<p class="muted" style="margin:8px 0 0">Last updated: ${safeText(overallWhen)}</p>` : ''}
-              ${certHints}
-            </div>
-          `
+              <div class="profile-overall-card">
+                <div>
+                  <p class="profile-kicker">Overall result</p>
+                  <h4 class="profile-overall-card__title">${safeText(formatScore(overall.score))}/100${
+                overall.title ? ` • ${safeText(overall.title)}` : ''
+              }</h4>
+                  ${isIeltsLikeAge(age) ? `<p class="muted">Bands shown are practice estimates (not official IELTS).</p>` : ''}
+                  ${overallWhen ? `<p class="muted">Last updated: ${safeText(overallWhen)}</p>` : ''}
+                </div>
+                <div>${certHints}</div>
+              </div>
+            `
             : `
-            <div class="note" style="margin:12px 0 0; padding:10px 12px">
-              <strong>${emojiSpan('🏆')} Certification</strong>
-              <p style="margin:8px 0 0; opacity:.92">
-                Complete all 4 skills to unlock an overall score for this group.
-              </p>
-              ${certHints}
-            </div>
-          `;
+              <div class="profile-overall-card">
+                <div>
+                  <p class="profile-kicker">Overall result</p>
+                  <h4 class="profile-overall-card__title">Complete all 4 skills</h4>
+                  <p class="muted">Finish every skill to unlock an overall score for this path.</p>
+                </div>
+                <div>${certHints}</div>
+              </div>
+            `;
 
           return `
-          <div class="detail-card" style="margin-top:12px" data-age-card="${safeText(
-            age
-          )}" role="region" aria-label="${safeText(label)} progress">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap">
-              <div>
-                <div style="font-weight:900">${safeText(label)}</div>
-                <div class="muted" style="margin-top:4px">Completed: ${completedCount} / ${SKILLS.length}</div>
+            <div class="profile-progress-card" data-age-card="${safeText(age)}" role="region" aria-label="${safeText(label)} progress">
+              <div class="profile-progress-card__head">
+                <div>
+                  <div class="profile-progress-card__title">${safeText(label)}</div>
+                  <div class="profile-progress-card__meta">Completed: ${completedCount} / ${SKILLS.length} skills</div>
+                </div>
+                <div class="profile-actions-bar">
+                  <a class="btn btn--small" href="${hrefFor(`/resources/${age}`)}" data-nav aria-label="Open resources for ${safeText(label)}">${emojiSpan('📚')} Open resources</a>
+                  <button
+                    type="button"
+                    class="btn btn--small"
+                    data-action="reset-age"
+                    data-age="${safeText(age)}"
+                    aria-label="Reset saved scores for ${safeText(label)}"
+                  >
+                    ${emojiSpan('🔄')} Reset this age group
+                  </button>
+                </div>
               </div>
-              <div style="display:flex; gap:8px; flex-wrap:wrap">
-                <a class="btn btn--small" href="${hrefFor(
-                  `/resources/${age}`
-                )}" data-nav aria-label="Open resources for ${safeText(label)}">${emojiSpan('📚')} Open resources</a>
-                <button
-                  type="button"
-                  class="btn btn--small"
-                  data-action="reset-age"
-                  data-age="${safeText(age)}"
-                  aria-label="Reset saved scores for ${safeText(label)}"
-                >
-                  ${emojiSpan('🔄')} Reset this age group
-                </button>
+
+              <div class="profile-progress-track" aria-label="Completion for ${safeText(label)}: ${completedCount} of ${SKILLS.length} skills.">
+                <span class="profile-progress-track__fill" style="width:${completionPct}%"></span>
               </div>
-            </div>
 
-            <div style="margin-top:10px">
-              <progress value="${completedCount}" max="${SKILLS.length}" style="width:100%; height:14px" aria-label="${safeText(
-            progressLabel
-          )}"></progress>
-            </div>
+              <div class="profile-skill-grid">
+                ${skillGrid}
+              </div>
 
-            <div style="margin-top:12px; display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))">
-              ${skillGrid}
+              ${overallBlock}
             </div>
-
-            ${overallBlock}
-          </div>
-        `;
+          `;
         })
         .join('');
 
-      progressHost.innerHTML = `${certPanel}${cards}`;
+      progressHost.innerHTML = `${certPanel}<div class="profile-progress-stack">${cards}</div>`;
     }
 
     function refreshAll(msgPersonal, msgProgress, focusTarget) {
       const p = getProfile();
       loadPersonalFields(p);
+      renderOverview(p);
       renderProgress(p);
 
       if (msgPersonal) setStatus(msgPersonal, focusTarget === 'profile');

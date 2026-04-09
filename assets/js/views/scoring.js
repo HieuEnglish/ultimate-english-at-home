@@ -85,6 +85,40 @@ function renderQuickNav(plan) {
   `;
 }
 
+function renderPathShowcase(api) {
+  const palette = {
+    "0-3": "green",
+    "4-7": "blue",
+    "8-10": "pink",
+    "11-12": "pink",
+    "13-18": "yellow",
+    ielts: "purple",
+  };
+
+  const cards = AGE_ORDER.map((age) => {
+    const agePlan = api.getAgePlan(age);
+    if (!agePlan) return "";
+    const rows = Array.isArray(agePlan.levels?.rows) ? agePlan.levels.rows : [];
+    const entry = rows[0] || {};
+    const label = age === "ielts" ? "IELTS" : `Ages ${String(age).replace("-", "–")}`;
+    const title = String(entry.title || "Path");
+    const desc = String(entry.canDo || entry.requirements || "Build your next English milestone.");
+    const color = palette[age] || "blue";
+
+    return `
+      <a class="scoring-showcase-card" data-age-jump href="#age-${escapeHtml(String(age))}" data-glow="${escapeHtml(
+        color
+      )}" aria-label="Open ${escapeHtml(label)} scoring details">
+        <div class="scoring-showcase-card__age">${escapeHtml(label)}</div>
+        <div class="scoring-showcase-card__badge">${escapeHtml(title)}</div>
+        <p class="scoring-showcase-card__desc">${escapeHtml(desc)}</p>
+      </a>
+    `;
+  }).join("");
+
+  return `<div class="scoring-showcase-grid" aria-label="Scoring path overview">${cards}</div>`;
+}
+
 function prefersReducedMotion() {
   try {
     return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -320,16 +354,18 @@ export function getView(ctx) {
   const sections = AGE_ORDER.map((age) => api.getAgePlan(age)).filter(Boolean);
 
   const html = `
-    <section class="page-top scoring-page">
+    <section class="page-top scoring-page scoring-nextgen">
       ${renderScoringPageStyles()}
       ${breadcrumb}
 
-      <h1 class="page-title"><span class="emoji" aria-hidden="true">📋</span> Scoring plan</h1>
-      <p class="page-subtitle">
-        <span class="emoji" aria-hidden="true">🧩</span>
-        Practice scoring rules and level titles per age group.
-        IELTS-related bands are <strong>practice estimates</strong> only.
-      </p>
+      <div class="scoring-nextgen__hero">
+        <h1 class="page-title scoring-nextgen__title">Next-Gen Scoring Plan</h1>
+        <p class="page-subtitle scoring-nextgen__subtitle">
+          Choose a path to level up your English — tailored to the expected skill level for each age group.
+        </p>
+      </div>
+
+      ${renderPathShowcase(api)}
 
       <div class="note" aria-label="Disclaimer">
         <p><strong><span class="emoji" aria-hidden="true">⚠️</span> General:</strong> ${escapeHtml(

@@ -207,10 +207,12 @@ export async function getView(ctx, age, skill) {
   }
 
   const html = `
-    <section class="page-top">
+    <section class="page-top skill-nextgen">
       ${breadcrumb}
-      <h1 class="page-title">${heading}</h1>
-      <p class="page-subtitle">${subtitle}</p>
+      <div class="subpage-hero">
+        <h1 class="page-title">${heading}</h1>
+        <p class="page-subtitle">${subtitle}</p>
+      </div>
       ${packHtml}
       <h2 class="page-title" style="margin-top:22px; font-size:20px">Resources</h2>
       ${gridHtml}

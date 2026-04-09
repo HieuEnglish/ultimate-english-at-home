@@ -75,10 +75,12 @@ export function getView(ctx) {
   }
 
   const html = `
-    <section class="page-top games-page">
+    <section class="page-top games-page games-nextgen">
       ${breadcrumb}
-      <h1 class="page-title"><span class="emoji" aria-hidden="true">🎮</span> Games</h1>
-      <p class="page-subtitle">Choose your age group to find fun learning games!</p>
+      <div class="subpage-hero">
+        <h1 class="page-title"><span class="emoji" aria-hidden="true">🎮</span> Games</h1>
+        <p class="page-subtitle">Choose your age group to find fun learning games!</p>
+      </div>
       ${statsHtml}
       <div class="card-grid games-age-grid" role="list">
         ${cardsHtml}

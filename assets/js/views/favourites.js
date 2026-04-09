@@ -191,21 +191,23 @@ export function getView(ctx) {
   const listHtml = renderFavouritesList(items, hrefFor);
 
   const html = `
-    <section class="page-top favourites-page">
+    <section class="page-top favourites-page favourites-nextgen">
       ${breadcrumb}
-      <h1 class="page-title">
-        Favourites <span class="emoji" aria-hidden="true">💖</span>
-      </h1>
-      <p class="page-subtitle">
-        Your saved resources (stored on this device)
-        <span class="emoji" aria-hidden="true">📌</span>
-      </p>
+      <div class="subpage-hero">
+        <h1 class="page-title">
+          Favourites <span class="emoji" aria-hidden="true">💖</span>
+        </h1>
+        <p class="page-subtitle">
+          Your saved resources (stored on this device)
+          <span class="emoji" aria-hidden="true">📌</span>
+        </p>
+      </div>
 
       <div id="favourites-list">
         ${listHtml}
       </div>
 
-      <div class="detail-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
+      <div class="detail-card favourites-sync-card" style="margin-top:18px" role="region" aria-label="Move profile and favourites to another device">
         <h2 class="detail-title" style="font-size:18px; margin:0">
           Move to another device <span class="emoji" aria-hidden="true">🚚</span>
         </h2>

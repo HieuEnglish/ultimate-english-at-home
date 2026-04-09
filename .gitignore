@@ -9,6 +9,11 @@ Desktop.ini
 
 # Logs
 *.log
+.server.pid
+
+# Local temp/dev
+/tmp/
+tmp/
 
 # Secrets (if you add them later)
 .env
