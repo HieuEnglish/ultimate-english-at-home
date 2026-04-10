@@ -1,436 +1,149 @@
 /* assets/js/games/8-10/word-ladder.js
-   Ladder Climber (Word Ladder) - Ages 8-10
-   
-   Climb the ladder by changing one letter at a time to reach the target word.
+   Word Ladder - Ages 8-10
+
+   Senior pass:
+   - Clearer puzzle progression and target visibility
+   - Better input flow, stronger validation, and cleaner level completion
 */
 
-const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
+const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const LEVELS = [
-    {
-        start: "CAT",
-        end: "DOG",
-        rungs: [
-            { word: "CAT", type: "start", hint: "Start here" },
-            { word: "COT", type: "input", hint: "A baby sleeps in a..." },
-            { word: "DOT", type: "input", hint: "A small circle" },
-            { word: "DOG", type: "end", hint: "Target word!" }
-        ]
-    },
-    {
-        start: "COLD",
-        end: "WARM",
-        rungs: [
-            { word: "COLD", type: "start", hint: "Start here" },
-            { word: "CORD", type: "input", hint: "A rope or wire" },
-            { word: "WARD", type: "input", hint: "Hospital section" },
-            { word: "WARM", type: "end", hint: "Target word!" }
-        ]
-    },
-    {
-        start: "HEAD",
-        end: "TAIL",
-        rungs: [
-            { word: "HEAD", type: "start", hint: "Top of your body" },
-            { word: "HEAL", type: "input", hint: "To get better" },
-            { word: "TEAL", type: "input", hint: "Blue-green color" },
-            { word: "TELL", type: "input", hint: "Speak or say" },
-            { word: "TALL", type: "input", hint: "Opposite of short" },
-            { word: "TAIL", type: "end", hint: "Target word!" }
-        ]
-    },
-    {
-        start: "LION",
-        end: "BEAR",
-        rungs: [
-            { word: "LION", type: "start", hint: "King of the jungle" },
-            { word: "LOON", type: "input", hint: "A water bird" },
-            { word: "LOOK", type: "input", hint: "See with eyes" },
-            { word: "BOOK", type: "input", hint: "Read a..." },
-            { word: "BOOT", type: "input", hint: "Wear on foot" },
-            { word: "BOAT", type: "input", hint: "Travel on water" },
-            { word: "BEAT", type: "input", hint: "Rhythm of music" },
-            { word: "BEAR", type: "end", hint: "Target word!" }
-        ]
-    },
-    {
-        start: "PIG",
-        end: "COW",
-        rungs: [
-            { word: "PIG", type: "start", hint: "Farm animal that oinks" },
-            { word: "BIG", type: "input", hint: "Opposite of small" },
-            { word: "BOG", type: "input", hint: "Wet muddy ground" },
-            { word: "BOW", type: "input", hint: "Bend forward" },
-            { word: "COW", type: "end", hint: "Target word!" }
-        ]
-    },
-    {
-        start: "FISH",
-        end: "BIRD",
-        rungs: [
-            { word: "FISH", type: "start", hint: "Swims in water" },
-            { word: "FIST", type: "input", hint: "Closed hand" },
-            { word: "MIST", type: "input", hint: "Thin fog" },
-            { word: "MIND", type: "input", hint: "Where you think" },
-            { word: "BIND", type: "input", hint: "To tie together" },
-            { word: "BIRD", type: "end", hint: "Target word!" }
-        ]
-    },
-    {
-        start: "DARK",
-        end: "LAMP",
-        rungs: [
-            { word: "DARK", type: "start", hint: "No light" },
-            { word: "DAMP", type: "input", hint: "Slightly wet" },
-            { word: "LAMP", type: "end", hint: "Target word!" }
-        ]
-    },
-    {
-        start: "HEAT",
-        end: "COOL",
-        rungs: [
-            { word: "HEAT", type: "start", hint: "Warmth from fire" },
-            { word: "HEAP", type: "input", hint: "A pile of things" },
-            { word: "REAP", type: "input", hint: "Harvest crops" },
-            { word: "REAL", type: "input", hint: "Not fake" },
-            { word: "REEL", type: "input", hint: "Wind on a spool" },
-            { word: "ROOL", type: "input", hint: "A made up step" },
-            { word: "COOL", type: "end", hint: "Target word!" }
-        ]
-    },
+  { start: 'CAT', end: 'DOG', rungs: [{ word: 'CAT', hint: 'Start here' }, { word: 'COT', hint: 'A baby sleeps in a...' }, { word: 'DOT', hint: 'A small circle' }, { word: 'DOG', hint: 'Target word!' }] },
+  { start: 'COLD', end: 'WARM', rungs: [{ word: 'COLD', hint: 'Start here' }, { word: 'CORD', hint: 'A rope or wire' }, { word: 'WARD', hint: 'Hospital section' }, { word: 'WARM', hint: 'Target word!' }] },
+  { start: 'PIG', end: 'COW', rungs: [{ word: 'PIG', hint: 'Farm animal that oinks' }, { word: 'BIG', hint: 'Opposite of small' }, { word: 'BOG', hint: 'Wet muddy ground' }, { word: 'BOW', hint: 'Bend forward' }, { word: 'COW', hint: 'Target word!' }] },
+  { start: 'DARK', end: 'LAMP', rungs: [{ word: 'DARK', hint: 'No light' }, { word: 'DAMP', hint: 'Slightly wet' }, { word: 'LAMP', hint: 'Target word!' }] },
 ];
 
 class LadderClimberGame extends GameBase {
-    constructor(container, config) {
-        super(container, config);
-        this.currentLevelIndex = 0;
-        this.currentRungIndex = 1; // Start input at 1
-    }
+  constructor(container, config) {
+    super(container, config);
+    this.currentLevelIndex = 0;
+    this.currentRungIndex = 1;
+    this.currentInput = '';
+  }
 
-    async init() {
-        this.container.innerHTML = `
-            <div class="game-wrapper ladder-theme">
-                <div class="sky-bg">
-                     <div class="cloud c1">☁️</div>
-                     <div class="cloud c2">☁️</div>
-                </div>
-                
-                <div class="game-content">
-                    <div class="header">
-                         <div class="level-badge">Level <span id="level-num">1</span></div>
-                         <div class="score-badge">⭐ <span id="score-val">0</span></div>
-                    </div>
-
-                    <div class="ladder-area" id="ladder-area">
-                        <!-- Rungs generated here -->
-                    </div>
-
-                    <div class="controls-area">
-                         <div class="hint-box" id="hint-box">Hint: ...</div>
-                         <div class="keyboard" id="keyboard"></div>
-                    </div>
-                </div>
-                
-                <div class="climber-avatar" id="climber">🧗</div>
-
-                <div class="celebration" id="celebration">
-                    <span class="celeb-emoji">🚩</span>
-                    <span class="celeb-text">LEVEL COMPLETE!</span>
-                </div>
+  async init() {
+    this.container.innerHTML = `
+      <div class="wl-game">
+        <div class="wl-panel">
+          <div class="wl-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Word Ladder</div>
+              <div class="progress" id="level-num">Level 1</div>
             </div>
-        `;
+            <div class="pill">🪜</div>
+          </div>
 
-        this.injectStyles();
-        this.start();
-    }
+          <div class="goal-card">
+            <div class="goal-word"><span id="start-word">CAT</span> → <span id="end-word">DOG</span></div>
+            <div class="hint-box" id="hint-box">Hint: A baby sleeps in a...</div>
+          </div>
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
-            .game-wrapper {
-                width: 100%; height: 600px;
-                background: linear-gradient(#4facfe 0%, #00f2fe 100%);
-                position: relative; overflow: hidden;
-                border-radius: 20px;
-                font-family: 'Courier New', monospace;
-            }
-            .sky-bg { position: absolute; inset: 0; pointer-events: none; }
-            .cloud { position: absolute; font-size: 60px; opacity: 0.6; animation: drift 30s linear infinite; }
-            .c1 { top: 50px; left: -100px; }
-            .c2 { top: 150px; left: -200px; animation-delay: -15s; }
-            @keyframes drift { to { transform: translateX(800px); } }
+          <div class="ladder-area" id="ladder-area"></div>
+          <div class="keyboard" id="keyboard"></div>
+        </div>
+      </div>
+    `;
 
-            .game-content {
-                position: relative; z-index: 10;
-                height: 100%; display: flex; flex-direction: column;
-                padding: 20px;
-            }
-            
-            .header {
-                display: flex; justify-content: space-between;
-                font-family: 'Fredoka One', sans-serif;
-            }
-            .level-badge, .score-badge {
-                background: white; padding: 5px 15px; border-radius: 20px;
-                font-size: 20px; color: #0984e3; box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-            }
+    this.injectStyles();
+    this.start();
+  }
 
-            .ladder-area {
-                flex: 1; display: flex; flex-direction: column-reverse; /* Bottom up */
-                justify-content: center; align-items: center;
-                gap: 10px; margin-bottom: 20px;
-            }
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .wl-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#4facfe 0%,#00f2fe 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}.wl-panel{width:min(760px,96%);background:rgba(255,255,255,.9);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.14);padding:22px;display:flex;flex-direction:column;gap:16px}.wl-topbar{display:flex;align-items:center;gap:12px}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;border-radius:999px;font-weight:800}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#0984e3}.progress{font-size:14px;color:#607d8b}
+      .goal-card{background:#fff;border:3px solid #d9ebff;border-radius:26px;padding:18px;text-align:center}.goal-word{font-size:34px;color:#2d3436}.hint-box{font-size:20px;color:#4d6273;margin-top:8px}
+      .ladder-area{display:flex;flex-direction:column-reverse;gap:10px;align-items:center}.rung{width:min(320px,100%);padding:14px 18px;border-radius:18px;background:#b2bec3;color:#fff;text-align:center;font-size:28px;letter-spacing:4px;box-shadow:0 6px 0 rgba(0,0,0,.08)}.rung.done{background:#00b894}.rung.current{background:#fdcb6e;color:#6b3d00}.rung.end{background:#6c5ce7}.rung.error{background:#ff7675}
+      .keyboard{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.key{width:40px;height:46px;border:none;border-radius:10px;background:#fff;box-shadow:0 4px 0 rgba(0,0,0,.08);font-weight:800;cursor:pointer}.key.wide{width:84px;background:#ff7675;color:#fff}
+    `;
+    this.container.appendChild(style);
+  }
 
-            .rung-container {
-                position: relative;
-                width: 240px; height: 50px;
-                background: #e17055;
-                border-radius: 5px;
-                display: flex; align-items: center; justify-content: center;
-                box-shadow: 0 5px 0 #d35400;
-            }
-            .rung-container::before, .rung-container::after {
-                content: ''; position: absolute; top: -10px; bottom: -20px; width: 15px; background: #636e72; z-index: -1;
-            }
-            .rung-container::before { left: 10px; }
-            .rung-container::after { right: 10px; }
+  start() {
+    super.start();
+    this.setupKeyboard();
+    this.loadLevel();
+  }
 
-            .rung-text {
-                font-size: 28px; font-weight: bold; color: white; letter-spacing: 5px;
-            }
-            
-            .rung-container.current {
-                background: #fdcb6e; box-shadow: 0 5px 0 #e1b12c;
-                transform: scale(1.1);
-                z-index: 5;
-            }
-            .rung-container.done { background: #00b894; box-shadow: 0 5px 0 #00a884; }
-            .rung-container.locked { background: #b2bec3; box-shadow: 0 5px 0 #636e72; opacity: 0.7; }
+  setupKeyboard() {
+    const kb = document.getElementById('keyboard');
+    const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    kb.innerHTML = `${keys.map((ch) => `<button class="key" data-key="${ch}">${ch}</button>`).join('')}<button class="key wide" data-key="DEL">BACK</button>`;
+    kb.querySelectorAll('.key').forEach((key) => {
+      key.onclick = () => this.handleInput(key.dataset.key);
+    });
+  }
 
-            .controls-area {
-                background: rgba(255,255,255,0.9);
-                padding: 15px; border-radius: 20px;
-                box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-            }
+  loadLevel() {
+    if (this.currentLevelIndex >= LEVELS.length) return this.showResults(this.saveScore());
+    this.level = JSON.parse(JSON.stringify(LEVELS[this.currentLevelIndex]));
+    this.currentRungIndex = 1;
+    this.currentInput = '';
+    this.inputLength = this.level.rungs[0].word.length;
+    document.getElementById('level-num').textContent = `Level ${this.currentLevelIndex + 1}`;
+    document.getElementById('start-word').textContent = this.level.start;
+    document.getElementById('end-word').textContent = this.level.end;
+    this.renderLadder();
+  }
 
-            .hint-box {
-                text-align: center; color: #2d3436; font-weight: bold; margin-bottom: 10px;
-                font-family: sans-serif; font-size: 16px; min-height: 20px;
-            }
+  renderLadder() {
+    const container = document.getElementById('ladder-area');
+    container.innerHTML = this.level.rungs.map((rung, index) => {
+      let text = rung.word;
+      let cls = 'rung';
+      if (index < this.currentRungIndex) cls += ' done';
+      else if (index === this.currentRungIndex) { cls += ' current'; text = this.currentInput.padEnd(this.inputLength, '_').split('').join(' '); }
+      else if (index === this.level.rungs.length - 1) cls += ' end';
+      return `<div class="${cls}" id="rung-${index}">${text}</div>`;
+    }).join('');
+    document.getElementById('hint-box').textContent = `Hint: ${this.level.rungs[this.currentRungIndex].hint}`;
+  }
 
-            .keyboard {
-                display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;
-            }
-            .key {
-                width: 32px; height: 40px; background: white; border: 1px solid #b2bec3;
-                border-radius: 5px; display: flex; align-items: center; justify-content: center;
-                font-weight: bold; cursor: pointer; color: #2d3436;
-                box-shadow: 0 2px 0 #b2bec3; font-family: sans-serif;
-            }
-            .key:active { transform: translateY(2px); box-shadow: none; }
-            .key.wide { width: 60px; background: #ff7675; color: white; border-color: #d63031; }
+  handleInput(key) {
+    if (key === 'DEL') this.currentInput = this.currentInput.slice(0, -1);
+    else if (this.currentInput.length < this.inputLength) this.currentInput += key;
+    this.renderLadder();
+    if (this.currentInput.length === this.inputLength) this.checkWord();
+  }
 
-            .climber-avatar {
-                position: absolute; left: 50%; top: 50%;
-                font-size: 50px;
-                transform: translate(140px, 0); /* To the right of ladder */
-                transition: top 0.5s;
-                z-index: 20;
-            }
+  checkWord() {
+    const target = this.level.rungs[this.currentRungIndex].word;
+    const previous = this.level.rungs[this.currentRungIndex - 1].word;
+    const changes = [...target].filter((_, i) => target[i] !== previous[i]).length;
 
-            .celebration {
-                position: absolute; inset: 0;
-                background: rgba(0, 184, 148, 0.9);
-                display: flex; flex-direction: column; align-items: center; justify-content: center;
-                opacity: 0; pointer-events: none; transition: opacity 0.5s; z-index: 50;
-            }
-            .celebration.visible { opacity: 1; pointer-events: auto; }
-            .celeb-emoji { font-size: 100px; animation: bounce 1s infinite; }
-            .celeb-text { color: white; font-size: 40px; font-weight: bold; margin-top: 20px; font-family: 'Fredoka One'; }
-            @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        `;
-        this.container.appendChild(style);
-    }
-
-    start() {
-        super.start();
-        this.setupKeyboard();
-        this.loadLevel();
-    }
-
-    setupKeyboard() {
-        const kb = document.getElementById('keyboard');
-        const rows = [
-            "QWERTYUIOP",
-            "ASDFGHJKL",
-            "ZXCVBNM"
-        ];
-
-        let html = "";
-        rows.forEach(row => {
-            html += `<div style="display:flex; gap:5px; justify-content:center; width:100%; margin-bottom:5px;">`;
-            row.split('').forEach(char => {
-                html += `<div class="key" data-key="${char}">${char}</div>`;
-            });
-            html += `</div>`;
-        });
-
-        // Add Delete button
-        html += `<div style="display:flex; justify-content:center; margin-top:5px;"><div class="key wide" data-key="DEL">BACK</div></div>`;
-
-        kb.innerHTML = html;
-
-        kb.querySelectorAll('.key').forEach(k => {
-            k.onclick = () => this.handleInput(k.dataset.key);
-        });
-    }
-
-    loadLevel() {
-        if (this.currentLevelIndex >= LEVELS.length) {
-            this.showResults(true);
-            return;
-        }
-
-        this.level = JSON.parse(JSON.stringify(LEVELS[this.currentLevelIndex]));
-        this.currentRungIndex = 1;
-        this.currentInput = "";
-        this.inputLength = this.level.rungs[0].word.length;
-
-        document.getElementById('level-num').textContent = this.currentLevelIndex + 1;
+    setTimeout(() => {
+      if (this.currentInput === target && changes >= 1) {
+        this.incrementCombo();
+        this.addScore(140);
+        document.getElementById('score-val').textContent = this.score;
+        this.celebrateMove({ burst: target, duration: 900 });
+        this.currentRungIndex += 1;
+        this.currentInput = '';
+        if (this.currentRungIndex >= this.level.rungs.length) return this.levelComplete();
         this.renderLadder();
-        this.updateClimber();
-    }
+        return;
+      }
 
-    renderLadder() {
-        const container = document.getElementById('ladder-area');
+      this.resetCombo();
+      const rung = document.getElementById(`rung-${this.currentRungIndex}`);
+      rung?.classList.add('error');
+      this.coachMove(`That rung should be ${target}.`, 950);
+      this.currentInput = '';
+      setTimeout(() => { rung?.classList.remove('error'); this.renderLadder(); }, 650);
+    }, 180);
+  }
 
-        container.innerHTML = this.level.rungs.map((rung, index) => {
-            let content = rung.word;
-            let statusClass = "";
-
-            if (index < this.currentRungIndex) {
-                statusClass = "done"; // Completed rungs (start or solved)
-            } else if (index === this.currentRungIndex) {
-                statusClass = "current";
-                // Show input placeholders
-                content = this.currentInput.padEnd(this.inputLength, '_').split('').join(' ');
-            } else {
-                statusClass = "locked";
-                if (rung.type === 'end') {
-                    // Show end word partially or fully? Let's show it fully so they know target
-                    content = rung.word;
-                } else {
-                    content = "? ? ? ?"; // Hidden intermediate
-                    content = Array(this.inputLength).fill('?').join(' ');
-                }
-            }
-
-            return `
-                <div class="rung-container ${statusClass}" id="rung-${index}">
-                    <div class="rung-text">${content}</div>
-                </div>
-            `;
-        }).join('');
-
-        const currentHint = this.level.rungs[this.currentRungIndex].hint;
-        document.getElementById('hint-box').textContent = `Hint: ${currentHint}`;
-    }
-
-    updateClimber() {
-        // Position climber next to current rung
-        // Since flex-direction is column-reverse, visual top is different.
-        // Let's just calculate based on index vs total
-
-        const rungs = document.querySelectorAll('.rung-container');
-        // Because of flex-reverse, index 0 (start) is at bottom
-        // DOM order is top-down logic if we didn't use reverse?
-        // Actually map output order is 0..N. 
-        // With column-reverse, the first element in DOM (index 0, Start) is at BOTTOM.
-
-        // Let's find the current rung element in DOM
-        const targetRung = document.getElementById(`rung-${this.currentRungIndex - 1}`);
-        // Climber stands on the PREVIOUS rung (completed one)
-
-        if (targetRung) {
-            const rect = targetRung.getBoundingClientRect();
-            const wrapperRect = this.container.querySelector('.game-wrapper').getBoundingClientRect();
-
-            // Relative top
-            const top = rect.top - wrapperRect.top;
-
-            const avatar = document.getElementById('climber');
-            avatar.style.top = (top - 20) + 'px';
-        }
-    }
-
-    handleInput(key) {
-        if (key === 'DEL') {
-            this.currentInput = this.currentInput.slice(0, -1);
-        } else {
-            if (this.currentInput.length < this.inputLength) {
-                this.currentInput += key;
-            }
-        }
-
-        this.renderLadder();
-
-        if (this.currentInput.length === this.inputLength) {
-            this.checkWord();
-        }
-    }
-
-    checkWord() {
-        const target = this.level.rungs[this.currentRungIndex].word; // Although in 'input' type, the 'word' field holds the correct answer in our data structure
-
-        // Wait minor delay for visual input update
-        setTimeout(() => {
-            if (this.currentInput === target) {
-                // Correct
-                this.playSound('success');
-                this.celebrateMove({ burst: target.toUpperCase(), duration: 700 });
-                this.currentRungIndex++;
-                this.currentInput = "";
-                this.updateClimber();
-
-                // Check finish
-                if (this.currentRungIndex >= this.level.rungs.length - 1) {
-                    // Reached target (index = length-1 is the 'end' rung)
-                    // Actually, if we solve the one before end, do we need to solve End?
-                    // In our data, End is "Target word!". We just stepped on second to last.
-                    // Let's move climber to top
-                    this.currentRungIndex++;
-                    this.updateClimber();
-
-                    this.levelComplete();
-                } else {
-                    this.renderLadder();
-                }
-            } else {
-                // Wrong
-                this.playSound('error');
-                const rung = document.querySelector('.rung-container.current');
-                Animations.shake(rung);
-                this.coachMove();
-                this.currentInput = "";
-                setTimeout(() => this.renderLadder(), 500);
-            }
-        }, 200);
-    }
-
-    levelComplete() {
-        const celeb = document.getElementById('celebration');
-        celeb.classList.add('visible');
-        this.addScore(500);
-        this.confetti.explode(null, null, 20);
-
-        setTimeout(() => {
-            celeb.classList.remove('visible');
-            this.currentLevelIndex++;
-            this.loadLevel();
-        }, 2500);
-    }
+  levelComplete() {
+    this.confetti.explode(null, null, 20);
+    this.celebrateMove({ burst: 'CLIMB', duration: 1000 });
+    this.currentLevelIndex += 1;
+    setTimeout(() => this.loadLevel(), 1100);
+  }
 }
 
 export function createGame(container, config) {
-    return new LadderClimberGame(container, config);
+  return new LadderClimberGame(container, config);
 }

@@ -1,55 +1,30 @@
 /* assets/js/games/8-10/fast-phrases.js
    Fast Phrases - Ages 8-10
-   
-   MODERN CONSTRUCTION THEME
-   "Build" the sentence by stacking brick-words!
+
+   Senior pass:
+   - Stronger sentence-building loop with reorder/removal support
+   - Better hinting, pacing, and sentence validation feedback
 */
 
-const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
+const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const SENTENCES = [
-  { sentence: "The dog is running", emoji: "🐕💨" },
-  { sentence: "I like red apples", emoji: "😋🍎" },
-  { sentence: "She is reading a book", emoji: "👧📖" },
-  { sentence: "The sun is shining bright", emoji: "☀️😎" },
-  { sentence: "He plays football well", emoji: "👦⚽" },
-  { sentence: "We go to school daily", emoji: "🚌🏫" },
-  { sentence: "The cat sleeps all day", emoji: "🐱💤" },
-  { sentence: "dolphins can swim fast", emoji: "🐬🌊" },
-  { sentence: "I drink water often", emoji: "🥤💧" },
-  { sentence: "They are happy friends", emoji: "👫😄" },
-  { sentence: "Birds fly in the sky", emoji: "🐦☁️" },
-  { sentence: "She eats her breakfast", emoji: "👩🍳" },
-  { sentence: "The flower is very pretty", emoji: "🌸😍" },
-  { sentence: "He rides his bicycle fast", emoji: "🚴💨" },
-  { sentence: "The baby is sleeping now", emoji: "👶💤" },
-  { sentence: "We planted many trees", emoji: "🌳🌱" },
-  { sentence: "The moon shines at night", emoji: "🌙✨" },
-  { sentence: "She draws beautiful pictures", emoji: "🎨🖼️" },
-  { sentence: "They sing songs together", emoji: "🎤🎶" },
-  { sentence: "The frog jumps very high", emoji: "🐸⬆️" },
-  { sentence: "My teacher is very kind", emoji: "👩‍🏫❤️" },
-  { sentence: "The children play outside", emoji: "👧🌳" },
-  { sentence: "I brush my teeth daily", emoji: "🪥😁" },
-  { sentence: "The stars twinkle at night", emoji: "⭐🌃" },
-  { sentence: "She finished her homework", emoji: "📝✅" },
-  { sentence: "We watched a funny movie", emoji: "🎬😂" },
-  { sentence: "The rain falls from clouds", emoji: "🌧️☁️" },
-  { sentence: "He helped his little sister", emoji: "👦👧" },
-  { sentence: "I enjoy learning new words", emoji: "📚🧠" },
-  { sentence: "The rabbit has long ears", emoji: "🐰👂" },
-  { sentence: "She plays the piano well", emoji: "🎹🎵" },
-  { sentence: "They visited the museum today", emoji: "🏛️📸" },
-  { sentence: "The cake tastes very sweet", emoji: "🍰😋" },
-  { sentence: "We wrote a story together", emoji: "✍️📖" },
-  { sentence: "The elephant has a long trunk", emoji: "🐘💪" },
+  { sentence: 'The dog is running', emoji: '🐕💨' },
+  { sentence: 'I like red apples', emoji: '😋🍎' },
+  { sentence: 'She is reading a book', emoji: '👧📖' },
+  { sentence: 'The sun is shining bright', emoji: '☀️😎' },
+  { sentence: 'He plays football well', emoji: '👦⚽' },
+  { sentence: 'We go to school daily', emoji: '🚌🏫' },
+  { sentence: 'The cat sleeps all day', emoji: '🐱💤' },
+  { sentence: 'Birds fly in the sky', emoji: '🐦☁️' },
+  { sentence: 'I drink water often', emoji: '🥤💧' },
+  { sentence: 'They are happy friends', emoji: '👫😄' },
 ];
 
 class FastPhrasesGame extends GameBase {
   constructor(container, config) {
-    super(container, { ...config, hasTimer: true, timerDuration: 120 });
+    super(container, { ...config, hasTimer: true, timerDuration: 100 });
     this.currentSentence = null;
-    this.words = [];
     this.selectedWords = [];
     this.rounds = 0;
     this.correctAnswers = 0;
@@ -57,34 +32,29 @@ class FastPhrasesGame extends GameBase {
 
   async init() {
     this.container.innerHTML = `
-      <div class="game-wrapper builder-theme">
-        <!-- Site Header (Blueprint style) -->
-        <div class="site-header-bar">
-          <div class="blueprint-title">🏗️ SENTENCE BUILDER</div>
-          <div class="stats-panel">
-            <div class="stat-box">⭐ <span data-game-score>0</span></div>
-            <div class="stat-box">⏱️ <span data-game-timer>2:00</span></div>
-          </div>
-        </div>
-
-        <div class="construction-site">
-          <!-- The Wall (Answer Area) -->
-          <div class="wall-frame">
-            <div class="wall-label">CONSTRUCTION ZONE</div>
-            <div class="brick-wall" id="brick-wall"></div>
-            <div class="wall-base"></div>
+      <div class="fp-game">
+        <div class="fp-panel">
+          <div class="fp-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Fast Phrases</div>
+              <div class="subtitle">Build the sentence in the correct order.</div>
+            </div>
+            <div class="pill">⏱️ <span id="timer-val">1:40</span></div>
           </div>
 
-          <!-- Crane/Supply Area (Word Bank) -->
-          <div class="supply-zone">
-            <div class="crane-label">SUPPLY MATERIALS</div>
-            <div class="supply-depot" id="supply-depot"></div>
+          <div class="hint-card">
+            <div class="hint-emoji" id="hint-display">🐕💨</div>
+            <div class="helper" id="helper-text">Tap the words to build the sentence.</div>
           </div>
-        </div>
-        
-        <div class="control-panel">
-           <button class="tool-btn reset-btn" id="reset-btn">🔨 DEMOLISH</button>
-           <div class="hint-display" id="hint-display"></div>
+
+          <div class="brick-wall" id="brick-wall"></div>
+          <div class="supply-depot" id="supply-depot"></div>
+
+          <div class="controls-row">
+            <button class="tool-btn reset-btn" id="reset-btn">🔄 Clear</button>
+            <button class="tool-btn" id="undo-btn">↩️ Undo</button>
+          </div>
         </div>
       </div>
     `;
@@ -96,143 +66,11 @@ class FastPhrasesGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .game-wrapper {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background: #2c3e50; /* Dark blueprint blue/grey */
-        border-radius: 12px;
-        font-family: 'Russo One', sans-serif; /* Blocky font */
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        color: white;
-        position: relative;
-        overflow: hidden;
-      }
-      
-      /* Blueprint Grid Background */
-      .game-wrapper::before {
-        content: ''; position: absolute; inset: 0;
-        background-image: 
-          linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-        background-size: 20px 20px;
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      .site-header-bar {
-        position: relative; z-index: 2;
-        display: flex; justify-content: space-between; align-items: center;
-        margin-bottom: 20px; padding: 10px;
-        border-bottom: 2px solid #f1c40f;
-        background: rgba(0,0,0,0.2);
-      }
-      
-      .blueprint-title { font-size: 24px; color: #f1c40f; text-shadow: 2px 2px 0 #000; letter-spacing: 1px; }
-      
-      .stats-panel { display: flex; gap: 15px; }
-      .stat-box { font-size: 20px; font-weight: bold; background: #34495e; padding: 5px 15px; border-radius: 4px; border: 1px solid #7f8c8d; }
-
-      .construction-site {
-        position: relative; z-index: 2;
-        display: flex; flex-direction: column; gap: 30px;
-        padding: 10px;
-      }
-      
-      /* Wall Area */
-      .wall-frame {
-        background: rgba(255,255,255,0.1);
-        padding: 20px;
-        border-radius: 8px;
-        min-height: 140px;
-        display: flex; flex-direction: column; align-items: center;
-        border: 2px dashed #95a5a6;
-      }
-      .wall-label { font-size: 14px; color: #95a5a6; margin-bottom: 10px; letter-spacing: 2px; }
-      
-      .brick-wall {
-        display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;
-        min-height: 60px; width: 100%;
-      }
-      
-      .brick {
-        background: #e67e22;
-        color: white;
-        padding: 12px 20px;
-        font-size: 18px;
-        border-radius: 4px;
-        border-bottom: 4px solid #d35400;
-        border-right: 4px solid #d35400;
-        border-top: 1px solid #f39c12;
-        border-left: 1px solid #f39c12;
-        cursor: pointer;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        animation: dropIn 0.3s ease-out;
-        position: relative;
-      }
-      .brick::after { /* Mortar look? Or slight texture */
-        content: ''; position: absolute; top: 2px; left: 2px; right: 2px; height: 3px; 
-        background: rgba(255,255,255,0.1); border-radius: 2px;
-      }
-      .brick:hover { transform: translateY(-2px); filter: brightness(1.1); }
-      
-      @keyframes dropIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-      .wall-base {
-        width: 100%; height: 10px; background: #7f8c8d; margin-top: 10px; border-radius: 4px;
-      }
-      
-      /* Supply Zone */
-      .supply-zone {
-        background: rgba(0,0,0,0.3);
-        padding: 20px;
-        border-radius: 8px;
-        border: 2px solid #576574;
-      }
-      .crane-label { font-size: 14px; color: #bdc3c7; margin-bottom: 15px; text-transform: uppercase; }
-      
-      .supply-depot {
-        display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
-      }
-      
-      .supply-item {
-        background: #95a5a6;
-        color: #ecf0f1;
-        padding: 10px 18px;
-        font-size: 16px;
-        border-radius: 4px;
-        border: 2px solid #7f8c8d;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .supply-item:hover { background: #bdc3c7; color: #2c3e50; transform: scale(1.05); }
-      .supply-item.used { opacity: 0; pointer-events: none; transform: scale(0); }
-      
-      /* Controls */
-      .control-panel {
-        margin-top: 20px;
-        display: flex; justify-content: space-between; align-items: center;
-        position: relative; z-index: 2;
-      }
-      .tool-btn {
-        background: #c0392b; color: white; padding: 10px 20px; border: none; border-radius: 6px;
-        font-family: inherit; font-size: 16px; cursor: pointer; border-bottom: 4px solid #a93226;
-      }
-      .tool-btn:active { transform: translateY(2px); border-bottom-width: 0; margin-top: 4px; }
-      
-      .hint-display { font-size: 20px; }
-      
-      /* Animations */
-      .brick.cementing { animation: cement 0.5s ease; border-color: #27ae60; background: #2ecc71; }
-      @keyframes cement { 
-        0% { transform: scale(1); } 
-        50% { transform: scale(1.1); } 
-        100% { transform: scale(1); } 
-      }
-      
-      .brick.wrong { background: #e74c3c; border-color: #c0392b; animation: shake 0.4s; }
-      @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+      .fp-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#2c3e50 0%,#34495e 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}.fp-panel{width:min(820px,96%);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:34px;box-shadow:0 24px 60px rgba(0,0,0,.3);padding:22px;display:flex;flex-direction:column;gap:16px}.fp-topbar{display:flex;align-items:center;gap:12px}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;border-radius:999px;font-weight:800}.title-wrap{flex:1;text-align:center}.title{font-size:32px}.subtitle{font-size:14px;color:#c7cfdb}
+      .hint-card{background:rgba(255,255,255,.1);border-radius:24px;padding:16px;text-align:center}.hint-emoji{font-size:44px}.helper{font-size:20px;color:#ecf0f1;margin-top:8px}
+      .brick-wall,.supply-depot{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;min-height:78px;padding:14px;border-radius:22px}.brick-wall{background:rgba(255,255,255,.08);border:2px dashed rgba(255,255,255,.2)}.supply-depot{background:rgba(0,0,0,.25)}
+      .brick,.supply-item{border:none;border-radius:14px;padding:14px 18px;font-size:20px;cursor:pointer;font-family:inherit}.brick{background:#e67e22;color:#fff;box-shadow:0 6px 0 #d35400}.brick.good{background:#00b894;box-shadow:0 6px 0 #00a382}.brick.bad{background:#d63031;box-shadow:0 6px 0 #c0392b}.supply-item{background:#ecf0f1;color:#2c3e50;box-shadow:0 6px 0 #bdc3c7}.supply-item.used{opacity:.35;pointer-events:none}
+      .controls-row{display:flex;justify-content:center;gap:12px}.tool-btn{border:none;border-radius:12px;padding:12px 18px;font-size:16px;font-weight:800;cursor:pointer}.reset-btn{background:#ff7675;color:#fff}
     `;
     this.container.appendChild(style);
   }
@@ -241,113 +79,96 @@ class FastPhrasesGame extends GameBase {
     super.start();
     this.rounds = 0;
     this.correctAnswers = 0;
+    document.getElementById('reset-btn').onclick = () => this.clearWall();
+    document.getElementById('undo-btn').onclick = () => this.undoLast();
     this.nextRound();
-
-    document.getElementById('reset-btn').onclick = () => this.demolish();
   }
 
   nextRound() {
     if (!this.isRunning) return;
-    this.rounds++;
+    this.rounds += 1;
     this.selectedWords = [];
-
-    // Pick random sentence
-    const shuffled = [...SENTENCES].sort(() => Math.random() - 0.5);
-    this.currentSentence = shuffled[0];
-
+    this.currentSentence = [...SENTENCES].sort(() => Math.random() - 0.5)[0];
+    document.getElementById('hint-display').textContent = this.currentSentence.emoji;
+    document.getElementById('helper-text').textContent = 'Tap the words to build the sentence.';
     this.renderRound();
   }
 
   renderRound() {
     const wall = document.getElementById('brick-wall');
-    const depot = document.getElementById('supply-depot');
-    const hint = document.getElementById('hint-display');
+    wall.innerHTML = this.selectedWords.map((word, index) => `<button class="brick" data-index="${index}">${word}</button>`).join('');
+    wall.querySelectorAll('.brick').forEach((brick) => {
+      brick.onclick = () => this.removeBrick(Number(brick.dataset.index));
+    });
 
-    wall.innerHTML = '';
-    hint.textContent = this.currentSentence.emoji; // Show emoji as "blueprint spec"
+    const words = this.currentSentence.sentence.split(' ').map((word, idx) => ({ word, idx })).sort(() => Math.random() - 0.5);
+    const usedCounts = {};
+    this.selectedWords.forEach((word) => { usedCounts[word] = (usedCounts[word] || 0) + 1; });
 
-    // Prepare Supply
-    const words = this.currentSentence.sentence.split(' ').sort(() => Math.random() - 0.5);
-
-    depot.innerHTML = words.map((word, i) => `
-            <button class="supply-item" data-word="${word}" data-id="${i}">${word}</button>
-        `).join('');
-
-    depot.querySelectorAll('.supply-item').forEach(btn => {
-      btn.onclick = () => this.placeBrick(btn);
+    const supply = document.getElementById('supply-depot');
+    supply.innerHTML = words.map(({ word }, i) => {
+      const maxAvailable = this.currentSentence.sentence.split(' ').filter((w) => w === word).length;
+      const used = (usedCounts[word] || 0) >= maxAvailable;
+      return `<button class="supply-item ${used ? 'used' : ''}" data-word="${word}">${word}</button>`;
+    }).join('');
+    supply.querySelectorAll('.supply-item:not(.used)').forEach((btn) => {
+      btn.onclick = () => this.placeBrick(btn.dataset.word);
     });
   }
 
-  placeBrick(supplyBtn) {
-    const word = supplyBtn.dataset.word;
+  placeBrick(word) {
     this.selectedWords.push(word);
-    supplyBtn.classList.add('used');
-
-    const wall = document.getElementById('brick-wall');
-    const brick = document.createElement('div');
-    brick.className = 'brick';
-    brick.textContent = word;
-    brick.onclick = () => {
-      // Remove functionality? Or just stick to demolish?
-      // Let's keep it simple: Demolish button resets.
-    };
-    wall.appendChild(brick);
-
-    // Check Answer
-    const targetWords = this.currentSentence.sentence.split(' ');
-    if (this.selectedWords.length === targetWords.length) {
-      this.checkStructuralIntegrity();
-    }
+    this.renderRound();
+    if (this.selectedWords.length === this.currentSentence.sentence.split(' ').length) this.checkSentence();
   }
 
-  demolish() {
+  removeBrick(index) {
+    this.selectedWords.splice(index, 1);
+    this.renderRound();
+  }
+
+  clearWall() {
     this.selectedWords = [];
-    const wall = document.getElementById('brick-wall');
-    wall.innerHTML = ''; // Crash sound would be cool here
-
-    // Reset supply
-    document.querySelectorAll('.supply-item').forEach(btn => {
-      btn.classList.remove('used');
-    });
+    this.renderRound();
   }
 
-  checkStructuralIntegrity() {
+  undoLast() {
+    if (!this.selectedWords.length) return;
+    this.selectedWords.pop();
+    this.renderRound();
+  }
+
+  checkSentence() {
     const attempt = this.selectedWords.join(' ');
     const correct = this.currentSentence.sentence;
+    const bricks = [...this.container.querySelectorAll('.brick')];
 
     if (attempt === correct) {
-      // Success
+      bricks.forEach((b) => b.classList.add('good'));
       this.incrementCombo();
-      this.addScore(100);
-      this.correctAnswers++;
-      this.celebrateMove({ burst: 'BUILD', duration: 700 });
-
-      // Cementing animation
-      document.querySelectorAll('.brick').forEach((b, i) => {
-        setTimeout(() => b.classList.add('cementing'), i * 100);
-      });
-
-      this.confetti.explode(null, null, 20);
-
-      setTimeout(() => this.nextRound(), 1500);
-
-    } else {
-      // Collapse
-      this.resetCombo();
-      this.speak("Structure unstable!");
-      this.coachMove();
-
-      document.querySelectorAll('.brick').forEach(b => b.classList.add('wrong'));
-
-      setTimeout(() => {
-        this.demolish();
-      }, 1000);
+      this.addScore(140);
+      this.correctAnswers += 1;
+      document.getElementById('score-val').textContent = this.score;
+      document.getElementById('helper-text').textContent = 'Sentence complete! Nice build.';
+      this.confetti.explode(null, null, 18);
+      this.celebrateMove({ burst: 'BUILD', duration: 900 });
+      setTimeout(() => this.nextRound(), 1200);
+      return;
     }
+
+    bricks.forEach((b) => b.classList.add('bad'));
+    this.resetCombo();
+    document.getElementById('helper-text').textContent = 'That order is not correct. Rebuild it.';
+    this.coachMove('The sentence order is off. Try again.', 1000);
+    setTimeout(() => this.clearWall(), 800);
+  }
+
+  onTimerTick(remaining) {
+    document.getElementById('timer-val').textContent = this.formatTime(remaining);
+    super.onTimerTick(remaining);
   }
 
   end() {
-    this.isRunning = false;
-    this.endTime = Date.now();
     this.showResults(this.saveScore());
   }
 }
