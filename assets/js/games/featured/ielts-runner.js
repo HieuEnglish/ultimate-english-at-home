@@ -120,6 +120,8 @@ export class IeltsRunnerGame {
         this.questionsAnswered = 0;
         this.questionsCorrect = 0;
         this.currentQuestionMeta = QUESTION_TYPE_META.default;
+        this.currentQuestionTimeLimit = 10;
+        this.lastQuestionResult = null;
 
         // Power-ups
         this.hasShield = false;
@@ -365,6 +367,7 @@ export class IeltsRunnerGame {
                             </div>
                             <h3 class="question-text" id="q-text">Loading question...</h3>
                             <p class="question-helper" id="q-helper">Stay calm and choose the strongest answer.</p>
+                            <div class="question-meta-line"><span id="q-pressure">Pressure: standard</span><span id="q-reward">Reward: +100</span></div>
                             <div class="question-options" id="q-options"></div>
                         </div>
                     </div>
@@ -378,9 +381,11 @@ export class IeltsRunnerGame {
                                 <div class="stat">Score: <span id="final-score">0</span></div>
                                 <div class="stat">Questions: <span id="final-questions">0</span></div>
                                 <div class="stat">Accuracy: <span id="final-accuracy">0%</span></div>
+                                <div class="stat">Max Combo: <span id="final-combo">0x</span></div>
                             </div>
                             <div class="certificate-award" id="cert-award"></div>
                             <div class="complete-note" id="final-note"></div>
+                            <div class="complete-note" id="final-rating"></div>
                             <button class="play-btn" id="next-level-btn">NEXT LEVEL →</button>
                         </div>
                     </div>
@@ -787,6 +792,15 @@ export class IeltsRunnerGame {
                 line-height: 1.5;
                 color: #6b7280;
             }
+            .question-meta-line {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                margin: -8px 0 16px;
+                font-size: 13px;
+                color: #64748b;
+                font-weight: 700;
+            }
             .question-options {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -1121,6 +1135,7 @@ export class IeltsRunnerGame {
         this.questionsCorrect = 0;
         this.speed = 5;
         this.gameTime = 0;
+        this.lastQuestionResult = null;
 
         // Reset player
         this.lane = 1;
@@ -2702,36 +2717,32 @@ export class IeltsRunnerGame {
     triggerQuestion() {
         this.isPaused = true;
 
-        const q = getRandomQuestion(Math.max(1, this.level - 1), this.level);
+        const q = this.getGameQuestion();
 
         const modal = this.container.querySelector('#question-modal');
         const qText = this.container.querySelector('#q-text');
         const qCategory = this.container.querySelector('#q-category');
         const qHelper = this.container.querySelector('#q-helper');
+        const qPressure = this.container.querySelector('#q-pressure');
+        const qReward = this.container.querySelector('#q-reward');
         const qOptions = this.container.querySelector('#q-options');
         const timerBar = this.container.querySelector('#timer-bar');
+        const meta = this.getQuestionMeta(q.type);
+        const timeLimit = Math.max(5.5, 10 - Math.min(3.5, this.level * 0.45));
+        const projectedCombo = Math.max(1, this.combo + 1);
+        const projectedReward = 100 * projectedCombo;
+        let answered = false;
 
         qText.textContent = q.question;
-
-        // Set Category Badge
-        const typeMap = {
-            'vocab': '📚 Vocabulary',
-            'grammar': '⚖️ Grammar',
-            'spelling': '✍️ Spelling',
-            'listening': '👂 Listening'
-        };
-        const categoryLabel = typeMap[q.type] || '🧠 Knowledge';
-        if (qCategory) {
-            qCategory.textContent = categoryLabel;
-            // distinct colors could be added here if needed
-        }
-        const meta = this.getQuestionMeta(q.type);
         this.currentQuestionMeta = meta;
+        this.currentQuestionTimeLimit = timeLimit;
         if (qCategory) {
             qCategory.textContent = meta.badge;
             qCategory.style.background = `linear-gradient(135deg, ${meta.colors[0]}, ${meta.colors[1]})`;
         }
         if (qHelper) qHelper.textContent = `${meta.helper} Level ${this.level} pressure is active.`;
+        if (qPressure) qPressure.textContent = `Pressure: ${timeLimit.toFixed(1)}s gate`;
+        if (qReward) qReward.textContent = `Reward: +${projectedReward} and +3 planks`;
 
         const allOpts = [q.answer, ...q.distractors].sort(() => Math.random() - 0.5);
         qOptions.innerHTML = allOpts.map(opt =>
@@ -2739,37 +2750,44 @@ export class IeltsRunnerGame {
         ).join('');
 
         // Timer
-        let timeLeft = 10;
+        let timeLeft = timeLimit;
         timerBar.style.width = '100%';
         timerBar.classList.remove('warning');
 
         const timerInterval = setInterval(() => {
             timeLeft -= 0.1;
-            timerBar.style.width = (timeLeft / 10 * 100) + '%';
-            if (timeLeft < 3) timerBar.classList.add('warning');
-            if (timeLeft <= 0) {
+            timerBar.style.width = (Math.max(0, timeLeft) / timeLimit * 100) + '%';
+            if (timeLeft < Math.min(3, timeLimit * 0.35)) timerBar.classList.add('warning');
+            if (timeLeft <= 0 && !answered) {
+                answered = true;
                 clearInterval(timerInterval);
+                qOptions.querySelectorAll('.opt-btn').forEach((b) => {
+                    b.disabled = true;
+                    if (b.textContent === q.answer) b.classList.add('correct');
+                });
                 this.showBanner('Time pressure won that gate. Reset and take the next one faster.', 'warning', 1500);
-                this.answerQuestion(false, modal);
+                setTimeout(() => this.answerQuestion(false, modal, q), 700);
             }
         }, 100);
 
         // Bind answer buttons
         qOptions.querySelectorAll('.opt-btn').forEach(btn => {
             btn.onclick = () => {
+                if (answered) return;
+                answered = true;
                 clearInterval(timerInterval);
                 const isCorrect = btn.textContent === q.answer;
                 btn.classList.add(isCorrect ? 'correct' : 'wrong');
+                qOptions.querySelectorAll('.opt-btn').forEach((b) => b.disabled = true);
 
                 if (!isCorrect) {
-                    // Show correct answer
                     qOptions.querySelectorAll('.opt-btn').forEach(b => {
                         if (b.textContent === q.answer) b.classList.add('correct');
                     });
                 }
 
                 setTimeout(() => {
-                    this.answerQuestion(isCorrect, modal);
+                    this.answerQuestion(isCorrect, modal, q);
                 }, 800);
             };
         });
@@ -2777,7 +2795,7 @@ export class IeltsRunnerGame {
         modal.classList.add('active');
     }
 
-    answerQuestion(correct, modal) {
+    answerQuestion(correct, modal, question = null) {
         modal.classList.remove('active');
         this.questionsAnswered++;
 
@@ -2790,6 +2808,7 @@ export class IeltsRunnerGame {
             const points = 100 * comboMult;
             this.planks += 3;
             this.score += points;
+            this.lastQuestionResult = { correct: true, question };
             this.showFloatText(`+${points} ⭐ +3 🧱 ${comboMult > 1 ? `(${comboMult}x!)` : ''}`, 'success');
             this.createParticles(this.canvasWidth / 2, this.canvasHeight / 2, '#4CAF50', 20 + this.combo * 5);
             this.flashAlpha = 0.15;
@@ -2798,13 +2817,16 @@ export class IeltsRunnerGame {
             if (this.combo > 1) this.playSound('combo');
             this.showBanner(`${this.currentQuestionMeta.success} +${points} score and +3 planks.`, 'success', 1600);
         } else {
+            this.lastQuestionResult = { correct: false, question };
+            const plankLoss = this.planks > 0 ? 1 : 0;
             this.combo = 0;
             this.comboTimer = 0;
-            this.showFloatText('Wrong! ❌', 'error');
+            this.planks = Math.max(0, this.planks - plankLoss);
+            this.showFloatText(plankLoss ? `Wrong! -${plankLoss} 🧱` : 'Wrong! ❌', 'error');
             this.createParticles(this.canvasWidth / 2, this.canvasHeight / 2, '#F44336', 10);
             this.shakeAmount = 8;
             this.playSound('wrong');
-            this.showBanner(this.currentQuestionMeta.warning, 'warning', 1700);
+            this.showBanner(plankLoss ? `${this.currentQuestionMeta.warning} You also lost 1 plank.` : this.currentQuestionMeta.warning, 'warning', 1700);
         }
 
         this.updateHUD();
@@ -2882,6 +2904,9 @@ export class IeltsRunnerGame {
         cancelAnimationFrame(this.frameId);
 
         const config = this.levelConfig[this.level];
+        const accuracy = this.questionsAnswered ? Math.round((this.questionsCorrect / this.questionsAnswered) * 100) : 0;
+        const stars = accuracy >= 90 && this.maxCombo >= 5 ? '⭐⭐⭐' : accuracy >= 75 ? '⭐⭐' : '⭐';
+        const rating = accuracy >= 90 ? 'Band-ready run' : accuracy >= 75 ? 'Strong control' : accuracy >= 55 ? 'Promising but inconsistent' : 'Needs another clean run';
 
         // Victory flash
         this.flashAlpha = 0.4;
@@ -2890,12 +2915,13 @@ export class IeltsRunnerGame {
 
         // Show completion screen
         const modal = this.container.querySelector('#level-complete');
+        this.container.querySelector('.complete-stars').textContent = stars;
         this.container.querySelector('#final-score').textContent = this.score;
         this.container.querySelector('#final-questions').textContent = this.questionsAnswered;
-        this.container.querySelector('#final-accuracy').textContent = this.questionsAnswered
-            ? `${Math.round((this.questionsCorrect / this.questionsAnswered) * 100)}%`
-            : '0%';
+        this.container.querySelector('#final-accuracy').textContent = `${accuracy}%`;
+        this.container.querySelector('#final-combo').textContent = `${this.maxCombo}x`;
         this.container.querySelector('#final-note').textContent = this.getLevelBriefing().finish;
+        this.container.querySelector('#final-rating').textContent = `Run rating: ${rating}.`;
 
         if (config.award) {
             this.container.querySelector('#cert-award').textContent = `🏆 ${config.award}`;
@@ -2909,6 +2935,7 @@ export class IeltsRunnerGame {
                 level: this.level,
                 score: this.score,
                 maxCombo: this.maxCombo,
+                accuracy,
                 date: new Date().toISOString()
             });
         }
@@ -2945,17 +2972,25 @@ export class IeltsRunnerGame {
     gameOver(reason) {
         this.isRunning = false;
         this.showFloatText("GAME OVER", "error");
+        const accuracy = this.questionsAnswered ? Math.round((this.questionsCorrect / this.questionsAnswered) * 100) : 0;
 
         const modal = document.createElement('div');
         modal.style.cssText = `
-            position: absolute; inset: 0; background: rgba(0,0,0,0.85);
+            position: absolute; inset: 0; background: rgba(0,0,0,0.88);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: white; z-index: 500; text-align: center;
+            color: white; z-index: 500; text-align: center; padding: 24px;
         `;
         modal.innerHTML = `
             <div style="font-size: 50px; margin-bottom: 20px">💀</div>
-            <h2 style="font-size: 32px; margin: 0 0 10px; color: #F44336">GAME OVER</h2>
-            <p style="font-size: 18px; color: #ccc; margin-bottom: 30px">${reason}</p>
+            <h2 style="font-size: 32px; margin: 0 0 10px; color: #F44336">RUN BROKEN</h2>
+            <p style="font-size: 18px; color: #ccc; margin-bottom: 18px; max-width: 40ch">${reason}</p>
+            <div style="display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-bottom:26px;color:#fff;font-weight:700">
+                <div>Score: ${this.score}</div>
+                <div>Distance: ${Math.floor(this.distance)}m</div>
+                <div>Accuracy: ${accuracy}%</div>
+                <div>Max Combo: ${this.maxCombo}x</div>
+            </div>
+            <p style="font-size: 14px; color: #aab2c0; margin: 0 0 26px; max-width: 42ch">Tip: protect plank stock, keep question streaks alive, and use jumps earlier before barrier or gap pressure peaks.</p>
             <button class="play-btn" id="retry-btn">TRY AGAIN ↺</button>
         `;
 
