@@ -1,337 +1,166 @@
 /* assets/js/games/4-7/picture-pairs.js
    Picture Pairs - Ages 4-7
-   
-   Classic memory matching game. Find the matching pairs of cards.
+
+   Senior pass:
+   - Reframed as a quick visual matching challenge distinct from word/emoji concentration
+   - Better feedback, move tracking, and clearer completion state
 */
 
 const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const VOCAB_ITEMS = [
-    { word: "Cat", emoji: "🐱", color: "#fab1a0" },
-    { word: "Dog", emoji: "🐶", color: "#74b9ff" },
-    { word: "Apple", emoji: "🍎", color: "#ff7675" },
-    { word: "Car", emoji: "🚗", color: "#a29bfe" },
-    { word: "Star", emoji: "⭐", color: "#ffeaa7" },
-    { word: "Moon", emoji: "🌙", color: "#fdcb6e" },
-    { word: "Flower", emoji: "🌸", color: "#e17055" },
-    { word: "Ball", emoji: "⚽", color: "#55efc4" },
-    { word: "Bear", emoji: "🐻", color: "#636e72" },
-    { word: "Fish", emoji: "🐠", color: "#00cec9" },
-    { word: "Bird", emoji: "🐦", color: "#00b894" },
-    { word: "Tree", emoji: "🌳", color: "#27ae60" },
-    { word: "Sun", emoji: "☀️", color: "#f1c40f" },
-    { word: "Cake", emoji: "🍰", color: "#fd79a8" },
-    { word: "Frog", emoji: "🐸", color: "#00b894" },
-    { word: "Duck", emoji: "🦆", color: "#fdcb6e" },
-    { word: "Book", emoji: "📖", color: "#6c5ce7" },
-    { word: "Hat", emoji: "🎩", color: "#2d3436" },
-    { word: "Bus", emoji: "🚌", color: "#e17055" },
-    { word: "Bee", emoji: "🐝", color: "#ffeaa7" },
+  { word: 'Cat', emoji: '🐱', color: '#fab1a0' }, { word: 'Dog', emoji: '🐶', color: '#74b9ff' },
+  { word: 'Apple', emoji: '🍎', color: '#ff7675' }, { word: 'Car', emoji: '🚗', color: '#a29bfe' },
+  { word: 'Star', emoji: '⭐', color: '#ffeaa7' }, { word: 'Moon', emoji: '🌙', color: '#fdcb6e' },
+  { word: 'Flower', emoji: '🌸', color: '#e17055' }, { word: 'Ball', emoji: '⚽', color: '#55efc4' },
+  { word: 'Bear', emoji: '🐻', color: '#636e72' }, { word: 'Fish', emoji: '🐠', color: '#00cec9' },
+  { word: 'Bird', emoji: '🐦', color: '#00b894' }, { word: 'Tree', emoji: '🌳', color: '#27ae60' },
 ];
 
 class PicturePairsGame extends GameBase {
-    constructor(container, config) {
-        super(container, config);
-        this.cards = [];
-        this.flippedCards = [];
-        this.matchedPairs = 0;
-        this.totalPairs = 6; // 6 pairs = 12 cards grid (3x4 or 4x3)
-        this.isLocked = false;
-    }
+  constructor(container, config) {
+    super(container, config);
+    this.cards = [];
+    this.flippedCards = [];
+    this.matchedPairs = 0;
+    this.totalPairs = 6;
+    this.moves = 0;
+    this.isLocked = false;
+  }
 
-    async init() {
-        await this.init3D();
-
-        this.container.innerHTML = `
-            <div class="game-wrapper">
-                <div class="sky-bg">
-                    <div class="cloud c1">☁️</div>
-                    <div class="cloud c2">☁️</div>
-                </div>
-                
-                <div class="game-content">
-                    <div class="header-bar">
-                        <div class="level-badge">Level 1</div>
-                        <div class="score-display">Pairs: <span id="pairs-count">0</span>/${this.totalPairs}</div>
-                    </div>
-
-                    <div class="card-grid" id="card-grid"></div>
-                    
-                    <div class="message-area" id="messge-area">Find a pair!</div>
-                </div>
-                
-                <div class="celebration" id="celebration">
-                    <span class="celeb-text">AWESOME!</span>
-                    <span class="celeb-emoji">👯</span>
-                </div>
+  async init() {
+    this.container.innerHTML = `
+      <div class="ppairs-game">
+        <div class="ppairs-panel">
+          <div class="ppairs-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Picture Pairs</div>
+              <div class="subtitle"><span id="pairs-count">0</span> / ${this.totalPairs} pairs · <span id="moves-count">0</span> moves</div>
             </div>
-        `;
+            <div class="badge">👯</div>
+          </div>
 
-        this.injectStyles();
-        this.showStartOverlay();
+          <div class="message-area" id="message-area">Flip two cards to find a pair.</div>
+          <div class="card-grid" id="card-grid"></div>
+        </div>
+      </div>
+    `;
+
+    this.injectStyles();
+    this.start();
+  }
+
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .ppairs-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#81ecec 0%,#74b9ff 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .ppairs-panel{width:min(760px,96%);background:rgba(255,255,255,.9);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.15);padding:22px;display:flex;flex-direction:column;gap:16px}
+      .ppairs-topbar{display:flex;align-items:center;gap:12px}.pill,.badge{border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#4a69bd}.subtitle{font-size:14px;color:#607d8b}.badge{background:#6c5ce7;color:#fff;padding:12px 16px}
+      .message-area{background:#fff8e6;border:3px solid #ffe2a5;border-radius:20px;padding:14px 18px;text-align:center;font-size:22px;color:#465a65}
+      .card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;perspective:1000px}.game-card{aspect-ratio:1;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .55s}.game-card.flipped,.game-card.matched{transform:rotateY(180deg)}.game-card.matched{cursor:default}.card-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px rgba(0,0,0,.12)}.card-front{background:linear-gradient(135deg,#6c5ce7,#a29bfe);border:4px solid #fff;color:rgba(255,255,255,.8);font-size:42px}.card-back{background:#fff;transform:rotateY(180deg);flex-direction:column;border:4px solid #dfe6e9}.card-emoji{font-size:52px}.card-word{font-size:16px;color:#636e72;margin-top:6px}.game-card.matched .card-back{background:#edfff0;border-color:#4cd137}
+    `;
+    this.container.appendChild(style);
+  }
+
+  start() {
+    super.start();
+    this.resetGame();
+  }
+
+  resetGame() {
+    this.matchedPairs = 0;
+    this.moves = 0;
+    this.flippedCards = [];
+    this.isLocked = false;
+
+    const items = [...VOCAB_ITEMS].sort(() => Math.random() - 0.5).slice(0, this.totalPairs);
+    let deck = [...items, ...items].map((item, idx) => ({ ...item, uid: `${item.word}-${idx}` }));
+    deck = deck.sort(() => Math.random() - 0.5);
+    this.cards = deck;
+    this.renderGrid();
+    this.updateStats();
+    document.getElementById('message-area').textContent = 'Flip two cards to find a pair.';
+  }
+
+  renderGrid() {
+    const grid = document.getElementById('card-grid');
+    grid.innerHTML = this.cards.map((item, index) => `
+      <button class="game-card" data-index="${index}">
+        <div class="card-face card-front">?</div>
+        <div class="card-face card-back" style="border-color:${item.color}">
+          <span class="card-emoji">${item.emoji}</span>
+          <span class="card-word">${item.word}</span>
+        </div>
+      </button>
+    `).join('');
+
+    grid.querySelectorAll('.game-card').forEach((card) => {
+      card.onclick = () => this.handleCardClick(card);
+    });
+  }
+
+  updateStats() {
+    document.getElementById('pairs-count').textContent = this.matchedPairs;
+    document.getElementById('moves-count').textContent = this.moves;
+    document.getElementById('score-val').textContent = this.score;
+  }
+
+  handleCardClick(card) {
+    if (this.isLocked || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+    const index = Number(card.dataset.index);
+    card.classList.add('flipped');
+    this.flippedCards.push({ element: card, data: this.cards[index] });
+
+    if (this.flippedCards.length === 2) {
+      this.moves += 1;
+      this.updateStats();
+      this.checkForMatch();
     }
+  }
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
-            .game-wrapper {
-                position: relative;
-                width: 100%;
-                height: 600px;
-                overflow: hidden;
-                border-radius: 24px;
-                background: linear-gradient(180deg, #81ecec 0%, #74b9ff 100%);
-                font-family: 'Fredoka One', cursive, sans-serif;
-                user-select: none;
-            }
-            .sky-bg {
-                position: absolute;
-                inset: 0;
-                pointer-events: none;
-            }
-            .cloud {
-                position: absolute;
-                font-size: 80px;
-                opacity: 0.8;
-                animation: floatCloud 20s linear infinite;
-            }
-            .c1 { top: 10%; left: -20%; animation-duration: 25s; }
-            .c2 { top: 30%; left: -20%; animation-delay: 10s; animation-duration: 30s; }
-            
-            @keyframes floatCloud {
-                from { transform: translateX(-150px); }
-                to { transform: translateX(800px); }
-            }
-            
-            .game-content {
-                position: relative;
-                z-index: 2;
-                height: 100%;
-                padding: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .header-bar {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                max-width: 600px;
-                margin-bottom: 20px;
-            }
-            .level-badge {
-                background: #6c5ce7;
-                color: white;
-                padding: 8px 16px;
-                border-radius: 12px;
-                font-size: 18px;
-                box-shadow: 0 4px 0 #a29bfe;
-            }
-            .score-display {
-                background: white;
-                color: #2d3436;
-                padding: 8px 20px;
-                border-radius: 20px;
-                font-size: 20px;
-                font-weight: bold;
-                box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-            }
-            
-            .card-grid {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 15px;
-                width: 100%;
-                max-width: 500px;
-                perspective: 1000px;
-            }
-            
-            .game-card {
-                aspect-ratio: 1;
-                position: relative;
-                cursor: pointer;
-                transform-style: preserve-3d;
-                transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-            .game-card:hover { transform: scale(1.05); }
-            .game-card.flipped { transform: rotateY(180deg); }
-            .game-card.matched { transform: rotateY(180deg) scale(0.95); opacity: 0.8; cursor: default; }
-            
-            .card-face {
-                position: absolute;
-                inset: 0;
-                backface-visibility: hidden;
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }
-            .card-front {
-                background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-                border: 2px solid white;
-            }
-            .card-front::after {
-                content: "?";
-                font-size: 40px;
-                color: rgba(255,255,255,0.5);
-                font-weight: bold;
-            }
-            .card-back {
-                background: white;
-                transform: rotateY(180deg);
-                flex-direction: column;
-                border: 4px solid #fab1a0;
-            }
-            .card-emoji { font-size: 40px; }
-            .card-word { font-size: 14px; margin-top: 5px; color: #636e72; text-transform: uppercase; letter-spacing: 1px; }
-            
-            .message-area {
-                margin-top: auto;
-                background: rgba(255,255,255,0.9);
-                padding: 10px 30px;
-                border-radius: 20px;
-                font-size: 24px;
-                color: #2d3436;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-            
-            .celebration {
-                position: absolute;
-                inset: 0;
-                background: rgba(108, 92, 231, 0.9);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.5s;
-                z-index: 100;
-                color: white;
-            }
-            .celebration.visible { opacity: 1; pointer-events: auto; }
-            .celeb-text { font-size: 60px; margin-bottom: 20px; animation: popIn 0.5s; }
-            .celeb-emoji { font-size: 100px; animation: bounce 1s infinite; }
-            
-            @keyframes popIn { 0% { transform: scale(0); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
-            @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        `;
-        this.container.appendChild(style);
-    }
-
-    start() {
-        super.start();
-        this.resetGame();
-
-        // Add 3D elements
-        const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        const material = new THREE.MeshNormalMaterial();
-        this.threeHelper.addFloatingObject(geometry, material, 15);
-    }
-
-    resetGame() {
-        this.matchedPairs = 0;
+  checkForMatch() {
+    this.isLocked = true;
+    const [c1, c2] = this.flippedCards;
+    if (c1.data.word === c2.data.word) {
+      setTimeout(() => {
+        c1.element.classList.add('matched');
+        c2.element.classList.add('matched');
         this.flippedCards = [];
         this.isLocked = false;
-        document.getElementById('pairs-count').textContent = '0';
-
-        // Prepare deck
-        const items = [...VOCAB_ITEMS].sort(() => Math.random() - 0.5).slice(0, this.totalPairs);
-        // Create pairs
-        let deck = [...items, ...items];
-        // Shuffle
-        deck.sort(() => Math.random() - 0.5);
-
-        this.renderGrid(deck);
-        this.speak("Find the matching picture pairs!");
+        this.matchedPairs += 1;
+        this.incrementCombo();
+        this.addScore(120);
+        this.updateStats();
+        document.getElementById('message-area').textContent = `Match! ${c1.data.word}!`;
+        this.speak(c1.data.word);
+        this.confetti.explode(null, null, 14);
+        this.celebrateMove({ burst: c1.data.emoji, duration: 900 });
+        if (this.matchedPairs === this.totalPairs) this.win();
+      }, 550);
+      return;
     }
 
-    renderGrid(deck) {
-        const grid = document.getElementById('card-grid');
-        grid.innerHTML = deck.map((item, index) => `
-            <div class="game-card" data-index="${index}" data-word="${item.word}">
-                <div class="card-face card-front"></div>
-                <div class="card-face card-back" style="border-color: ${item.color}">
-                    <span class="card-emoji">${item.emoji}</span>
-                    <span class="card-word">${item.word}</span>
-                </div>
-            </div>
-        `).join('');
+    this.resetCombo();
+    document.getElementById('message-area').textContent = 'Not a pair. Try to remember those cards.';
+    this.coachMove('Remember where those pictures were.', 900);
+    setTimeout(() => {
+      c1.element.classList.remove('flipped');
+      c2.element.classList.remove('flipped');
+      this.flippedCards = [];
+      this.isLocked = false;
+    }, 850);
+  }
 
-        // Store card data refs
-        this.cards = deck;
-
-        // Add listeners
-        grid.querySelectorAll('.game-card').forEach(card => {
-            card.onclick = () => this.handleCardClick(card);
-        });
-    }
-
-    handleCardClick(card) {
-        if (this.isLocked) return;
-        if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
-
-        // Flip card
-        const index = parseInt(card.dataset.index);
-        card.classList.add('flipped');
-
-        // Play click/flip sound (simulated by speaking or just visual for now, game engine might have SFX later)
-        if (window.UEAH_AUDIO && window.UEAH_AUDIO.playClick) window.UEAH_AUDIO.playClick();
-
-        this.flippedCards.push({ element: card, data: this.cards[index] });
-
-        if (this.flippedCards.length === 2) {
-            this.checkForMatch();
-        } else {
-            // First card flipped, speak it? Maybe too noisy.
-            // this.speak(this.cards[index].word); 
-        }
-    }
-
-    checkForMatch() {
-        this.isLocked = true;
-        const [c1, c2] = this.flippedCards;
-
-        if (c1.data.word === c2.data.word) {
-            // Match!
-            setTimeout(() => {
-                c1.element.classList.add('matched');
-                c2.element.classList.add('matched');
-                this.matchedPairs++;
-                document.getElementById('pairs-count').textContent = this.matchedPairs;
-                this.speak(c1.data.word);
-                this.confetti.explode(null, null, 10);
-                this.celebrateMove({ burst: c1.data.word.toUpperCase() });
-
-                this.flippedCards = [];
-                this.isLocked = false;
-
-                if (this.matchedPairs === this.totalPairs) {
-                    this.win();
-                }
-            }, 600);
-        } else {
-            // No match
-            this.coachMove('Those pictures do not match yet. Flip again and remember them.');
-            setTimeout(() => {
-                c1.element.classList.remove('flipped');
-                c2.element.classList.remove('flipped');
-                this.flippedCards = [];
-                this.isLocked = false;
-            }, 1000);
-        }
-    }
-
-    win() {
-        this.addScore(1000);
-        setTimeout(() => {
-            this.showResults(this.saveScore());
-        }, 1000);
-    }
+  win() {
+    const bonus = Math.max(0, 16 - this.moves) * 15;
+    if (bonus) this.addScore(bonus);
+    this.updateStats();
+    document.getElementById('message-area').textContent = 'All pairs found! Great memory!';
+    setTimeout(() => this.showResults(this.saveScore()), 1200);
+  }
 }
 
 export function createGame(container, config) {
-    return new PicturePairsGame(container, config);
+  return new PicturePairsGame(container, config);
 }
