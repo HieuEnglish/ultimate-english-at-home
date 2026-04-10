@@ -1,256 +1,147 @@
 /* assets/js/games/0-3/action-beats.js
    Action Beats - Ages 0-3
-   
-   Baby DJ console theme.
-   Press large colorful buttons to hear a "beat" loop and see a character perform an action (Clap, Jump, Wave).
+
+   Senior pass:
+   - Upgraded from a button toy into a guided copy-the-move rhythm game
+   - Still playful, but now has goals, streaks, progress, and stronger feedback
 */
 
-const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
+const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const ACTIONS = [
-  { verb: "Clap", emoji: "👏", color: "#fdcb6e", sound: "clap" },
-  { verb: "Jump", emoji: "🏃", color: "#6c5ce7", sound: "jump" },
-  { verb: "Wave", emoji: "👋", color: "#ff7675", sound: "wave" },
-  { verb: "Spin", emoji: "🌪️", color: "#00cec9", sound: "spin" },
-  { verb: "Sleep", emoji: "😴", color: "#636e72", sound: "snore" },
-  { verb: "Dance", emoji: "💃", color: "#e84393", sound: "music" },
-  { verb: "Stomp", emoji: "🦶", color: "#d63031", sound: "stomp" },
-  { verb: "Stretch", emoji: "🙆", color: "#00b894", sound: "stretch" },
-  { verb: "Shake", emoji: "🫨", color: "#e17055", sound: "shake" },
-  { verb: "Wiggle", emoji: "🪱", color: "#74b9ff", sound: "wiggle" },
-  { verb: "March", emoji: "🚶", color: "#a29bfe", sound: "march" },
-  { verb: "Fly", emoji: "🦅", color: "#55efc4", sound: "fly" },
-  { verb: "Swim", emoji: "🏊", color: "#0984e3", sound: "swim" },
-  { verb: "Crawl", emoji: "🐛", color: "#b8e994", sound: "crawl" },
-  { verb: "Hug", emoji: "🤗", color: "#fd79a8", sound: "hug" },
-  { verb: "Kick", emoji: "🦵", color: "#e55039", sound: "kick" },
-  { verb: "Blow", emoji: "🌬️", color: "#82ccdd", sound: "blow" },
-  { verb: "Sing", emoji: "🎤", color: "#f8c291", sound: "sing" },
-  { verb: "Peek", emoji: "🙈", color: "#b71540", sound: "peek" },
-  { verb: "Tickle", emoji: "🤭", color: "#78e08f", sound: "tickle" },
-  { verb: "Run", emoji: "🏃‍♂️", color: "#3c6382", sound: "run" },
-  { verb: "Hop", emoji: "🐸", color: "#38ada9", sound: "hop" },
-  { verb: "Roll", emoji: "🔄", color: "#fa983a", sound: "roll" },
-  { verb: "Nod", emoji: "😊", color: "#4a69bd", sound: "nod" },
+  { verb: 'Clap', emoji: '👏', color: '#fdcb6e' },
+  { verb: 'Jump', emoji: '🦘', color: '#6c5ce7' },
+  { verb: 'Wave', emoji: '👋', color: '#ff7675' },
+  { verb: 'Spin', emoji: '🌀', color: '#00cec9' },
+  { verb: 'Dance', emoji: '💃', color: '#e84393' },
+  { verb: 'Stomp', emoji: '🦶', color: '#d63031' },
+  { verb: 'Wiggle', emoji: '🪱', color: '#74b9ff' },
+  { verb: 'March', emoji: '🚶', color: '#a29bfe' },
 ];
 
 class ActionBeatsGame extends GameBase {
   constructor(container, config) {
     super(container, config);
-    this.beatActive = false;
     this.currentAction = null;
+    this.rounds = 0;
+    this.maxRounds = 8;
+    this.locked = false;
   }
 
   async init() {
     this.container.innerHTML = `
-      <div class="game-wrapper dj-theme">
-        <div class="disco-lights">
-           <div class="light l1"></div>
-           <div class="light l2"></div>
-           <div class="light l3"></div>
-        </div>
-        
-        <div class="dance-floor">
-           <div class="dj-character" id="dj-char">🦊</div>
-           <div class="speech-bubble" id="char-speech">Ready to dance!</div>
-        </div>
-        
-        <div class="dj-deck">
-           <div class="deck-surface">
-              <div class="speaker left">🔊</div>
-              
-              <div class="buttons-grid" id="action-buttons">
-                 <!-- Generated buttons -->
-              </div>
-              
-              <div class="speaker right">🔊</div>
-           </div>
+      <div class="ab-game">
+        <div class="ab-panel">
+          <div class="ab-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Action Beats</div>
+              <div class="progress" id="progress-text">Round 1 of ${this.maxRounds}</div>
+            </div>
+            <button class="hear-btn" id="hear-btn">🔊</button>
+          </div>
+
+          <div class="target-card">
+            <div class="dj-character" id="dj-char">🦊</div>
+            <div>
+              <div class="target-label">Copy this move</div>
+              <div class="target-action" id="target-action">👏 Clap!</div>
+              <div class="helper" id="helper-text">Tap the same move below.</div>
+            </div>
+          </div>
+
+          <div class="buttons-grid" id="action-buttons"></div>
         </div>
       </div>
     `;
 
     this.injectStyles();
-    this.renderButtons();
     this.start();
   }
 
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .game-wrapper {
-        width: 100%; height: 500px;
-        background: #2d3436;
-        border-radius: 20px;
-        position: relative; overflow: hidden;
-        display: flex; flex-direction: column;
-        user-select: none;
-      }
-      
-      .disco-lights {
-        position: absolute; top: 0; left: 0; right: 0; height: 100px;
-        display: flex; justify-content: space-around;
-        z-index: 5;
-      }
-      .light {
-        width: 60px; height: 150px;
-        background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
-        transform-origin: top center;
-        opacity: 0.5;
-        animation: swingLight 3s ease-in-out infinite alternate;
-      }
-      .l1 { background: linear-gradient(to bottom, rgba(255,107,107,0.8), transparent); animation-delay: 0s; }
-      .l2 { background: linear-gradient(to bottom, rgba(85,239,196,0.8), transparent); animation-delay: 1s; }
-      .l3 { background: linear-gradient(to bottom, rgba(162,155,254,0.8), transparent); animation-delay: 2s; }
-      
-      @keyframes swingLight { from { transform: rotate(-20deg); } to { transform: rotate(20deg); } }
-      
-      .dance-floor {
-        flex: 1;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        background: radial-gradient(circle, #636e72 10%, #2d3436 80%);
-      }
-      
-      .dj-character {
-        font-size: 100px;
-        transition: transform 0.2s;
-        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-      }
-      
-      /* Action Animations */
-      .action-clap { animation: clap 0.5s infinite; }
-      .action-jump { animation: jump 0.6s infinite; }
-      .action-wave { animation: wave 1s infinite; }
-      .action-spin { animation: spin 1s infinite linear; }
-      .action-sleep { animation: sleep 2s infinite ease-in-out; opacity: 0.7; }
-      .action-dance { animation: dance 0.8s infinite; }
-      .action-stomp { animation: stomp 0.5s infinite; }
-      .action-stretch { animation: stretch 1.2s infinite ease-in-out; }
-      .action-shake { animation: actionShake 0.4s infinite; }
-      .action-wiggle { animation: wiggle 0.6s infinite; }
-      .action-march { animation: march 0.8s infinite; }
-      .action-fly { animation: actionFly 1s infinite ease-in-out; }
-      
-      @keyframes clap { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-      @keyframes jump { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-50px); } }
-      @keyframes wave { 0% { transform: rotate(0); } 25% { transform: rotate(-20deg); } 75% { transform: rotate(20deg); } 100% { transform: rotate(0); } }
-      @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-      @keyframes sleep { 0%,100% { transform: scale(1) rotate(5deg); } 50% { transform: scale(0.95) rotate(-5deg); } }
-      @keyframes dance { 0% { transform: skewX(0); } 25% { transform: skewX(-10deg); } 75% { transform: skewX(10deg); } 100% { transform: skewX(0); } }
-      @keyframes stomp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px) scale(1.1); } }
-      @keyframes stretch { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.3); } }
-      @keyframes actionShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-15px); } 75% { transform: translateX(15px); } }
-      @keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-15deg); } 75% { transform: rotate(15deg); } }
-      @keyframes march { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-10px) rotate(-5deg); } 75% { transform: translateY(-10px) rotate(5deg); } }
-      @keyframes actionFly { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-40px) scale(1.1); } }
-      
-      .speech-bubble {
-        background: white; color: black; padding: 10px 20px; border-radius: 20px;
-        font-weight: bold; font-family: 'Comic Sans MS', cursive;
-        margin-top: 10px; opacity: 0; transition: opacity 0.3s;
-      }
-      .speech-bubble.visible { opacity: 1; }
-      
-      .dj-deck {
-        height: 200px;
-        background: #dfe6e9;
-        border-top: 5px solid #b2bec3;
-        padding: 15px;
-        box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
-      }
-      .deck-surface {
-        background: #2d3436;
-        height: 100%;
-        border-radius: 12px;
-        padding: 15px;
-        display: flex; align-items: center; justify-content: space-between;
-        border: 2px solid #636e72;
-      }
-      
-      .speaker { font-size: 40px; }
-      .speaker.pump { animation: pump 0.4s infinite; }
-      @keyframes pump { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-      
-      .buttons-grid {
-        display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-        max-width: 400px; width: 100%;
-      }
-      
-      .beat-btn {
-        aspect-ratio: 1.5;
-        border: none; border-radius: 12px;
-        font-size: 24px; font-weight: bold; color: white;
-        cursor: pointer;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        box-shadow: 0 5px 0 rgba(0,0,0,0.3);
-        transition: transform 0.1s, box-shadow 0.1s;
-      }
-      .beat-btn:active { transform: translateY(5px); box-shadow: none; }
-      .beat-btn span { font-size: 32px; display: block; margin-bottom: 5px; }
-      
-      .beat-btn.active {
-        box-shadow: 0 0 20px white;
-        z-index: 10;
-        animation: glow 0.5s infinite alternate;
-      }
-      @keyframes glow { from { filter: brightness(1); } to { filter: brightness(1.3); } }
+      .ab-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#2d3436 0%,#000 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .ab-panel{width:min(820px,96%);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:32px;box-shadow:0 24px 60px rgba(0,0,0,.42);padding:22px;display:flex;flex-direction:column;gap:18px}
+      .ab-topbar{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px}.title-wrap{flex:1;text-align:center}.title{font-size:34px;color:#fff}.progress{font-size:14px;color:#b2bec3}.hear-btn{width:54px;height:54px;background:#ff7675;color:#fff;cursor:pointer;box-shadow:0 5px 0 #d63031;font-size:24px}
+      .target-card{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:20px;color:#fff}.dj-character{font-size:100px;min-width:110px;text-align:center}.target-label{font-size:18px;color:#ffeaa7;text-transform:uppercase;letter-spacing:1px}.target-action{font-size:40px;margin-top:6px}.helper{font-size:18px;color:#dfe6e9;margin-top:8px}
+      .buttons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.beat-btn{border:none;border-radius:24px;padding:16px 10px;color:#fff;cursor:pointer;box-shadow:0 10px 0 rgba(0,0,0,.25);font-size:22px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .12s,box-shadow .12s,filter .2s}.beat-btn:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(0,0,0,.25)}.beat-btn.correct{outline:4px solid #55efc4}.beat-btn.wrong{filter:grayscale(.35);outline:4px solid #ff7675}.beat-btn.dim{opacity:.45}.beat-emoji{font-size:42px}
+      @media (max-width:720px){.buttons-grid{grid-template-columns:repeat(2,1fr)}.target-action{font-size:32px}.target-card{flex-direction:column;text-align:center}}
     `;
     this.container.appendChild(style);
   }
 
-  renderButtons() {
-    const grid = document.getElementById('action-buttons');
-    grid.innerHTML = ACTIONS.map(action => `
-            <button class="beat-btn" style="background: ${action.color}" data-verb="${action.verb}">
-               <span>${action.emoji}</span>
-               ${action.verb}
-            </button>
-        `).join('');
+  start() {
+    super.start();
+    this.rounds = 0;
+    document.getElementById('hear-btn').onclick = () => this.speakPrompt();
+    this.nextRound();
+  }
 
-    grid.querySelectorAll('.beat-btn').forEach(btn => {
+  nextRound() {
+    if (this.rounds >= this.maxRounds) return this.end();
+    this.rounds += 1;
+    this.locked = false;
+    this.currentAction = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
+
+    document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;
+    document.getElementById('target-action').textContent = `${this.currentAction.emoji} ${this.currentAction.verb}!`;
+    document.getElementById('helper-text').textContent = 'Tap the same move below.';
+
+    const shuffled = [...ACTIONS].sort(() => Math.random() - 0.5);
+    const buttons = document.getElementById('action-buttons');
+    buttons.innerHTML = shuffled.map((action) => `
+      <button class="beat-btn" style="background:${action.color}" data-verb="${action.verb}">
+        <span class="beat-emoji">${action.emoji}</span>
+        <span>${action.verb}</span>
+      </button>
+    `).join('');
+
+    buttons.querySelectorAll('.beat-btn').forEach((btn) => {
       btn.onclick = () => this.triggerAction(btn, btn.dataset.verb);
     });
+
+    setTimeout(() => this.speakPrompt(), 500);
+  }
+
+  speakPrompt() {
+    if (!this.currentAction) return;
+    this.speak(`${this.currentAction.verb}!`, { rate: 0.9 });
   }
 
   triggerAction(btn, verb) {
-    // Reset old
-    this.container.querySelectorAll('.beat-btn').forEach(b => b.classList.remove('active'));
+    if (this.locked) return;
+    const buttons = [...this.container.querySelectorAll('.beat-btn')];
     const char = document.getElementById('dj-char');
-    char.className = 'dj-character'; // reset anims
-    void char.offsetWidth; // trigger reflow
+    char.style.transform = 'scale(1.08) rotate(6deg)';
+    setTimeout(() => { char.style.transform = ''; }, 220);
 
-    // Set new
-    btn.classList.add('active');
-    const actionData = ACTIONS.find(a => a.verb === verb);
+    if (verb === this.currentAction.verb) {
+      this.locked = true;
+      btn.classList.add('correct');
+      buttons.filter((node) => node !== btn).forEach((node) => node.classList.add('dim'));
+      this.incrementCombo();
+      this.addScore(100);
+      document.getElementById('score-val').textContent = this.score;
+      document.getElementById('helper-text').textContent = `${verb}! Nice move!`;
+      this.speak(`${verb}! Great job!`);
+      this.confetti.explode(null, null, 18);
+      this.celebrateMove({ burst: this.currentAction.emoji, duration: 900 });
+      setTimeout(() => this.nextRound(), 1200);
+      return;
+    }
 
-    // Animate Char
-    char.classList.add(`action-${verb.toLowerCase()}`);
-
-    // Show Speech
-    const bubble = document.getElementById('char-speech');
-    bubble.textContent = `${verb}!`;
-    bubble.classList.add('visible');
-
-    // Speakers pump
-    this.container.querySelectorAll('.speaker').forEach(s => s.classList.add('pump'));
-
-    // Speak
-    this.speak(verb);
-    this.incrementCombo();
-    this.celebrateMove({ burst: verb.toUpperCase(), duration: 700 });
-
-    // Timeout to "stop" the music visually after a bit (or keep it going!)
-    // For 0-3, instant reaction is best. Let it loop for 3s then stop.
-    if (this.currentTimer) clearTimeout(this.currentTimer);
-    this.currentTimer = setTimeout(() => {
-      this.stopAction();
-    }, 3000);
+    btn.classList.add('wrong');
+    this.resetCombo();
+    this.speak(`${verb}. Try ${this.currentAction.verb}.`);
+    this.coachMove(`Copy ${this.currentAction.verb}.`, 900);
+    document.getElementById('helper-text').textContent = `Good try. Tap ${this.currentAction.verb}.`;
+    setTimeout(() => btn.classList.remove('wrong'), 700);
   }
 
-  stopAction() {
-    this.container.querySelectorAll('.beat-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('dj-char').className = 'dj-character';
-    document.getElementById('char-speech').classList.remove('visible');
-    this.container.querySelectorAll('.speaker').forEach(s => s.classList.remove('pump'));
+  end() {
+    this.showResults(this.saveScore());
   }
 }
 

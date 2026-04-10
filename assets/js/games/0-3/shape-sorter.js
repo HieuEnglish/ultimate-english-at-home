@@ -1,325 +1,158 @@
 /* assets/js/games/0-3/shape-sorter.js
    Shape Sorter - Ages 0-3
-   
-   Match shapes to their holes.
+
+   Senior pass:
+   - Reworked from vague multiple choice into a simple "pick the shape and watch it drop into the hole" toy
+   - Added progress, stronger target clarity, and fewer abstract distractions
 */
 
 const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const SHAPES = [
-    { name: "Circle", emoji: "🔴", cssShape: "border-radius: 50%;", color: "#ff7675" },
-    { name: "Square", emoji: "🟥", cssShape: "border-radius: 10px;", color: "#0984e3" },
-    { name: "Triangle", emoji: "🔺", cssShape: "clip-path: polygon(50% 0%, 0% 100%, 100% 100%);", color: "#fdcb6e" },
-    { name: "Star", emoji: "⭐", cssShape: "clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);", color: "#ffeaa7" },
-    { name: "Heart", emoji: "❤️", cssShape: "clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'); transform: scale(3);", color: "#e17055" }, // SVG path for simplicity or emoji
-];
-
-// Simplified SHAPES using svgs/emojis directly to avoid complex CSS clip-paths issues on simple implementation
-const SHAPES_SIMPLE = [
-    { name: "Circle", icon: "⚫", match: "🔴", color: "#ff7675" },
-    { name: "Square", icon: "⬛", match: "🟥", color: "#0984e3" },
-    { name: "Triangle", icon: "📐", match: "🔺", color: "#fdcb6e" },
-    { name: "Star", icon: "⭐", match: "⭐", color: "#ffeaa7" },
-    { name: "Heart", icon: "❤️", match: "❤️", color: "#e17055" },
-    { name: "Diamond", icon: "💠", match: "💎", color: "#00cec9" },
-    { name: "Moon", icon: "🌙", match: "🌙", color: "#a29bfe" },
-    { name: "Sun", icon: "☀️", match: "☀️", color: "#ff9f43" },
-    { name: "Cloud", icon: "☁️", match: "☁️", color: "#74b9ff" },
-    { name: "Flower", icon: "🌸", match: "🌸", color: "#fd79a8" },
-    { name: "Rainbow", icon: "🌈", match: "🌈", color: "#e84393" },
-    { name: "Drop", icon: "💧", match: "💧", color: "#0984e3" },
-    { name: "Lightning", icon: "⚡", match: "⚡", color: "#f9ca24" },
-    { name: "Snowflake", icon: "❄️", match: "❄️", color: "#74b9ff" },
-    { name: "Leaf", icon: "🍃", match: "🍃", color: "#00b894" },
-    { name: "Bell", icon: "🔔", match: "🔔", color: "#fdcb6e" },
-    { name: "Apple", icon: "🍎", match: "🍎", color: "#d63031" },
-    { name: "Crown", icon: "👑", match: "👑", color: "#f9ca24" },
-    { name: "Egg", icon: "🥚", match: "🥚", color: "#dfe6e9" },
-    { name: "Butterfly", icon: "🦋", match: "🦋", color: "#a29bfe" },
+  { name: "Circle", icon: "⚫", color: "#ff7675" },
+  { name: "Square", icon: "🟥", color: "#0984e3" },
+  { name: "Triangle", icon: "🔺", color: "#fdcb6e" },
+  { name: "Star", icon: "⭐", color: "#ffeaa7" },
+  { name: "Heart", icon: "❤️", color: "#fd79a8" },
+  { name: "Diamond", icon: "💎", color: "#00cec9" },
 ];
 
 class ShapeSorterGame extends GameBase {
-    constructor(container, config) {
-        super(container, config);
-        this.currentShape = null;
-        this.options = [];
-        this.rounds = 0;
-        this.maxRounds = 8;
-    }
+  constructor(container, config) {
+    super(container, config);
+    this.currentShape = null;
+    this.options = [];
+    this.rounds = 0;
+    this.maxRounds = 8;
+    this.locked = false;
+  }
 
-    async init() {
-        await this.init3D();
-
-        this.container.innerHTML = `
-            <div class="game-wrapper">
-                <div class="bg-shapes"></div>
-                
-                <div class="main-content">
-                    <div class="header">
-                         <div class="score-pill">⭐ <span id="score-val">0</span></div>
-                    </div>
-
-                    <div class="hole-container">
-                        <div class="hole-label">Hole</div>
-                        <div class="shape-hole" id="target-hole"></div>
-                    </div>
-
-                    <div class="arrow-down">⬇️</div>
-
-                    <div class="options-container" id="shape-options"></div>
-                    
-                    <div class="instruction-box">
-                        <span id="instruction-text">Match the shape!</span>
-                        <button class="speak-btn" id="hear-btn">🔊</button>
-                    </div>
-                </div>
-
-                <div class="celebration" id="celebration">
-                    <span class="celeb-emoji" id="celeb-emoji">🌟</span>
-                </div>
+  async init() {
+    this.container.innerHTML = `
+      <div class="ss-game">
+        <div class="ss-panel">
+          <div class="ss-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Shape Sorter</div>
+              <div class="progress" id="progress-text">Round 1 of ${this.maxRounds}</div>
             </div>
-        `;
+            <button class="hear-btn" id="hear-btn">🔊</button>
+          </div>
 
-        this.injectStyles();
-        this.showStartOverlay();
-    }
-
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
-            .game-wrapper {
-                position: relative;
-                width: 100%;
-                height: 600px;
-                overflow: hidden;
-                border-radius: 24px;
-                background: linear-gradient(135deg, #74b9ff 0%, #a29bfe 100%);
-                font-family: 'Fredoka One', cursive, sans-serif;
-            }
-            .bg-shapes {
-                position: absolute;
-                inset: 0;
-                opacity: 0.2;
-                background-image: radial-gradient(#ffffff 2px, transparent 2px);
-                background-size: 30px 30px;
-            }
-            .main-content {
-                position: relative;
-                z-index: 2;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 20px;
-            }
-            .header {
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-            }
-            .score-pill {
-                background: rgba(0,0,0,0.2);
-                color: white;
-                padding: 8px 16px;
-                border-radius: 20px;
-                font-weight: bold;
-            }
-            
-            .hole-container {
-                margin-top: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            .hole-label {
-                color: rgba(255,255,255,0.8);
-                margin-bottom: 5px;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-            }
-            .shape-hole {
-                width: 150px;
-                height: 150px;
-                background: rgba(0,0,0,0.3);
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 100px;
-                filter: brightness(0); /* Make emoji black silhouette */
-                opacity: 0.6;
-                border: 4px dashed rgba(255,255,255,0.5);
-                transition: transform 0.3s;
-            }
-            
-            .arrow-down {
-                font-size: 40px;
-                margin: 20px 0;
-                animation: bounce 2s infinite;
-                color: white;
-            }
-            
-            .options-container {
-                display: flex;
-                gap: 20px;
-                justify-content: center;
-            }
-            .shape-option {
-                width: 100px;
-                height: 100px;
-                font-size: 70px;
-                background: white;
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                box-shadow: 0 10px 0 rgba(0,0,0,0.1);
-                border-bottom: 4px solid #ddd;
-                transition: transform 0.2s;
-            }
-            .shape-option:active { transform: translateY(4px); box-shadow: 0 6px 0 rgba(0,0,0,0.1); }
-            
-            .shape-option.correct {
-                background: #55efc4;
-                animation: pulse 0.5s;
-            }
-            .shape-option.wrong {
-                background: #ff7675;
-                animation: shake 0.5s;
-            }
-            
-            .instruction-box {
-                margin-top: auto;
-                background: white;
-                padding: 15px 30px;
-                border-radius: 50px;
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            }
-            #instruction-text {
-                font-size: 24px;
-                color: #2d3436;
-            }
-            .speak-btn {
-                background: #fdcb6e;
-                border: none;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 20px;
-            }
-            
-            .celebration {
-                position: absolute;
-                inset: 0;
-                background: rgba(255,255,255,0.9);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s;
-                z-index: 100;
-            }
-            .celebration.visible { opacity: 1; pointer-events: auto; }
-            .celeb-emoji { font-size: 150px; animation: spin 2s infinite linear; }
-            
-            @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
-            @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-            @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-            @keyframes spin { 100% { transform: rotate(360deg); } }
-        `;
-        this.container.appendChild(style);
-    }
-
-    start() {
-        super.start();
-        this.rounds = 0;
-        this.score = 0;
-
-        // Add 3D shapes
-        const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
-        const material = new THREE.MeshNormalMaterial();
-        this.threeHelper.addFloatingObject(geometry, material, 5);
-
-        this.nextRound();
-
-        document.getElementById('hear-btn').onclick = () => this.speakInstruction();
-    }
-
-    nextRound() {
-        if (this.rounds >= this.maxRounds) {
-            this.end();
-            return;
-        }
-
-        this.rounds++;
-
-        const shuffled = [...SHAPES_SIMPLE].sort(() => Math.random() - 0.5);
-        this.currentShape = shuffled[0];
-        this.options = shuffled.slice(0, 3).sort(() => Math.random() - 0.5);
-
-        this.renderRound();
-        setTimeout(() => this.speakInstruction(), 500);
-    }
-
-    renderRound() {
-        const hole = document.getElementById('target-hole');
-        const optionsDiv = document.getElementById('shape-options');
-        const text = document.getElementById('instruction-text');
-
-        // Show silhouette of the match in the hole
-        hole.textContent = this.currentShape.match;
-        text.textContent = `Find the ${this.currentShape.name}`;
-
-        optionsDiv.innerHTML = this.options.map(shape => `
-            <div class="shape-option" data-name="${shape.name}">
-                ${shape.match}
+          <div class="target-zone">
+            <div class="target-title" id="instruction-text">Find the circle</div>
+            <div class="hole-wrap">
+              <div class="shape-hole" id="target-hole"></div>
+              <div class="shape-drop" id="shape-drop"></div>
             </div>
-        `).join('');
+          </div>
 
-        optionsDiv.querySelectorAll('.shape-option').forEach(opt => {
-            opt.onclick = () => this.handlePick(opt);
-        });
+          <div class="shape-options" id="shape-options"></div>
+
+          <div class="helper" id="helper-text">Tap a shape to drop it into the hole.</div>
+        </div>
+      </div>
+    `;
+
+    this.injectStyles();
+    this.start();
+  }
+
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .ss-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#74b9ff 0%,#a29bfe 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .ss-panel{width:min(760px,96%);background:rgba(255,255,255,.9);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.16);padding:22px;display:flex;flex-direction:column;gap:18px}
+      .ss-topbar{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;box-shadow:0 4px 0 rgba(0,0,0,.08)}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#4a69bd}.progress{font-size:14px;color:#607d8b}.hear-btn{width:54px;height:54px;background:#6c5ce7;color:#fff;cursor:pointer;box-shadow:0 5px 0 #4c3fc0;font-size:24px}
+      .target-zone{background:linear-gradient(135deg,#f6fbff,#fff);border-radius:28px;border:3px solid #d9ebff;padding:20px;display:flex;flex-direction:column;align-items:center;gap:16px}.target-title{font-size:32px;color:#2d3436;text-transform:capitalize}.hole-wrap{position:relative;width:220px;height:180px;display:flex;align-items:center;justify-content:center}.shape-hole{width:150px;height:150px;border-radius:26px;background:rgba(0,0,0,.14);border:5px dashed rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:86px;filter:grayscale(1) brightness(.2);opacity:.8}.shape-drop{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:86px;opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .2s}
+      .shape-drop.is-dropping{opacity:1;transform:translateX(-50%) translateY(78px) scale(1.05)}
+      .shape-options{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.shape-option{border:none;background:#fff;border-radius:26px;padding:18px;cursor:pointer;box-shadow:0 10px 0 rgba(0,0,0,.08);border:4px solid #fff;transition:transform .12s,border-color .2s;display:flex;flex-direction:column;align-items:center;gap:8px}.shape-option:active{transform:translateY(6px);box-shadow:0 4px 0 rgba(0,0,0,.08)}.shape-option.correct{border-color:#4cd137;background:#edfff0}.shape-option.wrong{border-color:#ff6b6b;background:#fff0f0}.shape-option.dim{opacity:.45}.shape-icon{font-size:72px;line-height:1}.shape-name{font-size:22px;color:#2d3436}
+      .helper{background:#fff8e6;border:3px solid #ffe2a5;border-radius:20px;padding:14px 18px;text-align:center;font-size:22px;color:#465a65}
+      @media (max-width:720px){.shape-options{grid-template-columns:repeat(2,1fr)}.target-title{font-size:28px}}
+    `;
+    this.container.appendChild(style);
+  }
+
+  start() {
+    super.start();
+    this.rounds = 0;
+    this.locked = false;
+    document.getElementById('hear-btn').onclick = () => this.speakInstruction();
+    this.nextRound();
+  }
+
+  nextRound() {
+    if (this.rounds >= this.maxRounds) return this.end();
+    this.rounds += 1;
+    this.locked = false;
+
+    const shuffled = [...SHAPES].sort(() => Math.random() - 0.5);
+    this.currentShape = shuffled[0];
+    this.options = shuffled.slice(0, 3).sort(() => Math.random() - 0.5);
+
+    document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;
+    document.getElementById('target-hole').textContent = this.currentShape.icon;
+    document.getElementById('instruction-text').textContent = `Find the ${this.currentShape.name}`;
+    document.getElementById('helper-text').textContent = 'Tap a shape to drop it into the hole.';
+    document.getElementById('shape-drop').className = 'shape-drop';
+    document.getElementById('shape-drop').textContent = '';
+
+    const options = document.getElementById('shape-options');
+    options.innerHTML = this.options.map((shape) => `
+      <button class="shape-option" data-name="${shape.name}">
+        <span class="shape-icon">${shape.icon}</span>
+        <span class="shape-name">${shape.name}</span>
+      </button>
+    `).join('');
+
+    options.querySelectorAll('.shape-option').forEach((opt) => {
+      opt.onclick = () => this.handlePick(opt);
+    });
+
+    setTimeout(() => this.speakInstruction(), 500);
+  }
+
+  speakInstruction() {
+    if (!this.currentShape) return;
+    this.speak(`Put the ${this.currentShape.name} in the hole`, { rate: 0.9 });
+  }
+
+  handlePick(opt) {
+    if (this.locked) return;
+    const name = opt.dataset.name;
+    const options = [...this.container.querySelectorAll('.shape-option')];
+
+    if (name === this.currentShape.name) {
+      this.locked = true;
+      opt.classList.add('correct');
+      options.filter((node) => node !== opt).forEach((node) => node.classList.add('dim'));
+      const drop = document.getElementById('shape-drop');
+      drop.textContent = this.currentShape.icon;
+      drop.classList.add('is-dropping');
+      this.incrementCombo();
+      this.addScore(100);
+      document.getElementById('score-val').textContent = this.score;
+      document.getElementById('helper-text').textContent = `${this.currentShape.name} fits!`;
+      this.speak(`Yes! ${this.currentShape.name}!`);
+      this.confetti.explode(null, null, 18);
+      this.celebrateMove({ burst: this.currentShape.icon, duration: 900 });
+      setTimeout(() => this.nextRound(), 1400);
+      return;
     }
 
-    speakInstruction() {
-        this.speak(`Put the ${this.currentShape.name} in the hole!`);
-    }
+    opt.classList.add('wrong');
+    this.resetCombo();
+    this.speak(`Not the ${name}. Try again.`);
+    this.coachMove(`Look for the ${this.currentShape.name}.`, 900);
+    setTimeout(() => opt.classList.remove('wrong'), 700);
+  }
 
-    handlePick(opt) {
-        const name = opt.dataset.name;
-
-        if (name === this.currentShape.name) {
-            // Correct
-            opt.classList.add('correct');
-            this.addScore(100);
-            document.getElementById('score-val').textContent = this.score;
-            document.getElementById('target-hole').style.filter = 'none'; // Reveal color
-            document.getElementById('target-hole').style.opacity = '1';
-
-            this.speak("Good job!");
-            this.celebrateMove({ burst: this.currentShape.match });
-            this.confetti.explode(null, null, 10);
-
-            setTimeout(() => this.nextRound(), 1500);
-        } else {
-            // Wrong
-            opt.classList.add('wrong');
-            this.speak("Not that one!");
-            this.coachMove();
-        }
-    }
-
-    end() {
-        this.showResults(this.saveScore());
-    }
+  end() {
+    this.showResults(this.saveScore());
+  }
 }
 
 export function createGame(container, config) {
-    return new ShapeSorterGame(container, config);
+  return new ShapeSorterGame(container, config);
 }

@@ -1,299 +1,165 @@
 /* assets/js/games/0-3/peekaboo-pets.js
    Peekaboo Pets - Ages 0-3
-   
-   A simple hiding game where animals hide behind bushes/boxes.
+
+   Senior pass:
+   - Added a brief learning phase before hiding so it's not pure blind guessing
+   - Clearer prompts, progress, better retry flow, and stronger reveal feedback
 */
 
 const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const PETS = [
-    { name: "Dog", emoji: "🐶" },
-    { name: "Cat", emoji: "🐱" },
-    { name: "Mouse", emoji: "🐭" },
-    { name: "Bunny", emoji: "🐰" },
-    { name: "Fox", emoji: "🦊" },
-    { name: "Bear", emoji: "🐻" },
-    { name: "Panda", emoji: "🐼" },
-    { name: "Koala", emoji: "🐨" },
-    { name: "Tiger", emoji: "🐯" },
-    { name: "Lion", emoji: "🦁" },
-    { name: "Monkey", emoji: "🐒" },
-    { name: "Penguin", emoji: "🐧" },
-    { name: "Elephant", emoji: "🐘" },
-    { name: "Giraffe", emoji: "🦒" },
-    { name: "Whale", emoji: "🐳" },
-    { name: "Dolphin", emoji: "🐬" },
-    { name: "Owl", emoji: "🦉" },
-    { name: "Frog", emoji: "🐸" },
-    { name: "Turtle", emoji: "🐢" },
-    { name: "Hamster", emoji: "🐹" },
+  { name: "Dog", emoji: "🐶" },
+  { name: "Cat", emoji: "🐱" },
+  { name: "Mouse", emoji: "🐭" },
+  { name: "Bunny", emoji: "🐰" },
+  { name: "Fox", emoji: "🦊" },
+  { name: "Bear", emoji: "🐻" },
+  { name: "Panda", emoji: "🐼" },
+  { name: "Koala", emoji: "🐨" },
+  { name: "Tiger", emoji: "🐯" },
+  { name: "Lion", emoji: "🦁" },
+  { name: "Monkey", emoji: "🐒" },
+  { name: "Penguin", emoji: "🐧" },
 ];
 
 class PeekabooPetsGame extends GameBase {
-    constructor(container, config) {
-        super(container, config);
-        this.currentPet = null;
-        this.options = [];
-        this.rounds = 0;
-        this.maxRounds = 8;
-        this.isRevealing = false;
-    }
+  constructor(container, config) {
+    super(container, config);
+    this.currentPet = null;
+    this.options = [];
+    this.rounds = 0;
+    this.maxRounds = 8;
+    this.isLocked = false;
+  }
 
-    async init() {
-        await this.init3D();
-
-        this.container.innerHTML = `
-            <div class="game-wrapper">
-                <div class="bg-forest"></div>
-                
-                <div class="game-content">
-                    <div class="header">
-                        <div class="score-pill">⭐ <span id="score-val">0</span></div>
-                        <h1 class="guide-text" id="guide-text">Who is hiding?</h1>
-                    </div>
-
-                    <div class="hiding-spots" id="hiding-spots"></div>
-
-                    <div class="controls">
-                        <button class="icon-btn" id="hear-btn">🔊</button>
-                    </div>
-                </div>
-                
-                <!-- Celebration Overlay -->
-                <div class="celebration" id="celebration">
-                    <span class="celeb-emoji" id="celeb-emoji">🎉</span>
-                </div>
+  async init() {
+    this.container.innerHTML = `
+      <div class="pp-game">
+        <div class="pp-panel">
+          <div class="pp-header">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Peekaboo Pets</div>
+              <div class="progress" id="progress-text">Round 1 of ${this.maxRounds}</div>
             </div>
-        `;
+            <button class="hear-btn" id="hear-btn">🔊</button>
+          </div>
 
-        this.injectStyles();
-        this.showStartOverlay();
+          <div class="guide-card">
+            <div class="guide-emoji" id="guide-emoji">🫣</div>
+            <div class="guide-text" id="guide-text">Watch closely. One pet is about to hide!</div>
+          </div>
+
+          <div class="hiding-spots" id="hiding-spots"></div>
+
+          <div class="helper" id="helper-text">First look, then find the pet.</div>
+        </div>
+      </div>
+    `;
+
+    this.injectStyles();
+    this.start();
+  }
+
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .pp-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#81ecec 0%,#55efc4 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .pp-panel{width:min(760px,96%);background:rgba(255,255,255,.9);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.16);padding:22px;display:flex;flex-direction:column;gap:18px}
+      .pp-header{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;box-shadow:0 4px 0 rgba(0,0,0,.08)}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#0e9f6e}.progress{font-size:14px;color:#607d8b}.hear-btn{width:54px;height:54px;background:#00b894;color:#fff;cursor:pointer;box-shadow:0 5px 0 #008f72;font-size:24px}
+      .guide-card{background:linear-gradient(135deg,#fff9ef,#fff);border-radius:26px;border:3px solid #d9ffef;padding:18px;display:flex;align-items:center;gap:16px}.guide-emoji{font-size:66px}.guide-text{font-size:28px;color:#2d3436;line-height:1.2}
+      .hiding-spots{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.hiding-card{position:relative;height:180px;border:none;background:transparent;cursor:pointer;perspective:1000px}.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s}.hiding-card.revealed .card-inner{transform:rotateY(180deg)}.card-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:28px;backface-visibility:hidden;box-shadow:0 12px 20px rgba(0,0,0,.12)}.card-front{background:linear-gradient(135deg,#ffeaa7,#fdcb6e);font-size:82px;border:4px solid #fff4ca}.card-back{transform:rotateY(180deg);background:#fff;border:4px solid #d9ebff;font-size:90px}
+      .helper{background:#fff8e6;border:3px solid #ffe2a5;border-radius:20px;padding:14px 18px;text-align:center;font-size:22px;color:#465a65}
+      @media (max-width:720px){.hiding-spots{grid-template-columns:1fr}.guide-text{font-size:24px}}
+    `;
+    this.container.appendChild(style);
+  }
+
+  start() {
+    super.start();
+    this.rounds = 0;
+    this.isLocked = false;
+    document.getElementById('hear-btn').onclick = () => this.speakInstruction();
+    this.nextRound();
+  }
+
+  nextRound() {
+    if (this.rounds >= this.maxRounds) return this.end();
+    this.rounds += 1;
+    this.isLocked = true;
+
+    const shuffled = [...PETS].sort(() => Math.random() - 0.5);
+    this.options = shuffled.slice(0, 3);
+    this.currentPet = this.options[Math.floor(Math.random() * this.options.length)];
+
+    document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;
+    document.getElementById('guide-emoji').textContent = this.currentPet.emoji;
+    document.getElementById('guide-text').textContent = `Watch the ${this.currentPet.name}. It will hide!`;
+    document.getElementById('helper-text').textContent = 'Look first... then the cards will flip.';
+
+    const spots = document.getElementById('hiding-spots');
+    spots.innerHTML = this.options.map((pet, index) => `
+      <button class="hiding-card revealed" data-index="${index}">
+        <div class="card-inner">
+          <div class="card-face card-front">🌳</div>
+          <div class="card-face card-back">${pet.emoji}</div>
+        </div>
+      </button>
+    `).join('');
+
+    spots.querySelectorAll('.hiding-card').forEach((card) => {
+      card.onclick = () => this.handleCardClick(card);
+    });
+
+    this.speak(`Watch the ${this.currentPet.name}`, { rate: 0.9 });
+    setTimeout(() => {
+      spots.querySelectorAll('.hiding-card').forEach((card) => card.classList.remove('revealed'));
+      this.isLocked = false;
+      this.speakInstruction();
+      document.getElementById('guide-emoji').textContent = '🫣';
+      document.getElementById('guide-text').textContent = `Where is the ${this.currentPet.name}?`;
+      document.getElementById('helper-text').textContent = 'Tap the card where the pet is hiding.';
+    }, 1400);
+  }
+
+  speakInstruction() {
+    if (!this.currentPet) return;
+    this.speak(`Where is the ${this.currentPet.name}?`, { rate: 0.9 });
+  }
+
+  handleCardClick(card) {
+    if (this.isLocked) return;
+    const index = Number(card.dataset.index);
+    const pet = this.options[index];
+    card.classList.add('revealed');
+
+    if (pet.name === this.currentPet.name) {
+      this.isLocked = true;
+      this.addScore(100);
+      this.incrementCombo();
+      document.getElementById('score-val').textContent = this.score;
+      document.getElementById('guide-emoji').textContent = pet.emoji;
+      document.getElementById('guide-text').textContent = `You found the ${pet.name}!`;
+      document.getElementById('helper-text').textContent = 'Peekaboo! Another pet is coming.';
+      this.speak(`You found the ${pet.name}!`);
+      this.confetti.explode(null, null, 20);
+      this.celebrateMove({ burst: pet.emoji, duration: 900 });
+      setTimeout(() => this.nextRound(), 1500);
+      return;
     }
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
-            .game-wrapper {
-                position: relative;
-                width: 100%;
-                height: 600px;
-                overflow: hidden;
-                border-radius: 24px;
-                background: linear-gradient(180deg, #81ecec 0%, #00b894 100%);
-                font-family: 'Fredoka One', cursive, sans-serif;
-            }
-            .bg-forest {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 200px;
-                background: #55efc4;
-                border-radius: 50% 50% 0 0 / 20px 20px 0 0;
-                opacity: 0.5;
-            }
-            .game-content {
-                position: relative;
-                z-index: 2;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 20px;
-            }
-            .header {
-                margin-top: 20px;
-                text-align: center;
-            }
-            .score-pill {
-                background: white;
-                padding: 8px 16px;
-                border-radius: 20px;
-                font-weight: bold;
-                color: #e67e22;
-                display: inline-block;
-                margin-bottom: 10px;
-                box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-            }
-            .guide-text {
-                font-size: 32px;
-                color: white;
-                text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                background: rgba(0,0,0,0.2);
-                padding: 10px 20px;
-                border-radius: 12px;
-            }
-            .hiding-spots {
-                flex: 1;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 30px;
-                perspective: 1000px;
-            }
-            .hiding-card {
-                width: 140px;
-                height: 140px;
-                position: relative;
-                cursor: pointer;
-                transition: transform 0.3s;
-                transform-style: preserve-3d;
-            }
-            .hiding-card:hover { transform: scale(1.05); }
-            .hiding-card.revealed { transform: rotateY(180deg); }
-            
-            .card-face {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                backface-visibility: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 20px;
-                font-size: 80px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            }
-            .card-front {
-                background: #ffeaa7; /* Bush/Box bg */
-                z-index: 2;
-                border: 4px solid #fab1a0;
-            }
-            .card-back {
-                background: white;
-                transform: rotateY(180deg);
-                border: 4px solid #74b9ff;
-            }
-            
-            .controls {
-                margin-bottom: 30px;
-            }
-            .icon-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 30px;
-                border-radius: 50%;
-                border: none;
-                background: white;
-                cursor: pointer;
-                box-shadow: 0 4px 0 #b2bec3;
-                transition: transform 0.1s;
-            }
-            .icon-btn:active { transform: translateY(4px); box-shadow: none; }
+    this.resetCombo();
+    this.speak(`That is ${pet.name}. Try again.`);
+    this.coachMove(`That was ${pet.name}. Find ${this.currentPet.name}.`, 900);
+    setTimeout(() => card.classList.remove('revealed'), 900);
+  }
 
-            .celebration {
-                position: absolute;
-                inset: 0;
-                background: rgba(255,255,255,0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s;
-                z-index: 100;
-            }
-            .celebration.visible { opacity: 1; pointer-events: auto; }
-            .celeb-emoji { font-size: 120px; animation: bounce 1s infinite; }
-            
-            @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        `;
-        this.container.appendChild(style);
-    }
-
-    start() {
-        super.start();
-        this.rounds = 0;
-        this.score = 0;
-
-        // Add 3D elements (trees)
-        const geometry = new THREE.ConeGeometry(0.8, 2, 8);
-        const material = new THREE.MeshLambertMaterial({ color: 0x00b894 });
-        this.threeHelper.addFloatingObject(geometry, material, 5);
-
-        this.nextRound();
-
-        document.getElementById('hear-btn').onclick = () => this.speakInstruction();
-    }
-
-    nextRound() {
-        if (this.rounds >= this.maxRounds) {
-            this.end();
-            return;
-        }
-
-        this.rounds++;
-        this.isRevealing = false;
-
-        // Pick 3 random pets
-        const shuffled = [...PETS].sort(() => Math.random() - 0.5);
-        this.options = shuffled.slice(0, 3);
-        // Pick one as target
-        this.currentPet = this.options[Math.floor(Math.random() * this.options.length)];
-
-        this.renderRound();
-        setTimeout(() => this.speakInstruction(), 600);
-    }
-
-    renderRound() {
-        const spots = document.getElementById('hiding-spots');
-        const guide = document.getElementById('guide-text');
-
-        guide.textContent = `Where is the ${this.currentPet.name}?`;
-
-        spots.innerHTML = this.options.map((pet, index) => `
-            <div class="hiding-card" data-index="${index}">
-                <div class="card-face card-front">🌳</div>
-                <div class="card-face card-back">${pet.emoji}</div>
-            </div>
-        `).join('');
-
-        spots.querySelectorAll('.hiding-card').forEach(card => {
-            card.onclick = () => this.handleCardClick(card);
-        });
-    }
-
-    speakInstruction() {
-        this.speak(`Where is the ${this.currentPet.name}?`);
-    }
-
-    handleCardClick(card) {
-        if (this.isRevealing) return;
-
-        const index = parseInt(card.dataset.index);
-        const pet = this.options[index];
-
-        // Reveal
-        card.classList.add('revealed');
-
-        if (pet.name === this.currentPet.name) {
-            // Correct
-            this.isRevealing = true;
-            this.addScore(100);
-            document.getElementById('score-val').textContent = this.score;
-            this.speak(`Found the ${pet.name}!`);
-            this.confetti.explode(null, null, 15);
-            this.celebrateMove({ burst: pet.emoji || pet.name.toUpperCase() });
-
-            setTimeout(() => {
-                this.nextRound();
-            }, 2000);
-        } else {
-            // Wrong
-            this.speak(`That is a ${pet.name}. Try again!`);
-            this.coachMove(`That is the ${pet.name}. Keep looking for the hiding pet.`);
-            setTimeout(() => {
-                card.classList.remove('revealed');
-            }, 1500);
-        }
-    }
-
-    end() {
-        this.showResults(this.saveScore());
-    }
+  end() {
+    this.showResults(this.saveScore());
+  }
 }
 
 export function createGame(container, config) {
-    return new PeekabooPetsGame(container, config);
+  return new PeekabooPetsGame(container, config);
 }

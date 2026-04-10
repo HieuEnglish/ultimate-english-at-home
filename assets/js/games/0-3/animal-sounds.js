@@ -1,34 +1,26 @@
 /* assets/js/games/0-3/animal-sounds.js
-   Animal Sounds Match - Ages 0-3
-   
-   MODERN TABLET LAYOUT VERSION
-   Tablet frame style.
-   Theme: "The Farm" - nature inspired.
+   Animal Sounds - Ages 0-3
+
+   Senior pass:
+   - Clear round structure, stronger prompts, progress, and better retries
+   - Removed dead controls and made the listening loop easier to understand
 */
 
-const { GameBase, Animations } = window.UEAH_GAME_ENGINE;
+const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const ANIMALS = [
-  { name: "dog", emoji: "🐕", sound: "woof woof" },
-  { name: "cat", emoji: "🐱", sound: "meow meow" },
-  { name: "cow", emoji: "🐄", sound: "moo moo" },
-  { name: "pig", emoji: "🐷", sound: "oink oink" },
-  { name: "duck", emoji: "🦆", sound: "quack quack" },
-  { name: "sheep", emoji: "🐑", sound: "baa baa" },
-  { name: "rooster", emoji: "🐓", sound: "cock-a-doodle-doo" },
-  { name: "horse", emoji: "🐴", sound: "neigh neigh" },
-  { name: "frog", emoji: "🐸", sound: "ribbit ribbit" },
-  { name: "lion", emoji: "🦁", sound: "roar roar" },
-  { name: "monkey", emoji: "🐒", sound: "ooh ooh ah ah" },
-  { name: "elephant", emoji: "🐘", sound: "trumpet trumpet" },
-  { name: "bee", emoji: "🐝", sound: "buzz buzz" },
-  { name: "owl", emoji: "🦉", sound: "hoot hoot" },
-  { name: "snake", emoji: "🐍", sound: "hiss hiss" },
-  { name: "mouse", emoji: "🐭", sound: "squeak squeak" },
-  { name: "bird", emoji: "🐦", sound: "tweet tweet" },
-  { name: "donkey", emoji: "🫏", sound: "hee haw" },
-  { name: "goat", emoji: "🐐", sound: "meh meh" },
-  { name: "turkey", emoji: "🦃", sound: "gobble gobble" },
+  { name: 'dog', emoji: '🐕', sound: 'woof woof' },
+  { name: 'cat', emoji: '🐱', sound: 'meow meow' },
+  { name: 'cow', emoji: '🐄', sound: 'moo moo' },
+  { name: 'pig', emoji: '🐷', sound: 'oink oink' },
+  { name: 'duck', emoji: '🦆', sound: 'quack quack' },
+  { name: 'sheep', emoji: '🐑', sound: 'baa baa' },
+  { name: 'horse', emoji: '🐴', sound: 'neigh neigh' },
+  { name: 'frog', emoji: '🐸', sound: 'ribbit ribbit' },
+  { name: 'lion', emoji: '🦁', sound: 'roar roar' },
+  { name: 'monkey', emoji: '🐒', sound: 'ooh ooh ah ah' },
+  { name: 'elephant', emoji: '🐘', sound: 'trumpet trumpet' },
+  { name: 'owl', emoji: '🦉', sound: 'hoot hoot' },
 ];
 
 class AnimalSoundsGame extends GameBase {
@@ -38,65 +30,33 @@ class AnimalSoundsGame extends GameBase {
     this.options = [];
     this.rounds = 0;
     this.maxRounds = 8;
-    this.correctAnswers = 0;
+    this.locked = false;
   }
 
   async init() {
     this.container.innerHTML = `
-      <div class="game-wrapper">
-        <!-- Farm Background -->
-        <div class="farm-bg">
-          <div class="sky"></div>
-          <div class="hills-bg"></div>
-          <div class="barn">🏠</div>
-          <div class="sun">☀️</div>
-        </div>
-
-        <!-- Tablet Frame -->
-        <div class="tablet-frame">
-          <div class="tablet-screen">
-            <!-- Header -->
-            <div class="screen-header">
-              <div class="header-left">
-                <button class="icon-btn home-btn">🏠</button>
-              </div>
-              <div class="header-title">
-                <span class="title-text">SOUNDS</span>
-                <span class="title-icon">🔊</span>
-              </div>
-              <div class="header-right">
-                <div class="score-pill">⭐ <span id="score-val">0</span></div>
-              </div>
+      <div class="as-game">
+        <div class="as-panel">
+          <div class="as-header">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Animal Sounds</div>
+              <div class="progress" id="progress-text">Round 1 of ${this.maxRounds}</div>
             </div>
-
-            <!-- Main Content -->
-            <div class="main-stage">
-              <!-- Sound Waves / Notes Visual -->
-              <div class="sound-visual">
-                <div class="note n1">🎵</div>
-                <div class="note n2">🎶</div>
-                <div class="note n3">🎵</div>
-                <div class="big-ear">👂</div>
-              </div>
-              
-              <!-- Animal Buttons -->
-              <div class="animals-grid" id="animals-grid"></div>
-            </div>
-            
-            <!-- Bottom Bar -->
-            <div class="bottom-bar">
-               <div class="sentence-box">
-                <span id="instruction-text" class="sentence-text">Who says that?</span>
-              </div>
-              <button class="action-btn speaker-btn" id="hear-btn">🔊</button>
-            </div>
-
+            <button class="hear-btn" id="hear-btn">🔊 Hear sound</button>
           </div>
-        </div>
-        
-        <!-- Celebration Overlay -->
-        <div class="celebration" id="celebration">
-            <span class="celeb-emoji" id="celeb-emoji">🎉</span>
+
+          <div class="sound-card">
+            <div class="ear">👂</div>
+            <div>
+              <div class="sound-title">Who makes this sound?</div>
+              <div class="sound-text" id="instruction-text">Listen and choose an animal.</div>
+            </div>
+          </div>
+
+          <div class="animals-grid" id="animals-grid"></div>
+
+          <div class="helper" id="helper-text">Tap the animal you think is making the sound.</div>
         </div>
       </div>
     `;
@@ -108,155 +68,13 @@ class AnimalSoundsGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .game-wrapper {
-        position: relative;
-        width: 100%;
-        height: 600px;
-        overflow: hidden;
-        border-radius: 24px;
-        background: #81ecec;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Fredoka One', cursive, sans-serif;
-      }
-      
-      .farm-bg { position: absolute; inset: 0; pointer-events: none; }
-      .sky { position: absolute; top: 0; height: 60%; width: 100%; background: #81ecec; }
-      .hills-bg { 
-        position: absolute; bottom: 0; height: 50%; width: 100%; 
-        background: #55efc4; border-radius: 100% 100% 0 0; transform: scaleX(1.2);
-      }
-      .barn { position: absolute; bottom: 100px; right: 50px; font-size: 80px; }
-      .sun { position: absolute; top: 30px; left: 30px; font-size: 60px; animation: spin 20s linear infinite; }
-      
-      @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-
-      /* Tablet Frame */
-      .tablet-frame {
-        position: relative;
-        width: 640px;
-        height: 500px;
-        background: white;
-        border-radius: 40px;
-        padding: 12px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-        z-index: 10;
-      }
-      
-      .tablet-screen {
-        width: 100%;
-        height: 100%;
-        background: #fdfcdc;
-        border-radius: 30px;
-        border: 4px solid #f1c40f;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-      }
-      
-      .screen-header {
-        height: 70px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 20px;
-        background: white;
-        border-bottom: 2px solid #eee;
-      }
-      
-      .title-text { font-size: 26px; font-weight: 900; color: #f39c12; }
-      
-      .icon-btn { width: 44px; height: 44px; border-radius: 50%; background: #fef9e7; border: none; font-size: 20px; cursor: pointer; }
-      .score-pill { background: #55efc4; padding: 6px 14px; border-radius: 20px; font-weight: bold; color: #006266; }
-      
-      /* Main Content */
-      .main-stage {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-      }
-      
-      .sound-visual {
-        height: 120px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-      }
-      .big-ear { font-size: 60px; }
-      .note { position: absolute; font-size: 30px; opacity: 0; animation: floatNote 2s infinite; }
-      .n1 { animation-delay: 0s; left: 45%; }
-      .n2 { animation-delay: 0.5s; left: 50%; }
-      .n3 { animation-delay: 1s; left: 55%; }
-      
-      @keyframes floatNote {
-        0% { transform: translateY(0) rotate(0); opacity: 0; }
-        20% { opacity: 1; }
-        100% { transform: translateY(-50px) rotate(20deg); opacity: 0; }
-      }
-
-      .animals-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        width: 100%;
-        max-width: 400px;
-      }
-      
-      .animal-btn {
-        background: white;
-        border: 3px solid #f1c40f;
-        border-radius: 20px;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        transition: transform 0.1s;
-        box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-      }
-      .animal-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.1); }
-      .animal-btn:hover { background: #fffdf0; }
-      
-      .animal-emoji { font-size: 40px; }
-      .animal-name { font-size: 20px; font-weight: bold; color: #d35400; text-transform: uppercase; }
-      
-      .animal-btn.correct { background: #fab1a0; border-color: #e17055; color: white; }
-      .animal-btn.wrong { opacity: 0.5; }
-
-      .bottom-bar {
-        height: 80px;
-        background: white;
-        border-top: 2px solid #eee;
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        gap: 15px;
-      }
-      
-      .sentence-box { flex: 1; text-align: center; }
-      .sentence-text { font-size: 18px; font-weight: bold; color: #2d3436; font-style: italic; }
-      
-      .speaker-btn {
-        width: 50px; height: 50px; border-radius: 50%;
-        background: #fcd581; color: white; border: none; font-size: 24px; cursor: pointer;
-        box-shadow: 0 4px 0 #e67e22;
-      }
-      .speaker-btn:active { transform: scale(0.95); }
-      
-      .celebration {
-        position: absolute; inset: 0; background: rgba(255,255,255,0.8);
-        display: flex; align-items: center; justify-content: center;
-        opacity: 0; pointer-events: none; transition: opacity 0.3s;
-        z-index: 100;
-        border-radius: 24px;
-      }
-      .celebration.visible { opacity: 1; }
-      .celeb-emoji { font-size: 100px; animation: bounce 1s infinite; }
+      .as-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#81ecec 0%,#a8e6cf 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .as-panel{width:min(760px,96%);background:rgba(255,255,255,.92);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.15);padding:22px;display:flex;flex-direction:column;gap:18px}
+      .as-header{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;box-shadow:0 4px 0 rgba(0,0,0,.08)}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#16a085}.progress{font-size:14px;color:#607d8b}.hear-btn{padding:12px 18px;background:#ff9f43;color:#fff;cursor:pointer;box-shadow:0 5px 0 #e67e22}
+      .sound-card{background:linear-gradient(135deg,#fff9ef,#fff);border-radius:26px;border:3px solid #ffe3ad;padding:18px;display:flex;align-items:center;gap:16px}.ear{font-size:68px}.sound-title{font-size:20px;color:#d35400;text-transform:uppercase}.sound-text{font-size:30px;color:#2d3436;line-height:1.2}
+      .animals-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.animal-btn{background:#fff;border:4px solid #fff;border-radius:24px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 8px 0 rgba(0,0,0,.08);transition:transform .12s,border-color .2s}.animal-btn:active{transform:translateY(5px);box-shadow:0 3px 0 rgba(0,0,0,.08)}.animal-btn.correct{border-color:#4cd137;background:#edfff0}.animal-btn.wrong{border-color:#ff6b6b;background:#fff0f0}.animal-btn.dim{opacity:.45}.animal-emoji{font-size:52px}.animal-name{font-size:26px;color:#34495e;text-transform:capitalize}
+      .helper{background:#fff8e6;border:3px solid #ffe2a5;border-radius:20px;padding:14px 18px;text-align:center;font-size:22px;color:#465a65}
+      @media (max-width:720px){.animals-grid{grid-template-columns:1fr}.sound-text{font-size:24px}}
     `;
     this.container.appendChild(style);
   }
@@ -264,66 +82,70 @@ class AnimalSoundsGame extends GameBase {
   start() {
     super.start();
     this.rounds = 0;
-    this.score = 0;
-    this.nextRound();
-
+    this.locked = false;
     document.getElementById('hear-btn').onclick = () => this.playSound();
+    this.nextRound();
   }
 
   nextRound() {
-    if (this.rounds >= this.maxRounds) {
-      this.end();
-      return;
-    }
-
-    this.rounds++;
+    if (this.rounds >= this.maxRounds) return this.end();
+    this.rounds += 1;
+    this.locked = false;
 
     const shuffled = [...ANIMALS].sort(() => Math.random() - 0.5);
     this.currentAnimal = shuffled[0];
-    // 4 options
     this.options = shuffled.slice(0, 4).sort(() => Math.random() - 0.5);
 
-    this.renderRound();
-    setTimeout(() => this.playSound(), 600);
-  }
-
-  renderRound() {
-    document.getElementById('instruction-text').textContent = 'Who says that?';
+    document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;
+    document.getElementById('instruction-text').textContent = 'Listen carefully...';
+    document.getElementById('helper-text').textContent = 'Tap the animal you think is making the sound.';
 
     const grid = document.getElementById('animals-grid');
-    grid.innerHTML = this.options.map(animal => `
+    grid.innerHTML = this.options.map((animal) => `
       <button class="animal-btn" data-animal="${animal.name}">
         <span class="animal-emoji">${animal.emoji}</span>
         <span class="animal-name">${animal.name}</span>
       </button>
     `).join('');
 
-    grid.querySelectorAll('.animal-btn').forEach(btn => {
+    grid.querySelectorAll('.animal-btn').forEach((btn) => {
       btn.onclick = () => this.checkAnswer(btn, btn.dataset.animal);
     });
+
+    setTimeout(() => this.playSound(), 500);
   }
 
   playSound() {
+    if (!this.currentAnimal) return;
     this.speak(this.currentAnimal.sound, { rate: 0.8 });
+    document.getElementById('instruction-text').textContent = `Who says "${this.currentAnimal.sound}"?`;
   }
 
   checkAnswer(btn, animalName) {
+    if (this.locked) return;
+    const buttons = [...this.container.querySelectorAll('.animal-btn')];
+
     if (animalName === this.currentAnimal.name) {
-      // Correct
+      this.locked = true;
+      btn.classList.add('correct');
+      buttons.filter((node) => node !== btn).forEach((node) => node.classList.add('dim'));
+      this.incrementCombo();
       this.addScore(100);
       document.getElementById('score-val').textContent = this.score;
-      btn.classList.add('correct');
-      document.getElementById('instruction-text').textContent = `Correct! It's the ${animalName}!`;
-      this.celebrateMove({ burst: this.currentAnimal.emoji });
-
-      this.confetti.explode(null, null, 30);
-      setTimeout(() => this.nextRound(), 1500);
-    } else {
-      // Wrong
-      btn.classList.add('wrong');
-      this.speak("Try again");
-      this.coachMove();
+      document.getElementById('instruction-text').textContent = `Yes! ${this.currentAnimal.name}!`;
+      document.getElementById('helper-text').textContent = `${this.currentAnimal.emoji} makes that sound.`;
+      this.speak(`Correct! It is the ${this.currentAnimal.name}.`);
+      this.confetti.explode(null, null, 20);
+      this.celebrateMove({ burst: this.currentAnimal.emoji, duration: 900 });
+      setTimeout(() => this.nextRound(), 1400);
+      return;
     }
+
+    btn.classList.add('wrong');
+    this.resetCombo();
+    this.speak(`That is ${animalName}. Try again.`);
+    this.coachMove(`Listen again for ${this.currentAnimal.name}.`, 900);
+    setTimeout(() => btn.classList.remove('wrong'), 700);
   }
 
   end() {
