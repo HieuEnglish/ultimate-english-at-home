@@ -1,237 +1,200 @@
-/* assets/js/games/13-18/thesis-thinker.js */
+/* assets/js/games/13-18/thesis-thinker.js
+   Thesis Thinker - Ages 13-18
+
+   Senior pass:
+   - Clearer thesis-building structure: topic -> claim -> rationale
+   - Better academic feedback and round progression
+   - Stronger distinction between weak and debatable thesis parts
+*/
+
 const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const THESIS_CHALLENGES = [
-    {
-        topic: "Education",
-        claim: "digital textbooks should replace paper ones",
-        rationale: "because they are more cost-effective and environmentally friendly",
-        feedback: "A strong, debatable thesis focusing on cost and sustainability."
-    },
-    {
-        topic: "Environment",
-        claim: "governments must ban single-use plastics",
-        rationale: "to prevent irreparable damage to marine ecosystems",
-        feedback: "Excellent. This statement includes a clear action and a specific reason."
-    },
-    {
-        topic: "Technology",
-        claim: "social media algorithms require strict regulation",
-        rationale: "as they currently contribute to increasing social polarization",
-        feedback: "A sophisticated thesis addressing a complex modern issue."
-    },
-    {
-        topic: "Healthcare",
-        claim: "mental health services should be free for all citizens",
-        rationale: "because untreated mental illness costs society billions in lost productivity",
-        feedback: "A compelling economic argument tied to a social cause."
-    },
-    {
-        topic: "Urban Planning",
-        claim: "cities should prioritize public transport over private car infrastructure",
-        rationale: "since reducing vehicle emissions is critical to combating climate change",
-        feedback: "A well-structured thesis connecting urban policy to environmental outcomes."
-    }
+  {
+    topic: 'Education',
+    claim: 'digital textbooks should replace paper ones',
+    rationale: 'because they are more cost-effective and environmentally friendly',
+    feedback: 'A strong thesis: debatable claim plus a focused reason.',
+  },
+  {
+    topic: 'Environment',
+    claim: 'governments must ban single-use plastics',
+    rationale: 'to prevent irreparable damage to marine ecosystems',
+    feedback: 'Excellent: it states a clear action and a meaningful consequence.',
+  },
+  {
+    topic: 'Technology',
+    claim: 'social media algorithms require strict regulation',
+    rationale: 'as they currently contribute to increasing social polarization',
+    feedback: 'Strong: the claim is arguable and supported by a clear reason.',
+  },
+  {
+    topic: 'Healthcare',
+    claim: 'mental health services should be free for all citizens',
+    rationale: 'because untreated mental illness costs society billions in lost productivity',
+    feedback: 'Compelling: social issue plus economic reasoning.',
+  },
+  {
+    topic: 'Urban Planning',
+    claim: 'cities should prioritize public transport over private car infrastructure',
+    rationale: 'since reducing vehicle emissions is critical to combating climate change',
+    feedback: 'Well built: policy argument clearly tied to environmental impact.',
+  },
 ];
 
 class ThesisThinker extends GameBase {
-    async init() {
-        await this.init3D();
-        this.currentQ = 0;
-        this.score = 0;
-        this.shuffledChallenges = this.shuffle([...THESIS_CHALLENGES]);
+  constructor(container, config) {
+    super(container, config);
+    this.currentQ = 0;
+    this.score = 0;
+    this.stage = 'claim';
+    this.rounds = [];
+  }
 
-        this.setupUI();
-    }
-
-    setupUI() {
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #e0d7c6; color: #2c1e14; font-family: 'Times New Roman', serif; display: flex; flex-direction: column; overflow: hidden; border: 20px solid #8b4513; box-sizing: border-box;">
-                <!-- Library Header -->
-                <div style="background: #5d3a1a; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; color: #fdf5e6; border-bottom: 2px solid #3d2611;">
-                    <div style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">🖋️ THE THESIS LIBRARY</div>
-                    <div style="display: flex; gap: 30px; font-family: sans-serif;">
-                        <div>ASSIGNMENT: <span id="q-num">1</span>/3</div>
-                        <div>CREDITS: <span id="score">0</span></div>
-                    </div>
-                </div>
-
-                <!-- Thesis Drafting Area -->
-                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; gap: 30px;">
-                    
-                    <div style="background: #fdf5e6; padding: 40px; border-radius: 4px; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 800px; border: 1px solid #d2b48c; position: relative;">
-                        <div style="position: absolute; top: 10px; right: 20px; color: #d2b48c; font-size: 40px; transform: rotate(10deg); font-family: sans-serif;">A+</div>
-                        
-                        <div style="font-size: 14px; font-weight: bold; color: #8b4513; margin-bottom: 20px; text-transform: uppercase;">Draft Statement:</div>
-                        
-                        <div id="thesis-draft" style="font-size: 28px; line-height: 1.6; border-bottom: 2px dashed #d2b48c; padding-bottom: 10px; min-height: 100px;">
-                            <span id="part-topic" class="thesis-part">[Topic]</span>, 
-                            <span id="part-claim" class="thesis-part">[Claim]</span> 
-                            <span id="part-rationale" class="thesis-part">[Rationale]</span>.
-                        </div>
-                    </div>
-
-                    <!-- Component Selection -->
-                    <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 800px;">
-                        <div id="options-label" style="font-weight: bold; font-family: sans-serif; color: #5d3a1a;">SELECT A CLAIM:</div>
-                        <div id="options-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                            <!-- Buttons injected here -->
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Footer -->
-                <div style="background: #5d3a1a; padding: 10px; text-align: center; color: #d2b48c; font-family: sans-serif; font-size: 12px;">
-                    Combine a Topic, a Claim, and a Rationale to construct a compelling argument.
-                </div>
-
-                <!-- Start Overlay -->
-                <div id="start-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 40px;">
-                    <div style="font-size: 100px; margin-bottom: 20px;">📜</div>
-                    <h1 style="font-size: 48px; font-family: 'Times New Roman', serif;">THESIS THINKER</h1>
-                    <p style="font-size: 20px; max-width: 500px; margin: 20px 0 40px 0; font-family: sans-serif; opacity: 0.9;">The foundation of any great essay is a strong thesis. Construct effective arguments by selecting the best components.</p>
-                    <button id="start-btn" style="padding: 18px 60px; border: none; background: #8b4513; color: white; font-size: 22px; font-weight: bold; cursor: pointer; border-radius: 4px; font-family: sans-serif;">START THE ASSIGNMENT</button>
-                </div>
+  async init() {
+    this.container.innerHTML = `
+      <div class="thesis-game">
+        <div class="thesis-panel">
+          <div class="thesis-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Thesis Thinker</div>
+              <div class="progress" id="progress-text">Draft 1 of 5</div>
             </div>
-            <style>
-                .thesis-part { color: #d2b48c; transition: color 0.3s; }
-                .thesis-part.active { color: #8b4513; font-weight: bold; }
-                .choice-btn {
-                    background: #fdf5e6; border: 1px solid #d2b48c; padding: 15px; border-radius: 4px; cursor: pointer; text-align: left; font-family: 'Times New Roman', serif; font-size: 18px; transition: all 0.2s;
-                }
-                .choice-btn:hover { background: #f5deb3; transform: scale(1.02); }
-            </style>
-        `;
+            <div class="pill">📚</div>
+          </div>
 
-        this.container.querySelector('#start-btn').onclick = () => {
-            this.container.querySelector('#start-overlay').style.display = 'none';
-            this.start();
-        };
+          <div class="draft-card">
+            <div class="draft-label">Academic thesis draft</div>
+            <div class="draft-text">
+              <span id="part-topic" class="draft-part">[Topic]</span>,
+              <span id="part-claim" class="draft-part">[Claim]</span>
+              <span id="part-rationale" class="draft-part">[Rationale]</span>.
+            </div>
+          </div>
+
+          <div class="instruction-box" id="instruction-box">Select the strongest claim.</div>
+          <div class="options-grid" id="options-grid"></div>
+          <div class="feedback-box" id="feedback-box">A strong thesis must be arguable, precise, and supported.</div>
+        </div>
+      </div>
+    `;
+
+    this.injectStyles();
+    this.start();
+  }
+
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .thesis-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#e8dbc3 0%,#d5c1a2 100%);font-family:Georgia,'Times New Roman',serif;display:flex;align-items:center;justify-content:center;padding:20px}.thesis-panel{width:min(880px,96%);background:#fdf6e8;border-radius:28px;border:2px solid #c9aa79;padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:0 18px 50px rgba(0,0,0,.18)}.thesis-topbar{display:flex;align-items:center;gap:12px}.pill{background:#6f4e37;color:#fff4dd;padding:10px 16px;border-radius:999px;font-weight:800;font-family:Inter,Arial,sans-serif}.title-wrap{flex:1;text-align:center}.title{font-size:30px;font-weight:900;color:#5a3417;font-family:Inter,Arial,sans-serif}.progress{font-size:14px;color:#8a6c4b;font-family:Inter,Arial,sans-serif}.draft-card{background:#fff8ee;border:1px solid #dbc6a2;border-radius:20px;padding:20px}.draft-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#8b5a2b;font-weight:800;font-family:Inter,Arial,sans-serif;margin-bottom:10px}.draft-text{font-size:30px;line-height:1.55;color:#3e2a1d}.draft-part{color:#b79463}.draft-part.active{color:#6f4e37;font-weight:700}.instruction-box,.feedback-box{border-radius:14px;padding:13px 15px;font-family:Inter,Arial,sans-serif}.instruction-box{background:#f4ead7;color:#69492c;font-weight:800}.feedback-box{background:#fff;border-left:4px solid #8b5a2b;color:#5c4a3d}.options-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.choice-btn{border:none;background:#fff;border:2px solid #d7c2a0;border-radius:16px;padding:16px;text-align:left;cursor:pointer;font-size:18px;line-height:1.4;color:#3b2a20;transition:all .2s}.choice-btn:hover{transform:translateY(-2px);border-color:#8b5a2b;box-shadow:0 10px 18px rgba(0,0,0,.06)}.choice-btn.correct{background:#edfff0;border-color:#2ecc71}.choice-btn.wrong{background:#fff0f0;border-color:#ff6b6b}
+    `;
+    this.container.appendChild(style);
+  }
+
+  start() {
+    super.start();
+    this.currentQ = 0;
+    this.score = 0;
+    this.rounds = [...THESIS_CHALLENGES].sort(() => Math.random() - 0.5);
+    this.loadRound();
+  }
+
+  loadRound() {
+    if (this.currentQ >= this.rounds.length) return this.end();
+    const q = this.rounds[this.currentQ];
+    this.stage = 'claim';
+    document.getElementById('progress-text').textContent = `Draft ${this.currentQ + 1} of ${this.rounds.length}`;
+    document.getElementById('part-topic').textContent = q.topic;
+    document.getElementById('part-topic').classList.add('active');
+    document.getElementById('part-claim').textContent = '[Claim]';
+    document.getElementById('part-rationale').textContent = '[Rationale]';
+    document.getElementById('part-claim').classList.remove('active');
+    document.getElementById('part-rationale').classList.remove('active');
+    document.getElementById('feedback-box').textContent = 'A strong thesis must be arguable, precise, and supported.';
+    this.showClaimSelection();
+  }
+
+  showClaimSelection() {
+    const current = this.rounds[this.currentQ];
+    const others = this.rounds.filter((c) => c !== current);
+    const choices = [
+      current.claim,
+      others[0].claim,
+      'things should probably be better in the future',
+      'everyone knows this is obviously wrong',
+    ].sort(() => Math.random() - 0.5);
+
+    document.getElementById('instruction-box').textContent = 'Select the strongest claim.';
+    const grid = document.getElementById('options-grid');
+    grid.innerHTML = choices.map((choice, idx) => `<button class="choice-btn" data-idx="${idx}">${choice}</button>`).join('');
+    grid.querySelectorAll('.choice-btn').forEach((btn) => {
+      btn.onclick = () => this.handleClaim(btn, btn.textContent, current.claim);
+    });
+  }
+
+  handleClaim(btn, selected, correct) {
+    if (selected === correct) {
+      btn.classList.add('correct');
+      document.getElementById('part-claim').textContent = selected;
+      document.getElementById('part-claim').classList.add('active');
+      document.getElementById('feedback-box').textContent = 'Good claim: it is arguable and specific enough for an essay.';
+      this.addScore(100);
+      document.getElementById('score-val').textContent = this.score;
+      this.celebrateMove({ burst: 'CLAIM', duration: 800 });
+      setTimeout(() => this.showRationaleSelection(), 900);
+      return;
     }
 
-    start() {
-        super.start();
+    btn.classList.add('wrong');
+    this.coachMove('That claim is too vague or not strongly arguable.', 1000);
+    document.getElementById('feedback-box').textContent = 'Weak claims are often obvious, vague, or too broad.';
+  }
+
+  showRationaleSelection() {
+    const current = this.rounds[this.currentQ];
+    const others = this.rounds.filter((c) => c !== current);
+    const choices = [
+      current.rationale,
+      others[0].rationale,
+      'for many different reasons that people can imagine',
+      'because that would be interesting to see',
+    ].sort(() => Math.random() - 0.5);
+
+    document.getElementById('instruction-box').textContent = 'Now select the strongest rationale.';
+    const grid = document.getElementById('options-grid');
+    grid.innerHTML = choices.map((choice, idx) => `<button class="choice-btn" data-idx="${idx}">${choice}</button>`).join('');
+    grid.querySelectorAll('.choice-btn').forEach((btn) => {
+      btn.onclick = () => this.handleRationale(btn, btn.textContent, current.rationale, current.feedback);
+    });
+  }
+
+  handleRationale(btn, selected, correct, feedback) {
+    if (selected === correct) {
+      btn.classList.add('correct');
+      document.getElementById('part-rationale').textContent = selected;
+      document.getElementById('part-rationale').classList.add('active');
+      document.getElementById('feedback-box').textContent = feedback;
+      this.addScore(140);
+      document.getElementById('score-val').textContent = this.score;
+      this.celebrateMove({ burst: 'THESIS', duration: 900 });
+      setTimeout(() => {
+        this.currentQ += 1;
         this.loadRound();
+      }, 1200);
+      return;
     }
 
-    loadRound() {
-        if (this.currentQ >= this.shuffledChallenges.length) {
-            this.end();
-            return;
-        }
+    btn.classList.add('wrong');
+    this.coachMove('That reason does not strongly support the claim.', 1000);
+    document.getElementById('feedback-box').textContent = 'The best rationale gives a focused reason or consequence, not filler.';
+  }
 
-        const q = this.shuffledChallenges[this.currentQ];
-        this.container.querySelector('#q-num').textContent = this.currentQ + 1;
-
-        // Initial state
-        this.container.querySelector('#part-topic').textContent = q.topic;
-        this.container.querySelector('#part-topic').classList.add('active');
-        this.container.querySelector('#part-claim').textContent = "[Select a Claim]";
-        this.container.querySelector('#part-claim').classList.remove('active');
-        this.container.querySelector('#part-rationale').textContent = "[Select a Rationale]";
-        this.container.querySelector('#part-rationale').classList.remove('active');
-
-        this.showClaimSelection();
-    }
-
-    showClaimSelection() {
-        this.container.querySelector('#options-label').textContent = "SELECT THE BEST CLAIM:";
-        const grid = this.container.querySelector('#options-grid');
-        grid.innerHTML = '';
-
-        const currentQ = this.shuffledChallenges[this.currentQ];
-        const otherQs = this.shuffledChallenges.filter(c => c !== currentQ);
-
-        const claims = this.shuffle([
-            currentQ.claim,
-            otherQs[0].claim,
-            "it might be better if things were different",
-            "everyone knows that this is a bad idea"
-        ]);
-
-        claims.forEach(claim => {
-            const btn = document.createElement('button');
-            btn.className = 'choice-btn';
-            btn.textContent = claim;
-            btn.onclick = () => {
-                const draft = this.container.querySelector('#part-claim');
-                draft.textContent = claim;
-                draft.classList.add('active');
-                if (claim === currentQ.claim) {
-                    this.addScore(100);
-                    this.celebrateMove({ burst: 'CLAIM', duration: 700 });
-                    this.showRationaleSelection();
-                } else {
-                    this.speak("That claim lacks precision or debated weight. Try again.");
-                    this.coachMove();
-                }
-            };
-            grid.appendChild(btn);
-        });
-    }
-
-    showRationaleSelection() {
-        this.container.querySelector('#options-label').textContent = "SELECT THE STRONGEST RATIONALE:";
-        const grid = this.container.querySelector('#options-grid');
-        grid.innerHTML = '';
-
-        const currentQ = this.shuffledChallenges[this.currentQ];
-        const otherQs = this.shuffledChallenges.filter(c => c !== currentQ);
-
-        const rationales = this.shuffle([
-            currentQ.rationale,
-            otherQs[0].rationale,
-            "mostly because it would be interesting to see",
-            "for many different and varied reasons"
-        ]);
-
-        rationales.forEach(rat => {
-            const btn = document.createElement('button');
-            btn.className = 'choice-btn';
-            btn.textContent = rat;
-            btn.onclick = () => {
-                const draft = this.container.querySelector('#part-rationale');
-                draft.textContent = rat;
-                draft.classList.add('active');
-                if (rat === currentQ.rationale) {
-                    this.addScore(200);
-                    this.container.querySelector('#score').textContent = this.score;
-                    this.speak("Excellent thesis construction!");
-                    this.celebrateMove({ burst: 'THESIS', duration: 800 });
-                    setTimeout(() => {
-                        this.currentQ++;
-                        this.loadRound();
-                    }, 2000);
-                } else {
-                    this.speak("This rationale doesn't fully support your claim. Try again.");
-                    this.coachMove();
-                }
-            };
-            grid.appendChild(btn);
-        });
-    }
-
-    end() {
-        super.end();
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #5d3a1a; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; font-family: 'Times New Roman', serif;">
-                <div style="font-size: 100px; margin-bottom: 20px;">📜</div>
-                <h1 style="font-size: 48px;">TERM PAPER APPROVED!</h1>
-                <p style="font-size: 24px; margin-bottom: 40px;">Total Academic Credits: ${this.score}</p>
-                <div style="display: flex; gap: 20px;">
-                    <button onclick="location.reload()" style="padding: 15px 40px; background: #8b4513; color: white; border: none; border-radius: 4px; cursor: pointer; font-family: sans-serif; font-weight: bold;">NEW ASSIGNMENT</button>
-                    <button onclick="window.history.back()" style="padding: 15px 40px; background: transparent; border: 2px solid white; color: white; border-radius: 4px; cursor: pointer; font-family: sans-serif; font-weight: bold;">EXIT LIBRARY</button>
-                </div>
-            </div>
-        `;
-    }
-
-    shuffle(array) {
-        return array.sort(() => Math.random() - 0.5);
-    }
+  end() {
+    this.showResults(this.saveScore());
+  }
 }
 
 export function createGame(container, config) {
-    return new ThesisThinker(container, config);
+  return new ThesisThinker(container, config);
 }

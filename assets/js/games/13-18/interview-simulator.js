@@ -1,189 +1,186 @@
-/* assets/js/games/13-18/interview-simulator.js */
+/* assets/js/games/13-18/interview-simulator.js
+   Interview Simulator - Ages 13-18
+
+   Senior pass:
+   - Clearer professional communication scoring
+   - Better feedback on why answers work
+   - Stronger round structure and final performance summary
+*/
+
 const { GameBase } = window.UEAH_GAME_ENGINE;
 
-const INTERVIEW_QUESTIONS = [
-    {
-        question: "Can you tell me about a time you had to deal with a difficult situation?",
-        options: [
-            { text: "I once managed a project conflict by facilitating a discussion to find common ground.", tone: "Professional", points: 100 },
-            { text: "I just ignored it until it went away. No point in making a fuss.", tone: "Passive", points: 20 },
-            { text: "I yelled at everyone until they did what I said. It worked.", tone: "Aggressive", points: 10 }
-        ]
-    },
-    {
-        question: "Why should we hire you over other candidates?",
-        options: [
-            { text: "Because I'm the best, obviously. You'd be lucky to have me.", tone: "Arrogant", points: 20 },
-            { text: "I possess a unique combination of technical skills and a proactive mindset that aligns with your company's values.", tone: "Professional", points: 100 },
-            { text: "I don't know, I just need the money.", tone: "Blunt", points: 10 }
-        ]
-    },
-    {
-        question: "What is your greatest weakness?",
-        options: [
-            { text: "I don't have any weaknesses. I'm perfect.", tone: "Dishonest", points: 10 },
-            { text: "I sometimes struggle with perfectionism, but I've learned to manage my time more effectively by setting realistic deadlines.", tone: "Professional", points: 100 },
-            { text: "I'm really lazy and hate waking up early.", tone: "Too Honest", points: 20 }
-        ]
-    },
-    {
-        question: "Where do you see yourself in five years?",
-        options: [
-            { text: "I envision myself in a leadership role, having developed my skills and contributed meaningfully to the company's growth.", tone: "Professional", points: 100 },
-            { text: "Probably at a different company making more money.", tone: "Blunt", points: 10 },
-            { text: "I haven't really thought about it that much.", tone: "Passive", points: 20 }
-        ]
-    },
-    {
-        question: "How do you handle working under pressure?",
-        options: [
-            { text: "I prioritize tasks, break them into manageable steps, and maintain clear communication with my team.", tone: "Professional", points: 100 },
-            { text: "I usually panic but things sort themselves out eventually.", tone: "Too Honest", points: 20 },
-            { text: "I don't deal with pressure. I just leave early.", tone: "Blunt", points: 10 }
-        ]
-    }
+const INTERVIEW_ROUNDS = [
+  {
+    question: 'Can you tell me about a time you had to deal with a difficult situation?',
+    prompt: 'Choose the answer that sounds professional, reflective, and specific.',
+    options: [
+      { text: 'I once managed a project conflict by facilitating a discussion to find common ground and agree on next steps.', tone: 'Professional', impact: 28, feedback: 'Strong: specific action, calm tone, and a useful result.' },
+      { text: 'I just ignored it until it went away. No point in making a fuss.', tone: 'Passive', impact: 8, feedback: 'Weak: it avoids responsibility and problem-solving.' },
+      { text: 'I yelled at everyone until they did what I said. It worked.', tone: 'Aggressive', impact: 3, feedback: 'Poor: this damages trust and teamwork.' },
+    ],
+  },
+  {
+    question: 'Why should we hire you over other candidates?',
+    prompt: 'Employers want confidence supported by evidence.',
+    options: [
+      { text: 'I possess a strong mix of technical skill, adaptability, and initiative, and I am eager to contribute from day one.', tone: 'Professional', impact: 28, feedback: 'Strong: confident, specific, and employer-focused.' },
+      { text: 'Because I am the best, obviously. You would be lucky to have me.', tone: 'Arrogant', impact: 7, feedback: 'Weak: confidence without substance feels arrogant.' },
+      { text: 'I do not know, I just need the money.', tone: 'Blunt', impact: 2, feedback: 'Poor: it ignores value, fit, and motivation.' },
+    ],
+  },
+  {
+    question: 'What is your greatest weakness?',
+    prompt: 'A good answer is honest but also shows growth.',
+    options: [
+      { text: 'I sometimes spend too long perfecting details, so I now set realistic deadlines and checkpoints to stay efficient.', tone: 'Professional', impact: 28, feedback: 'Strong: honest, self-aware, and solution-focused.' },
+      { text: 'I do not really have any weaknesses.', tone: 'Dishonest', impact: 4, feedback: 'Poor: this sounds unrealistic and unreflective.' },
+      { text: 'I am lazy and hate early mornings.', tone: 'Too Honest', impact: 6, feedback: 'Weak: honest, but not strategically professional.' },
+    ],
+  },
+  {
+    question: 'Where do you see yourself in five years?',
+    prompt: 'Show ambition, growth, and alignment with the role.',
+    options: [
+      { text: 'I hope to have deepened my skills, taken on more responsibility, and contributed meaningfully to the team’s success.', tone: 'Professional', impact: 28, feedback: 'Strong: realistic ambition and alignment with the company.' },
+      { text: 'Probably at a different company making more money.', tone: 'Blunt', impact: 5, feedback: 'Weak: it signals low commitment and poor tact.' },
+      { text: 'I have not thought about it much.', tone: 'Passive', impact: 8, feedback: 'Weak: it suggests limited planning and motivation.' },
+    ],
+  },
+  {
+    question: 'How do you handle working under pressure?',
+    prompt: 'Show process, composure, and teamwork.',
+    options: [
+      { text: 'I prioritize tasks, break them into manageable steps, and communicate clearly so the team stays focused.', tone: 'Professional', impact: 28, feedback: 'Strong: organized, calm, and collaborative.' },
+      { text: 'I usually panic, but things sort themselves out eventually.', tone: 'Too Honest', impact: 7, feedback: 'Weak: it does not show control or strategy.' },
+      { text: 'I do not deal with pressure. I just leave early.', tone: 'Blunt', impact: 1, feedback: 'Poor: it signals unreliability.' },
+    ],
+  },
+  {
+    question: 'Do you have any questions for us?',
+    prompt: 'The best candidates ask thoughtful questions.',
+    options: [
+      { text: 'Yes. What would success in this role look like in the first six months?', tone: 'Professional', impact: 28, feedback: 'Strong: thoughtful, forward-looking, and role-focused.' },
+      { text: 'No, I just want to know when lunch happens.', tone: 'Casual', impact: 4, feedback: 'Weak: it misses the chance to show interest.' },
+      { text: 'Only how fast I can get promoted.', tone: 'Self-focused', impact: 7, feedback: 'Weak: ambition matters, but this sounds narrow.' },
+    ],
+  },
 ];
 
 class InterviewSimulator extends GameBase {
-    async init() {
-        await this.init3D();
-        this.currentQ = 0;
-        this.score = 0;
-        this.hireability = 0; // 0 to 100
+  constructor(container, config) {
+    super(container, config);
+    this.currentQ = 0;
+    this.score = 0;
+    this.hireability = 0;
+    this.rounds = [];
+  }
 
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #f4f7f6; color: #333; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; overflow: hidden;">
-                <!-- UI Header -->
-                <div style="background: #2c3e50; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; color: white;">
-                    <div style="font-weight: bold; font-size: 20px;">💼 CAREER SIMULATOR</div>
-                    <div style="display: flex; gap: 30px;">
-                        <div>QUESTION: <span id="q-num">1</span>/3</div>
-                        <div>SCORE: <span id="score">0</span></div>
-                    </div>
-                </div>
-
-                <!-- Main Content -->
-                <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; gap: 40px;">
-                    
-                    <!-- Interviewer Side -->
-                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; max-width: 400px;">
-                        <div style="font-size: 150px; margin-bottom: 20px;">👔</div>
-                        <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative;">
-                            <div id="interviewer-text" style="font-size: 18px; font-weight: 500; text-align: center;">Welcome. Let's begin.</div>
-                            <div style="position: absolute; left: -10px; top: 50%; width: 20px; height: 20px; background: white; transform: rotate(45deg); border-left: 1px solid #ddd; border-bottom: 1px solid #ddd;"></div>
-                        </div>
-                    </div>
-
-                    <!-- Player Response Side -->
-                    <div style="flex: 1.5; display: flex; flex-direction: column; gap: 15px;">
-                        <div id="options-container" style="display: flex; flex-direction: column; gap: 12px;">
-                            <!-- Buttons -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer Stats -->
-                <div style="background: #fff; border-top: 1px solid #eee; padding: 20px 40px; display: flex; align-items: center; gap: 20px;">
-                    <div style="font-weight: bold; font-size: 14px; width: 120px;">HIREABILITY:</div>
-                    <div style="flex: 1; height: 10px; background: #eee; border-radius: 5px; overflow: hidden;">
-                        <div id="hire-bar" style="width: 0%; height: 100%; background: #27ae60; transition: width 0.5s;"></div>
-                    </div>
-                </div>
-
-                <!-- Start Overlay -->
-                <div id="start-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white;">
-                    <div style="font-size: 100px; margin-bottom: 20px;">🏢</div>
-                    <h1 style="font-size: 40px; margin: 0;">INTERVIEW SIMULATOR</h1>
-                    <p style="font-size: 18px; max-width: 500px; margin: 20px 0 40px 0; opacity: 0.8;">Professionalism is key. Select the most articulate and appropriately-toned responses to secure your dream job.</p>
-                    <button id="start-btn" style="padding: 15px 50px; border: none; background: #27ae60; color: white; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 30px;">ENTER INTERVIEW</button>
-                </div>
+  async init() {
+    this.container.innerHTML = `
+      <div class="isim-game">
+        <div class="isim-panel">
+          <div class="isim-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Interview Simulator</div>
+              <div class="progress" id="progress-text">Question 1 of 6</div>
             </div>
-            <style>
-                .response-btn {
-                    padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; text-align: left; font-size: 16px; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-                }
-                .response-btn:hover { border-color: #27ae60; background: #fafffa; transform: translateX(5px); }
-            </style>
-        `;
+            <div class="pill">💼 <span id="hire-val">0</span>%</div>
+          </div>
 
-        this.container.querySelector('#start-btn').onclick = () => this.startGame();
+          <div class="meter-box">
+            <div class="meter-label">Hireability</div>
+            <div class="meter-track"><div class="meter-fill" id="meter-fill"></div></div>
+          </div>
+
+          <div class="question-card">
+            <div class="avatar">👔</div>
+            <div class="question-text" id="question-text">Loading...</div>
+            <div class="prompt-text" id="prompt-text">Choose the strongest response.</div>
+          </div>
+
+          <div class="options-list" id="options-list"></div>
+          <div class="feedback-box" id="feedback-box">Select the most professional answer.</div>
+        </div>
+      </div>
+    `;
+
+    this.injectStyles();
+    this.start();
+  }
+
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .isim-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#f4f7f6 0%,#dde8e4 100%);font-family:Inter,Arial,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}.isim-panel{width:min(860px,96%);background:#fff;border-radius:30px;box-shadow:0 20px 50px rgba(0,0,0,.12);padding:22px;display:flex;flex-direction:column;gap:16px}.isim-topbar{display:flex;align-items:center;gap:12px}.pill{background:#edf6f2;color:#285c4d;padding:10px 16px;border-radius:999px;font-weight:800}.title-wrap{flex:1;text-align:center}.title{font-size:30px;color:#21313b;font-weight:900}.progress{font-size:14px;color:#6f7f88}.meter-box{background:#f3f6f7;border-radius:18px;padding:14px}.meter-label{font-size:13px;color:#667784;font-weight:700;margin-bottom:8px}.meter-track{height:14px;background:#dde6ea;border-radius:999px;overflow:hidden}.meter-fill{height:100%;width:0;background:linear-gradient(90deg,#ffb142,#26de81);transition:width .35s ease}.question-card{background:#263238;color:#fff;border-radius:24px;padding:22px;text-align:center}.avatar{font-size:54px;margin-bottom:10px}.question-text{font-size:27px;line-height:1.35}.prompt-text{margin-top:10px;font-size:16px;color:#b7c7cf}.options-list{display:flex;flex-direction:column;gap:12px}.reply-btn{border:none;background:#fff;border:2px solid #dbe5ea;border-radius:18px;padding:16px 18px;text-align:left;font-size:17px;line-height:1.45;cursor:pointer;transition:all .2s}.reply-btn:hover{transform:translateX(4px);border-color:#5f9ea0;box-shadow:0 10px 20px rgba(0,0,0,.06)}.reply-btn.correct{background:#edfff5;border-color:#2ecc71}.reply-btn.partial{background:#fff8e7;border-color:#f5b041}.reply-btn.wrong{background:#fff0f0;border-color:#ff6b6b}.feedback-box{background:#f7fafb;border-left:5px solid #5f9ea0;border-radius:12px;padding:14px 16px;color:#39505b;font-size:16px;min-height:52px}
+    `;
+    this.container.appendChild(style);
+  }
+
+  start() {
+    super.start();
+    this.currentQ = 0;
+    this.score = 0;
+    this.hireability = 0;
+    this.rounds = [...INTERVIEW_ROUNDS].sort(() => Math.random() - 0.5);
+    this.loadQuestion();
+  }
+
+  loadQuestion() {
+    if (this.currentQ >= this.rounds.length) return this.end();
+    const q = this.rounds[this.currentQ];
+    document.getElementById('progress-text').textContent = `Question ${this.currentQ + 1} of ${this.rounds.length}`;
+    document.getElementById('question-text').textContent = q.question;
+    document.getElementById('prompt-text').textContent = q.prompt;
+    document.getElementById('feedback-box').textContent = 'Select the most professional answer.';
+
+    const list = document.getElementById('options-list');
+    list.innerHTML = q.options.map((opt, idx) => `<button class="reply-btn" data-idx="${idx}">${opt.text}</button>`).join('');
+    list.querySelectorAll('.reply-btn').forEach((btn) => {
+      btn.onclick = () => this.handleResponse(Number(btn.dataset.idx), btn);
+    });
+  }
+
+  handleResponse(idx, btn) {
+    const q = this.rounds[this.currentQ];
+    const opt = q.options[idx];
+    const bestImpact = Math.max(...q.options.map((o) => o.impact));
+    const isBest = opt.impact === bestImpact;
+    const isMid = opt.impact >= 8 && opt.impact < bestImpact;
+
+    if (isBest) {
+      btn.classList.add('correct');
+      this.addScore(180);
+      this.hireability = Math.min(100, this.hireability + opt.impact);
+      this.celebrateMove({ burst: 'HIRED', duration: 900 });
+    } else if (isMid) {
+      btn.classList.add('partial');
+      this.addScore(60);
+      this.hireability = Math.min(100, this.hireability + Math.round(opt.impact / 2));
+      this.coachMove('Better than a careless answer, but not the strongest one.', 1000);
+    } else {
+      btn.classList.add('wrong');
+      this.hireability = Math.max(0, this.hireability - 6);
+      this.coachMove('That answer weakens your professional impression.', 1000);
     }
 
-    startGame() {
-        this.container.querySelector('#start-overlay').style.display = 'none';
-        this.loadQuestion();
-    }
+    document.getElementById('feedback-box').textContent = `${opt.feedback} Tone: ${opt.tone}.`;
+    document.getElementById('score-val').textContent = this.score;
+    document.getElementById('hire-val').textContent = this.hireability;
+    document.getElementById('meter-fill').style.width = `${this.hireability}%`;
 
-    loadQuestion() {
-        if (this.currentQ >= INTERVIEW_QUESTIONS.length) {
-            this.endGame();
-            return;
-        }
+    document.querySelectorAll('.reply-btn').forEach((b) => b.disabled = true);
+    setTimeout(() => {
+      this.currentQ += 1;
+      this.loadQuestion();
+    }, 1400);
+  }
 
-        const q = INTERVIEW_QUESTIONS[this.currentQ];
-        this.container.querySelector('#q-num').textContent = this.currentQ + 1;
-        this.container.querySelector('#interviewer-text').textContent = q.question;
-
-        // Speak the question
-        this.speak(q.question, { rate: 0.95, pitch: 1 });
-
-        const container = this.container.querySelector('#options-container');
-        container.innerHTML = '';
-
-        q.options.forEach((opt, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'response-btn';
-            btn.textContent = opt.text;
-            btn.onclick = () => this.handleResponse(opt, btn);
-            container.appendChild(btn);
-        });
-    }
-
-    handleResponse(opt, btn) {
-        this.container.querySelectorAll('.response-btn').forEach(b => b.style.pointerEvents = 'none');
-
-        const isPerfect = opt.tone === "Professional";
-        if (isPerfect) {
-            btn.style.borderColor = '#27ae60';
-            btn.style.background = '#fafffa';
-            this.celebrateMove({ burst: 'HIRED', duration: 700 });
-        } else {
-            btn.style.borderColor = '#e74c3c';
-            btn.style.background = '#fffafa';
-            this.coachMove("Sharper professional phrasing would land better here.", 900);
-        }
-
-        this.score += opt.points;
-        this.hireability = Math.min(100, this.hireability + (opt.points / INTERVIEW_QUESTIONS.length));
-
-        this.container.querySelector('#score').textContent = this.score;
-        this.container.querySelector('#hire-bar').style.width = `${this.hireability}%`;
-
-        setTimeout(() => {
-            this.currentQ++;
-            this.loadQuestion();
-        }, 2000);
-    }
-
-    endGame() {
-        const hired = this.hireability >= 70;
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #2c3e50; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px;">
-                <div style="font-size: 100px; margin-bottom: 20px;">${hired ? '📜' : '🏢'}</div>
-                <h1 style="font-size: 50px;">${hired ? "YOU'RE HIRED!" : "NOT THIS TIME"}</h1>
-                <p style="font-size: 24px;">Professional Standing: ${Math.round(this.hireability)}%</p>
-                <p style="max-width: 500px; margin: 20px 0 40px 0; color: #bdc3c7;">
-                    ${hired ? "Your articulate communication and professional demeanor stood out. Welcome to the team!" : "While you have potential, your communication style didn't quite match our professional standards."}
-                </p>
-                <div style="display: flex; gap: 15px;">
-                    <button onclick="location.reload()" style="padding: 15px 40px; background: #27ae60; color: white; border: none; border-radius: 30px; font-weight: bold; cursor: pointer;">Try Again</button>
-                    <button onclick="window.history.back()" style="padding: 15px 40px; background: transparent; border: 2px solid white; color: white; border-radius: 30px; font-weight: bold; cursor: pointer;">Return Home</button>
-                </div>
-            </div>
-        `;
-    }
+  end() {
+    this.showResults(this.saveScore());
+  }
 }
 
 export function createGame(container, config) {
-    return new InterviewSimulator(container, config);
+  return new InterviewSimulator(container, config);
 }

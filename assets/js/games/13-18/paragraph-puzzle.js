@@ -1,191 +1,211 @@
-/* assets/js/games/13-18/paragraph-puzzle.js */
+/* assets/js/games/13-18/paragraph-puzzle.js
+   Paragraph Puzzle - Ages 13-18
+
+   Senior pass:
+   - Rebuilt into a clearer paragraph sequencing challenge
+   - Better structural labels, reset flow, and multi-round progression
+*/
+
 const { GameBase } = window.UEAH_GAME_ENGINE;
 
 const PARAGRAPH_CHALLENGES = [
-    {
-        title: "The Impact of Urban Green Spaces",
-        sentences: [
-            { text: "Green spaces in urban environments offer significant benefits to residents' well-being.", role: "Topic Sentence", order: 0 },
-            { text: "For instance, studies have shown that access to parks can reduce stress and improve mental health.", role: "Evidence", order: 1 },
-            { text: "Moreover, these areas act as critical habitats for local biodiversity.", role: "Supporting Detail", order: 2 },
-            { text: "Ultimately, urban planning must prioritize the integration of nature to create sustainable cities.", role: "Conclusion", order: 3 }
-        ]
-    },
-    {
-        title: "The Role of Technology in Modern Education",
-        sentences: [
-            { text: "Technology has fundamentally transformed the way students learn and engage with educational content.", role: "Topic Sentence", order: 0 },
-            { text: "Digital platforms enable personalized learning experiences that adapt to each student's pace.", role: "Evidence", order: 1 },
-            { text: "However, excessive screen time can lead to decreased attention spans and social isolation.", role: "Counterpoint", order: 2 },
-            { text: "Therefore, a balanced approach that combines technology with traditional teaching methods is essential.", role: "Conclusion", order: 3 }
-        ]
-    },
-    {
-        title: "Climate Change and Individual Responsibility",
-        sentences: [
-            { text: "While corporations produce the majority of greenhouse gas emissions, individuals also play a critical role.", role: "Topic Sentence", order: 0 },
-            { text: "Simple actions like reducing meat consumption and using public transport can collectively make a significant impact.", role: "Evidence", order: 1 },
-            { text: "Additionally, consumer choices drive corporate behavior, meaning individual action can influence industry standards.", role: "Supporting Detail", order: 2 },
-            { text: "In conclusion, systemic change requires both institutional reform and personal commitment from each citizen.", role: "Conclusion", order: 3 }
-        ]
-    }
+  {
+    title: 'The Impact of Urban Green Spaces',
+    sentences: [
+      { text: 'Green spaces in urban environments offer significant benefits to residents\' well-being.', role: 'Topic sentence', order: 0 },
+      { text: 'For instance, studies have shown that access to parks can reduce stress and improve mental health.', role: 'Evidence', order: 1 },
+      { text: 'Moreover, these areas act as critical habitats for local biodiversity.', role: 'Supporting detail', order: 2 },
+      { text: 'Ultimately, urban planning must prioritize the integration of nature to create sustainable cities.', role: 'Conclusion', order: 3 },
+    ],
+  },
+  {
+    title: 'The Role of Technology in Modern Education',
+    sentences: [
+      { text: 'Technology has fundamentally transformed the way students learn and engage with educational content.', role: 'Topic sentence', order: 0 },
+      { text: 'Digital platforms enable personalized learning experiences that adapt to each student\'s pace.', role: 'Evidence', order: 1 },
+      { text: 'However, excessive screen time can lead to decreased attention spans and social isolation.', role: 'Counterpoint', order: 2 },
+      { text: 'Therefore, a balanced approach that combines technology with traditional teaching methods is essential.', role: 'Conclusion', order: 3 },
+    ],
+  },
+  {
+    title: 'Climate Change and Individual Responsibility',
+    sentences: [
+      { text: 'While corporations produce the majority of greenhouse gas emissions, individuals also play a critical role.', role: 'Topic sentence', order: 0 },
+      { text: 'Simple actions like reducing meat consumption and using public transport can collectively make a significant impact.', role: 'Evidence', order: 1 },
+      { text: 'Additionally, consumer choices drive corporate behavior, meaning individual action can influence industry standards.', role: 'Supporting detail', order: 2 },
+      { text: 'In conclusion, systemic change requires both institutional reform and personal commitment from each citizen.', role: 'Conclusion', order: 3 },
+    ],
+  },
+  {
+    title: 'Why Critical Thinking Matters',
+    sentences: [
+      { text: 'Critical thinking helps people judge claims, evidence, and arguments more carefully.', role: 'Topic sentence', order: 0 },
+      { text: 'In daily life, this skill protects people from manipulation and misinformation.', role: 'Supporting detail', order: 1 },
+      { text: 'It also improves academic writing because students learn to support claims with strong reasons.', role: 'Evidence', order: 2 },
+      { text: 'As a result, critical thinking is essential for responsible learning and citizenship.', role: 'Conclusion', order: 3 },
+    ],
+  },
 ];
 
 class ParagraphPuzzle extends GameBase {
-    async init() {
-        await this.init3D();
-        this.currentQ = 0;
-        this.score = 0;
+  constructor(container, config) {
+    super(container, config);
+    this.currentQ = 0;
+    this.score = 0;
+    this.rounds = [];
+    this.selected = [];
+  }
 
-        this.setupUI();
-    }
-
-    setupUI() {
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #121212; color: #00ff88; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; overflow: hidden; border: 10px solid #1a1a1a;">
-                <!-- Blueprint Header -->
-                <div style="background: #1a1a1a; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00ff88;">
-                    <div style="font-size: 24px; font-weight: 800; letter-spacing: 2px;">IDENT: PARAGRAPH_PUZZLE</div>
-                    <div style="display: flex; gap: 40px; font-family: monospace; font-weight: bold;">
-                        <div>UNIT: <span id="q-num">1</span>/1</div>
-                        <div>INTEGRITY: <span id="score">0</span></div>
-                    </div>
-                </div>
-
-                <!-- Puzzle Area -->
-                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; position: relative;">
-                    
-                    <div id="blueprint-title" style="margin-bottom: 30px; font-family: monospace; font-size: 14px; opacity: 0.6; text-transform: uppercase;">PROJECT: LOADING...</div>
-
-                    <!-- Scrambled List -->
-                    <div id="puzzle-list" style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 800px;">
-                        <!-- Sentences injected here -->
-                    </div>
-
-                    <button id="verify-btn" style="margin-top: 40px; padding: 15px 50px; background: transparent; border: 2px solid #00ff88; color: #00ff88; font-family: monospace; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">Run Integrity Check</button>
-
-                </div>
-
-                <!-- Start Overlay -->
-                <div id="start-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.95); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #00ff88; padding: 40px;">
-                    <div style="font-size: 100px; margin-bottom: 20px;">🏗️</div>
-                    <h1 style="font-size: 50px; margin: 0; font-weight: 900;">PARAGRAPH PUZZLE</h1>
-                    <p style="font-size: 20px; max-width: 500px; margin: 20px 0 40px 0; color: #008c4a;">Structure is the key to clarity. Drag and drop these sentences into their correct logical order to complete the blueprint.</p>
-                    <button id="start-btn" style="padding: 18px 60px; border: 2px solid #00ff88; background: #00ff88; color: #121212; font-size: 22px; font-weight: bold; cursor: pointer; text-transform: uppercase;">Access Interface</button>
-                </div>
+  async init() {
+    this.container.innerHTML = `
+      <div class="ppuz-game">
+        <div class="ppuz-panel">
+          <div class="ppuz-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Paragraph Puzzle</div>
+              <div class="progress" id="progress-text">Paragraph 1 of 4</div>
             </div>
-            <style>
-                .sentence-node {
-                    padding: 20px; background: rgba(0,255,136,0.05); border: 1px solid #00ff88; color: #fff; cursor: move; display: flex; align-items: center; gap: 15px; border-radius: 4px; transition: background 0.2s;
-                    user-select: none;
-                }
-                .sentence-node:hover { background: rgba(0,255,136,0.1); }
-                .sentence-node.dragging { opacity: 0.5; background: #00ff88 !important; color: #000; }
-                .sentence-node span { font-family: monospace; font-size: 12px; color: #00ff88; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 2px; }
-            </style>
-        `;
+            <div class="pill">🧩</div>
+          </div>
 
-        this.container.querySelector('#start-btn').onclick = () => {
-            this.container.querySelector('#start-overlay').style.display = 'none';
-            this.start();
-        };
+          <div class="title-card">
+            <div class="title-label">Paragraph focus</div>
+            <div class="paragraph-title" id="paragraph-title">Loading...</div>
+          </div>
+
+          <div class="build-zone">
+            <div class="build-label">Your paragraph order</div>
+            <div class="build-list" id="build-list"></div>
+          </div>
+
+          <div class="bank-zone">
+            <div class="build-label">Sentence bank</div>
+            <div class="sentence-bank" id="sentence-bank"></div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" id="reset-btn">Reset</button>
+            <button class="btn check" id="check-btn">Check Structure</button>
+          </div>
+
+          <div class="helper" id="helper-text">Build a paragraph with a logical flow from opening idea to conclusion.</div>
+        </div>
+      </div>
+    `;
+
+    this.injectStyles();
+    this.start();
+  }
+
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .ppuz-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#121212 0%,#1f1f1f 100%);font-family:Inter,Arial,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}.ppuz-panel{width:min(900px,96%);background:rgba(255,255,255,.05);border:1px solid rgba(0,255,136,.18);border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 18px 50px rgba(0,0,0,.3)}.ppuz-topbar{display:flex;align-items:center;gap:12px}.pill{background:#09281a;color:#7fffb7;padding:10px 16px;border-radius:999px;font-weight:800}.title-wrap{flex:1;text-align:center}.title{font-size:30px;font-weight:900;color:#8dffbf}.progress{font-size:14px;color:#88bda1}.title-card,.build-zone,.bank-zone{background:rgba(255,255,255,.06);border-radius:18px;padding:16px}.title-label,.build-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#76b896;font-weight:800;margin-bottom:8px}.paragraph-title{font-size:24px;color:#fff}.build-list,.sentence-bank{display:flex;flex-direction:column;gap:10px;min-height:88px}.sentence-btn{border:none;background:#fff;color:#1f2a24;border-radius:16px;padding:14px 16px;text-align:left;cursor:pointer;font-size:15px;line-height:1.45;border:3px solid #fff;transition:all .2s}.sentence-btn:hover{transform:translateX(4px)}.sentence-btn.used{opacity:.45;cursor:not-allowed}.placed{background:#eafff2;border-color:#2ecc71}.wrong{background:#fff0f0;border-color:#ff6b6b}.role-tag{display:inline-block;margin-bottom:8px;background:#0e3323;color:#7fffb7;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}.controls{display:flex;justify-content:center;gap:12px}.btn{border:none;background:#4b5d67;color:#fff;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer}.btn.check{background:#00c853}.helper{background:#0f2017;border-left:4px solid #00ff88;border-radius:12px;padding:12px 14px;color:#bfead0}
+    `;
+    this.container.appendChild(style);
+  }
+
+  start() {
+    super.start();
+    this.currentQ = 0;
+    this.score = 0;
+    this.rounds = [...PARAGRAPH_CHALLENGES].sort(() => Math.random() - 0.5);
+    document.getElementById('reset-btn').onclick = () => this.resetSelection();
+    document.getElementById('check-btn').onclick = () => this.verifyOrder();
+    this.loadChallenge();
+  }
+
+  loadChallenge() {
+    if (this.currentQ >= this.rounds.length) return this.end();
+    const q = this.rounds[this.currentQ];
+    this.selected = [];
+    document.getElementById('progress-text').textContent = `Paragraph ${this.currentQ + 1} of ${this.rounds.length}`;
+    document.getElementById('paragraph-title').textContent = q.title;
+    document.getElementById('helper-text').textContent = 'Build a paragraph with a logical flow from opening idea to conclusion.';
+    this.renderChallenge();
+  }
+
+  renderChallenge() {
+    const q = this.rounds[this.currentQ];
+    const build = document.getElementById('build-list');
+    build.innerHTML = this.selected.map((item, idx) => `
+      <button class="sentence-btn placed" data-build-index="${idx}">
+        <div class="role-tag">Placed ${idx + 1}</div>
+        ${item.text}
+      </button>
+    `).join('');
+    build.querySelectorAll('.sentence-btn').forEach((btn) => {
+      btn.onclick = () => this.removeSelected(Number(btn.dataset.buildIndex));
+    });
+
+    const bank = document.getElementById('sentence-bank');
+    bank.innerHTML = q.sentences.map((s, idx) => {
+      const used = this.selected.some((item) => item.order === s.order && item.text === s.text);
+      return `
+        <button class="sentence-btn ${used ? 'used' : ''}" data-bank-index="${idx}" ${used ? 'disabled' : ''}>
+          <div class="role-tag">${s.role}</div>
+          ${s.text}
+        </button>
+      `;
+    }).join('');
+    bank.querySelectorAll('.sentence-btn:not([disabled])').forEach((btn) => {
+      btn.onclick = () => this.addSelected(Number(btn.dataset.bankIndex));
+    });
+  }
+
+  addSelected(idx) {
+    const q = this.rounds[this.currentQ];
+    this.selected.push(q.sentences[idx]);
+    this.renderChallenge();
+  }
+
+  removeSelected(idx) {
+    this.selected.splice(idx, 1);
+    this.renderChallenge();
+  }
+
+  resetSelection() {
+    this.selected = [];
+    this.renderChallenge();
+  }
+
+  verifyOrder() {
+    const q = this.rounds[this.currentQ];
+    if (this.selected.length !== q.sentences.length) {
+      this.coachMove('Use all sentences before checking the paragraph.', 1000);
+      return;
     }
 
-    start() {
-        super.start();
+    const isCorrect = this.selected.every((item, idx) => item.order === idx);
+    const placed = [...document.querySelectorAll('#build-list .sentence-btn')];
+
+    if (isCorrect) {
+      placed.forEach((el) => el.classList.add('placed'));
+      this.addScore(180);
+      document.getElementById('score-val').textContent = this.score;
+      document.getElementById('helper-text').textContent = 'Strong flow: topic sentence, support, and conclusion are in the right order.';
+      this.celebrateMove({ burst: 'FLOW', duration: 900 });
+      setTimeout(() => {
+        this.currentQ += 1;
         this.loadChallenge();
+      }, 1200);
+      return;
     }
 
-    loadChallenge() {
-        const q = PARAGRAPH_CHALLENGES[this.currentQ];
-        this.container.querySelector('#blueprint-title').textContent = `PROJECT: ${q.title}`;
+    placed.forEach((el, idx) => {
+      if (this.selected[idx].order !== idx) el.classList.add('wrong');
+    });
+    document.getElementById('helper-text').textContent = 'Recheck the opening, development, and conclusion roles.';
+    this.coachMove('The paragraph structure is not logical yet.', 1000);
+    setTimeout(() => this.renderChallenge(), 800);
+  }
 
-        const list = this.container.querySelector('#puzzle-list');
-        list.innerHTML = '';
-
-        // Scramble sentences
-        const scrambled = [...q.sentences].sort(() => Math.random() - 0.5);
-
-        scrambled.forEach((s, i) => {
-            const node = document.createElement('div');
-            node.className = 'sentence-node';
-            node.draggable = true;
-            node.dataset.originalOrder = s.order;
-            node.innerHTML = `<span>NODE_${i + 1}</span> ${s.text}`;
-
-            node.addEventListener('dragstart', () => node.classList.add('dragging'));
-            node.addEventListener('dragend', () => node.classList.remove('dragging'));
-
-            list.appendChild(node);
-        });
-
-        list.addEventListener('dragover', e => {
-            e.preventDefault();
-            const dragging = list.querySelector('.dragging');
-            const afterElement = this.getDragAfterElement(list, e.clientY);
-            if (afterElement == null) {
-                list.appendChild(dragging);
-            } else {
-                list.insertBefore(dragging, afterElement);
-            }
-        });
-
-        this.container.querySelector('#verify-btn').onclick = () => this.verifyOrder();
-    }
-
-    getDragAfterElement(container, y) {
-        const draggableElements = [...container.querySelectorAll('.sentence-node:not(.dragging)')];
-        return draggableElements.reduce((closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            } else {
-                return closest;
-            }
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
-    }
-
-    verifyOrder() {
-        const nodes = [...this.container.querySelectorAll('.sentence-node')];
-        let correctCount = 0;
-
-        nodes.forEach((node, idx) => {
-            if (parseInt(node.dataset.originalOrder) === idx) {
-                node.style.borderColor = '#00ff88';
-                correctCount++;
-            } else {
-                node.style.borderColor = '#ff4444';
-            }
-        });
-
-        if (correctCount === nodes.length) {
-            this.score += 500;
-            this.container.querySelector('#score').textContent = this.score;
-            this.speak("System integrity verified. Paragraph structure complete.");
-            this.celebrateMove({ burst: 'VERIFIED', duration: 800 });
-            setTimeout(() => this.end(), 2000);
-        } else {
-            this.speak("Logic error detected in sequence. Adjust nodes.");
-            this.coachMove();
-        }
-    }
-
-    end() {
-        super.end();
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #121212; color: #00ff88; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; font-family: 'Inter', sans-serif; border: 10px solid #1a1a1a;">
-                <h1 style="font-size: 60px; font-weight: 900;">BLUEPRINT FINALIZED</h1>
-                <p style="font-size: 32px; margin-top: -20px;">Logic Integrity: ${this.score}</p>
-                <div style="margin-top: 40px; display: flex; gap: 20px;">
-                    <button onclick="location.reload()" style="padding: 15px 40px; border: 2px solid #00ff88; background: #00ff88; color: #121212; font-size: 18px; font-weight: bold; cursor: pointer;">REINITIALIZE</button>
-                    <button onclick="window.history.back()" style="padding: 15px 40px; border: 2px solid white; background: transparent; color: white; font-size: 18px; font-weight: bold; cursor: pointer;">EXIT SYSTEM</button>
-                </div>
-            </div>
-        `;
-    }
+  end() {
+    this.showResults(this.saveScore());
+  }
 }
 
 export function createGame(container, config) {
-    return new ParagraphPuzzle(container, config);
+  return new ParagraphPuzzle(container, config);
 }
