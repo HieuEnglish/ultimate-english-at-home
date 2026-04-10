@@ -199,6 +199,136 @@ function audioSettingsPanelHtml(slug) {
   `;
 }
 
+function escapeAttr(value) {
+  return escapeHtml(String(value == null ? '' : value)).replaceAll('\n', ' ');
+}
+
+function inferRunnerState(stage) {
+  const text = String(stage?.textContent || '').replace(/\s+/g, ' ').trim();
+  if (!text) return { mode: 'idle', label: 'Practice mode' };
+
+  const progressMatch = text.match(/\b(Question|Prompt)\s+(\d+)\s+of\s+(\d+)\b/i);
+  if (progressMatch) {
+    return {
+      mode: 'question',
+      label: progressMatch[1],
+      current: Number(progressMatch[2] || 0),
+      total: Number(progressMatch[3] || 0),
+    };
+  }
+
+  if (/\bfinished\b|\bsummary\b|\bnext step\b/i.test(text)) {
+    return { mode: 'summary', label: 'Summary' };
+  }
+  if (/\bloading\b|\bpreparing\b/i.test(text)) {
+    return { mode: 'loading', label: 'Loading' };
+  }
+  if (/could not start|unknown error|missing/i.test(text)) {
+    return { mode: 'error', label: 'Needs attention' };
+  }
+  if (/\bstart\b|caregiver-led|practice test|quick prompts|tip:/i.test(text)) {
+    return { mode: 'intro', label: 'Ready to begin' };
+  }
+
+  return { mode: 'practice', label: 'Practice mode' };
+}
+
+function buildRunnerChromeMarkup(title, theme, state) {
+  const modeLabel = state.mode === 'question'
+    ? `${state.label} ${state.current} of ${state.total}`
+    : state.label;
+  const progress = state.mode === 'question' && state.total > 0
+    ? Math.max(0, Math.min(100, Math.round((state.current / state.total) * 100)))
+    : null;
+
+  return `
+    <div class="test-runner-chrome" data-test-runner-chrome data-mode="${escapeAttr(state.mode)}">
+      <div class="test-runner-chrome__top">
+        <div>
+          <span class="test-runner-chrome__eyebrow">${escapeHtml(theme.mode)}</span>
+          <h3 class="test-runner-chrome__title">${escapeHtml(title)}</h3>
+        </div>
+        <div class="test-runner-chrome__badge">${escapeHtml(modeLabel)}</div>
+      </div>
+      ${progress != null ? `
+        <div class="test-runner-chrome__progress" aria-label="Progress">
+          <div class="test-runner-chrome__progress-meta">
+            <span>${escapeHtml(theme.skillLabel)}</span>
+            <strong>${progress}%</strong>
+          </div>
+          <div class="test-runner-chrome__progress-bar"><span style="width:${progress}%"></span></div>
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+function enhanceRunnerStage(stage) {
+  if (!stage) return;
+
+  const children = Array.from(stage.children || []).filter((el) => !el.hasAttribute('data-test-runner-chrome'));
+  children.forEach((el) => {
+    el.classList.remove('test-runner-stage__topbar', 'test-runner-stage__panel', 'test-runner-stage__formwrap');
+  });
+
+  children.forEach((el, index) => {
+    const text = String(el.textContent || '').replace(/\s+/g, ' ').trim();
+    const hasButton = !!el.querySelector('button');
+    const hasFieldset = !!el.querySelector('fieldset');
+    const styleAttr = String(el.getAttribute('style') || '');
+    const looksPanel = /border\s*:\s*1px\s+solid|border-radius|background\s*:\s*var\(--surface/i.test(styleAttr);
+
+    if (/(Question|Prompt)\s+\d+\s+of\s+\d+/i.test(text) && hasButton) {
+      el.classList.add('test-runner-stage__topbar');
+    } else if (hasFieldset || (looksPanel && index > 0)) {
+      el.classList.add('test-runner-stage__panel');
+      if (hasFieldset) el.classList.add('test-runner-stage__formwrap');
+    }
+  });
+}
+
+function installRunnerChrome(rootEl, title, theme) {
+  const stage = rootEl?.querySelector('[data-stage]');
+  if (!stage) return () => {};
+
+  const applyChrome = () => {
+    if (stage.__ueahApplyingChrome) return;
+    stage.__ueahApplyingChrome = true;
+    try {
+      const oldChrome = stage.querySelector(':scope > [data-test-runner-chrome]');
+      if (oldChrome) oldChrome.remove();
+
+      const state = inferRunnerState(stage);
+      const shell = document.createElement('div');
+      shell.innerHTML = buildRunnerChromeMarkup(title, theme, state).trim();
+      const chrome = shell.firstElementChild;
+      if (chrome) stage.prepend(chrome);
+      enhanceRunnerStage(stage);
+    } catch (_) {
+      // ignore
+    } finally {
+      stage.__ueahApplyingChrome = false;
+    }
+  };
+
+  applyChrome();
+
+  const observer = new MutationObserver(() => {
+    applyChrome();
+  });
+  observer.observe(stage, { childList: true, subtree: true });
+
+  return () => {
+    try {
+      observer.disconnect();
+    } catch (_) {}
+    try {
+      const chrome = stage.querySelector(':scope > [data-test-runner-chrome]');
+      if (chrome) chrome.remove();
+    } catch (_) {}
+  };
+}
+
 /**
  * Build the test detail page for the given slug.
  *
@@ -346,6 +476,16 @@ export async function getView(ctx, slug) {
       // ignore
     } finally {
       window.__ueahTtsControlsCleanup = null;
+    }
+
+    try {
+      if (typeof window.__ueahTestRunnerChromeCleanup === 'function') {
+        window.__ueahTestRunnerChromeCleanup();
+      }
+    } catch (_) {
+      // ignore
+    } finally {
+      window.__ueahTestRunnerChromeCleanup = null;
     }
 
     if (showAudioPanel) {
@@ -647,11 +787,18 @@ export async function getView(ctx, slug) {
       }
     }
 
+    const rootEl = document.querySelector(`[data-test-runner-root="${slug}"]`);
+
     if (typeof runnerAfterRender === 'function') {
       try {
-        const rootEl = document.querySelector(`[data-test-runner-root="${slug}"]`);
         runnerAfterRender(rootEl, ctx);
       } catch (_) {}
+    }
+
+    try {
+      window.__ueahTestRunnerChromeCleanup = installRunnerChrome(rootEl, safeTitle, theme);
+    } catch (_) {
+      window.__ueahTestRunnerChromeCleanup = null;
     }
   };
 
