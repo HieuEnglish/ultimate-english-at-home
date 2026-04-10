@@ -268,21 +268,40 @@ function enhanceRunnerStage(stage) {
 
   const children = Array.from(stage.children || []).filter((el) => !el.hasAttribute('data-test-runner-chrome'));
   children.forEach((el) => {
-    el.classList.remove('test-runner-stage__topbar', 'test-runner-stage__panel', 'test-runner-stage__formwrap');
+    el.classList.remove(
+      'test-runner-stage__topbar',
+      'test-runner-stage__panel',
+      'test-runner-stage__formwrap',
+      'test-runner-stage__intro',
+      'test-runner-stage__summary',
+      'test-runner-stage__feedback'
+    );
   });
 
   children.forEach((el, index) => {
     const text = String(el.textContent || '').replace(/\s+/g, ' ').trim();
     const hasButton = !!el.querySelector('button');
     const hasFieldset = !!el.querySelector('fieldset');
+    const hasDetails = !!el.querySelector('details');
     const styleAttr = String(el.getAttribute('style') || '');
     const looksPanel = /border\s*:\s*1px\s+solid|border-radius|background\s*:\s*var\(--surface/i.test(styleAttr);
+    const isSummary = /\bfinished\b|\bsummary\b|\bnext step\b|save score to profile/i.test(text);
+    const isIntro = /\bstart\b|caregiver-led|practice test|preparing your test|quick prompts|short reading questions|listen and answer/i.test(text);
+    const isFeedback = /correct|incorrect|score|points earned|try again tomorrow/i.test(text);
 
     if (/(Question|Prompt)\s+\d+\s+of\s+\d+/i.test(text) && hasButton) {
       el.classList.add('test-runner-stage__topbar');
     } else if (hasFieldset || (looksPanel && index > 0)) {
       el.classList.add('test-runner-stage__panel');
       if (hasFieldset) el.classList.add('test-runner-stage__formwrap');
+    }
+
+    if (isSummary || hasDetails) {
+      el.classList.add('test-runner-stage__summary');
+    } else if (isIntro && hasButton) {
+      el.classList.add('test-runner-stage__intro');
+    } else if (isFeedback) {
+      el.classList.add('test-runner-stage__feedback');
     }
   });
 }
