@@ -1,204 +1,121 @@
-/* assets/js/games/11-12/accent-ace.js */
+/* assets/js/games/11-12/accent-ace.js
+   Accent Ace - Ages 11-12
+
+   Senior pass:
+   - Stronger quiz structure and cleaner listening loop
+   - Better replayability and less novelty-only feel
+*/
+
 const { GameBase } = window.UEAH_GAME_ENGINE;
 
 class AccentAce extends GameBase {
-    async init() {
-        await this.init3D();
+  async init() {
+    this.accents = [
+      { id: 'us', name: 'American', lang: 'en-US', phrase: 'I am going to the movies to grab some popcorn and soda.' },
+      { id: 'uk', name: 'British', lang: 'en-GB', phrase: 'I am heading to the cinema for some crisps and biscuits.' },
+      { id: 'au', name: 'Australian', lang: 'en-AU', phrase: "G'day mate! Let's fire up the barbie in the backyard this afternoon." },
+      { id: 'in', name: 'Indian', lang: 'en-IN', phrase: 'I will be completing the assignment by this evening, definitely.' },
+      { id: 'ie', name: 'Irish', lang: 'en-IE', phrase: 'Grand day for a walk, is it not? The craic was mighty last night.' },
+      { id: 'nz', name: 'New Zealand', lang: 'en-NZ', phrase: 'Sweet as, bro! Let us head to the dairy for some lollies.' },
+    ];
+    this.currentQ = 0;
+    this.score = 0;
+    this.voices = [];
+    this.questions = [];
 
-        this.accents = [
-            { id: "us", name: "American", lang: "en-US", phrase: "I'm going to the movies to grab some popcorn and soda.", marker: "movies, soda" },
-            { id: "uk", name: "British", lang: "en-GB", phrase: "I'm heading to the cinema for some crisps and a tin of biscuits.", marker: "cinema, crisps, biscuits" },
-            { id: "au", name: "Australian", lang: "en-AU", phrase: "G'day mate! Let's fire up the barbie in the backyard this afternoon.", marker: "G'day, barbie" },
-            { id: "in", name: "Indian", lang: "en-IN", phrase: "I will be completing the assignment by this evening, definitely.", marker: "distinctive phrasing" },
-            { id: "za", name: "South African", lang: "en-ZA", phrase: "Is it far to the shop? Howzit, my friend!", marker: "Howzit" },
-            { id: "ie", name: "Irish", lang: "en-IE", phrase: "Grand day for a walk, isn't it? The craic was mighty last night!", marker: "Grand, craic" },
-            { id: "sc", name: "Scottish", lang: "en-GB", phrase: "Aye, the bonnie wee loch is just over the brae yonder.", marker: "Aye, bonnie, brae" },
-            { id: "nz", name: "New Zealand", lang: "en-NZ", phrase: "Sweet as, bro! Let's head to the dairy for some lollies.", marker: "Sweet as, dairy, lollies" }
-        ];
-
-        this.currentQ = 0;
-        this.score = 0;
-        this.voices = [];
-        this.shuffled = this.shuffle([...this.accents]);
-
-        // Load voices
-        this.loadVoices();
-
-        this.setupUI();
-        this.setupScene();
-    }
-
-    loadVoices() {
-        // Voice loading is async in some browsers
-        const getV = () => {
-            this.voices = window.speechSynthesis.getVoices();
-        };
-        getV();
-        if (window.speechSynthesis.onvoiceschanged !== undefined) {
-            window.speechSynthesis.onvoiceschanged = getV;
-        }
-    }
-
-    setupUI() {
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #001f3f; color: white; font-family: 'Montserrat', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;">
-                <!-- World Map Decoration -->
-                <div style="position: absolute; font-size: 400px; opacity: 0.05; z-index: 0; pointer-events: none;">🌍</div>
-
-                <!-- HUD -->
-                <div style="position: absolute; top: 20px; width: 90%; display: flex; justify-content: space-between; z-index: 10;">
-                    <div style="font-size: 28px; font-weight: 900; color: #ffdc00; text-shadow: 0 0 10px rgba(255,220,0,0.5);">🌍 Accent Ace</div>
-                    <div style="font-size: 22px; background: rgba(255,255,255,0.1); padding: 5px 20px; border-radius: 10px;">Score: <span id="score">0</span></div>
-                </div>
-
-                <!-- Display Card -->
-                <div id="game-card" style="background: rgba(255,255,255,0.95); color: #333; padding: 40px; border-radius: 20px; width: 85%; max-width: 600px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); text-align: center; z-index: 10; display: none;">
-                    <div style="margin-bottom: 30px;">
-                        <button id="hear-btn" style="width: 100px; height: 100px; border-radius: 50%; border: none; background: #ff4136; color: white; cursor: pointer; font-size: 40px; box-shadow: 0 8px 20px rgba(255,65,54,0.4); transition: transform 0.2s;">🎧</button>
-                        <p style="margin-top: 15px; font-weight: bold; color: #777;">Click to listen to the speaker</p>
-                    </div>
-
-                    <h2 style="font-size: 24px; margin-bottom: 25px;">Which accent do you hear?</h2>
-
-                    <div id="options-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <!-- Buttons -->
-                    </div>
-                </div>
-
-                <!-- Feedback -->
-                <div id="feedback" style="position: fixed; bottom: 80px; font-size: 32px; font-weight: bold; transform: scale(0); transition: transform 0.3s; z-index: 10;"></div>
-
-                <!-- Start Overlay -->
-                <div id="start-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-                    <div style="font-size: 100px; margin-bottom: 20px;">🌎✈️</div>
-                    <h1 style="font-size: 48px; margin: 0; color: #ffdc00;">Accent Ace</h1>
-                    <p style="font-size: 18px; max-width: 500px; margin: 20px 0 40px 0; opacity: 0.9;">Travel the globe through your ears! Identify the regional accents from across the English-speaking world.</p>
-                    <button id="start-btn" style="padding: 18px 50px; border-radius: 50px; background: #ffdc00; color: #001f3f; border: none; font-size: 22px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 30px rgba(255,220,0,0.3);">START JOURNEY</button>
-                </div>
+    this.container.innerHTML = `
+      <div class="aa11-game">
+        <div class="aa11-panel">
+          <div class="aa11-topbar">
+            <div class="pill">⭐ <span id="score-val">0</span></div>
+            <div class="title-wrap">
+              <div class="title">Accent Ace</div>
+              <div class="progress" id="progress-text">Round 1 of 6</div>
             </div>
-            <style>
-                .opt-btn {
-                    padding: 15px; border: 2px solid #ddd; background: white; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.2s; color: #333;
-                }
-                .opt-btn:hover { border-color: #ffdc00; background: #fffdf0; transform: translateY(-3px); }
-                #hear-btn:active { transform: scale(0.9); }
-            </style>
-        `;
+            <button class="hear-btn" id="hear-btn">🎧 Listen</button>
+          </div>
 
-        this.container.querySelector('#start-btn').onclick = () => this.startGame();
-        this.container.querySelector('#hear-btn').onclick = () => this.playAccent();
+          <div class="prompt-card">
+            <div class="prompt-label">Which accent do you hear?</div>
+            <div class="helper" id="helper-text">Listen carefully, then choose the best answer.</div>
+          </div>
+
+          <div class="options-grid" id="options-grid"></div>
+        </div>
+      </div>
+    `;
+
+    this.injectStyles();
+    this.start();
+  }
+
+  injectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .aa11-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#001f3f 0%,#0d2b52 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}.aa11-panel{width:min(820px,96%);background:rgba(255,255,255,.08);border-radius:34px;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(0,0,0,.3);padding:22px;display:flex;flex-direction:column;gap:18px}.aa11-topbar{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px}.title-wrap{flex:1;text-align:center}.title{font-size:32px}.progress{font-size:14px;color:#d3e8ff}.hear-btn{padding:12px 18px;background:#ffdc00;color:#001f3f;cursor:pointer}
+      .prompt-card{background:rgba(255,255,255,.92);color:#333;border-radius:26px;padding:20px;text-align:center}.prompt-label{font-size:28px}.helper{font-size:18px;color:#5d6d7e;margin-top:10px}.options-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.opt-btn{border:none;background:#fff;color:#333;padding:18px;border-radius:18px;font-size:22px;font-weight:800;cursor:pointer;box-shadow:0 8px 0 rgba(0,0,0,.08);border:4px solid #fff}.opt-btn:active{transform:translateY(6px);box-shadow:0 2px 0 rgba(0,0,0,.08)}.opt-btn.correct{background:#edfff0;border-color:#4cd137}.opt-btn.wrong{background:#fff0f0;border-color:#ff6b6b}
+      @media (max-width:720px){.options-grid{grid-template-columns:1fr}}
+    `;
+    this.container.appendChild(style);
+  }
+
+  loadVoices() {
+    const getV = () => { this.voices = window.speechSynthesis.getVoices(); };
+    getV();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) window.speechSynthesis.onvoiceschanged = getV;
+  }
+
+  start() {
+    super.start();
+    this.loadVoices();
+    this.questions = [...this.accents].sort(() => Math.random() - 0.5);
+    document.getElementById('hear-btn').onclick = () => this.playAccent();
+    this.currentQ = 0;
+    this.loadQuestion();
+  }
+
+  loadQuestion() {
+    if (this.currentQ >= this.questions.length) return this.end();
+    const q = this.questions[this.currentQ];
+    document.getElementById('progress-text').textContent = `Round ${this.currentQ + 1} of ${this.questions.length}`;
+    document.getElementById('helper-text').textContent = 'Listen carefully, then choose the best answer.';
+
+    const options = [q, ...this.accents.filter((a) => a.id !== q.id).sort(() => Math.random() - 0.5).slice(0, 3)].sort(() => Math.random() - 0.5);
+    const grid = document.getElementById('options-grid');
+    grid.innerHTML = options.map((opt) => `<button class="opt-btn" data-id="${opt.id}">${opt.name}</button>`).join('');
+    grid.querySelectorAll('.opt-btn').forEach((btn) => {
+      btn.onclick = () => this.handleAnswer(btn, btn.dataset.id, q.id);
+    });
+
+    setTimeout(() => this.playAccent(), 400);
+  }
+
+  playAccent() {
+    const q = this.questions[this.currentQ];
+    let voice = this.voices.find((v) => v.lang.startsWith(q.lang));
+    if (!voice) voice = this.voices.find((v) => v.lang.startsWith('en'));
+    this.speak(q.phrase, { voice, rate: 0.9, pitch: 1.0 });
+  }
+
+  handleAnswer(btn, selectedId, correctId) {
+    if (selectedId === correctId) {
+      btn.classList.add('correct');
+      this.addScore(140);
+      document.getElementById('score-val').textContent = this.score;
+      this.celebrateMove({ burst: selectedId.toUpperCase(), duration: 900 });
+    } else {
+      btn.classList.add('wrong');
+      this.coachMove('That accent does not match the sample.', 950);
     }
+    document.querySelectorAll('.opt-btn').forEach((b) => b.disabled = true);
+    setTimeout(() => { this.currentQ += 1; this.loadQuestion(); }, 1100);
+  }
 
-    setupScene() {
-        // Floating globe elements
-        const globeGeo = new THREE.SphereGeometry(1, 16, 16);
-        const globeMat = new THREE.MeshPhongMaterial({ color: 0x0074d9, wireframe: true });
-        this.threeHelper.addFloatingObject(globeGeo, globeMat, 5);
-    }
-
-    startGame() {
-        this.container.querySelector('#start-overlay').style.display = 'none';
-        this.container.querySelector('#game-card').style.display = 'block';
-        this.loadQuestion();
-    }
-
-    loadQuestion() {
-        if (this.currentQ >= this.shuffled.length) {
-            this.endGame();
-            return;
-        }
-
-        const q = this.shuffled[this.currentQ];
-        const grid = this.container.querySelector('#options-grid');
-        grid.innerHTML = '';
-
-        // Generate 4 options (including correct one)
-        const options = this.shuffle([
-            q,
-            ...this.accents.filter(a => a.id !== q.id).slice(0, 3)
-        ]);
-
-        options.forEach(opt => {
-            const btn = document.createElement('button');
-            btn.className = 'opt-btn';
-            btn.textContent = opt.name;
-            btn.onclick = () => this.handleAnswer(opt.id, q.id, btn);
-            grid.appendChild(btn);
-        });
-
-        setTimeout(() => this.playAccent(), 500);
-    }
-
-    playAccent() {
-        const q = this.shuffled[this.currentQ];
-
-        // Find best voice
-        let voice = this.voices.find(v => v.lang.startsWith(q.lang));
-        if (!voice) voice = this.voices.find(v => v.lang.startsWith('en')); // Fallback to any English
-
-        this.speak(q.phrase, {
-            voice: voice,
-            rate: 0.9,
-            pitch: 1.0
-        });
-
-        const btn = this.container.querySelector('#hear-btn');
-        btn.textContent = '🔊';
-        setTimeout(() => btn.textContent = '🎧', 1000);
-    }
-
-    handleAnswer(selectedId, correctId, btn) {
-        const feedback = this.container.querySelector('#feedback');
-
-        if (selectedId === correctId) {
-            this.score += 150;
-            this.container.querySelector('#score').textContent = this.score;
-            this.celebrateMove({ burst: String(selectedId).toUpperCase(), duration: 700 });
-            btn.style.background = '#2ecc40';
-            btn.style.color = 'white';
-            btn.style.borderColor = '#2ecc40';
-            feedback.textContent = "✅ Excellent Ear!";
-            feedback.style.color = "#2ecc40";
-        } else {
-            this.coachMove();
-            btn.style.background = '#ff4136';
-            btn.style.color = 'white';
-            btn.style.borderColor = '#ff4136';
-            feedback.textContent = "❌ Not Quite!";
-            feedback.style.color = "#ff4136";
-        }
-
-        feedback.style.transform = 'scale(1)';
-
-        // Disable all
-        const btns = this.container.querySelectorAll('.opt-btn');
-        btns.forEach(b => b.disabled = true);
-
-        setTimeout(() => {
-            feedback.style.transform = 'scale(0)';
-            this.currentQ++;
-            this.loadQuestion();
-        }, 1500);
-    }
-
-    endGame() {
-        this.container.innerHTML = `
-            <div style="position: absolute; inset: 0; background: #001f3f; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-                <h1 style="font-size: 60px; color: #ffdc00;">World Tour Complete! 🗺️</h1>
-                <p style="font-size: 32px; margin-top: -20px;">Linguistic Score: ${this.score}</p>
-                <div style="margin-top: 40px; display: flex; gap: 20px;">
-                    <button onclick="location.reload()" style="padding: 15px 40px; border-radius: 10px; background: #ffdc00; color: #001f3f; border: none; font-size: 20px; font-weight: bold; cursor: pointer;">New Tour</button>
-                    <button onclick="window.history.back()" style="padding: 15px 40px; border-radius: 10px; background: transparent; border: 2px solid white; color: white; font-size: 20px; font-weight: bold; cursor: pointer;">Exit</button>
-                </div>
-            </div>
-        `;
-    }
-
-    shuffle(array) {
-        return array.sort(() => Math.random() - 0.5);
-    }
+  end() {
+    this.showResults(this.saveScore());
+  }
 }
 
 export function createGame(container, config) {
-    return new AccentAce(container, config);
+  return new AccentAce(container, config);
 }
