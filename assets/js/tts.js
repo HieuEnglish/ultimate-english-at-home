@@ -380,7 +380,8 @@
   }
 
   function resolveVoice(voiceOrURI, preferredLang) {
-    const list = voices.length ? voices : refreshVoices();
+    // Prevent infinite recursion by not calling refreshVoices if list is empty
+    const list = voices.length ? voices : [];
     if (!list.length) return null;
 
     if (typeof voiceOrURI === "string" && voiceOrURI.trim()) {
