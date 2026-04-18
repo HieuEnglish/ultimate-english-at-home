@@ -309,11 +309,26 @@ function enhanceRunnerStage(stage) {
 function installRunnerChrome(rootEl, title, theme) {
   const stage = rootEl?.querySelector('[data-stage]');
   if (!stage) return () => {};
+  let observer = null;
+  let isObserving = false;
+
+  const resumeObserver = () => {
+    if (!observer || isObserving) return;
+    observer.observe(stage, { childList: true, subtree: true });
+    isObserving = true;
+  };
+
+  const pauseObserver = () => {
+    if (!observer || !isObserving) return;
+    observer.disconnect();
+    isObserving = false;
+  };
 
   const applyChrome = () => {
     if (stage.__ueahApplyingChrome) return;
     stage.__ueahApplyingChrome = true;
     try {
+      pauseObserver();
       const oldChrome = stage.querySelector(':scope > [data-test-runner-chrome]');
       if (oldChrome) oldChrome.remove();
 
@@ -326,20 +341,21 @@ function installRunnerChrome(rootEl, title, theme) {
     } catch (_) {
       // ignore
     } finally {
+      resumeObserver();
       stage.__ueahApplyingChrome = false;
     }
   };
 
   applyChrome();
 
-  const observer = new MutationObserver(() => {
+  observer = new MutationObserver(() => {
     applyChrome();
   });
-  observer.observe(stage, { childList: true, subtree: true });
+  resumeObserver();
 
   return () => {
     try {
-      observer.disconnect();
+      pauseObserver();
     } catch (_) {}
     try {
       const chrome = stage.querySelector(':scope > [data-test-runner-chrome]');
