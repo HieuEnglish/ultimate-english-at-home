@@ -58,6 +58,11 @@ export function getView(ctx) {
     return String(skill || '').toLowerCase();
   }
 
+  function getFeaturedTestForHero(key) {
+    if (key === 'ielts') return ieltsTests[0] || null;
+    return (byAge.get(key) || [])[0] || null;
+  }
+
   function renderTestCard(t, { glow } = {}) {
     const skillKey = safeSkillKey(t.skill);
     const cardGlow = glow || GLOW_BY_SKILL[skillKey] || 'blue';
@@ -128,8 +133,13 @@ export function getView(ctx) {
     .map((key) => {
       const meta = HERO_META[key];
       const count = key === 'ielts' ? ieltsTests.length : (byAge.get(key) || []).length;
+      const featuredTest = getFeaturedTestForHero(key);
+      const heroHref = featuredTest ? hrefFor(`/tests/${featuredTest.slug}`) : `#${meta.jump}`;
+      const heroAttrs = featuredTest
+        ? `href="${heroHref}" data-nav aria-label="Open ${meta.label} featured test"`
+        : `href="${heroHref}" data-tests-jump aria-label="Open ${meta.label} tests"`;
       return `
-        <a class="tests-hero-card" href="#${meta.jump}" data-tests-jump data-glow="${meta.glow}" aria-label="Open ${meta.label} tests">
+        <a class="tests-hero-card" ${heroAttrs} data-glow="${meta.glow}">
           <div class="tests-hero-card__icon" aria-hidden="true">${meta.emoji}</div>
           <h2 class="tests-hero-card__title">${meta.label}</h2>
           <p class="tests-hero-card__desc">${meta.desc}</p>
