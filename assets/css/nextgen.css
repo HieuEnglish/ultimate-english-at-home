@@ -69,6 +69,16 @@
   --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@property --frame-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes frameOrbit {
+  to { --frame-angle: 360deg; }
+}
+
 /* ── Reset / Base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -2673,6 +2683,87 @@ body {
    Resources index + profile next-gen passes
    ============================================================= */
 
+@supports ((-webkit-mask: linear-gradient(#000 0 0)) or (mask: linear-gradient(#000 0 0))) {
+  .resources-nextgen .resource-age-card,
+  .age-nextgen .age-skill-card,
+  .skill-nextgen__stat,
+  .skill-nextgen .detail-card,
+  .skill-nextgen__resource-card {
+    --frame-rgb: 124,92,252;
+    --frame-strength: 1;
+    --frame-speed: 8s;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .resources-nextgen .resource-age-card::after,
+  .age-nextgen .age-skill-card::after,
+  .skill-nextgen__stat::after,
+  .skill-nextgen .detail-card::after,
+  .skill-nextgen__resource-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--frame-angle, 0deg),
+      transparent 0deg,
+      rgba(var(--frame-rgb), calc(0.16 * var(--frame-strength))) 34deg,
+      rgba(79,195,247, calc(0.70 * var(--frame-strength))) 78deg,
+      rgba(251,191,36, calc(0.76 * var(--frame-strength))) 116deg,
+      rgba(244,114,182, calc(0.48 * var(--frame-strength))) 150deg,
+      transparent 186deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: frameOrbit var(--frame-speed) linear infinite;
+  }
+
+  .skill-nextgen__stat,
+  .skill-nextgen .detail-card,
+  .skill-nextgen__resource-card {
+    --frame-strength: 0.68;
+    --frame-speed: 11s;
+  }
+}
+
+.resource-age-card[data-glow="orange"] { --frame-rgb: 251,146,60; }
+.resource-age-card[data-glow="yellow"] { --frame-rgb: 251,191,36; }
+.resource-age-card[data-glow="blue"] { --frame-rgb: 79,195,247; }
+.resource-age-card[data-glow="pink"] { --frame-rgb: 244,114,182; }
+.resource-age-card[data-glow="purple"] { --frame-rgb: 167,139,250; }
+
+.age-skill-card[data-skill="reading"],
+.skill-nextgen__resource-card[data-skill="reading"] { --frame-rgb: 52,211,153; }
+.age-skill-card[data-skill="listening"],
+.skill-nextgen__resource-card[data-skill="listening"] { --frame-rgb: 79,195,247; }
+.age-skill-card[data-skill="writing"],
+.skill-nextgen__resource-card[data-skill="writing"] { --frame-rgb: 251,146,60; }
+.age-skill-card[data-skill="speaking"],
+.skill-nextgen__resource-card[data-skill="speaking"] { --frame-rgb: 167,139,250; }
+
+.skill-nextgen__stat:nth-child(1) { --frame-rgb: 79,195,247; }
+.skill-nextgen__stat:nth-child(2) { --frame-rgb: 251,191,36; }
+.skill-nextgen__stat:nth-child(3) { --frame-rgb: 167,139,250; }
+
+@media (prefers-reduced-motion: reduce) {
+  .resources-nextgen .resource-age-card::after,
+  .age-nextgen .age-skill-card::after,
+  .skill-nextgen__stat::after,
+  .skill-nextgen .detail-card::after,
+  .skill-nextgen__resource-card::after {
+    animation: none;
+  }
+}
+
 .resources-nextgen {
   padding-bottom: 2rem;
 }
@@ -3294,6 +3385,73 @@ body {
   margin-top: 2rem;
 }
 
+@supports ((-webkit-mask: linear-gradient(#000 0 0)) or (mask: linear-gradient(#000 0 0))) {
+  .tests-hero-card,
+  .tests-section--nextgen,
+  .tests-section--nextgen .card {
+    --frame-rgb: 124,92,252;
+    --frame-strength: 0.78;
+    --frame-speed: 10s;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .tests-hero-card::after,
+  .tests-section--nextgen::after,
+  .tests-section--nextgen .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    height: auto;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 1;
+    background: conic-gradient(
+      from var(--frame-angle, 0deg),
+      transparent 0deg,
+      rgba(var(--frame-rgb), calc(0.16 * var(--frame-strength))) 34deg,
+      rgba(79,195,247, calc(0.70 * var(--frame-strength))) 78deg,
+      rgba(251,191,36, calc(0.76 * var(--frame-strength))) 116deg,
+      rgba(244,114,182, calc(0.48 * var(--frame-strength))) 150deg,
+      transparent 186deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: frameOrbit var(--frame-speed) linear infinite;
+    transition: none;
+  }
+
+  .tests-hero-card {
+    --frame-strength: 1;
+    --frame-speed: 8s;
+  }
+
+  .tests-section--nextgen {
+    --frame-strength: 0.58;
+    --frame-speed: 13s;
+  }
+}
+
+.tests-hero-card[data-glow="blue"],
+.tests-section--nextgen .card[data-glow="blue"] { --frame-rgb: 79,195,247; }
+.tests-hero-card[data-glow="green"],
+.tests-section--nextgen .card[data-glow="green"] { --frame-rgb: 52,211,153; }
+.tests-hero-card[data-glow="orange"],
+.tests-section--nextgen .card[data-glow="orange"] { --frame-rgb: 251,146,60; }
+.tests-hero-card[data-glow="yellow"],
+.tests-section--nextgen .card[data-glow="yellow"] { --frame-rgb: 251,191,36; }
+.tests-hero-card[data-glow="pink"],
+.tests-section--nextgen .card[data-glow="pink"] { --frame-rgb: 244,114,182; }
+.tests-hero-card[data-glow="purple"],
+.tests-section--nextgen .card[data-glow="purple"] { --frame-rgb: 167,139,250; }
+
 .tests-hero-card {
   display: flex;
   flex-direction: column;
@@ -3384,7 +3542,7 @@ body {
 
 .tests-section--nextgen .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.95rem;
 }
 
@@ -3474,7 +3632,7 @@ body {
   color: var(--text-secondary);
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1120px) {
   .tests-section--nextgen .card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3483,6 +3641,14 @@ body {
 @media (max-width: 640px) {
   .tests-section--nextgen .card-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tests-hero-card::after,
+  .tests-section--nextgen::after,
+  .tests-section--nextgen .card::after {
+    animation: none;
   }
 }
 

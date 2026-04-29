@@ -172,7 +172,9 @@ export async function getView(ctx, age, skill) {
 
             return `
               <article class="resource-item skill-nextgen__resource${isFeatured}" role="listitem">
-                <button class="resource-card skill-nextgen__resource-card" type="button" data-nav-to="${escapeAttr(
+                <button class="resource-card skill-nextgen__resource-card" type="button" data-skill="${escapeAttr(
+                  skill
+                )}" data-nav-to="${escapeAttr(
                   detailPath
                 )}" aria-label="View details: ${escapeAttr(r.title)}">
                   <div class="skill-nextgen__resource-top">
