@@ -1674,6 +1674,23 @@ body::after {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .games-hub-card::before,
+  .games-featured-banner::before,
+  .games-dashboard__panel::before,
+  .games-badge-card::before,
+  .games-skill-card::before,
+  .games-list-card::before,
+  .game-hero-card::before,
+  .game-missing-card::before,
+  .game-status-bar::before,
+  .game-container::before,
+  .game-tip-card::before,
+  .game-side-card::before {
+    animation: none;
+  }
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 0 1rem;
@@ -5804,6 +5821,171 @@ body {
 
 .error-nextgen__btn {
   min-width: 220px;
+}
+
+/* Final games frame-motion override: keep games frames above older static highlights. */
+@supports ((-webkit-mask: linear-gradient(#000 0 0)) or (mask: linear-gradient(#000 0 0))) {
+  .games-hub-card,
+  .games-featured-banner,
+  .games-dashboard__panel,
+  .games-badge-card,
+  .games-skill-card,
+  .games-list-card,
+  .game-hero-card,
+  .game-missing-card,
+  .game-status-bar,
+  .game-container,
+  .game-tip-card,
+  .game-side-card {
+    --frame-fill: linear-gradient(180deg, rgba(20,16,62,0.96), rgba(13,13,43,0.92));
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .games-featured-banner {
+    --frame-rgb: 251,191,36;
+    --frame-strength: 1;
+    --frame-speed: 8s;
+    --frame-fill:
+      radial-gradient(circle at top, rgba(251,191,36,0.16), transparent 42%),
+      linear-gradient(180deg, rgba(68,36,14,0.36), rgba(32,18,58,0.92));
+  }
+
+  .game-hero-card,
+  .game-missing-card,
+  .game-status-bar,
+  .game-container,
+  .game-tip-card,
+  .game-side-card {
+    --frame-fill:
+      linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)),
+      radial-gradient(540px 240px at 0% 0%, var(--game-accent-soft, rgba(124,92,252,0.14)), transparent 72%),
+      rgba(12, 14, 38, 0.78);
+  }
+
+  .game-container {
+    --frame-strength: 0.5;
+    --frame-speed: 14s;
+  }
+
+  .games-dashboard__panel,
+  .games-badge-card,
+  .game-status-bar,
+  .game-tip-card,
+  .game-side-card {
+    --frame-strength: 0.62;
+    --frame-speed: 12s;
+  }
+
+  .games-hub-card[data-glow="green"],
+  .games-skill-card[data-glow="green"],
+  .games-list-card[data-glow="green"] { --frame-rgb: 52,211,153; }
+  .games-hub-card[data-glow="yellow"],
+  .games-skill-card[data-glow="yellow"],
+  .games-list-card[data-glow="yellow"] { --frame-rgb: 251,191,36; }
+  .games-hub-card[data-glow="blue"],
+  .games-skill-card[data-glow="blue"],
+  .games-list-card[data-glow="blue"] { --frame-rgb: 79,195,247; }
+  .games-hub-card[data-glow="purple"],
+  .games-skill-card[data-glow="purple"],
+  .games-list-card[data-glow="purple"] { --frame-rgb: 167,139,250; }
+  .games-hub-card[data-glow="pink"],
+  .games-skill-card[data-glow="pink"],
+  .games-list-card[data-glow="pink"] { --frame-rgb: 244,114,182; }
+  .games-skill-card[data-glow="red"],
+  .games-list-card[data-glow="red"] { --frame-rgb: 255,86,120; }
+
+  .games-dashboard__panel--violet { --frame-rgb: 167,139,250; }
+  .games-dashboard__panel--gold,
+  .games-badge-card { --frame-rgb: 251,191,36; }
+
+  .game-play-page[data-game-age-theme="0-3"] { --frame-rgb: 52,211,153; }
+  .game-play-page[data-game-age-theme="4-7"] { --frame-rgb: 251,191,36; }
+  .game-play-page[data-game-age-theme="8-10"] { --frame-rgb: 79,195,247; }
+  .game-play-page[data-game-age-theme="11-12"] { --frame-rgb: 167,139,250; }
+  .game-play-page[data-game-age-theme="13-18"],
+  .game-play-page[data-game-age-theme="featured"] { --frame-rgb: 244,114,182; }
+
+  .games-hub-card::before,
+  .games-featured-banner::before,
+  .games-dashboard__panel::before,
+  .games-badge-card::before,
+  .games-skill-card::before,
+  .games-list-card::before,
+  .game-hero-card::before,
+  .game-missing-card::before,
+  .game-status-bar::before,
+  .game-container::before,
+  .game-tip-card::before,
+  .game-side-card::before {
+    content: "";
+    position: absolute;
+    inset: -75%;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(var(--frame-rgb, 124,92,252), calc(0.18 * var(--frame-strength, 1))) 36deg,
+      rgba(79,195,247, calc(0.74 * var(--frame-strength, 1))) 82deg,
+      rgba(251,191,36, calc(0.80 * var(--frame-strength, 1))) 124deg,
+      rgba(244,114,182, calc(0.52 * var(--frame-strength, 1))) 164deg,
+      transparent 212deg,
+      transparent 360deg
+    );
+    -webkit-mask: none;
+    mask: none;
+    animation: frameSpin var(--frame-speed, 8s) linear infinite;
+  }
+
+  .games-hub-card::after,
+  .games-featured-banner::after,
+  .games-dashboard__panel::after,
+  .games-badge-card::after,
+  .games-skill-card::after,
+  .games-list-card::after,
+  .game-hero-card::after,
+  .game-missing-card::after,
+  .game-status-bar::after,
+  .game-container::after,
+  .game-tip-card::after,
+  .game-side-card::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 1;
+    height: auto;
+    padding: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 1;
+    background: var(--frame-fill);
+    filter: none;
+    -webkit-mask: none;
+    mask: none;
+    animation: none;
+    transition: none;
+  }
+
+  .games-hub-card > *,
+  .games-featured-banner > *,
+  .games-dashboard__panel > *,
+  .games-badge-card > *,
+  .games-skill-card > *,
+  .games-list-card > *,
+  .game-hero-card > *,
+  .game-missing-card > *,
+  .game-status-bar > *,
+  .game-container > *,
+  .game-tip-card > *,
+  .game-side-card > * {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 /* Final frame-motion override: keep the rotating layer above older static highlights. */
