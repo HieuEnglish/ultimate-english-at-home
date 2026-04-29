@@ -41,7 +41,7 @@
 
 @property --frame-angle {
   syntax: "<angle>";
-  inherits: false;
+  inherits: true;
   initial-value: 0deg;
 }
 
@@ -284,6 +284,10 @@ section, header, footer, nav, main { position: relative; z-index: 1; }
   to { --frame-angle: 360deg; }
 }
 
+@keyframes frameSpin {
+  to { transform: rotate(1turn); }
+}
+
 @supports ((-webkit-mask: linear-gradient(#000 0 0)) or (mask: linear-gradient(#000 0 0))) {
   .shader-frame {
     --frame-speed: 8s;
@@ -291,6 +295,7 @@ section, header, footer, nav, main { position: relative; z-index: 1; }
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    animation: frameOrbit var(--frame-speed) linear infinite;
   }
 
   .shader-frame::before {
@@ -316,12 +321,15 @@ section, header, footer, nav, main { position: relative; z-index: 1; }
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: frameOrbit var(--frame-speed) linear infinite;
   }
 
   .shader-frame--soft {
     --frame-strength: 0.72;
     --frame-speed: 11s;
+  }
+
+  .cta-card.shader-frame {
+    --frame-speed: 9s;
   }
 
   .cta-card.shader-frame::before {
@@ -359,12 +367,72 @@ section, header, footer, nav, main { position: relative; z-index: 1; }
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: frameOrbit 9s linear infinite;
   }
 
   .cta-card.shader-frame > * {
     position: relative;
     z-index: 1;
+  }
+}
+
+@supports ((-webkit-mask: linear-gradient(#000 0 0)) or (mask: linear-gradient(#000 0 0))) {
+  .shader-frame {
+    --frame-fill: var(--bg-card);
+    animation: none;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .cta-card.shader-frame {
+    --frame-fill: linear-gradient(135deg, rgba(124,92,252,0.12), rgba(79,195,247,0.06));
+  }
+
+  .shader-frame::before,
+  .cta-card.shader-frame::before {
+    content: "";
+    position: absolute;
+    inset: -75%;
+    z-index: 0;
+    padding: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      color-mix(in srgb, var(--accent-color, var(--purple)) 22%, transparent) 36deg,
+      rgba(79,195,247, calc(0.74 * var(--frame-strength, 1))) 82deg,
+      rgba(251,191,36, calc(0.80 * var(--frame-strength, 1))) 124deg,
+      rgba(244,114,182, calc(0.52 * var(--frame-strength, 1))) 164deg,
+      transparent 212deg,
+      transparent 360deg
+    );
+    -webkit-mask: none;
+    mask: none;
+    animation: frameSpin var(--frame-speed, 8s) linear infinite;
+  }
+
+  .shader-frame::after,
+  .cta-card.shader-frame::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 1;
+    height: auto;
+    padding: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 1;
+    background: var(--frame-fill);
+    -webkit-mask: none;
+    mask: none;
+    animation: none;
+    transform: none;
+  }
+
+  .shader-frame > *,
+  .cta-card.shader-frame > * {
+    position: relative;
+    z-index: 2;
   }
 }
 
@@ -825,7 +893,7 @@ section, header, footer, nav, main { position: relative; z-index: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .shader-frame::before,
-  .cta-card.shader-frame::after {
+  .cta-card.shader-frame::before {
     animation: none;
   }
 }
@@ -874,10 +942,10 @@ section, header, footer, nav, main { position: relative; z-index: 1; }
     <p class="hero-note">No account needed · Works on any device · Always free</p>
 
     <div class="hero-pills">
-      <div class="hero-pill shader-frame shader-frame--soft">🧸 Ages 0–3</div>
-      <div class="hero-pill shader-frame shader-frame--soft">🎨 Ages 4–7</div>
-      <div class="hero-pill shader-frame shader-frame--soft">🤖 Ages 8–12</div>
-      <div class="hero-pill shader-frame shader-frame--soft">🎧 Ages 13+</div>
+      <div class="hero-pill shader-frame shader-frame--soft"><span>🧸 Ages 0–3</span></div>
+      <div class="hero-pill shader-frame shader-frame--soft"><span>🎨 Ages 4–7</span></div>
+      <div class="hero-pill shader-frame shader-frame--soft"><span>🤖 Ages 8–12</span></div>
+      <div class="hero-pill shader-frame shader-frame--soft"><span>🎧 Ages 13+</span></div>
     </div>
   </div>
 </section>

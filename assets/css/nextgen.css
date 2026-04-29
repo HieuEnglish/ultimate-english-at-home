@@ -71,12 +71,16 @@
 
 @property --frame-angle {
   syntax: "<angle>";
-  inherits: false;
+  inherits: true;
   initial-value: 0deg;
 }
 
 @keyframes frameOrbit {
   to { --frame-angle: 360deg; }
+}
+
+@keyframes frameSpin {
+  to { transform: rotate(1turn); }
 }
 
 /* ── Reset / Base ── */
@@ -2695,6 +2699,7 @@ body {
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    animation: frameOrbit var(--frame-speed) linear infinite;
   }
 
   .resources-nextgen .resource-age-card::after,
@@ -2724,7 +2729,6 @@ body {
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: frameOrbit var(--frame-speed) linear infinite;
   }
 
   .skill-nextgen__stat,
@@ -2755,11 +2759,11 @@ body {
 .skill-nextgen__stat:nth-child(3) { --frame-rgb: 167,139,250; }
 
 @media (prefers-reduced-motion: reduce) {
-  .resources-nextgen .resource-age-card::after,
-  .age-nextgen .age-skill-card::after,
-  .skill-nextgen__stat::after,
-  .skill-nextgen .detail-card::after,
-  .skill-nextgen__resource-card::after {
+  .resources-nextgen .resource-age-card,
+  .age-nextgen .age-skill-card,
+  .skill-nextgen__stat,
+  .skill-nextgen .detail-card,
+  .skill-nextgen__resource-card {
     animation: none;
   }
 }
@@ -3395,6 +3399,7 @@ body {
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    animation: frameOrbit var(--frame-speed) linear infinite;
   }
 
   .tests-hero-card::after,
@@ -3424,7 +3429,6 @@ body {
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: frameOrbit var(--frame-speed) linear infinite;
     transition: none;
   }
 
@@ -3451,6 +3455,114 @@ body {
 .tests-section--nextgen .card[data-glow="pink"] { --frame-rgb: 244,114,182; }
 .tests-hero-card[data-glow="purple"],
 .tests-section--nextgen .card[data-glow="purple"] { --frame-rgb: 167,139,250; }
+
+@supports ((-webkit-mask: linear-gradient(#000 0 0)) or (mask: linear-gradient(#000 0 0))) {
+  .resources-nextgen .resource-age-card,
+  .age-nextgen .age-skill-card,
+  .skill-nextgen__stat,
+  .skill-nextgen .detail-card,
+  .skill-nextgen__resource-card,
+  .tests-hero-card,
+  .tests-section--nextgen,
+  .tests-section--nextgen .card {
+    animation: none;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .resources-nextgen .resource-age-card {
+    --frame-fill: linear-gradient(180deg, rgba(23, 17, 74, 0.96), rgba(13, 13, 43, 0.94));
+  }
+
+  .age-nextgen .age-skill-card {
+    --frame-fill: var(--bg-card);
+  }
+
+  .skill-nextgen__stat {
+    --frame-fill: rgba(255,255,255,0.05);
+  }
+
+  .skill-nextgen .detail-card,
+  .skill-nextgen__resource-card,
+  .tests-hero-card {
+    --frame-fill: linear-gradient(180deg, rgba(20,16,62,0.96), rgba(13,13,43,0.92));
+  }
+
+  .tests-section--nextgen {
+    --frame-fill:
+      linear-gradient(180deg, rgba(24,18,74,0.78), rgba(13,13,43,0.62)),
+      radial-gradient(circle at top, rgba(124,92,252,0.08), transparent 45%);
+  }
+
+  .tests-section--nextgen .card {
+    --frame-fill: linear-gradient(180deg, rgba(26,20,78,0.96), rgba(18,16,60,0.92));
+  }
+
+  .resources-nextgen .resource-age-card::before,
+  .age-nextgen .age-skill-card::before,
+  .skill-nextgen__stat::before,
+  .skill-nextgen .detail-card::before,
+  .skill-nextgen__resource-card::before,
+  .tests-hero-card::before,
+  .tests-section--nextgen::before,
+  .tests-section--nextgen .card::before {
+    content: "";
+    position: absolute;
+    inset: -75%;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(var(--frame-rgb), calc(0.18 * var(--frame-strength, 1))) 36deg,
+      rgba(79,195,247, calc(0.74 * var(--frame-strength, 1))) 82deg,
+      rgba(251,191,36, calc(0.80 * var(--frame-strength, 1))) 124deg,
+      rgba(244,114,182, calc(0.52 * var(--frame-strength, 1))) 164deg,
+      transparent 212deg,
+      transparent 360deg
+    );
+    -webkit-mask: none;
+    mask: none;
+    animation: frameSpin var(--frame-speed, 8s) linear infinite;
+  }
+
+  .resources-nextgen .resource-age-card::after,
+  .age-nextgen .age-skill-card::after,
+  .skill-nextgen__stat::after,
+  .skill-nextgen .detail-card::after,
+  .skill-nextgen__resource-card::after,
+  .tests-hero-card::after,
+  .tests-section--nextgen::after,
+  .tests-section--nextgen .card::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 1;
+    height: auto;
+    padding: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 1;
+    background: var(--frame-fill);
+    -webkit-mask: none;
+    mask: none;
+    animation: none;
+    transition: none;
+  }
+
+  .resources-nextgen .resource-age-card > *,
+  .age-nextgen .age-skill-card > *,
+  .skill-nextgen__stat > *,
+  .skill-nextgen .detail-card > *,
+  .skill-nextgen__resource-card > *,
+  .tests-hero-card > *,
+  .tests-section--nextgen > *,
+  .tests-section--nextgen .card > * {
+    position: relative;
+    z-index: 2;
+  }
+}
 
 .tests-hero-card {
   display: flex;
@@ -3645,9 +3757,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tests-hero-card::after,
-  .tests-section--nextgen::after,
-  .tests-section--nextgen .card::after {
+  .tests-hero-card,
+  .tests-section--nextgen,
+  .tests-section--nextgen .card {
     animation: none;
   }
 }
@@ -5692,4 +5804,72 @@ body {
 
 .error-nextgen__btn {
   min-width: 220px;
+}
+
+/* Final frame-motion override: keep the rotating layer above older static highlights. */
+@supports ((-webkit-mask: linear-gradient(#000 0 0)) or (mask: linear-gradient(#000 0 0))) {
+  .resources-nextgen .resource-age-card::before,
+  .age-nextgen .age-skill-card::before,
+  .skill-nextgen__stat::before,
+  .skill-nextgen .detail-card::before,
+  .skill-nextgen__resource-card::before,
+  .tests-hero-card::before,
+  .tests-section--nextgen::before,
+  .tests-section--nextgen .card::before {
+    content: "";
+    position: absolute;
+    inset: -75%;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(var(--frame-rgb), calc(0.18 * var(--frame-strength, 1))) 36deg,
+      rgba(79,195,247, calc(0.74 * var(--frame-strength, 1))) 82deg,
+      rgba(251,191,36, calc(0.80 * var(--frame-strength, 1))) 124deg,
+      rgba(244,114,182, calc(0.52 * var(--frame-strength, 1))) 164deg,
+      transparent 212deg,
+      transparent 360deg
+    );
+    -webkit-mask: none;
+    mask: none;
+    animation: frameSpin var(--frame-speed, 8s) linear infinite;
+  }
+
+  .resources-nextgen .resource-age-card::after,
+  .age-nextgen .age-skill-card::after,
+  .skill-nextgen__stat::after,
+  .skill-nextgen .detail-card::after,
+  .skill-nextgen__resource-card::after,
+  .tests-hero-card::after,
+  .tests-section--nextgen::after,
+  .tests-section--nextgen .card::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 1;
+    height: auto;
+    padding: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 1;
+    background: var(--frame-fill);
+    -webkit-mask: none;
+    mask: none;
+    animation: none;
+    transition: none;
+  }
+
+  .resources-nextgen .resource-age-card > *,
+  .age-nextgen .age-skill-card > *,
+  .skill-nextgen__stat > *,
+  .skill-nextgen .detail-card > *,
+  .skill-nextgen__resource-card > *,
+  .tests-hero-card > *,
+  .tests-section--nextgen > *,
+  .tests-section--nextgen .card > * {
+    position: relative;
+    z-index: 2;
+  }
 }
