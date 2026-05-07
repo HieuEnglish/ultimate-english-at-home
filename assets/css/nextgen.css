@@ -3581,6 +3581,296 @@ body {
   }
 }
 
+/* Test visual redo: cleaner stage surfaces, no rotating/background line clutter. */
+.tests-nextgen {
+  --test-surface-strong: rgba(18, 16, 54, 0.94);
+  --test-surface: rgba(20, 18, 62, 0.84);
+  --test-surface-soft: rgba(255, 255, 255, 0.055);
+}
+
+.tests-hero-card,
+.tests-section--nextgen,
+.tests-section--nextgen .card {
+  animation: none !important;
+  isolation: isolate;
+}
+
+.tests-hero-card::before,
+.tests-hero-card::after,
+.tests-section--nextgen::before,
+.tests-section--nextgen::after,
+.tests-section--nextgen .card::before,
+.tests-section--nextgen .card::after,
+.test-detail-shell::before,
+.test-runner-shell::before {
+  content: none !important;
+  animation: none !important;
+  background: none !important;
+}
+
+.tests-hero-card {
+  border-color: rgba(255, 255, 255, 0.13) !important;
+  background:
+    radial-gradient(420px 220px at 50% -8%, rgba(var(--frame-rgb, 124,92,252), 0.20), transparent 66%),
+    linear-gradient(180deg, rgba(28, 23, 80, 0.98), rgba(12, 12, 38, 0.94)) !important;
+}
+
+.tests-hero-card__icon {
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255,255,255,0.22), transparent 34%),
+    linear-gradient(145deg, rgba(var(--frame-rgb, 124,92,252), 0.24), rgba(255,255,255,0.07));
+  box-shadow: 0 18px 34px rgba(0,0,0,0.20), 0 0 24px rgba(var(--frame-rgb, 124,92,252), 0.14);
+}
+
+.tests-section--nextgen {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background:
+    radial-gradient(720px 280px at 8% 0%, rgba(79,195,247,0.08), transparent 70%),
+    radial-gradient(620px 260px at 94% 0%, rgba(244,114,182,0.07), transparent 70%),
+    linear-gradient(180deg, rgba(21, 18, 66, 0.92), rgba(11, 11, 36, 0.82)) !important;
+  box-shadow: 0 20px 54px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.tests-section--nextgen .card {
+  border-color: rgba(255,255,255,0.115) !important;
+  background:
+    linear-gradient(135deg, rgba(var(--frame-rgb, 124,92,252), 0.12), rgba(255,255,255,0.035) 42%),
+    linear-gradient(180deg, rgba(30, 25, 82, 0.96), rgba(17, 15, 54, 0.92)) !important;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.07) !important;
+}
+
+.tests-section--nextgen .card:hover {
+  border-color: rgba(var(--frame-rgb, 124,92,252), 0.36) !important;
+  box-shadow: 0 22px 48px rgba(0,0,0,0.28), 0 0 30px rgba(var(--frame-rgb, 124,92,252), 0.13) !important;
+}
+
+.test-hero {
+  border-color: color-mix(in srgb, var(--test-accent) 30%, rgba(255,255,255,0.14));
+  background:
+    radial-gradient(520px 280px at 18% 4%, color-mix(in srgb, var(--test-accent) 22%, transparent), transparent 72%),
+    radial-gradient(540px 260px at 92% 18%, color-mix(in srgb, var(--test-accent-2) 18%, transparent), transparent 72%),
+    linear-gradient(145deg, rgba(32, 27, 88, 0.96), rgba(12, 12, 40, 0.92)) !important;
+}
+
+.test-hero__orb {
+  opacity: 0.58;
+  filter: blur(26px);
+}
+
+.test-hero__panel {
+  background:
+    radial-gradient(circle at 35% 24%, rgba(255,255,255,0.22), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.055)),
+    rgba(16, 16, 48, 0.62);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.25), 0 0 30px color-mix(in srgb, var(--test-accent) 18%, transparent);
+}
+
+.test-detail-shell {
+  background:
+    radial-gradient(760px 300px at 0% 0%, color-mix(in srgb, var(--test-accent) 10%, transparent), transparent 70%),
+    radial-gradient(760px 300px at 100% 0%, color-mix(in srgb, var(--test-accent-2) 9%, transparent), transparent 72%),
+    linear-gradient(180deg, rgba(28, 24, 78, 0.94), rgba(12, 12, 40, 0.9)) !important;
+  border-color: color-mix(in srgb, var(--test-accent) 28%, rgba(255,255,255,0.14)) !important;
+}
+
+.test-detail-shell__icon,
+.test-stage-pill,
+.test-chip,
+.test-stat-card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045)),
+    rgba(255,255,255,0.035) !important;
+}
+
+.test-runner-shell {
+  position: relative;
+  background:
+    radial-gradient(720px 280px at 12% 0%, color-mix(in srgb, var(--test-accent) 11%, transparent), transparent 72%),
+    radial-gradient(720px 280px at 88% 0%, color-mix(in srgb, var(--test-accent-2) 9%, transparent), transparent 72%),
+    linear-gradient(180deg, rgba(34, 30, 86, 0.92), rgba(15, 14, 48, 0.88)) !important;
+  border-color: color-mix(in srgb, var(--test-accent) 24%, rgba(255,255,255,0.14)) !important;
+}
+
+.tests-page [data-test-runner-root] .note,
+.tests-page [data-test-runner-root] details,
+.tests-page [data-test-runner-root] fieldset,
+.tests-page [data-test-runner-root] form,
+.tests-page [data-test-runner-root] table,
+.test-runner-chrome,
+.test-runner-stage__topbar {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.105), rgba(255,255,255,0.04)),
+    rgba(255,255,255,0.045) !important;
+  border-color: color-mix(in srgb, var(--test-accent) 20%, rgba(255,255,255,0.13)) !important;
+}
+
+.test-runner-stage__intro > .note:first-child,
+.test-runner-stage__summary > .note:first-child,
+.test-runner-stage__feedback > .note:first-child {
+  background:
+    radial-gradient(440px 180px at 100% 0%, color-mix(in srgb, var(--test-accent-2) 16%, transparent), transparent 70%),
+    linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.045)),
+    rgba(255,255,255,0.045) !important;
+}
+
+.test-runner-stage__feedback--correct,
+.tests-page [data-test-runner-root] .note.is-correct {
+  border-color: rgba(52, 211, 153, 0.42) !important;
+  background:
+    radial-gradient(520px 220px at 100% 0%, rgba(52, 211, 153, 0.18), transparent 68%),
+    linear-gradient(180deg, rgba(52, 211, 153, 0.18), rgba(52, 211, 153, 0.065)),
+    rgba(10, 42, 34, 0.46) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 18px 40px rgba(0,0,0,0.18),
+    0 0 34px rgba(52, 211, 153, 0.10) !important;
+}
+
+.test-runner-stage__feedback--correct strong:first-child,
+.tests-page [data-test-runner-root] .note.is-correct strong:first-child {
+  color: #b8ffe7 !important;
+}
+
+.test-runner-stage__feedback--incorrect {
+  border-color: rgba(251, 191, 36, 0.38) !important;
+  background:
+    radial-gradient(520px 220px at 100% 0%, rgba(251, 146, 60, 0.16), transparent 68%),
+    linear-gradient(180deg, rgba(251, 191, 36, 0.13), rgba(251, 146, 60, 0.055)),
+    rgba(48, 31, 16, 0.38) !important;
+}
+
+.test-runner-stage__feedback--incorrect strong:first-child {
+  color: #ffe0a3 !important;
+}
+
+.test-runner-stage__formwrap fieldset {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.105), rgba(255,255,255,0.035)),
+    rgba(255,255,255,0.04) !important;
+}
+
+.tests-page [data-test-runner-root] label[for^="opt-"],
+.tests-page [data-test-runner-root] [data-choice] {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045)),
+    rgba(255,255,255,0.04) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.tests-page [data-test-runner-root] label[for^="opt-"]:hover,
+.tests-page [data-test-runner-root] [data-choice]:hover {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--test-accent) 14%, rgba(255,255,255,0.10)), rgba(255,255,255,0.055)),
+    rgba(255,255,255,0.05) !important;
+}
+
+.test-detail-shell.is-test-complete {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 28px 70px rgba(0,0,0,0.28),
+    0 0 44px color-mix(in srgb, var(--test-accent) 22%, transparent);
+}
+
+.test-confetti-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.test-complete-burst {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  min-width: 150px;
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.24);
+  background: rgba(9, 9, 28, 0.72);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.28), 0 0 34px color-mix(in srgb, var(--test-accent) 28%, transparent);
+  transform: translate(-50%, -50%) scale(0.86);
+  opacity: 0;
+  animation: testCompleteBurst 1600ms ease forwards;
+}
+
+.test-complete-burst[data-variant="correct"] {
+  border-color: rgba(52, 211, 153, 0.34);
+  background: rgba(7, 36, 30, 0.76);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.28), 0 0 34px rgba(52, 211, 153, 0.22);
+}
+
+.test-confetti-layer i {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: testConfettiFallback 1300ms ease-out forwards;
+}
+
+.confetti-particle {
+  will-change: transform, opacity;
+}
+
+.confetti-shockwave {
+  will-change: transform, opacity;
+}
+
+@keyframes confettiShockwave {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(18);
+  }
+}
+
+@keyframes testCompleteBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -44%) scale(0.84);
+  }
+  18%, 62% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -68%) scale(0.96);
+  }
+}
+
+@keyframes testConfettiFallback {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) + 180px)) scale(0.96) rotate(var(--rot));
+  }
+}
+
+@media (max-width: 640px) {
+  .test-complete-burst {
+    top: 14%;
+    min-width: 128px;
+    font-size: 0.9rem;
+  }
+}
+
 .tests-hero-card {
   display: flex;
   flex-direction: column;
@@ -4416,6 +4706,40 @@ body {
   .test-runner-stage__feedback > .note:first-child {
     border-radius: 18px;
   }
+}
+
+/* Final feedback color pass: keep result panels obvious despite runner inline styles. */
+.tests-page [data-test-runner-root] .test-runner-stage__feedback--correct,
+.tests-page [data-test-runner-root] .test-runner-stage__feedback--correct[style],
+.tests-page [data-test-runner-root] .note.is-correct,
+.tests-page [data-test-runner-root] .note.is-correct[style] {
+  border-color: rgba(52, 211, 153, 0.48) !important;
+  background:
+    radial-gradient(520px 220px at 100% 0%, rgba(52, 211, 153, 0.20), transparent 68%),
+    linear-gradient(180deg, rgba(52, 211, 153, 0.20), rgba(52, 211, 153, 0.075)),
+    rgba(10, 42, 34, 0.52) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 18px 42px rgba(0,0,0,0.20),
+    0 0 36px rgba(52, 211, 153, 0.13) !important;
+}
+
+.tests-page [data-test-runner-root] .test-runner-stage__feedback--correct strong:first-child,
+.tests-page [data-test-runner-root] .note.is-correct strong:first-child {
+  color: #b8ffe7 !important;
+}
+
+.tests-page [data-test-runner-root] .test-runner-stage__feedback--incorrect,
+.tests-page [data-test-runner-root] .test-runner-stage__feedback--incorrect[style] {
+  border-color: rgba(251, 191, 36, 0.42) !important;
+  background:
+    radial-gradient(520px 220px at 100% 0%, rgba(251, 146, 60, 0.17), transparent 68%),
+    linear-gradient(180deg, rgba(251, 191, 36, 0.14), rgba(251, 146, 60, 0.06)),
+    rgba(48, 31, 16, 0.42) !important;
+}
+
+.tests-page [data-test-runner-root] .test-runner-stage__feedback--incorrect strong:first-child {
+  color: #ffe0a3 !important;
 }
 
 /* Scoring next-gen */

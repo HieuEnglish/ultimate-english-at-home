@@ -380,46 +380,100 @@ class ConfettiExplosion {
         this.container = container;
         this.particles = [];
         this.colors = [
-            "#ff6b6b", "#4ecdc4", "#ffe66d", "#95e1d3",
-            "#f38181", "#aa96da", "#fcbad3", "#a8d8ea",
-            "#6c5ce7", "#00cec9", "#fdcb6e", "#e17055"
+            "#7c5cfc", "#4fc3f7", "#00e5ff", "#34d399",
+            "#fbbf24", "#fb923c", "#f472b6", "#ffffff",
+            "#a78bfa", "#2dd4bf", "#ffd166", "#ff6b8a"
         ];
+        this.shapes = ["circle", "square", "ticket", "spark"];
     }
 
     explode(x, y, count = 100) {
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (!this.container || typeof this.container.getBoundingClientRect !== "function") return;
+
         const rect = this.container.getBoundingClientRect();
-        const centerX = x || rect.width / 2;
-        const centerY = y || rect.height / 3;
+        let centerX = rect.width / 2;
+        let centerY = rect.height / 3;
+
+        if (x && typeof x.getBoundingClientRect === "function") {
+            const targetRect = x.getBoundingClientRect();
+            centerX = targetRect.left - rect.left + targetRect.width / 2;
+            centerY = targetRect.top - rect.top + targetRect.height / 2;
+        } else {
+            if (Number.isFinite(Number(x))) centerX = Number(x);
+            if (Number.isFinite(Number(y))) centerY = Number(y);
+        }
+
+        this.createShockwave(centerX, centerY);
 
         for (let i = 0; i < count; i++) {
-            this.createParticle(centerX, centerY);
+            this.createParticle(centerX, centerY, i, count);
         }
 
         // Cleanup after animation
-        setTimeout(() => this.cleanup(), 3000);
+        setTimeout(() => this.cleanup(), 3600);
     }
 
-    createParticle(x, y) {
-        const particle = document.createElement("div");
-        particle.className = "confetti-particle";
-        particle.style.cssText = `
+    createShockwave(x, y) {
+        const wave = document.createElement("div");
+        wave.className = "confetti-shockwave";
+        wave.style.cssText = `
       position: absolute;
-      width: ${Math.random() * 10 + 5}px;
-      height: ${Math.random() * 10 + 5}px;
-      background: ${this.colors[Math.floor(Math.random() * this.colors.length)]};
       left: ${x}px;
       top: ${y}px;
-      border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,.72);
+      box-shadow: 0 0 30px rgba(124,92,252,.34), inset 0 0 20px rgba(79,195,247,.24);
       pointer-events: none;
       z-index: 1000;
+      transform: translate(-50%, -50%) scale(.25);
+      animation: confettiShockwave 780ms ease-out forwards;
+    `;
+        this.container.appendChild(wave);
+        this.particles.push(wave);
+    }
+
+    createParticle(x, y, index = 0, total = 100) {
+        const particle = document.createElement("div");
+        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        const shape = this.shapes[Math.floor(Math.random() * this.shapes.length)];
+        const size = Math.random() * 9 + 5;
+        const delay = Math.random() * 70;
+
+        particle.className = "confetti-particle";
+        particle.dataset.shape = shape;
+        particle.style.cssText = `
+      position: absolute;
+      width: ${shape === "ticket" ? size * 1.7 : size}px;
+      height: ${shape === "spark" ? Math.max(10, size * 1.8) : size}px;
+      background: ${color};
+      left: ${x}px;
+      top: ${y}px;
+      border-radius: ${shape === "circle" ? "50%" : shape === "ticket" ? "999px" : "3px"};
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 0 12px ${color}66;
+      transform: translate3d(-50%, -50%, 0) rotate(0deg);
+      transform-origin: center;
     `;
 
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = Math.random() * 15 + 10;
+        if (shape === "spark") {
+            particle.style.width = "3px";
+            particle.style.borderRadius = "999px";
+        }
+
+        const goldenStep = Math.PI * (3 - Math.sqrt(5));
+        const spreadAngle = (index * goldenStep) + (Math.random() - 0.5) * 0.7;
+        const angle = total > 40 ? spreadAngle : Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 10 + 9;
         const vx = Math.cos(angle) * velocity;
-        const vy = Math.sin(angle) * velocity - 10;
+        const vy = Math.sin(angle) * velocity - (Math.random() * 12 + 11);
         const rotation = Math.random() * 360;
-        const rotationSpeed = Math.random() * 10 - 5;
+        const rotationSpeed = Math.random() * 18 - 9;
+        const drift = (Math.random() - 0.5) * 0.32;
+        const life = Math.floor(Math.random() * 28 + 70);
 
         this.container.appendChild(particle);
         this.particles.push(particle);
@@ -427,22 +481,22 @@ class ConfettiExplosion {
         let frame = 0;
         let currentX = x;
         let currentY = y;
+        let currentVX = vx;
         let currentVY = vy;
         let currentRotation = rotation;
 
         const animate = () => {
             frame++;
-            currentX += vx * 0.95;
-            currentVY += 0.5; // gravity
+            currentVX = (currentVX + drift) * 0.985;
+            currentX += currentVX;
+            currentVY += 0.48; // gravity
             currentY += currentVY;
             currentRotation += rotationSpeed;
 
-            particle.style.left = currentX + "px";
-            particle.style.top = currentY + "px";
-            particle.style.transform = `rotate(${currentRotation}deg)`;
-            particle.style.opacity = Math.max(0, 1 - frame / 60);
+            particle.style.transform = `translate3d(${currentX - x}px, ${currentY - y}px, 0) rotate(${currentRotation}deg)`;
+            particle.style.opacity = Math.max(0, 1 - Math.max(0, frame - delay / 16) / life);
 
-            if (frame < 60 && currentY < this.container.offsetHeight + 50) {
+            if (frame < life && currentY < this.container.offsetHeight + 70) {
                 requestAnimationFrame(animate);
             } else {
                 particle.remove();

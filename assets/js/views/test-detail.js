@@ -217,7 +217,7 @@ function inferRunnerState(stage) {
     };
   }
 
-  if (/\bfinished\b|\bsummary\b|\bnext step\b/i.test(text)) {
+  if (/finished|summary|next step/i.test(text)) {
     return { mode: 'summary', label: 'Summary' };
   }
   if (/\bloading\b|\bpreparing\b/i.test(text)) {
@@ -231,6 +231,22 @@ function inferRunnerState(stage) {
   }
 
   return { mode: 'practice', label: 'Practice mode' };
+}
+
+function inferRunnerFeedback(stage) {
+  const text = String(stage?.textContent || '').replace(/\s+/g, ' ').trim();
+  if (!text || /finished|summary|next step/i.test(text)) return { kind: '', key: '' };
+
+  const progressMatch = text.match(/\b(Question|Prompt)\s+(\d+)\s+of\s+(\d+)\b/i);
+  const current = progressMatch ? Number(progressMatch[2] || 0) : 0;
+  const total = progressMatch ? Number(progressMatch[3] || 0) : 0;
+
+  const negative = /\bnot quite\b|\bincorrect\b|\bkeep going\b|\btry again\b|correct answer/i.test(text);
+  const positive = /\bnice work\b|\bgood job\b|\bwell done\b|\bcorrect\b|saved\s*&\s*scored/i.test(text);
+
+  if (negative) return { kind: 'incorrect', key: `incorrect-${current}-${total}` };
+  if (positive) return { kind: 'correct', key: `correct-${current}-${total}` };
+  return { kind: '', key: '' };
 }
 
 function buildRunnerChromeMarkup(title, theme, state) {
@@ -263,6 +279,84 @@ function buildRunnerChromeMarkup(title, theme, state) {
   `;
 }
 
+function triggerRunnerCelebration(rootEl, stage, theme, options = {}) {
+  const key = String(options.key || 'summary');
+  if (!rootEl || !stage || stage.dataset.ueahCelebrated === key) return;
+  stage.dataset.ueahCelebrated = key;
+
+  const shell = rootEl.closest('.test-detail-shell') || rootEl;
+  if (!shell || typeof document === 'undefined') return;
+
+  try {
+    shell.classList.add('is-test-complete');
+    window.setTimeout(() => {
+      try {
+        shell.classList.remove('is-test-complete');
+      } catch (_) {}
+    }, 1800);
+  } catch (_) {}
+
+  const layer = document.createElement('div');
+  layer.className = 'test-confetti-layer';
+  layer.setAttribute('aria-hidden', 'true');
+  shell.appendChild(layer);
+
+  const badge = document.createElement('div');
+  badge.className = 'test-complete-burst';
+  if (options.variant) badge.dataset.variant = String(options.variant);
+  badge.textContent = options.label || 'Great work';
+  layer.appendChild(badge);
+
+  const runFallback = () => {
+    const colors = [theme.accent, theme.accentAlt, theme.ageAccent, '#ffffff', '#fbbf24', '#34d399'];
+    const rect = layer.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = Math.max(110, rect.height * 0.34);
+
+    for (let i = 0; i < 120; i += 1) {
+      const particle = document.createElement('i');
+      const color = colors[i % colors.length];
+      const angle = (i / 120) * Math.PI * 2 + (Math.random() - 0.5) * 0.42;
+      const distance = 120 + Math.random() * 260;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance - Math.random() * 90;
+      particle.style.setProperty('--tx', `${tx}px`);
+      particle.style.setProperty('--ty', `${ty}px`);
+      particle.style.setProperty('--rot', `${Math.random() * 720 - 360}deg`);
+      particle.style.cssText += `
+        left:${centerX}px;
+        top:${centerY}px;
+        background:${color};
+        animation-delay:${Math.random() * 90}ms;
+      `;
+      layer.appendChild(particle);
+    }
+  };
+
+  try {
+    const Engine = window.UEAH_GAME_ENGINE;
+    if (Engine && typeof Engine.ConfettiExplosion === 'function') {
+      const confetti = new Engine.ConfettiExplosion(layer);
+      const rect = layer.getBoundingClientRect();
+      confetti.explode(
+        rect.width / 2,
+        Math.max(110, rect.height * (options.originYRatio || 0.34)),
+        options.count || 170
+      );
+    } else {
+      runFallback();
+    }
+  } catch (_) {
+    runFallback();
+  }
+
+  window.setTimeout(() => {
+    try {
+      layer.remove();
+    } catch (_) {}
+  }, 3800);
+}
+
 function enhanceRunnerStage(stage) {
   if (!stage) return;
 
@@ -288,6 +382,7 @@ function enhanceRunnerStage(stage) {
     const isSummary = /\bfinished\b|\bsummary\b|\bnext step\b|save score to profile/i.test(text);
     const isIntro = /\bstart\b|caregiver-led|practice test|preparing your test|quick prompts|short reading questions|listen and answer/i.test(text);
     const isFeedback = /correct|incorrect|score|points earned|try again tomorrow/i.test(text);
+    const feedback = inferRunnerFeedback({ textContent: text });
 
     if (/(Question|Prompt)\s+\d+\s+of\s+\d+/i.test(text) && hasButton) {
       el.classList.add('test-runner-stage__topbar');
@@ -302,6 +397,11 @@ function enhanceRunnerStage(stage) {
       el.classList.add('test-runner-stage__intro');
     } else if (isFeedback) {
       el.classList.add('test-runner-stage__feedback');
+      if (feedback.kind === 'correct') {
+        el.classList.add('test-runner-stage__feedback--correct');
+      } else if (feedback.kind === 'incorrect') {
+        el.classList.add('test-runner-stage__feedback--incorrect');
+      }
     }
   });
 }
@@ -338,6 +438,29 @@ function installRunnerChrome(rootEl, title, theme) {
       const chrome = shell.firstElementChild;
       if (chrome) stage.prepend(chrome);
       enhanceRunnerStage(stage);
+
+      if (state.mode === 'summary') {
+        triggerRunnerCelebration(rootEl, stage, theme, {
+          key: 'summary',
+          label: 'Great work',
+          variant: 'summary',
+          count: 170,
+          originYRatio: 0.34
+        });
+      } else {
+        const feedback = inferRunnerFeedback(stage);
+        if (feedback.kind === 'correct') {
+          triggerRunnerCelebration(rootEl, stage, theme, {
+            key: feedback.key || 'correct',
+            label: 'Nice work',
+            variant: 'correct',
+            count: 96,
+            originYRatio: 0.5
+          });
+        } else if (feedback.kind !== 'correct' && stage.dataset.ueahCelebrated !== 'summary') {
+          delete stage.dataset.ueahCelebrated;
+        }
+      }
     } catch (_) {
       // ignore
     } finally {
