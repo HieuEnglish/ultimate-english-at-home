@@ -4698,6 +4698,34 @@ body {
   line-height: 1.55;
 }
 
+.reading-passage-card {
+  border-color: color-mix(in srgb, var(--test-accent) 24%, rgba(255,255,255,0.14)) !important;
+}
+
+.reading-passage-card > strong:first-child {
+  display: block;
+  margin-bottom: 0.85rem !important;
+  color: #eef0ff;
+  font-family: var(--font-display);
+  font-size: 1.04rem !important;
+  line-height: 1.25;
+}
+
+.reading-passage-card__body {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.reading-passage-card__body p {
+  margin: 0 !important;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.045);
+  color: var(--text-secondary);
+  line-height: 1.72;
+}
+
 @media (max-width: 640px) {
   .test-runner-stage__topbar,
   .test-runner-stage__formwrap fieldset,

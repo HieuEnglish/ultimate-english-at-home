@@ -69,6 +69,14 @@
       .replaceAll("'", "&#39;");
   }
 
+  function safeDomId(v) {
+    return String(v == null ? "" : v)
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9\-_:.]/g, "-")
+      .slice(0, 90);
+  }
+
   function normalizeType(t) {
     return String(t || "multipleChoice").trim().toLowerCase();
   }
@@ -131,6 +139,26 @@
     const n = Number(idx);
     if (!Number.isFinite(n)) return "";
     return opts[n] == null ? "" : String(opts[n]);
+  }
+
+  function passageTitle(text) {
+    const s = String(text || "").trim();
+    const match = s.match(/^(Passage\s+\d+:\s*[^.\n]+)\.?\s*([\s\S]*)$/i);
+    if (!match) return { title: "", body: s };
+    return { title: match[1], body: match[2] || "" };
+  }
+
+  function passageParagraphs(text) {
+    const { title, body } = passageTitle(text);
+    const source = body || String(text || "").trim();
+    const normalized = source
+      .replace(/\r\n/g, "\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .replace(/[ \t]+/g, " ")
+      .replace(/\s+(Paragraph\s+[A-Z]:)/g, "\n\n$1")
+      .trim();
+    const parts = normalized.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+    return { title, parts: parts.length ? parts : [source].filter(Boolean) };
   }
 
   function ensureIds(list) {
@@ -344,11 +372,14 @@
   function renderPassage(q) {
     const p = q && q.passage ? String(q.passage) : "";
     if (!p.trim()) return "";
+    const structured = passageParagraphs(p);
 
     return `
-      <div class="note" style="margin:12px 0 0; padding:12px 14px">
-        <strong>Read</strong>
-        <p style="margin:8px 0 0">${safeText(p)}</p>
+      <div class="note reading-passage-card" style="margin:12px 0 0; padding:16px 18px">
+        <strong>Read${structured.title ? `: ${safeText(structured.title)}` : ""}</strong>
+        <div class="reading-passage-card__body">
+          ${structured.parts.map((part) => `<p>${safeText(part)}</p>`).join("")}
+        </div>
       </div>
     `;
   }
@@ -357,7 +388,7 @@
     const prompt = safeText(q.question || "Question");
     const options = getOptionsForQuestion(q);
 
-    const qid = q && q.id ? String(q.id) : "q";
+    const qid = safeDomId(q && q.id ? q.id : "q");
     const optionsHtml = options
       .map((opt, i) => {
         const id = `opt-${SLUG}-${qid}-${i}`;

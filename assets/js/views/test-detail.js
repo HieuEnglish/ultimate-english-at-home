@@ -241,8 +241,8 @@ function inferRunnerFeedback(stage) {
   const current = progressMatch ? Number(progressMatch[2] || 0) : 0;
   const total = progressMatch ? Number(progressMatch[3] || 0) : 0;
 
-  const negative = /\bnot quite\b|\bincorrect\b|\bkeep going\b|\btry again\b|correct answer/i.test(text);
-  const positive = /\bnice work\b|\bgood job\b|\bwell done\b|\bcorrect\b|saved\s*&\s*scored/i.test(text);
+  const negative = /\bnot quite\b|\bincorrect\b|\btry again next time\b|\bcorrect answer\b/i.test(text);
+  const positive = /\bnice work\b|\bgood job\b|\bwell done\b|✅|saved\s*&\s*scored|(?:^|[.!?]\s+)correct(?:[.!?]|\s*$)/i.test(text);
 
   if (negative) return { kind: 'incorrect', key: `incorrect-${current}-${total}` };
   if (positive) return { kind: 'correct', key: `correct-${current}-${total}` };
@@ -381,8 +381,8 @@ function enhanceRunnerStage(stage) {
     const looksPanel = /border\s*:\s*1px\s+solid|border-radius|background\s*:\s*var\(--surface/i.test(styleAttr);
     const isSummary = /\bfinished\b|\bsummary\b|\bnext step\b|save score to profile/i.test(text);
     const isIntro = /\bstart\b|caregiver-led|practice test|preparing your test|quick prompts|short reading questions|listen and answer/i.test(text);
-    const isFeedback = /correct|incorrect|score|points earned|try again tomorrow/i.test(text);
     const feedback = inferRunnerFeedback({ textContent: text });
+    const isFeedback = !!feedback.kind || /\bpoints earned\b|\btry again tomorrow\b/i.test(text);
 
     if (/(Question|Prompt)\s+\d+\s+of\s+\d+/i.test(text) && hasButton) {
       el.classList.add('test-runner-stage__topbar');

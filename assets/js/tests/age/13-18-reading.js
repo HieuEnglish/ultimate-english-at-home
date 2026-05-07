@@ -146,16 +146,27 @@
 
   function passageIdOf(q) {
     const pid = String((q && q.passageId) || "").toLowerCase();
-    if (pid === "p2" || pid === "part2" || pid === "2") return "p2";
-    if (pid === "p3" || pid === "part3" || pid === "3") return "p3";
+    const direct = pid.match(/^(?:p|part)?([1-9]\d*)$/);
+    if (direct) return `p${direct[1]}`;
+
+    const passageText = String((q && q.passage) || "");
+    const passageMatch = passageText.match(/\bPassage\s+([1-9]\d*)\b/i);
+    if (passageMatch) return `p${passageMatch[1]}`;
+
+    const questionText = String((q && q.question) || "").toLowerCase();
+    if (/study|library|silent|group tables|whiteboards|zone|flexible|students|power sockets|collaborative/.test(questionText)) {
+      return "p5";
+    }
+    if (/cooling|city|shade|trees|asphalt|roof|water|combined|school yard|walking/.test(questionText)) {
+      return "p4";
+    }
     return "p1";
   }
 
   function passageLabel(passageId) {
     const id = String(passageId || "").toLowerCase();
-    if (id === "p1") return "Passage 1";
-    if (id === "p2") return "Passage 2";
-    if (id === "p3") return "Passage 3";
+    const match = id.match(/^p([1-9]\d*)$/);
+    if (match) return `Passage ${match[1]}`;
     return "Passage";
   }
 
@@ -242,6 +253,46 @@
     return list.length ? list.join(" / ") : "";
   }
 
+  function passageTitle(text) {
+    const s = String(text || "").trim();
+    const match = s.match(/^(Passage\s+\d+:\s*[^.]+)\.\s*(.*)$/i);
+    if (!match) return { title: "", body: s };
+    return { title: match[1], body: match[2] || "" };
+  }
+
+  function passageParagraphs(text) {
+    const { title, body } = passageTitle(text);
+    const source = body || String(text || "").trim();
+    const normalized = source
+      .replace(/\s+/g, " ")
+      .replace(/\s+(Paragraph\s+[A-Z]:)/g, "\n$1")
+      .trim();
+    const parts = normalized.split(/\n+/).map((p) => p.trim()).filter(Boolean);
+    return { title, parts: parts.length ? parts : [source].filter(Boolean) };
+  }
+
+  function normalizeQuestionShape(q) {
+    if (!isPlainObject(q)) return q;
+    const question = String(q.question || "");
+    const type = String(q.type || "").toLowerCase();
+    const answer = q.answer;
+
+    if (
+      type === "fillintheblank" &&
+      /^true\s+or\s+false\s*:/i.test(question) &&
+      (answer === 0 || answer === 1 || answer === true || answer === false)
+    ) {
+      return {
+        ...q,
+        type: "multipleChoice",
+        options: ["False", "True"],
+        answer: answer === true ? 1 : answer === false ? 0 : Number(answer)
+      };
+    }
+
+    return q;
+  }
+
   function cloneQuestionWithShuffledOptions(q) {
     if (!isPlainObject(q)) return q;
 
@@ -313,32 +364,53 @@
   // -----------------------------
 
   function buildReadingSet(bankRaw) {
-    const base = (Array.isArray(bankRaw) ? bankRaw : []).filter(isPlainObject).map((q) => ({
-      ...q,
-      passageId: passageIdOf(q)
-    }));
+    const raw = (Array.isArray(bankRaw) ? bankRaw : []).filter(isPlainObject);
+    const passageById = Object.create(null);
+
+    raw.forEach((q) => {
+      const pid = passageIdOf(q);
+      const p = q && q.passage ? String(q.passage).trim() : "";
+      if (pid && p && !passageById[pid]) passageById[pid] = p;
+    });
+
+    const base = raw.map((q) => {
+      const passageId = passageIdOf(q);
+      const passage = q && q.passage ? q.passage : passageById[passageId] || "";
+      return normalizeQuestionShape({
+        ...q,
+        passageId,
+        passage
+      });
+    });
 
     const cleaned = ensureUniqueIds(base);
     if (!cleaned.length) return [];
 
     const prepared = cleaned.map(cloneQuestionWithShuffledOptions);
 
-    const byPassage = { p1: [], p2: [], p3: [] };
+    const byPassage = Object.create(null);
     prepared.forEach((q) => {
-      byPassage[passageIdOf(q)].push(q);
+      const pid = passageIdOf(q);
+      if (!byPassage[pid]) byPassage[pid] = [];
+      byPassage[pid].push(q);
     });
 
     const chosen = [];
     const used = new Set();
-    const counts = { p1: 0, p2: 0, p3: 0 };
+    const counts = Object.create(null);
+    const passageIds = Object.keys(byPassage).sort((a, b) => {
+      const an = Number(String(a).replace(/^p/, ""));
+      const bn = Number(String(b).replace(/^p/, ""));
+      return (Number.isFinite(an) ? an : 999) - (Number.isFinite(bn) ? bn : 999);
+    });
 
     // Primary pick: cap per passage
-    ["p1", "p2", "p3"].forEach((pid) => {
+    passageIds.forEach((pid) => {
       const arr = (byPassage[pid] || []).slice();
       shuffleInPlace(arr);
 
       for (let i = 0; i < arr.length && chosen.length < TARGET_TOTAL; i++) {
-        if (counts[pid] >= MAX_PER_PASSAGE) break;
+        if ((counts[pid] || 0) >= MAX_PER_PASSAGE) break;
 
         const q = arr[i];
         const id = q && q.id != null ? String(q.id) : "";
@@ -346,7 +418,7 @@
 
         used.add(id);
         chosen.push(q);
-        counts[pid] += 1;
+        counts[pid] = (counts[pid] || 0) + 1;
       }
     });
 
@@ -367,7 +439,7 @@
 
     // Keep questions grouped by passage, but randomize passage block order each run
     // so the test clearly feels different every time.
-    const passageOrder = ["p1", "p2", "p3"].filter((pid) => chosen.some((q) => passageIdOf(q) === pid));
+    const passageOrder = passageIds.filter((pid) => chosen.some((q) => passageIdOf(q) === pid));
     shuffleInPlace(passageOrder);
 
     const ordered = [];
@@ -439,10 +511,13 @@
   function renderPassage(q) {
     const p = q && q.passage ? String(q.passage) : "";
     if (!p.trim()) return "";
+    const structured = passageParagraphs(p);
     return `
-      <div class="note" style="margin:12px 0 0; padding:12px 14px">
-        <strong>Read</strong>
-        <p style="margin:8px 0 0">${safeTextWithBreaks(p)}</p>
+      <div class="note reading-passage-card" style="margin:12px 0 0; padding:16px 18px">
+        <strong>Read${structured.title ? `: ${safeText(structured.title)}` : ""}</strong>
+        <div class="reading-passage-card__body">
+          ${structured.parts.map((part) => `<p>${safeText(part)}</p>`).join("")}
+        </div>
       </div>
     `;
   }
