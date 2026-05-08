@@ -53,8 +53,8 @@ export function getView(ctx) {
     <a class="games-featured-banner" href="${hrefFor('/games/featured/comprehensive/ielts-runner')}" data-nav role="listitem">
       <div class="games-featured-banner__scroll"></div>
       <div class="games-featured-banner__content">
-        <h2 class="games-featured-banner__title">IELTS BuildUp</h2>
-        <p class="games-featured-banner__desc">Skill-based test practice with a premium challenge feel.</p>
+        <h2 class="games-featured-banner__title">IELTS Sky Quest</h2>
+        <p class="games-featured-banner__desc">Fly through Tiny Skies and collect IELTS question markers for points.</p>
         <span class="games-featured-banner__cta">Play Now</span>
       </div>
     </a>

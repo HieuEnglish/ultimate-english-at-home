@@ -394,12 +394,12 @@
         // ========== FEATURED ==========
         {
             slug: "ielts-runner",
-            title: "IELTS BuildUp",
-            emoji: "🏆🏃",
+            title: "IELTS Sky Quest",
+            emoji: "AIR",
             age: "featured",
             skill: "comprehensive",
             difficulty: 5,
-            description: "The ultimate challenge! Run, build, and climb to the top of IELTS expertise.",
+            description: "Fly the imported Tiny Skies open world, collect IELTS question markers, and gain or lose points.",
             hasTimer: false,
         },
     ];
