@@ -139,12 +139,13 @@ export class IeltsRunnerGame {
 
         const viewport = this.container.querySelector('#tinyskies-viewport');
         const cover = this.container.querySelector('#tinyskies-cover');
-        const src = new URL('assets/vendor/tinyskies/index.html?ueahAuto=1', document.baseURI).href;
+        const src = new URL('assets/vendor/tinyskies/index.html?ueahAuto=1&ueahBuild=20260509-clean', document.baseURI).href;
 
         this.iframe = document.createElement('iframe');
         this.iframe.className = 'tinyskies-frame';
         this.iframe.title = 'IELTS Sky Quest open world';
         this.iframe.allow = 'fullscreen; autoplay; gamepad';
+        this.iframe.addEventListener('load', () => this.cleanTinySkiesBranding());
         this.iframe.src = src;
         viewport.appendChild(this.iframe);
         cover?.classList.add('is-hidden');
@@ -157,6 +158,43 @@ export class IeltsRunnerGame {
                 kind: 'active',
             },
         }));
+    }
+
+    cleanTinySkiesBranding() {
+        const frameDoc = this.iframe?.contentDocument;
+        if (!frameDoc) return;
+
+        const style = frameDoc.createElement('style');
+        style.textContent = `
+            script[src*="vibej"],
+            iframe[src*="vibej"],
+            a[href*="vibej"],
+            [class*="vibe" i],
+            [id*="vibe" i] {
+                display: none !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+        `;
+        frameDoc.head?.appendChild(style);
+
+        const removeInjectedBranding = () => {
+            const candidates = Array.from(frameDoc.querySelectorAll('a, div, span, p, iframe, script'));
+            for (const element of candidates) {
+                const text = element.textContent || '';
+                const href = element.getAttribute('href') || '';
+                const src = element.getAttribute('src') || '';
+                const label = element.getAttribute('aria-label') || '';
+                if (/vibe\s*jam|vibejam|vibej/i.test(`${text} ${href} ${src} ${label}`)) {
+                    element.remove();
+                }
+            }
+        };
+
+        removeInjectedBranding();
+        window.setTimeout(removeInjectedBranding, 500);
+        window.setTimeout(removeInjectedBranding, 1500);
+        window.setTimeout(removeInjectedBranding, 3000);
     }
 
     cleanup() {
