@@ -217,7 +217,7 @@ function inferRunnerState(stage) {
     };
   }
 
-  if (/finished|summary|next step/i.test(text)) {
+  if (/finished|summary|save score to profile/i.test(text)) {
     return { mode: 'summary', label: 'Summary' };
   }
   if (/\bloading\b|\bpreparing\b/i.test(text)) {
@@ -242,7 +242,8 @@ function inferRunnerFeedback(stage) {
   const total = progressMatch ? Number(progressMatch[3] || 0) : 0;
 
   const negative = /\bnot quite\b|\bincorrect\b|\btry again next time\b|\bcorrect answer\b/i.test(text);
-  const positive = /\bnice work\b|\bgood job\b|\bwell done\b|✅|saved\s*&\s*scored|(?:^|[.!?]\s+)correct(?:[.!?]|\s*$)/i.test(text);
+  const normalized = text.replace(/\bcorrect\s*answer\s*:/gi, '');
+  const positive = /\bnice work\b|\bgood job\b|\bwell done\b|✅|saved\s*&\s*scored|(?:^|[.!?]\s+)correct(?:[.!?]|\s*$)/i.test(normalized);
 
   if (negative) return { kind: 'incorrect', key: `incorrect-${current}-${total}` };
   if (positive) return { kind: 'correct', key: `correct-${current}-${total}` };
@@ -368,7 +369,9 @@ function enhanceRunnerStage(stage) {
       'test-runner-stage__formwrap',
       'test-runner-stage__intro',
       'test-runner-stage__summary',
-      'test-runner-stage__feedback'
+      'test-runner-stage__feedback',
+      'test-runner-stage__feedback--correct',
+      'test-runner-stage__feedback--incorrect'
     );
   });
 
