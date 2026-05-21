@@ -5559,7 +5559,8 @@ body {
   min-height: 560px;
   padding: 1.1rem;
   border-radius: 30px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
 }
 
 .game-controls {

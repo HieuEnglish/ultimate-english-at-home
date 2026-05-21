@@ -65,7 +65,7 @@ class SentenceSurgeonGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .ssurg-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#dff9fb 0%,#81ecec 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .ssurg-game{min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(180deg,#dff9fb 0%,#81ecec 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
       .ssurg-panel{width:min(780px,96%);background:rgba(255,255,255,.94);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.14);padding:22px;display:flex;flex-direction:column;gap:18px}.ssurg-topbar{display:flex;align-items:center;gap:12px}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;border-radius:999px;font-weight:800}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#006266}.progress{font-size:14px;color:#607d8b}
       .monitor-screen{background:#2d3436;border-radius:18px;padding:14px 18px;text-align:center}.diagnosis-text{color:#55efc4;font-size:22px}
       .patient-card{background:#fff;border:3px solid #d9ebff;border-radius:28px;padding:20px;text-align:center}.patient-label{font-size:18px;color:#7f8c8d;text-transform:uppercase}.patient-sentence{font-size:38px;color:#2d3436;margin:10px 0}.patient-note{font-size:18px;color:#5f6f81}

@@ -68,7 +68,7 @@ class AnimalSoundsGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .as-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#81ecec 0%,#a8e6cf 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .as-game{min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(180deg,#81ecec 0%,#a8e6cf 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
       .as-panel{width:min(760px,96%);background:rgba(255,255,255,.92);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.15);padding:22px;display:flex;flex-direction:column;gap:18px}
       .as-header{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;box-shadow:0 4px 0 rgba(0,0,0,.08)}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#16a085}.progress{font-size:14px;color:#607d8b}.hear-btn{padding:12px 18px;background:#ff9f43;color:#fff;cursor:pointer;box-shadow:0 5px 0 #e67e22}
       .sound-card{background:linear-gradient(135deg,#fff9ef,#fff);border-radius:26px;border:3px solid #ffe3ad;padding:18px;display:flex;align-items:center;gap:16px}.ear{font-size:68px}.sound-title{font-size:20px;color:#d35400;text-transform:uppercase}.sound-text{font-size:30px;color:#2d3436;line-height:1.2}

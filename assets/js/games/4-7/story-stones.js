@@ -62,7 +62,7 @@ class StoryStonesGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .sstones-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#81ecec 0%,#74b9ff 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .sstones-game{min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(180deg,#81ecec 0%,#74b9ff 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
       .sstones-panel{width:min(760px,96%);background:rgba(255,255,255,.92);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.15);padding:22px;display:flex;flex-direction:column;gap:18px}
       .sstones-topbar{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#0984e3}.progress{font-size:14px;color:#607d8b}.hear-btn{width:54px;height:54px;background:#74b9ff;color:#fff;cursor:pointer;box-shadow:0 5px 0 #0984e3;font-size:24px}
       .sentence-card{background:#fff;border:3px solid #d9ebff;border-radius:28px;padding:22px;display:flex;align-items:center;gap:18px}.image-hint{width:92px;height:92px;border-radius:50%;background:#f1f7ff;display:flex;align-items:center;justify-content:center;font-size:54px}.sentence-text{font-size:32px;color:#2d3436;line-height:1.2}

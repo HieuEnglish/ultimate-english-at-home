@@ -65,7 +65,7 @@ class PictureBingoGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .pbingo-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#ffeaa7 0%,#f9ca24 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .pbingo-game{min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(180deg,#ffeaa7 0%,#f9ca24 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
       .pbingo-panel{width:min(760px,96%);background:rgba(255,255,255,.92);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.15);padding:22px;display:flex;flex-direction:column;gap:16px}
       .pbingo-topbar{display:flex;align-items:center;gap:12px}.pill,.replay-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#c0392b}.subtitle{font-size:14px;color:#7f8c8d}.replay-btn{padding:12px 18px;background:#3498db;color:#fff;cursor:pointer;box-shadow:0 5px 0 #2980b9}
       .call-card{display:flex;align-items:center;gap:16px;background:#fff8e8;border:3px solid #ffe2a5;border-radius:24px;padding:16px}.call-ball{width:82px;height:82px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:4px solid #e74c3c;font-size:44px}.call-label{font-size:18px;color:#e67e22;text-transform:uppercase}.call-text{font-size:30px;color:#2d3436}

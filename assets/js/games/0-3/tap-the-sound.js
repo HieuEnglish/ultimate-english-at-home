@@ -83,7 +83,7 @@ class TapTheSoundGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .tts-game{position:relative;height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#71d7ff 0%,#9ff8ff 60%,#b8f18d 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center}
+      .tts-game{position:relative;min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(180deg,#71d7ff 0%,#9ff8ff 60%,#b8f18d 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center}
       .tts-sky{position:absolute;inset:0;pointer-events:none}.cloud{position:absolute;font-size:56px;opacity:.85;animation:ttsFloat 20s linear infinite}.c1{top:8%;left:8%}.c2{top:18%;left:52%;animation-delay:-7s}.c3{top:10%;left:78%;animation-delay:-12s}.hill{position:absolute;left:-10%;right:-10%;bottom:-40px;height:170px;background:#88d66c;border-radius:50% 50% 0 0}
       @keyframes ttsFloat{from{transform:translateX(-70px)}to{transform:translateX(120px)}}
       .tts-panel{position:relative;z-index:1;width:min(760px,94%);background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border:5px solid #fff;border-radius:32px;box-shadow:0 18px 40px rgba(0,0,0,.15);padding:22px;display:flex;flex-direction:column;gap:18px}

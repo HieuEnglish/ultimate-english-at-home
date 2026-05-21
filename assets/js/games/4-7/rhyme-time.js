@@ -66,7 +66,7 @@ class RhymeTimeGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .rtime-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#a29bfe 0%,#6c5ce7 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .rtime-game{min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(135deg,#a29bfe 0%,#6c5ce7 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
       .rtime-panel{width:min(760px,96%);background:rgba(255,255,255,.9);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.15);padding:22px;display:flex;flex-direction:column;gap:18px}
       .rtime-topbar{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#6c5ce7}.progress{font-size:14px;color:#607d8b}.hear-btn{width:54px;height:54px;background:#fab1a0;color:#fff;cursor:pointer;box-shadow:0 5px 0 #e17055;font-size:24px}
       .target-card{display:flex;align-items:center;gap:18px;background:#fff;border:3px solid #e5d8ff;border-radius:26px;padding:18px}.target-emoji{font-size:74px}.target-word{font-size:34px;color:#2d3436}.instruction{font-size:20px;color:#5f6f81}

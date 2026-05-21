@@ -62,7 +62,7 @@ class ActionBeatsGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .ab-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#2d3436 0%,#000 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .ab-game{min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(135deg,#2d3436 0%,#000 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
       .ab-panel{width:min(820px,96%);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:32px;box-shadow:0 24px 60px rgba(0,0,0,.42);padding:22px;display:flex;flex-direction:column;gap:18px}
       .ab-topbar{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px}.title-wrap{flex:1;text-align:center}.title{font-size:34px;color:#fff}.progress{font-size:14px;color:#b2bec3}.hear-btn{width:54px;height:54px;background:#ff7675;color:#fff;cursor:pointer;box-shadow:0 5px 0 #d63031;font-size:24px}
       .target-card{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:20px;color:#fff}.dj-character{font-size:100px;min-width:110px;text-align:center}.target-label{font-size:18px;color:#ffeaa7;text-transform:uppercase;letter-spacing:1px}.target-action{font-size:40px;margin-top:6px}.helper{font-size:18px;color:#dfe6e9;margin-top:8px}

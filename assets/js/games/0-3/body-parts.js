@@ -71,7 +71,7 @@ class BodyPartsGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .bp-game{position:relative;height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#fff3b0 0%,#ffd6a5 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center}
+      .bp-game{position:relative;min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(180deg,#fff3b0 0%,#ffd6a5 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center}
       .bp-room{position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.4) 0 8px,transparent 9px) 0 0/36px 36px,linear-gradient(180deg,rgba(255,255,255,.18),transparent 50%),linear-gradient(0deg,#f8b195 0 28%,transparent 28%)}
       .bp-tablet{position:relative;z-index:1;width:min(760px,94%);height:520px;background:rgba(255,255,255,.9);border-radius:34px;border:5px solid #fff;box-shadow:0 20px 50px rgba(0,0,0,.18);padding:20px;display:flex;flex-direction:column;gap:16px}
       .bp-header,.bp-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}.pill,.speak-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#ffef99;color:#9d6500;padding:10px 16px;box-shadow:0 4px 0 rgba(0,0,0,.08)}.bp-title-wrap{text-align:center;flex:1}.bp-title{font-size:30px;color:#0984e3}.bp-progress{font-size:14px;color:#607d8b}.speak-btn{width:54px;height:54px;background:#74b9ff;color:#fff;cursor:pointer;box-shadow:0 5px 0 #0984e3;font-size:24px}

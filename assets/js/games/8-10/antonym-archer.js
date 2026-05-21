@@ -60,7 +60,7 @@ class AntonymArcherGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .aa-game{height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#c8f7ff 0%,#8fd3a8 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+      .aa-game{min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(180deg,#c8f7ff 0%,#8fd3a8 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
       .aa-panel{width:min(820px,96%);background:rgba(255,255,255,.92);border-radius:34px;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.14);padding:22px;display:flex;flex-direction:column;gap:18px}
       .aa-topbar{display:flex;align-items:center;gap:12px}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;border-radius:999px;font-weight:800}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#2d3436}.subtitle{font-size:14px;color:#607d8b}.timer-pill{background:#eef7ff;color:#0b63b6}
       .mission-card{background:#fff;border:3px solid #d9ebff;border-radius:28px;padding:20px;text-align:center}.mission-label{font-size:18px;color:#7f8c8d;text-transform:uppercase}.mission-word{font-size:44px;color:#d63031;margin:6px 0}.helper{font-size:20px;color:#4d6273}

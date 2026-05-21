@@ -63,7 +63,7 @@ class ColorMatchGame extends GameBase {
   injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      .cm-game{position:relative;height:600px;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#a8edea 0%,#fed6e3 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center}
+      .cm-game{position:relative;min-height:600px;height:auto;overflow:visible;border-radius:24px;background:linear-gradient(135deg,#a8edea 0%,#fed6e3 100%);font-family:'Fredoka One',cursive,sans-serif;display:flex;align-items:center;justify-content:center}
       .cm-bg{position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.5) 0 12px,transparent 13px) 0 0/80px 80px,radial-gradient(circle at 70% 40%,rgba(255,255,255,.35) 0 10px,transparent 11px) 0 0/110px 110px}
       .cm-panel{position:relative;z-index:1;width:min(760px,94%);background:rgba(255,255,255,.9);border:5px solid #fff;border-radius:34px;box-shadow:0 18px 40px rgba(0,0,0,.14);padding:22px;display:flex;flex-direction:column;gap:20px}
       .cm-topbar{display:flex;align-items:center;gap:12px}.pill,.hear-btn{border:none;border-radius:999px;font-weight:800}.pill{background:#fff0a6;color:#8d6500;padding:10px 16px;box-shadow:0 4px 0 rgba(0,0,0,.08)}.title-wrap{flex:1;text-align:center}.title{font-size:32px;color:#ff6b6b}.progress{font-size:14px;color:#5c6b73}.hear-btn{width:54px;height:54px;background:#74b9ff;color:#fff;cursor:pointer;font-size:24px;box-shadow:0 5px 0 #0984e3}
