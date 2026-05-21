@@ -45,7 +45,7 @@ export function getView(ctx) {
               <div class="hero-pill"><span aria-hidden="true">🎓</span> Ages 13-18</div>
               <div class="hero-pill"><span aria-hidden="true">🎯</span> IELTS Track</div>
             </div>
-          </a>
+          </div>
 
           <div class="hero-visual" data-reveal>
             <div class="hero-visual__halo hero-visual__halo--one"></div>
@@ -112,7 +112,7 @@ export function getView(ctx) {
                 <small>Come back fast</small>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       </section>
 
@@ -121,19 +121,19 @@ export function getView(ctx) {
           <div>
             <span class="stat-num">6</span>
             <p class="stat-label">Learning Tracks</p>
-          </a>
+          </div>
           <div>
             <span class="stat-num">4</span>
             <p class="stat-label">Core Skills</p>
-          </a>
+          </div>
           <div>
             <span class="stat-num">100%</span>
             <p class="stat-label">Free Forever</p>
-          </a>
+          </div>
           <div>
             <span class="stat-num">24/7</span>
             <p class="stat-label">At-Home Practice</p>
-          </a>
+          </div>
         </div>
       </section>
 
