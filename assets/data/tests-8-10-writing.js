@@ -19,6 +19,7 @@
     {
       id: "q1",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best topic sentence for a paragraph about a fun school day.",
       options: [
         "Last Friday was the best day at school because we had a science fair.",
@@ -32,6 +33,7 @@
     {
       id: "q2",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct capital letter: ___y friend and I played chess.",
       options: ["m", "M", "y", "Y"],
       answer: 1,
@@ -41,6 +43,7 @@
     {
       id: "q3",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the best word: I went to the park ____ it was sunny.",
       answer: ["because"],
       acceptedAnswers: ["because"],
@@ -50,6 +53,7 @@
     {
       id: "q4",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best punctuation: Where are you going__",
       options: [".", "!", "?", ","], answer: 2,
       difficulty: "easy",
@@ -58,6 +62,7 @@
     {
       id: "q5",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct verb: Yesterday, we ____ to the museum.",
       options: ["go", "goes", "going", "went"], answer: 3,
       difficulty: "easy",
@@ -66,6 +71,7 @@
     {
       id: "q6",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the word: Please ____ the door quietly.",
       answer: ["close", "shut"],
       acceptedAnswers: ["close", "shut"],
@@ -75,6 +81,7 @@
     {
       id: "q7",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which word is spelled correctly?",
       options: ["because", "becaus", "becose", "beacuse"], answer: 0,
       difficulty: "easy",
@@ -83,6 +90,7 @@
     {
       id: "q8",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "A sentence should start with a capital letter.",
       options: ["False", "True"], answer: 1,
       difficulty: "easy",
@@ -91,6 +99,7 @@
     {
       id: "q9",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word order.",
       options: [
         "To school I walked.",
@@ -104,6 +113,7 @@
     {
       id: "q10",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the plural word: One child, two ____.",
       answer: ["children"],
       acceptedAnswers: ["children"],
@@ -113,6 +123,7 @@
     {
       id: "q11",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best ending: We turned off the lights and ____.",
       options: ["go to bed", "goes to bed", "going to bed", "went to bed"], answer: 3,
       difficulty: "medium",
@@ -121,6 +132,7 @@
     {
       id: "q12",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the sequencing word: ____, wash your hands. Next, dry them.",
       answer: ["first"],
       acceptedAnswers: ["first"],
@@ -130,6 +142,7 @@
     {
       id: "q13",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best linking word: I was tired, ____ I went to bed early.",
       options: ["so", "because", "but", "or"], answer: 0,
       difficulty: "easy",
@@ -138,6 +151,7 @@
     {
       id: "q14",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct pronoun: Sara and I went to the shop. ____ bought ice cream.",
       options: ["He", "We", "She", "They"], answer: 1,
       difficulty: "easy",
@@ -146,6 +160,7 @@
     {
       id: "q15",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: I wanted to play outside, ____ it started to rain.",
       options: ["because", "so", "but", "and"], answer: 2,
       difficulty: "easy",
@@ -154,6 +169,7 @@
     {
       id: "q16",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Write the contraction for 'do not':",
       answer: ["don't", "dont"],
       acceptedAnswers: ["don't", "dont"],
@@ -361,6 +377,7 @@
     {
       id: "q27",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best linking word: I packed my bag, ____ I checked my homework.",
       options: ["or", "because", "but", "then"], answer: 3,
       difficulty: "easy",
@@ -369,6 +386,7 @@
     {
       id: "q28",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the word: Please write ____ (not loud) in the library.",
       answer: ["quietly"],
       acceptedAnswers: ["quietly"],
@@ -395,6 +413,7 @@
     {
       id: "q30",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct punctuation: I can't wait to see the show__",
       options: [
         ".",
@@ -408,6 +427,7 @@
     {
       id: "q31",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best title for a paragraph about a class recycling project.",
       options: [
         "A Scary Movie",
@@ -421,6 +441,7 @@
     {
       id: "q32",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct verb: Yesterday, I ____ my grandma.",
       options: [
         "visit",
@@ -434,6 +455,7 @@
     {
       id: "q33",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct subject-verb pair: My friends ____ to the park.",
       options: [
         "go",
@@ -448,6 +470,7 @@
     {
       id: "q34",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: I like ice cream, ____ I don't eat it every day.",
       options: [
         "and",
@@ -462,6 +485,7 @@
     {
       id: "q35",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct word: Please put the books ____ the shelf.",
       options: [
         "at",
@@ -475,6 +499,7 @@
     {
       id: "q36",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct word: ____ going to the museum on Saturday.",
       options: [
         "Their",
@@ -488,6 +513,7 @@
     {
       id: "q37",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best sentence.",
       options: [
         "We went to the beach.",
@@ -501,6 +527,7 @@
     {
       id: "q38",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct pronoun: This is Anna. ____ is my cousin.",
       options: [
         "He",
@@ -515,6 +542,7 @@
     {
       id: "q39",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: The puppy was very ____ (cute).",
       options: [
         "slowly",
@@ -528,6 +556,7 @@
     {
       id: "q40",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the sentence with correct commas in a list.",
       options: [
         "I bought apples bananas and grapes.",
@@ -541,6 +570,7 @@
     {
       id: "q41",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best transition word: First, mix the flour. ____, add the water.",
       options: [
         "Next",
@@ -554,6 +584,7 @@
     {
       id: "q42",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct sentence with an apostrophe.",
       options: [
         "Its raining today.",
@@ -568,6 +599,7 @@
     {
       id: "q43",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word order.",
       options: [
         "Always I brush my teeth.",
@@ -581,6 +613,7 @@
     {
       id: "q44",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best closing for a friendly letter.",
       options: [
         "Because I said so.",
@@ -594,6 +627,7 @@
     {
       id: "q45",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct question word: ____ is your favourite subject?",
       options: [
         "What",
@@ -608,6 +642,7 @@
     {
       id: "q46",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best sentence to add a reason.",
       options: [
         "I like reading.",
@@ -622,6 +657,7 @@
     {
       id: "q47",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct comparative: This puzzle is ____ than the last one.",
       options: [
         "hard",
@@ -635,6 +671,7 @@
     {
       id: "q48",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best ending: After the storm, the sky became ____.",
       options: [
         "cleared",
@@ -648,6 +685,7 @@
     {
       id: "q49",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the linking word: I wore a jacket ____ it was cold.",
       answer: [
         "because"
@@ -661,6 +699,7 @@
     {
       id: "q50",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the best word: I wanted to play, ____ it started to rain.",
       answer: [
         "but"
@@ -674,6 +713,7 @@
     {
       id: "q51",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the sequencing word: First, open the box. ____, take out the toy.",
       answer: [
         "then"
@@ -687,6 +727,7 @@
     {
       id: "q52",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Write the contraction for 'cannot':",
       answer: [
         "can't",
@@ -702,6 +743,7 @@
     {
       id: "q53",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the correct past tense: Today I walk. Yesterday I ____.",
       answer: [
         "walked"
@@ -715,6 +757,7 @@
     {
       id: "q54",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the plural: One leaf, two ____.",
       answer: [
         "leaves"
@@ -728,6 +771,7 @@
     {
       id: "q55",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the word: My brother and I ____ going to the park.",
       answer: [
         "are"
@@ -741,6 +785,7 @@
     {
       id: "q56",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the word: Please write ____ (not messy).",
       answer: [
         "neatly"
@@ -754,6 +799,7 @@
     {
       id: "q57",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the possessive: This is my ____ book. (the book of my sister)",
       answer: [
         "sister's"
@@ -767,6 +813,7 @@
     {
       id: "q58",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the word: I ____ (feel) excited about the trip.",
       answer: [
         "feel"
@@ -780,6 +827,7 @@
     {
       id: "q59",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "A paragraph should have a topic sentence that tells the main idea.",
       options: [
         "True",
@@ -792,6 +840,7 @@
     {
       id: "q60",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "In dialogue, we use quotation marks around the words someone says.",
       options: [
         "False",
@@ -803,6 +852,7 @@
     {
       id: "q61",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "A full stop (.) is used at the end of a question.",
       options: [
         "False",

@@ -25,6 +25,7 @@
     {
       id: "q1",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best topic sentence for a paragraph about keeping the school clean.",
       options: [
         "My friend has a blue backpack and a red pencil case.",
@@ -39,6 +40,7 @@
     {
       id: "q2",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the sentence with correct capitalization and punctuation.",
       options: [
         "after school, we played football in the park",
@@ -54,6 +56,7 @@
     {
       id: "q3",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best linking word: I wanted to go outside, ____ it started to rain.",
       options: ["because", "and", "so", "but"], answer: 3,
       points: 1,
@@ -63,6 +66,7 @@
     {
       id: "q4",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I stayed home ____ I was feeling sick.",
       answer: "because",
       acceptedAnswers: ["because"],
@@ -73,6 +77,7 @@
     {
       id: "q5",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best verb form: Last night, I ____ my homework before dinner.",
       options: ["finished", "finish", "finishing", "will finish"], answer: 0,
       points: 1,
@@ -82,6 +87,7 @@
     {
       id: "q6",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "A conclusion should introduce a new main idea.",
       options: ["True", "False"],
       answer: 1,
@@ -92,6 +98,7 @@
     {
       id: "q7",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the best order of these sentences to make a clear paragraph.\n\nA) Finally, we checked our answers.\nB) First, we read the questions carefully.\nC) Then, we wrote our ideas in short notes.",
       options: ["A → B → C", "C → B → A", "B → C → A", "B → A → C"], answer: 2,
@@ -102,6 +109,7 @@
     {
       id: "q8",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which sentence is NOT a run-on sentence?",
       options: [
         "I like reading I read every night.",
@@ -116,6 +124,7 @@
     {
       id: "q9",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I was tired; ____, I finished the project.",
       answer: ["however", "still"],
       acceptedAnswers: ["however", "still"],
@@ -126,6 +135,7 @@
     {
       id: "q10",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best ending sentence for a paragraph about teamwork.",
       options: [
         "In conclusion, teamwork helps people share ideas and finish tasks faster.",
@@ -141,6 +151,7 @@
     {
       id: "q11",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best opening for an email to a teacher.",
       options: ["Yo teacher!!!", "Dear Ms. Lee,", "Give me help now.", "Hey, what's up"],
       answer: 1,
@@ -151,6 +162,7 @@
     {
       id: "q12",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best transition word: I studied hard. ____, I did well on the test.",
       options: ["However", "For example", "As a result", "Meanwhile"],
       answer: 2,
@@ -349,6 +361,7 @@
     {
       id: "q17",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best supporting sentence for a paragraph about recycling at school.",
       options: [
         "Winter is colder than summer.",
@@ -363,6 +376,7 @@
     {
       id: "q18",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the sentence with correct punctuation.",
       options: [
         "On Monday, we visited the museum.", 
@@ -377,6 +391,7 @@
     {
       id: "q19",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best linking word: ____ it was late, we finished the poster.",
       options: ["Because", "Although", "So", "And"],
       answer: 1,
@@ -387,6 +402,7 @@
     {
       id: "q20",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I studied carefully; ____, I felt prepared for the quiz.",
       answer: "therefore",
       acceptedAnswers: ["therefore"],
@@ -397,6 +413,7 @@
     {
       id: "q21",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best verb form: Each of the students ____ a role in the project.",
       options: ["have", "are", "has", "were"], answer: 2,
       points: 1,
@@ -406,6 +423,7 @@
     {
       id: "q22",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct word: Rita and Sam forgot ____ tickets.",
       options: ["there", "them", "they're", "their"], answer: 3,
       points: 1,
@@ -415,6 +433,7 @@
     {
       id: "q23",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: My brother is ____ than me.",
       answer: "taller",
       acceptedAnswers: ["taller"],
@@ -425,6 +444,7 @@
     {
       id: "q24",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best form: This puzzle is ____ than the last one.",
       options: ["easier", "easy", "easiest", "more easy"], answer: 0,
       points: 1,
@@ -434,6 +454,7 @@
     {
       id: "q25",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: She spoke ____ so everyone could hear.",
       options: ["clear", "clearly", "clearness", "clearest"],
       answer: 1,
@@ -444,6 +465,7 @@
     {
       id: "q26",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "A formal email usually includes a subject line.",
       options: ["True", "False"],
       answer: 0,
@@ -454,6 +476,7 @@
     {
       id: "q27",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best sentence to support this topic sentence: ‘Pocket parks improve neighbourhoods.’",
       options: [
         "I bought a new notebook yesterday.",
@@ -468,6 +491,7 @@
     {
       id: "q28",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct word: ____ going to be a test tomorrow.",
       options: ["There", "Their", "They're", "Them"], answer: 0,
       points: 1,
@@ -477,6 +501,7 @@
     {
       id: "q29",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the sentence with correct commas.",
       options: [
         "I packed apples bananas and oranges.",
@@ -491,6 +516,7 @@
     {
       id: "q30",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I finished early; ____, I helped my partner.",
       answer: ["so", "as a result"],
       acceptedAnswers: ["so", "as a result"],
@@ -501,6 +527,7 @@
     {
       id: "q31",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best sentence to avoid repeating the noun.",
       options: [
         "The bike was new. The bike was very fast.",
@@ -515,6 +542,7 @@
     {
       id: "q32",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best concluding sentence for a paragraph about exercise.",
       options: [
         "Yesterday I watched a movie.",
@@ -529,6 +557,7 @@
     {
       id: "q33",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the best order for a polite email.\n\nA) Thank you for your time.\nB) Dear Mr. Tan,\nC) Could you please explain the homework?\nD) I missed class because I was sick.",
       options: ["B → D → C → A", "B → C → D → A", "D → B → C → A", "B → A → D → C"],
@@ -540,6 +569,7 @@
     {
       id: "q34",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Supporting sentences should relate to the topic sentence.",
       options: ["False", "True"], answer: 1,
       points: 1,
@@ -549,6 +579,7 @@
     {
       id: "q35",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the sentence with consistent tense.",
       options: [
         "I walk to school yesterday and I saw my friend.",
@@ -563,6 +594,7 @@
     {
       id: "q36",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I have ____ my project already.",
       answer: "finished",
       acceptedAnswers: ["finished"],
@@ -573,6 +605,7 @@
     {
       id: "q37",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word for a formal email: I would like to ____ for your advice.",
       options: ["wanna ask", "ask politely", "ask kindly", "ask"], answer: 3,
       points: 1,
@@ -582,6 +615,7 @@
     {
       id: "q38",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct sentence.",
       options: [
         "It's raining outside today.",
@@ -596,6 +630,7 @@
     {
       id: "q39",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: If it ____ tomorrow, we will stay inside.",
       answer: "rains",
       acceptedAnswers: ["rains"],
@@ -606,6 +641,7 @@
     {
       id: "q40",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best transition word: I enjoy science. For example, ____.",
       options: [
         "I forgot my pencil yesterday",
@@ -621,6 +657,7 @@
     {
       id: "q41",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct preposition: I am interested ____ joining the art club.",
       options: ["on", "at", "in", "for"], answer: 2,
       points: 1,
@@ -630,6 +667,7 @@
     {
       id: "q42",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "A summary should include every small detail from the original text.",
       options: ["True", "False"],
       answer: 1,
@@ -640,6 +678,7 @@
     {
       id: "q43",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best way to join the sentences: The girl is my cousin. She won the race.",
       options: [
         "The girl who won the race is my cousin.",
@@ -655,6 +694,7 @@
     {
       id: "q44",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: Please ____ your name at the top of the page.",
       answer: "write",
       acceptedAnswers: ["write"],
@@ -665,6 +705,7 @@
     {
       id: "q45",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the most polite request.",
       options: [
         "Give me the worksheet now.",
@@ -679,6 +720,7 @@
     {
       id: "q46",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which sentence uses a comma correctly after an introductory word?",
       options: [
         "However I still finished my work.",

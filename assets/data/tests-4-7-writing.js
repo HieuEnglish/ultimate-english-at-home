@@ -37,6 +37,7 @@
     {
       id: "q3",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: C _ T",
       answer: "a",
       difficulty: "easy",
@@ -45,6 +46,7 @@
     {
       id: "q4",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: D O _",
       answer: "g",
       difficulty: "easy",
@@ -53,6 +55,7 @@
     {
       id: "q5",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best capital letter: ___ am Sam.",
       options: ["I", "i", "A", "S"],
       answer: 0,
@@ -62,6 +65,7 @@
     {
       id: "q6",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct sentence.",
       options: ["i can run", "I can run.", "I can Run", "I can run"],
       answer: 1,
@@ -71,6 +75,7 @@
     {
       id: "q7",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: I ___ happy.",
       options: ["are", "is", "am", "be"], answer: 2,
       difficulty: "easy",
@@ -79,6 +84,7 @@
     {
       id: "q8",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which one has spaces between words?",
       options: ["Ilikecats.", "I-like-cats.", "I likecats.", "I like cats."], answer: 3,
       difficulty: "medium",
@@ -87,6 +93,7 @@
     {
       id: "q9",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best end mark: Are you ready__",
       options: ["?", ".", "!", ","], answer: 0,
       difficulty: "medium",
@@ -103,6 +110,7 @@
     {
       id: "q11",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I like ___ (🐶).",
       answer: ["dog", "dogs"],
       difficulty: "medium",
@@ -111,6 +119,7 @@
     {
       id: "q12",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Write the word for this picture: ☀️",
       answer: "sun",
       difficulty: "easy",
@@ -119,6 +128,7 @@
     {
       id: "q13",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best order.",
       options: ["I school go.", "I go to school.", "Go I school.", "School go I."], answer: 1,
       difficulty: "medium",
@@ -127,6 +137,7 @@
     {
       id: "q14",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: _at (🐱)",
       answer: "c",
       difficulty: "easy",
@@ -135,6 +146,7 @@
     {
       id: "q15",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct punctuation: I have a dog__",
       options: ["!", "?", ".", ";"], answer: 2,
       difficulty: "medium",
@@ -143,6 +155,7 @@
     {
       id: "q16",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which word is spelled correctly?",
       options: ["skool", "shcool", "scool", "school"], answer: 3,
       difficulty: "hard",
@@ -167,6 +180,7 @@
     {
       id: "q19",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: b _ ll (a toy)",
       answer: "a",
       difficulty: "easy",
@@ -192,6 +206,7 @@
     {
       id: "q22",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: F _ S H",
       answer: "i",
       difficulty: "easy",
@@ -200,6 +215,7 @@
     {
       id: "q23",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best end mark: Wow__",
       options: ["!", "?", ".", ","], answer: 0,
       difficulty: "medium",
@@ -208,6 +224,7 @@
     {
       id: "q24",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best capital letter: ___e is my dad.",
       options: ["h", "H", "E", "e"], answer: 1,
       difficulty: "easy",
@@ -216,6 +233,7 @@
     {
       id: "q25",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I can ___ (jump).",
       answer: "jump",
       difficulty: "easy",
@@ -232,6 +250,7 @@
     {
       id: "q27",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct sentence.",
       options: ["We are happy", "we are happy.", "We are happy.", "We are Happy."],
       answer: 2,
@@ -241,6 +260,7 @@
     {
       id: "q28",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: h _ t (a hat)",
       answer: "a",
       difficulty: "easy",
@@ -249,6 +269,7 @@
     {
       id: "q29",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: r _ n",
       answer: "u",
       difficulty: "easy",
@@ -257,6 +278,7 @@
     {
       id: "q30",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which one has the best spacing?",
       options: ["Ilikerice.", "I like  rice.", "I likeRice.", "I like rice."], answer: 3,
       difficulty: "medium",
@@ -273,6 +295,7 @@
     {
       id: "q32",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: She ___ a cat.",
       options: ["has", "have", "am", "are"], answer: 0,
       difficulty: "medium",
@@ -281,6 +304,7 @@
     {
       id: "q33",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: They ___ play.",
       options: ["cans", "can", "is", "am"], answer: 1,
       difficulty: "medium",
@@ -289,6 +313,7 @@
     {
       id: "q34",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Add -s for plural: two cat__",
       answer: "s",
       difficulty: "medium",
@@ -297,6 +322,7 @@
     {
       id: "q35",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I have ___ apple.",
       answer: "an",
       difficulty: "medium",
@@ -305,6 +331,7 @@
     {
       id: "q36",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: I see ___ dog.",
       options: ["the", "an", "a", "to"], answer: 2,
       difficulty: "easy",
@@ -313,6 +340,7 @@
     {
       id: "q37",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which sentence is a question?",
       options: ["You like ice cream.", "Like ice cream.", "I like ice cream!", "Do you like ice cream?"], answer: 3,
       difficulty: "medium",
@@ -329,6 +357,7 @@
     {
       id: "q39",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Add the missing end mark: I like books__",
       answer: ".",
       difficulty: "easy",
@@ -337,6 +366,7 @@
     {
       id: "q40",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct way to write this day: ___",
       options: ["Monday", "monday", "MONday", "MonDay"], answer: 0,
       difficulty: "medium",
@@ -345,6 +375,7 @@
     {
       id: "q41",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: M _ M (mother)",
       answer: "o",
       difficulty: "medium",
@@ -361,6 +392,7 @@
     {
       id: "q43",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best way to write this name: ___",
       options: ["tom", "Tom", "TOM.", "tom."],
       answer: 1,
@@ -370,6 +402,7 @@
     {
       id: "q44",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: ___ name is Ana.",
       answer: ["My", "my"],
       difficulty: "medium",
@@ -378,6 +411,7 @@
     {
       id: "q45",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the correct sentence.",
       options: ["My name is ana.", "my name is Ana.", "My name is Ana.", "My name is Ana"], answer: 2,
       difficulty: "medium",
@@ -386,6 +420,7 @@
     {
       id: "q46",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: p _ n (write tool)",
       answer: "e",
       difficulty: "easy",
@@ -402,6 +437,7 @@
     {
       id: "q48",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: I ___ two cats.",
       options: ["is", "has", "am", "have"], answer: 3,
       difficulty: "medium",
@@ -410,6 +446,7 @@
     {
       id: "q49",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which word is spelled correctly?",
       options: ["friend", "frend", "freind", "firend"], answer: 0,
       difficulty: "hard",
@@ -418,6 +455,7 @@
     {
       id: "q50",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letters: fr _ _ nd",
       answer: "ie",
       difficulty: "hard",
@@ -434,6 +472,7 @@
     {
       id: "q52",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best punctuation: Hello__ Mom!",
       options: [".", ",", "?", "!"],
       answer: 1,
@@ -443,6 +482,7 @@
     {
       id: "q53",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Add the missing comma: Hello _ Dad.",
       answer: ",",
       difficulty: "medium",
@@ -451,6 +491,7 @@
     {
       id: "q54",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I ___ 6 years old.",
       answer: "am",
       difficulty: "easy",
@@ -459,6 +500,7 @@
     {
       id: "q55",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: He ___ tall.",
       options: ["are", "am", "is", "be"],
       answer: 2,
@@ -476,6 +518,7 @@
     {
       id: "q57",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best end mark: Stop__",
       options: [".", "?", ",", "!"], answer: 3,
       difficulty: "medium",
@@ -484,6 +527,7 @@
     {
       id: "q58",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing letter: _ook (a book)",
       answer: "b",
       difficulty: "easy",
@@ -492,6 +536,7 @@
     {
       id: "q59",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Which word is spelled correctly?",
       options: ["apple", "aplpe", "aple", "appel"], answer: 0,
       difficulty: "easy",
@@ -508,6 +553,7 @@
     {
       id: "q61",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best sentence with and.",
       options: ["I like apples andbananas.", "I like apples and bananas.", "I like apples, and bananas.", "I like apples And bananas."], answer: 1,
       difficulty: "medium",
@@ -516,6 +562,7 @@
     {
       id: "q62",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: I like apples ___ bananas.",
       answer: "and",
       difficulty: "easy",
@@ -524,6 +571,7 @@
     {
       id: "q63",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best word: The cat is ___ the box.",
       options: ["at", "on", "in", "to"], answer: 2,
       difficulty: "medium",
@@ -532,6 +580,7 @@
     {
       id: "q64",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Fill in the missing word: The ball is ___ the box.",
       answer: "in",
       difficulty: "easy",
@@ -548,6 +597,7 @@
     {
       id: "q66",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best sentence.",
       options: ["Because I like it.", "I like it, because it is fun.", "I like it Because it is fun.", "I like it because it is fun."], answer: 3,
       difficulty: "hard",
@@ -556,6 +606,7 @@
     {
       id: "q67",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Write the missing capital letter: _ love my dog.",
       answer: "I",
       difficulty: "medium",
@@ -564,6 +615,7 @@
     {
       id: "q68",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Choose the best sentence.",
       options: ["I can't swim.", "I cant swim.", "i can't swim.", "I can't swim"],
       answer: 0,
@@ -581,6 +633,7 @@
     {
       id: "q70",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question: "Add the missing end mark: Let's play__",
       answer: ".",
       difficulty: "easy",

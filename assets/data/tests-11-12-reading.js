@@ -1087,6 +1087,7 @@
     {
       id: "q81",
       type: "trueFalse",
+      passage: "In reading tasks, headings are short titles that summarize paragraph ideas.",
       question: "A heading is a short title for a paragraph.",
       options: ["True", "False"],
       answer: 0,

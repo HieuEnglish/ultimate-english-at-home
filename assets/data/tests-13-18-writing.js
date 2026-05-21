@@ -24,6 +24,7 @@
     {
       id: "q1",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence best paraphrases this idea?\n\nTeenagers should be given more independence.",
       options: [
@@ -40,6 +41,7 @@
     {
       id: "q2",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in the linking word to show contrast:\n\nSome students prefer online learning; ______ others enjoy classroom discussion.",
       answer: "whereas",
@@ -52,6 +54,7 @@
     {
       id: "q3",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the most formal option for academic writing:",
       options: [
@@ -68,6 +71,7 @@
     {
       id: "q4",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "True or False: In IELTS-style Writing Task 1, you should give your personal opinion about the topic.",
       options: ["False", "True"], answer: 0,
@@ -79,6 +83,7 @@
     {
       id: "q5",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the best topic sentence for a paragraph about using bicycles in cities:",
       options: [
@@ -96,6 +101,7 @@
     {
       id: "q6",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Complete the sentence with ONE word (noun):\n\nThere has been a significant ______ in the number of teenagers using social media.",
       answer: "increase",
@@ -108,6 +114,7 @@
     {
       id: "q7",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence uses however correctly?",
       options: [
@@ -125,6 +132,7 @@
     {
       id: "q8",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which overview sentence best fits an IELTS-style Task 1 report about the data below?\n\nStudy time rose slightly, social media time rose sharply, exercise fell a little, and part-time work increased.",
       options: [
@@ -141,6 +149,7 @@
     {
       id: "q9",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence is the best concluding sentence for an opinion essay?",
       options: [
@@ -158,6 +167,7 @@
     {
       id: "q10",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Pick the best reason + example pair to support this claim:\n\nSchools should teach more practical life skills.",
       options: [
@@ -347,6 +357,7 @@
     {
       id: "q13",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence best paraphrases this idea?\n\nYoung people spend too much time on their phones.",
       options: [
@@ -364,6 +375,7 @@
     {
       id: "q14",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in the linking phrase to add an extra point:\n\nPublic transport is often cheaper; ______, it can reduce traffic in city centres.",
       answer: "moreover",
@@ -376,6 +388,7 @@
     {
       id: "q15",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the most academic option:",
       options: [
@@ -392,6 +405,7 @@
     {
       id: "q16",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "True or False: A clear overview is an important part of an IELTS-style Task 1 report.",
       options: ["True", "False"],
@@ -404,6 +418,7 @@
     {
       id: "q17",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence uses 'despite' correctly?",
       options: [
@@ -421,6 +436,7 @@
     {
       id: "q18",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the best way to describe a decrease:",
       options: [
@@ -437,6 +453,7 @@
     {
       id: "q19",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in the linking phrase to show result:\n\nTrain tickets became cheaper. ______, more people started travelling by rail.",
       answer: "consequently",
@@ -449,6 +466,7 @@
     {
       id: "q20",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which introduction sentence is best for a Task 1 report?",
       options: [
@@ -465,6 +483,7 @@
     {
       id: "q21",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which overview sentence best fits these trends?\n\nPhone ownership increased a lot, laptop ownership increased slightly, and tablet ownership fell.",
       options: [
@@ -481,6 +500,7 @@
     {
       id: "q22",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Complete the sentence with ONE word:\n\nThe ______ of households with internet access reached 90%.",
       answer: "percentage",
@@ -493,6 +513,7 @@
     {
       id: "q23",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the correct verb form:\n\nThe number of students who travel abroad ____ increasing each year.",
       options: ["are", "is", "were", "have"],
@@ -505,6 +526,7 @@
     {
       id: "q24",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the correctly punctuated sentence:",
       options: [
@@ -521,6 +543,7 @@
     {
       id: "q25",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in a contrast linker:\n\nCar use rose during the period; ______, cycling declined.",
       answer: "in contrast",
@@ -533,6 +556,7 @@
     {
       id: "q26",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence is the best thesis statement for an opinion essay?",
       options: [
@@ -549,6 +573,7 @@
     {
       id: "q27",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the best topic sentence for a paragraph about volunteering:",
       options: [
@@ -565,6 +590,7 @@
     {
       id: "q28",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "True or False: Contractions (don't, can't) are recommended in formal academic writing.",
       options: ["True", "False"],
@@ -577,6 +603,7 @@
     {
       id: "q29",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Replace the informal word in brackets with a more formal one:\n\nMany ______ (kids) benefit from regular exercise.",
       answer: "children",
@@ -589,6 +616,7 @@
     {
       id: "q30",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence correctly describes this comparison?\n\nCar users: 40% | Bus users: 20%",
       options: [
@@ -605,6 +633,7 @@
     {
       id: "q31",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence is best for a process description (passive voice)?",
       options: [
@@ -621,6 +650,7 @@
     {
       id: "q32",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in a sequencing word:\n\nFirst, the data is collected. ______, it is analysed to identify trends.",
       answer: "next",
@@ -633,6 +663,7 @@
     {
       id: "q33",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "True or False: A separate conclusion paragraph is required in Task 1 reports.",
       options: ["False", "True"], answer: 0,
@@ -644,6 +675,7 @@
     {
       id: "q34",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Pick the best reason + example pair to support this claim:\n\nReading regularly improves language skills.",
       options: [
@@ -661,6 +693,7 @@
     {
       id: "q35",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Complete the sentence with ONE adjective:\n\nThere was a ______ increase in the number of online shoppers over the period.",
       answer: "dramatic",
@@ -673,6 +706,7 @@
     {
       id: "q36",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence best paraphrases this idea?\n\nGovernments should limit the use of private cars.",
       options: [
@@ -689,6 +723,7 @@
     {
       id: "q37",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which phrase is most accurate for describing shares in a pie chart?",
       options: [
@@ -705,6 +740,7 @@
     {
       id: "q38",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Complete the sentence with ONE word:\n\nBus, car, and bicycle use were 30%, 50%, and 20% ______.",
       answer: "respectively",
@@ -717,6 +753,7 @@
     {
       id: "q39",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence is correct?",
       options: [
@@ -733,6 +770,7 @@
     {
       id: "q40",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence is best for academic tone (avoid overgeneralisation)?",
       options: [
@@ -749,6 +787,7 @@
     {
       id: "q41",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "True or False: In Task 2, each body paragraph should focus on one main idea.",
       options: ["True", "False"],
@@ -761,6 +800,7 @@
     {
       id: "q42",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in a phrase to introduce the opposite view:\n\nSome people prefer to study alone. ______, others learn better in groups.",
       answer: "on the other hand",
@@ -773,6 +813,7 @@
     {
       id: "q43",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence is most suitable for Task 1 (objective report)?",
       options: [
@@ -789,6 +830,7 @@
     {
       id: "q44",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the correct use of 'respectively':",
       options: [
@@ -805,6 +847,7 @@
     {
       id: "q45",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Complete the sentence with ONE noun:\n\nThere was a noticeable ______ in unemployment between 2015 and 2020.",
       answer: "decline",
@@ -817,6 +860,7 @@
     {
       id: "q46",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence correctly compares two figures?",
       options: [
@@ -834,6 +878,7 @@
     {
       id: "q47",
       type: "trueFalse",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "True or False: It is best to paraphrase the task question in your introduction rather than copying it word-for-word.",
       options: ["True", "False"],
@@ -846,6 +891,7 @@
     {
       id: "q48",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which opening sentence best paraphrases the task statement for an essay about remote work?",
       options: [
@@ -862,6 +908,7 @@
     {
       id: "q49",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in a cause-and-effect linker:\n\nPublic transport was improved; ______, traffic congestion decreased.",
       answer: "therefore",
@@ -874,6 +921,7 @@
     {
       id: "q50",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Choose the best collocation:",
       options: [
@@ -891,6 +939,7 @@
     {
       id: "q51",
       type: "multipleChoice",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Which sentence uses paragraph signposting correctly?",
       options: [
@@ -908,6 +957,7 @@
     {
       id: "q52",
       type: "fillInTheBlank",
+      passage: "Use the sentence and nearby prompt details to choose the best answer.",
       question:
         "Fill in a contrast linker:\n\nThe bus is slower than the train. ______, it is cheaper.",
       answer: "nevertheless",

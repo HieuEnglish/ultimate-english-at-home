@@ -117,6 +117,7 @@
     {
       id: "q9",
       type: "fillInTheBlank",
+      passage: "Think about a daily routine sentence. The action happens before dinner.",
       question: "Fill in the word: I ______ my homework before dinner.",
       answer: ["do", "finish"],
       difficulty: "easy",
@@ -217,6 +218,7 @@
     {
       id: "q18",
       type: "fillInTheBlank",
+      passage: "Good reading habits help you answer questions correctly.",
       question: "Fill in the missing word: Please read ______ before you answer.",
       answer: ["carefully", "slowly"],
       difficulty: "medium",
@@ -977,6 +979,7 @@
     {
       id: "q72",
       type: "fillInTheBlank",
+      passage: "Strong readers scan for important terms to locate key information quickly.",
       question: "Fill in the missing word: I look for key ______ when I read.",
       answer: [
         "words"
@@ -987,6 +990,7 @@
     {
       id: "q73",
       type: "multipleChoice",
+      passage: "In this sentence, the word 'quickly' describes doing something in a fast way.",
       question: "Which word is a synonym for 'quickly'?",
       options: [
         "fast",
@@ -1001,6 +1005,7 @@
     {
       id: "q74",
       type: "trueFalse",
+      passage: "A title tells readers the topic before they read the full text.",
       question: "A title can help you guess what a passage is about.",
       options: [
         "False",
