@@ -1539,7 +1539,573 @@
         "One detail",
         "Clear voice"
       ]
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q113",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q114",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q115",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q116",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q117",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q118",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q119",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q120",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q121",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby you enjoy and explain how you learned it.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+
+{
+    "id": "q122",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a book you enjoyed and why.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q123",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a skill you want to learn.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q124",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a memorable school day.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q125",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Explain how you prepare for a test.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q126",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe your favorite subject and why.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q127",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a helpful classmate.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q128",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby that relaxes you.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q129",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Explain a rule that is important in class.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q130",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a goal for this year.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q131",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a time you solved a problem.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+
+{
+    "id": "q132",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby and why you enjoy it.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q133",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a challenge you solved.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q134",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a useful school rule.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q135",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a book you like.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q136",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a goal for this year.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q137",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby and why you enjoy it.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q138",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a challenge you solved.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q139",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a useful school rule.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q140",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a book you like.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q141",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a goal for this year.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q142",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby and why you enjoy it.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q143",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a challenge you solved.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q144",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a useful school rule.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q145",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a book you like.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q146",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a goal for this year.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q147",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a hobby and why you enjoy it.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q148",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a challenge you solved.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q149",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a useful school rule.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q150",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Talk about a book you like.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q151",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Describe a goal for this year.",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

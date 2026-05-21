@@ -1478,7 +1478,613 @@
       "answer": 0,
       "difficulty": "medium",
       "explanation": "Choose the best reading-based answer."
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "passage": "The science club meets every Thursday after class.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Every Friday morning",
+        "Every Thursday after class",
+        "Only once a month",
+        "During lunch break"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "passage": "The debate club meets weekly to improve public speaking.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Improve speaking",
+        "Learn cooking",
+        "Fix computers",
+        "Play chess only"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "passage": "Students submitted their projects by Friday afternoon.",
+    "question": "Choose the best answer.",
+    "options": [
+        "By Friday afternoon",
+        "By Monday morning",
+        "By noon daily",
+        "No deadline"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "passage": "The notice says the lab will close at 5 p.m.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Close at 5 p.m.",
+        "Open at midnight",
+        "Close at noon",
+        "Open all night"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "passage": "A balanced schedule can reduce exam stress.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Reduce stress",
+        "Increase noise",
+        "End homework",
+        "Shorten weekends"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "passage": "The article compares online and face-to-face classes.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Online vs face-to-face",
+        "History of trains",
+        "How to swim",
+        "Cooking tips"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "passage": "The principal announced a new reading challenge.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Reading challenge",
+        "Sports ban",
+        "Longer lunch",
+        "No homework forever"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "passage": "The report shows attendance improved this term.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Attendance improved",
+        "Attendance dropped to zero",
+        "No data shown",
+        "School closed"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "passage": "The survey asked students about study habits.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Study habits",
+        "Favorite movies",
+        "Pet names",
+        "Shoe sizes"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "passage": "The team revised the plan after feedback.",
+    "question": "Choose the best answer.",
+    "options": [
+        "After feedback",
+        "Before writing",
+        "Without reading",
+        "By luck"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "passage": "The workshop focused on note-taking strategies.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Note-taking",
+        "Painting",
+        "Dancing",
+        "Camping"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "passage": "The science fair deadline is Friday noon.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Friday noon",
+        "Thursday noon",
+        "Friday night",
+        "Monday noon"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "passage": "Regular revision improves retention.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Improves retention",
+        "Reduces sleep",
+        "Removes homework",
+        "Ends exams"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "passage": "The survey included 200 students.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "200 students",
+        "20 students",
+        "120 students",
+        "2,000 students"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "passage": "The workshop focused on note-taking.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Note-taking",
+        "Painting",
+        "Coding only",
+        "Sports"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "passage": "The article compares two learning methods.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Two methods",
+        "Three cities",
+        "One teacher",
+        "Zero data"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "passage": "The science fair deadline is Friday noon.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Friday noon",
+        "Thursday noon",
+        "Friday night",
+        "Monday noon"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "passage": "Regular revision improves retention.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Improves retention",
+        "Reduces sleep",
+        "Removes homework",
+        "Ends exams"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "passage": "The survey included 200 students.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "200 students",
+        "20 students",
+        "120 students",
+        "2,000 students"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "passage": "The workshop focused on note-taking.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Note-taking",
+        "Painting",
+        "Coding only",
+        "Sports"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "passage": "The article compares two learning methods.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Two methods",
+        "Three cities",
+        "One teacher",
+        "Zero data"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "passage": "The science fair deadline is Friday noon.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Friday noon",
+        "Thursday noon",
+        "Friday night",
+        "Monday noon"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "passage": "Regular revision improves retention.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Improves retention",
+        "Reduces sleep",
+        "Removes homework",
+        "Ends exams"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "passage": "The survey included 200 students.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "200 students",
+        "20 students",
+        "120 students",
+        "2,000 students"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "passage": "The workshop focused on note-taking.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Note-taking",
+        "Painting",
+        "Coding only",
+        "Sports"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "passage": "The article compares two learning methods.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Two methods",
+        "Three cities",
+        "One teacher",
+        "Zero data"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "passage": "The science fair deadline is Friday noon.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Friday noon",
+        "Thursday noon",
+        "Friday night",
+        "Monday noon"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "passage": "Regular revision improves retention.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Improves retention",
+        "Reduces sleep",
+        "Removes homework",
+        "Ends exams"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "passage": "The survey included 200 students.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "200 students",
+        "20 students",
+        "120 students",
+        "2,000 students"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "passage": "The workshop focused on note-taking.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Note-taking",
+        "Painting",
+        "Coding only",
+        "Sports"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "passage": "The article compares two learning methods.",
+    "question": "Choose the most accurate answer.",
+    "options": [
+        "Two methods",
+        "Three cities",
+        "One teacher",
+        "Zero data"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Select the option supported by the text."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

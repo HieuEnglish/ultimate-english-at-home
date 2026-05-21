@@ -1461,7 +1461,573 @@
       "answer": 1,
       "difficulty": "medium",
       "explanation": "Planners must balance both needs."
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The class begins at nine fifteen.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q113",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "She brought a green notebook.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q114",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The game starts after lunch.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q115",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Their bus arrives at gate two.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q116",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "He finished the task on Tuesday.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q117",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The library closes at six o clock.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q118",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "We need three bottles of water.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q119",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The concert is next Saturday night.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q120",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The teacher asked for full sentences.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q121",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "They will meet in room fourteen.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+
+{
+    "id": "q122",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The lesson ends at ten forty.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q123",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "He left his notebook on the desk.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q124",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Their practice match is on Wednesday.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q125",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The cafeteria serves pasta today.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q126",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "She needs a ruler and an eraser.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q127",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The train to Central leaves at 4:20.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q128",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "They will visit the museum next month.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q129",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The coach asked everyone to warm up.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q130",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Her presentation topic is climate change.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+{
+    "id": "q131",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The homework has three short questions.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide whether the statement is true."
+},
+
+{
+    "id": "q132",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The class starts at nine twenty.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q133",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The test has five questions.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q134",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "We meet in room fourteen.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q135",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "She brought a blue folder.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q136",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The bus leaves at four ten.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q137",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Practice is on Wednesday.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q138",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Please write full sentences.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q139",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The library closes at six.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q140",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Bring two pencils tomorrow.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q141",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Lunch break is at twelve thirty.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q142",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The class starts at nine twenty.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q143",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The test has five questions.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q144",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "We meet in room fourteen.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q145",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "She brought a blue folder.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q146",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The bus leaves at four ten.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q147",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Practice is on Wednesday.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q148",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Please write full sentences.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q149",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "The library closes at six.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q150",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Bring two pencils tomorrow.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+},
+{
+    "id": "q151",
+    "type": "listenTrueFalse",
+    "context": "Listen to the short statement.",
+    "question": "Listen. True or False?",
+    "say": "Lunch break is at twelve thirty.",
+    "options": [
+        "False",
+        "True"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Decide if the statement is true."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

@@ -1421,7 +1421,613 @@
       "answer": 1,
       "difficulty": "medium",
       "explanation": "Write the exact word."
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "passage": "Community service can help teenagers build empathy and practical skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It always improves test scores instantly",
+        "It builds empathy and practical experience",
+        "It removes the need for school",
+        "It guarantees a job"
+    ],
+    "answer": 1,
+    "difficulty": "hard",
+    "explanation": "Pick the option that matches the passage."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "passage": "Volunteering often develops leadership and communication skills.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Leadership skills",
+        "Instant perfect grades",
+        "No effort needed",
+        "Automatic jobs"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "passage": "Public transport investment can reduce urban congestion.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Reduce congestion",
+        "Increase traffic",
+        "Remove buses",
+        "Raise noise"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "passage": "Many schools adopt blended learning for flexibility.",
+    "question": "Choose the best answer.",
+    "options": [
+        "For flexibility",
+        "To cancel classes",
+        "To remove teachers",
+        "To avoid learning"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "passage": "Data literacy is increasingly important in modern careers.",
+    "question": "Choose the best answer.",
+    "options": [
+        "For modern careers",
+        "Only for artists",
+        "Only for sports",
+        "Not important"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "passage": "Mentorship programs can improve student confidence.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Improve confidence",
+        "Ban clubs",
+        "Reduce support",
+        "Delay learning"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "passage": "Regular exercise is linked to better concentration.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Better concentration",
+        "Worse memory",
+        "No effect",
+        "Less sleep"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "passage": "Community projects strengthen civic responsibility.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Civic responsibility",
+        "Less teamwork",
+        "Lower trust",
+        "No impact"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "passage": "Career guidance helps students make informed choices.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Informed choices",
+        "Random decisions",
+        "No planning",
+        "More confusion"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "passage": "Digital tools can support independent learning.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Independent learning",
+        "No homework ever",
+        "Shorter school years",
+        "No reading"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "passage": "Clear goals improve long-term academic performance.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Clear goals",
+        "Luck alone",
+        "Last-minute panic",
+        "No revision"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Use the key detail from the passage."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "passage": "Public transport investment can lower congestion.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Lower congestion",
+        "Increase traffic",
+        "Remove buses",
+        "Ban cycling"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "passage": "Project-based learning promotes applied skills.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Applied skills",
+        "No assessment",
+        "Less teamwork",
+        "No planning"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "passage": "Career guidance supports informed decisions.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Informed decisions",
+        "Random choices",
+        "No goals",
+        "Fewer options"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "passage": "Digital literacy is essential in modern workplaces.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Essential skill",
+        "Optional hobby only",
+        "Not useful",
+        "Outdated concept"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "passage": "Community service can strengthen civic engagement.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Civic engagement",
+        "Lower confidence",
+        "Less empathy",
+        "More isolation"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "passage": "Public transport investment can lower congestion.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Lower congestion",
+        "Increase traffic",
+        "Remove buses",
+        "Ban cycling"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "passage": "Project-based learning promotes applied skills.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Applied skills",
+        "No assessment",
+        "Less teamwork",
+        "No planning"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "passage": "Career guidance supports informed decisions.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Informed decisions",
+        "Random choices",
+        "No goals",
+        "Fewer options"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "passage": "Digital literacy is essential in modern workplaces.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Essential skill",
+        "Optional hobby only",
+        "Not useful",
+        "Outdated concept"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "passage": "Community service can strengthen civic engagement.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Civic engagement",
+        "Lower confidence",
+        "Less empathy",
+        "More isolation"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "passage": "Public transport investment can lower congestion.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Lower congestion",
+        "Increase traffic",
+        "Remove buses",
+        "Ban cycling"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "passage": "Project-based learning promotes applied skills.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Applied skills",
+        "No assessment",
+        "Less teamwork",
+        "No planning"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "passage": "Career guidance supports informed decisions.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Informed decisions",
+        "Random choices",
+        "No goals",
+        "Fewer options"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "passage": "Digital literacy is essential in modern workplaces.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Essential skill",
+        "Optional hobby only",
+        "Not useful",
+        "Outdated concept"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "passage": "Community service can strengthen civic engagement.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Civic engagement",
+        "Lower confidence",
+        "Less empathy",
+        "More isolation"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "passage": "Public transport investment can lower congestion.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Lower congestion",
+        "Increase traffic",
+        "Remove buses",
+        "Ban cycling"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "passage": "Project-based learning promotes applied skills.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Applied skills",
+        "No assessment",
+        "Less teamwork",
+        "No planning"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "passage": "Career guidance supports informed decisions.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Informed decisions",
+        "Random choices",
+        "No goals",
+        "Fewer options"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "passage": "Digital literacy is essential in modern workplaces.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Essential skill",
+        "Optional hobby only",
+        "Not useful",
+        "Outdated concept"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "passage": "Community service can strengthen civic engagement.",
+    "question": "Which statement is best supported?",
+    "options": [
+        "Civic engagement",
+        "Lower confidence",
+        "Less empathy",
+        "More isolation"
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Identify the main supported claim."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

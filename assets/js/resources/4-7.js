@@ -2072,6 +2072,1646 @@
         focus: "short answers, repetition, fluency",
         time: "5-8 min",
         level: "caregiver-led"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "booktrust-storybooks-and-games-4-7-reading",
+        title: "BookTrust Storybooks and Games",
+        link: "https://www.booktrust.org.uk/how-we-help/have-fun-at-home/storybooks-and-games/",
+        format: "site",
+        description:
+          "Online stories, read-aloud videos, and simple book games.",
+        details: {
+          type: "stories and games 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "free-children-stories-4-7-reading",
+        title: "Free Children Stories",
+        link: "https://www.freechildrenstories.com/",
+        format: "site",
+        description:
+          "Free short stories for different child age groups.",
+        details: {
+          type: "stories 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "storyline-online-library-4-7-reading",
+        title: "Storyline Online Library",
+        link: "https://storylineonline.net/library/",
+        format: "site",
+        description:
+          "Actors read picture books with activity guides.",
+        details: {
+          type: "read-aloud stories 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "unite-for-literacy-library-4-7-reading",
+        title: "Unite for Literacy Library",
+        link: "https://www.uniteforliteracy.com/",
+        format: "site",
+        description:
+          "Short picture books with audio narration options.",
+        details: {
+          type: "picture books 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "british-council-learnenglish-kids-4-7-reading",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "cambridge-english-activities-for-children-4-7-reading",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "esleschool-starters-4-7-reading",
+        title: "ESLeSchool Starters",
+        link: "https://www.esleschool.com/starters/",
+        format: "site",
+        description:
+          "Starter-level practice, quizzes, and young learner tasks.",
+        details: {
+          type: "young learner ESL 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "games-to-learn-english-4-7-reading",
+        title: "Games to Learn English",
+        link: "https://www.gamestolearnenglish.com/",
+        format: "site",
+        description:
+          "Simple games for vocabulary, spelling, questions, and sentences.",
+        details: {
+          type: "interactive games 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "learnenglish-kids-listen-and-watch-4-7-reading",
+        title: "LearnEnglish Kids Listen and Watch",
+        link: "https://learnenglishkids.britishcouncil.org/listen-watch",
+        format: "site",
+        description:
+          "Songs, stories, videos, games, and printable activities.",
+        details: {
+          type: "songs and videos 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "mes-english-flashcards-4-7-reading",
+        title: "MES English Flashcards",
+        link: "https://www.mes-english.com/flashcards.php",
+        format: "site",
+        description:
+          "Printable flashcards for vocabulary, speaking, and matching games.",
+        details: {
+          type: "flashcards 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "natgeo-kids-english-primary-resources-4-7-reading",
+        title: "NatGeo Kids English Primary Resources",
+        link: "https://www.natgeokids.com/uk/teacher-category/english/",
+        format: "site",
+        description:
+          "English primary resources for reading, writing, vocabulary, and talk.",
+        details: {
+          type: "teacher resources 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "national-geographic-kids-4-7-reading",
+        title: "National Geographic Kids",
+        link: "https://kids.nationalgeographic.com/",
+        format: "site",
+        description:
+          "High-interest animals, science, history, videos, and quizzes.",
+        details: {
+          type: "articles and quizzes 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "national-geographic-kids-little-kids-4-7-reading",
+        title: "National Geographic Kids Little Kids",
+        link: "https://kids.nationalgeographic.com/little-kids/topic/littlekids",
+        format: "site",
+        description:
+          "Short animal videos and picture-led content for talk practice.",
+        details: {
+          type: "videos and animals 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "pbs-kids-games-4-7-reading",
+        title: "PBS Kids Games",
+        link: "https://pbskids.org/games",
+        format: "site",
+        description:
+          "Child-friendly games using simple vocabulary and instructions.",
+        details: {
+          type: "educational games 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "pbs-super-why-4-7-reading",
+        title: "PBS Super Why",
+        link: "https://pbskids.org/superwhy",
+        format: "site",
+        description:
+          "Games for alphabet, rhyming, spelling, and comprehension.",
+        details: {
+          type: "literacy games 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "sesame-street-games-4-7-reading",
+        title: "Sesame Street Games",
+        link: "https://pbskids.org/sesame/all-games",
+        format: "site",
+        description:
+          "Very young learner games with simple words and routines.",
+        details: {
+          type: "preschool games 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "booktrust-storybooks-and-games-4-7-listening",
+        title: "BookTrust Storybooks and Games",
+        link: "https://www.booktrust.org.uk/how-we-help/have-fun-at-home/storybooks-and-games/",
+        format: "site",
+        description:
+          "Online stories, read-aloud videos, and simple book games.",
+        details: {
+          type: "stories and games 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "british-council-learnenglish-kids-4-7-listening",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "cambridge-english-activities-for-children-4-7-listening",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "cambridge-sing-and-learn-4-7-listening",
+        title: "Cambridge Sing and Learn",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/sing-and-learn/",
+        format: "site",
+        description:
+          "Simple songs for vocabulary, listening, and pronunciation.",
+        details: {
+          type: "songs 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "esleschool-starters-4-7-listening",
+        title: "ESLeSchool Starters",
+        link: "https://www.esleschool.com/starters/",
+        format: "site",
+        description:
+          "Starter-level practice, quizzes, and young learner tasks.",
+        details: {
+          type: "young learner ESL 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "free-children-stories-4-7-listening",
+        title: "Free Children Stories",
+        link: "https://www.freechildrenstories.com/",
+        format: "site",
+        description:
+          "Free short stories for different child age groups.",
+        details: {
+          type: "stories 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "mes-english-flashcards-4-7-listening",
+        title: "MES English Flashcards",
+        link: "https://www.mes-english.com/flashcards.php",
+        format: "site",
+        description:
+          "Printable flashcards for vocabulary, speaking, and matching games.",
+        details: {
+          type: "flashcards 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "national-geographic-kids-4-7-listening",
+        title: "National Geographic Kids",
+        link: "https://kids.nationalgeographic.com/",
+        format: "site",
+        description:
+          "High-interest animals, science, history, videos, and quizzes.",
+        details: {
+          type: "articles and quizzes 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "national-geographic-kids-little-kids-4-7-listening",
+        title: "National Geographic Kids Little Kids",
+        link: "https://kids.nationalgeographic.com/little-kids/topic/littlekids",
+        format: "site",
+        description:
+          "Short animal videos and picture-led content for talk practice.",
+        details: {
+          type: "videos and animals 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "pbs-kids-games-4-7-listening",
+        title: "PBS Kids Games",
+        link: "https://pbskids.org/games",
+        format: "site",
+        description:
+          "Child-friendly games using simple vocabulary and instructions.",
+        details: {
+          type: "educational games 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "pbs-kids-videos-4-7-listening",
+        title: "PBS Kids Videos",
+        link: "https://pbskids.org/videos",
+        format: "site",
+        description:
+          "Safe children’s videos for listening and retelling practice.",
+        details: {
+          type: "videos 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "pbs-super-why-4-7-listening",
+        title: "PBS Super Why",
+        link: "https://pbskids.org/superwhy",
+        format: "site",
+        description:
+          "Games for alphabet, rhyming, spelling, and comprehension.",
+        details: {
+          type: "literacy games 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "sesame-street-games-4-7-listening",
+        title: "Sesame Street Games",
+        link: "https://pbskids.org/sesame/all-games",
+        format: "site",
+        description:
+          "Very young learner games with simple words and routines.",
+        details: {
+          type: "preschool games 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      ,
+
+      {
+        age: "4-7",
+        skill: "listening",
+        slug: "storyberries-4-7-listening",
+        title: "Storyberries",
+        link: "https://www.storyberries.com/",
+        format: "site",
+        description:
+          "Free online stories, poems, audio books, and fairy tales.",
+        details: {
+          type: "story library 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "british-council-learnenglish-kids-4-7-writing",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "cambridge-english-activities-for-children-4-7-writing",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "esleschool-starters-4-7-writing",
+        title: "ESLeSchool Starters",
+        link: "https://www.esleschool.com/starters/",
+        format: "site",
+        description:
+          "Starter-level practice, quizzes, and young learner tasks.",
+        details: {
+          type: "young learner ESL 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "free-children-stories-4-7-writing",
+        title: "Free Children Stories",
+        link: "https://www.freechildrenstories.com/",
+        format: "site",
+        description:
+          "Free short stories for different child age groups.",
+        details: {
+          type: "stories 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "games-to-learn-english-4-7-writing",
+        title: "Games to Learn English",
+        link: "https://www.gamestolearnenglish.com/",
+        format: "site",
+        description:
+          "Simple games for vocabulary, spelling, questions, and sentences.",
+        details: {
+          type: "interactive games 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "mes-english-flashcards-4-7-writing",
+        title: "MES English Flashcards",
+        link: "https://www.mes-english.com/flashcards.php",
+        format: "site",
+        description:
+          "Printable flashcards for vocabulary, speaking, and matching games.",
+        details: {
+          type: "flashcards 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "natgeo-kids-english-primary-resources-4-7-writing",
+        title: "NatGeo Kids English Primary Resources",
+        link: "https://www.natgeokids.com/uk/teacher-category/english/",
+        format: "site",
+        description:
+          "English primary resources for reading, writing, vocabulary, and talk.",
+        details: {
+          type: "teacher resources 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "national-geographic-kids-4-7-writing",
+        title: "National Geographic Kids",
+        link: "https://kids.nationalgeographic.com/",
+        format: "site",
+        description:
+          "High-interest animals, science, history, videos, and quizzes.",
+        details: {
+          type: "articles and quizzes 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "pbs-super-why-4-7-writing",
+        title: "PBS Super Why",
+        link: "https://pbskids.org/superwhy",
+        format: "site",
+        description:
+          "Games for alphabet, rhyming, spelling, and comprehension.",
+        details: {
+          type: "literacy games 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "storyberries-4-7-writing",
+        title: "Storyberries",
+        link: "https://www.storyberries.com/",
+        format: "site",
+        description:
+          "Free online stories, poems, audio books, and fairy tales.",
+        details: {
+          type: "story library 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "storyline-online-library-4-7-writing",
+        title: "Storyline Online Library",
+        link: "https://storylineonline.net/library/",
+        format: "site",
+        description:
+          "Actors read picture books with activity guides.",
+        details: {
+          type: "read-aloud stories 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "booktrust-storybooks-and-games-4-7-writing",
+        title: "BookTrust Storybooks and Games",
+        link: "https://www.booktrust.org.uk/how-we-help/have-fun-at-home/storybooks-and-games/",
+        format: "site",
+        description:
+          "Online stories, read-aloud videos, and simple book games.",
+        details: {
+          type: "stories and games 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "cambridge-sing-and-learn-4-7-writing",
+        title: "Cambridge Sing and Learn",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/sing-and-learn/",
+        format: "site",
+        description:
+          "Simple songs for vocabulary, listening, and pronunciation.",
+        details: {
+          type: "songs 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "learnenglish-kids-listen-and-watch-4-7-writing",
+        title: "LearnEnglish Kids Listen and Watch",
+        link: "https://learnenglishkids.britishcouncil.org/listen-watch",
+        format: "site",
+        description:
+          "Songs, stories, videos, games, and printable activities.",
+        details: {
+          type: "songs and videos 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "national-geographic-kids-little-kids-4-7-writing",
+        title: "National Geographic Kids Little Kids",
+        link: "https://kids.nationalgeographic.com/little-kids/topic/littlekids",
+        format: "site",
+        description:
+          "Short animal videos and picture-led content for talk practice.",
+        details: {
+          type: "videos and animals 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "writing",
+        slug: "pbs-kids-games-4-7-writing",
+        title: "PBS Kids Games",
+        link: "https://pbskids.org/games",
+        format: "site",
+        description:
+          "Child-friendly games using simple vocabulary and instructions.",
+        details: {
+          type: "educational games 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "cambridge-sing-and-learn-4-7-speaking",
+        title: "Cambridge Sing and Learn",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/sing-and-learn/",
+        format: "site",
+        description:
+          "Simple songs for vocabulary, listening, and pronunciation.",
+        details: {
+          type: "songs 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "mes-english-flashcards-4-7-speaking",
+        title: "MES English Flashcards",
+        link: "https://www.mes-english.com/flashcards.php",
+        format: "site",
+        description:
+          "Printable flashcards for vocabulary, speaking, and matching games.",
+        details: {
+          type: "flashcards 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "pbs-kids-videos-4-7-speaking",
+        title: "PBS Kids Videos",
+        link: "https://pbskids.org/videos",
+        format: "site",
+        description:
+          "Safe children’s videos for listening and retelling practice.",
+        details: {
+          type: "videos 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "storyline-online-library-4-7-speaking",
+        title: "Storyline Online Library",
+        link: "https://storylineonline.net/library/",
+        format: "site",
+        description:
+          "Actors read picture books with activity guides.",
+        details: {
+          type: "read-aloud stories 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "booktrust-storybooks-and-games-4-7-speaking",
+        title: "BookTrust Storybooks and Games",
+        link: "https://www.booktrust.org.uk/how-we-help/have-fun-at-home/storybooks-and-games/",
+        format: "site",
+        description:
+          "Online stories, read-aloud videos, and simple book games.",
+        details: {
+          type: "stories and games 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "british-council-learnenglish-kids-4-7-speaking",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "cambridge-english-activities-for-children-4-7-speaking",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "esleschool-starters-4-7-speaking",
+        title: "ESLeSchool Starters",
+        link: "https://www.esleschool.com/starters/",
+        format: "site",
+        description:
+          "Starter-level practice, quizzes, and young learner tasks.",
+        details: {
+          type: "young learner ESL 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "free-children-stories-4-7-speaking",
+        title: "Free Children Stories",
+        link: "https://www.freechildrenstories.com/",
+        format: "site",
+        description:
+          "Free short stories for different child age groups.",
+        details: {
+          type: "stories 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "games-to-learn-english-4-7-speaking",
+        title: "Games to Learn English",
+        link: "https://www.gamestolearnenglish.com/",
+        format: "site",
+        description:
+          "Simple games for vocabulary, spelling, questions, and sentences.",
+        details: {
+          type: "interactive games 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "learnenglish-kids-listen-and-watch-4-7-speaking",
+        title: "LearnEnglish Kids Listen and Watch",
+        link: "https://learnenglishkids.britishcouncil.org/listen-watch",
+        format: "site",
+        description:
+          "Songs, stories, videos, games, and printable activities.",
+        details: {
+          type: "songs and videos 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "natgeo-kids-english-primary-resources-4-7-speaking",
+        title: "NatGeo Kids English Primary Resources",
+        link: "https://www.natgeokids.com/uk/teacher-category/english/",
+        format: "site",
+        description:
+          "English primary resources for reading, writing, vocabulary, and talk.",
+        details: {
+          type: "teacher resources 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "national-geographic-kids-4-7-speaking",
+        title: "National Geographic Kids",
+        link: "https://kids.nationalgeographic.com/",
+        format: "site",
+        description:
+          "High-interest animals, science, history, videos, and quizzes.",
+        details: {
+          type: "articles and quizzes 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "national-geographic-kids-little-kids-4-7-speaking",
+        title: "National Geographic Kids Little Kids",
+        link: "https://kids.nationalgeographic.com/little-kids/topic/littlekids",
+        format: "site",
+        description:
+          "Short animal videos and picture-led content for talk practice.",
+        details: {
+          type: "videos and animals 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "pbs-kids-games-4-7-speaking",
+        title: "PBS Kids Games",
+        link: "https://pbskids.org/games",
+        format: "site",
+        description:
+          "Child-friendly games using simple vocabulary and instructions.",
+        details: {
+          type: "educational games 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "pbs-super-why-4-7-speaking",
+        title: "PBS Super Why",
+        link: "https://pbskids.org/superwhy",
+        format: "site",
+        description:
+          "Games for alphabet, rhyming, spelling, and comprehension.",
+        details: {
+          type: "literacy games 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "sesame-street-games-4-7-speaking",
+        title: "Sesame Street Games",
+        link: "https://pbskids.org/sesame/all-games",
+        format: "site",
+        description:
+          "Very young learner games with simple words and routines.",
+        details: {
+          type: "preschool games 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧒 keep activities playful and visual."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "8–15 min",
+        level: "guided"
       }
     ]
   };

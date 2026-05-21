@@ -45,7 +45,7 @@ export function getView(ctx) {
               <div class="hero-pill"><span aria-hidden="true">🎓</span> Ages 13-18</div>
               <div class="hero-pill"><span aria-hidden="true">🎯</span> IELTS Track</div>
             </div>
-          </div>
+          </a>
 
           <div class="hero-visual" data-reveal>
             <div class="hero-visual__halo hero-visual__halo--one"></div>
@@ -112,7 +112,7 @@ export function getView(ctx) {
                 <small>Come back fast</small>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -121,19 +121,19 @@ export function getView(ctx) {
           <div>
             <span class="stat-num">6</span>
             <p class="stat-label">Learning Tracks</p>
-          </div>
+          </a>
           <div>
             <span class="stat-num">4</span>
             <p class="stat-label">Core Skills</p>
-          </div>
+          </a>
           <div>
             <span class="stat-num">100%</span>
             <p class="stat-label">Free Forever</p>
-          </div>
+          </a>
           <div>
             <span class="stat-num">24/7</span>
             <p class="stat-label">At-Home Practice</p>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -146,36 +146,36 @@ export function getView(ctx) {
         </p>
 
         <div class="features-grid">
-          <div class="feature-card" data-accent="green" data-reveal>
+          <a class="feature-card" data-accent="green" data-reveal href="${hrefFor('/resources')}" data-nav>
             <div class="feature-icon"><span class="feature-icon__emoji">📚</span><span>Resources</span></div>
             <h3 class="feature-title">Curated Resources</h3>
             <p class="feature-desc">Free learning materials grouped by age and skill, from first words through IELTS-style preparation.</p>
-          </div>
-          <div class="feature-card" data-accent="yellow" data-reveal>
+          </a>
+          <a class="feature-card" data-accent="yellow" data-reveal href="${hrefFor('/games')}" data-nav>
             <div class="feature-icon"><span class="feature-icon__emoji">🎮</span><span>Games</span></div>
             <h3 class="feature-title">Interactive Games</h3>
             <p class="feature-desc">Vocabulary, spelling, grammar, listening, and speaking activities that make practice feel active instead of repetitive.</p>
-          </div>
-          <div class="feature-card" data-accent="blue" data-reveal>
+          </a>
+          <a class="feature-card" data-accent="blue" data-reveal href="${hrefFor('/tests')}" data-nav>
             <div class="feature-icon"><span class="feature-icon__emoji">🧪</span><span>Tests</span></div>
             <h3 class="feature-title">IELTS-Inspired Tests</h3>
             <p class="feature-desc">Structured practice tests that help learners build familiarity with real-world English assessment patterns.</p>
-          </div>
-          <div class="feature-card" data-accent="orange" data-reveal>
+          </a>
+          <a class="feature-card" data-accent="orange" data-reveal href="${hrefFor('/profile')}" data-nav>
             <div class="feature-icon"><span class="feature-icon__emoji">👤</span><span>Profile</span></div>
             <h3 class="feature-title">Progress Tracking</h3>
             <p class="feature-desc">Store scores locally, review progress by age group, and see where learners are building momentum.</p>
-          </div>
-          <div class="feature-card" data-accent="pink" data-reveal>
+          </a>
+          <a class="feature-card" data-accent="pink" data-reveal href="${hrefFor('/favourites')}" data-nav>
             <div class="feature-icon"><span class="feature-icon__emoji">⭐</span><span>Save</span></div>
             <h3 class="feature-title">Favourites</h3>
             <p class="feature-desc">Bookmark resources and return to them fast, without digging back through the full catalogue every session.</p>
-          </div>
-          <div class="feature-card" data-accent="purple" data-reveal>
+          </a>
+          <a class="feature-card" data-accent="purple" data-reveal href="${hrefFor('/profile/certificates/all')}" data-nav>
             <div class="feature-icon"><span class="feature-icon__emoji">🏆</span><span>Awards</span></div>
             <h3 class="feature-title">Certificates</h3>
             <p class="feature-desc">Unlock printable certificates as milestones are completed and keep practice outcomes visible and motivating.</p>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -261,26 +261,26 @@ export function getView(ctx) {
         <p class="section-sub">The platform keeps reading, listening, writing, and speaking aligned so practice feels balanced instead of fragmented.</p>
 
         <div class="skills-grid">
-          <div class="skill-pill" data-skill="reading" data-reveal>
+          <a class="skill-pill" data-skill="reading" data-reveal href="${hrefFor('/resources/ielts/reading')}" data-nav>
             <span class="skill-pill__icon" aria-hidden="true">📖</span>
             <div class="skill-pill__name">Reading</div>
             <p class="skill-pill__desc">Comprehension, fluency, inference, and vocabulary in context.</p>
-          </div>
-          <div class="skill-pill" data-skill="listening" data-reveal>
+          </a>
+          <a class="skill-pill" data-skill="listening" data-reveal href="${hrefFor('/resources/ielts/listening')}" data-nav>
             <span class="skill-pill__icon" aria-hidden="true">🎧</span>
             <div class="skill-pill__name">Listening</div>
             <p class="skill-pill__desc">Audio comprehension, rhythm, attention, and real-world understanding.</p>
-          </div>
-          <div class="skill-pill" data-skill="writing" data-reveal>
+          </a>
+          <a class="skill-pill" data-skill="writing" data-reveal href="${hrefFor('/resources/ielts/writing')}" data-nav>
             <span class="skill-pill__icon" aria-hidden="true">✍️</span>
             <div class="skill-pill__name">Writing</div>
             <p class="skill-pill__desc">Spelling, grammar, structure, sentence quality, and longer expression.</p>
-          </div>
-          <div class="skill-pill" data-skill="speaking" data-reveal>
+          </a>
+          <a class="skill-pill" data-skill="speaking" data-reveal href="${hrefFor('/resources/ielts/speaking')}" data-nav>
             <span class="skill-pill__icon" aria-hidden="true">🎙️</span>
             <div class="skill-pill__name">Speaking</div>
             <p class="skill-pill__desc">Confidence, pronunciation, clarity, and spoken communication practice.</p>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -289,7 +289,7 @@ export function getView(ctx) {
         <h2 class="section-title">Why the app feels useful fast</h2>
 
         <div class="testimonials-grid">
-          <div class="testimonial-card" data-reveal>
+          <a class="testimonial-card" data-reveal href="${hrefFor('/resources')}" data-nav>
             <div class="testimonial-stars">Age-aware</div>
             <p class="testimonial-text">The material is split by learner stage, so the homepage feels guided instead of overwhelming.</p>
             <div class="testimonial-author">
@@ -299,9 +299,9 @@ export function getView(ctx) {
                 <div class="testimonial-role">From early learners to exam prep</div>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="testimonial-card" data-reveal>
+          <a class="testimonial-card" data-reveal href="${hrefFor('/games')}" data-nav>
             <div class="testimonial-stars">Multi-mode</div>
             <p class="testimonial-text">Games, tests, and resources are tied together, so practice can switch modes without losing momentum.</p>
             <div class="testimonial-author">
@@ -311,9 +311,9 @@ export function getView(ctx) {
                 <div class="testimonial-role">Read, play, test, repeat</div>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="testimonial-card" data-reveal>
+          <a class="testimonial-card" data-reveal href="${hrefFor('/profile')}" data-nav>
             <div class="testimonial-stars">Visible wins</div>
             <p class="testimonial-text">Local profile storage, favourites, and certificates make the app feel like a real study environment instead of a loose link dump.</p>
             <div class="testimonial-author">
@@ -323,7 +323,7 @@ export function getView(ctx) {
                 <div class="testimonial-role">Track and revisit meaningful work</div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </section>
 

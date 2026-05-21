@@ -1835,7 +1835,573 @@
       "question": "Writing Task 2 (Essay)\n\nYou should spend about 40 minutes on this task.\nWrite at least 250 words.\n\nWorking from home will become the normal model for many jobs in the future. What are the advantages and disadvantages?",
       "difficulty": "hard",
       "explanation": "State a clear position, explain your reasons, and support them with examples."
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Schools should include financial literacy because it prepares students for real-world decisions.",
+        "Money is important and that is all.",
+        "Some topics are interesting for many people.",
+        "I think maybe this could be fine."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is precise, formal, and specific."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Implementing financial literacy courses can improve long-term decision-making.",
+        "Money matters to people.",
+        "Courses might help maybe.",
+        "Decisions are difficult."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Mandatory community service can strengthen civic engagement among students.",
+        "Service is good sometimes.",
+        "Civic things are important.",
+        "Students can volunteer."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Flexible assessment models can better reflect diverse learner strengths.",
+        "Tests are stressful.",
+        "Learners are different.",
+        "Models can change."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Investing in teacher training has a measurable impact on outcomes.",
+        "Training sounds useful.",
+        "Teachers work hard.",
+        "Outcomes may improve."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Career counselling should be integrated earlier in secondary education.",
+        "Careers matter later.",
+        "Students need advice.",
+        "Schools can help."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Well-designed public transport policies can reduce urban emissions.",
+        "Transport affects cities.",
+        "Policies are complex.",
+        "Emissions are bad."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Ethical AI education is increasingly necessary in modern curricula.",
+        "AI is everywhere now.",
+        "Ethics is important.",
+        "Curricula evolve over time."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Project-based learning encourages deeper conceptual understanding.",
+        "Projects can be fun.",
+        "Concepts are hard.",
+        "Understanding grows slowly."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "School mental-health support should be expanded and normalised.",
+        "Mental health matters.",
+        "Support is helpful.",
+        "Students face pressure."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Transparent grading criteria can increase trust in assessment systems.",
+        "Grades are important.",
+        "Criteria should be clear.",
+        "Trust is valuable."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "The best option is specific, formal, and complete."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Schools should teach financial literacy to prepare students for real-world decisions.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "hard",
+    "explanation": "Best answers are specific, formal, and complete."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

@@ -3030,7 +3030,573 @@
           }
         ]
       }
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The results suggest that regular revision improves performance.",
+        "The results are kinda good maybe.",
+        "Revision is cool stuff.",
+        "Students was studying hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The findings indicate that regular revision boosts performance.",
+        "Revision is kinda helpful.",
+        "Students was revising.",
+        "Performance maybe improved."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The proposal is practical and cost-effective for schools.",
+        "The plan is cool stuff.",
+        "Schools got money maybe.",
+        "Proposal is nice."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "A clear structure improves the reader’s understanding.",
+        "Structure is good I think.",
+        "Readers can read it.",
+        "Understanding is important."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "The evidence strongly supports the main conclusion.",
+        "Evidence is there somewhere.",
+        "Conclusion feels right.",
+        "Support is nice."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Public libraries remain valuable learning spaces.",
+        "Libraries are old places.",
+        "Books are everywhere.",
+        "Learning can happen maybe."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Time management is essential during exam preparation.",
+        "Time is ticking fast.",
+        "Exams are stressful.",
+        "Preparation takes effort."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Constructive feedback helps students refine their writing.",
+        "Feedback can be okay.",
+        "Writing gets better maybe.",
+        "Teachers comment a lot."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Digital literacy is a core skill in modern education.",
+        "Computers are common now.",
+        "Skills are useful.",
+        "Education changes quickly."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Balanced arguments are more persuasive to readers.",
+        "Arguments can be balanced.",
+        "Readers like reasons.",
+        "Persuasion matters."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Accurate data presentation increases report credibility.",
+        "Data should be right.",
+        "Reports use numbers.",
+        "Credibility sounds formal."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Clear evidence and structure make arguments more persuasive.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

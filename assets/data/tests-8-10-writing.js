@@ -1817,7 +1817,573 @@
         ]
       },
       "model": "Plan a beginning, middle, and ending."
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy habits help students stay active and focused.",
+        "I like pizza a lot.",
+        "School days are long.",
+        "My bag is blue."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is precise, formal, and specific."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "A good routine helps students stay organised.",
+        "I woke up early today.",
+        "My pencil is yellow.",
+        "School is a place."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Reading daily can improve vocabulary over time.",
+        "Books are nice sometimes.",
+        "I have a book.",
+        "Words are words."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Exercise before class can increase focus.",
+        "Running is cool.",
+        "I like sports.",
+        "Focus is important maybe."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Planning homework reduces stress later.",
+        "Homework exists.",
+        "I did math.",
+        "Stress is bad."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Healthy meals support energy in lessons.",
+        "Food is tasty.",
+        "I eat lunch.",
+        "Energy is energy."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Group work can build communication skills.",
+        "Teams are fun.",
+        "I like friends.",
+        "Talking happens."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Clear goals make learning more effective.",
+        "Goals are good.",
+        "I want to pass.",
+        "Learning is hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Sleep is essential for memory and attention.",
+        "Sleep is comfy.",
+        "I sleep at night.",
+        "Beds are soft."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Asking questions helps students understand difficult ideas.",
+        "Questions are okay.",
+        "I asked once.",
+        "Ideas are hard."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "question": "Choose the strongest sentence for academic writing.",
+    "options": [
+        "Reviewing notes weekly improves long-term retention.",
+        "Notes are useful.",
+        "I write notes.",
+        "Weekly is seven days."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "The best option is specific, formal, and complete."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "question": "Choose the strongest academic sentence.",
+    "options": [
+        "Daily reading helps students build vocabulary and confidence.",
+        "This topic is nice and many people like it.",
+        "I think stuff can be good sometimes.",
+        "School is school and that is all."
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Best answers are specific, formal, and complete."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

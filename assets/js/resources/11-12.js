@@ -2095,6 +2095,1644 @@
           "freeAccess": "Free American English resource.",
           "ageCheck": "Good fit for 11-12 with topic preview."
         }
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "esl-fast-11-12-reading",
+        title: "ESL Fast",
+        link: "https://www.eslfast.com/",
+        format: "site",
+        description:
+          "Short stories and dialogues with audio for learners.",
+        details: {
+          type: "short stories/dialogues 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "storyline-online-library-11-12-reading",
+        title: "Storyline Online Library",
+        link: "https://storylineonline.net/library/",
+        format: "site",
+        description:
+          "Actors read picture books with activity guides.",
+        details: {
+          type: "read-aloud stories 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "agendaweb-english-exercises-11-12-reading",
+        title: "AgendaWeb English Exercises",
+        link: "https://agendaweb.org/",
+        format: "site",
+        description:
+          "Large index of free English exercises by topic and skill.",
+        details: {
+          type: "grammar and skills exercises 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "breaking-news-english-11-12-reading",
+        title: "Breaking News English",
+        link: "https://breakingnewsenglish.com/",
+        format: "site",
+        description:
+          "News lessons with reading, listening, vocabulary, and discussion.",
+        details: {
+          type: "news lessons 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "british-council-learnenglish-kids-11-12-reading",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "british-council-learnenglish-teens-11-12-reading",
+        title: "British Council LearnEnglish Teens",
+        link: "https://learnenglishteens.britishcouncil.org/",
+        format: "site",
+        description:
+          "Reading, writing, listening, exams, grammar, games, and videos.",
+        details: {
+          type: "teen ESL 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "cambridge-activities-for-learners-11-12-reading",
+        title: "Cambridge Activities for Learners",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/",
+        format: "site",
+        description:
+          "Free online activities for listening, grammar, vocabulary, and reading.",
+        details: {
+          type: "skill activities 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "cambridge-english-activities-for-children-11-12-reading",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "elllo-english-listening-11-12-reading",
+        title: "ELLLO English Listening",
+        link: "https://www.elllo.org/",
+        format: "site",
+        description:
+          "Thousands of listening lessons with scripts, vocabulary, and quizzes.",
+        details: {
+          type: "listening lessons 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "elllo-lessons-by-level-11-12-reading",
+        title: "ELLLO Lessons by Level",
+        link: "https://elllo.org/english/levels/index.htm",
+        format: "site",
+        description:
+          "Listening lessons organised by CEFR level.",
+        details: {
+          type: "graded listening 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "esleschool-beginner-11-12-reading",
+        title: "ESLeSchool Beginner",
+        link: "https://www.esleschool.com/beginner/",
+        format: "site",
+        description:
+          "Beginner practice for vocabulary, grammar, and test-style skills.",
+        details: {
+          type: "beginner ESL 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "english-for-everyone-reading-11-12-reading",
+        title: "English for Everyone Reading",
+        link: "https://englishforeveryone.org/Topics/Reading-Comprehension.html",
+        format: "site",
+        description:
+          "Printable reading comprehension worksheets for many grade levels.",
+        details: {
+          type: "worksheets 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "englishclub-11-12-reading",
+        title: "EnglishClub",
+        link: "https://www.englishclub.com/",
+        format: "site",
+        description:
+          "Lessons and practice for grammar, vocabulary, pronunciation, and skills.",
+        details: {
+          type: "English reference 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "games-to-learn-english-11-12-reading",
+        title: "Games to Learn English",
+        link: "https://www.gamestolearnenglish.com/",
+        format: "site",
+        description:
+          "Simple games for vocabulary, spelling, questions, and sentences.",
+        details: {
+          type: "interactive games 🌐",
+          teaches: "Reading comprehension + vocabulary growth 📚🧠",
+          howTo: [
+            "1️⃣ Read once for gist, then re-read for key details. 👀📖",
+            "2️⃣ Highlight 5 useful words and use them in new sentences. 🖍️🧠",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, vocabulary",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "breaking-news-english-multi-speed-listening-11-12-listening",
+        title: "Breaking News English Multi-Speed Listening",
+        link: "https://breakingnewsenglish.com/multi-speed-listening.html",
+        format: "site",
+        description:
+          "News listening at different speeds from slow to fast.",
+        details: {
+          type: "listening practice 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "elllo-english-listening-11-12-listening",
+        title: "ELLLO English Listening",
+        link: "https://www.elllo.org/",
+        format: "site",
+        description:
+          "Thousands of listening lessons with scripts, vocabulary, and quizzes.",
+        details: {
+          type: "listening lessons 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "elllo-lessons-by-level-11-12-listening",
+        title: "ELLLO Lessons by Level",
+        link: "https://elllo.org/english/levels/index.htm",
+        format: "site",
+        description:
+          "Listening lessons organised by CEFR level.",
+        details: {
+          type: "graded listening 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "listen-a-minute-11-12-listening",
+        title: "Listen A Minute",
+        link: "https://listenaminute.com/",
+        format: "site",
+        description:
+          "One-minute listening texts with simple exercises.",
+        details: {
+          type: "short listening 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "randall-easy-listening-11-12-listening",
+        title: "Randall Easy Listening",
+        link: "https://www.esl-lab.com/easy/",
+        format: "site",
+        description:
+          "Easy listening topics for routines, family, and daily life.",
+        details: {
+          type: "easy listening 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "randall-intermediate-listening-11-12-listening",
+        title: "Randall Intermediate Listening",
+        link: "https://www.esl-lab.com/intermediate/",
+        format: "site",
+        description:
+          "Intermediate listening quizzes with discussion and vocabulary.",
+        details: {
+          type: "intermediate listening 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "randall-s-esl-cyber-listening-lab-11-12-listening",
+        title: "Randall’s ESL Cyber Listening Lab",
+        link: "https://www.esl-lab.com/",
+        format: "site",
+        description:
+          "Everyday listening quizzes with vocabulary and discussion tasks.",
+        details: {
+          type: "listening quizzes 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "agendaweb-english-exercises-11-12-listening",
+        title: "AgendaWeb English Exercises",
+        link: "https://agendaweb.org/",
+        format: "site",
+        description:
+          "Large index of free English exercises by topic and skill.",
+        details: {
+          type: "grammar and skills exercises 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "breaking-news-english-11-12-listening",
+        title: "Breaking News English",
+        link: "https://breakingnewsenglish.com/",
+        format: "site",
+        description:
+          "News lessons with reading, listening, vocabulary, and discussion.",
+        details: {
+          type: "news lessons 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "british-council-learnenglish-kids-11-12-listening",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "british-council-learnenglish-teens-11-12-listening",
+        title: "British Council LearnEnglish Teens",
+        link: "https://learnenglishteens.britishcouncil.org/",
+        format: "site",
+        description:
+          "Reading, writing, listening, exams, grammar, games, and videos.",
+        details: {
+          type: "teen ESL 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "cambridge-activities-for-learners-11-12-listening",
+        title: "Cambridge Activities for Learners",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/",
+        format: "site",
+        description:
+          "Free online activities for listening, grammar, vocabulary, and reading.",
+        details: {
+          type: "skill activities 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "cambridge-english-activities-for-children-11-12-listening",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "cambridge-speak-improve-11-12-listening",
+        title: "Cambridge Speak & Improve",
+        link: "https://speakandimprove.com/",
+        format: "site",
+        description:
+          "Learners practise speaking and receive level-style feedback.",
+        details: {
+          type: "speaking practice 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "esl-fast-11-12-listening",
+        title: "ESL Fast",
+        link: "https://www.eslfast.com/",
+        format: "site",
+        description:
+          "Short stories and dialogues with audio for learners.",
+        details: {
+          type: "short stories/dialogues 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "esleschool-beginner-11-12-listening",
+        title: "ESLeSchool Beginner",
+        link: "https://www.esleschool.com/beginner/",
+        format: "site",
+        description:
+          "Beginner practice for vocabulary, grammar, and test-style skills.",
+        details: {
+          type: "beginner ESL 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "listening",
+        slug: "englishclub-11-12-listening",
+        title: "EnglishClub",
+        link: "https://www.englishclub.com/",
+        format: "site",
+        description:
+          "Lessons and practice for grammar, vocabulary, pronunciation, and skills.",
+        details: {
+          type: "English reference 🌐",
+          teaches: "Listening comprehension + repeat-after-me fluency 🎧🗣️",
+          howTo: [
+            "1️⃣ Listen once for gist, then replay and note key words. 🎧📝",
+            "2️⃣ Shadow key phrases and repeat 2–3 times for clarity. 🔁🗣️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "comprehension, pronunciation",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "english-for-everyone-reading-11-12-writing",
+        title: "English for Everyone Reading",
+        link: "https://englishforeveryone.org/Topics/Reading-Comprehension.html",
+        format: "site",
+        description:
+          "Printable reading comprehension worksheets for many grade levels.",
+        details: {
+          type: "worksheets 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "agendaweb-english-exercises-11-12-writing",
+        title: "AgendaWeb English Exercises",
+        link: "https://agendaweb.org/",
+        format: "site",
+        description:
+          "Large index of free English exercises by topic and skill.",
+        details: {
+          type: "grammar and skills exercises 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "breaking-news-english-11-12-writing",
+        title: "Breaking News English",
+        link: "https://breakingnewsenglish.com/",
+        format: "site",
+        description:
+          "News lessons with reading, listening, vocabulary, and discussion.",
+        details: {
+          type: "news lessons 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "british-council-learnenglish-kids-11-12-writing",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "british-council-learnenglish-teens-11-12-writing",
+        title: "British Council LearnEnglish Teens",
+        link: "https://learnenglishteens.britishcouncil.org/",
+        format: "site",
+        description:
+          "Reading, writing, listening, exams, grammar, games, and videos.",
+        details: {
+          type: "teen ESL 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "cambridge-activities-for-learners-11-12-writing",
+        title: "Cambridge Activities for Learners",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/",
+        format: "site",
+        description:
+          "Free online activities for listening, grammar, vocabulary, and reading.",
+        details: {
+          type: "skill activities 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "cambridge-english-activities-for-children-11-12-writing",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "elllo-english-listening-11-12-writing",
+        title: "ELLLO English Listening",
+        link: "https://www.elllo.org/",
+        format: "site",
+        description:
+          "Thousands of listening lessons with scripts, vocabulary, and quizzes.",
+        details: {
+          type: "listening lessons 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "esl-fast-11-12-writing",
+        title: "ESL Fast",
+        link: "https://www.eslfast.com/",
+        format: "site",
+        description:
+          "Short stories and dialogues with audio for learners.",
+        details: {
+          type: "short stories/dialogues 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "esleschool-beginner-11-12-writing",
+        title: "ESLeSchool Beginner",
+        link: "https://www.esleschool.com/beginner/",
+        format: "site",
+        description:
+          "Beginner practice for vocabulary, grammar, and test-style skills.",
+        details: {
+          type: "beginner ESL 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "englishclub-11-12-writing",
+        title: "EnglishClub",
+        link: "https://www.englishclub.com/",
+        format: "site",
+        description:
+          "Lessons and practice for grammar, vocabulary, pronunciation, and skills.",
+        details: {
+          type: "English reference 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "games-to-learn-english-11-12-writing",
+        title: "Games to Learn English",
+        link: "https://www.gamestolearnenglish.com/",
+        format: "site",
+        description:
+          "Simple games for vocabulary, spelling, questions, and sentences.",
+        details: {
+          type: "interactive games 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "learnenglish-teens-skills-11-12-writing",
+        title: "LearnEnglish Teens Skills",
+        link: "https://learnenglishteens.britishcouncil.org/skills",
+        format: "site",
+        description:
+          "Practice materials for reading, writing, listening, and speaking.",
+        details: {
+          type: "skill practice 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "listen-a-minute-11-12-writing",
+        title: "Listen A Minute",
+        link: "https://listenaminute.com/",
+        format: "site",
+        description:
+          "One-minute listening texts with simple exercises.",
+        details: {
+          type: "short listening 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "natgeo-kids-english-primary-resources-11-12-writing",
+        title: "NatGeo Kids English Primary Resources",
+        link: "https://www.natgeokids.com/uk/teacher-category/english/",
+        format: "site",
+        description:
+          "English primary resources for reading, writing, vocabulary, and talk.",
+        details: {
+          type: "teacher resources 🌐",
+          teaches: "Guided writing practice + clearer sentence construction ✍️🧩",
+          howTo: [
+            "1️⃣ Follow one prompt and produce a short written response. ✍️📄",
+            "2️⃣ Revise once for grammar, once for clarity, then submit. ✅✍️",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "sentence building, written output",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "elllo-english-listening-11-12-speaking",
+        title: "ELLLO English Listening",
+        link: "https://www.elllo.org/",
+        format: "site",
+        description:
+          "Thousands of listening lessons with scripts, vocabulary, and quizzes.",
+        details: {
+          type: "listening lessons 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "storyline-online-library-11-12-speaking",
+        title: "Storyline Online Library",
+        link: "https://storylineonline.net/library/",
+        format: "site",
+        description:
+          "Actors read picture books with activity guides.",
+        details: {
+          type: "read-aloud stories 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "agendaweb-english-exercises-11-12-speaking",
+        title: "AgendaWeb English Exercises",
+        link: "https://agendaweb.org/",
+        format: "site",
+        description:
+          "Large index of free English exercises by topic and skill.",
+        details: {
+          type: "grammar and skills exercises 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "breaking-news-english-11-12-speaking",
+        title: "Breaking News English",
+        link: "https://breakingnewsenglish.com/",
+        format: "site",
+        description:
+          "News lessons with reading, listening, vocabulary, and discussion.",
+        details: {
+          type: "news lessons 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "breaking-news-english-multi-speed-listening-11-12-speaking",
+        title: "Breaking News English Multi-Speed Listening",
+        link: "https://breakingnewsenglish.com/multi-speed-listening.html",
+        format: "site",
+        description:
+          "News listening at different speeds from slow to fast.",
+        details: {
+          type: "listening practice 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "british-council-learnenglish-kids-11-12-speaking",
+        title: "British Council LearnEnglish Kids",
+        link: "https://learnenglishkids.britishcouncil.org/",
+        format: "site",
+        description:
+          "Free games, songs, stories, videos, grammar, and vocabulary.",
+        details: {
+          type: "ESL activities 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "british-council-learnenglish-teens-11-12-speaking",
+        title: "British Council LearnEnglish Teens",
+        link: "https://learnenglishteens.britishcouncil.org/",
+        format: "site",
+        description:
+          "Reading, writing, listening, exams, grammar, games, and videos.",
+        details: {
+          type: "teen ESL 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "cambridge-activities-for-learners-11-12-speaking",
+        title: "Cambridge Activities for Learners",
+        link: "https://www.cambridgeenglish.org/learning-english/activities-for-learners/",
+        format: "site",
+        description:
+          "Free online activities for listening, grammar, vocabulary, and reading.",
+        details: {
+          type: "skill activities 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "cambridge-english-activities-for-children-11-12-speaking",
+        title: "Cambridge English Activities for Children",
+        link: "https://www.cambridgeenglish.org/learning-english/parents-and-children/activities-for-children/",
+        format: "site",
+        description:
+          "Free Pre-A1, A1, and A2 activities for young learners.",
+        details: {
+          type: "exam-aligned activities 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "cambridge-speak-improve-11-12-speaking",
+        title: "Cambridge Speak & Improve",
+        link: "https://speakandimprove.com/",
+        format: "site",
+        description:
+          "Learners practise speaking and receive level-style feedback.",
+        details: {
+          type: "speaking practice 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "elllo-lessons-by-level-11-12-speaking",
+        title: "ELLLO Lessons by Level",
+        link: "https://elllo.org/english/levels/index.htm",
+        format: "site",
+        description:
+          "Listening lessons organised by CEFR level.",
+        details: {
+          type: "graded listening 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "esl-fast-11-12-speaking",
+        title: "ESL Fast",
+        link: "https://www.eslfast.com/",
+        format: "site",
+        description:
+          "Short stories and dialogues with audio for learners.",
+        details: {
+          type: "short stories/dialogues 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "esleschool-beginner-11-12-speaking",
+        title: "ESLeSchool Beginner",
+        link: "https://www.esleschool.com/beginner/",
+        format: "site",
+        description:
+          "Beginner practice for vocabulary, grammar, and test-style skills.",
+        details: {
+          type: "beginner ESL 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "englishclub-11-12-speaking",
+        title: "EnglishClub",
+        link: "https://www.englishclub.com/",
+        format: "site",
+        description:
+          "Lessons and practice for grammar, vocabulary, pronunciation, and skills.",
+        details: {
+          type: "English reference 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "games-to-learn-english-11-12-speaking",
+        title: "Games to Learn English",
+        link: "https://www.gamestolearnenglish.com/",
+        format: "site",
+        description:
+          "Simple games for vocabulary, spelling, questions, and sentences.",
+        details: {
+          type: "interactive games 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "learnenglish-kids-listen-and-watch-11-12-speaking",
+        title: "LearnEnglish Kids Listen and Watch",
+        link: "https://learnenglishkids.britishcouncil.org/listen-watch",
+        format: "site",
+        description:
+          "Songs, stories, videos, games, and printable activities.",
+        details: {
+          type: "songs and videos 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "speaking",
+        slug: "learnenglish-teens-skills-11-12-speaking",
+        title: "LearnEnglish Teens Skills",
+        link: "https://learnenglishteens.britishcouncil.org/skills",
+        format: "site",
+        description:
+          "Practice materials for reading, writing, listening, and speaking.",
+        details: {
+          type: "skill practice 🌐",
+          teaches: "Speaking fluency + confidence in real communication 🗣️✨",
+          howTo: [
+            "1️⃣ Use one prompt and record/perform a short spoken response. 🗣️🎙️",
+            "2️⃣ Retell in your own words and focus on clear delivery. 🧠💬",
+            "3️⃣ Keep practice regular (2–3 times/week). 🧑‍🎓 add reflection and follow-up tasks."
+          ],
+          whyTopPick: "Public student-facing resource with reliable free access. ⭐",
+          freeAccess: "Free (no account required). 🆓✅",
+          ageCheck: "Age-fit confirmed for this band with normal guidance. ✅"
+        },
+        focus: "fluency, confidence",
+        time: "15–25 min",
+        level: "semi-independent"
       }
     ]
   };

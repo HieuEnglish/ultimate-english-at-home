@@ -1466,7 +1466,613 @@
       "answer": 0,
       "difficulty": "medium",
       "explanation": "Write the key word."
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "passage": "Ari checked the weather before packing his raincoat.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He forgot his shoes",
+        "He expected rain",
+        "He lost his coat",
+        "He bought a bicycle"
+    ],
+    "answer": 1,
+    "difficulty": "medium",
+    "explanation": "Pick the option that matches the passage."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "passage": "Ivy checked the map before the class trip.",
+    "question": "Choose the best answer.",
+    "options": [
+        "She checked the map",
+        "She stayed home",
+        "She lost her bag",
+        "She missed class"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "passage": "Noah brought a jacket because it was cloudy.",
+    "question": "Choose the best answer.",
+    "options": [
+        "It was cloudy",
+        "It was hot",
+        "It was sunny",
+        "It was snowy"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "passage": "The team practises on Tuesday and Thursday.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Tue and Thu",
+        "Mon and Wed",
+        "Fri only",
+        "Sat and Sun"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "passage": "Lia borrowed a storybook from the library.",
+    "question": "Choose the best answer.",
+    "options": [
+        "A storybook",
+        "A laptop",
+        "A lunchbox",
+        "A ruler"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "passage": "The teacher posted homework on the board.",
+    "question": "Choose the best answer.",
+    "options": [
+        "On the board",
+        "In a drawer",
+        "On a bus",
+        "In a locker"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "passage": "Ken saved coins to buy a science kit.",
+    "question": "Choose the best answer.",
+    "options": [
+        "A science kit",
+        "A toy car",
+        "A new phone",
+        "A game console"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "passage": "The museum tour starts at ten thirty.",
+    "question": "Choose the best answer.",
+    "options": [
+        "10:30",
+        "9:00",
+        "11:45",
+        "12:30"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "passage": "Maya watered the plants after school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "After school",
+        "Before breakfast",
+        "At midnight",
+        "During lunch"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "passage": "The poster explains how to recycle plastic.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Recycle plastic",
+        "Play football",
+        "Learn guitar",
+        "Cook rice"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "passage": "Rin packed fruit and sandwiches for lunch.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Fruit and sandwiches",
+        "Only candy",
+        "Just water",
+        "Nothing"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail from the passage."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "passage": "The class trip starts at 9:30.",
+    "question": "What is correct?",
+    "options": [
+        "9:30",
+        "8:30",
+        "10:30",
+        "11:00"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "passage": "Rina packed fruit and water.",
+    "question": "What is correct?",
+    "options": [
+        "Fruit and water",
+        "Candy only",
+        "Nothing",
+        "A laptop"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "passage": "The team practises on Tuesday.",
+    "question": "What is correct?",
+    "options": [
+        "Tuesday",
+        "Monday",
+        "Friday",
+        "Sunday"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "passage": "Kai borrowed two books.",
+    "question": "What is correct?",
+    "options": [
+        "Two books",
+        "One book",
+        "Three books",
+        "No books"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "passage": "The poster explains recycling rules.",
+    "question": "What is correct?",
+    "options": [
+        "Recycling rules",
+        "Cooking rules",
+        "Game rules",
+        "Bus rules"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "passage": "The class trip starts at 9:30.",
+    "question": "What is correct?",
+    "options": [
+        "9:30",
+        "8:30",
+        "10:30",
+        "11:00"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "passage": "Rina packed fruit and water.",
+    "question": "What is correct?",
+    "options": [
+        "Fruit and water",
+        "Candy only",
+        "Nothing",
+        "A laptop"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "passage": "The team practises on Tuesday.",
+    "question": "What is correct?",
+    "options": [
+        "Tuesday",
+        "Monday",
+        "Friday",
+        "Sunday"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "passage": "Kai borrowed two books.",
+    "question": "What is correct?",
+    "options": [
+        "Two books",
+        "One book",
+        "Three books",
+        "No books"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "passage": "The poster explains recycling rules.",
+    "question": "What is correct?",
+    "options": [
+        "Recycling rules",
+        "Cooking rules",
+        "Game rules",
+        "Bus rules"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "passage": "The class trip starts at 9:30.",
+    "question": "What is correct?",
+    "options": [
+        "9:30",
+        "8:30",
+        "10:30",
+        "11:00"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "passage": "Rina packed fruit and water.",
+    "question": "What is correct?",
+    "options": [
+        "Fruit and water",
+        "Candy only",
+        "Nothing",
+        "A laptop"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "passage": "The team practises on Tuesday.",
+    "question": "What is correct?",
+    "options": [
+        "Tuesday",
+        "Monday",
+        "Friday",
+        "Sunday"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "passage": "Kai borrowed two books.",
+    "question": "What is correct?",
+    "options": [
+        "Two books",
+        "One book",
+        "Three books",
+        "No books"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "passage": "The poster explains recycling rules.",
+    "question": "What is correct?",
+    "options": [
+        "Recycling rules",
+        "Cooking rules",
+        "Game rules",
+        "Bus rules"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "passage": "The class trip starts at 9:30.",
+    "question": "What is correct?",
+    "options": [
+        "9:30",
+        "8:30",
+        "10:30",
+        "11:00"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "passage": "Rina packed fruit and water.",
+    "question": "What is correct?",
+    "options": [
+        "Fruit and water",
+        "Candy only",
+        "Nothing",
+        "A laptop"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "passage": "The team practises on Tuesday.",
+    "question": "What is correct?",
+    "options": [
+        "Tuesday",
+        "Monday",
+        "Friday",
+        "Sunday"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "passage": "Kai borrowed two books.",
+    "question": "What is correct?",
+    "options": [
+        "Two books",
+        "One book",
+        "Three books",
+        "No books"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "passage": "The poster explains recycling rules.",
+    "question": "What is correct?",
+    "options": [
+        "Recycling rules",
+        "Cooking rules",
+        "Game rules",
+        "Bus rules"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Choose the fact stated in the passage."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

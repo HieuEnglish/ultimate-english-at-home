@@ -1444,7 +1444,613 @@
     "answer": "cold",
     "difficulty": "medium",
     "explanation": "Think about the word carefully."
-  }
+  },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "passage": "Nina has a blue bag. She takes it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the zoo",
+        "To the park",
+        "To the beach"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "passage": "Leo has a red cap. He wears it to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "To school",
+        "To the beach",
+        "To the farm",
+        "To the mall"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "passage": "The bird is in the tree. It sings every morning.",
+    "question": "Choose the best answer.",
+    "options": [
+        "In the tree",
+        "In the lake",
+        "On the road",
+        "In the bag"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "passage": "Mina drinks water after running in the park.",
+    "question": "Choose the best answer.",
+    "options": [
+        "She sleeps",
+        "She drinks water",
+        "She paints",
+        "She sings"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "passage": "Dad cooks rice and soup for dinner.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Breakfast",
+        "Lunch",
+        "Dinner",
+        "Snack"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "passage": "Sam reads a comic before bed.",
+    "question": "Choose the best answer.",
+    "options": [
+        "After bed",
+        "Before bed",
+        "At noon",
+        "At school"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "passage": "The class visits the zoo on Friday.",
+    "question": "Choose the best answer.",
+    "options": [
+        "On Friday",
+        "On Monday",
+        "On Sunday",
+        "On Wednesday"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "passage": "Nora keeps her pencils in a blue box.",
+    "question": "Choose the best answer.",
+    "options": [
+        "In a blue box",
+        "In a red bag",
+        "On the table",
+        "Under the chair"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "passage": "Tom takes the bus at 7 o clock.",
+    "question": "Choose the best answer.",
+    "options": [
+        "At 7 o clock",
+        "At 6 o clock",
+        "At 8 o clock",
+        "At 9 o clock"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "passage": "The kitten sleeps on a soft pillow.",
+    "question": "Choose the best answer.",
+    "options": [
+        "On a pillow",
+        "On a desk",
+        "In a tree",
+        "In water"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "passage": "Ava writes her name on the notebook.",
+    "question": "Choose the best answer.",
+    "options": [
+        "On the notebook",
+        "On the wall",
+        "On the board",
+        "On the desk"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "passage": "Lia has a yellow kite.",
+    "question": "Choose the best answer.",
+    "options": [
+        "A yellow kite",
+        "A red bike",
+        "A blue hat",
+        "A green bag"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "passage": "Tom drinks water after football.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He drinks water",
+        "He eats cake",
+        "He sleeps",
+        "He runs home"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "passage": "Mia reads before bed.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Before bed",
+        "After lunch",
+        "At noon",
+        "At school"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "passage": "Ben takes the bus to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "The bus",
+        "A train",
+        "A bike",
+        "A boat"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "passage": "Nora keeps crayons in a box.",
+    "question": "Choose the best answer.",
+    "options": [
+        "In a box",
+        "On the floor",
+        "In a drawer",
+        "Under a desk"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "passage": "Lia has a yellow kite.",
+    "question": "Choose the best answer.",
+    "options": [
+        "A yellow kite",
+        "A red bike",
+        "A blue hat",
+        "A green bag"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "passage": "Tom drinks water after football.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He drinks water",
+        "He eats cake",
+        "He sleeps",
+        "He runs home"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "passage": "Mia reads before bed.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Before bed",
+        "After lunch",
+        "At noon",
+        "At school"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "passage": "Ben takes the bus to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "The bus",
+        "A train",
+        "A bike",
+        "A boat"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "passage": "Nora keeps crayons in a box.",
+    "question": "Choose the best answer.",
+    "options": [
+        "In a box",
+        "On the floor",
+        "In a drawer",
+        "Under a desk"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "passage": "Lia has a yellow kite.",
+    "question": "Choose the best answer.",
+    "options": [
+        "A yellow kite",
+        "A red bike",
+        "A blue hat",
+        "A green bag"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "passage": "Tom drinks water after football.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He drinks water",
+        "He eats cake",
+        "He sleeps",
+        "He runs home"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "passage": "Mia reads before bed.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Before bed",
+        "After lunch",
+        "At noon",
+        "At school"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "passage": "Ben takes the bus to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "The bus",
+        "A train",
+        "A bike",
+        "A boat"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "passage": "Nora keeps crayons in a box.",
+    "question": "Choose the best answer.",
+    "options": [
+        "In a box",
+        "On the floor",
+        "In a drawer",
+        "Under a desk"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "passage": "Lia has a yellow kite.",
+    "question": "Choose the best answer.",
+    "options": [
+        "A yellow kite",
+        "A red bike",
+        "A blue hat",
+        "A green bag"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "passage": "Tom drinks water after football.",
+    "question": "Choose the best answer.",
+    "options": [
+        "He drinks water",
+        "He eats cake",
+        "He sleeps",
+        "He runs home"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "passage": "Mia reads before bed.",
+    "question": "Choose the best answer.",
+    "options": [
+        "Before bed",
+        "After lunch",
+        "At noon",
+        "At school"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "passage": "Ben takes the bus to school.",
+    "question": "Choose the best answer.",
+    "options": [
+        "The bus",
+        "A train",
+        "A bike",
+        "A boat"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "passage": "Nora keeps crayons in a box.",
+    "question": "Choose the best answer.",
+    "options": [
+        "In a box",
+        "On the floor",
+        "In a drawer",
+        "Under a desk"
+    ],
+    "answer": 0,
+    "difficulty": "medium",
+    "explanation": "Use the key detail in the sentence."
+}
+
+
+
 ];
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

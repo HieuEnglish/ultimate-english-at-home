@@ -1679,7 +1679,613 @@
     "answer": 0,
     "difficulty": "easy",
     "explanation": "Plane = ✈️"
-  }
+  },
+
+{
+    "id": "q112",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "cat",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q113",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "dog",
+    "options": [
+        "🐶",
+        "🐱",
+        "🐻",
+        "🐰"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q114",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "sun",
+    "options": [
+        "☀️",
+        "🌙",
+        "⭐",
+        "☁️"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q115",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "bus",
+    "options": [
+        "🚌",
+        "🚗",
+        "🚲",
+        "🚂"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q116",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "fish",
+    "options": [
+        "🐟",
+        "🐬",
+        "🐳",
+        "🦈"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q117",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "apple",
+    "options": [
+        "🍎",
+        "🍌",
+        "🍇",
+        "🍉"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q118",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "book",
+    "options": [
+        "📚",
+        "✏️",
+        "🚌",
+        "⚽"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q119",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "ball",
+    "options": [
+        "⚽",
+        "🏀",
+        "🏈",
+        "🎾"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q120",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "milk",
+    "options": [
+        "🥛",
+        "🧃",
+        "🍵",
+        "☕"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+{
+    "id": "q121",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "shoe",
+    "options": [
+        "👟",
+        "🧢",
+        "🧤",
+        "🧦"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Choose the matching picture."
+},
+
+{
+    "id": "q122",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "moon",
+    "options": [
+        "🌙",
+        "☀️",
+        "⭐",
+        "☁️"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q123",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "car",
+    "options": [
+        "🚗",
+        "🚌",
+        "🚲",
+        "🚂"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q124",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "bird",
+    "options": [
+        "🐦",
+        "🐶",
+        "🐱",
+        "🐰"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q125",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "tree",
+    "options": [
+        "🌳",
+        "🌼",
+        "🍎",
+        "🏠"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q126",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "milk",
+    "options": [
+        "🥛",
+        "🧃",
+        "☕",
+        "🍵"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q127",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "shoe",
+    "options": [
+        "👟",
+        "🧦",
+        "🧤",
+        "🧢"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q128",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "star",
+    "options": [
+        "⭐",
+        "🌙",
+        "☀️",
+        "🌈"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q129",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "cake",
+    "options": [
+        "🍰",
+        "🍎",
+        "🍞",
+        "🧀"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q130",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "duck",
+    "options": [
+        "🦆",
+        "🐟",
+        "🐳",
+        "🐬"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q131",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "book",
+    "options": [
+        "📚",
+        "⚽",
+        "🍎",
+        "🚌"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+
+{
+    "id": "q132",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "tree",
+    "options": [
+        "🌳",
+        "🌼",
+        "🍎",
+        "🏠"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q133",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "bird",
+    "options": [
+        "🐦",
+        "🐶",
+        "🐱",
+        "🐰"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q134",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "car",
+    "options": [
+        "🚗",
+        "🚌",
+        "🚲",
+        "🚂"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q135",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "shoe",
+    "options": [
+        "👟",
+        "🧢",
+        "🧤",
+        "🧦"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q136",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "star",
+    "options": [
+        "⭐",
+        "🌙",
+        "☀️",
+        "☁️"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q137",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "cake",
+    "options": [
+        "🍰",
+        "🍎",
+        "🍞",
+        "🧀"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q138",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "duck",
+    "options": [
+        "🦆",
+        "🐟",
+        "🐬",
+        "🐳"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q139",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "house",
+    "options": [
+        "🏠",
+        "🏫",
+        "🏢",
+        "🏥"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q140",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "baby",
+    "options": [
+        "👶",
+        "🧒",
+        "🧑",
+        "👴"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q141",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "train",
+    "options": [
+        "🚂",
+        "🚌",
+        "🚗",
+        "🚲"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q142",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "tree",
+    "options": [
+        "🌳",
+        "🌼",
+        "🍎",
+        "🏠"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q143",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "bird",
+    "options": [
+        "🐦",
+        "🐶",
+        "🐱",
+        "🐰"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q144",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "car",
+    "options": [
+        "🚗",
+        "🚌",
+        "🚲",
+        "🚂"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q145",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "shoe",
+    "options": [
+        "👟",
+        "🧢",
+        "🧤",
+        "🧦"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q146",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "star",
+    "options": [
+        "⭐",
+        "🌙",
+        "☀️",
+        "☁️"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q147",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "cake",
+    "options": [
+        "🍰",
+        "🍎",
+        "🍞",
+        "🧀"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q148",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "duck",
+    "options": [
+        "🦆",
+        "🐟",
+        "🐬",
+        "🐳"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q149",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "house",
+    "options": [
+        "🏠",
+        "🏫",
+        "🏢",
+        "🏥"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q150",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "baby",
+    "options": [
+        "👶",
+        "🧒",
+        "🧑",
+        "👴"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+},
+{
+    "id": "q151",
+    "type": "listenChoice",
+    "question": "Listen. Choose the picture.",
+    "say": "train",
+    "options": [
+        "🚂",
+        "🚌",
+        "🚗",
+        "🚲"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the matching picture."
+}
+
+
+
 ];
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

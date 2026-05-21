@@ -911,7 +911,293 @@
       "model": "? ?",
       "difficulty": "medium",
       "explanation": "Keep strokes large and slow. Any close try is fine."
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q113",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q114",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q115",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q116",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q117",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q118",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q119",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q120",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+{
+    "id": "q121",
+    "type": "prompt",
+    "question": "Say the letter A and draw one thing that starts with A.",
+    "difficulty": "easy",
+    "explanation": "Use a clear sentence."
+},
+
+{
+    "id": "q122",
+    "type": "prompt",
+    "question": "Trace letter C and say a word that starts with C.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q123",
+    "type": "prompt",
+    "question": "Draw a sun and say one sentence about it.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q124",
+    "type": "prompt",
+    "question": "Say your name and write the first letter.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q125",
+    "type": "prompt",
+    "question": "Draw your favorite food and name it.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q126",
+    "type": "prompt",
+    "question": "Trace letter D and clap the sounds in dog.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q127",
+    "type": "prompt",
+    "question": "Draw a ball and say its color.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q128",
+    "type": "prompt",
+    "question": "Write one short sentence about your pet.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q129",
+    "type": "prompt",
+    "question": "Draw your house and label one room.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q130",
+    "type": "prompt",
+    "question": "Say two action words you can do.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+{
+    "id": "q131",
+    "type": "prompt",
+    "question": "Write one sentence: I like ____.",
+    "difficulty": "easy",
+    "explanation": "Keep it short and clear."
+},
+
+{
+    "id": "q132",
+    "type": "prompt",
+    "question": "Say the letter and draw one matching object.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q133",
+    "type": "prompt",
+    "question": "Write one short sentence about your day.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q134",
+    "type": "prompt",
+    "question": "Draw your favorite animal and label it.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q135",
+    "type": "prompt",
+    "question": "Write: I like ____.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q136",
+    "type": "prompt",
+    "question": "Say three words you know.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q137",
+    "type": "prompt",
+    "question": "Trace a letter and say its sound.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q138",
+    "type": "prompt",
+    "question": "Draw your home and name one room.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q139",
+    "type": "prompt",
+    "question": "Write one sentence about school.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q140",
+    "type": "prompt",
+    "question": "Say one color and one food.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q141",
+    "type": "prompt",
+    "question": "Write your name clearly.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q142",
+    "type": "prompt",
+    "question": "Say the letter and draw one matching object.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q143",
+    "type": "prompt",
+    "question": "Write one short sentence about your day.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q144",
+    "type": "prompt",
+    "question": "Draw your favorite animal and label it.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q145",
+    "type": "prompt",
+    "question": "Write: I like ____.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q146",
+    "type": "prompt",
+    "question": "Say three words you know.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q147",
+    "type": "prompt",
+    "question": "Trace a letter and say its sound.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q148",
+    "type": "prompt",
+    "question": "Draw your home and name one room.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q149",
+    "type": "prompt",
+    "question": "Write one sentence about school.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q150",
+    "type": "prompt",
+    "question": "Say one color and one food.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+},
+{
+    "id": "q151",
+    "type": "prompt",
+    "question": "Write your name clearly.",
+    "difficulty": "easy",
+    "explanation": "Keep your answer short and clear."
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

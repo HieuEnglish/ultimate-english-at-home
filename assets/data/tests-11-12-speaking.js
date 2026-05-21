@@ -1526,7 +1526,573 @@
         "3 sentences",
         "One detail"
       ]
-    }
+    },
+
+{
+    "id": "q112",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q113",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q114",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q115",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q116",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q117",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q118",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q119",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q120",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q121",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Do students learn better in groups or alone? Give reasons.",
+    "model": "Sample answer with a clear idea, a reason, and a short example.",
+    "say": "Sample answer with a clear idea, a reason, and a short example.",
+    "difficulty": "medium",
+    "explanation": "State your opinion and support it.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+
+{
+    "id": "q122",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should students have less homework? Explain.",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q123",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Is teamwork better than working alone? Why?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q124",
+    "type": "prompt",
+    "section": "part1",
+    "question": "What makes a teacher effective?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q125",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should uniforms be required?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q126",
+    "type": "prompt",
+    "section": "part1",
+    "question": "How can schools reduce stress?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q127",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Is social media helpful for learning?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q128",
+    "type": "prompt",
+    "section": "part1",
+    "question": "What builds confidence in speaking?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q129",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should school start later?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q130",
+    "type": "prompt",
+    "section": "part1",
+    "question": "How can students improve writing?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q131",
+    "type": "prompt",
+    "section": "part1",
+    "question": "What is one useful life skill schools should teach?",
+    "model": "Sample answer: clear opinion, one reason, and one example.",
+    "say": "Sample answer: clear opinion, one reason, and one example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly and support your idea.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+
+{
+    "id": "q132",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should homework be shorter? Why?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q133",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Is group work better than solo work?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q134",
+    "type": "prompt",
+    "section": "part1",
+    "question": "What makes a good teacher?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q135",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should school start later?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q136",
+    "type": "prompt",
+    "section": "part1",
+    "question": "How can students reduce stress?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q137",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should homework be shorter? Why?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q138",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Is group work better than solo work?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q139",
+    "type": "prompt",
+    "section": "part1",
+    "question": "What makes a good teacher?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q140",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should school start later?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q141",
+    "type": "prompt",
+    "section": "part1",
+    "question": "How can students reduce stress?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q142",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should homework be shorter? Why?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q143",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Is group work better than solo work?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q144",
+    "type": "prompt",
+    "section": "part1",
+    "question": "What makes a good teacher?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q145",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should school start later?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q146",
+    "type": "prompt",
+    "section": "part1",
+    "question": "How can students reduce stress?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q147",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should homework be shorter? Why?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q148",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Is group work better than solo work?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q149",
+    "type": "prompt",
+    "section": "part1",
+    "question": "What makes a good teacher?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q150",
+    "type": "prompt",
+    "section": "part1",
+    "question": "Should school start later?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+},
+{
+    "id": "q151",
+    "type": "prompt",
+    "section": "part1",
+    "question": "How can students reduce stress?",
+    "model": "Sample answer: clear opinion + reason + example.",
+    "say": "Sample answer: clear opinion + reason + example.",
+    "difficulty": "medium",
+    "explanation": "Answer directly, then support with a reason.",
+    "targets": [
+        "Reason",
+        "Example"
+    ]
+}
+
+
+
   );
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;

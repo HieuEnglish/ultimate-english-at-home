@@ -1570,7 +1570,593 @@
     "answer": 0,
     "difficulty": "easy",
     "explanation": "Moon = 🌙"
-  }
+  },
+
+{
+    "id": "q112",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q113",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q114",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q115",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q116",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q117",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q118",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q119",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q120",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+{
+    "id": "q121",
+    "type": "multipleChoice",
+    "passage": "Find the picture for the word CAT.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Pick the option that matches the passage."
+},
+
+{
+    "id": "q122",
+    "type": "multipleChoice",
+    "passage": "Point to the word SUN.",
+    "question": "Choose the best answer.",
+    "options": [
+        "☀️",
+        "🌙",
+        "⭐",
+        "☁️"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q123",
+    "type": "multipleChoice",
+    "passage": "Find the picture for DOG.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐶",
+        "🐱",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q124",
+    "type": "multipleChoice",
+    "passage": "Which one is CAT?",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐻",
+        "🐼"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q125",
+    "type": "multipleChoice",
+    "passage": "Tap the letter B.",
+    "question": "Choose the best answer.",
+    "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q126",
+    "type": "multipleChoice",
+    "passage": "Match the word BUS.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🚗",
+        "🚌",
+        "🚲",
+        "🚂"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q127",
+    "type": "multipleChoice",
+    "passage": "Find APPLE.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🍌",
+        "🍎",
+        "🍇",
+        "🍉"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q128",
+    "type": "multipleChoice",
+    "passage": "Pick BOOK.",
+    "question": "Choose the best answer.",
+    "options": [
+        "📚",
+        "⚽",
+        "🚌",
+        "🍎"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q129",
+    "type": "multipleChoice",
+    "passage": "Find BALL.",
+    "question": "Choose the best answer.",
+    "options": [
+        "⚽",
+        "🏀",
+        "🏈",
+        "🎾"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q130",
+    "type": "multipleChoice",
+    "passage": "Pick the letter M.",
+    "question": "Choose the best answer.",
+    "options": [
+        "N",
+        "M",
+        "W",
+        "H"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+{
+    "id": "q131",
+    "type": "multipleChoice",
+    "passage": "Find FISH.",
+    "question": "Choose the best answer.",
+    "options": [
+        "🐟",
+        "🐬",
+        "🐳",
+        "🦈"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Use the key detail from the passage."
+},
+
+{
+    "id": "q132",
+    "type": "multipleChoice",
+    "question": "Find: CAT",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q133",
+    "type": "multipleChoice",
+    "question": "Find: DOG",
+    "options": [
+        "🐶",
+        "🐱",
+        "🐻",
+        "🐼"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q134",
+    "type": "multipleChoice",
+    "question": "Find: SUN",
+    "options": [
+        "☀️",
+        "🌙",
+        "⭐",
+        "☁️"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q135",
+    "type": "multipleChoice",
+    "question": "Find: BUS",
+    "options": [
+        "🚌",
+        "🚗",
+        "🚲",
+        "🚂"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q136",
+    "type": "multipleChoice",
+    "question": "Find: FISH",
+    "options": [
+        "🐟",
+        "🐬",
+        "🐳",
+        "🦈"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q137",
+    "type": "multipleChoice",
+    "question": "Find: BOOK",
+    "options": [
+        "📚",
+        "✏️",
+        "🚌",
+        "⚽"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q138",
+    "type": "multipleChoice",
+    "question": "Find: BALL",
+    "options": [
+        "⚽",
+        "🏀",
+        "🏈",
+        "🎾"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q139",
+    "type": "multipleChoice",
+    "question": "Find: APPLE",
+    "options": [
+        "🍎",
+        "🍌",
+        "🍇",
+        "🍉"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q140",
+    "type": "multipleChoice",
+    "question": "Find: MOON",
+    "options": [
+        "🌙",
+        "☀️",
+        "⭐",
+        "🌈"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q141",
+    "type": "multipleChoice",
+    "question": "Find: MILK",
+    "options": [
+        "🥛",
+        "🧃",
+        "☕",
+        "🍵"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q142",
+    "type": "multipleChoice",
+    "question": "Find: CAT",
+    "options": [
+        "🐱",
+        "🐶",
+        "🐰",
+        "🦊"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q143",
+    "type": "multipleChoice",
+    "question": "Find: DOG",
+    "options": [
+        "🐶",
+        "🐱",
+        "🐻",
+        "🐼"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q144",
+    "type": "multipleChoice",
+    "question": "Find: SUN",
+    "options": [
+        "☀️",
+        "🌙",
+        "⭐",
+        "☁️"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q145",
+    "type": "multipleChoice",
+    "question": "Find: BUS",
+    "options": [
+        "🚌",
+        "🚗",
+        "🚲",
+        "🚂"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q146",
+    "type": "multipleChoice",
+    "question": "Find: FISH",
+    "options": [
+        "🐟",
+        "🐬",
+        "🐳",
+        "🦈"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q147",
+    "type": "multipleChoice",
+    "question": "Find: BOOK",
+    "options": [
+        "📚",
+        "✏️",
+        "🚌",
+        "⚽"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q148",
+    "type": "multipleChoice",
+    "question": "Find: BALL",
+    "options": [
+        "⚽",
+        "🏀",
+        "🏈",
+        "🎾"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q149",
+    "type": "multipleChoice",
+    "question": "Find: APPLE",
+    "options": [
+        "🍎",
+        "🍌",
+        "🍇",
+        "🍉"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q150",
+    "type": "multipleChoice",
+    "question": "Find: MOON",
+    "options": [
+        "🌙",
+        "☀️",
+        "⭐",
+        "🌈"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+},
+{
+    "id": "q151",
+    "type": "multipleChoice",
+    "question": "Find: MILK",
+    "options": [
+        "🥛",
+        "🧃",
+        "☕",
+        "🍵"
+    ],
+    "answer": 0,
+    "difficulty": "easy",
+    "explanation": "Match the word to the picture."
+}
+
+
+
 ];
   window.UEAH_TEST_BANKS = window.UEAH_TEST_BANKS || {};
   window.UEAH_TEST_BANKS[SLUG] = QUESTIONS;
