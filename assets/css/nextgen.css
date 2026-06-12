@@ -4000,6 +4000,539 @@ body {
   pointer-events: none;
 }
 
+/* Tests hub dashboard refresh */
+.tests-nextgen {
+  --skill-listening: #38bdf8;
+  --skill-reading: #34d399;
+  --skill-writing: #f59e0b;
+  --skill-speaking: #fb7185;
+}
+
+.tests-nextgen .tests-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  align-items: stretch;
+  gap: 1.2rem;
+  margin-top: 0.8rem;
+  padding: 1.35rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(56,189,248,0.14), transparent 34%),
+    radial-gradient(circle at 94% 8%, rgba(167,139,250,0.18), transparent 34%),
+    linear-gradient(180deg, rgba(24,18,74,0.82), rgba(13,13,43,0.68));
+  box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+}
+
+.tests-hero__eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 0.85rem;
+  padding: 0.52rem 0.78rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.08);
+  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tests-dashboard-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 150px;
+  padding: 1.15rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05)),
+    rgba(255,255,255,0.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+.tests-dashboard-card__welcome {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  font-weight: 800;
+}
+
+.tests-dashboard-card__meta {
+  margin: 0.45rem 0 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.tests-progress-ring {
+  --progress: 0;
+  width: 96px;
+  height: 96px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, rgba(13,13,43,0.95) 0 58%, transparent 59%),
+    conic-gradient(#34d399 calc(var(--progress) * 1%), rgba(255,255,255,0.12) 0);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.24), inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+.tests-progress-ring span {
+  font-weight: 900;
+  color: #d1fae5;
+}
+
+.tests-skill-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.2rem;
+}
+
+.tests-skill-pill {
+  --skill-accent: var(--skill-listening);
+  display: flex;
+  align-items: center;
+  gap: 0.82rem;
+  min-height: 104px;
+  padding: 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--skill-accent) 22%, transparent), transparent 44%),
+    linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.035));
+  border: 1px solid color-mix(in srgb, var(--skill-accent) 28%, rgba(255,255,255,0.12));
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.tests-skill-pill:hover,
+.tests-skill-pill:focus-visible {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--skill-accent) 58%, white);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.26), 0 0 28px color-mix(in srgb, var(--skill-accent) 22%, transparent);
+}
+
+.tests-skill-pill[data-skill-jump="reading"],
+.test-skill-card[data-skill="reading"] {
+  --skill-accent: var(--skill-reading);
+}
+
+.tests-skill-pill[data-skill-jump="writing"],
+.test-skill-card[data-skill="writing"] {
+  --skill-accent: var(--skill-writing);
+}
+
+.tests-skill-pill[data-skill-jump="speaking"],
+.test-skill-card[data-skill="speaking"] {
+  --skill-accent: var(--skill-speaking);
+}
+
+.tests-skill-pill__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  color: var(--skill-accent);
+  background: color-mix(in srgb, var(--skill-accent) 14%, rgba(255,255,255,0.06));
+}
+
+.tests-skill-pill__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tests-skill-pill strong,
+.tests-skill-pill small {
+  display: block;
+}
+
+.tests-skill-pill strong {
+  font-size: 1rem;
+}
+
+.tests-skill-pill small {
+  margin-top: 0.28rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.tests-hero-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.tests-hero-card {
+  min-height: 260px;
+  padding: 1.15rem;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.tests-hero-card[data-age-tone="kids"] {
+  background:
+    radial-gradient(circle at 16% 14%, rgba(255,255,255,0.18), transparent 32%),
+    linear-gradient(145deg, rgba(251,146,60,0.20), rgba(56,189,248,0.10)),
+    linear-gradient(180deg, rgba(24,18,74,0.94), rgba(13,13,43,0.9));
+}
+
+.tests-hero-card[data-age-tone="adult"],
+.tests-hero-card[data-age-tone="teen"] {
+  background:
+    linear-gradient(135deg, rgba(16,185,129,0.14), rgba(79,70,229,0.16)),
+    linear-gradient(180deg, rgba(20,16,62,0.96), rgba(13,13,43,0.92));
+}
+
+.tests-hero-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.tests-hero-card__avatar {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  color: #fff;
+  font-weight: 950;
+  letter-spacing: -0.04em;
+  background:
+    radial-gradient(circle at 35% 26%, rgba(255,255,255,0.28), transparent 32%),
+    linear-gradient(135deg, rgba(56,189,248,0.72), rgba(167,139,250,0.72));
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.26);
+}
+
+.tests-hero-card[data-age-tone="kids"] .tests-hero-card__avatar {
+  border-radius: 28px 20px 28px 20px;
+  background:
+    radial-gradient(circle at 34% 22%, rgba(255,255,255,0.34), transparent 32%),
+    linear-gradient(135deg, #fb923c, #38bdf8);
+}
+
+.tests-hero-card__tag {
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.tests-hero-card__title,
+.tests-hero-card__desc {
+  text-align: left;
+}
+
+.tests-hero-card__title {
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  line-height: 1.05;
+}
+
+.tests-hero-card__desc {
+  margin-top: 0.72rem;
+}
+
+.tests-hero-card__footer {
+  margin-top: 1rem;
+}
+
+.test-skill-card {
+  --skill-accent: var(--skill-listening);
+}
+
+.tests-section--nextgen .test-skill-card {
+  border-color: color-mix(in srgb, var(--skill-accent) 22%, rgba(255,255,255,0.10));
+}
+
+.tests-section--nextgen .test-skill-card:hover,
+.tests-section--nextgen .test-skill-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--skill-accent) 56%, rgba(255,255,255,0.16));
+  box-shadow: 0 18px 42px rgba(0,0,0,0.24), 0 0 26px color-mix(in srgb, var(--skill-accent) 18%, transparent);
+}
+
+.tests-section--nextgen .test-skill-card .card-icon {
+  color: var(--skill-accent);
+  background: color-mix(in srgb, var(--skill-accent) 14%, rgba(255,255,255,0.06));
+}
+
+/* Skill-specific runner polish */
+.test-detail-page[data-test-skill="listening"] {
+  --test-skill-accent: #38bdf8;
+}
+
+.test-detail-page[data-test-skill="reading"] {
+  --test-skill-accent: #34d399;
+}
+
+.test-detail-page[data-test-skill="writing"] {
+  --test-skill-accent: #f59e0b;
+}
+
+.test-detail-page[data-test-skill="speaking"] {
+  --test-skill-accent: #fb7185;
+}
+
+.test-detail-page .test-runner-chrome__badge {
+  border-color: color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 32%, rgba(255,255,255,0.16));
+  background: color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 12%, rgba(255,255,255,0.06));
+}
+
+.test-detail-page .test-runner-chrome__progress-bar span {
+  background: linear-gradient(90deg, var(--test-skill-accent, var(--test-accent)), var(--test-accent-2));
+}
+
+.test-detail-page [data-test-runner-root] button[data-action="play"],
+.test-detail-page [data-test-runner-root] button[aria-label*="Play"] {
+  position: relative;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 36%, rgba(255,255,255,0.18));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 26%, rgba(255,255,255,0.10)), rgba(255,255,255,0.05)),
+    var(--surface);
+}
+
+.test-detail-page [data-test-runner-root] button[data-action="play"]::after,
+.test-detail-page [data-test-runner-root] button[aria-label*="Play"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 14px 7px 14px;
+  height: 10px;
+  border-radius: 999px;
+  opacity: 0.82;
+  background:
+    linear-gradient(90deg,
+      transparent 0 5%,
+      color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 84%, white) 5% 9%,
+      transparent 9% 15%,
+      color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 78%, white) 15% 22%,
+      transparent 22% 30%,
+      color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 90%, white) 30% 34%,
+      transparent 34% 43%,
+      color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 72%, white) 43% 50%,
+      transparent 50% 60%,
+      color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 86%, white) 60% 65%,
+      transparent 65% 100%);
+  animation: listeningWave 1.35s ease-in-out infinite;
+}
+
+.test-detail-page[data-test-skill="speaking"] [data-test-runner-root] button[data-action="play"]::before,
+.test-detail-page[data-test-skill="speaking"] [data-test-runner-root] button[aria-label*="Play"]::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  border: 1px solid color-mix(in srgb, var(--test-skill-accent) 42%, transparent);
+  animation: micPulse 1.55s ease-out infinite;
+}
+
+.test-detail-page [data-test-runner-root] details {
+  margin-top: 1rem;
+  border: 1px solid color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 24%, rgba(255,255,255,0.12));
+  border-radius: 18px;
+  background: rgba(255,255,255,0.055);
+  overflow: hidden;
+}
+
+.test-detail-page [data-test-runner-root] details summary {
+  cursor: pointer;
+  padding: 0.9rem 1rem;
+  font-weight: 800;
+}
+
+.test-detail-page [data-test-runner-root] details[open] {
+  animation: accordionOpen 220ms ease-out;
+}
+
+.test-detail-page[data-test-skill="reading"] [data-test-runner-root] [style*="passage"],
+.test-detail-page[data-test-skill="reading"] [data-test-runner-root] .note:has(strong) {
+  border-radius: 20px;
+}
+
+.test-detail-page[data-test-skill="reading"] [data-test-runner-root] p,
+.test-detail-page[data-test-skill="reading"] [data-test-runner-root] li {
+  line-height: 1.72;
+}
+
+.test-detail-page[data-test-skill="reading"] [data-test-runner-root] ::selection {
+  color: #111827;
+  background: rgba(253, 230, 138, 0.9);
+}
+
+.test-detail-page[data-test-skill="writing"] textarea,
+.test-detail-page [data-test-runner-root] textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 1rem 1.05rem !important;
+  border-radius: 18px !important;
+  border: 1px solid color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 24%, rgba(255,255,255,0.16)) !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.035)),
+    rgba(255,255,255,0.04) !important;
+  color: var(--text-primary, var(--text));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 28px rgba(0,0,0,0.14);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.test-detail-page[data-test-skill="writing"] textarea:focus,
+.test-detail-page [data-test-runner-root] textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 68%, white) !important;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 18%, transparent),
+    0 18px 38px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+.test-detail-page [data-word-count],
+.test-detail-page [data-sentence-count] {
+  display: inline-flex;
+  min-width: 2.2em;
+  justify-content: center;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  color: #fffbeb;
+  background: color-mix(in srgb, var(--test-skill-accent, var(--test-accent)) 42%, rgba(255,255,255,0.08));
+  font-weight: 900;
+}
+
+.test-runner-stage__feedback {
+  transform-origin: center;
+  animation: feedbackSettle 240ms ease-out;
+}
+
+.test-runner-stage__feedback--correct {
+  border-color: rgba(52,211,153,0.38) !important;
+  box-shadow: 0 18px 44px rgba(16,185,129,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.test-runner-stage__feedback--incorrect {
+  border-color: rgba(251,113,133,0.36) !important;
+  animation: gentleShake 260ms ease-out;
+}
+
+@keyframes listeningWave {
+  0%, 100% {
+    transform: scaleX(0.82);
+    opacity: 0.54;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes micPulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes accordionOpen {
+  from {
+    opacity: 0.74;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes feedbackSettle {
+  from {
+    opacity: 0.78;
+    transform: translateY(5px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gentleShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  65% {
+    transform: translateX(4px);
+  }
+}
+
+@media (min-width: 940px) {
+  .test-detail-page[data-test-skill="reading"] [data-test-runner-root] form:has(fieldset) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .test-detail-page[data-test-skill="reading"] [data-test-runner-root] form:has(fieldset) > *:first-child {
+    position: sticky;
+    top: 86px;
+    max-height: min(68vh, 720px);
+    overflow: auto;
+  }
+}
+
+@media (max-width: 1100px) {
+  .tests-skill-strip,
+  .tests-hero-grid,
+  .tests-section--nextgen .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .tests-nextgen .tests-hero,
+  .tests-skill-strip,
+  .tests-hero-grid,
+  .tests-section--nextgen .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tests-dashboard-card {
+    align-items: flex-start;
+  }
+
+  .tests-progress-ring {
+    width: 82px;
+    height: 82px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tests-skill-pill,
+  .tests-hero-card,
+  .test-runner-stage__feedback,
+  .test-detail-page [data-test-runner-root] button::before,
+  .test-detail-page [data-test-runner-root] button::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 .tests-section--nextgen .card:hover {
   transform: translateY(-4px) scale(1.01);
 }
