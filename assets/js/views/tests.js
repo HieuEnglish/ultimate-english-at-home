@@ -28,13 +28,6 @@ export function getView(ctx) {
   const AGE_ORDER = ['0-3', '4-7', '8-10', '11-12', '13-18'];
   const SKILL_ORDER = ['reading', 'listening', 'writing', 'speaking'];
 
-  const SKILL_META = {
-    listening: { label: 'Listening', icon: 'listening', glow: 'blue', desc: 'Hear, repeat, and answer with clearer live speech.' },
-    reading: { label: 'Reading', icon: 'reading', glow: 'green', desc: 'Read passages with focused comprehension questions.' },
-    writing: { label: 'Writing', icon: 'writing', glow: 'orange', desc: 'Build answers with supportive prompts and counters.' },
-    speaking: { label: 'Speaking', icon: 'speaking', glow: 'red', desc: 'Practice aloud with calm prompt cards and model audio.' },
-  };
-
   const GLOW_BY_SKILL = {
     reading: 'green',
     listening: 'blue',
@@ -252,19 +245,6 @@ export function getView(ctx) {
     }
   }
 
-  const skillStripHtml = SKILL_ORDER.map((skill) => {
-    const meta = SKILL_META[skill];
-    return `
-      <a class="tests-skill-pill" href="#skill-${skill}" data-tests-jump data-skill-jump="${skill}" aria-label="${escapeHtml(meta.label)} tests">
-        <span class="tests-skill-pill__icon" aria-hidden="true">${iconSkill(meta.icon)}</span>
-        <span>
-          <strong>${escapeHtml(meta.label)}</strong>
-          <small>${escapeHtml(meta.desc)}</small>
-        </span>
-      </a>
-    `;
-  }).join('');
-
   const html = `
     <section class="page-top tests-page tests-nextgen">
       ${breadcrumb}
@@ -290,7 +270,6 @@ export function getView(ctx) {
       ${
         hasTests
           ? `
-            <div class="tests-skill-strip" aria-label="Skill groups">${skillStripHtml}</div>
             <div class="tests-hero-grid" aria-label="Featured test paths">${heroHtml}</div>
             <div class="tests-sections-wrap" aria-label="Tests">${sectionsHtml}</div>
           `
@@ -314,11 +293,7 @@ export function getView(ctx) {
       link.addEventListener('click', (e) => {
         const href = String(link.getAttribute('href') || '');
         if (!href.startsWith('#')) return;
-        const skill = String(link.getAttribute('data-skill-jump') || '');
-        const safeSkill = skill.replace(/[^a-z-]/gi, '');
-        const target = skill
-          ? document.querySelector(`.test-skill-card[data-skill="${safeSkill}"]`)
-          : document.querySelector(href);
+        const target = document.querySelector(href);
         if (!target) return;
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
