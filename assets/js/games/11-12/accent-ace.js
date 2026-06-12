@@ -60,9 +60,16 @@ class AccentAce extends GameBase {
   }
 
   loadVoices() {
-    const getV = () => { this.voices = window.speechSynthesis.getVoices(); };
-    getV();
-    if (window.speechSynthesis.onvoiceschanged !== undefined) window.speechSynthesis.onvoiceschanged = getV;
+    const syncVoices = () => {
+      this.voices = typeof window.UEAH_TTS?.getVoices === 'function'
+        ? window.UEAH_TTS.getVoices()
+        : [];
+    };
+
+    syncVoices();
+    if (typeof window.UEAH_TTS?.ready === 'function') {
+      window.UEAH_TTS.ready().then(syncVoices).catch(() => {});
+    }
   }
 
   start() {

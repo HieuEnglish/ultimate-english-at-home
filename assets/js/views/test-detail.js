@@ -142,7 +142,7 @@ function audioSettingsPanelHtml(slug) {
         <div style="min-width:240px; flex:1">
           <strong>Audio settings</strong>
           <small style="display:block; margin-top:6px; opacity:.85">
-            These settings apply across tests and games. Pre-generated clips are used automatically when available.
+            These settings apply across tests and games. Audio is generated live by your browser.
           </small>
           <div style="margin-top:10px; display:grid; gap:12px">
             <div style="display:grid; gap:6px">
@@ -150,7 +150,6 @@ function audioSettingsPanelHtml(slug) {
               <select id="${providerId}" data-tts-provider-select aria-label="Playback engine" style="min-height:38px">
                 <option value="auto">Auto</option>
                 <option value="browser">Browser voice</option>
-                <option value="edge">Edge neural</option>
               </select>
               <small data-tts-provider-hint style="opacity:.9"></small>
             </div>
@@ -162,12 +161,12 @@ function audioSettingsPanelHtml(slug) {
               </select>
               <small data-tts-quality style="opacity:.9"></small>
               <small data-tts-voice-hint style="opacity:.85">
-                Tip: Browser voice choice is only used when playback is on Browser voice or Auto falls back to browser speech.
+                Tip: Auto prefers the clearest English browser voice available on this device.
               </small>
             </div>
 
             <div style="display:grid; gap:6px">
-              <label for="${rateId}">Speed: <span data-tts-rate-value>0.95x</span></label>
+              <label for="${rateId}">Speed: <span data-tts-rate-value>0.88x</span></label>
               <input
                 id="${rateId}"
                 data-tts-rate
@@ -175,7 +174,7 @@ function audioSettingsPanelHtml(slug) {
                 min="0.7"
                 max="1.2"
                 step="0.05"
-                value="0.95"
+                value="0.88"
                 aria-label="Speech speed"
               />
             </div>
@@ -688,7 +687,7 @@ export async function getView(ctx, slug) {
             ? tts.getVoiceMeta(voice, preferredLang)
             : null;
           if (!meta) return 99;
-          if (meta.isEdgeNatural) return 0;
+          if (meta.isMicrosoftNatural) return 0;
           if (meta.isMicrosoft && meta.isNatural) return 1;
           if (meta.isMicrosoft) return 2;
           if (meta.isGoogle && meta.isNatural) return 3;
@@ -706,14 +705,11 @@ export async function getView(ctx, slug) {
           const providerMeta = typeof tts.getProviderMeta === 'function'
             ? tts.getProviderMeta(preferredLang)
             : null;
-          const edgeConfigured = !!providerMeta?.edgeConfigured;
-
           providerSelect.innerHTML = '';
 
           const options = [
-            { value: 'auto', label: edgeConfigured ? 'Auto (prefer Edge neural)' : 'Auto (browser fallback)' },
+            { value: 'auto', label: 'Auto (smart browser voice)' },
             { value: 'browser', label: 'Browser voice' },
-            { value: 'edge', label: edgeConfigured ? `Edge neural (${providerMeta.edgeVoice || 'configured'})` : 'Edge neural (needs endpoint)', disabled: !edgeConfigured },
           ];
 
           for (const option of options) {
@@ -725,7 +721,7 @@ export async function getView(ctx, slug) {
           }
 
           const current = String(settings.provider || 'auto');
-          providerSelect.value = current === 'edge' && !edgeConfigured ? 'auto' : current;
+          providerSelect.value = current === 'browser' ? 'browser' : 'auto';
         };
 
         const updateVoiceMessaging = () => {
@@ -749,21 +745,13 @@ export async function getView(ctx, slug) {
           if (providerHint) {
             if (!providerMeta) {
               providerHint.textContent = 'Playback provider information is not available yet.';
-            } else if (providerMeta.usesExternalAudio) {
-              providerHint.textContent = `Edge neural playback is active with ${providerMeta.edgeVoice}. Games and tests will use it app-wide.`;
-            } else if (providerMeta.selectedProvider === 'edge' && !providerMeta.edgeConfigured) {
-              providerHint.textContent = 'Edge neural was requested, but no endpoint is configured yet, so the app is falling back to browser speech.';
-            } else if (providerMeta.edgeConfigured) {
-              providerHint.textContent = `Edge neural is available. Auto will prefer ${providerMeta.edgeVoice} for tests and games.`;
             } else {
-              providerHint.textContent = 'This static build will use pre-generated clips when available, and browser speech for everything else. Add an Edge/Azure-style endpoint in assets/js/tts-config.js for live neural playback.';
+              providerHint.textContent = 'This static build uses live browser speech synthesis only. Voice quality depends on the browser and OS.';
             }
           }
 
           if (qualityEl) {
-            if (providerMeta?.usesExternalAudio) {
-              qualityEl.textContent = `Playback engine: Edge neural. ${providerMeta.summary}`;
-            } else if (activeMeta && activeMeta.voice) {
+            if (activeMeta && activeMeta.voice) {
               qualityEl.textContent = selectedVoiceURI
                 ? `Current voice: ${activeMeta.displayName}. ${activeMeta.summary}`
                 : `Auto voice: ${activeMeta.displayName}. ${activeMeta.summary}`;
@@ -773,16 +761,14 @@ export async function getView(ctx, slug) {
           }
 
           if (voiceHint) {
-            if (!usesBrowserVoices) {
-              voiceHint.textContent = 'Browser voice choice is ignored while Edge neural playback is active.';
-            } else if (!autoMeta || !autoMeta.voice) {
-              voiceHint.textContent = 'No browser voices were detected yet. Try Microsoft Edge or wait a moment for voices to load.';
-            } else if (autoMeta.isEdgeNatural) {
+            if (!autoMeta || !autoMeta.voice) {
+              voiceHint.textContent = 'No browser voices were detected yet. Try Chrome or wait a moment for voices to load.';
+            } else if (autoMeta.isMicrosoftNatural) {
               voiceHint.textContent = 'Auto is already preferring a Microsoft natural voice on this device.';
             } else if (autoMeta.isMicrosoft) {
-              voiceHint.textContent = 'A Microsoft voice is available. For the most natural sound, choose one marked Natural or keep Auto in Edge.';
+              voiceHint.textContent = 'A Microsoft voice is available. For the most natural sound, choose one marked Natural or Online.';
             } else {
-              voiceHint.textContent = 'This client-only build sounds best in Microsoft Edge when Microsoft natural voices are available.';
+              voiceHint.textContent = 'This browser-only build usually sounds best in Chrome on desktop when Google English voices are available.';
             }
           }
         };

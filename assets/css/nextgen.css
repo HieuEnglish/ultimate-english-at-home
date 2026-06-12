@@ -1899,16 +1899,30 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.45rem 1rem;
+  padding: 0.62rem 1.25rem;
   border-radius: 999px;
   background: rgba(124, 92, 252, 0.12);
   border: 1px solid rgba(124, 92, 252, 0.32);
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+  font-weight: 800;
   color: var(--accent-purple);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.landing-home .hero-maker {
+  display: block;
+  width: fit-content;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(79, 195, 247, 0.12);
+  border: 1px solid rgba(79, 195, 247, 0.3);
+  color: var(--accent-cyan);
+  font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.65rem;
 }
 
 .landing-home .hero-title {

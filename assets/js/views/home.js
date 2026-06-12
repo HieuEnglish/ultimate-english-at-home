@@ -15,6 +15,7 @@ export function getView(ctx) {
         <div class="hero-shell">
           <div class="hero-copy">
             <div class="hero-badge">&#10024; 100% Free &middot; No sign-up required</div>
+            <div class="hero-maker">Made by Teacher Zane</div>
 
             <h1 class="hero-title">
               Learn English<br />
