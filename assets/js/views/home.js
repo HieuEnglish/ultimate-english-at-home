@@ -138,7 +138,7 @@ export function getView(ctx) {
         </div>
       </section>
 
-      <section class="features" id="features">
+      <section class="features" id="features" data-ueah-animate="stagger">
         <span class="section-label">What You Get</span>
         <h2 class="section-title">Everything you need to<br />build English confidence at home</h2>
         <p class="section-sub">
@@ -146,7 +146,7 @@ export function getView(ctx) {
           profile tracking, favourites, and printable certificates.
         </p>
 
-        <div class="features-grid">
+        <div class="features-grid" data-ueah-animate="stagger" data-ueah-stagger-delay="80">
           <a class="feature-card" data-accent="green" data-reveal href="${hrefFor('/resources')}" data-nav>
             <div class="feature-icon"><span class="feature-icon__emoji">📚</span><span>Resources</span></div>
             <h3 class="feature-title">Curated Resources</h3>
