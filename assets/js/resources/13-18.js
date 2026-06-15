@@ -3392,6 +3392,188 @@
         focus: "fluency, confidence",
         time: "20–35 min",
         level: "independent"
+      },
+
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "khan-academy-grammar-13-18-writing",
+        title: "Khan Academy Grammar",
+        link: "https://www.khanacademy.org/humanities/grammar",
+        format: "site",
+        description:
+          "Structured grammar lessons for older learners who want clearer, more accurate writing.",
+        details: {
+          type: "grammar course",
+          teaches: "Grammar, sentence accuracy, writing clarity, vocabulary, and comprehension.",
+          howTo: [
+            "Choose one grammar topic.",
+            "Watch or read the explanation.",
+            "Complete the practice, then use the target grammar in a short paragraph."
+          ],
+          whyTopPick: "Clear, structured grammar support for independent study.",
+          freeAccess: "Free lessons; optional account can help track progress.",
+          ageCheck: "Good for 13-18, especially learners preparing for school writing or exams."
+        },
+        focus: "grammar, sentence accuracy",
+        time: "15-25 min",
+        level: "independent"
+      },
+
+      {
+        age: "13-18",
+        skill: "speaking",
+        slug: "sounds-of-speech-13-18-speaking",
+        title: "Sounds of Speech",
+        link: "https://soundsofspeech.uiowa.edu/",
+        format: "site",
+        description:
+          "Interactive pronunciation tool that shows how English sounds are made.",
+        details: {
+          type: "pronunciation tool",
+          teaches: "Pronunciation, speaking clarity, listening discrimination, and fluency.",
+          howTo: [
+            "Choose one difficult English sound.",
+            "Watch how the mouth and tongue move.",
+            "Record yourself saying words with that sound and compare."
+          ],
+          whyTopPick: "Especially useful for older learners fixing persistent sound-level issues.",
+          freeAccess: "Free university-hosted resource.",
+          ageCheck: "Best for 13-18 because the sound explanations are more technical."
+        },
+        focus: "pronunciation, clear speech",
+        time: "10-15 min",
+        level: "independent"
+      },
+
+      {
+        age: "13-18",
+        skill: "reading",
+        slug: "poetry-foundation-children-13-18-reading",
+        title: "Poetry Foundation - Poems for Children",
+        link: "https://www.poetryfoundation.org/children",
+        format: "site",
+        description:
+          "Free poems and archive materials for fluency, interpretation, and cultural literacy.",
+        details: {
+          type: "poems and archive",
+          teaches: "Reading, listening, fluency, vocabulary, comprehension, tone, and interpretation.",
+          howTo: [
+            "Choose one poem that matches the learner's level.",
+            "Read it aloud once for rhythm and once for meaning.",
+            "Write a short response about tone, image, or theme."
+          ],
+          whyTopPick: "Short rich texts are useful for fluency, tone, and discussion.",
+          freeAccess: "Free public access to poems and related materials.",
+          ageCheck: "Good for teens; choose poems by level and topic."
+        },
+        focus: "poetry, interpretation",
+        time: "10-20 min",
+        level: "independent"
+      },
+
+      {
+        age: "13-18",
+        skill: "writing",
+        slug: "smithsonian-learning-lab-13-18-writing",
+        title: "Smithsonian Learning Lab",
+        link: "https://smithsonianeducation.org/",
+        format: "site",
+        description:
+          "Culture-rich collections for evidence-based response writing and vocabulary growth.",
+        details: {
+          type: "interactive collections",
+          teaches: "Reading, writing, vocabulary, comprehension, and cultural knowledge.",
+          howTo: [
+            "Choose one collection or primary-source item.",
+            "Take notes on details and evidence.",
+            "Write a paragraph using specific evidence from the item."
+          ],
+          whyTopPick: "Strong source material for culture-rich reading and response writing.",
+          freeAccess: "Free education platform with collections by grade and topic.",
+          ageCheck: "Good for 13-18; select age-appropriate topics."
+        },
+        focus: "evidence writing, culture",
+        time: "20-30 min",
+        level: "independent"
+      },
+
+      {
+        age: "13-18",
+        skill: "reading",
+        slug: "adlit-literacy-strategies-13-18-reading",
+        title: "AdLit",
+        link: "https://www.adlit.org/",
+        format: "site",
+        description:
+          "Reading and writing strategy library for middle and high school learners.",
+        details: {
+          type: "strategy library",
+          teaches: "Reading comprehension, vocabulary, fluency, and writing strategies.",
+          howTo: [
+            "Choose one reading or writing strategy page.",
+            "Use the template or steps with a current text.",
+            "Reflect on what improved after using the strategy."
+          ],
+          whyTopPick: "Practical adolescent literacy support with templates and videos.",
+          freeAccess: "Free reading and writing strategy library.",
+          ageCheck: "Best for older learners, especially 12-18."
+        },
+        focus: "reading strategies, comprehension",
+        time: "15-25 min",
+        level: "independent"
+      },
+
+      {
+        age: "13-18",
+        skill: "reading",
+        slug: "openlearn-13-18-reading",
+        title: "OpenLearn",
+        link: "https://www.open.edu/openlearn/",
+        format: "course",
+        description:
+          "Free courses for independent study, communication, vocabulary, and study skills.",
+        details: {
+          type: "free courses",
+          teaches: "Reading, writing, vocabulary, grammar, fluency, and comprehension.",
+          howTo: [
+            "Choose a short beginner-friendly course or article.",
+            "Read one section and take notes on key vocabulary.",
+            "Write a short summary or reflection."
+          ],
+          whyTopPick: "Good for older teens who can study independently and want broader academic English.",
+          freeAccess: "Free course access; optional account may be used for tracking or badges.",
+          ageCheck: "Best for 15-18 and stronger 13-14 learners."
+        },
+        focus: "independent study, academic reading",
+        time: "20-35 min",
+        level: "independent"
+      },
+
+      {
+        age: "13-18",
+        skill: "listening",
+        slug: "librivox-13-18-listening",
+        title: "LibriVox",
+        link: "https://librivox.org/",
+        format: "site",
+        description:
+          "Free public-domain audiobooks for listening, shadowing, and reading along.",
+        details: {
+          type: "audio library",
+          teaches: "Listening, pronunciation, fluency, comprehension, and cultural knowledge.",
+          howTo: [
+            "Choose a short public-domain story or chapter.",
+            "Listen once for the main idea.",
+            "Replay a short section and shadow-read aloud."
+          ],
+          whyTopPick: "Large free audiobook library for older learners building listening stamina.",
+          freeAccess: "Free public-domain audiobook access.",
+          ageCheck: "Best for 15-18; preview texts because difficulty and themes vary."
+        },
+        focus: "audiobooks, shadowing",
+        time: "15-30 min",
+        level: "independent"
       }
     ]
   };

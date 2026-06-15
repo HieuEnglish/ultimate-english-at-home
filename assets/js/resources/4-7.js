@@ -3712,6 +3712,110 @@
         focus: "fluency, confidence",
         time: "8–15 min",
         level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "read-along-by-google-4-7-reading",
+        title: "Read Along by Google",
+        link: "https://readalong.google/intl/en/",
+        format: "app",
+        description:
+          "Free guided reading app that listens and gives short support while children read aloud.",
+        details: {
+          type: "reading app",
+          teaches: "Reading fluency, phonics, pronunciation, vocabulary, and comprehension.",
+          howTo: [
+            "Set up the app with an adult.",
+            "Choose an easy story and read aloud for a short session.",
+            "Repeat tricky words and stop while the learner is still confident."
+          ],
+          whyTopPick: "Useful for emergent readers who need read-aloud support and immediate help.",
+          freeAccess: "Free reading app from Google; app or device setup may be required.",
+          ageCheck: "Best for 5-7 in this pack; adult setup and supervision recommended."
+        },
+        focus: "read-aloud fluency",
+        time: "5-10 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "highlights-kids-4-7-reading",
+        title: "Highlights Kids",
+        link: "https://www.highlightskids.com/",
+        format: "site",
+        description:
+          "Stories, puzzles, and playful activities for short language practice.",
+        details: {
+          type: "stories and activities",
+          teaches: "Reading, vocabulary, comprehension, and playful fluency.",
+          howTo: [
+            "Pick one story or activity with an adult.",
+            "Read or play for a short timed session.",
+            "Ask one retell question: who, where, or what happened?"
+          ],
+          whyTopPick: "Adds a friendly story-and-puzzle site with easy entry points for young learners.",
+          freeAccess: "Free site access; no required sign-up for main content.",
+          ageCheck: "Good for 4-7 with adult selection."
+        },
+        focus: "stories, puzzles, comprehension",
+        time: "5-10 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "reading",
+        slug: "start-with-a-book-4-7-reading",
+        title: "Start with a Book",
+        link: "https://www.startwithabook.org/",
+        format: "site",
+        description:
+          "Book-centered topic packs for repeat reading, vocabulary, and simple follow-up activities.",
+        details: {
+          type: "activity hub",
+          teaches: "Reading routines, vocabulary, comprehension, and simple writing extensions.",
+          howTo: [
+            "Choose a topic the child likes.",
+            "Read one short suggested book or page together.",
+            "Do one simple activity or drawing/writing response."
+          ],
+          whyTopPick: "Turns reading into practical parent-led activities without adding hosted files.",
+          freeAccess: "Free public site; no required sign-up for main content.",
+          ageCheck: "Good for 4-7 when an adult chooses short, visual activities."
+        },
+        focus: "topic reading, activities",
+        time: "8-12 min",
+        level: "guided"
+      },
+
+      {
+        age: "4-7",
+        skill: "speaking",
+        slug: "pathways-toddler-communication-activities",
+        title: "Pathways - Get Your Toddler Talking",
+        link: "https://pathways.org/daily-toddler-communication-activities",
+        format: "article",
+        description:
+          "Everyday talk routines for dressing, play, and home conversations.",
+        details: {
+          type: "caregiver guide",
+          teaches: "Speaking, listening, vocabulary, comprehension, and fluency.",
+          howTo: [
+            "Choose one daily routine from the guide.",
+            "Model short phrases and simple choices.",
+            "Wait for the child to answer with a word, phrase, or gesture."
+          ],
+          whyTopPick: "Practical parent guidance for children who still need oral-language support.",
+          freeAccess: "Free article page; no required sign-up for the content.",
+          ageCheck: "Best for younger learners in this pack, especially ages 4-5."
+        },
+        focus: "daily conversation",
+        time: "3-8 min",
+        level: "caregiver-led"
       }
     ]
   };

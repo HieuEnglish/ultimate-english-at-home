@@ -3733,6 +3733,136 @@
         focus: "fluency, confidence",
         time: "15–25 min",
         level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "highlights-kids-11-12-reading",
+        title: "Highlights Kids",
+        link: "https://www.highlightskids.com/",
+        format: "site",
+        description:
+          "Short reads, puzzles, and language activities for lighter reading practice.",
+        details: {
+          type: "stories and activities",
+          teaches: "Reading, vocabulary, comprehension, fluency, and light writing.",
+          howTo: [
+            "Choose one story, article, or puzzle.",
+            "Read carefully and list five useful words.",
+            "Write a two-sentence summary or response."
+          ],
+          whyTopPick: "Still useful for 11-12 learners who need shorter, high-interest texts.",
+          freeAccess: "Free site access; no required sign-up for main content.",
+          ageCheck: "Good for this pack as lighter practice; choose mature-enough pages for stronger readers."
+        },
+        focus: "short reads, vocabulary",
+        time: "10-15 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "nasa-space-place-11-12-reading",
+        title: "NASA Space Place",
+        link: "https://spaceplace.nasa.gov/",
+        format: "site",
+        description:
+          "Space and science articles that support nonfiction reading and discussion.",
+        details: {
+          type: "science activity hub",
+          teaches: "Nonfiction comprehension, academic vocabulary, and topic discussion.",
+          howTo: [
+            "Choose one article or activity page.",
+            "Find the main idea and three details.",
+            "Explain one new science word in your own words."
+          ],
+          whyTopPick: "Excellent topic-driven nonfiction for vocabulary growth.",
+          freeAccess: "Free NASA educational site.",
+          ageCheck: "Good for 11-12; topics are child-friendly but vary in difficulty."
+        },
+        focus: "nonfiction, science vocabulary",
+        time: "10-20 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "writing",
+        slug: "smithsonian-learning-lab-11-12-writing",
+        title: "Smithsonian Learning Lab",
+        link: "https://smithsonianeducation.org/",
+        format: "site",
+        description:
+          "Free culture, image, and history collections for descriptive and evidence-based writing.",
+        details: {
+          type: "interactive collections",
+          teaches: "Observation, descriptive writing, vocabulary, comprehension, and cultural knowledge.",
+          howTo: [
+            "Choose one object, image, or collection.",
+            "Write three observations and one inference.",
+            "Use evidence from the item in a short paragraph."
+          ],
+          whyTopPick: "Visual material helps students practice evidence-based writing.",
+          freeAccess: "Free education platform with collections by grade and topic.",
+          ageCheck: "Good for 11-12 with topic selection by a parent or teacher."
+        },
+        focus: "evidence writing, description",
+        time: "15-25 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "poetry-foundation-children-11-12-reading",
+        title: "Poetry Foundation - Poems for Children",
+        link: "https://www.poetryfoundation.org/children",
+        format: "site",
+        description:
+          "Free poems and poet resources for fluency, imagery, and discussion.",
+        details: {
+          type: "poems and archive",
+          teaches: "Reading fluency, vocabulary, comprehension, imagery, and feeling-language.",
+          howTo: [
+            "Choose one short poem.",
+            "Read it aloud twice for rhythm and meaning.",
+            "Write one sentence about the image or feeling you noticed."
+          ],
+          whyTopPick: "Poetry gives short, rich texts for expressive reading.",
+          freeAccess: "Free public access to poems and related materials.",
+          ageCheck: "Good for 11-12; choose child/young-reader poems first."
+        },
+        focus: "poetry, fluency, imagery",
+        time: "10-15 min",
+        level: "semi-independent"
+      },
+
+      {
+        age: "11-12",
+        skill: "reading",
+        slug: "international-childrens-digital-library-11-12-reading",
+        title: "International Children's Digital Library",
+        link: "https://www.icdlbooks.org/",
+        format: "site",
+        description:
+          "Free children's books for cross-cultural reading and independent browsing.",
+        details: {
+          type: "digital library",
+          teaches: "Reading, vocabulary, fluency, comprehension, and cultural awareness.",
+          howTo: [
+            "Choose a book that matches your level.",
+            "Read for ten to fifteen minutes.",
+            "Write a short retell or compare it with another story."
+          ],
+          whyTopPick: "Helpful for cross-cultural reading and illustrated book choice.",
+          freeAccess: "Free children's book access on the public site.",
+          ageCheck: "Good for 11-12; some books may feel young, so choose by interest and level."
+        },
+        focus: "independent reading, culture",
+        time: "10-20 min",
+        level: "semi-independent"
       }
     ]
   };

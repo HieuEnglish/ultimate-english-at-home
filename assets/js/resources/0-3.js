@@ -3709,6 +3709,136 @@
         focus: "fluency, confidence",
         time: "5–10 min",
         level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "listening",
+        slug: "pathways-rhyming-and-singing-baby",
+        title: "Pathways - Rhyming and Singing Help Baby Learn",
+        link: "https://pathways.org/rhyming-and-singing-helps-baby-learn/",
+        format: "article",
+        description:
+          "Simple song and rhyme ideas for bedtime, feeding, and play.",
+        details: {
+          type: "caregiver guide",
+          teaches: "Listening, early words, rhythm, and parent-child turn-taking.",
+          howTo: [
+            "Choose one short rhyme or song for a daily routine.",
+            "Repeat it slowly and pause for the child to copy a sound or gesture.",
+            "Use the same song for several days so it becomes familiar."
+          ],
+          whyTopPick: "Strong fit for babies and toddlers because practice happens through normal routines.",
+          freeAccess: "Free article page; no required sign-up for the content.",
+          ageCheck: "Best for 0-2 and still useful across the 0-3 pack with caregiver support."
+        },
+        focus: "songs, listening, early words",
+        time: "3-5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "speaking",
+        slug: "pathways-narrating-your-day",
+        title: "Pathways - Narrating Your Day",
+        link: "https://pathways.org/narrating-your-day/",
+        format: "article",
+        description:
+          "Parent tips for turning daily routines into natural talk time.",
+        details: {
+          type: "caregiver guide",
+          teaches: "Speaking readiness, vocabulary, comprehension, and fluency through daily talk.",
+          howTo: [
+            "Pick one routine such as dressing, snack time, or bath time.",
+            "Say short sentences about what is happening.",
+            "Pause often so the child can gesture, vocalize, or try a word."
+          ],
+          whyTopPick: "Very practical for early speaking because it does not require worksheets or screen time.",
+          freeAccess: "Free article page; no required sign-up for the content.",
+          ageCheck: "Best for 0-2; appropriate for the full 0-3 pack as parent-led language practice."
+        },
+        focus: "daily talk, vocabulary",
+        time: "3-5 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "reading",
+        slug: "reach-out-and-read-milestones",
+        title: "Reach Out and Read - Read With Your Child Milestones",
+        link: "https://reachoutandread.org/read-with-your-child-milestones/",
+        format: "guide",
+        description:
+          "Milestone-based shared reading tips for babies, toddlers, and families.",
+        details: {
+          type: "family reading guide",
+          teaches: "Shared reading, vocabulary, attention, and early comprehension.",
+          howTo: [
+            "Check the milestone guidance for the child's age.",
+            "Read one short book together and point to pictures.",
+            "Use one simple question such as 'What is that?' or 'Where is it?'"
+          ],
+          whyTopPick: "Clear parent guidance for what shared reading can look like at each early age.",
+          freeAccess: "Free public family page.",
+          ageCheck: "Strong fit for 0-3 because all practice is caregiver-led."
+        },
+        focus: "shared reading, milestones",
+        time: "5-10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "reading",
+        slug: "start-with-a-book-early-activities",
+        title: "Start with a Book",
+        link: "https://www.startwithabook.org/",
+        format: "site",
+        description:
+          "Book-linked activities that help parents turn read-alouds into talk and play.",
+        details: {
+          type: "activity hub",
+          teaches: "Reading routines, vocabulary, comprehension, and topic-based talk.",
+          howTo: [
+            "Choose a simple topic the child already knows.",
+            "Read or look through one related book idea together.",
+            "Do one short play or talk activity from the topic page."
+          ],
+          whyTopPick: "Useful for families who want more ideas after reading a picture book.",
+          freeAccess: "Free public site; no required sign-up for main content.",
+          ageCheck: "Use only the simplest activities for 0-3; best with adult selection."
+        },
+        focus: "read-alouds, topic talk",
+        time: "5-10 min",
+        level: "caregiver-led"
+      },
+
+      {
+        age: "0-3",
+        skill: "reading",
+        slug: "international-childrens-digital-library",
+        title: "International Children's Digital Library",
+        link: "https://www.icdlbooks.org/",
+        format: "site",
+        description:
+          "Free picture-book library for parent-and-child shared reading.",
+        details: {
+          type: "digital library",
+          teaches: "Shared reading, vocabulary, picture talk, and early comprehension.",
+          howTo: [
+            "Choose a short picture-led book.",
+            "Talk about the pictures more than the printed words.",
+            "Repeat the same book several times during the week."
+          ],
+          whyTopPick: "Adds a large free book library with a strong picture-book focus.",
+          freeAccess: "Free children's book access on the public site.",
+          ageCheck: "Appropriate for 0-3 when an adult chooses short visual books."
+        },
+        focus: "picture books, shared reading",
+        time: "5-10 min",
+        level: "caregiver-led"
       }
     ]
   };

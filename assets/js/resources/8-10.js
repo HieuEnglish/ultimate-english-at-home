@@ -3597,7 +3597,135 @@
         level: "guided to independent"
       },
 
-      
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "read-along-by-google-8-10-reading",
+        title: "Read Along by Google",
+        link: "https://readalong.google/intl/en/",
+        format: "app",
+        description:
+          "Guided reading app for learners who still benefit from read-aloud support.",
+        details: {
+          type: "reading app",
+          teaches: "Reading fluency, pronunciation, vocabulary, and comprehension.",
+          howTo: [
+            "Choose an age-appropriate story in the app.",
+            "Read aloud and use the support when a word is hard.",
+            "Repeat one short section for smoother fluency."
+          ],
+          whyTopPick: "Good support for hesitant readers who need help reading aloud.",
+          freeAccess: "Free reading app from Google; app or device setup may be required.",
+          ageCheck: "Appropriate for 8-10 learners who need extra fluency support."
+        },
+        focus: "read-aloud fluency",
+        time: "8-12 min",
+        level: "guided to independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "highlights-kids-8-10-reading",
+        title: "Highlights Kids",
+        link: "https://www.highlightskids.com/",
+        format: "site",
+        description:
+          "Stories, puzzles, and short activities for playful reading practice.",
+        details: {
+          type: "stories and activities",
+          teaches: "Reading, vocabulary, comprehension, fluency, and light writing.",
+          howTo: [
+            "Pick one story or puzzle page.",
+            "Read carefully and explain two new words.",
+            "Write or say a short answer about the main idea."
+          ],
+          whyTopPick: "Good mix of shorter reads and language-rich activities without a paywall at entry.",
+          freeAccess: "Free site access; no required sign-up for main content.",
+          ageCheck: "Strong fit for 8-10 with normal browsing guidance."
+        },
+        focus: "short reads, vocabulary",
+        time: "10-15 min",
+        level: "guided to independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "nasa-space-place-8-10-reading",
+        title: "NASA Space Place",
+        link: "https://spaceplace.nasa.gov/",
+        format: "site",
+        description:
+          "Short science articles and activities that build nonfiction vocabulary.",
+        details: {
+          type: "science activity hub",
+          teaches: "Reading comprehension, academic vocabulary, and topic knowledge.",
+          howTo: [
+            "Choose one short article or activity.",
+            "Write five space or science words from the page.",
+            "Explain the main idea in two sentences."
+          ],
+          whyTopPick: "High-interest nonfiction that naturally supports academic English.",
+          freeAccess: "Free NASA educational site.",
+          ageCheck: "Good fit for curious 8-10 readers; adult can help choose easier topics."
+        },
+        focus: "nonfiction, science vocabulary",
+        time: "10-20 min",
+        level: "guided to independent"
+      },
+
+      {
+        age: "8-10",
+        skill: "writing",
+        slug: "smithsonian-learning-lab-8-10-writing",
+        title: "Smithsonian Learning Lab",
+        link: "https://smithsonianeducation.org/",
+        format: "site",
+        description:
+          "Free image, culture, and history collections for observation and response writing.",
+        details: {
+          type: "interactive collections",
+          teaches: "Descriptive writing, vocabulary, comprehension, and cultural knowledge.",
+          howTo: [
+            "Choose one image or object collection.",
+            "Write three things you notice.",
+            "Add one question and one short opinion sentence."
+          ],
+          whyTopPick: "Visual collections make writing easier for learners who need concrete prompts.",
+          freeAccess: "Free education platform with collections by grade and topic.",
+          ageCheck: "Good for 8-10 with adult topic selection."
+        },
+        focus: "descriptive writing",
+        time: "10-20 min",
+        level: "guided"
+      },
+
+      {
+        age: "8-10",
+        skill: "reading",
+        slug: "international-childrens-digital-library-8-10-reading",
+        title: "International Children's Digital Library",
+        link: "https://www.icdlbooks.org/",
+        format: "site",
+        description:
+          "Free children's book library for independent reading and retelling.",
+        details: {
+          type: "digital library",
+          teaches: "Reading, vocabulary, fluency, comprehension, and cultural awareness.",
+          howTo: [
+            "Choose a book with an appropriate reading level.",
+            "Read for ten minutes.",
+            "Retell the beginning, middle, and end."
+          ],
+          whyTopPick: "Adds cross-cultural book choice and independent browsing.",
+          freeAccess: "Free children's book access on the public site.",
+          ageCheck: "Good for 8-10; choose topics and length carefully."
+        },
+        focus: "independent reading, retelling",
+        time: "10-20 min",
+        level: "guided to independent"
+      }
     ]
   };
 
