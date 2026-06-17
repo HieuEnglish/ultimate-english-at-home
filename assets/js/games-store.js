@@ -97,6 +97,7 @@
         { slug: "rhyme-time", title: "Rhyme Time", emoji: "🕰️", age: "4-7", skill: "reading", difficulty: 2, description: "Match rhyming pictures.", hasTimer: true },
         { slug: "picture-pairs", title: "Picture Pairs", emoji: "👯", age: "4-7", skill: "vocabulary", difficulty: 2, description: "Find matching pair.", hasTimer: false },
         { slug: "word-detective", title: "Word Detective", emoji: "🕵️‍♀️", age: "4-7", skill: "reading", difficulty: 2, description: "Find the word.", hasTimer: true },
+        { slug: "sound-match", title: "Sound Match", emoji: "🔊", age: "4-7", skill: "listening", difficulty: 2, description: "Listen to the word and tap the matching picture!", hasTimer: false },
 
         // ========== Age 4-7 (Early Reading + Spelling) ==========
         {
