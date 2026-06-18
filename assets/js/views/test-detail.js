@@ -61,8 +61,8 @@ function ageTheme(ageKey) {
     return {
       label: 'IELTS track',
       vibe: 'Exam-style momentum',
-      accent: '#2dd4bf',
-      soft: 'rgba(45, 212, 191, .18)'
+      accent: '#F59E0B',
+      soft: 'rgba(245, 158, 11, .18)'
     };
   }
   return {
@@ -78,31 +78,31 @@ function skillTheme(skill) {
   if (key === 'reading') {
     return {
       label: 'Reading focus',
-      accent: '#6c63ff',
-      accentAlt: '#ff8a65',
+      accent: '#38BDF8',
+      accentAlt: '#6C63FF',
       summary: 'Visual prompts, focused choices, and clearer reading flow.'
     };
   }
   if (key === 'listening') {
     return {
       label: 'Listening focus',
-      accent: '#00c2a8',
-      accentAlt: '#5c7cff',
+      accent: '#00C9A7',
+      accentAlt: '#6C63FF',
       summary: 'Audio-led practice with faster controls and stronger cues.'
     };
   }
   if (key === 'writing') {
     return {
       label: 'Writing focus',
-      accent: '#ff8f5b',
-      accentAlt: '#ff5fa2',
+      accent: '#FBBF24',
+      accentAlt: '#6C63FF',
       summary: 'Cleaner prompts, warmer feedback, and a brighter writing studio.'
     };
   }
   return {
     label: 'Speaking focus',
-    accent: '#ff5fa2',
-    accentAlt: '#6f8bff',
+    accent: '#FB7185',
+    accentAlt: '#6C63FF',
     summary: 'More confident speaking flow, richer prompts, and clearer coaching.'
   };
 }
@@ -120,9 +120,26 @@ function testTheme(test) {
     skillLabel: skill.label,
     accent: skill.accent,
     accentAlt: skill.accentAlt,
+    trackAccent: ageKey === 'ielts' ? age.accent : skill.accent,
     summary: skill.summary,
     mode: isAudioSkill(test && test.skill) ? 'Audio-guided practice' : 'Interactive practice'
   };
+}
+
+function skillStatValues(test, theme) {
+  const skill = String(test && test.skill ? test.skill : '').toLowerCase();
+  const ageKey = theme.ageKey;
+  const isIelts = ageKey === 'ielts';
+  if (skill === 'listening') {
+    return { energy: isIelts ? 'Part-by-part audio' : 'Audio cues', focus: 'Careful listening', feel: 'Steady pace' };
+  }
+  if (skill === 'reading') {
+    return { energy: isIelts ? 'Passage rhythm' : 'Text discovery', focus: 'Details + meaning', feel: 'Calm focus' };
+  }
+  if (skill === 'writing') {
+    return { energy: isIelts ? 'Task practice' : 'Idea builder', focus: 'Clear answers', feel: 'Creative flow' };
+  }
+  return { energy: isIelts ? 'Interview mode' : 'Voice practice', focus: 'Fluency + clarity', feel: 'Confident reps' };
 }
 
 function audioSettingsPanelHtml(slug) {
@@ -279,6 +296,27 @@ function buildRunnerChromeMarkup(title, theme, state) {
   `;
 }
 
+function buildScoreRingMarkup(text) {
+  const scoreMatch = String(text || '').match(/Score:\s*(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)(?:\s*\((\d+)%\))?/i);
+  if (!scoreMatch) return '';
+  const earned = Number(scoreMatch[1] || 0);
+  const total = Number(scoreMatch[2] || 0);
+  const pct = scoreMatch[3] != null ? Number(scoreMatch[3]) : total ? Math.round((earned / total) * 100) : 0;
+  const clamped = Math.max(0, Math.min(100, pct));
+  const radius = 42;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (clamped / 100) * circumference;
+  return `
+    <div class="test-score-ring" aria-label="Score ${clamped}%">
+      <svg viewBox="0 0 112 112" role="img" aria-hidden="true">
+        <circle class="test-score-ring__track" cx="56" cy="56" r="${radius}"></circle>
+        <circle class="test-score-ring__fill" cx="56" cy="56" r="${radius}" style="stroke-dasharray:${circumference.toFixed(2)}; stroke-dashoffset:${offset.toFixed(2)}"></circle>
+      </svg>
+      <span>${clamped}%</span>
+    </div>
+  `;
+}
+
 function triggerRunnerCelebration(rootEl, stage, theme, options = {}) {
   const key = String(options.key || 'summary');
   if (!rootEl || !stage || stage.dataset.ueahCelebrated === key) return;
@@ -395,6 +433,10 @@ function enhanceRunnerStage(stage) {
 
     if (isSummary || hasDetails) {
       el.classList.add('test-runner-stage__summary');
+      if (!el.querySelector('.test-score-ring')) {
+        const ring = buildScoreRingMarkup(text);
+        if (ring) el.insertAdjacentHTML('afterbegin', ring);
+      }
     } else if (isIntro && hasButton) {
       el.classList.add('test-runner-stage__intro');
     } else if (isFeedback) {
@@ -405,6 +447,14 @@ function enhanceRunnerStage(stage) {
         el.classList.add('test-runner-stage__feedback--incorrect');
       }
     }
+
+    el.querySelectorAll('.chip[aria-label="Time remaining"]').forEach((chip) => {
+      const m = String(chip.textContent || '').trim().match(/^(\d+):(\d{2})$/);
+      if (!m) return;
+      const seconds = Number(m[1]) * 60 + Number(m[2]);
+      if (Number.isFinite(seconds) && seconds < 60) chip.classList.add('is-warning');
+      else chip.classList.remove('is-warning');
+    });
   });
 }
 
@@ -515,11 +565,13 @@ export async function getView(ctx, slug) {
   const safeTitle = test.title || 'Test';
   const safeSubtitle = test.subtitle || 'Test your ability';
   const theme = testTheme(test);
+  const stats = skillStatValues(test, theme);
   const themeStyle = [
     `--test-accent:${theme.accent}`,
     `--test-accent-2:${theme.accentAlt}`,
     `--test-accent-soft:${theme.ageSoft}`,
-    `--test-accent-age:${theme.ageAccent}`
+    `--test-accent-age:${theme.ageAccent}`,
+    `--test-track-accent:${theme.trackAccent}`
   ].join(';');
 
   const title = `${safeTitle} - UEAH`;
@@ -555,9 +607,16 @@ export async function getView(ctx, slug) {
       ${breadcrumb}
 
       <div class="test-hero">
+        <div class="test-hero__decor test-hero__decor--one" aria-hidden="true"></div>
+        <div class="test-hero__decor test-hero__decor--two" aria-hidden="true"></div>
         <div class="test-hero__copy">
-          <div class="test-hero__eyebrow">Practice lane</div>
-          <h1 class="page-title test-hero__title">${escapeHtml(safeTitle)}</h1>
+          <div class="test-hero__identity">
+            <div class="test-hero__skill-icon" aria-hidden="true">${iconSkill(test.skill)}</div>
+            <div>
+              <div class="test-hero__eyebrow">Practice lane</div>
+              <h1 class="page-title test-hero__title">${escapeHtml(safeTitle)}</h1>
+            </div>
+          </div>
           <p class="page-subtitle test-hero__subtitle">${escapeHtml(safeSubtitle)}</p>
 
           <div class="test-chip-row" aria-label="Test summary">
@@ -568,16 +627,16 @@ export async function getView(ctx, slug) {
 
           <div class="test-stat-grid" aria-label="Test highlights">
             <div class="test-stat-card">
-              <span class="test-stat-card__label">Energy</span>
-              <strong>${escapeHtml(theme.vibe)}</strong>
+              <span class="test-stat-card__label"><span aria-hidden="true">⚡</span> Energy</span>
+              <strong>${escapeHtml(stats.energy)}</strong>
             </div>
             <div class="test-stat-card">
-              <span class="test-stat-card__label">Focus</span>
-              <strong>${escapeHtml(theme.skillLabel)}</strong>
+              <span class="test-stat-card__label"><span aria-hidden="true">◎</span> Focus</span>
+              <strong>${escapeHtml(stats.focus)}</strong>
             </div>
             <div class="test-stat-card">
-              <span class="test-stat-card__label">Feel</span>
-              <strong>${escapeHtml(theme.summary)}</strong>
+              <span class="test-stat-card__label"><span aria-hidden="true">✦</span> Feel</span>
+              <strong>${escapeHtml(stats.feel)}</strong>
             </div>
           </div>
         </div>

@@ -9,6 +9,15 @@
   50% { transform: translateY(-10px); }
 }
 
+/* Test runner redesign font override. This file is loaded after nextgen.css. */
+.test-detail-page,
+.test-detail-page button,
+.test-detail-page input,
+.test-detail-page select,
+.test-detail-page textarea {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
 @keyframes softGlow {
   0%, 100% { box-shadow: 0 0 20px rgba(124, 92, 252, 0.2); }
   50% { box-shadow: 0 0 40px rgba(124, 92, 252, 0.4); }
