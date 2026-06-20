@@ -395,6 +395,19 @@ function triggerRunnerCelebration(rootEl, stage, theme, options = {}) {
   }, 3800);
 }
 
+function autoSaveRunnerScore(stage) {
+  if (!stage || stage.dataset.ueahAutoSaved === 'summary') return;
+  const saveButton = stage.querySelector('button[data-action="save-score"]');
+  if (!saveButton || saveButton.disabled) return;
+
+  stage.dataset.ueahAutoSaved = 'summary';
+  window.setTimeout(() => {
+    try {
+      if (document.contains(saveButton)) saveButton.click();
+    } catch (_) {}
+  }, 0);
+}
+
 function enhanceRunnerStage(stage) {
   if (!stage) return;
 
@@ -492,6 +505,7 @@ function installRunnerChrome(rootEl, title, theme) {
       enhanceRunnerStage(stage);
 
       if (state.mode === 'summary') {
+        autoSaveRunnerScore(stage);
         triggerRunnerCelebration(rootEl, stage, theme, {
           key: 'summary',
           label: 'Great work',
@@ -512,6 +526,7 @@ function installRunnerChrome(rootEl, title, theme) {
         } else if (feedback.kind !== 'correct' && stage.dataset.ueahCelebrated !== 'summary') {
           delete stage.dataset.ueahCelebrated;
         }
+        delete stage.dataset.ueahAutoSaved;
       }
     } catch (_) {
       // ignore

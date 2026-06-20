@@ -21,6 +21,35 @@
     runners: new Map()    // slug -> runner object/function
   };
 
+  const TRUE_FALSE_WORDS = {
+    "🐱": "cat",
+    "🐶": "dog",
+    "🐰": "rabbit",
+    "🐟": "fish",
+    "🐸": "frog",
+    "🐦": "bird",
+    "🍎": "apple",
+    "🍌": "banana",
+    "🍇": "grapes",
+    "🥕": "carrot",
+    "🧀": "cheese",
+    "📚": "book",
+    "🎒": "bag",
+    "🚌": "bus",
+    "🚗": "car",
+    "🏫": "school",
+    "🌳": "tree",
+    "👟": "shoes",
+    "🧦": "socks",
+    "⏰": "clock",
+    "⚽": "football",
+    "🧸": "teddy bear",
+    "⛵": "boat",
+    "☀️": "sunny",
+    "🌧️": "raining",
+    "❄️": "cold"
+  };
+
   function normalizeSlug(slug) {
     return String(slug || "")
       .trim()
@@ -93,6 +122,162 @@
     }
 
     return out;
+  }
+
+  function compactText(value) {
+    return String(value == null ? "" : value)
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+  }
+
+  function ageFromSlug(slug) {
+    const s = normalizeSlug(slug);
+    if (s.startsWith("age-0-3-")) return "0-3";
+    if (s.startsWith("age-4-7-")) return "4-7";
+    if (s.startsWith("age-8-10-")) return "8-10";
+    if (s.startsWith("age-11-12-")) return "11-12";
+    if (s.startsWith("age-13-18-")) return "13-18";
+    if (s.startsWith("iels-") || s.startsWith("ielts-")) return "ielts";
+    return "";
+  }
+
+  function skillFromSlug(slug) {
+    return inferSkillFromSlug(slug);
+  }
+
+  function isGenericListeningTruthContext(q) {
+    const context = compactText(q && q.context);
+    if (!context) return true;
+    return context === "listen to the short statement." || context === "listen to the short statement";
+  }
+
+  function shouldDropQuestion(q, slug) {
+    if (!isPlainObject(q)) return true;
+
+    const age = ageFromSlug(slug);
+    const skill = skillFromSlug(slug);
+    const type = compactText(q.type);
+    const question = compactText(q.question || q.prompt);
+    const model = compactText(q.model);
+    const say = compactText(q.say);
+    const explanation = compactText(q.explanation);
+    const blob = [question, model, say, explanation].join(" ");
+
+    // Remove generated IELTS-style scaffolding that was appended to child banks.
+    if (
+      (age !== "13-18" && age !== "ielts" && /sample answer|clear opinion|support your idea/.test(blob)) ||
+      (skill === "speaking" && /sample answer|clear opinion/.test([model, say].join(" ")))
+    ) {
+      return true;
+    }
+
+    // A true/false item must provide something to verify against. A bare spoken
+    // statement that is always marked True is not a meaningful question.
+    if (type.includes("truefalse")) {
+      const hasPicture = !!compactText(q.picture || q.image || q.look);
+      const hasReadableReference = !!compactText(q.text || q.passage || q.reference);
+      if (skill === "listening" && !hasPicture && !hasReadableReference && isGenericListeningTruthContext(q)) {
+        return true;
+      }
+      if (skill !== "listening" && !hasPicture && !hasReadableReference && !compactText(q.context)) {
+        return true;
+      }
+    }
+
+    // Fill-in questions need the actual sentence or passage, not only the answer.
+    if (type.includes("fill") || /missing word/.test(question)) {
+      const hasContext =
+        !!compactText(q.context || q.passage || q.sentence || q.text) ||
+        /_{2,}|\bblank\b/.test(String(q.question || ""));
+      if (!hasContext) return true;
+    }
+
+    if (Array.isArray(q.options) && (q.answer == null || q.options[Number(q.answer)] == null)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function normalizeTrueFalseAnswer(q) {
+    if (!isPlainObject(q)) return q;
+    const type = compactText(q.type);
+    if (!type.includes("truefalse") || !Array.isArray(q.options)) return q;
+
+    const picture = String(q.picture || "").trim();
+    const target = TRUE_FALSE_WORDS[picture];
+    if (!target) return q;
+
+    const said = compactText(q.say);
+    if (!said) return q;
+
+    const shouldBeTrue = said.includes(target);
+    const trueIndex = q.options.findIndex((opt) => compactText(opt) === "true");
+    const falseIndex = q.options.findIndex((opt) => compactText(opt) === "false");
+    if (trueIndex < 0 || falseIndex < 0) return q;
+
+    return {
+      ...q,
+      answer: shouldBeTrue ? trueIndex : falseIndex
+    };
+  }
+
+  function sanitizeQuestionsForBank(slug, questions) {
+    const s = normalizeSlug(slug);
+    const age = ageFromSlug(s);
+    const skill = skillFromSlug(s);
+    const seenId = new Set();
+    const seenQuestion = new Set();
+    const seenAudio = new Set();
+    const out = [];
+
+    (Array.isArray(questions) ? questions : []).forEach((raw, idx) => {
+      if (shouldDropQuestion(raw, s)) return;
+
+      const q = normalizeTrueFalseAnswer(raw);
+      const id = String(q.id != null ? q.id : `${s}::${idx}`).trim();
+      if (seenId.has(id)) return;
+
+      const questionKey = compactText(q.question || q.prompt);
+      const audioKey = compactText(q.say || q.model);
+      const semanticKey = [questionKey, audioKey].filter(Boolean).join(" :: ");
+
+      if (semanticKey && seenQuestion.has(semanticKey)) return;
+      if (skill === "listening" && age !== "13-18" && age !== "ielts" && audioKey && seenAudio.has(audioKey)) return;
+
+      seenId.add(id);
+      if (semanticKey) seenQuestion.add(semanticKey);
+      if (audioKey) seenAudio.add(audioKey);
+      out.push({ ...q, id });
+    });
+
+    return out;
+  }
+
+  function installBankSanitizer() {
+    const existing = window.UEAH_TEST_BANKS;
+    if (existing && existing.__ueahSanitizedProxy) return;
+
+    const target = isPlainObject(existing) ? existing : {};
+    const proxy = new Proxy(target, {
+      set(obj, prop, value) {
+        const key = String(prop);
+        obj[prop] = Array.isArray(value) ? sanitizeQuestionsForBank(key, value) : value;
+        return true;
+      }
+    });
+
+    Object.defineProperty(proxy, "__ueahSanitizedProxy", {
+      value: true,
+      enumerable: false
+    });
+
+    Object.keys(target).forEach((key) => {
+      if (Array.isArray(target[key])) target[key] = sanitizeQuestionsForBank(key, target[key]);
+    });
+
+    window.UEAH_TEST_BANKS = proxy;
   }
 
   function upsertTest(test) {
@@ -211,4 +396,6 @@
     hasRunner,
     render             // optional convenience wrapper
   };
+
+  installBankSanitizer();
 })();

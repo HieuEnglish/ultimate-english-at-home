@@ -730,10 +730,18 @@
 
     const skillBucket = isPlainObject(bucket[sk]) ? bucket[sk] : { lastScore: null, history: [] };
     const history = Array.isArray(skillBucket.history) ? skillBucket.history.slice() : [];
+    const last = skillBucket.lastScore;
+    const lastScore = last && Number.isFinite(Number(last.score)) ? Number(last.score) : null;
+    const nextScore = Number(cleaned.score);
+
+    // Profile progress stores the learner's best score for an age + skill.
+    // Lower/equal retakes should not replace a previous best or add history noise.
+    if (lastScore !== null && Number.isFinite(nextScore) && nextScore <= lastScore) {
+      return current;
+    }
 
     // Dedupe: if lastScore is identical (score+rawCorrect+rawTotal+slug),
     // keep overall synchronized but avoid writing a duplicate history entry.
-    const last = skillBucket.lastScore;
     if (
       last &&
       last.score === cleaned.score &&

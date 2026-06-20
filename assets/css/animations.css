@@ -18,6 +18,31 @@
   font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
+/* Make test prompts read as the primary task, not a small fieldset label. */
+.tests-page [data-test-runner-root] fieldset > legend,
+.tests-page [data-test-runner-root] .test-runner-stage__panel > div:first-child:not(.actions) {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.62rem 0.85rem !important;
+  border-radius: 12px;
+  border: 1px solid rgba(251, 191, 36, 0.42);
+  background:
+    linear-gradient(180deg, rgba(251, 191, 36, 0.22), rgba(251, 146, 60, 0.11)),
+    rgba(34, 26, 8, 0.48);
+  color: #fff4c7 !important;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem) !important;
+  line-height: 1.35 !important;
+  font-weight: 900 !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), 0 0 22px rgba(251, 191, 36, 0.10);
+}
+
+/* The game-engine shockwave reads as an odd ring in test celebrations. */
+.test-confetti-layer .confetti-shockwave {
+  display: none !important;
+}
+
 @keyframes softGlow {
   0%, 100% { box-shadow: 0 0 20px rgba(124, 92, 252, 0.2); }
   50% { box-shadow: 0 0 40px rgba(124, 92, 252, 0.4); }
