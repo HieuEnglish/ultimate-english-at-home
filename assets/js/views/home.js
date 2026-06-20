@@ -58,7 +58,8 @@ export function getView(ctx) {
             <div class="hero-visual__frame">
               <div class="hero-visual__card hero-visual__card--lead">
                 <div class="hero-visual__eyebrow">Live learning map</div>
-                <div class="hero-visual__title">Reading, games, tests, progress</div>
+                <div class="hero-visual__title">Choose a route. Build momentum.</div>
+                <p class="hero-visual__caption">Resources, games, tests, and certificates connected in one practice path.</p>
                 <div class="hero-visual__mini-grid">
                   <div class="hero-visual__mini-tile">
                     <strong>📚</strong>
