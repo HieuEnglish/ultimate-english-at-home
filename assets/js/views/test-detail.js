@@ -148,16 +148,23 @@ function audioSettingsPanelHtml(slug) {
   const rateId = `tts-rate-${slug}`;
 
   return `
-    <div
+    <details
       class="note test-audio-panel"
       data-tts-panel="${slug}"
-      role="region"
-      aria-label="Audio settings"
       style="margin-top:14px"
     >
-      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap">
-        <div style="min-width:240px; flex:1">
+      <summary class="test-audio-panel__summary">
+        <span>
           <strong>Audio settings</strong>
+          <small>
+            Playback engine, browser voice, and speed
+          </small>
+        </span>
+        <span class="test-audio-panel__toggle" aria-hidden="true"></span>
+      </summary>
+
+      <div class="test-audio-panel__body" style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap">
+        <div style="min-width:240px; flex:1">
           <small style="display:block; margin-top:6px; opacity:.85">
             These settings apply across tests and games. Audio is generated live by your browser.
           </small>
@@ -211,7 +218,7 @@ function audioSettingsPanelHtml(slug) {
       <div data-tts-unsupported class="note" hidden style="margin-top:12px">
         <strong>Text-to-speech not available:</strong> your browser does not support speech synthesis.
       </div>
-    </div>
+    </details>
   `;
 }
 
