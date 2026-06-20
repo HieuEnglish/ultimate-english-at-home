@@ -266,7 +266,7 @@ function inferRunnerFeedback(stage) {
 
   const negative = /\bnot quite\b|\bincorrect\b|\btry again next time\b|\bcorrect answer\b/i.test(text);
   const normalized = text.replace(/\bcorrect\s*answer\s*:/gi, '');
-  const positive = /\bnice work\b|\bgood job\b|\bwell done\b|✅|saved\s*&\s*scored|(?:^|[.!?]\s+)correct(?:[.!?]|\s*$)/i.test(normalized);
+  const positive = /\bnice work\b|\bgood job\b|\bwell done\b|saved\s*&\s*scored|(?:^|[.!?]\s+)correct(?:[.!?]|\s*$)/i.test(normalized);
 
   if (negative) return { kind: 'incorrect', key: `incorrect-${current}-${total}` };
   if (positive) return { kind: 'correct', key: `correct-${current}-${total}` };
