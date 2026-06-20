@@ -38,6 +38,15 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), 0 0 22px rgba(251, 191, 36, 0.10);
 }
 
+.tests-page [data-test-runner-root] fieldset > legend {
+  float: left;
+  margin: 0 0 14px !important;
+}
+
+.tests-page [data-test-runner-root] fieldset > legend + * {
+  clear: both;
+}
+
 /* The game-engine shockwave reads as an odd ring in test celebrations. */
 .test-confetti-layer .confetti-shockwave {
   display: none !important;

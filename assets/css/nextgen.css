@@ -1912,7 +1912,9 @@ body {
 }
 
 .landing-home .hero-maker {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
   padding: 0.55rem 1.2rem;
   border-radius: 999px;
@@ -1922,7 +1924,7 @@ body {
   font-size: clamp(0.95rem, 1.15vw, 1.08rem);
   font-weight: 800;
   letter-spacing: 0.02em;
-  margin-bottom: 1.65rem;
+  margin: 0 auto 1.65rem;
 }
 
 .landing-home .hero-title {
@@ -4653,14 +4655,16 @@ body {
 }
 
 .test-stat-card {
-  min-height: 116px;
+  min-height: 58px;
+  padding: 10px 16px;
+  border-radius: 18px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .test-stat-card strong {
-  font-size: 1.02rem;
+  font-size: 0.95rem;
 }
 
 .test-detail-shell {
@@ -5219,19 +5223,34 @@ body {
 }
 
 .test-runner-stage__formwrap fieldset {
+  width: 100%;
+  margin: 0 !important;
   padding: 18px !important;
   border-radius: 24px !important;
+}
+
+.test-runner-stage__formwrap {
+  width: 100%;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .test-runner-stage__formwrap legend {
   font-family: var(--font-display);
   font-size: clamp(1.05rem, 2vw, 1.22rem);
   font-weight: 800;
+  float: left;
+  margin: 0 0 14px !important;
 }
 
 .test-runner-stage__formwrap [role="radiogroup"],
 .test-runner-stage__formwrap [role="group"] {
+  clear: both;
   gap: 0.85rem !important;
+  margin-top: 0 !important;
 }
 
 .test-runner-stage__formwrap .btn[type="submit"],
