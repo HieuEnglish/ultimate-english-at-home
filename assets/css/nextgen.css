@@ -2024,7 +2024,7 @@ body {
 
 .landing-home .hero-visual {
   position: relative;
-  min-height: 570px;
+  min-height: 620px;
   --hero-map-surface: rgba(12, 16, 38, 0.78);
   --hero-map-line: rgba(79, 195, 247, 0.34);
   --hero-map-soft: rgba(255, 255, 255, 0.065);
@@ -2120,14 +2120,17 @@ body {
     linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.032)),
     rgba(255, 255, 255, 0.035);
   color: var(--text-primary);
+  text-decoration: none;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .landing-home .hero-visual__card--lead {
-  padding: 1.35rem 1.25rem;
+  padding: 1.35rem 1.25rem 1.6rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 1rem;
   overflow: hidden;
 }
 
@@ -2140,7 +2143,6 @@ body {
 }
 
 .landing-home .hero-visual__title {
-  margin-top: 0.7rem;
   font-family: var(--font-display);
   font-size: clamp(1.35rem, 2.45vw, 1.7rem);
   font-weight: 800;
@@ -2150,7 +2152,7 @@ body {
 
 .landing-home .hero-visual__caption {
   max-width: 24rem;
-  margin: 0.55rem 0 0;
+  margin: 0;
   color: var(--text-secondary);
   font-size: 0.82rem;
   line-height: 1.55;
@@ -2160,37 +2162,16 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.7rem;
-  margin-top: 1rem;
+  margin-top: 1.6rem;
   position: relative;
 }
 
 .landing-home .hero-visual__mini-grid::before {
-  content: "";
-  position: absolute;
-  left: 22%;
-  right: 22%;
-  top: 50%;
-  height: 44%;
-  border: 2px solid var(--hero-map-line);
-  border-left-width: 0;
-  border-bottom-width: 0;
-  border-radius: 0 24px 0 0;
-  transform: translateY(-50%);
-  opacity: 0.74;
-  pointer-events: none;
+  content: none;
 }
 
 .landing-home .hero-visual__mini-grid::after {
-  content: "";
-  position: absolute;
-  left: 22%;
-  right: 22%;
-  top: 50%;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(52, 211, 153, 0.9), rgba(79, 195, 247, 0.9), rgba(244, 114, 182, 0.78));
-  box-shadow: 0 0 18px rgba(79, 195, 247, 0.18);
-  transform: translateY(-50%);
-  pointer-events: none;
+  content: none;
 }
 
 .landing-home .hero-visual__mini-tile {
@@ -2206,6 +2187,8 @@ body {
   justify-content: space-between;
   position: relative;
   z-index: 1;
+  color: inherit;
+  text-decoration: none;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -2230,6 +2213,15 @@ body {
   transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--node-accent) 42%, rgba(255, 255, 255, 0.14));
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+}
+
+.landing-home .hero-visual__card--path:hover,
+.landing-home .hero-visual__card--score:hover {
+  transform: translateY(-3px);
+  border-color: rgba(79, 195, 247, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 30px rgba(0, 0, 0, 0.22);
 }
 
 .landing-home .hero-visual__mini-tile strong {

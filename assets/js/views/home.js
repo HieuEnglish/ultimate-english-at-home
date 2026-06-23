@@ -61,41 +61,41 @@ export function getView(ctx) {
                 <div class="hero-visual__title">Choose a route. Build momentum.</div>
                 <p class="hero-visual__caption">Resources, games, tests, and certificates connected in one practice path.</p>
                 <div class="hero-visual__mini-grid">
-                  <div class="hero-visual__mini-tile">
+                  <a class="hero-visual__mini-tile" href="${hrefFor('/resources')}" data-nav>
                     <strong>📚</strong>
                     <span>Resources</span>
-                  </div>
-                  <div class="hero-visual__mini-tile">
+                  </a>
+                  <a class="hero-visual__mini-tile" href="${hrefFor('/games')}" data-nav>
                     <strong>🎮</strong>
                     <span>Games</span>
-                  </div>
-                  <div class="hero-visual__mini-tile">
+                  </a>
+                  <a class="hero-visual__mini-tile" href="${hrefFor('/tests')}" data-nav>
                     <strong>🧪</strong>
                     <span>Tests</span>
-                  </div>
-                  <div class="hero-visual__mini-tile">
+                  </a>
+                  <a class="hero-visual__mini-tile" href="${hrefFor('/profile/certificates')}" data-nav>
                     <strong>🏆</strong>
                     <span>Certificates</span>
-                  </div>
+                  </a>
                 </div>
               </div>
 
               <div class="hero-visual__stack">
-                <div class="hero-visual__card hero-visual__card--path">
+                <a class="hero-visual__card hero-visual__card--path" href="${hrefFor('/resources')}" data-nav>
                   <div class="hero-visual__card-icon">🧭</div>
                   <div>
                     <div class="hero-visual__card-label">Age path</div>
                     <div class="hero-visual__card-value">6 learner tracks</div>
                   </div>
-                </div>
+                </a>
 
-                <div class="hero-visual__card hero-visual__card--score">
+                <a class="hero-visual__card hero-visual__card--score" href="${hrefFor('/profile')}" data-nav>
                   <div class="hero-visual__card-icon">📈</div>
                   <div>
                     <div class="hero-visual__card-label">Progress</div>
                     <div class="hero-visual__card-value">Skill scores + saved wins</div>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
 
