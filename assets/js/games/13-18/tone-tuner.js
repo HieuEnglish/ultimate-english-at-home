@@ -130,9 +130,15 @@ class ToneTuner extends GameBase {
 
     const list = document.getElementById('options-list');
     const options = [...q.options].sort(() => Math.random() - 0.5);
-    list.innerHTML = options.map((opt, idx) => `<button class="tone-btn" data-idx="${idx}">${opt.text}</button>`).join('');
-    list.querySelectorAll('.tone-btn').forEach((btn) => {
+    list.replaceChildren();
+    options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tone-btn';
+      btn.dataset.idx = String(idx);
+      btn.textContent = String(opt.text);
       btn.onclick = () => this.handleAnswer(options[Number(btn.dataset.idx)], btn);
+      list.appendChild(btn);
     });
   }
 

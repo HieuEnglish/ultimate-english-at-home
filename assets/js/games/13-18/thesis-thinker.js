@@ -127,10 +127,7 @@ class ThesisThinker extends GameBase {
 
     document.getElementById('instruction-box').textContent = 'Select the strongest claim.';
     const grid = document.getElementById('options-grid');
-    grid.innerHTML = choices.map((choice, idx) => `<button class="choice-btn" data-idx="${idx}">${choice}</button>`).join('');
-    grid.querySelectorAll('.choice-btn').forEach((btn) => {
-      btn.onclick = () => this.handleClaim(btn, btn.textContent, current.claim);
-    });
+    this.renderChoices(grid, choices, (btn, choice) => this.handleClaim(btn, choice, current.claim));
   }
 
   handleClaim(btn, selected, correct) {
@@ -163,9 +160,21 @@ class ThesisThinker extends GameBase {
 
     document.getElementById('instruction-box').textContent = 'Now select the strongest rationale.';
     const grid = document.getElementById('options-grid');
-    grid.innerHTML = choices.map((choice, idx) => `<button class="choice-btn" data-idx="${idx}">${choice}</button>`).join('');
-    grid.querySelectorAll('.choice-btn').forEach((btn) => {
-      btn.onclick = () => this.handleRationale(btn, btn.textContent, current.rationale, current.feedback);
+    this.renderChoices(grid, choices, (btn, choice) => {
+      this.handleRationale(btn, choice, current.rationale, current.feedback);
+    });
+  }
+
+  renderChoices(grid, choices, onChoose) {
+    grid.replaceChildren();
+    choices.forEach((choice, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'choice-btn';
+      btn.dataset.idx = String(idx);
+      btn.textContent = String(choice);
+      btn.onclick = () => onChoose(btn, choice);
+      grid.appendChild(btn);
     });
   }
 

@@ -255,27 +255,44 @@ class NewsAnchorGame extends GameBase {
 
     const data = this.questionQueue.pop();
     this.currentData = data;
-    const text = data.headline.replace("____", "<span style='color:cyan'>[...]</span>");
-
-    document.getElementById('prompter-text').innerHTML = text;
+    this.renderHeadline(data.headline, '[...]', 'cyan');
 
     const optionsEl = document.getElementById('news-options');
     const shuffled = this.shuffleArray([...data.options]);
 
-    optionsEl.innerHTML = shuffled.map(opt => `
-           <button class="news-btn" data-word="${opt}">${opt}</button>
-        `).join('');
-
-    optionsEl.querySelectorAll('.news-btn').forEach(btn => {
+    optionsEl.replaceChildren();
+    shuffled.forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'news-btn';
+      btn.dataset.word = String(opt);
+      btn.textContent = String(opt);
       btn.onclick = () => this.checkAnswer(btn, btn.dataset.word, data);
+      optionsEl.appendChild(btn);
     });
+  }
+
+  renderHeadline(headline, replacement, color) {
+    const prompter = document.getElementById('prompter-text');
+    const text = String(headline);
+    const marker = '____';
+    const markerIndex = text.indexOf(marker);
+    prompter.replaceChildren();
+    if (markerIndex < 0) {
+      prompter.textContent = text;
+      return;
+    }
+    const answer = document.createElement('span');
+    answer.style.color = color;
+    answer.textContent = String(replacement);
+    prompter.append(document.createTextNode(text.slice(0, markerIndex)), answer, document.createTextNode(text.slice(markerIndex + marker.length)));
   }
 
   checkAnswer(btn, word, data) {
     if (word === data.correct) {
       this.score += 100;
       this.celebrateMove({ burst: word.toUpperCase(), duration: 700 });
-      document.getElementById('prompter-text').innerHTML = data.headline.replace("____", `<span style='color:#2ecc71'>${word.toUpperCase()}</span>`);
+      this.renderHeadline(data.headline, word.toUpperCase(), '#2ecc71');
 
       const optionsEl = document.getElementById('news-options');
       optionsEl.querySelectorAll('.news-btn').forEach(b => b.disabled = true);

@@ -96,9 +96,12 @@ class FastPhrasesGame extends GameBase {
 
   renderRound() {
     const wall = document.getElementById('brick-wall');
-    wall.innerHTML = this.selectedWords.map((word, index) => `<button class="brick" data-index="${index}">${word}</button>`).join('');
-    wall.querySelectorAll('.brick').forEach((brick) => {
+    wall.replaceChildren();
+    this.selectedWords.forEach((word, index) => {
+      const brick = this.createWordButton(word, 'brick');
+      brick.dataset.index = String(index);
       brick.onclick = () => this.removeBrick(Number(brick.dataset.index));
+      wall.appendChild(brick);
     });
 
     const words = this.currentSentence.sentence.split(' ').map((word, idx) => ({ word, idx })).sort(() => Math.random() - 0.5);
@@ -106,14 +109,24 @@ class FastPhrasesGame extends GameBase {
     this.selectedWords.forEach((word) => { usedCounts[word] = (usedCounts[word] || 0) + 1; });
 
     const supply = document.getElementById('supply-depot');
-    supply.innerHTML = words.map(({ word }, i) => {
+    supply.replaceChildren();
+    words.forEach(({ word }) => {
       const maxAvailable = this.currentSentence.sentence.split(' ').filter((w) => w === word).length;
       const used = (usedCounts[word] || 0) >= maxAvailable;
-      return `<button class="supply-item ${used ? 'used' : ''}" data-word="${word}">${word}</button>`;
-    }).join('');
-    supply.querySelectorAll('.supply-item:not(.used)').forEach((btn) => {
-      btn.onclick = () => this.placeBrick(btn.dataset.word);
+      const btn = this.createWordButton(word, `supply-item ${used ? 'used' : ''}`);
+      btn.dataset.word = String(word);
+      btn.disabled = used;
+      if (!used) btn.onclick = () => this.placeBrick(btn.dataset.word);
+      supply.appendChild(btn);
     });
+  }
+
+  createWordButton(word, className) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = className;
+    button.textContent = String(word);
+    return button;
   }
 
   placeBrick(word) {

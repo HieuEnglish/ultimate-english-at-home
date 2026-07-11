@@ -88,19 +88,36 @@ class SentenceShuffleGame extends GameBase {
 
   renderRound() {
     const answerZone = document.getElementById('answer-zone');
-    answerZone.innerHTML = this.selectedWords.map((word, idx) => `<button class="magnet-word placed" data-index="${idx}">${word}</button>`).join('');
-    answerZone.querySelectorAll('.magnet-word').forEach((mag) => { mag.onclick = () => this.removeFromAnswer(Number(mag.dataset.index)); });
+    answerZone.replaceChildren();
+    this.selectedWords.forEach((word, idx) => {
+      const mag = this.createWordButton(word, 'magnet-word placed');
+      mag.dataset.index = String(idx);
+      mag.onclick = () => this.removeFromAnswer(Number(mag.dataset.index));
+      answerZone.appendChild(mag);
+    });
 
     const pool = this.currentSentence.sentence.split(' ').sort(() => Math.random() - 0.5);
     const used = [...this.selectedWords];
     const scatter = document.getElementById('scatter-zone');
-    scatter.innerHTML = pool.map((word) => {
+    scatter.replaceChildren();
+    pool.forEach((word) => {
       const available = this.currentSentence.sentence.split(' ').filter((w) => w === word).length;
       const usedCount = used.filter((w) => w === word).length;
       const disabled = usedCount >= available;
-      return `<button class="magnet-word ${disabled ? 'placed' : ''}" data-word="${word}" ${disabled ? 'disabled' : ''}>${word}</button>`;
-    }).join('');
-    scatter.querySelectorAll('.magnet-word:not([disabled])').forEach((mag) => { mag.onclick = () => this.addToAnswer(mag.dataset.word); });
+      const mag = this.createWordButton(word, `magnet-word ${disabled ? 'placed' : ''}`);
+      mag.dataset.word = String(word);
+      mag.disabled = disabled;
+      if (!disabled) mag.onclick = () => this.addToAnswer(mag.dataset.word);
+      scatter.appendChild(mag);
+    });
+  }
+
+  createWordButton(word, className) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = className;
+    button.textContent = String(word);
+    return button;
   }
 
   addToAnswer(word) {
