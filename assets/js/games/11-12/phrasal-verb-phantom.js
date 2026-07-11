@@ -84,14 +84,22 @@ class PhrasalPhantom extends GameBase {
 
     const options = [q.correct, ...q.alts].sort(() => Math.random() - 0.5);
     const ghosts = document.getElementById('ghosts-container');
-    ghosts.innerHTML = options.map((word) => `
-      <button class="ghost-card" data-word="${word}">
-        <div class="ghost-emoji">👻</div>
-        <div class="ghost-word">${word}</div>
-      </button>
-    `).join('');
-    ghosts.querySelectorAll('.ghost-card').forEach((card) => {
+    ghosts.replaceChildren();
+    options.forEach((word) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'ghost-card';
+      card.dataset.word = String(word);
+      const emoji = document.createElement('div');
+      emoji.className = 'ghost-emoji';
+      emoji.textContent = '👻';
+      emoji.setAttribute('aria-hidden', 'true');
+      const label = document.createElement('div');
+      label.className = 'ghost-word';
+      label.textContent = String(word);
+      card.append(emoji, label);
       card.onclick = () => this.handleGhostClick(card, q.correct);
+      ghosts.appendChild(card);
     });
   }
 

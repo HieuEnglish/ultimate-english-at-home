@@ -94,15 +94,26 @@ class WordDetectiveGame extends GameBase {
     document.getElementById('helper-text').textContent = 'Pick the missing letter to solve the case.';
 
     const chars = this.currentCase.word.split('');
-    document.getElementById('word-puzzle').innerHTML = chars.map((char, idx) => {
-      if (idx === this.currentCase.missingIndex) return `<span class="letter missing" id="missing-slot">?</span>`;
-      return `<span class="letter">${char}</span>`;
-    }).join('');
+    const puzzle = document.getElementById('word-puzzle');
+    puzzle.replaceChildren();
+    chars.forEach((char, idx) => {
+      const letter = document.createElement('span');
+      letter.className = `letter ${idx === this.currentCase.missingIndex ? 'missing' : ''}`;
+      if (idx === this.currentCase.missingIndex) letter.id = 'missing-slot';
+      letter.textContent = idx === this.currentCase.missingIndex ? '?' : char;
+      puzzle.appendChild(letter);
+    });
 
     const row = document.getElementById('options-row');
-    row.innerHTML = this.options.map((opt) => `<button class="clue-option" data-char="${opt}">${opt}</button>`).join('');
-    row.querySelectorAll('.clue-option').forEach((opt) => {
+    row.replaceChildren();
+    this.options.forEach((value) => {
+      const opt = document.createElement('button');
+      opt.type = 'button';
+      opt.className = 'clue-option';
+      opt.dataset.char = String(value);
+      opt.textContent = String(value);
       opt.onclick = () => this.handlePick(opt);
+      row.appendChild(opt);
     });
 
     setTimeout(() => this.speakWord(), 450);

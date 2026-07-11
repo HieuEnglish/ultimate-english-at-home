@@ -203,12 +203,15 @@ class VocabVolcanoGame extends GameBase {
         const opts = [data.correct, ...data.options].sort(() => Math.random() - 0.5);
         const grid = document.getElementById('options-grid');
 
-        grid.innerHTML = opts.map(opt => `
-            <button class="option-btn" data-text="${opt}">${opt}</button>
-        `).join('');
-
-        grid.querySelectorAll('.option-btn').forEach(btn => {
+        grid.replaceChildren();
+        opts.forEach((opt) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'option-btn';
+            btn.dataset.text = String(opt);
+            btn.textContent = String(opt);
             btn.onclick = () => this.handleAnswer(btn, btn.dataset.text === data.correct);
+            grid.appendChild(btn);
         });
     }
 

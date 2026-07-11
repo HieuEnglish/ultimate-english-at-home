@@ -212,16 +212,21 @@ class EssayBuilderGame extends GameBase {
             ? this.userOrder.map(id => this.shuffledParagraphs.find(p => p.id === id))
             : this.shuffledParagraphs;
 
-        listEl.innerHTML = toRender.map((p, i) => `
-      <div class="paragraph-item ${this.userOrder.includes(p.id) ? 'selected' : ''}" data-id="${p.id}">
-        <span class="paragraph-number">${this.userOrder.indexOf(p.id) + 1 || '?'}</span>
-        <span class="paragraph-text">${p.text}</span>
-      </div>
-    `).join('');
-
-        // Click to reorder
-        listEl.querySelectorAll('.paragraph-item').forEach(item => {
+        listEl.replaceChildren();
+        toRender.forEach((paragraph) => {
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = `paragraph-item ${this.userOrder.includes(paragraph.id) ? 'selected' : ''}`;
+            item.dataset.id = String(paragraph.id);
+            const number = document.createElement('span');
+            number.className = 'paragraph-number';
+            number.textContent = String(this.userOrder.indexOf(paragraph.id) + 1 || '?');
+            const text = document.createElement('span');
+            text.className = 'paragraph-text';
+            text.textContent = String(paragraph.text);
+            item.append(number, text);
             item.addEventListener('click', () => this.toggleParagraph(parseInt(item.dataset.id)));
+            listEl.appendChild(item);
         });
 
         // Controls

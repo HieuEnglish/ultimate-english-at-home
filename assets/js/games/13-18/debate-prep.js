@@ -254,20 +254,19 @@ class DebatePrepGame extends GameBase {
     );
 
     // Render args as draggables
-    poolEl.innerHTML = uncategorized.map(a => `
-      <div class="argument-card" draggable="true" data-text="${a.text}">
-        <span class="drag-handle">::</span> ${a.text}
-      </div>
-    `).join('') || '<div class="empty-pool-msg">All sorted! Check answers.</div>';
+    poolEl.replaceChildren();
+    if (uncategorized.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-pool-msg';
+      empty.textContent = 'All sorted! Check answers.';
+      poolEl.appendChild(empty);
+    } else {
+      uncategorized.forEach((argument) => poolEl.appendChild(this.createArgumentCard(argument.text, false)));
+    }
 
     // Categorized (already sorted)
-    forEl.innerHTML = this.categorized.for.map(text => `
-      <div class="argument-card sorted" data-text="${text}">${text} <span class="undo-btn" onclick="game.undo('${text}', 'for')">↩</span></div>
-    `).join('') || '';
-
-    againstEl.innerHTML = this.categorized.against.map(text => `
-      <div class="argument-card sorted" data-text="${text}">${text} <span class="undo-btn" onclick="game.undo('${text}', 'against')">↩</span></div>
-    `).join('') || '';
+    forEl.replaceChildren(...this.categorized.for.map((text) => this.createArgumentCard(text, true)));
+    againstEl.replaceChildren(...this.categorized.against.map((text) => this.createArgumentCard(text, true)));
 
     // Setup Drag and Drop
     this.setupDragAndDrop();
@@ -331,6 +330,29 @@ class DebatePrepGame extends GameBase {
         }
       });
     });
+  }
+
+  createArgumentCard(text, sorted) {
+    const card = document.createElement('div');
+    card.className = `argument-card ${sorted ? 'sorted' : ''}`;
+    card.dataset.text = String(text);
+    card.draggable = !sorted;
+    if (!sorted) {
+      const handle = document.createElement('span');
+      handle.className = 'drag-handle';
+      handle.textContent = '::';
+      handle.setAttribute('aria-hidden', 'true');
+      card.append(handle, document.createTextNode(` ${text}`));
+    } else {
+      card.appendChild(document.createTextNode(`${text} `));
+      const undo = document.createElement('button');
+      undo.type = 'button';
+      undo.className = 'undo-btn';
+      undo.textContent = '↩';
+      undo.setAttribute('aria-label', `Undo ${text}`);
+      card.appendChild(undo);
+    }
+    return card;
   }
 
   playDropSound() {
