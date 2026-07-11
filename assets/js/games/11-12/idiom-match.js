@@ -88,6 +88,10 @@ class IdiomAlchemistGame extends GameBase {
       }
       
       .bottle {
+        appearance: none;
+        border: 0;
+        color: inherit;
+        font: inherit;
         width: 100px; height: 40px;
         border: 2px solid rgba(255,255,255,0.2);
         background: #34495e;
@@ -170,11 +174,11 @@ class IdiomAlchemistGame extends GameBase {
     let meanings = [...RECIPES].sort(() => Math.random() - 0.5);
 
     idiomShelf.innerHTML = idioms.map(r => `
-            <div class="bottle type-idiom" data-id="${r.idiom}" data-type="idiom">${r.idiom}</div>
+            <button type="button" class="bottle type-idiom" data-id="${r.idiom}" data-type="idiom">${r.idiom}</button>
         `).join('');
 
     meaningShelf.innerHTML = meanings.map(r => `
-            <div class="bottle type-meaning" data-id="${r.idiom}" data-type="meaning">${r.meaning}</div>
+            <button type="button" class="bottle type-meaning" data-id="${r.idiom}" data-type="meaning">${r.meaning}</button>
         `).join('');
 
     this.container.querySelectorAll('.bottle').forEach(b => {

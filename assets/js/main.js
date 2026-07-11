@@ -165,6 +165,18 @@ const ctx = {
 
 // Token used to discard outdated renders when navigation happens quickly
 let renderToken = 0;
+let activeViewCleanup = null;
+
+function cleanupActiveView() {
+  if (typeof activeViewCleanup !== 'function') return;
+  const cleanup = activeViewCleanup;
+  activeViewCleanup = null;
+  try {
+    cleanup();
+  } catch (err) {
+    console.error('Failed to clean up the previous view:', err);
+  }
+}
 
 /**
  * Shows a simple loading indicator while asynchronous views are fetched.
@@ -192,6 +204,7 @@ function loadingHtml() {
 async function render(appPath) {
   const token = ++renderToken;
   const normalizedPath = normalizeAppPath(appPath);
+  cleanupActiveView();
 
   // Highlight the active navigation link
   setActiveNav(normalizedPath, navLinks);
@@ -363,9 +376,14 @@ async function render(appPath) {
   // Call afterRender hook if provided
   if (viewResult.afterRender && typeof viewResult.afterRender === 'function') {
     try {
-      viewResult.afterRender();
-    } catch (_) {
-      // ignore errors in afterRender
+      const cleanup = await viewResult.afterRender();
+      if (token !== renderToken) {
+        if (typeof cleanup === 'function') cleanup();
+        return;
+      }
+      activeViewCleanup = typeof cleanup === 'function' ? cleanup : null;
+    } catch (err) {
+      console.error('Failed to initialise view:', err);
     }
   }
 

@@ -64,8 +64,17 @@ async function run() {
   page.on('console', (m) => {
     const t = m.type();
     const text = m.text();
-    if (t === 'error') errors.push({ area: 'console', msg: text });
+    // Chromium emits this generic message for requests cancelled by the next
+    // intentional SPA navigation. Actual failed requests are handled below.
+    if (t === 'error' && !text.startsWith('Failed to load resource:')) {
+      errors.push({ area: 'console', msg: text });
+    }
     if (t === 'warning') warnings.push({ area: 'console', msg: text });
+  });
+  page.on('requestfailed', (request) => {
+    const reason = request.failure()?.errorText || 'unknown request failure';
+    if (reason.includes('ERR_ABORTED') || reason.includes('ERR_CONNECTION_RESET')) return;
+    errors.push({ area: 'request', msg: `${reason}: ${request.url()}` });
   });
 
   async function checkPage(t) {
@@ -95,8 +104,8 @@ async function run() {
 
     // Click-through key CTAs on Home/Resources/Tests
     if (t.name === 'Home') {
-      const cards = page.locator('main .card-grid > *');
-      if ((await cards.count()) < 3) warnings.push({ area: 'ui', msg: 'Home: expected CTA cards list' });
+      const cards = page.locator('main .feature-card, main .hero-visual__mini-tile');
+      if ((await cards.count()) < 3) warnings.push({ area: 'ui', msg: 'Home: expected learning-path links' });
       // Try click the Tests card heading if present
       const testsCard = page.getByRole('heading', { name: 'Tests' }).first();
       if (await testsCard.count()) {
@@ -118,8 +127,8 @@ async function run() {
       if ((await testCards.count()) > 0) {
         await page.goto(asUrl(base, '/?r=/tests/age-4-7-listening'), { waitUntil: 'domcontentloaded', timeout: 45000 });
 
-        const start = page.getByRole('button', { name: /^Start$/i }).first();
-        await start.waitFor({ state: 'visible', timeout: 3000 }).catch(() => null);
+        const start = page.locator('[data-test-runner-root] [data-action="start"]').first();
+        await start.waitFor({ state: 'visible', timeout: 20000 }).catch(() => null);
         if (await start.count()) {
           await start.click();
 

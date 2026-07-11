@@ -2,6 +2,10 @@
   "name": "ueah-qa",
   "private": true,
   "type": "commonjs",
+  "scripts": {
+    "test:smoke": "node weekly.js",
+    "test:games": "node games.js"
+  },
   "dependencies": {
     "playwright": "^1.41.2"
   }

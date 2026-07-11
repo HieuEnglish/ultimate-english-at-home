@@ -140,6 +140,12 @@ class MemoryMatchGame extends GameBase {
       }
       
       .memory-card {
+        appearance: none;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
         aspect-ratio: 1;
         position: relative;
         cursor: pointer;
@@ -268,10 +274,10 @@ class MemoryMatchGame extends GameBase {
     renderCards() {
         const grid = document.getElementById('card-grid');
         grid.innerHTML = this.cards.map(card => `
-      <div class="memory-card" data-id="${card.id}" data-pair="${card.pairId}">
+      <button type="button" class="memory-card" data-id="${card.id}" data-pair="${card.pairId}" aria-label="Hidden matching card">
         <div class="card-face card-back"></div>
         <div class="card-face card-front ${card.type}-card">${card.value}</div>
-      </div>
+      </button>
     `).join('');
 
         grid.querySelectorAll('.memory-card').forEach(card => {

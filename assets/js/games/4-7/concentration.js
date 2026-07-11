@@ -86,6 +86,12 @@ class ConcentrationGame extends GameBase {
         margin: 0 auto;
       }
       .memory-card {
+        appearance: none;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
         aspect-ratio: 1;
         perspective: 1000px;
         cursor: pointer;
@@ -189,7 +195,7 @@ class ConcentrationGame extends GameBase {
   renderGrid() {
     const gridEl = document.getElementById('memory-grid');
     gridEl.innerHTML = this.cards.map((card, i) => `
-      <div class="memory-card" data-index="${i}" data-pair-id="${card.pairId}">
+      <button type="button" class="memory-card" data-index="${i}" data-pair-id="${card.pairId}" aria-label="Hidden matching card ${i + 1}">
         <div class="card-inner">
           <div class="card-front">❓</div>
           <div class="card-back">
@@ -199,7 +205,7 @@ class ConcentrationGame extends GameBase {
       }
           </div>
         </div>
-      </div>
+      </button>
     `).join('');
 
     gridEl.querySelectorAll('.memory-card').forEach(card => {

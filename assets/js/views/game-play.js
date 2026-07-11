@@ -316,8 +316,28 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
   if (!container || !startBtn || !refreshBtn || !statusPill || !statusDetail) return;
 
   let gameInstance = null;
+  let disposed = false;
+  const listeners = new AbortController();
+
+  const cleanup = () => {
+    if (disposed) return;
+    disposed = true;
+    listeners.abort();
+    try {
+      if (gameInstance && typeof gameInstance.cleanup === "function") gameInstance.cleanup();
+    } catch (err) {
+      console.error("Failed to clean up game:", err);
+    }
+    gameInstance = null;
+    try {
+      window.speechSynthesis?.cancel();
+    } catch (_) {
+      // Speech synthesis is optional.
+    }
+  };
 
   const setStatus = (label, detail, kind = "ready") => {
+    if (disposed) return;
     statusPill.textContent = label;
     statusPill.dataset.kind = kind;
     statusDetail.textContent = detail;
@@ -339,7 +359,7 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
   };
 
   const launchGame = () => {
-    if (!gameInstance || gameInstance.isRunning) return;
+    if (disposed || !gameInstance || gameInstance.isRunning) return;
 
     const inlineStart = getInlineStartButton();
     setStatus(
@@ -362,6 +382,8 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
     const modulePath = `${basePath}/assets/js/games/${age}/${slug}.js`;
     const module = await import(modulePath);
 
+    if (disposed) return;
+
     container.innerHTML = "";
 
     if (!module.createGame) {
@@ -375,6 +397,12 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
       skill,
     });
     await gameInstance.init();
+
+    if (disposed) {
+      if (gameInstance && typeof gameInstance.cleanup === "function") gameInstance.cleanup();
+      gameInstance = null;
+      return;
+    }
 
     refreshBtn.disabled = false;
     syncLaunchLabel();
@@ -419,17 +447,17 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
     const detail = event.detail || {};
     if (!detail.label || !detail.message) return;
     setStatus(detail.label, detail.message, detail.kind || "ready");
-  });
+  }, { signal: listeners.signal });
 
   try {
     await loadGame();
 
-    startBtn.addEventListener("click", launchGame);
+    startBtn.addEventListener("click", launchGame, { signal: listeners.signal });
     refreshBtn.addEventListener("click", () => {
       resetStage(false).catch((err) => {
         console.error("Failed to refresh game:", err);
       });
-    });
+    }, { signal: listeners.signal });
 
     container.addEventListener("click", (event) => {
       const action = event.target.closest("[data-action]")?.dataset.action;
@@ -441,7 +469,7 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
       } else if (action === "back") {
         window.history.back();
       }
-    });
+    }, { signal: listeners.signal });
   } catch (err) {
     console.error("Failed to load game:", err);
     container.innerHTML = `
@@ -459,4 +487,6 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
       "error"
     );
   }
+
+  return cleanup;
 }

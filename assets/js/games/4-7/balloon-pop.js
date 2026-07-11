@@ -209,6 +209,12 @@ class BalloonPopGame extends GameBase {
       }
       
       .balloon {
+        appearance: none;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
         position: absolute;
         display: flex;
         flex-direction: column;
@@ -330,15 +336,17 @@ class BalloonPopGame extends GameBase {
         const duration = 4 + Math.random() * 3;
         const id = this.balloonId++;
 
-        const balloon = document.createElement('div');
+        const balloon = document.createElement('button');
+        balloon.type = 'button';
         balloon.className = 'balloon';
         balloon.dataset.id = id;
         balloon.dataset.letter = letter;
+        balloon.setAttribute('aria-label', `Balloon ${letter}`);
         balloon.style.left = `${left}%`;
         balloon.style.animationDuration = `${duration}s`;
         balloon.innerHTML = `
-      <div class="balloon-body" style="background: ${color}">${letter}</div>
-      <div class="balloon-string"></div>
+      <span class="balloon-body" style="background: ${color}">${letter}</span>
+      <span class="balloon-string"></span>
     `;
 
         balloon.addEventListener('click', () => this.popBalloon(balloon, letter));
