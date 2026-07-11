@@ -85,9 +85,15 @@ class ContextClues extends GameBase {
     document.getElementById('hint-btn').disabled = false;
 
     const container = document.getElementById('options-container');
-    container.innerHTML = [...q.options].sort(() => Math.random() - 0.5).map((opt) => `<button class="opt-btn" data-opt="${opt}">${opt}</button>`).join('');
-    container.querySelectorAll('.opt-btn').forEach((btn) => {
+    container.replaceChildren();
+    [...q.options].sort(() => Math.random() - 0.5).forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'opt-btn';
+      btn.dataset.opt = String(opt);
+      btn.textContent = String(opt);
       btn.onclick = () => this.checkAnswer(btn, btn.dataset.opt, q.correct);
+      container.appendChild(btn);
     });
   }
 

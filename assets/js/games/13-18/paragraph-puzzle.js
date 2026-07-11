@@ -129,29 +129,35 @@ class ParagraphPuzzle extends GameBase {
   renderChallenge() {
     const q = this.rounds[this.currentQ];
     const build = document.getElementById('build-list');
-    build.innerHTML = this.selected.map((item, idx) => `
-      <button class="sentence-btn placed" data-build-index="${idx}">
-        <div class="role-tag">Placed ${idx + 1}</div>
-        ${item.text}
-      </button>
-    `).join('');
-    build.querySelectorAll('.sentence-btn').forEach((btn) => {
+    build.replaceChildren();
+    this.selected.forEach((item, idx) => {
+      const btn = this.createSentenceButton(`Placed ${idx + 1}`, item.text, 'sentence-btn placed');
+      btn.dataset.buildIndex = String(idx);
       btn.onclick = () => this.removeSelected(Number(btn.dataset.buildIndex));
+      build.appendChild(btn);
     });
 
     const bank = document.getElementById('sentence-bank');
-    bank.innerHTML = q.sentences.map((s, idx) => {
+    bank.replaceChildren();
+    q.sentences.forEach((s, idx) => {
       const used = this.selected.some((item) => item.order === s.order && item.text === s.text);
-      return `
-        <button class="sentence-btn ${used ? 'used' : ''}" data-bank-index="${idx}" ${used ? 'disabled' : ''}>
-          <div class="role-tag">${s.role}</div>
-          ${s.text}
-        </button>
-      `;
-    }).join('');
-    bank.querySelectorAll('.sentence-btn:not([disabled])').forEach((btn) => {
-      btn.onclick = () => this.addSelected(Number(btn.dataset.bankIndex));
+      const btn = this.createSentenceButton(s.role, s.text, `sentence-btn ${used ? 'used' : ''}`);
+      btn.dataset.bankIndex = String(idx);
+      btn.disabled = used;
+      if (!used) btn.onclick = () => this.addSelected(Number(btn.dataset.bankIndex));
+      bank.appendChild(btn);
     });
+  }
+
+  createSentenceButton(role, text, className) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = className;
+    const tag = document.createElement('div');
+    tag.className = 'role-tag';
+    tag.textContent = String(role);
+    btn.append(tag, document.createTextNode(String(text)));
+    return btn;
   }
 
   addSelected(idx) {

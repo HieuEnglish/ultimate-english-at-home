@@ -145,21 +145,34 @@ class ContextCluesGame extends GameBase {
     if (availableData.length === 0) availableData = CONTEXT_CLUES_DATA;
     this.currentData = availableData[Math.floor(Math.random() * availableData.length)];
 
-    const paragraph = this.currentData.paragraph.replace(
-      this.currentData.underlined,
-      `<span class="clue-word" id="clue-target">${this.currentData.underlined}</span>`
-    );
-    document.getElementById('passage-text').innerHTML = paragraph;
+    const passage = document.getElementById('passage-text');
+    const paragraph = String(this.currentData.paragraph);
+    const target = String(this.currentData.underlined);
+    const targetIndex = paragraph.indexOf(target);
+    passage.replaceChildren();
+    if (targetIndex < 0) {
+      passage.textContent = paragraph;
+    } else {
+      passage.append(document.createTextNode(paragraph.slice(0, targetIndex)));
+      const clueWord = document.createElement('span');
+      clueWord.className = 'clue-word';
+      clueWord.id = 'clue-target';
+      clueWord.textContent = target;
+      passage.append(clueWord, document.createTextNode(paragraph.slice(targetIndex + target.length)));
+    }
     document.getElementById('helper-text').textContent = 'Tap the correct meaning of the underlined word.';
 
     const options = [...this.currentData.options].sort(() => Math.random() - 0.5);
     const grid = document.getElementById('options-grid');
-    grid.innerHTML = options.map((opt) => `
-      <button class="option-btn" data-meaning="${opt}">${opt}</button>
-    `).join('');
-
-    grid.querySelectorAll('.option-btn').forEach((btn) => {
+    grid.replaceChildren();
+    options.forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.dataset.meaning = String(opt);
+      btn.textContent = String(opt);
       btn.onclick = () => this.selectOption(btn);
+      grid.appendChild(btn);
     });
   }
 

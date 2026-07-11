@@ -4,7 +4,9 @@
   "type": "commonjs",
   "scripts": {
     "test:smoke": "node weekly.js",
-    "test:games": "node games.js"
+    "test:games": "node games.js",
+    "test:tests": "node tests.js",
+    "test:banks": "node ../validate-banks.js"
   },
   "dependencies": {
     "playwright": "^1.41.2"

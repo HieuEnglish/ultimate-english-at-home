@@ -26,6 +26,14 @@ class WordSearchGame extends GameBase {
         this.selection = [];
         this.isSelecting = false;
         this.startCell = null;
+        this.keyboardStart = null;
+        this.handleMouseDown = (event) => this.handleStart(event);
+        this.handleMouseMove = (event) => this.handleMove(event);
+        this.handleMouseUp = () => this.handleEnd();
+        this.handleTouchStart = (event) => this.handleStart(event);
+        this.handleTouchMove = (event) => this.handleMove(event);
+        this.handleTouchEnd = () => this.handleEnd();
+        this.handleKeyDown = (event) => this.handleGridKeyDown(event);
     }
 
     async init() {
@@ -40,7 +48,8 @@ class WordSearchGame extends GameBase {
         <div class="chalkboard-area">
           <!-- The Letters Grid -->
           <div class="grid-frame">
-            <div class="grid-container" id="grid-container"></div>
+            <p class="sr-only" id="word-search-help">Use arrow keys to move. Press Enter or Space on the first and last letter of a word.</p>
+            <div class="grid-container" id="grid-container" role="grid" aria-label="Word search letters" aria-describedby="word-search-help"></div>
             <div class="selection-line" id="selection-line"></div>
           </div>
           
@@ -113,6 +122,12 @@ class WordSearchGame extends GameBase {
       }
       
       .grid-cell {
+        appearance: none;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
         width: 40px; height: 40px;
         display: flex; align-items: center; justify-content: center;
         font-size: 22px;
@@ -123,6 +138,7 @@ class WordSearchGame extends GameBase {
         position: relative;
       }
       .grid-cell:hover { background: rgba(255,255,255,0.1); }
+      .grid-cell:focus-visible { outline: 3px solid #74b9ff; outline-offset: 1px; }
       .grid-cell.selected { background: rgba(255, 234, 167, 0.3); color: #ffeaa7; }
       .grid-cell.found { background: #55efc4; color: #2d3436; font-weight: bold; border-radius: 50%; box-shadow: 0 0 10px #55efc4; }
 
@@ -236,7 +252,7 @@ class WordSearchGame extends GameBase {
         const gridEl = document.getElementById('grid-container');
         gridEl.innerHTML = this.grid.map((row, r) =>
             row.map((letter, c) => `
-                <div class="grid-cell" data-r="${r}" data-c="${c}">${letter}</div>
+                <button type="button" class="grid-cell" role="gridcell" data-r="${r}" data-c="${c}" aria-label="Row ${r + 1}, column ${c + 1}: ${letter}">${letter}</button>
             `).join('')
         ).join('');
 
@@ -244,13 +260,53 @@ class WordSearchGame extends GameBase {
         listEl.innerHTML = this.words.map(w => `<div class="word-item" data-word="${w}">${w}</div>`).join('');
 
         // Interaction
-        this.container.addEventListener('mousedown', (e) => this.handleStart(e));
-        this.container.addEventListener('mousemove', (e) => this.handleMove(e));
-        this.container.addEventListener('mouseup', () => this.handleEnd());
+        this.container.addEventListener('mousedown', this.handleMouseDown);
+        this.container.addEventListener('mousemove', this.handleMouseMove);
+        this.container.addEventListener('mouseup', this.handleMouseUp);
         // Touch support
-        this.container.addEventListener('touchstart', (e) => this.handleStart(e));
-        this.container.addEventListener('touchmove', (e) => this.handleMove(e));
-        this.container.addEventListener('touchend', () => this.handleEnd());
+        this.container.addEventListener('touchstart', this.handleTouchStart);
+        this.container.addEventListener('touchmove', this.handleTouchMove);
+        this.container.addEventListener('touchend', this.handleTouchEnd);
+        this.container.addEventListener('keydown', this.handleKeyDown);
+    }
+
+    handleGridKeyDown(event) {
+        const cellEl = event.target.closest('.grid-cell');
+        if (!cellEl) return;
+        const r = Number(cellEl.dataset.r);
+        const c = Number(cellEl.dataset.c);
+        const moves = {
+            ArrowUp: [-1, 0],
+            ArrowDown: [1, 0],
+            ArrowLeft: [0, -1],
+            ArrowRight: [0, 1],
+        };
+
+        if (moves[event.key]) {
+            event.preventDefault();
+            const [dr, dc] = moves[event.key];
+            const nextR = Math.max(0, Math.min(this.gridSize - 1, r + dr));
+            const nextC = Math.max(0, Math.min(this.gridSize - 1, c + dc));
+            this.container.querySelector(`.grid-cell[data-r="${nextR}"][data-c="${nextC}"]`)?.focus();
+            return;
+        }
+
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        const cell = { r, c, el: cellEl };
+        if (!this.keyboardStart) {
+            this.keyboardStart = cell;
+            this.startCell = cell;
+            this.isSelecting = true;
+            this.updateSelection(cell);
+            cellEl.setAttribute('aria-pressed', 'true');
+            return;
+        }
+
+        this.updateSelection(cell);
+        this.handleEnd();
+        this.keyboardStart.el?.removeAttribute('aria-pressed');
+        this.keyboardStart = null;
     }
 
     getCellFromEvent(e) {
@@ -360,6 +416,17 @@ class WordSearchGame extends GameBase {
 
     end() {
         this.showResults(this.saveScore());
+    }
+
+    cleanup() {
+        this.container.removeEventListener('mousedown', this.handleMouseDown);
+        this.container.removeEventListener('mousemove', this.handleMouseMove);
+        this.container.removeEventListener('mouseup', this.handleMouseUp);
+        this.container.removeEventListener('touchstart', this.handleTouchStart);
+        this.container.removeEventListener('touchmove', this.handleTouchMove);
+        this.container.removeEventListener('touchend', this.handleTouchEnd);
+        this.container.removeEventListener('keydown', this.handleKeyDown);
+        super.cleanup?.();
     }
 }
 

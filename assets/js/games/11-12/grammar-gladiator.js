@@ -164,12 +164,15 @@ class GrammarGladiatorGame extends GameBase {
 
         // Generate grid
         const grid = document.getElementById('options-grid');
-        grid.innerHTML = data.options.sort(() => Math.random() - 0.5).map(opt => `
-            <button class="arena-btn" data-word="${opt}">${opt}</button>
-        `).join('');
-
-        grid.querySelectorAll('.arena-btn').forEach(btn => {
+        grid.replaceChildren();
+        [...data.options].sort(() => Math.random() - 0.5).forEach((opt) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'arena-btn';
+            btn.dataset.word = String(opt);
+            btn.textContent = String(opt);
             btn.onclick = () => this.handleAttack(btn);
+            grid.appendChild(btn);
         });
     }
 

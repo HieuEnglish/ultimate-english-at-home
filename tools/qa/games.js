@@ -82,6 +82,37 @@ async function run() {
         await page.waitForTimeout(1000);
         result.controls = await page.locator('#game-container button, #game-container input, #game-container textarea, #game-container canvas, #game-container iframe, #game-container .grid-cell').count();
       }
+      if (game.slug === 'word-search') {
+        const endpoints = await page.evaluate(() => {
+          const size = 9;
+          const cells = Array.from(document.querySelectorAll('.grid-cell'));
+          const grid = Array.from({ length: size }, () => Array(size).fill(''));
+          cells.forEach((cell) => { grid[Number(cell.dataset.r)][Number(cell.dataset.c)] = cell.textContent.trim(); });
+          const words = Array.from(document.querySelectorAll('.word-item')).map((item) => item.textContent.trim());
+          const directions = [[0, 1], [1, 0], [1, 1], [-1, 1]];
+          for (const word of words) {
+            for (let r = 0; r < size; r += 1) for (let c = 0; c < size; c += 1) for (const [dr, dc] of directions) {
+              const endR = r + (word.length - 1) * dr;
+              const endC = c + (word.length - 1) * dc;
+              if (endR < 0 || endR >= size || endC < 0 || endC >= size) continue;
+              let candidate = '';
+              for (let i = 0; i < word.length; i += 1) candidate += grid[r + i * dr][c + i * dc];
+              if (candidate === word) return { word, r, c, endR, endC };
+            }
+          }
+          return null;
+        });
+        if (!endpoints) {
+          errors.push('keyboard: could not locate a placed word');
+        } else {
+          await page.locator(`.grid-cell[data-r="${endpoints.r}"][data-c="${endpoints.c}"]`).focus();
+          await page.keyboard.press('Enter');
+          await page.locator(`.grid-cell[data-r="${endpoints.endR}"][data-c="${endpoints.endC}"]`).focus();
+          await page.keyboard.press('Enter');
+          result.keyboardFound = await page.locator(`.word-item[data-word="${endpoints.word}"].found`).count() > 0;
+          if (!result.keyboardFound) errors.push('keyboard: selecting a word did not mark it found');
+        }
+      }
       result.ok = !result.loadError && errors.length === 0 && result.controls > 0;
     } catch (error) {
       errors.push(`fatal: ${error.message}`);
