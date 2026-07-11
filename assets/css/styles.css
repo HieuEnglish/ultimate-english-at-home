@@ -1891,7 +1891,7 @@ textarea[aria-invalid="true"] {
   --ueah-border: #2E2B50;
   --ueah-text: #FFFFFF;
   --ueah-body: #C4C2D8;
-  --ueah-muted: #7B78A8;
+  --ueah-muted: #AAA7C8;
   --ueah-indigo: #6C63FF;
   --ueah-indigo-hover: #8278FF;
   color: var(--ueah-body);
@@ -1911,6 +1911,10 @@ body:has(.test-detail-page) {
   color: var(--ueah-muted);
   font-size: 13px;
   font-weight: 500;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #0F0E1A;
 }
 
 .test-detail-page .breadcrumbs li {
@@ -2593,7 +2597,8 @@ progress::-moz-progress-bar {
   margin-top: auto;
   padding: 30px 0;
   border-top: 1px solid var(--border);
-  color: var(--muted);
+  color: #b8b9d1;
+  background: #07071a;
 }
 
 .footer-inner {

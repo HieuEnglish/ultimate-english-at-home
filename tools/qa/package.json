@@ -6,9 +6,13 @@
     "test:smoke": "node weekly.js",
     "test:games": "node games.js",
     "test:tests": "node tests.js",
-    "test:banks": "node ../validate-banks.js"
+    "test:banks": "node ../validate-banks.js",
+    "test:a11y": "node accessibility.js"
   },
   "dependencies": {
     "playwright": "^1.41.2"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1"
   }
 }

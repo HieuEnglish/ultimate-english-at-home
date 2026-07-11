@@ -1489,10 +1489,10 @@ body::after {
   color: var(--text-muted);
 }
 
-.footer-left { color: var(--text-muted); }
+.footer-left { color: #b8b9d1; }
 
 .footer-right a {
-  color: var(--text-muted);
+  color: #b8b9d1;
   text-decoration: none;
   transition: color var(--transition);
 }
@@ -1905,7 +1905,7 @@ body {
   border: 1px solid rgba(124, 92, 252, 0.32);
   font-size: clamp(0.95rem, 1.2vw, 1.12rem);
   font-weight: 800;
-  color: var(--accent-purple);
+  color: #a58dff;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
@@ -1998,7 +1998,7 @@ body {
 .landing-home .cta-note {
   margin-top: 0.9rem;
   font-size: 0.84rem;
-  color: var(--text-muted);
+  color: #b8b9d1;
 }
 
 .landing-home .hero-pills {
@@ -3039,7 +3039,7 @@ body {
   border-radius: 999px;
   background: rgba(124, 92, 252, 0.12);
   border: 1px solid rgba(124, 92, 252, 0.26);
-  color: var(--accent-purple);
+  color: #a58dff;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.05em;

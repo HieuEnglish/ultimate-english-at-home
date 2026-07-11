@@ -49,7 +49,7 @@ class WordSearchGame extends GameBase {
           <!-- The Letters Grid -->
           <div class="grid-frame">
             <p class="sr-only" id="word-search-help">Use arrow keys to move. Press Enter or Space on the first and last letter of a word.</p>
-            <div class="grid-container" id="grid-container" role="grid" aria-label="Word search letters" aria-describedby="word-search-help"></div>
+            <div class="grid-container" id="grid-container" aria-label="Word search letters" aria-describedby="word-search-help"></div>
             <div class="selection-line" id="selection-line"></div>
           </div>
           
@@ -252,7 +252,7 @@ class WordSearchGame extends GameBase {
         const gridEl = document.getElementById('grid-container');
         gridEl.innerHTML = this.grid.map((row, r) =>
             row.map((letter, c) => `
-                <button type="button" class="grid-cell" role="gridcell" data-r="${r}" data-c="${c}" aria-label="Row ${r + 1}, column ${c + 1}: ${letter}">${letter}</button>
+                <button type="button" class="grid-cell" data-r="${r}" data-c="${c}" aria-label="Row ${r + 1}, column ${c + 1}: ${letter}">${letter}</button>
             `).join('')
         ).join('');
 

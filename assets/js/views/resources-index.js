@@ -68,7 +68,7 @@ export function getView(ctx) {
     const browseLabel = key === 'ielts' ? 'Open IELTS path' : `Explore ages ${age}`;
 
     return `
-      <a class="resource-age-card ueah-hover-lift" href="${hrefFor(`/resources/${age}`)}" data-nav data-glow="${meta.glow}" aria-label="${browseLabel}" data-ueah-animate="reveal">
+      <a class="resource-age-card ueah-hover-lift" href="${hrefFor(`/resources/${age}`)}" data-nav data-glow="${meta.glow}" role="listitem" aria-label="${browseLabel}" data-ueah-animate="reveal">
         <div class="resource-age-card__art" data-glow="${meta.glow}">
           <div class="resource-age-card__emoji" aria-hidden="true">${meta.emoji}</div>
           <div class="resource-age-card__orb resource-age-card__orb--one"></div>
