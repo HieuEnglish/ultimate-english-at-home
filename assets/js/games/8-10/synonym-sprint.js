@@ -91,9 +91,15 @@ class SynonymSprintGame extends GameBase {
     const options = [correct, ...wrongs].sort(() => Math.random() - 0.5);
 
     const dock = document.getElementById('options-dock');
-    dock.innerHTML = options.map((word) => `<button class="sprint-btn" data-word="${word}">${word}</button>`).join('');
-    dock.querySelectorAll('.sprint-btn').forEach((btn) => {
+    dock.replaceChildren();
+    options.forEach((word) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'sprint-btn';
+      btn.dataset.word = String(word);
+      btn.textContent = String(word);
       btn.onclick = () => this.pickOption(btn, btn.dataset.word === correct);
+      dock.appendChild(btn);
     });
   }
 

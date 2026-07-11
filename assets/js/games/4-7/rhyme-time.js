@@ -103,9 +103,15 @@ class RhymeTimeGame extends GameBase {
     document.getElementById('helper-text').textContent = 'Listen for matching ending sounds.';
 
     const grid = document.getElementById('options-grid');
-    grid.innerHTML = this.options.map((word) => `<button class="rhyme-option" data-word="${word}">${word}</button>`).join('');
-    grid.querySelectorAll('.rhyme-option').forEach((btn) => {
+    grid.replaceChildren();
+    this.options.forEach((word) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rhyme-option';
+      btn.dataset.word = String(word);
+      btn.textContent = String(word);
       btn.onclick = () => this.handlePick(btn);
+      grid.appendChild(btn);
     });
 
     setTimeout(() => this.speakInstruction(), 500);

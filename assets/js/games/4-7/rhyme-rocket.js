@@ -101,9 +101,15 @@ class RhymeRocketGame extends GameBase {
 
     const optionsEl = document.getElementById('options-grid');
     const options = [...this.currentSet.options].sort(() => Math.random() - 0.5);
-    optionsEl.innerHTML = options.map((opt) => `<button class="option-btn" data-word="${opt}">${opt}</button>`).join('');
-    optionsEl.querySelectorAll('.option-btn').forEach((btn) => {
+    optionsEl.replaceChildren();
+    options.forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.dataset.word = String(opt);
+      btn.textContent = String(opt);
       btn.onclick = () => this.checkAnswer(btn, btn.dataset.word);
+      optionsEl.appendChild(btn);
     });
 
     this.speak(`Which word rhymes with ${this.currentSet.target}?`, { rate: 0.9 });

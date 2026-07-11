@@ -85,14 +85,18 @@ class AntonymArcherGame extends GameBase {
 
     const options = [this.currentData.antonym, ...this.currentData.distractors].sort(() => Math.random() - 0.5);
     const grid = document.getElementById('targets-grid');
-    grid.innerHTML = options.map((word) => `
-      <button class="target-btn" data-word="${word}">
-        <div class="target-word">${word}</div>
-      </button>
-    `).join('');
-
-    grid.querySelectorAll('.target-btn').forEach((btn) => {
+    grid.replaceChildren();
+    options.forEach((word) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'target-btn';
+      btn.dataset.word = String(word);
+      const label = document.createElement('div');
+      label.className = 'target-word';
+      label.textContent = String(word);
+      btn.appendChild(label);
       btn.onclick = () => this.selectTarget(btn);
+      grid.appendChild(btn);
     });
   }
 

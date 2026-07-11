@@ -95,9 +95,15 @@ class SentenceSurgeonGame extends GameBase {
 
     const tray = document.getElementById('tools-tray');
     const opts = [...this.currentPatient.options].sort(() => Math.random() - 0.5);
-    tray.innerHTML = opts.map((opt) => `<button class="tool-btn" data-val="${opt}">${opt}</button>`).join('');
-    tray.querySelectorAll('.tool-btn').forEach((btn) => {
+    tray.replaceChildren();
+    opts.forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tool-btn';
+      btn.dataset.val = String(opt);
+      btn.textContent = String(opt);
       btn.onclick = () => this.handleFix(btn);
+      tray.appendChild(btn);
     });
   }
 
