@@ -403,6 +403,36 @@
             description: "Fly the imported Tiny Skies open world, collect IELTS question markers, and gain or lose points.",
             hasTimer: false,
         },
+        {
+            slug: "ielts-invaders",
+            title: "IELTS Invaders",
+            emoji: "🚀",
+            age: "featured",
+            skill: "comprehensive",
+            difficulty: 5,
+            description: "Defend your band score and answer IELTS questions to unlock rapid fire and shields.",
+            hasTimer: true,
+        },
+        {
+            slug: "ielts-snake",
+            title: "Band Score Snake",
+            emoji: "🐍",
+            age: "featured",
+            skill: "comprehensive",
+            difficulty: 5,
+            description: "Collect vocabulary, avoid mistakes, and earn slow-time power-ups with IELTS questions.",
+            hasTimer: true,
+        },
+        {
+            slug: "ielts-breakout",
+            title: "IELTS Breakout",
+            emoji: "🧱",
+            age: "featured",
+            skill: "comprehensive",
+            difficulty: 5,
+            description: "Break academic word blocks and answer IELTS questions to activate a wider paddle and multiball.",
+            hasTimer: true,
+        },
     ];
 
     // Get all games for an age group

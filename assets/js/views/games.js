@@ -49,16 +49,28 @@ export function getView(ctx) {
     `;
   }).join('');
 
+  const ieltsGames = [
+    { slug: 'ielts-runner', icon: '✈️', title: 'IELTS Sky Quest', tag: 'Open world', desc: 'Explore the skies and collect IELTS challenges.' },
+    { slug: 'ielts-invaders', icon: '🚀', title: 'IELTS Invaders', tag: 'Arcade shooter', desc: 'Answer accurately to charge shields and rapid fire.' },
+    { slug: 'ielts-snake', icon: '🐍', title: 'Band Score Snake', tag: 'Classic snake', desc: 'Collect academic words and unlock slow time.' },
+    { slug: 'ielts-breakout', icon: '🧱', title: 'IELTS Breakout', tag: 'Brick breaker', desc: 'Win multiball and smash through vocabulary blocks.' },
+  ];
   const featuredCard = `
-    <a class="games-featured-banner" href="${hrefFor('/games/featured/comprehensive/ielts-runner')}" data-nav role="listitem">
-      <div class="games-featured-banner__scroll"></div>
-      <div class="games-featured-banner__content">
-        <h2 class="games-featured-banner__title">IELTS Sky Quest</h2>
-        <p class="games-featured-banner__desc">Fly through Tiny Skies and collect IELTS question markers for points.</p>
-        <span class="games-featured-banner__cta">Play Now</span>
+    <section class="ielts-arcade" aria-labelledby="ielts-arcade-title">
+      <div class="ielts-arcade__heading">
+        <div><span class="resources-hero__label">IELTS level</span><h2 id="ielts-arcade-title">IELTS Arcade</h2></div>
+        <p>Classic hits. Academic English power-ups.</p>
       </div>
-    </a>
-  `;
+      <div class="ielts-arcade__grid" role="list">
+        ${ieltsGames.map((item) => `
+          <a class="ielts-arcade-card" href="${hrefFor(`/games/featured/comprehensive/${item.slug}`)}" data-nav role="listitem">
+            <span class="ielts-arcade-card__icon" aria-hidden="true">${item.icon}</span>
+            <span class="ielts-arcade-card__tag">${item.tag}</span>
+            <strong>${item.title}</strong><span>${item.desc}</span>
+            <em>Play now →</em>
+          </a>`).join('')}
+      </div>
+    </section>`;
 
   const stats = buildStats();
   const statsHtml = stats

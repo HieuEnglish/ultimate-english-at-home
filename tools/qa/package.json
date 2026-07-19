@@ -5,6 +5,7 @@
   "scripts": {
     "test:smoke": "node weekly.js",
     "test:games": "node games.js",
+    "test:sky-quest": "node sky-quest.js",
     "test:tests": "node tests.js",
     "test:banks": "node ../validate-banks.js",
     "test:a11y": "node accessibility.js"

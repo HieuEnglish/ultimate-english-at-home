@@ -44,7 +44,9 @@ async function run() {
   const indexPage = await context.newPage();
   await indexPage.goto(new URL('?r=%2Fgames', base).toString(), { waitUntil: 'domcontentloaded' });
   await indexPage.waitForFunction(() => Boolean(window.UEAH_GAMES_STORE?.getAllGames));
-  const games = await indexPage.evaluate(() => window.UEAH_GAMES_STORE.getAllGames());
+  let games = await indexPage.evaluate(() => window.UEAH_GAMES_STORE.getAllGames());
+  const requestedSlugs = (arg('--slugs') || '').split(',').map((slug) => slug.trim()).filter(Boolean);
+  if (requestedSlugs.length) games = games.filter((game) => requestedSlugs.includes(game.slug));
   await indexPage.close();
 
   const results = [];
@@ -112,6 +114,20 @@ async function run() {
           result.keyboardFound = await page.locator(`.word-item[data-word="${endpoints.word}"].found`).count() > 0;
           if (!result.keyboardFound) errors.push('keyboard: selecting a word did not mark it found');
         }
+      }
+      if (['ielts-invaders', 'ielts-snake', 'ielts-breakout'].includes(game.slug)) {
+        const quiz = page.locator('.ia-quiz:not([hidden])');
+        await quiz.waitFor({ state: 'visible', timeout: 3000 });
+        result.ieltsAnswers = await quiz.locator('[data-answer]').count();
+        result.ieltsCanvas = await page.locator('.ia-canvas').count();
+        if (result.ieltsAnswers !== 4) errors.push(`ielts: expected 4 answers, found ${result.ieltsAnswers}`);
+        if (result.ieltsCanvas !== 1) errors.push(`ielts: expected one game canvas, found ${result.ieltsCanvas}`);
+        await quiz.locator('[data-answer]').first().click();
+        await quiz.waitFor({ state: 'hidden', timeout: 3000 });
+        await page.locator('.ia-canvas').focus();
+        await page.keyboard.press('ArrowRight');
+        result.ieltsRoundActive = await page.locator('.ia-power').count() === 1;
+        if (!result.ieltsRoundActive) errors.push('ielts: round did not continue after answering');
       }
       result.ok = !result.loadError && errors.length === 0 && result.controls > 0;
     } catch (error) {

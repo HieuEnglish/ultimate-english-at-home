@@ -98,6 +98,49 @@
       t = setTimeout(function(){ c.style.opacity = '0'; visible = false; }, 2000);
     })();
   </script>
+  <script>
+    (function () {
+      /*
+       * Freeze every animation loop while an IELTS checkpoint is visible.
+       * Answer buttons use normal DOM events/timeouts, so feedback remains
+       * interactive; the queued frame resumes as soon as the modal closes.
+       */
+      var nativeRequestAnimationFrame = window.requestAnimationFrame.bind(window);
+      var nativeCancelAnimationFrame = window.cancelAnimationFrame.bind(window);
+      var pending = new Map();
+      var nextId = 1;
+
+      function questionIsOpen() {
+        var modal = document.querySelector('[data-ielts-modal]');
+        return Boolean(modal && !modal.hidden);
+      }
+
+      window.requestAnimationFrame = function (callback) {
+        var id = nextId++;
+        function run(timestamp) {
+          if (!pending.has(id)) return;
+          if (questionIsOpen()) {
+            pending.set(id, nativeRequestAnimationFrame(run));
+            return;
+          }
+          pending.delete(id);
+          callback(timestamp);
+        }
+        pending.set(id, nativeRequestAnimationFrame(run));
+        return id;
+      };
+
+      window.cancelAnimationFrame = function (id) {
+        var nativeId = pending.get(id);
+        if (nativeId !== undefined) {
+          pending.delete(id);
+          nativeCancelAnimationFrame(nativeId);
+        }
+      };
+
+      window.UEAH_SKY_QUEST_PAUSE = { questionIsOpen: questionIsOpen };
+    })();
+  </script>
   <script type="module" crossorigin src="./assets/index-C0W3KyIs.js"></script>
 </head>
 <body>
