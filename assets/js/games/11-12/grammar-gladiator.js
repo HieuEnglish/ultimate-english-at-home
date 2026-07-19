@@ -157,7 +157,7 @@ class GrammarGladiatorGame extends GameBase {
             return;
         }
 
-        const data = ROUNDS[Math.floor(Math.random() * ROUNDS.length)];
+        const data = this.pickFromBag(ROUNDS, 'rounds');
         this.currentRound = data;
 
         document.getElementById('target-type').textContent = data.type;

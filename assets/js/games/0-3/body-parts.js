@@ -97,7 +97,7 @@ class BodyPartsGame extends GameBase {
     this.rounds += 1;
     this.locked = false;
 
-    const shuffled = [...BODY_PARTS].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(BODY_PARTS, 'body-parts');
     this.currentPart = shuffled[0];
     this.options = [this.currentPart, ...shuffled.slice(1, 3)].sort(() => Math.random() - 0.5);
 

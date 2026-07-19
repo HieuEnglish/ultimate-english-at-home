@@ -142,6 +142,116 @@
     })();
   </script>
   <script type="module" crossorigin src="./assets/index-C0W3KyIs.js"></script>
+  <script>
+    (function () {
+      var selectedVehicle = '';
+      var lastCheckpointAt = performance.now();
+      var CHECKPOINT_DELAY_MS = 18000;
+      var questionBag = [];
+      var lastQuestionIndex = -1;
+      var score = 0;
+      var questions = [
+        { prompt: "Choose the best academic synonym for 'important'.", choices: ["significant", "ordinary", "temporary", "unclear"], answer: 0, explanation: "'Significant' is a strong academic synonym for 'important'." },
+        { prompt: "Which phrase appropriately introduces a contrast?", choices: ["Furthermore", "For instance", "However", "As a result"], answer: 2, explanation: "'However' introduces a contrasting idea." },
+        { prompt: "Choose the correct academic collocation.", choices: ["make research", "conduct research", "do a conclusion", "take evidence"], answer: 1, explanation: "In academic English, we 'conduct research'." },
+        { prompt: "What does 'approximately' mean?", choices: ["exactly", "rarely", "roughly", "immediately"], answer: 2, explanation: "'Approximately' means 'roughly' or 'about'." },
+        { prompt: "Which sentence has the best IELTS Writing tone?", choices: ["Pollution is super bad.", "Pollution presents a significant global challenge.", "Everyone knows pollution is awful.", "I hate all this pollution."], answer: 1, explanation: "The second sentence is formal, precise, and appropriately academic." },
+        { prompt: "Complete the sentence: 'The number of visitors ___ increased.'", choices: ["have", "are", "has", "were"], answer: 2, explanation: "The subject 'the number' is singular, so it takes 'has'." }
+      ];
+
+      document.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-vehicle]');
+        if (button && button.getAttribute('aria-disabled') !== 'true') {
+          selectedVehicle = button.dataset.vehicle || '';
+          lastCheckpointAt = performance.now();
+        }
+      }, true);
+
+      function gameIsReady() {
+        return selectedVehicle === 'boat' && Boolean(document.querySelector('[data-ielts-score]'));
+      }
+
+      function questionAlreadyOpen() {
+        return Array.from(document.querySelectorAll('[data-ielts-modal]')).some(function (modal) {
+          return !modal.hidden;
+        });
+      }
+
+      function nextRandomQuestion() {
+        if (!questionBag.length) {
+          questionBag = questions.map(function (_, index) { return index; });
+          for (var index = questionBag.length - 1; index > 0; index -= 1) {
+            var swapIndex = Math.floor(Math.random() * (index + 1));
+            var held = questionBag[index];
+            questionBag[index] = questionBag[swapIndex];
+            questionBag[swapIndex] = held;
+          }
+          if (questionBag.length > 1 && questionBag[questionBag.length - 1] === lastQuestionIndex) {
+            var first = questionBag[0];
+            questionBag[0] = questionBag[questionBag.length - 1];
+            questionBag[questionBag.length - 1] = first;
+          }
+        }
+        lastQuestionIndex = questionBag.pop();
+        return questions[lastQuestionIndex];
+      }
+
+      function forceCheckpoint() {
+        if (!gameIsReady() || questionAlreadyOpen()) return false;
+        var question = nextRandomQuestion();
+        var modal = document.createElement('div');
+        modal.className = 'ielts-quest-modal ueah-boat-ielts-modal';
+        modal.dataset.ieltsModal = '';
+        modal.innerHTML = '<div class="ielts-quest-card" role="dialog" aria-modal="true" aria-labelledby="boat-ielts-question">' +
+          '<div class="ielts-quest-card__top"><span class="ielts-quest-card__badge">Boat IELTS checkpoint</span><span class="ielts-quest-card__points">+25 / -10</span></div>' +
+          '<h2 id="boat-ielts-question"></h2><div class="ielts-quest-options"></div>' +
+          '<p class="ielts-quest-feedback" aria-live="polite"></p></div>';
+        modal.querySelector('h2').textContent = question.prompt;
+        var options = modal.querySelector('.ielts-quest-options');
+        var feedback = modal.querySelector('.ielts-quest-feedback');
+
+        question.choices.forEach(function (choice, index) {
+          var answer = document.createElement('button');
+          answer.type = 'button';
+          answer.className = 'ielts-quest-option';
+          answer.textContent = choice;
+          answer.addEventListener('click', function () {
+            var correct = index === question.answer;
+            score += correct ? 25 : -10;
+            document.querySelectorAll('[data-ielts-score]').forEach(function (element) {
+              element.textContent = String(score);
+              element.classList.toggle('is-good', score >= 0);
+              element.classList.toggle('is-bad', score < 0);
+            });
+            options.querySelectorAll('button').forEach(function (option, optionIndex) {
+              option.disabled = true;
+              option.classList.toggle('is-correct', optionIndex === question.answer);
+              option.classList.toggle('is-wrong', optionIndex === index && !correct);
+            });
+            feedback.textContent = (correct ? 'Correct. ' : 'Not quite. ') + question.explanation;
+            feedback.classList.add(correct ? 'is-correct' : 'is-wrong');
+            window.setTimeout(function () { modal.remove(); }, 1100);
+          });
+          options.appendChild(answer);
+        });
+
+        document.getElementById('app').appendChild(modal);
+        options.querySelector('button').focus();
+        lastCheckpointAt = performance.now();
+        return true;
+      }
+
+      window.UEAH_BOAT_IELTS = {
+        forceCheckpoint: forceCheckpoint,
+        isReady: gameIsReady,
+        getSelectedVehicle: function () { return selectedVehicle; }
+      };
+
+      window.setInterval(function () {
+        if (performance.now() - lastCheckpointAt >= CHECKPOINT_DELAY_MS) forceCheckpoint();
+      }, 1000);
+    })();
+  </script>
 </head>
 <body>
   <div id="app"></div>

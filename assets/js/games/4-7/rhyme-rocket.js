@@ -94,7 +94,7 @@ class RhymeRocketGame extends GameBase {
   nextRound() {
     if (this.fuelLevel >= this.maxFuel) return this.launchSequence();
     this.locked = false;
-    this.currentSet = RHYME_SETS[Math.floor(Math.random() * RHYME_SETS.length)];
+    this.currentSet = this.pickFromBag(RHYME_SETS, 'rhyme-sets');
     document.getElementById('target-emoji').textContent = this.currentSet.emoji;
     document.getElementById('target-text').textContent = this.currentSet.target;
     document.getElementById('helper-text').textContent = 'Pick the rhyming word to add fuel.';

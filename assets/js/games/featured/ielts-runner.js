@@ -139,7 +139,7 @@ export class IeltsRunnerGame {
 
         const viewport = this.container.querySelector('#tinyskies-viewport');
         const cover = this.container.querySelector('#tinyskies-cover');
-        const src = new URL('assets/vendor/tinyskies/index.html?ueahAuto=1&ueahBuild=20260719-question-pause', document.baseURI).href;
+        const src = new URL('assets/vendor/tinyskies/index.html?ueahAuto=1&ueahBuild=20260719-boat-questions', document.baseURI).href;
 
         this.iframe = document.createElement('iframe');
         this.iframe.className = 'tinyskies-frame';

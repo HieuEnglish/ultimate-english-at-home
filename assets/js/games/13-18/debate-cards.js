@@ -276,7 +276,7 @@ class DebateCardsGame extends GameBase {
     }
 
     loadNextTopic() {
-        const topicData = TOPICS[Math.floor(Math.random() * TOPICS.length)];
+        const topicData = this.pickFromBag(TOPICS, 'topics');
         this.currentTopic = topicData;
         document.getElementById('topic-text').textContent = topicData.topic;
 

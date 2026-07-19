@@ -209,7 +209,7 @@ class PronunciationProGame extends GameBase {
         this.updateProgress();
 
         // Pick random challenge
-        const shuffled = [...PRONUNCIATION_CHALLENGES].sort(() => Math.random() - 0.5);
+        const shuffled = this.shuffleWithBagFirst(PRONUNCIATION_CHALLENGES, 'challenges');
         this.currentChallenge = shuffled[0];
 
         this.renderRound();

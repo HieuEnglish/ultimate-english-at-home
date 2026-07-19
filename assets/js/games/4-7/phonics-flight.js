@@ -333,9 +333,9 @@ class PhonicsFlightGame extends GameBase {
         this.updateRoundDisplay();
 
         // Pick a random sound and word from that sound
-        this.correctSound = SOUNDS[Math.floor(Math.random() * SOUNDS.length)];
+        this.correctSound = this.pickFromBag(SOUNDS, 'sounds');
         const words = PHONICS_FLIGHT_DATA[this.correctSound];
-        const wordObj = words[Math.floor(Math.random() * words.length)];
+        const wordObj = this.pickFromBag(words, `words-${this.correctSound}`);
         this.currentWord = wordObj.word;
         this.currentEmoji = wordObj.emoji;
 

@@ -80,7 +80,7 @@ class SightWordSafariGame extends GameBase {
     if (this.rounds >= this.maxRounds) return this.end();
     this.rounds += 1;
     this.locked = false;
-    this.currentWord = SIGHT_WORDS[Math.floor(Math.random() * SIGHT_WORDS.length)];
+    this.currentWord = this.pickFromBag(SIGHT_WORDS, 'sight-words');
     const wrongWords = SIGHT_WORDS.filter((w) => w !== this.currentWord).sort(() => Math.random() - 0.5).slice(0, 3);
     this.options = [this.currentWord, ...wrongWords].sort(() => Math.random() - 0.5);
 

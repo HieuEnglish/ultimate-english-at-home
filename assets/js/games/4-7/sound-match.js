@@ -82,7 +82,7 @@ class SoundMatchGame extends GameBase {
         }
 
         // Pick a random word pair
-        const pair = WORD_PAIRS[Math.floor(Math.random() * WORD_PAIRS.length)];
+        const pair = this.pickFromBag(WORD_PAIRS, 'word-pairs');
         this.targetWord = pair.word;
         this.correctEmoji = pair.emoji;
 

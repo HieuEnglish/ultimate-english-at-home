@@ -86,7 +86,7 @@ class WordDetectiveGame extends GameBase {
     if (this.rounds >= this.maxRounds) return this.end();
     this.rounds += 1;
     this.locked = false;
-    this.currentCase = [...CASES].sort(() => Math.random() - 0.5)[0];
+    this.currentCase = this.pickFromBag(CASES, 'cases');
     this.options = [...this.currentCase.options].sort(() => Math.random() - 0.5);
 
     document.getElementById('progress-text').textContent = `Case ${this.rounds} of ${this.maxRounds}`;

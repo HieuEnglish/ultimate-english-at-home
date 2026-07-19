@@ -381,7 +381,7 @@ class VocabQuestGame extends GameBase {
   }
 
   nextQuestion() {
-    const shuffled = [...VOCAB].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(VOCAB, 'vocabulary');
     const vocab = shuffled[0];
 
     this.currentQuestion = vocab;

@@ -195,7 +195,7 @@ class VocabVolcanoGame extends GameBase {
     }
 
     nextQuestion() {
-        const data = VOCAB_DATA[Math.floor(Math.random() * VOCAB_DATA.length)];
+        const data = this.pickFromBag(VOCAB_DATA, 'vocabulary');
         this.currentQuestion = data;
 
         document.getElementById('word-display').textContent = data.word;

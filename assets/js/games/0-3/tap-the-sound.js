@@ -113,7 +113,7 @@ class TapTheSoundGame extends GameBase {
     this.rounds += 1;
     this.locked = false;
 
-    const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(WORDS, 'words');
     this.targetWord = shuffled[0];
     this.options = [this.targetWord, ...shuffled.slice(1, 3)].sort(() => Math.random() - 0.5);
 

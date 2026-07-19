@@ -328,7 +328,7 @@ class WordScrambleGame extends GameBase {
         this.userAnswer = [];
         this.usedIndices = [];
 
-        const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
+        const shuffled = this.shuffleWithBagFirst(WORDS, 'words');
         this.currentWord = shuffled[0];
         this.scrambled = this.currentWord.word.split('').sort(() => Math.random() - 0.5);
 

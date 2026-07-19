@@ -89,7 +89,7 @@ class RhymeTimeGame extends GameBase {
     this.rounds += 1;
     this.locked = false;
     this.foundMatches = [];
-    this.currentRhyme = [...RHYMES].sort(() => Math.random() - 0.5)[0];
+    this.currentRhyme = this.pickFromBag(RHYMES, 'rhymes');
 
     const selectedMatches = [...this.currentRhyme.matches].sort(() => Math.random() - 0.5).slice(0, 2);
     const selectedWrongs = [...this.currentRhyme.wrong].sort(() => Math.random() - 0.5).slice(0, 2);

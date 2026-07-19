@@ -115,7 +115,7 @@ class VerbViperGame extends GameBase {
     do {
       pos = { x: Math.floor(Math.random() * this.gridCols), y: Math.floor(Math.random() * this.gridRows) };
     } while (this.snake.some((s) => s.x === pos.x && s.y === pos.y));
-    const wordData = WORD_POOL[Math.floor(Math.random() * WORD_POOL.length)];
+    const wordData = this.pickFromBag(WORD_POOL, 'verbs');
     this.food = { ...pos, ...wordData };
   }
 

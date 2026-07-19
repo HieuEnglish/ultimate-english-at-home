@@ -45,6 +45,17 @@ async function run() {
   await indexPage.goto(new URL('?r=%2Fgames', base).toString(), { waitUntil: 'domcontentloaded' });
   await indexPage.waitForFunction(() => Boolean(window.UEAH_GAMES_STORE?.getAllGames));
   let games = await indexPage.evaluate(() => window.UEAH_GAMES_STORE.getAllGames());
+  const shuffleBagOk = await indexPage.evaluate(() => {
+    const container = document.createElement('div');
+    const game = new window.UEAH_GAME_ENGINE.GameBase(container, {});
+    const pool = ['a', 'b', 'c', 'd', 'e'];
+    const firstCycle = Array.from({ length: pool.length }, () => game.pickFromBag(pool, 'audit'));
+    const previous = firstCycle[firstCycle.length - 1];
+    const next = game.pickFromBag(pool, 'audit');
+    game.cleanup();
+    return new Set(firstCycle).size === pool.length && next !== previous;
+  });
+  if (!shuffleBagOk) throw new Error('Shared shuffle bag repeated before exhausting its pool');
   const requestedSlugs = (arg('--slugs') || '').split(',').map((slug) => slug.trim()).filter(Boolean);
   if (requestedSlugs.length) games = games.filter((game) => requestedSlugs.includes(game.slug));
   await indexPage.close();

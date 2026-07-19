@@ -227,7 +227,7 @@ class DebatePrepGame extends GameBase {
     this.selectedArgument = null;
 
     // Pick random debate  
-    const shuffled = [...DEBATES].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(DEBATES, 'debates');
     this.currentDebate = shuffled[0];
 
     // Combine and shuffle arguments

@@ -193,7 +193,7 @@ class EssayBuilderGame extends GameBase {
         this.updateProgress();
 
         // Pick random essay
-        const shuffled = [...ESSAYS].sort(() => Math.random() - 0.5);
+        const shuffled = this.shuffleWithBagFirst(ESSAYS, 'essays');
         this.currentEssay = shuffled[0];
         this.shuffledParagraphs = [...this.currentEssay.paragraphs].sort(() => Math.random() - 0.5);
 

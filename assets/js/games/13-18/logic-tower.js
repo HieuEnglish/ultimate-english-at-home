@@ -246,7 +246,7 @@ class LogicTowerGame extends GameBase {
         this.resetUI();
 
         // Pick random puzzle
-        this.currentPuzzle = LOGIC_PUZZLES[Math.floor(Math.random() * LOGIC_PUZZLES.length)];
+        this.currentPuzzle = this.pickFromBag(LOGIC_PUZZLES, 'puzzles');
         document.getElementById('puzzle-topic').textContent = `Topic: ${this.currentPuzzle.topic}`;
 
         // Create steps and shuffle

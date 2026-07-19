@@ -648,8 +648,41 @@ class GameBase {
         this.timerWarningShown = false;
         this.theme = getTheme(config);
         this.flavor = getGameFlavor(config);
+        this.selectionBags = new Map();
 
         this.applyTheme();
+    }
+
+    pickFromBag(items, key = "default") {
+        const pool = Array.isArray(items) ? items : [];
+        if (!pool.length) return null;
+        let state = this.selectionBags.get(key);
+        if (!state || state.source !== pool || state.size !== pool.length || !state.queue.length) {
+            const queue = pool.map((_, index) => index);
+            for (let index = queue.length - 1; index > 0; index -= 1) {
+                const swapIndex = Math.floor(Math.random() * (index + 1));
+                [queue[index], queue[swapIndex]] = [queue[swapIndex], queue[index]];
+            }
+            if (state && queue.length > 1 && queue[queue.length - 1] === state.lastIndex) {
+                [queue[0], queue[queue.length - 1]] = [queue[queue.length - 1], queue[0]];
+            }
+            state = { source: pool, size: pool.length, queue, lastIndex: state?.lastIndex ?? -1 };
+            this.selectionBags.set(key, state);
+        }
+        const index = state.queue.pop();
+        state.lastIndex = index;
+        return pool[index];
+    }
+
+    shuffleWithBagFirst(items, key = "default") {
+        const selected = this.pickFromBag(items, key);
+        if (selected == null) return [];
+        const rest = items.filter((item) => item !== selected);
+        for (let index = rest.length - 1; index > 0; index -= 1) {
+            const swapIndex = Math.floor(Math.random() * (index + 1));
+            [rest[index], rest[swapIndex]] = [rest[swapIndex], rest[index]];
+        }
+        return [selected, ...rest];
     }
 
     applyTheme() {

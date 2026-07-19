@@ -88,7 +88,7 @@ class ColorMatchGame extends GameBase {
     this.rounds += 1;
     this.locked = false;
 
-    const shuffled = [...COLORS].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(COLORS, 'colors');
     this.currentColor = shuffled[0];
     this.options = shuffled.slice(0, 4).sort(() => Math.random() - 0.5);
 

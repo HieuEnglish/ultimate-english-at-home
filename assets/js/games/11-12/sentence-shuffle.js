@@ -81,7 +81,7 @@ class SentenceShuffleGame extends GameBase {
     if (this.rounds >= 8) return this.end();
     this.rounds += 1;
     this.selectedWords = [];
-    this.currentSentence = [...SENTENCES].sort(() => Math.random() - 0.5)[0];
+    this.currentSentence = this.pickFromBag(SENTENCES, 'sentences');
     document.getElementById('grammar-hint-text').textContent = this.currentSentence.grammar;
     this.renderRound();
   }

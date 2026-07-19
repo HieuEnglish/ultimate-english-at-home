@@ -86,7 +86,7 @@ class StoryStonesGame extends GameBase {
     this.rounds += 1;
     this.locked = false;
 
-    this.currentSentence = [...SENTENCES].sort(() => Math.random() - 0.5)[0];
+    this.currentSentence = this.pickFromBag(SENTENCES, 'sentences');
     this.options = [...this.currentSentence.options].sort(() => Math.random() - 0.5);
 
     document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;

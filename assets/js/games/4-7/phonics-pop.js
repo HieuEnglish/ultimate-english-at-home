@@ -172,9 +172,9 @@ class PhonicsPopGame extends GameBase {
         this.rounds++;
 
         // Pick a random sound and word
-        this.correctSound = SOUNDS[Math.floor(Math.random() * SOUNDS.length)];
+        this.correctSound = this.pickFromBag(SOUNDS, 'sounds');
         const words = PHONICS_WORDS[this.correctSound];
-        this.currentWord = words[Math.floor(Math.random() * words.length)];
+        this.currentWord = this.pickFromBag(words, `words-${this.correctSound}`);
 
         // Pick 3 wrong sounds
         const wrongSounds = SOUNDS.filter(s => s !== this.correctSound)

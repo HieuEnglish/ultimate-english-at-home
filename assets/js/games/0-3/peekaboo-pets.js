@@ -89,9 +89,9 @@ class PeekabooPetsGame extends GameBase {
     this.rounds += 1;
     this.isLocked = true;
 
-    const shuffled = [...PETS].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(PETS, 'pets');
     this.options = shuffled.slice(0, 3);
-    this.currentPet = this.options[Math.floor(Math.random() * this.options.length)];
+    this.currentPet = shuffled[0];
 
     document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;
     document.getElementById('guide-emoji').textContent = this.currentPet.emoji;

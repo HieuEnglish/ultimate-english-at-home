@@ -129,7 +129,7 @@ class WordDetectiveGame extends GameBase {
 
   nextQuestion() {
     this.locked = false;
-    this.currentPuzzle = PUZZLE_DATA[Math.floor(Math.random() * PUZZLE_DATA.length)];
+    this.currentPuzzle = this.pickFromBag(PUZZLE_DATA, 'puzzles');
 
     // Build word array with target and distractors
     const sentenceWords = this.currentPuzzle.sentence.split(/\s+/).map(w => w.replace(/[.,!?]/g, ''));

@@ -82,7 +82,7 @@ class SynonymSprintGame extends GameBase {
 
   nextQuestion() {
     this.locked = false;
-    this.currentData = SYNONYM_DATA[Math.floor(Math.random() * SYNONYM_DATA.length)];
+    this.currentData = this.pickFromBag(SYNONYM_DATA, 'synonyms');
     document.getElementById('track-word').textContent = this.currentData.word;
     document.getElementById('helper-text').textContent = 'Choose the word with the same meaning.';
 

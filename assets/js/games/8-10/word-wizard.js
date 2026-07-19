@@ -105,7 +105,7 @@ class WordWizardGame extends GameBase {
   nextTurn() {
     if (this.monsterHealth <= 0) return this.endGame(true);
     if (this.playerHealth <= 0) return this.endGame(false);
-    this.currentSpell = SPELLS[Math.floor(Math.random() * SPELLS.length)];
+    this.currentSpell = this.pickFromBag(SPELLS, 'spells');
     this.inputBuffer = '';
     this.wrongAttemptsThisTurn = 0;
     document.getElementById('spell-hint').textContent = `Hint: ${this.currentSpell.hint}`;

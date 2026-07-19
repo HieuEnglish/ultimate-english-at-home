@@ -312,15 +312,14 @@ class GrammarNinjaGame extends GameBase {
 
         // Mix of wrong sentences (80%) and correct ones (20%)
         const isWrong = Math.random() < 0.8;
+        const picked = this.pickFromBag(SENTENCES, 'sentences');
 
         if (isWrong) {
-            const shuffled = [...SENTENCES].sort(() => Math.random() - 0.5);
-            this.currentSentence = { ...shuffled[0], isWrong: true };
+            this.currentSentence = { ...picked, isWrong: true };
         } else {
-            const shuffled = [...SENTENCES].sort(() => Math.random() - 0.5);
             this.currentSentence = {
-                sentence: shuffled[0].correct,
-                correct: shuffled[0].correct,
+                sentence: picked.correct,
+                correct: picked.correct,
                 isWrong: false
             };
         }

@@ -100,7 +100,7 @@ class AlphabetSoupGame extends GameBase {
     this.foundIndex = 0;
     this.locked = false;
 
-    this.currentWordObj = [...WORDS].sort(() => Math.random() - 0.5)[0];
+    this.currentWordObj = this.pickFromBag(WORDS, 'words');
     this.targetLetters = this.currentWordObj.word.split('');
 
     const distractors = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter((l) => !this.targetLetters.includes(l)).sort(() => Math.random() - 0.5).slice(0, 5);

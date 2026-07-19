@@ -145,7 +145,7 @@ class SyllableSplashGame extends GameBase {
     this.round++;
 
     // Pick a random word
-    this.currentWord = SYLLABLE_DATA[Math.floor(Math.random() * SYLLABLE_DATA.length)];
+    this.currentWord = this.pickFromBag(SYLLABLE_DATA, 'syllables');
 
     // Update UI
     document.getElementById('round-pill').textContent = `Round ${this.round} / ${this.maxRounds}`;

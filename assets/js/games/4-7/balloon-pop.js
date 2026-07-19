@@ -293,7 +293,7 @@ class BalloonPopGame extends GameBase {
     }
 
     nextWord() {
-        const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
+        const shuffled = this.shuffleWithBagFirst(WORDS, 'words');
         this.currentWord = shuffled[0];
         this.currentLetterIndex = 0;
         this.renderWord();

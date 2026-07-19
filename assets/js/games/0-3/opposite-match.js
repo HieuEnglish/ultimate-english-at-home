@@ -97,7 +97,7 @@ class OppositeMatchGame extends GameBase {
     this.rounds += 1;
     this.locked = false;
 
-    const shuffled = [...OPPOSITES].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(OPPOSITES, 'opposites');
     this.currentPair = shuffled[0];
 
     // Build options: one correct opposite + 3 random others

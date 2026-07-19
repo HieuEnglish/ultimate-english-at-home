@@ -109,7 +109,7 @@ class AnimalDanceGame extends GameBase {
     this.locked = false;
     this.stopAll(true);
 
-    this.targetAnimal = this.animals[Math.floor(Math.random() * this.animals.length)];
+    this.targetAnimal = this.pickFromBag(this.animals, 'animals');
     document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;
     document.getElementById('spotlight-emoji').textContent = this.targetAnimal.emoji;
     document.getElementById('spotlight-text').textContent = `Tap ${this.targetAnimal.name}!`;

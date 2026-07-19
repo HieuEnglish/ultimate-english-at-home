@@ -79,7 +79,7 @@ class AntonymArcherGame extends GameBase {
 
   nextQuestion() {
     this.locked = false;
-    this.currentData = ARCHER_DATA[Math.floor(Math.random() * ARCHER_DATA.length)];
+    this.currentData = this.pickFromBag(ARCHER_DATA, 'antonyms');
     document.getElementById('target-word').textContent = this.currentData.word;
     document.getElementById('helper-text').textContent = 'Choose the word with the opposite meaning.';
 

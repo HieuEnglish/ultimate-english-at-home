@@ -231,7 +231,7 @@ class SoundLabGame extends GameBase {
         this.resetUI();
 
         // Pick random pair
-        this.currentPair = MINIMAL_PAIRS[Math.floor(Math.random() * MINIMAL_PAIRS.length)];
+        this.currentPair = this.pickFromBag(MINIMAL_PAIRS, 'minimal-pairs');
 
         // Pick one as correct
         const isFirst = Math.random() < 0.5;

@@ -99,7 +99,7 @@ class TenseRaceGame extends GameBase {
   }
 
   nextChallenge() {
-    this.currentChallenge = CHALLENGES[Math.floor(Math.random() * CHALLENGES.length)];
+    this.currentChallenge = this.pickFromBag(CHALLENGES, 'challenges');
     document.getElementById('base-text').textContent = this.currentChallenge.base;
     document.getElementById('target-badge').textContent = this.currentChallenge.tense;
     document.getElementById('race-input').value = '';

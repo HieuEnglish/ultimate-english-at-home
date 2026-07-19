@@ -87,7 +87,7 @@ class ShapeSorterGame extends GameBase {
     this.rounds += 1;
     this.locked = false;
 
-    const shuffled = [...SHAPES].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(SHAPES, 'shapes');
     this.currentShape = shuffled[0];
     this.options = shuffled.slice(0, 3).sort(() => Math.random() - 0.5);
 

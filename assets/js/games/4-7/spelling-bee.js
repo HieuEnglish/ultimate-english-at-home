@@ -526,7 +526,7 @@ class SpellingBeeGame extends GameBase {
     this.usedIndices = [];
 
     // Pick random word
-    const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
+    const shuffled = this.shuffleWithBagFirst(WORDS, 'words');
     this.currentWord = shuffled[0];
 
     // Create letter bank (word letters + extra random letters)

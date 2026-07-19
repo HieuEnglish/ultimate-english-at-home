@@ -86,7 +86,7 @@ class SentenceSurgeonGame extends GameBase {
     if (this.rounds >= this.maxRounds) return this.end();
     this.rounds += 1;
     this.locked = false;
-    this.currentPatient = PATIENTS[Math.floor(Math.random() * PATIENTS.length)];
+    this.currentPatient = this.pickFromBag(PATIENTS, 'patients');
 
     document.getElementById('progress-text').textContent = `Case ${this.rounds} of ${this.maxRounds}`;
     document.getElementById('error-type').textContent = this.currentPatient.label;

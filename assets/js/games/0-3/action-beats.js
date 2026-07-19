@@ -83,7 +83,7 @@ class ActionBeatsGame extends GameBase {
     if (this.rounds >= this.maxRounds) return this.end();
     this.rounds += 1;
     this.locked = false;
-    this.currentAction = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
+    this.currentAction = this.pickFromBag(ACTIONS, 'actions');
 
     document.getElementById('progress-text').textContent = `Round ${this.rounds} of ${this.maxRounds}`;
     document.getElementById('target-action').textContent = `${this.currentAction.emoji} ${this.currentAction.verb}!`;

@@ -88,7 +88,7 @@ class FastPhrasesGame extends GameBase {
     if (!this.isRunning) return;
     this.rounds += 1;
     this.selectedWords = [];
-    this.currentSentence = [...SENTENCES].sort(() => Math.random() - 0.5)[0];
+    this.currentSentence = this.pickFromBag(SENTENCES, 'sentences');
     document.getElementById('hint-display').textContent = this.currentSentence.emoji;
     document.getElementById('helper-text').textContent = 'Tap the words to build the sentence.';
     this.renderRound();

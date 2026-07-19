@@ -190,7 +190,7 @@ class NounNinjaGame extends GameBase {
     }
 
     spawnWord() {
-        const data = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+        const data = this.pickFromBag(WORD_LIST, 'word-list');
 
         const el = document.createElement('div');
         el.className = 'tossed-word';

@@ -414,7 +414,7 @@ class AnagramRacerGame extends GameBase {
         this.selectedIndices = [];
 
         // Pick a random word
-        const shuffledWords = [...WORDS].sort(() => Math.random() - 0.5);
+        const shuffledWords = this.shuffleWithBagFirst(WORDS, 'words');
         this.currentWord = shuffledWords[0];
 
         // Scramble letters
