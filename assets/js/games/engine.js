@@ -375,20 +375,27 @@ function getGameFlavor(config = {}) {
 }
 
 // Confetti explosion for high scores 🎉
+// A self-contained, delta-time particle system with real projectile
+// physics (gravity, air drag, paper-like flutter), 3D-flipping shapes,
+// layered shockwaves and a soft radial flash. Public API is unchanged:
+//   explode(x, y, count)  — x/y may be an element, a pixel, or omitted.
 class ConfettiExplosion {
     constructor(container) {
         this.container = container;
         this.particles = [];
+        this.layers = [];
         this.colors = [
             "#7c5cfc", "#4fc3f7", "#00e5ff", "#34d399",
             "#fbbf24", "#fb923c", "#f472b6", "#ffffff",
             "#a78bfa", "#2dd4bf", "#ffd166", "#ff6b8a"
         ];
-        this.shapes = ["circle", "square", "ticket", "spark"];
+        this.shapes = ["rect", "circle", "ribbon", "star", "spark"];
+        this.reduceMotion = window.matchMedia &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     }
 
     explode(x, y, count = 100) {
-        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (this.reduceMotion) return;
         if (!this.container || typeof this.container.getBoundingClientRect !== "function") return;
 
         const rect = this.container.getBoundingClientRect();
@@ -404,111 +411,188 @@ class ConfettiExplosion {
             if (Number.isFinite(Number(y))) centerY = Number(y);
         }
 
-        this.createShockwave(centerX, centerY);
+        const big = count >= 60;
+        this.createFlash(centerX, centerY, big);
+        this.createShockwave(centerX, centerY, big);
+        this.createShockwave(centerX, centerY, big, true);
 
-        for (let i = 0; i < count; i++) {
-            this.createParticle(centerX, centerY, i, count);
+        const safeCount = Math.max(8, Math.min(count, 220));
+        for (let i = 0; i < safeCount; i++) {
+            this.createParticle(centerX, centerY, big);
         }
 
-        // Cleanup after animation
-        setTimeout(() => this.cleanup(), 3600);
+        // Safety net: remove any stragglers well after the longest life.
+        setTimeout(() => this.cleanup(), 5200);
     }
 
-    createShockwave(x, y) {
+    createFlash(x, y, big) {
+        const flash = document.createElement("div");
+        const size = big ? 240 : 150;
+        flash.style.cssText = `
+      position: absolute;
+      left: ${x}px;
+      top: ${y}px;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,255,255,.85) 0%, rgba(124,92,252,.35) 35%, rgba(124,92,252,0) 70%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 999;
+      transform: translate(-50%, -50%) scale(.2);
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: confettiFlash 520ms ease-out forwards;
+    `;
+        this.container.appendChild(flash);
+        this.layers.push(flash);
+    }
+
+    createShockwave(x, y, big, inner = false) {
         const wave = document.createElement("div");
+        const base = inner ? 30 : 18;
+        const grow = big ? 26 : 18;
         wave.className = "confetti-shockwave";
         wave.style.cssText = `
       position: absolute;
       left: ${x}px;
       top: ${y}px;
-      width: 18px;
-      height: 18px;
+      width: ${base}px;
+      height: ${base}px;
       border-radius: 999px;
       border: 2px solid rgba(255,255,255,.72);
       box-shadow: 0 0 30px rgba(124,92,252,.34), inset 0 0 20px rgba(79,195,247,.24);
       pointer-events: none;
       z-index: 1000;
       transform: translate(-50%, -50%) scale(.25);
-      animation: confettiShockwave 780ms ease-out forwards;
+      opacity: ${inner ? 0.55 : 0.9};
+      will-change: transform, opacity;
+      animation: confettiShockwave ${inner ? 620 : 780}ms cubic-bezier(.16,.84,.34,1) forwards;
     `;
+        // Override final scale so it grows large and fades out.
+        wave.style.setProperty("--cw-grow", String(grow));
         this.container.appendChild(wave);
-        this.particles.push(wave);
+        this.layers.push(wave);
     }
 
-    createParticle(x, y, index = 0, total = 100) {
+    createParticle(x, y, big) {
         const particle = document.createElement("div");
         const color = this.colors[Math.floor(Math.random() * this.colors.length)];
         const shape = this.shapes[Math.floor(Math.random() * this.shapes.length)];
-        const size = Math.random() * 9 + 5;
-        const delay = Math.random() * 70;
+        const size = (Math.random() * 9 + 6) * (big ? 1.1 : 1);
+        const lighter = this.shade(color, 28);
 
         particle.className = "confetti-particle";
         particle.dataset.shape = shape;
+
+        let width = size;
+        let height = size;
+        let borderRadius = "3px";
+        if (shape === "circle") borderRadius = "50%";
+        if (shape === "ribbon") { width = size * 0.55; height = size * 1.9; }
+        if (shape === "spark") { width = 3; height = Math.max(12, size * 1.8); borderRadius = "999px"; }
+        if (shape === "star") { borderRadius = "50%"; }
+
         particle.style.cssText = `
       position: absolute;
-      width: ${shape === "ticket" ? size * 1.7 : size}px;
-      height: ${shape === "spark" ? Math.max(10, size * 1.8) : size}px;
+      width: ${width}px;
+      height: ${height}px;
       background: ${color};
       left: ${x}px;
       top: ${y}px;
-      border-radius: ${shape === "circle" ? "50%" : shape === "ticket" ? "999px" : "3px"};
+      border-radius: ${borderRadius};
       pointer-events: none;
       z-index: 1000;
-      box-shadow: 0 0 12px ${color}66;
-      transform: translate3d(-50%, -50%, 0) rotate(0deg);
+      box-shadow: 0 0 12px ${color}66, inset 0 0 0 1px ${lighter}40;
+      backface-visibility: hidden;
       transform-origin: center;
+      will-change: transform, opacity;
     `;
 
-        if (shape === "spark") {
-            particle.style.width = "3px";
-            particle.style.borderRadius = "999px";
+        if (shape === "star") {
+            particle.style.background = "transparent";
+            particle.style.boxShadow = "none";
+            particle.style.clipPath = "polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)";
+            particle.style.background = color;
         }
 
-        const goldenStep = Math.PI * (3 - Math.sqrt(5));
-        const spreadAngle = (index * goldenStep) + (Math.random() - 0.5) * 0.7;
-        const angle = total > 40 ? spreadAngle : Math.random() * Math.PI * 2;
-        const velocity = Math.random() * 10 + 9;
-        const vx = Math.cos(angle) * velocity;
-        const vy = Math.sin(angle) * velocity - (Math.random() * 12 + 11);
-        const rotation = Math.random() * 360;
-        const rotationSpeed = Math.random() * 18 - 9;
-        const drift = (Math.random() - 0.5) * 0.32;
-        const life = Math.floor(Math.random() * 28 + 70);
+        // Radial burst with a strong upward bias so it arcs like a fountain.
+        const angle = Math.random() * Math.PI * 2;
+        const power = Math.random() * (big ? 16 : 13) + 7;
+        const vx = Math.cos(angle) * power;
+        const vy = Math.sin(angle) * power - (Math.random() * 14 + 12);
+        const rotationX = Math.random() * 360;
+        const rotationY = Math.random() * 360;
+        const rotSpeedX = Math.random() * 22 - 11;
+        const rotSpeedY = Math.random() * 22 - 11;
+        const flutterPhase = Math.random() * Math.PI * 2;
+        const flutterAmp = Math.random() * 1.6 + 0.6;
+        const flutterFreq = Math.random() * 0.12 + 0.06;
+        const life = 1.6 + Math.random() * 1.4; // seconds
+        const fadeStart = life * 0.55;
 
         this.container.appendChild(particle);
         this.particles.push(particle);
 
-        let frame = 0;
-        let currentX = x;
-        let currentY = y;
-        let currentVX = vx;
-        let currentVY = vy;
-        let currentRotation = rotation;
+        const start = performance.now();
+        let last = start;
+        let px = 0;
+        let py = 0;
+        let pvx = vx;
+        let pvy = vy;
+        let rx = rotationX;
+        let ry = rotationY;
 
-        const animate = () => {
-            frame++;
-            currentVX = (currentVX + drift) * 0.985;
-            currentX += currentVX;
-            currentVY += 0.48; // gravity
-            currentY += currentVY;
-            currentRotation += rotationSpeed;
-
-            particle.style.transform = `translate3d(${currentX - x}px, ${currentY - y}px, 0) rotate(${currentRotation}deg)`;
-            particle.style.opacity = Math.max(0, 1 - Math.max(0, frame - delay / 16) / life);
-
-            if (frame < life && currentY < this.container.offsetHeight + 70) {
-                requestAnimationFrame(animate);
-            } else {
+        const animate = (now) => {
+            const dt = Math.min(0.05, (now - last) / 1000);
+            last = now;
+            const elapsed = (now - start) / 1000;
+            if (elapsed >= life) {
                 particle.remove();
+                const idx = this.particles.indexOf(particle);
+                if (idx >= 0) this.particles.splice(idx, 1);
+                return;
             }
+
+            // Physics: gravity + drag + gentle horizontal flutter (paper sway).
+            pvy += 38 * dt;          // gravity
+            pvx *= (1 - 1.4 * dt);   // horizontal air drag
+            pvy *= (1 - 0.5 * dt);   // slight vertical drag
+            px += (pvx + Math.sin(elapsed * flutterFreq * 60 + flutterPhase) * flutterAmp) * dt * 60;
+            py += pvy * dt * 60;
+            rx += rotSpeedX * dt * 60;
+            ry += rotSpeedY * dt * 60;
+
+            const fade = elapsed > fadeStart
+                ? Math.max(0, 1 - (elapsed - fadeStart) / (life - fadeStart))
+                : 1;
+            const scale = 0.6 + 0.4 * fade;
+
+            particle.style.transform =
+                `translate3d(${px}px, ${py}px, 0) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`;
+            particle.style.opacity = fade;
+
+            requestAnimationFrame(animate);
         };
 
         requestAnimationFrame(animate);
     }
 
+    shade(hex, percent) {
+        const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        if (!m) return hex;
+        const clamp = (v) => Math.max(0, Math.min(255, v));
+        const r = clamp(parseInt(m[1], 16) + percent);
+        const g = clamp(parseInt(m[2], 16) + percent);
+        const b = clamp(parseInt(m[3], 16) + percent);
+        return `rgb(${r},${g},${b})`;
+    }
+
     cleanup() {
         this.particles.forEach((p) => p.remove());
+        this.layers.forEach((l) => l.remove());
         this.particles = [];
+        this.layers = [];
     }
 }
 

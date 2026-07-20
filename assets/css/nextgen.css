@@ -4066,7 +4066,22 @@ body {
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(18);
+    transform: translate(-50%, -50%) scale(var(--cw-grow, 18));
+  }
+}
+
+@keyframes confettiFlash {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  35% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
   }
 }
 

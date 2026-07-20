@@ -111,8 +111,8 @@ export function getView(ctx) {
         <p class="page-subtitle">Learning English through play and skill-building games.</p>
       </div>
 
-      <div class="games-hub-grid" role="list">
-        <div class="games-hub-grid__ages">${ageCards}</div>
+      <div class="games-hub-grid">
+        <div class="games-hub-grid__ages" role="list">${ageCards}</div>
         <div class="games-hub-grid__featured">${featuredCard}</div>
       </div>
 
