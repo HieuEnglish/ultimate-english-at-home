@@ -18,10 +18,9 @@ if (mount && !reduceMotion) {
       mount.prepend(renderer.domElement);
       document.querySelector('.hero')?.classList.add('has-webgl', 'has-particles');
 
-      const COUNT = innerWidth < 700 ? 7600 : 14000;
+      const COUNT = innerWidth < 700 ? 2000 : 4000;
       const homes = new Float32Array(COUNT * 3);
       const positions = new Float32Array(COUNT * 3);
-      const velocities = new Float32Array(COUNT * 3);
       const colors = new Float32Array(COUNT * 3);
       const seeds = new Float32Array(COUNT);
       const color = new THREE.Color();
@@ -216,50 +215,65 @@ if (mount && !reduceMotion) {
       const simulate = delta => {
         const rect = mount.getBoundingClientRect();
         const active = pointerX >= 0 && pointerX <= rect.width && pointerY >= 0 && pointerY <= rect.height;
+        const stiffness = 31;
+        const push = 17 + Math.min(pointerSpeed / 120, 12);
+
         if (active) {
           ndc.set(pointerX / rect.width * 2 - 1, -(pointerY / rect.height) * 2 + 1);
           raycaster.setFromCamera(ndc, camera);
-        }
-        const ray = raycaster.ray;
-        const radius = .72;
-        const radiusSq = radius * radius;
-        const stiffness = 31;
-        const decay = Math.exp(-7.5 * delta);
-        const push = 17 + Math.min(pointerSpeed / 120, 12);
+          const ray = raycaster.ray;
+          const radius = .72;
+          const radiusSq = radius * radius;
+          const rayOrigin = ray.origin;
+          const rayDir = ray.direction;
 
-        for (let i = 0; i < COUNT; i++) {
-          const p = i * 3;
-          let vx = velocities[p];
-          let vy = velocities[p + 1];
-          let vz = velocities[p + 2];
-          if (active) {
-            const wx = positions[p] - ray.origin.x;
-            const wy = positions[p + 1] - ray.origin.y;
-            const wz = positions[p + 2] - ray.origin.z;
-            const t = Math.max(wx * ray.direction.x + wy * ray.direction.y + wz * ray.direction.z, 0);
-            let rx = wx - ray.direction.x * t;
-            let ry = wy - ray.direction.y * t;
-            let rz = wz - ray.direction.z * t;
-            const distanceSq = rx * rx + ry * ry + rz * rz;
-            if (distanceSq < radiusSq) {
-              const distance = Math.sqrt(distanceSq);
-              const inverse = 1 / Math.max(distance, .001);
-              rx *= inverse; ry *= inverse; rz *= inverse;
-              const falloff = 1 - distance / radius;
-              const force = falloff * falloff * push * delta;
-              // Radial scatter plus a tangential curl produces the swirl.
-              vx += (rx - ry * .7) * force;
-              vy += (ry + rx * .7) * force;
-              vz += rz * force + falloff * 2.2 * delta;
+          // Spatial culling: project ray to particle Z plane, cull distant particles
+          const planeZ = -1;
+          const tPlane = (planeZ - rayOrigin.z) / rayDir.z;
+          const rayPlaneX = rayOrigin.x + rayDir.x * tPlane;
+          const rayPlaneY = rayOrigin.y + rayDir.y * tPlane;
+          const cullRadius = radius + 1.5;
+          const cullSq = cullRadius * cullRadius;
+
+          for (let i = 0; i < COUNT; i++) {
+            const p = i * 3;
+            const dx = positions[p] - rayPlaneX;
+            const dy = positions[p + 1] - rayPlaneY;
+            let fx = 0, fy = 0, fz = 0;
+
+            if (dx * dx + dy * dy < cullSq) {
+              const wx = positions[p] - rayOrigin.x;
+              const wy = positions[p + 1] - rayOrigin.y;
+              const wz = positions[p + 2] - rayOrigin.z;
+              const t = Math.max(wx * rayDir.x + wy * rayDir.y + wz * rayDir.z, 0);
+              const rx = wx - rayDir.x * t;
+              const ry = wy - rayDir.y * t;
+              const rz = wz - rayDir.z * t;
+              const distanceSq = rx * rx + ry * ry + rz * rz;
+              if (distanceSq < radiusSq) {
+                const distance = Math.sqrt(distanceSq);
+                const inverse = 1 / Math.max(distance, .001);
+                const falloff = 1 - distance / radius;
+                const force = falloff * falloff * push * delta;
+                // Radial scatter plus a tangential curl produces the swirl.
+                fx += (rx * inverse - ry * inverse * .7) * force;
+                fy += (ry * inverse + rx * inverse * .7) * force;
+                fz += rz * inverse * force + falloff * 2.2 * delta;
+              }
             }
+
+            // Direct interpolation towards home (no velocity/decay)
+            positions[p] += (homes[p] - positions[p] + fx) * stiffness * delta;
+            positions[p + 1] += (homes[p + 1] - positions[p + 1] + fy) * stiffness * delta;
+            positions[p + 2] += (homes[p + 2] - positions[p + 2] + fz) * stiffness * delta;
           }
-          vx = (vx + (homes[p] - positions[p]) * stiffness * delta) * decay;
-          vy = (vy + (homes[p + 1] - positions[p + 1]) * stiffness * delta) * decay;
-          vz = (vz + (homes[p + 2] - positions[p + 2]) * stiffness * delta) * decay;
-          positions[p] += vx * delta;
-          positions[p + 1] += vy * delta;
-          positions[p + 2] += vz * delta;
-          velocities[p] = vx; velocities[p + 1] = vy; velocities[p + 2] = vz;
+        } else {
+          for (let i = 0; i < COUNT; i++) {
+            const p = i * 3;
+            positions[p] += (homes[p] - positions[p]) * stiffness * delta;
+            positions[p + 1] += (homes[p + 1] - positions[p + 1]) * stiffness * delta;
+            positions[p + 2] += (homes[p + 2] - positions[p + 2]) * stiffness * delta;
+          }
         }
         positionAttribute.needsUpdate = true;
       };
@@ -276,15 +290,23 @@ if (mount && !reduceMotion) {
 
       let previous = performance.now();
       let frame = 0;
+      let simFrame = 0;
+      let simDelta = 0;
       const render = now => {
         const delta = Math.min((now - previous) / 1000, 1 / 30);
         previous = now;
+        simDelta += delta;
+        simFrame++;
         material.uniforms.uTime.value = now / 1000;
         cloud.rotation.y += (scrollRotation - cloud.rotation.y) * .025;
         cloud.rotation.x = Math.sin(now * .00035) * .035;
         cloud.position.y = Math.sin(now * .00055) * .08;
         pointerSpeed *= Math.exp(-3 * delta);
-        simulate(delta);
+        // Run simulation every 2 frames; skip if frame budget exceeded
+        if (simFrame % 2 === 0 && delta < 0.025) {
+          simulate(Math.min(simDelta, 0.05));
+          simDelta = 0;
+        }
         renderer.render(scene, camera);
         frame = requestAnimationFrame(render);
       };

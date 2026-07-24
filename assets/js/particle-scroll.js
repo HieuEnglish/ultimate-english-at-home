@@ -8,7 +8,12 @@ if (!motion.matches) {
   const main = document.querySelector('.site-main');
   const app = document.getElementById('app');
 
-  if (main && app) {
+  // Performance guard: skip on slow connections or low-memory devices
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const isSlow = conn && (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g');
+  const isLowMem = navigator.deviceMemory !== undefined && navigator.deviceMemory < 2;
+
+  if (main && app && !isSlow && !isLowMem) {
     const canvas = document.createElement('canvas');
     canvas.className = 'particle-scroll-canvas';
     canvas.setAttribute('aria-hidden', 'true');
@@ -45,7 +50,7 @@ if (!motion.matches) {
 
     const ctx = canvas.getContext('2d', { alpha: true });
     const config = {
-      point: .68,
+      point: .85,
       band: 360,
       density: innerWidth < 700 ? 34 : 27,
       size: 1.35,
@@ -110,6 +115,7 @@ if (!motion.matches) {
       });
       const elements = [...app.querySelectorAll(selectors)]
         .filter(element => !element.closest('[hidden], dialog:not([open])'))
+        .filter(element => !element.hasAttribute('data-reveal'))
         // Prefer the outer visual surface when nested pieces share a card suffix.
         .filter((element, index, all) =>
           !all.some(other => other !== element && other.contains(element) &&
@@ -124,15 +130,19 @@ if (!motion.matches) {
 
     function rebuildParticles() {
       particles = [];
-      targets.forEach((target, targetIndex) => {
+      const MAX_PARTICLES = 1200;
+      for (let targetIndex = 0; targetIndex < targets.length; targetIndex++) {
+        if (particles.length >= MAX_PARTICLES) break;
+        const target = targets[targetIndex];
         const rect = target.element.getBoundingClientRect();
-        if (rect.width < 4 || rect.height < 4) return;
+        if (rect.width < 4 || rect.height < 4) continue;
         const columns = Math.max(2, Math.ceil(rect.width / config.density));
         const rows = Math.max(1, Math.ceil(Math.min(rect.height, 240) / config.density));
         const stepX = 1 / columns;
         const stepY = 1 / rows;
         for (let row = 0; row < rows; row++) {
           for (let column = 0; column < columns; column++) {
+            if (particles.length >= MAX_PARTICLES) break;
             const seed = targetIndex * 100003 + row * 401 + column * 17;
             if (hash(seed) < .18) continue;
             particles.push({
@@ -145,8 +155,9 @@ if (!motion.matches) {
               d: hash(seed + 7)
             });
           }
+          if (particles.length >= MAX_PARTICLES) break;
         }
-      });
+      }
     }
 
     function resize() {
