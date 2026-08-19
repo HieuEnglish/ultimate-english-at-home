@@ -53,8 +53,11 @@ async function run() {
     });
     page.on('requestfailed', (request) => {
       const reason = request.failure()?.errorText || '';
+      const url = request.url();
+      // Optional presentation dependencies must not hide runner regressions.
+      if (/fonts\.(googleapis|gstatic)\.com/i.test(url)) return;
       if (!reason.includes('ERR_ABORTED') && !reason.includes('ERR_CONNECTION_RESET')) {
-        errors.push(`request: ${reason}: ${request.url()}`);
+        errors.push(`request: ${reason}: ${url}`);
       }
     });
 

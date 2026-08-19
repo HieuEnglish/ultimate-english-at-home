@@ -1,0 +1,18 @@
+{
+  "name": "ultimate-english-at-home",
+  "private": true,
+  "scripts": {
+    "generate": "node tools/generate-static-routes.js",
+    "check:syntax": "node tools/syntax-check.js",
+    "check:banks": "node tools/validate-banks.js",
+    "check:encoding": "node tools/scan-badchars.js",
+    "check:ids": "node tools/id-scan.js",
+    "check:security": "node tools/security-check.js",
+    "check:links": "node tools/check-resource-links.js",
+    "check": "npm run check:syntax && npm run check:banks && npm run check:encoding && npm run check:security",
+    "qa:smoke": "node tools/qa/weekly.js --url http://127.0.0.1:4173/",
+    "qa:games": "node tools/qa/games.js --url http://127.0.0.1:4173/",
+    "qa:tests": "node tools/qa/tests.js --url http://127.0.0.1:4173/",
+    "qa:a11y": "node tools/qa/accessibility.js --url http://127.0.0.1:4173/"
+  }
+}

@@ -203,7 +203,7 @@ function getOverall(resultsByAge, age) {
 function isPerfectScore(n) {
   const v = Number(n);
   if (!Number.isFinite(v)) return false;
-  return Math.abs(v - 100) < 1e-9;
+  return v >= 80;
 }
 
 function ageCertificateStatus(resultsByAge, age) {
@@ -294,7 +294,7 @@ export function getView(ctx) {
           <form id="profile-form" novalidate class="profile-form-grid">
             <div class="detail-section field">
               <label class="label" for="profile-email">${emojiSpan('📧')} Email</label>
-              <p class="muted" id="profile-email-help">Used for score tracking and contact.</p>
+              <p class="muted" id="profile-email-help">Optional. Stored only on this device; it does not create an account.</p>
               <input
                 id="profile-email"
                 name="email"
@@ -591,11 +591,11 @@ export function getView(ctx) {
         const canPrintAll = unlockedCount >= 2;
         const bestLabel = bestUnlockedAge ? ageLabelFor(bestUnlockedAge) : '';
         const ruleLine =
-          'Printing unlocks only when all 4 skills are saved and each score is 100/100 for an age group.';
+          'Mastery certificates unlock when all 4 skills are saved and each score is at least 80/100.';
 
         const bestAria = canPrintBest
           ? `View and print your best unlocked certificate${bestLabel ? ` (${bestLabel})` : ''}`
-          : 'Locked. Complete all skills with 100/100 in one age group to unlock printing.';
+          : 'Locked. Complete all skills with at least 80/100 in one age group to unlock printing.';
 
         const allAria = canPrintAll
           ? 'View and print all unlocked certificates'
@@ -723,7 +723,7 @@ export function getView(ctx) {
           const certHints = (() => {
             if (unlocked) {
               return `
-                <p class="profile-cert-status profile-cert-status--ok">${emojiSpan('✅')} Unlocked for printing (all skills are 100/100).</p>
+                <p class="profile-cert-status profile-cert-status--ok">${emojiSpan('✅')} Mastery certificate unlocked (all skills are at least 80/100).</p>
                 <div class="profile-actions-bar">
                   <a class="btn btn--small btn--primary" href="${hrefFor(`/profile/certificates/${age}`)}" data-nav aria-label="View and print certificate for ${safeText(label)}">
                     ${emojiSpan('🖨️')} View / Print certificate
@@ -736,7 +736,7 @@ export function getView(ctx) {
               const needs = certStatus.notPerfect.map(titleCase).join(', ');
               return `
                 <p class="profile-cert-status">${emojiSpan('🔒')} Locked for printing.</p>
-                <p class="muted">All skills are saved, but certificates require <strong>100/100</strong> in each skill.${
+                <p class="muted">All skills are saved, but mastery certificates require <strong>80/100 or higher</strong> in each skill.${
                   needs ? ` Skills to improve: <strong>${safeText(needs)}</strong>.` : ''
                 }</p>
               `;
@@ -836,7 +836,7 @@ export function getView(ctx) {
       if (!a) return;
       e.preventDefault();
       e.stopPropagation();
-      setProgressStatus('Certificates are locked. Unlock an age group by saving all 4 skills at 100/100.', true);
+      setProgressStatus('Certificates are locked. Unlock an age group by saving all 4 skills at 80/100 or higher.', true);
     });
 
     // Save personal fields (preserve resultsByAge and any other fields)

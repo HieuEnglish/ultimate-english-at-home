@@ -204,6 +204,9 @@ function loadingHtml() {
 async function render(appPath) {
   const token = ++renderToken;
   const normalizedPath = normalizeAppPath(appPath);
+  if (/^\/(resources|games|tests)\//.test(normalizedPath)) {
+    try { localStorage.setItem('UEAH_LAST_LEARNING_PATH_V1', normalizedPath); } catch (_) {}
+  }
   cleanupActiveView();
 
   // Highlight the active navigation link
@@ -242,6 +245,9 @@ async function render(appPath) {
       viewResult = viewModule.getView(ctx);
     } else if (parts[0] === 'contact' && parts.length === 1) {
       viewModule = await import('./views/contact.js');
+      viewResult = viewModule.getView(ctx);
+    } else if (parts[0] === 'privacy' && parts.length === 1) {
+      viewModule = await import('./views/privacy.js');
       viewResult = viewModule.getView(ctx);
     } else if (parts[0] === 'favourites' && parts.length === 1) {
       viewModule = await import('./views/favourites.js');

@@ -4,6 +4,11 @@
 
 export function getView(ctx) {
   const { hrefFor } = ctx;
+  let continuePath = '';
+  try {
+    const saved = localStorage.getItem('UEAH_LAST_LEARNING_PATH_V1') || '';
+    if (/^\/(resources|games|tests)\//.test(saved)) continuePath = saved;
+  } catch (_) {}
 
   const title = 'UEAH - Ultimate English At Home';
   const description =
@@ -28,8 +33,8 @@ export function getView(ctx) {
             </p>
 
             <div class="hero-actions">
-              <a href="${hrefFor('/resources')}" class="btn-hero btn-hero--primary" data-nav>
-                Start Learning Free &rarr;
+              <a href="${hrefFor(continuePath || '/resources')}" class="btn-hero btn-hero--primary" data-nav>
+                ${continuePath ? 'Continue Learning' : 'Start Learning Free'} &rarr;
               </a>
               <a href="#features" class="btn-hero btn-hero--outline">
                 Explore the Platform

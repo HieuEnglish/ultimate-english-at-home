@@ -923,9 +923,11 @@ class GameBase {
         if (window.THREE) return true;
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+            // Keep the 3D games available on school networks and offline. The
+            // pinned runtime is vendored instead of fetched from a third party.
+            script.src = new URL("assets/vendor/three-r128.min.js", document.baseURI).href;
             script.onload = () => resolve(true);
-            script.onerror = () => reject(new Error("Failed to load Three.js"));
+            script.onerror = () => reject(new Error("Failed to load the local Three.js runtime"));
             document.head.appendChild(script);
         });
     }

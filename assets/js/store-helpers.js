@@ -475,7 +475,7 @@ export function favouritesImportData(payload, opts = {}) {
   }
 
   const incomingItems = incoming && typeof incoming === "object" ? incoming.items : null;
-  const list = Array.isArray(incomingItems) ? incomingItems.slice() : [];
+  const list = Array.isArray(incomingItems) ? incomingItems.slice(0, 500) : [];
 
   const current = favouritesGetAll();
   const map = {};
@@ -547,6 +547,10 @@ export function syncExport() {
 export function syncImport(syncJson, opts = {}) {
   const mode = opts && opts.mode === "replace" ? "replace" : "merge";
 
+  if (typeof syncJson === "string" && syncJson.length > 2_000_000) {
+    return { ok: false, reason: "Sync file is too large (maximum 2 MB)" };
+  }
+
   let incoming = syncJson;
   if (typeof syncJson === "string") {
     try {
@@ -557,6 +561,13 @@ export function syncImport(syncJson, opts = {}) {
   }
 
   if (!incoming || typeof incoming !== "object") return { ok: false, reason: "Invalid payload shape" };
+  try {
+    if (JSON.stringify(incoming).length > 2_000_000) {
+      return { ok: false, reason: "Sync file is too large (maximum 2 MB)" };
+    }
+  } catch (_) {
+    return { ok: false, reason: "Invalid payload shape" };
+  }
 
   // Soft validation (don’t hard-block older files; just prefer correct metadata)
   if (incoming.app && String(incoming.app) !== "UEAH") {
@@ -664,6 +675,7 @@ function deepMerge(target, patch) {
   if (!isPlainObject(target) || !isPlainObject(patch)) return target;
   const out = { ...target };
   Object.keys(patch).forEach((k) => {
+    if (k === "__proto__" || k === "prototype" || k === "constructor") return;
     const tv = out[k];
     const pv = patch[k];
     if (isPlainObject(tv) && isPlainObject(pv)) out[k] = deepMerge(tv, pv);

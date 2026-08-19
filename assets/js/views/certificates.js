@@ -137,7 +137,7 @@ function getOverall(resultsByAge, age) {
 function isPerfectScore(n) {
   const v = Number(n);
   if (!Number.isFinite(v)) return false;
-  return Math.abs(v - 100) < 1e-9;
+  return v >= 80;
 }
 
 function ageCertificateStatus(resultsByAge, age) {
@@ -355,7 +355,7 @@ function pageLockedHtml(ctx, titleText, message) {
       <div class="note" style="margin-top:12px">
         <strong>${emojiSpan('✅')} Unlock rule</strong>
         <p style="margin:8px 0 0; opacity:.92">
-          Certificates unlock only when <strong>Reading, Listening, Writing, and Speaking</strong> are all saved and each score is <strong>100/100</strong> for an age group.
+          Mastery certificates unlock when <strong>Reading, Listening, Writing, and Speaking</strong> are all saved and each score is <strong>80/100 or higher</strong>.
         </p>
         <p class="muted" style="margin:8px 0 0">${safeText(message || '')}</p>
       </div>
@@ -486,7 +486,7 @@ export async function getView(ctx, mode) {
         html: pageLockedHtml(
           ctx,
           'Certificate',
-          'No age group is unlocked yet. Save all 4 skills at 100/100 for an age group to unlock.'
+          'No age group is unlocked yet. Save all 4 skills at 80/100 or higher for an age group to unlock.'
         ),
         afterRender: () => {},
       };
@@ -537,7 +537,7 @@ export async function getView(ctx, mode) {
       const missing = status.missing.map(titleCase).join(', ');
       const notPerfect = status.notPerfect.map(titleCase).join(', ');
       const msg = status.allSaved
-        ? `All skills are saved, but certificates require 100/100 in each skill. Skills to improve: ${notPerfect || 'Not specified'}.`
+        ? `All skills are saved, but mastery certificates require 80/100 or higher in each skill. Skills to improve: ${notPerfect || 'Not specified'}.`
         : `Missing saved skills: ${missing || 'Not specified'}.`;
 
       return {
@@ -590,7 +590,7 @@ export async function getView(ctx, mode) {
       <div class="note" style="margin-top:12px">
         <strong>${emojiSpan('✅')} Unlocked</strong>
         <p style="margin:8px 0 0; opacity:.92">
-          You unlocked certification for <strong>${safeText(label)}</strong> by saving all skills at <strong>100/100</strong>.
+          You unlocked mastery certification for <strong>${safeText(label)}</strong> by saving all skills at <strong>80/100 or higher</strong>.
         </p>
         ${
           overall

@@ -11,6 +11,7 @@ import {
   escapeAttr,
   ageGroupLabel,
   ageGroupMetaText,
+  safeExternalUrl,
 } from '../common.js';
 import { getStoreMissingView } from './error.js';
 import { getView as getNotFoundView } from './not-found.js';
@@ -109,9 +110,10 @@ export async function getView(ctx, age, skill, slug) {
     `
     : '';
 
-  const openBtn = resource.link
+  const primaryUrl = safeExternalUrl(resource.link);
+  const openBtn = primaryUrl
     ? `<a class="btn btn--primary" href="${escapeAttr(
-        resource.link
+        primaryUrl
       )}" target="_blank" rel="noopener noreferrer">Open Resource ↗</a>`
     : `<span class="btn btn--primary btn--disabled" aria-disabled="true">MISSING LINK</span>`;
 
@@ -153,7 +155,9 @@ export async function getView(ctx, age, skill, slug) {
   }
 
   // Extra links
-  const otherLinks = Array.isArray(details.otherLinks) ? details.otherLinks : [];
+  const otherLinks = Array.isArray(details.otherLinks)
+    ? details.otherLinks.map(safeExternalUrl).filter(Boolean)
+    : [];
   const otherLinksHtml = otherLinks.length
     ? `
       <div class="detail-section">
@@ -181,8 +185,9 @@ export async function getView(ctx, age, skill, slug) {
         const r = ctx.storeGetResource(age, skill, s);
         if (!r) return `<li>${escapeHtml(s)}</li>`;
         const internalHref = ctx.hrefFor(`/resources/${age}/${skill}/${r.slug}`);
-        const external = r.link
-          ? ` <a href="${escapeAttr(r.link)}" target="_blank" rel="noopener noreferrer">(Open ↗)</a>`
+        const linkedUrl = safeExternalUrl(r.link);
+        const external = linkedUrl
+          ? ` <a href="${escapeAttr(linkedUrl)}" target="_blank" rel="noopener noreferrer">(Open ↗)</a>`
           : ` <span class="muted">(MISSING LINK)</span>`;
         return `<li><a href="${internalHref}" data-nav>${escapeHtml(r.title)}</a>${external}</li>`;
       })

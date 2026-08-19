@@ -640,6 +640,7 @@ export async function getView(ctx, slug) {
             </div>
           </div>
           <p class="page-subtitle test-hero__subtitle">${escapeHtml(safeSubtitle)}</p>
+          <p class="note">Practice feedback is an educational estimate, not an official IELTS result or professional assessment. Browser speech recognition can affect speaking scores.</p>
 
           <div class="test-chip-row" aria-label="Test summary">
             <span class="test-chip">${escapeHtml(theme.ageLabel)}</span>

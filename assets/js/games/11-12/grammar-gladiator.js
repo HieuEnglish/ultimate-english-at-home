@@ -130,12 +130,6 @@ class GrammarGladiatorGame extends GameBase {
             @keyframes shake { 0%, 100% {transform:translateX(0);} 25% {transform:translateX(-10px);} 75% {transform:translateX(10px);} }
         `;
 
-        // Font
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap';
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
-
         this.container.appendChild(style);
     }
 

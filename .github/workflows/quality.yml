@@ -1,0 +1,46 @@
+name: Quality
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 3 * * 1"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tools/qa/package-lock.json
+      - run: npm run generate
+      - run: git diff --exit-code
+      - run: npm run check
+      - run: npm ci
+        working-directory: tools/qa
+      - run: npx playwright install --with-deps chromium
+        working-directory: tools/qa
+      - name: Start local app
+        run: python3 tools/spa_server.py 4173 > /tmp/ueah-server.log 2>&1 &
+      - run: npm run qa:smoke
+      - run: npm run qa:tests
+      - run: npm run qa:games
+      - run: npm run qa:a11y
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-reports
+          path: tmp/*-report.json
+
+  external-links:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run check:links

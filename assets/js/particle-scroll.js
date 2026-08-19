@@ -4,7 +4,11 @@
  * without the still-experimental html-in-canvas API.
  */
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
-if (!motion.matches) {
+const requestedRoute = new URL(location.href).searchParams.get('r');
+const isHomeRoute = !requestedRoute && /\/$/.test(location.pathname);
+// This is decorative and relatively expensive. Keep it on the marketing home
+// page; learning activities should reserve the frame budget for interaction.
+if (!motion.matches && isHomeRoute && innerWidth >= 700) {
   const main = document.querySelector('.site-main');
   const app = document.getElementById('app');
 

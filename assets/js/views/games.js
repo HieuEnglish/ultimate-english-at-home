@@ -9,8 +9,8 @@ const AGE_INFO = {
   '0-3': { emoji: '🧒', label: 'Kids', range: '0-3', sublabel: 'Tap, listen, and playful first wins', glow: 'green' },
   '4-7': { emoji: '🎨', label: 'Kids+', range: '4-7', sublabel: 'Phonics, early reading, and quick fun loops', glow: 'yellow' },
   '8-10': { emoji: '🚀', label: 'Pre-Teens', range: '8-10', sublabel: 'Vocabulary building and confidence games', glow: 'blue' },
-  '11-12': { emoji: '🧠', label: 'Teens', range: '11-12', sublabel: 'Grammar, strategy, and sharper challenge play', glow: 'purple' },
-  '13-18': { emoji: '🎓', label: 'Adults', range: '13-18', sublabel: 'Advanced speaking and stronger skill drills', glow: 'pink' },
+  '11-12': { emoji: '🧠', label: 'Pre-Teens', range: '11-12', sublabel: 'Grammar, strategy, and sharper challenge play', glow: 'purple' },
+  '13-18': { emoji: '🎓', label: 'Teens', range: '13-18', sublabel: 'Advanced speaking and stronger skill drills', glow: 'pink' },
 };
 
 function buildStats() {

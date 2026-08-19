@@ -2,7 +2,7 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mount = document.getElementById('hero-3d');
 
 if (mount && !reduceMotion) {
-  import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js')
+  import('../vendor/three-0.185.1.module.js')
     .then(THREE => {
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(48, 1, .1, 100);

@@ -6,8 +6,6 @@
    ============================================================= */
 
 /* ── Google Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 /* ── Design Tokens ── */
 :root {
   /* Core palette */
@@ -1477,7 +1475,7 @@ body::after {
 .site-footer {
   border-top: 1px solid var(--border-subtle);
   padding: 1rem 0;
-  background: rgba(7,7,26,0.8);
+  background: #07071a;
   backdrop-filter: blur(10px);
 }
 
@@ -1497,6 +1495,7 @@ body::after {
   transition: color var(--transition);
 }
 .footer-right a:hover { color: var(--text-secondary); }
+.footer-right { color: #b8b9d1; }
 
 /* ── GENERIC PAGE HEADER ── */
 .page-header {
@@ -1868,7 +1867,7 @@ body {
 }
 
 .site-footer {
-  background: rgba(7, 7, 26, 0.8);
+  background: #07071a;
 }
 
 /* =============================================================

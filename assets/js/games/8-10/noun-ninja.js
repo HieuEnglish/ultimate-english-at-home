@@ -156,12 +156,6 @@ class NounNinjaGame extends GameBase {
                 transform-origin: left center;
             }
         `;
-        // Load font
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Shojumaru&display=swap';
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
-
         this.container.appendChild(style);
     }
 

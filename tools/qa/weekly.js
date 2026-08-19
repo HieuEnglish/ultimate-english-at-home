@@ -73,8 +73,13 @@ async function run() {
   });
   page.on('requestfailed', (request) => {
     const reason = request.failure()?.errorText || 'unknown request failure';
+    const url = request.url();
     if (reason.includes('ERR_ABORTED') || reason.includes('ERR_CONNECTION_RESET')) return;
-    errors.push({ area: 'request', msg: `${reason}: ${request.url()}` });
+    if (/fonts\.(googleapis|gstatic)\.com/i.test(url)) {
+      warnings.push({ area: 'optional-resource', msg: `${reason}: ${url}` });
+      return;
+    }
+    errors.push({ area: 'request', msg: `${reason}: ${url}` });
   });
 
   async function checkPage(t) {

@@ -899,6 +899,7 @@
     if (!isPlainObject(target) || !isPlainObject(patch)) return target;
     const out = { ...target };
     Object.keys(patch).forEach((k) => {
+      if (k === "__proto__" || k === "prototype" || k === "constructor") return;
       const tv = out[k];
       const pv = patch[k];
       if (isPlainObject(tv) && isPlainObject(pv)) out[k] = deepMerge(tv, pv);

@@ -96,6 +96,23 @@ To keep the app aligned with its mission:
 - `tools/` — helper scripts  
 - `index.html` — app entry  
 
+## Local development and quality checks
+
+```powershell
+node tools/generate-static-routes.js
+node tools/spa_server.py 4173
+npm run check
+```
+
+Browser QA lives in `tools/qa`. Install it with `npm ci` from that directory,
+then run the `qa:*` scripts from the repository root. Pull requests run syntax,
+question-bank, security, route-generation, smoke, game, test-runner, and
+accessibility checks automatically.
+
+Generated route directories are intentional: they let GitHub Pages return a
+real HTTP 200 response for sitemap and shared deep links instead of relying on
+the custom 404 redirect.
+
 ---
 
 ## 🐛 Report Issues / Request Features

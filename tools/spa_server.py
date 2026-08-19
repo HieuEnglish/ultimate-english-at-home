@@ -27,7 +27,7 @@ class SPARequestHandler(SimpleHTTPRequestHandler):
     def _spa_redirect_target(self):
         requested = Path(self.translate_path(self.path))
 
-        if requested.exists() and requested.is_file():
+        if requested.exists() and (requested.is_file() or (requested.is_dir() and (requested / 'index.html').is_file())):
             return None
 
         route = self.path.split('?', 1)[0].split('#', 1)[0]

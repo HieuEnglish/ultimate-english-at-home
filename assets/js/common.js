@@ -55,6 +55,17 @@ export function escapeAttr(s) {
   return escapeHtml(String(s)).replaceAll("\n", " ");
 }
 
+// Only permit web links from resource data. This prevents imported or
+// contributed metadata from introducing javascript: or data: navigation.
+export function safeExternalUrl(value) {
+  try {
+    const url = new URL(String(value || '').trim(), window.location.href);
+    return url.protocol === 'https:' || url.protocol === 'http:' ? url.href : '';
+  } catch (_) {
+    return '';
+  }
+}
+
 // -----------------------------
 // UI helpers
 // -----------------------------
