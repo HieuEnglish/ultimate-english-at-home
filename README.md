@@ -84,9 +84,9 @@ To keep the app aligned with its mission:
 
 ## 🔊 TTS Notes
 
-- TTS is generated live with the browser Web Speech API.  
-- The app uses smart English voice selection and prefers higher-quality browser voices when available.  
-- Audio quality depends on the learner's browser and operating system; Chrome on desktop usually provides the best voices.  
+- Default voice is the browser Web Speech API (instant, offline), with smart ranking that prefers natural/neural built-ins (e.g. Microsoft Natural, Samantha, Google US English).
+- Optional **online neural voice** (`en-US-AvaNeural`): streams natural sentence audio, needs internet, no download or API key. Falls back to the browser voice offline or on error.
+- Audio quality otherwise depends on the learner's browser and OS; Chrome on desktop usually provides the best built-in voices.  
 
 ---
 

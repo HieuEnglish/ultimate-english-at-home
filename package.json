@@ -14,6 +14,8 @@
     "qa:smoke": "node tools/qa/weekly.js --url http://127.0.0.1:4173/",
     "qa:games": "node tools/qa/games.js --url http://127.0.0.1:4173/",
     "qa:tests": "node tools/qa/tests.js --url http://127.0.0.1:4173/",
+    "qa:tts-voices": "node tools/qa/tts-voices.js --url http://127.0.0.1:4173/",
+    "qa:tts-online": "node tools/qa/tts-online.js --url http://127.0.0.1:4173/",
     "qa:a11y": "node tools/qa/accessibility.js --url http://127.0.0.1:4173/"
   }
 }

@@ -59,6 +59,12 @@ if (unescapedCount > 20) errors.push(`... and ${unescapedCount - 20} more unesca
 // (no custom headers). Clickjacking cover: app has no sensitive actions;
 // state is localStorage-only.
 
+// Online neural voice streams from one pinned host; assert no widening.
+if (fs.existsSync(path.join(root, 'assets', 'js', 'tts-online.js'))) {
+  const cspMeta = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  if (!/speech\.platform\.bing\.com/.test(cspMeta)) errors.push('index.html: CSP missing speech.platform.bing.com (required by online voice)');
+}
+
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(2);

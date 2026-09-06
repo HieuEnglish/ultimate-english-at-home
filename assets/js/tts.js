@@ -2,7 +2,9 @@
    Shared Text-to-Speech helper for UEAH.
 
    Supports:
-   - Browser speech synthesis (Web Speech API)
+   - Browser speech synthesis (Web Speech API, instant default)
+   - Online neural voice (streams sentence audio, opt-in, needs internet;
+     falls back to the browser voice when offline or on error)
 
    Exposes: window.UEAH_TTS
      - isSupported()
@@ -31,7 +33,13 @@
   const PROVIDERS = {
     auto: "auto",
     browser: "browser",
+    online: "online",
   };
+
+  function getOnline() {
+    var o = window.UEAH_TTS_ONLINE;
+    return o && typeof o === "object" ? o : null;
+  }
 
   function norm(s) {
     return String(s || "").trim().toLowerCase();
@@ -59,7 +67,7 @@
 
     return {
       preferredProvider:
-        preferredProvider === PROVIDERS.browser
+        preferredProvider === PROVIDERS.browser || preferredProvider === PROVIDERS.online
           ? preferredProvider
           : PROVIDERS.browser,
     };
@@ -70,7 +78,7 @@
   const DEFAULTS = {
     provider: runtimeConfig.preferredProvider,
     voiceURI: "",
-    rate: 0.88,
+    rate: 0.95,
   };
 
   const EVENTS = {
@@ -100,8 +108,19 @@
 
   function normalizeProvider(value) {
     const v = norm(value);
-    if (v === PROVIDERS.auto || v === PROVIDERS.browser) return v;
+    if (v === PROVIDERS.auto || v === PROVIDERS.browser || v === PROVIDERS.online) return v;
     return PROVIDERS.browser;
+  }
+
+  // Online neural voice (streams sentence audio, needs internet).
+  function onlineStatus() {
+    const o = getOnline();
+    if (!o) return { available: false };
+    return {
+      available: true,
+      voice: String(o.VOICE || ""),
+      needsInternet: true,
+    };
   }
 
   function loadSettings() {
@@ -328,6 +347,40 @@
     };
   }
 
+  // Known-good built-in voices (no download needed). Names as reported by
+  // Windows (Microsoft), macOS/iOS (Samantha et al.) and Chrome (Google).
+  // Kept as substring matchers so "Microsoft Aria Online (Natural)" still hits.
+  const PREFERRED_VOICE_NAMES = [
+    "aria", "jenny", "guy", "ana", "christopher", "emma", "brian", "natasha",
+    "samantha", "karen", "moira", "tessa", "fiona", "daniel", "aaron", "zoe",
+    "google us english", "google uk english female", "google uk english male",
+  ];
+
+  function rankVoice(v, preferredLang) {
+    const pref = norm(preferredLang || "en-US");
+    const primaryPref = pref.split("-")[0] || "en";
+    const name = norm(v && v.name);
+    const uri = norm(v && v.voiceURI);
+    const lang = norm(v && v.lang);
+    if (!lang.startsWith("en")) return -1;
+
+    let score = 0;
+    // Quality signals (strongest first).
+    if (name.includes("natural") || name.includes("neural")) score += 60;
+    else if (name.includes("enhanced") || name.includes("premium") || name.includes("online")) score += 40;
+    else if (name.includes("google") || name.includes("microsoft") || name.includes("samantha")) score += 20;
+    // Online (network) voices usually sound better than local eSpeak-class ones.
+    if (v && v.localService === false) score += 10;
+    if (name.includes("microsoft") || uri.includes("microsoft")) score += 5;
+    // Known-good built-ins get a nudge.
+    if (PREFERRED_VOICE_NAMES.some((n) => name.includes(n))) score += 15;
+    // Locale preference: exact > en-US > other en.
+    if (lang === pref) score += 12;
+    else if (lang.startsWith("en-us")) score += 8;
+    else if (lang.startsWith(primaryPref)) score += 4;
+    return score;
+  }
+
   function pickBestVoice(preferredLang) {
     const list = voices.length ? voices : refreshVoices();
     if (!list.length) return null;
@@ -339,25 +392,16 @@
 
     if (cachedBestVoice && list.includes(cachedBestVoice)) return cachedBestVoice;
 
-    cachedBestVoice = list.find((v) => {
-      const name = norm(v && v.name);
-      const lang = norm(v && v.lang);
-      return name.includes("google") && lang.startsWith("en");
-    }) || list.find((v) => {
-      const name = norm(v && v.name);
-      const lang = norm(v && v.lang);
-      return name.includes("microsoft") && lang.startsWith("en") && v && v.localService === false;
-    }) || list.find((v) => {
-      const lang = norm(v && v.lang);
-      return v && v.localService === false && lang.startsWith("en");
-    }) || list.find((v) => {
-      const lang = norm(v && v.lang);
-      return lang.startsWith("en-us");
-    }) || list.find((v) => {
-      const lang = norm(v && v.lang);
-      return lang.startsWith("en");
-    }) || null;
-
+    let best = null;
+    let bestScore = -1;
+    for (const v of list) {
+      const s = rankVoice(v, preferredLang);
+      if (s > bestScore) {
+        bestScore = s;
+        best = v;
+      }
+    }
+    cachedBestVoice = best;
     return cachedBestVoice;
   }
 
@@ -370,13 +414,27 @@
   }
 
   function resolveProvider(requestedProvider) {
-    normalizeProvider(requestedProvider || settings.provider || runtimeConfig.preferredProvider);
-    return PROVIDERS.browser;
+    const v = normalizeProvider(requestedProvider || settings.provider || runtimeConfig.preferredProvider);
+    if (v === PROVIDERS.online && !getOnline()) return PROVIDERS.browser;
+    return v;
   }
 
   function getProviderMeta(preferredLang) {
     const selectedProvider = normalizeProvider(settings.provider || runtimeConfig.preferredProvider);
     const resolvedProvider = resolveProvider(selectedProvider);
+
+    if (resolvedProvider === PROVIDERS.online) {
+      return {
+        selectedProvider,
+        resolvedProvider,
+        browserMeta: getPreferredVoiceMeta(preferredLang || "en-US"),
+        online: onlineStatus(),
+        quality: "Online neural",
+        summary: "Online neural voice (streams audio, needs internet). Falls back to the browser voice offline.",
+        usesBrowserVoices: false,
+      };
+    }
+
     const browserMeta = getPreferredVoiceMeta(preferredLang || "en-US");
 
     let summary = "";
@@ -403,6 +461,10 @@
   function stop() {
     speakJobId += 1;
     try {
+      const o = getOnline();
+      if (o && typeof o.stop === "function") o.stop();
+    } catch (_) {}
+    try {
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }
@@ -410,6 +472,15 @@
   }
 
   function isSpeaking() {
+    const onlineSpeaking = (() => {
+      try {
+        const o = getOnline();
+        return !!(o && typeof o.isSpeaking === "function" && o.isSpeaking());
+      } catch (_) {
+        return false;
+      }
+    })();
+
     const browserSpeaking = (() => {
       try {
         return !!(window.speechSynthesis && window.speechSynthesis.speaking);
@@ -418,7 +489,7 @@
       }
     })();
 
-    return browserSpeaking;
+    return browserSpeaking || onlineSpeaking;
   }
 
   function cleanText(text) {
@@ -562,9 +633,10 @@
               const part = chunks[i++];
               const utterance = new SpeechSynthesisUtterance(part);
               utterance.lang = lang;
-              utterance.rate = 0.88;
-              utterance.pitch = 1.0;
-              utterance.volume = 1.0;
+              // Honour caller/user settings (previously hardcoded).
+              utterance.rate = clamp(options.rate, RATE_MIN, RATE_MAX);
+              utterance.pitch = clamp(options.pitch, 0.5, 2.0);
+              utterance.volume = clamp(options.volume, 0.0, 1.0);
 
               if (voice) {
                 try {
@@ -573,7 +645,8 @@
               }
 
               utterance.onend = () => {
-                setTimeout(speakNext, 10);
+                // Natural sentence pause instead of a 10ms blurt.
+                setTimeout(speakNext, chunks.length > 1 ? 180 : 10);
               };
 
               utterance.onerror = () => {
@@ -618,6 +691,25 @@
         window.speechSynthesis.cancel();
       }
     } catch (_) {}
+    try {
+      const o = getOnline();
+      if (o && typeof o.stop === "function") o.stop();
+    } catch (_) {}
+
+    // Online neural voice first when selected; any failure falls back to browser.
+    if (resolved.provider === PROVIDERS.online) {
+      const o = getOnline();
+      if (o && typeof o.speakAsync === "function") {
+        return o.speakAsync(t, { rate: resolved.rate }).then((ok) => {
+          if (ok && jobId === speakJobId) return true;
+          if (jobId !== speakJobId) return false;
+          return speakWithBrowser(t, resolved, jobId);
+        }).catch(() => {
+          if (jobId !== speakJobId) return false;
+          return speakWithBrowser(t, resolved, jobId);
+        });
+      }
+    }
 
     return speakWithBrowser(t, resolved, jobId);
   }
@@ -660,6 +752,7 @@
     getVoiceMeta,
     getPreferredVoiceMeta,
     getProviderMeta,
+    onlineStatus,
     speak,
     speakAsync,
     stop,

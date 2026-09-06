@@ -1,8 +1,11 @@
 /* assets/js/tts-config.js
    Browser-only runtime config for shared TTS.
 
-   UEAH is a fully static GitHub Pages app. Speech is generated live with the
-   browser Web Speech API; no stored clips, server, or API key is used.
+   UEAH is a fully static GitHub Pages app. Speech uses the browser
+   Web Speech API by default (no stored clips, server, or API key).
+   Users can opt into the online neural voice (streams sentence audio,
+   needs internet) from the test audio panel; anything else falls back
+   to the browser voice.
 */
 (function () {
   "use strict";

@@ -769,12 +769,14 @@ export async function getView(ctx, slug) {
             ? tts.getVoiceMeta(voice, preferredLang)
             : null;
           if (!meta) return 99;
-          if (meta.isMicrosoftNatural) return 0;
-          if (meta.isMicrosoft && meta.isNatural) return 1;
-          if (meta.isMicrosoft) return 2;
-          if (meta.isGoogle && meta.isNatural) return 3;
-          if (meta.isNatural) return 4;
-          if (meta.isEnglish) return 5;
+          const lang = String(voice?.lang || '').toLowerCase();
+          const usBonus = lang.startsWith('en-us') ? -0.5 : 0;
+          if (meta.isMicrosoftNatural) return 0 + usBonus;
+          if (meta.isMicrosoft && meta.isNatural) return 1 + usBonus;
+          if (meta.isMicrosoft) return 2 + usBonus;
+          if (meta.isGoogle && meta.isNatural) return 3 + usBonus;
+          if (meta.isNatural) return 4 + usBonus;
+          if (meta.isEnglish) return 5 + usBonus;
           return 6;
         };
 
@@ -792,6 +794,7 @@ export async function getView(ctx, slug) {
           const options = [
             { value: 'auto', label: 'Auto (smart browser voice)' },
             { value: 'browser', label: 'Browser voice' },
+            { value: 'online', label: 'Online neural voice (needs internet)' },
           ];
 
           for (const option of options) {
@@ -803,7 +806,7 @@ export async function getView(ctx, slug) {
           }
 
           const current = String(settings.provider || 'auto');
-          providerSelect.value = current === 'browser' ? 'browser' : 'auto';
+          providerSelect.value = ['browser', 'online'].includes(current) ? current : 'auto';
         };
 
         const updateVoiceMessaging = () => {
@@ -823,17 +826,22 @@ export async function getView(ctx, slug) {
 
           const activeMeta = selectedVoiceURI ? selectedMeta : autoMeta;
           const usesBrowserVoices = !!providerMeta?.usesBrowserVoices;
+          const onlineSelected = String(providerMeta?.selectedProvider || '') === 'online';
 
           if (providerHint) {
             if (!providerMeta) {
               providerHint.textContent = 'Playback provider information is not available yet.';
+            } else if (onlineSelected) {
+              providerHint.textContent = 'Online neural voice streams natural speech per sentence (needs internet). Offline or on error it falls back to the browser voice.';
             } else {
               providerHint.textContent = 'This static build uses live browser speech synthesis only. Voice quality depends on the browser and OS.';
             }
           }
 
           if (qualityEl) {
-            if (activeMeta && activeMeta.voice) {
+            if (onlineSelected) {
+              qualityEl.textContent = 'Current voice: Online neural (en-US-AvaNeural). Natural streaming speech.';
+            } else if (activeMeta && activeMeta.voice) {
               qualityEl.textContent = selectedVoiceURI
                 ? `Current voice: ${activeMeta.displayName}. ${activeMeta.summary}`
                 : `Auto voice: ${activeMeta.displayName}. ${activeMeta.summary}`;

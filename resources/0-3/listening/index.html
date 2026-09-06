@@ -27,7 +27,7 @@
   <meta name="description"
     content="Free listening resources for ages 0-3." />
   <meta name="robots" content="index,follow" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self' https://speech.platform.bing.com wss://speech.platform.bing.com; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; upgrade-insecure-requests" />
   <link rel="canonical" href="https://hieuenglish.github.io/ultimate-english-at-home/resources/0-3/listening" />
 
   <!-- Theme -->
@@ -413,6 +413,9 @@
 
   <!-- Shared TTS helper -->
   <script defer src="assets/js/tts.js"></script>
+
+  <!-- Online neural voice (opt-in; streams sentence audio, needs internet) -->
+  <script defer src="assets/js/tts-online.js"></script>
 
   <!-- Game Engine (core logic) -->
   <script defer src="assets/js/games/engine.js"></script>
