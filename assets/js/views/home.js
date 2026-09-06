@@ -10,12 +10,56 @@ export function getView(ctx) {
     if (/^\/(resources|games|tests)\//.test(saved)) continuePath = saved;
   } catch (_) {}
 
+  // Live counts so the homepage reflects the real catalogue, not constants.
+  let gamesCount = 0;
+  let testsCount = 0;
+  let favCount = 0;
+  try {
+    const games = window.UEAH_GAMES_STORE;
+    if (games && typeof games.getAllGames === 'function') {
+      const list = games.getAllGames();
+      if (Array.isArray(list)) gamesCount = list.length;
+    }
+  } catch (_) {}
+  try {
+    const tests = window.UEAH_TESTS_STORE;
+    if (tests && typeof tests.getAll === 'function') {
+      const list = tests.getAll();
+      if (Array.isArray(list)) testsCount = list.length;
+    }
+  } catch (_) {}
+  try {
+    if (typeof ctx.favouritesGetAll === 'function') {
+      const favs = ctx.favouritesGetAll();
+      if (Array.isArray(favs)) favCount = favs.length;
+    }
+  } catch (_) {}
+
+  // Real user progress for the progress card.
+  let practicedSkills = 0;
+  let certsEarned = 0;
+  try {
+    const store = window.UEAH_PROFILE_STORE;
+    const profile = store && typeof store.getProfile === 'function' ? store.getProfile() : null;
+    const buckets = profile && profile.resultsByAge && typeof profile.resultsByAge === 'object' ? profile.resultsByAge : {};
+    Object.keys(buckets).forEach((age) => {
+      const b = buckets[age] || {};
+      ['reading', 'listening', 'writing', 'speaking'].forEach((skill) => {
+        if (b[skill] && b[skill].lastScore != null) practicedSkills += 1;
+      });
+    });
+    if (profile && Array.isArray(profile.certificates)) certsEarned = profile.certificates.length;
+  } catch (_) {}
+  const hasProgress = practicedSkills > 0 || certsEarned > 0 || favCount > 0;
+  const pct = (n, max) => Math.max(n > 0 ? 6 : 0, Math.min(100, Math.round((n / max) * 100)));
+
   const title = 'UEAH - Ultimate English At Home';
   const description =
     'Free English practice for kids, teens, and adults. Age-specific resources, games, and IELTS-inspired tests - all at home, all free.';
 
   const html = `
     <div class="landing-home">
+      <div class="scroll-progress" aria-hidden="true"><span data-scroll-fill></span></div>
       <section class="hero">
         <div class="hero-shell">
           <div class="hero-copy">
@@ -24,13 +68,9 @@ export function getView(ctx) {
 
             <h1 class="hero-title">
               Learn English<br />
-              <span class="grad">at any age, at home</span>
+              <span class="grad" data-hero-rotate aria-hidden="true">at any age, at home</span>
+              <span class="sr-only">at any age, at home</span>
             </h1>
-
-            <p class="hero-sub">
-              UEAH gives kids, teens, and adults free access to age-specific English resources,
-              games, and IELTS-inspired tests - designed to feel modern, visual, and actually enjoyable to return to.
-            </p>
 
             <div class="hero-actions">
               <a href="${hrefFor(continuePath || '/resources')}" class="btn-hero btn-hero--primary" data-nav>
@@ -50,19 +90,20 @@ export function getView(ctx) {
               <div class="hero-pill"><span aria-hidden="true">🧠</span> Ages 11-12</div>
               <div class="hero-pill"><span aria-hidden="true">🎓</span> Ages 13-18</div>
               <div class="hero-pill"><span aria-hidden="true">🎯</span> IELTS Track</div>
+              ${favCount > 0 ? `<a class="hero-pill hero-pill--live" href="${hrefFor('/favourites')}" data-nav><span aria-hidden="true">⭐</span> ${favCount} favourite${favCount === 1 ? '' : 's'} saved</a>` : ''}
             </div>
           </div>
 
-          <div class="hero-visual" data-reveal>
+          <div class="hero-visual" data-reveal data-hero-visual>
             <div class="hero-visual__halo hero-visual__halo--one"></div>
             <div class="hero-visual__halo hero-visual__halo--two"></div>
             <div class="hero-visual__spark hero-visual__spark--one"></div>
             <div class="hero-visual__spark hero-visual__spark--two"></div>
             <div class="hero-visual__spark hero-visual__spark--three"></div>
 
-            <div class="hero-visual__frame">
+            <div class="hero-visual__frame" data-hero-layer="6">
               <div class="hero-visual__card hero-visual__card--lead">
-                <div class="hero-visual__eyebrow">Live learning map</div>
+                <div class="hero-visual__eyebrow"><span class="live-dot" aria-hidden="true"></span>Live learning map</div>
                 <div class="hero-visual__title">Choose a route. Build momentum.</div>
                 <p class="hero-visual__caption">Resources, games, tests, and certificates connected in one practice path.</p>
                 <div class="hero-visual__mini-grid">
@@ -73,20 +114,23 @@ export function getView(ctx) {
                   <a class="hero-visual__mini-tile" href="${hrefFor('/games')}" data-nav>
                     <strong>🎮</strong>
                     <span>Games</span>
+                    ${gamesCount > 0 ? `<em class="mini-count">${gamesCount}</em>` : ''}
                   </a>
                   <a class="hero-visual__mini-tile" href="${hrefFor('/tests')}" data-nav>
                     <strong>🧪</strong>
                     <span>Tests</span>
+                    ${testsCount > 0 ? `<em class="mini-count">${testsCount}</em>` : ''}
                   </a>
                   <a class="hero-visual__mini-tile" href="${hrefFor('/profile/certificates')}" data-nav>
                     <strong>🏆</strong>
                     <span>Certificates</span>
+                    ${certsEarned > 0 ? `<em class="mini-count">${certsEarned}</em>` : ''}
                   </a>
                 </div>
               </div>
 
               <div class="hero-visual__stack">
-                <a class="hero-visual__card hero-visual__card--path" href="${hrefFor('/resources')}" data-nav>
+                <a class="hero-visual__card hero-visual__card--path" href="${hrefFor('/resources')}" data-nav data-hero-layer="10">
                   <div class="hero-visual__card-icon">🧭</div>
                   <div>
                     <div class="hero-visual__card-label">Age path</div>
@@ -94,12 +138,19 @@ export function getView(ctx) {
                   </div>
                 </a>
 
-                <a class="hero-visual__card hero-visual__card--score" href="${hrefFor('/profile')}" data-nav>
+                <a class="hero-visual__card hero-visual__card--score${hasProgress ? ' has-live' : ''}" href="${hrefFor('/profile')}" data-nav data-hero-layer="14">
                   <div class="hero-visual__card-icon">📈</div>
                   <div>
                     <div class="hero-visual__card-label">Progress</div>
-                    <div class="hero-visual__card-value">Skill scores + saved wins</div>
+                    <div class="hero-visual__card-value">${hasProgress ? `${practicedSkills} skill${practicedSkills === 1 ? '' : 's'} practiced` : 'Skill scores + saved wins'}</div>
                   </div>
+                  ${hasProgress ? `
+                  <div class="hero-meters">
+                    <div class="hero-meter"><span>Skills</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(practicedSkills, 24)}%; --fill-c: #38bdf8; transition-delay: 0.30s"></span></div><strong>${practicedSkills}</strong></div>
+                    <div class="hero-meter"><span>Awards</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(certsEarned, 6)}%; --fill-c: #f472b6; transition-delay: 0.42s"></span></div><strong>${certsEarned}</strong></div>
+                    <div class="hero-meter"><span>Saved</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(favCount, 10)}%; --fill-c: #fbbf24; transition-delay: 0.54s"></span></div><strong>${favCount}</strong></div>
+                  </div>
+                  ` : ''}
                 </a>
               </div>
             </div>
@@ -123,15 +174,21 @@ export function getView(ctx) {
         </div>
       </section>
 
+      <div class="flow-marquee" aria-hidden="true">
+        <div class="flow-marquee__track">
+          ${[0, 1].map(() => `<span>100% Free Forever</span><i>✦</i><span>Ages 0–3 to IELTS</span><i>✦</i><span>Reading · Listening · Writing · Speaking</span><i>✦</i><span>${gamesCount > 0 ? gamesCount : 70} Games</span><i>✦</i><span>${testsCount > 0 ? testsCount : 24} Practice Tests</span><i>✦</i><span>No Sign-up</span><i>✦</i><span>Certificates</span><i>✦</i>`).join('')}
+        </div>
+      </div>
+
       <section class="stats-strip" data-reveal>
         <div class="stats-inner">
           <div>
-            <span class="stat-num">6</span>
-            <p class="stat-label">Learning Tracks</p>
+            <span class="stat-num" data-count="${gamesCount > 0 ? gamesCount : 70}">0</span>
+            <p class="stat-label">Games to Play</p>
           </div>
           <div>
-            <span class="stat-num">4</span>
-            <p class="stat-label">Core Skills</p>
+            <span class="stat-num" data-count="${testsCount > 0 ? testsCount : 24}">0</span>
+            <p class="stat-label">Practice Tests</p>
           </div>
           <div>
             <span class="stat-num">100%</span>
@@ -145,6 +202,7 @@ export function getView(ctx) {
       </section>
 
       <section class="features" id="features" data-ueah-animate="stagger">
+        <div class="flow-orb flow-orb--a" data-flow-speed="0.1" aria-hidden="true"></div>
         <span class="section-label">What You Get</span>
         <h2 class="section-title">Everything you need to<br />build English confidence at home</h2>
         <p class="section-sub">
@@ -187,6 +245,7 @@ export function getView(ctx) {
       </section>
 
       <section class="age-section" id="ages">
+        <div class="flow-orb flow-orb--b" data-flow-speed="-0.08" aria-hidden="true"></div>
         <span class="section-label">For Every Learner</span>
         <h2 class="section-title">Learning paths built<br />for each stage</h2>
         <p class="section-sub">
@@ -239,6 +298,7 @@ export function getView(ctx) {
       </section>
 
       <section class="how-section" id="how">
+        <div class="flow-orb flow-orb--c" data-flow-speed="0.12" aria-hidden="true"></div>
         <span class="section-label">Simple And Fast</span>
         <h2 class="section-title">Get started in seconds</h2>
         <p class="section-sub">No setup maze, no paid wall, no friction. Open the app and start practicing.</p>
@@ -263,6 +323,7 @@ export function getView(ctx) {
       </section>
 
       <section class="skills-section" id="skills">
+        <div class="flow-orb flow-orb--a" data-flow-speed="-0.1" aria-hidden="true"></div>
         <span class="section-label">Core Skills</span>
         <h2 class="section-title">All four English skills covered</h2>
         <p class="section-sub">The platform keeps reading, listening, writing, and speaking aligned so practice feels balanced instead of fragmented.</p>
@@ -292,6 +353,7 @@ export function getView(ctx) {
       </section>
 
       <section class="testimonials">
+        <div class="flow-orb flow-orb--b" data-flow-speed="0.09" aria-hidden="true"></div>
         <span class="section-label">Built For Real Use</span>
         <h2 class="section-title">Why the app feels useful fast</h2>
 
@@ -335,6 +397,7 @@ export function getView(ctx) {
       </section>
 
       <section class="cta-section">
+        <div class="flow-orb flow-orb--c" data-flow-speed="-0.12" aria-hidden="true"></div>
         <div class="cta-card" data-reveal>
           <h2 class="cta-title">Ready to start learning?</h2>
           <p class="cta-sub">
@@ -350,26 +413,323 @@ export function getView(ctx) {
     </div>
   `;
 
+  const HERO_PHRASES = [
+    'at any age, at home',
+    'through play',
+    'with confidence',
+    'for every level',
+  ];
+
   const afterRender = () => {
+    const cleanups = [];
+    const on = (target, type, handler, opts) => {
+      if (!target) return;
+      target.addEventListener(type, handler, opts);
+      cleanups.push(() => {
+        try {
+          target.removeEventListener(type, handler, opts);
+        } catch (_) {}
+      });
+    };
+
     const anchorLinks = Array.from(document.querySelectorAll('.landing-home a[href^="#"]'));
     anchorLinks.forEach((link) => {
-      link.addEventListener('click', (event) => {
+      const handler = (event) => {
         const href = link.getAttribute('href') || '';
         const id = href.slice(1);
         const target = id ? document.getElementById(id) : null;
         if (!target) return;
         event.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      };
+      on(link, 'click', handler);
     });
 
-    const revealEls = Array.from(document.querySelectorAll('.landing-home [data-reveal]'));
-    if (!revealEls.length) return;
+    const anim = (window.UEAH && window.UEAH.anim) || null;
+    const reducedMotion = (anim && anim.REDUCED) ||
+      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Rotating hero phrase (typewriter when motion is allowed).
+    const rotateEl = document.querySelector('.landing-home [data-hero-rotate]');
+    // Reserve the tallest phrase so rotation never moves the page. Measured
+    // at runtime because wrapping depends on viewport width and fonts.
+    const reserveHeroSpace = () => {
+      if (!rotateEl || reducedMotion) return;
+      const prev = rotateEl.textContent;
+      let max = 0;
+      try {
+        HERO_PHRASES.forEach((p) => {
+          rotateEl.textContent = p;
+          max = Math.max(max, rotateEl.scrollHeight);
+        });
+      } catch (_) {}
+      rotateEl.textContent = prev;
+      if (max > 0) rotateEl.style.minHeight = `${Math.ceil(max)}px`;
+    };
+    if (rotateEl && !reducedMotion) {
+      if (document.fonts && typeof document.fonts.ready.then === 'function') {
+        document.fonts.ready.then(reserveHeroSpace).catch(() => {});
+      } else {
+        reserveHeroSpace();
+      }
+      let resizeTimer = null;
+      const onResize = () => {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(reserveHeroSpace, 200);
+      };
+      on(window, 'resize', onResize);
+      cleanups.push(() => {
+        if (resizeTimer) clearTimeout(resizeTimer);
+      });
+    }
+    if (rotateEl && HERO_PHRASES.length > 1 && !reducedMotion) {
+      let idx = 0;
+      let timer = null;
+      const typePhrase = (text, done) => {
+        let i = 0;
+        rotateEl.textContent = '';
+        timer = setInterval(() => {
+          i += 1;
+          rotateEl.textContent = text.slice(0, i);
+          if (i >= text.length) {
+            clearInterval(timer);
+            timer = null;
+            if (done) done();
+          }
+        }, 45);
+      };
+      const step = () => {
+        idx = (idx + 1) % HERO_PHRASES.length;
+        typePhrase(HERO_PHRASES[idx], () => {
+          timer = setTimeout(step, 2600);
+        });
+      };
+      timer = setTimeout(step, 2600);
+      cleanups.push(() => {
+        if (timer) {
+          clearInterval(timer);
+          clearTimeout(timer);
+        }
+      });
+    }
+
+    // Animated counters when the stats strip scrolls into view.
+    const counters = Array.from(document.querySelectorAll('.landing-home [data-count]'));
+    if (counters.length && typeof IntersectionObserver === 'function' && !reducedMotion && anim) {
+      const seen = new Set();
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || seen.has(entry.target)) return;
+          seen.add(entry.target);
+          const to = Number(entry.target.getAttribute('data-count')) || 0;
+          anim.animateCounter(entry.target, to, 1100);
+          counterObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.4 });
+      counters.forEach((el) => counterObserver.observe(el));
+      cleanups.push(() => counterObserver.disconnect());
+    } else {
+      // No motion or no observer: show final values immediately.
+      counters.forEach((el) => {
+        el.textContent = String(Number(el.getAttribute('data-count')) || 0);
+      });
+    }
+
+    // Tactile touches: ripple CTAs, tilt cards.
+    if (anim && !reducedMotion) {
+      try {
+        anim.initCardTilt('.landing-home .feature-card, .landing-home .age-path-card');
+      } catch (_) {}
+      try {
+        document.querySelectorAll('.landing-home .btn-hero').forEach((btn) => {
+          on(btn, 'click', (e) => anim.addRipple(e));
+        });
+      } catch (_) {}
+    }
+
+    const heroVisual = document.querySelector('.landing-home .hero-visual');
+
+    // Scroll flow: progress bar + scrubbed hero + parallax orbs in one
+    // rAF-throttled listener. Transform/opacity only, so no layout shift.
+    if (!reducedMotion && typeof requestAnimationFrame === 'function') {
+      const heroCopy = document.querySelector('.landing-home .hero-copy');
+      const progressFill = document.querySelector('.landing-home [data-scroll-fill]');
+      const orbs = Array.from(document.querySelectorAll('.landing-home [data-flow-speed]'));
+      let flowTicking = false;
+      const clamp01 = (n) => Math.max(0, Math.min(1, n));
+      const updateFlow = () => {
+        flowTicking = false;
+        try {
+          const doc = document.documentElement;
+          const max = doc.scrollHeight - window.innerHeight;
+          const p = max > 0 ? clamp01(window.scrollY / max) : 0;
+          if (progressFill) progressFill.style.transform = `scaleX(${p.toFixed(3)})`;
+
+          if (heroVisual) {
+            const rect = heroVisual.getBoundingClientRect();
+            const out = clamp01(-rect.top / Math.max(1, window.innerHeight));
+            heroVisual.style.transform = `translateY(${(out * -36).toFixed(1)}px)`;
+            if (heroCopy) {
+              heroCopy.style.transform = `translateY(${(out * 60).toFixed(1)}px)`;
+              heroCopy.style.opacity = String(1 - out * 0.55);
+            }
+          }
+
+          const vh = window.innerHeight;
+          orbs.forEach((orb) => {
+            const speed = Number(orb.getAttribute('data-flow-speed')) || 0.1;
+            const r = orb.parentElement.getBoundingClientRect();
+            const y = (r.top + r.height / 2 - vh / 2) * -speed;
+            orb.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`;
+          });
+        } catch (_) {}
+      };
+      const onFlowScroll = () => {
+        if (flowTicking) return;
+        flowTicking = true;
+        requestAnimationFrame(updateFlow);
+      };
+      on(window, 'scroll', onFlowScroll, { passive: true });
+      updateFlow();
+    }
+
+      // Staged bar growth once the visual is on screen.
+      if (heroVisual && typeof IntersectionObserver === 'function') {
+        const liveObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            heroVisual.classList.add('is-live');
+            liveObserver.disconnect();
+          });
+        }, { threshold: 0.25 });
+        liveObserver.observe(heroVisual);
+        cleanups.push(() => liveObserver.disconnect());
+      } else if (heroVisual) {
+        heroVisual.classList.add('is-live');
+      }
+
+      // Spotlight tour: cycle a glow across the mini-tiles (pauses on hover).
+      const tiles = Array.from(
+        heroVisual.querySelectorAll('.hero-visual__mini-tile')
+      );
+      if (heroVisual && tiles.length > 1) {
+        let spot = -1;
+        let spotTimer = null;
+        let hovering = false;
+        const paintSpot = () => {
+          tiles.forEach((t, i) => t.classList.toggle('is-spotlight', i === spot));
+        };
+        const stepSpot = () => {
+          if (!hovering) {
+            spot = (spot + 1) % tiles.length;
+            paintSpot();
+          }
+          spotTimer = setTimeout(stepSpot, 2200);
+        };
+        const onEnter = () => {
+          hovering = true;
+          spot = -1;
+          paintSpot();
+        };
+        const onLeaveTiles = () => {
+          hovering = false;
+        };
+        if (!reducedMotion) {
+          spotTimer = setTimeout(stepSpot, 1800);
+        }
+        on(heroVisual, 'pointerenter', onEnter);
+        on(heroVisual, 'pointerleave', onLeaveTiles);
+        tiles.forEach((t) => {
+          on(t, 'pointerenter', () => {
+            hovering = true;
+            spot = -1;
+            paintSpot();
+            t.classList.add('is-spotlight');
+          });
+          on(t, 'pointerleave', () => {
+            t.classList.remove('is-spotlight');
+            hovering = false;
+          });
+        });
+        cleanups.push(() => {
+          if (spotTimer) clearTimeout(spotTimer);
+        });
+      }
+
+      // Depth parallax: layers drift against the pointer (fine pointers only).
+      const canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const layers = heroVisual
+        ? Array.from(heroVisual.querySelectorAll('[data-hero-layer]'))
+        : [];
+      if (heroVisual && canHover && layers.length && typeof requestAnimationFrame === 'function') {
+        let raf = 0;
+        let tx = 0;
+        let ty = 0;
+        let cx = 0;
+        let cy = 0;
+        const settle = () => {
+          cx += (tx - cx) * 0.08;
+          cy += (ty - cy) * 0.08;
+          if (Math.abs(tx - cx) < 0.05 && Math.abs(ty - cy) < 0.05) {
+            cx = tx;
+            cy = ty;
+          }
+          layers.forEach((el) => {
+            const depth = Number(el.getAttribute('data-hero-layer')) || 8;
+            el.style.translate = `${(-cx * depth).toFixed(2)}px ${(-cy * depth).toFixed(2)}px`;
+          });
+          if (cx !== tx || cy !== ty) {
+            raf = requestAnimationFrame(settle);
+          } else {
+            raf = 0;
+          }
+        };
+        const kick = () => {
+          if (!raf) raf = requestAnimationFrame(settle);
+        };
+        const onMove = (e) => {
+          const rect = heroVisual.getBoundingClientRect();
+          tx = (e.clientX - (rect.left + rect.width / 2)) / rect.width;
+          ty = (e.clientY - (rect.top + rect.height / 2)) / rect.height;
+          tx = Math.max(-1, Math.min(1, tx));
+          ty = Math.max(-1, Math.min(1, ty));
+          kick();
+        };
+        const onLeave = () => {
+          tx = 0;
+          ty = 0;
+          kick();
+        };
+        on(heroVisual, 'pointermove', onMove);
+        on(heroVisual, 'pointerleave', onLeave);
+        cleanups.push(() => {
+          if (raf) cancelAnimationFrame(raf);
+          layers.forEach((el) => {
+            el.style.translate = '';
+          });
+        });
+      }
+
+    const revealEls = Array.from(document.querySelectorAll('.landing-home [data-reveal]'));
+    if (!revealEls.length) {
+      return () => {
+        cleanups.forEach((fn) => {
+          try {
+            fn();
+          } catch (_) {}
+        });
+      };
+    }
+
     if (reducedMotion || typeof IntersectionObserver !== 'function') {
       revealEls.forEach((el) => el.classList.add('is-visible'));
-      return;
+      return () => {
+        cleanups.forEach((fn) => {
+          try {
+            fn();
+          } catch (_) {}
+        });
+      };
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -381,6 +741,15 @@ export function getView(ctx) {
     }, { threshold: 0.12 });
 
     revealEls.forEach((el) => observer.observe(el));
+    cleanups.push(() => observer.disconnect());
+
+    return () => {
+      cleanups.forEach((fn) => {
+        try {
+          fn();
+        } catch (_) {}
+      });
+    };
   };
 
   return { title, description, html, afterRender };

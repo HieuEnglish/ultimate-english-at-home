@@ -16,12 +16,26 @@ function collectJsFiles(dir) {
 }
 
 const files = collectJsFiles(root);
+const fsTmp = require('os').tmpdir();
 let ok = 0;
 let bad = 0;
 for (const p of files) {
   const f = path.relative(root, p);
   try {
-    execSync(`node --check "${p}"`, { stdio: 'pipe' });
+    const src = fs.readFileSync(p, 'utf8');
+    // node --check parses .js as CommonJS and misses ESM-only errors
+    // (e.g. illegal return). Re-check module-syntax files as ESM.
+    if (/^\s*(import|export)\b/m.test(src)) {
+      const tmp = path.join(fsTmp, `ueah-syntax-${process.pid}-${ok + bad}.mjs`);
+      fs.writeFileSync(tmp, src);
+      try {
+        execSync(`node --check "${tmp}"`, { stdio: 'pipe' });
+      } finally {
+        try { fs.unlinkSync(tmp); } catch (_) {}
+      }
+    } else {
+      execSync(`node --check "${p}"`, { stdio: 'pipe' });
+    }
     ok++;
   } catch (e) {
     bad++;
