@@ -112,7 +112,7 @@ class PictureBingoGame extends GameBase {
     document.getElementById('current-ball').textContent = this.currentTarget.emoji;
     document.getElementById('ball-text').textContent = this.currentTarget.word;
     document.getElementById('bingo-status').textContent = `Find ${this.currentTarget.word}!`;
-    document.getElementById('history-row').innerHTML = this.calledWords.slice(-5).map((word) => `<span class="history-chip">${word}</span>`).join('');
+    document.getElementById('history-row').innerHTML = this.calledWords.slice(-5).map((word) => `<span class="history-chip">${window.UEAH_SAFE.escapeHtml(word)}</span>`).join('');
     this.announceTarget();
   }
 

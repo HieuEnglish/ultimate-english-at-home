@@ -144,7 +144,7 @@ class WordDetectiveGame extends GameBase {
     document.getElementById('round-val').textContent = Math.min(this.score + 1, 8);
 
     const dock = document.getElementById('words-dock');
-    dock.innerHTML = this.words.map((word) => `<button class="word-btn" data-word="${word}">${word}</button>`).join('');
+    dock.innerHTML = this.words.map((word) => `<button class="word-btn" data-word="${window.UEAH_SAFE.escapeAttr(word)}">${window.UEAH_SAFE.escapeHtml(word)}</button>`).join('');
     dock.querySelectorAll('.word-btn').forEach((btn) => {
       btn.onclick = () => this.pickWord(btn, btn.dataset.word.toLowerCase() === this.currentPuzzle.answer.toLowerCase());
     });

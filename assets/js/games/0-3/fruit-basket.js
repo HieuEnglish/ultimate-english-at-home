@@ -106,7 +106,7 @@ class FruitBasketGame extends GameBase {
     document.getElementById('target-emoji').textContent = this.currentFruit.emoji;
     document.getElementById('instruction-text').textContent = `Pick the ${this.currentFruit.name}`;
     document.getElementById('helper-text').textContent = 'Fill the basket with yummy fruit.';
-    document.getElementById('basket-fill').innerHTML = this.basketFruit.map((fruit) => `<span>${fruit}</span>`).join('');
+    document.getElementById('basket-fill').innerHTML = this.basketFruit.map((fruit) => `<span>${window.UEAH_SAFE.escapeHtml(fruit)}</span>`).join('');
 
     const grid = document.getElementById('fruit-grid');
     grid.innerHTML = this.options.map((fruit) => `
@@ -141,7 +141,7 @@ class FruitBasketGame extends GameBase {
       this.incrementCombo();
       this.addScore(100);
       document.getElementById('score-val').textContent = this.score;
-      document.getElementById('basket-fill').innerHTML = this.basketFruit.map((fruit) => `<span>${fruit}</span>`).join('');
+      document.getElementById('basket-fill').innerHTML = this.basketFruit.map((fruit) => `<span>${window.UEAH_SAFE.escapeHtml(fruit)}</span>`).join('');
       document.getElementById('helper-text').textContent = `Yummy! ${this.currentFruit.name} goes in the basket.`;
       this.speak(`Yummy! ${this.currentFruit.name}!`);
       this.confetti.explode(null, null, 18);

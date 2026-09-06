@@ -806,23 +806,32 @@
     });
   }
 
+  function sanitizeCert(cert) {
+    if (!cert || typeof cert !== "object") return null;
+    const id = String(cert.id || Date.now().toString()).slice(0, 80).replace(/[^a-zA-Z0-9-_:.]/g, "");
+    if (!id) return null;
+    return {
+      id,
+      title: String(cert.title || "Certificate").slice(0, 120),
+      level: Math.max(1, Math.min(10, Number(cert.level) || 1)),
+      date: nowIso(),
+      age: cert.age != null ? String(cert.age).slice(0, 16) : undefined,
+      skill: cert.skill != null ? String(cert.skill).slice(0, 24) : undefined,
+    };
+  }
+
   function addCertificate(cert) {
     const current = load();
     const list = Array.isArray(current.certificates) ? current.certificates : [];
 
+    const clean = sanitizeCert(cert);
+    if (!clean) return current;
+
     // Dedupe by ID
-    if (list.find(c => c.id === cert.id)) return current;
+    if (list.find(c => c.id === clean.id)) return current;
 
-    const newCert = {
-      id: cert.id || Date.now().toString(),
-      title: cert.title || "Certificate",
-      level: cert.level || 1,
-      date: nowIso(),
-      ...cert
-    };
-
-    list.push(newCert);
-    return save({ ...current, certificates: list });
+    list.push(clean);
+    return save({ ...current, certificates: list.slice(-100) });
   }
 
   // Compatibility API expected by store-helpers.js patterns
@@ -948,9 +957,8 @@
     clearAgeResults,
 
     // Compatibility API (store-helpers)
-    getIelsHistory,
-    addAgeSkillScore,
-    clearAgeResults,
+    get,
+    set,
     addCertificate, // Exposed API
     exportData,
     importData,

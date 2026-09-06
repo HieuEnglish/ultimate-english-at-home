@@ -89,7 +89,7 @@ class AccentAce extends GameBase {
 
     const options = [q, ...this.accents.filter((a) => a.id !== q.id).sort(() => Math.random() - 0.5).slice(0, 3)].sort(() => Math.random() - 0.5);
     const grid = document.getElementById('options-grid');
-    grid.innerHTML = options.map((opt) => `<button class="opt-btn" data-id="${opt.id}">${opt.name}</button>`).join('');
+    grid.innerHTML = options.map((opt) => `<button class="opt-btn" data-id="${window.UEAH_SAFE.escapeAttr(opt.id)}">${window.UEAH_SAFE.escapeHtml(opt.name)}</button>`).join('');
     grid.querySelectorAll('.opt-btn').forEach((btn) => {
       btn.onclick = () => this.handleAnswer(btn, btn.dataset.id, q.id);
     });

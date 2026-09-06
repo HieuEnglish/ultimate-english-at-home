@@ -1695,9 +1695,21 @@ body::after {
     padding: 0 1rem;
   }
 
+  /* Phones: wrap nav instead of forced horizontal scroll; keep 44px targets */
+  .site-nav {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
   .nav-link {
     padding: 0.45rem 0.75rem;
     font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  .nav-link:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
   }
 
   .site-main {

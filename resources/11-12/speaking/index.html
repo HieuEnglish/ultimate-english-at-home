@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>UEAH — Ultimate English At Home</title>
+  <title>Speaking resources (11-12) — UEAH</title>
 
   <script>
     (function () {
@@ -25,32 +25,49 @@
 
   <!-- Core SEO -->
   <meta name="description"
-    content="A dark, neon, responsive English learning hub for all ages. Browse resources, games, and tests by age group and skill." />
+    content="Free speaking resources for ages 11-12." />
   <meta name="robots" content="index,follow" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; upgrade-insecure-requests" />
-  <link rel="canonical" href="https://hieuenglish.github.io/ultimate-english-at-home/" />
+  <link rel="canonical" href="https://hieuenglish.github.io/ultimate-english-at-home/resources/11-12/speaking" />
 
   <!-- Theme -->
   <meta name="theme-color" content="#07071a" />
   <meta name="color-scheme" content="dark" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="UEAH — Ultimate English At Home" />
+  <meta property="og:title" content="Speaking resources (11-12) — UEAH" />
   <meta property="og:description"
-    content="Browse resources by age group and skill (Reading, Listening, Writing, Speaking)." />
+    content="Free speaking resources for ages 11-12." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://hieuenglish.github.io/ultimate-english-at-home/" />
-  <meta property="og:image" content="https://hieuenglish.github.io/ultimate-english-at-home/assets/vendor/tinyskies/social-card.png" />
+  <meta property="og:url" content="https://hieuenglish.github.io/ultimate-english-at-home/resources/11-12/speaking" />
+  <meta property="og:image" content="https://hieuenglish.github.io/ultimate-english-at-home/assets/vendor/tinyskies/social-card.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="628" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Speaking resources (11-12) — UEAH" />
+  <meta name="twitter:description" content="Free speaking resources for ages 11-12." />
+  <meta name="twitter:image" content="https://hieuenglish.github.io/ultimate-english-at-home/assets/vendor/tinyskies/social-card.jpg" />
+  <meta property="og:site_name" content="UEAH" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="icon" href="assets/vendor/tinyskies/2D/logo_cursor.png" type="image/png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ultimate English At Home","url":"https://hieuenglish.github.io/ultimate-english-at-home/","description":"Free English practice by age group and skill."}</script>
 
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Critical CSS first; non-critical CSS async to avoid render-blocking -->
+  <link rel="preload" href="assets/css/styles.min.css" as="style" />
+  <link rel="stylesheet" href="assets/css/styles.min.css" />
   <!-- Certificates (print + preview styling) -->
-  <link rel="stylesheet" href="assets/css/certificates.css" />
-  <link rel="stylesheet" href="assets/css/nextgen.css" />
+  <link rel="preload" href="assets/css/nextgen.min.css" as="style" />
+  <link rel="stylesheet" href="assets/css/nextgen.min.css" />
+  <link rel="stylesheet" href="assets/css/certificates.min.css" media="print" onload="this.media='all'" />
   <!-- Animation & effects extension -->
-  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/animations.min.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="assets/css/certificates.min.css" />
+    <link rel="stylesheet" href="assets/css/animations.min.css" />
+  </noscript>
 
   <!-- Animation utilities (no dependencies, respects reduced-motion) -->
 
@@ -360,6 +377,8 @@
   </footer>
 
   <!-- Load stores/data BEFORE main.js -->
+  <!-- Escape helpers first: classic game scripts use window.UEAH_SAFE -->
+  <script defer src="assets/js/safe-html.js"></script>
   <script defer src="assets/js/resources-store.js"></script>
 
   <script defer src="assets/js/tests-store.js"></script>
@@ -402,11 +421,27 @@
   <script defer src="assets/js/games-store.js"></script>
   <script defer src="assets/js/games-score-store.js"></script>
 
-  <script defer src="assets/js/animations.js"></script>
+  <!-- Cosmetic only: lazy-load after first paint so it never blocks content -->
+  <script>
+    (function () {
+      function load(src, isModule) {
+        var s = document.createElement('script');
+        s.src = src;
+        if (isModule) { s.type = 'module'; } else { s.defer = true; }
+        document.head.appendChild(s);
+      }
+      function kick() {
+        load('assets/js/animations.js');
+        load('assets/js/particle-scroll.js', true);
+      }
+      if ('requestIdleCallback' in window) requestIdleCallback(kick, { timeout: 3000 });
+      else window.addEventListener('load', kick, { once: true });
+    })();
+  </script>
 
   <!-- Load the modular entrypoint as an ES module -->
+  <link rel="modulepreload" href="assets/js/main.js" />
   <script type="module" src="assets/js/main.js"></script>
-  <script type="module" src="assets/js/particle-scroll.js"></script>
 </body>
 
 </html>

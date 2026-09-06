@@ -83,7 +83,7 @@ class CodeBreakerGame extends GameBase {
 
   log(msg) {
     const log = document.getElementById('console-log');
-    log.innerHTML += `<br>> ${msg}`;
+    log.innerHTML += `<br>> ${window.UEAH_SAFE.escapeHtml(msg)}`;
     log.scrollTop = log.scrollHeight;
   }
 

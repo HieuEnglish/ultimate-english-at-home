@@ -96,7 +96,7 @@ class WordWizardGame extends GameBase {
   setupKeyboard() {
     const kb = document.getElementById('keyboard');
     const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    kb.innerHTML = keys.map((k) => `<button class="key-btn" data-key="${k}">${k}</button>`).join('');
+    kb.innerHTML = keys.map((k) => `<button class="key-btn" data-key="${window.UEAH_SAFE.escapeAttr(k)}">${window.UEAH_SAFE.escapeHtml(k)}</button>`).join('');
     kb.querySelectorAll('.key-btn').forEach((btn) => {
       btn.onclick = () => this.handleInput(btn.dataset.key);
     });

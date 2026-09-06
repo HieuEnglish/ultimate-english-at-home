@@ -441,7 +441,7 @@ class WordScrambleGame extends GameBase {
     }
 
     showFeedback(text, type) {
-        document.getElementById('feedback').innerHTML = `<div class="feedback-msg feedback-${type}">${text}</div>`;
+        document.getElementById('feedback').innerHTML = `<div class="feedback-msg feedback-${window.UEAH_SAFE.safeClassToken(type)}">${window.UEAH_SAFE.escapeHtml(text)}</div>`;
     }
 
     onTimerTick(remaining) {

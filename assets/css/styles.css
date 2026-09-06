@@ -276,6 +276,8 @@ small.emoji {
     width: 100%;
     justify-content: flex-start;
     gap: 6px;
+    flex-wrap: wrap;
+    overflow-x: visible;
   }
 }
 
@@ -287,6 +289,13 @@ small.emoji {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.nav-link:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
 }
 
 @media (max-width: 560px) {

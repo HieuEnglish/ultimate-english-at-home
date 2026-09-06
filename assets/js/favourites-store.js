@@ -55,23 +55,27 @@
     return String(age || "").trim() + "|" + String(skill || "").trim() + "|" + String(slug || "").trim();
   }
 
+  var MAX_STR = 500;
+  var MAX_ITEMS = 500;
+  function capStr(v) { return String(v == null ? "" : v).trim().slice(0, MAX_STR); }
+
   function normalizeSnapshot(snapshot) {
     // Accept minimal inputs; keep unknown fields if provided.
     if (!isPlainObject(snapshot)) return null;
 
-    var age = snapshot.age != null ? String(snapshot.age).trim() : "";
-    var skill = snapshot.skill != null ? String(snapshot.skill).trim() : "";
-    var slug = snapshot.slug != null ? String(snapshot.slug).trim() : "";
-    var key = snapshot.key != null ? String(snapshot.key).trim() : "";
+    var age = capStr(snapshot.age).slice(0, 16);
+    var skill = capStr(snapshot.skill).slice(0, 24);
+    var slug = capStr(snapshot.slug).slice(0, 120);
+    var key = snapshot.key != null ? capStr(snapshot.key).slice(0, 200) : "";
 
     if (!key) key = makeKey(age, skill, slug);
 
     // If key is still empty, reject.
     if (!key || key === "||") return null;
 
-    var title = snapshot.title != null ? String(snapshot.title).trim() : "";
-    var description = snapshot.description != null ? String(snapshot.description).trim() : "";
-    var link = snapshot.link != null ? String(snapshot.link).trim() : "";
+    var title = snapshot.title != null ? capStr(snapshot.title).slice(0, 200) : "";
+    var description = snapshot.description != null ? capStr(snapshot.description).slice(0, 500) : "";
+    var link = snapshot.link != null ? capStr(snapshot.link).slice(0, 500) : "";
 
     var addedAt = snapshot.addedAt != null ? String(snapshot.addedAt).trim() : "";
     if (!addedAt) addedAt = nowISO();
@@ -211,6 +215,7 @@
       merged.key = k;
       _state.items[k] = merged;
     } else {
+      if (Object.keys(_state.items).length >= MAX_ITEMS) return false;
       _state.items[k] = snap;
     }
 

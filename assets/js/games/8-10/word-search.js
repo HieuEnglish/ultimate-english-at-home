@@ -257,7 +257,7 @@ class WordSearchGame extends GameBase {
         ).join('');
 
         const listEl = document.getElementById('word-list');
-        listEl.innerHTML = this.words.map(w => `<div class="word-item" data-word="${w}">${w}</div>`).join('');
+        listEl.innerHTML = this.words.map(w => `<div class="word-item" data-word="${window.UEAH_SAFE.escapeAttr(w)}">${window.UEAH_SAFE.escapeHtml(w)}</div>`).join('');
 
         // Interaction
         this.container.addEventListener('mousedown', this.handleMouseDown);

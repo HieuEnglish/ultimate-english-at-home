@@ -183,7 +183,7 @@ class NewsEditor extends GameBase {
 
     logWire(msg) {
         const feed = this.container.querySelector('#wire-feed');
-        feed.innerHTML = `> ${msg}<br>` + feed.innerHTML;
+        feed.innerHTML = `> ${window.UEAH_SAFE.escapeHtml(msg)}<br>` + feed.innerHTML;
     }
 
     endGame() {

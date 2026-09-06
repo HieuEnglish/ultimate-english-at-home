@@ -355,7 +355,7 @@ class PronunciationProGame extends GameBase {
 
     showFeedback(message, type) {
         const feedbackEl = document.getElementById('game-feedback');
-        feedbackEl.innerHTML = `<div class="feedback-message feedback-${type}">${message}</div>`;
+        feedbackEl.innerHTML = `<div class="feedback-message feedback-${window.UEAH_SAFE.safeClassToken(type)}">${window.UEAH_SAFE.escapeHtml(message)}</div>`;
     }
 
     updateProgress() {

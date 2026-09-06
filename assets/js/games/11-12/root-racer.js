@@ -86,7 +86,7 @@ class RootRacer extends GameBase {
     document.getElementById('helper-text').textContent = 'Pick the root that carries the meaning clue.';
 
     const grid = document.getElementById('options-grid');
-    grid.innerHTML = [...q.options].sort(() => Math.random() - 0.5).map((opt) => `<button class="root-btn" data-root="${opt}">${opt}</button>`).join('');
+    grid.innerHTML = [...q.options].sort(() => Math.random() - 0.5).map((opt) => `<button class="root-btn" data-root="${window.UEAH_SAFE.escapeAttr(opt)}">${window.UEAH_SAFE.escapeHtml(opt)}</button>`).join('');
     grid.querySelectorAll('.root-btn').forEach((btn) => {
       btn.onclick = () => this.handleAnswer(btn, q.root);
     });

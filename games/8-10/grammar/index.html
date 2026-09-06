@@ -1,0 +1,447 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grammar games (8-10) — UEAH</title>
+
+  <script>
+    (function () {
+      var hostname = window.location.hostname || '';
+      var pathname = window.location.pathname || '/';
+      var baseHref = '/';
+
+      if (hostname.endsWith('github.io')) {
+        var parts = pathname.split('/').filter(Boolean);
+        baseHref = parts.length ? '/' + parts[0] + '/' : '/';
+      }
+
+      var base = document.createElement('base');
+      base.href = baseHref;
+      document.head.appendChild(base);
+    })();
+  </script>
+
+  <!-- Core SEO -->
+  <meta name="description"
+    content="Free grammar games for ages 8-10." />
+  <meta name="robots" content="index,follow" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; upgrade-insecure-requests" />
+  <link rel="canonical" href="https://hieuenglish.github.io/ultimate-english-at-home/games/8-10/grammar" />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#07071a" />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Grammar games (8-10) — UEAH" />
+  <meta property="og:description"
+    content="Free grammar games for ages 8-10." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hieuenglish.github.io/ultimate-english-at-home/games/8-10/grammar" />
+  <meta property="og:image" content="https://hieuenglish.github.io/ultimate-english-at-home/assets/vendor/tinyskies/social-card.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="628" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Grammar games (8-10) — UEAH" />
+  <meta name="twitter:description" content="Free grammar games for ages 8-10." />
+  <meta name="twitter:image" content="https://hieuenglish.github.io/ultimate-english-at-home/assets/vendor/tinyskies/social-card.jpg" />
+  <meta property="og:site_name" content="UEAH" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="icon" href="assets/vendor/tinyskies/2D/logo_cursor.png" type="image/png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ultimate English At Home","url":"https://hieuenglish.github.io/ultimate-english-at-home/","description":"Free English practice by age group and skill."}</script>
+
+  <!-- Critical CSS first; non-critical CSS async to avoid render-blocking -->
+  <link rel="preload" href="assets/css/styles.min.css" as="style" />
+  <link rel="stylesheet" href="assets/css/styles.min.css" />
+  <!-- Certificates (print + preview styling) -->
+  <link rel="preload" href="assets/css/nextgen.min.css" as="style" />
+  <link rel="stylesheet" href="assets/css/nextgen.min.css" />
+  <link rel="stylesheet" href="assets/css/certificates.min.css" media="print" onload="this.media='all'" />
+  <!-- Animation & effects extension -->
+  <link rel="stylesheet" href="assets/css/animations.min.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="assets/css/certificates.min.css" />
+    <link rel="stylesheet" href="assets/css/animations.min.css" />
+  </noscript>
+
+  <!-- Animation utilities (no dependencies, respects reduced-motion) -->
+
+  <!--
+    Initial per-route SEO (supports GitHub Pages deep-link redirect: /?r=...).
+    This runs early to set canonical + description before the main SPA renders.
+  -->
+  <script type="module">
+    import { detectBasePath, normalizeAppPath } from "./assets/js/router.js";
+    import { applySEO } from "./assets/js/seo.js";
+
+    function getInitialAppPath(basePath) {
+      const url = new URL(window.location.href);
+      const r = url.searchParams.get("r");
+
+      // Deep-link restore from 404.html uses ?r=<requested full path>
+      if (r) {
+        let target = String(r);
+        try {
+          const parsed = new URL(target, window.location.origin);
+          target = parsed.pathname + parsed.search + parsed.hash;
+        } catch (_) {
+          // ignore
+        }
+
+        if (basePath && target.startsWith(basePath)) target = target.slice(basePath.length);
+        return normalizeAppPath(target);
+      }
+
+      // Normal load (non-redirect)
+      let p = window.location.pathname || "/";
+      if (basePath && p.startsWith(basePath)) p = p.slice(basePath.length);
+      return normalizeAppPath(p);
+    }
+
+    function titleCase(s) {
+      const t = String(s || "").trim();
+      return t ? t.charAt(0).toUpperCase() + t.slice(1) : t;
+    }
+
+    // Conservative route mapping for initial load.
+    // main.js will overwrite with more specific per-view descriptions after render.
+    function initialRouteSEO(appPath) {
+      const baseTitle = "UEAH — Ultimate English At Home";
+
+      let title = baseTitle;
+      let description =
+        "A dark, neon, responsive English learning hub for all ages. Browse resources, games, and tests by age group and skill.";
+
+      if (appPath === "/") {
+        title = baseTitle;
+      } else if (appPath.startsWith("/resources")) {
+        const parts = appPath.split("/").filter(Boolean); // e.g. ["resources","8-10","reading","slug"]
+        title = "Resources — UEAH";
+        description = "Browse free English learning resources by age group and skill (Reading, Listening, Writing, Speaking).";
+
+        if (parts.length === 2) {
+          const age = parts[1];
+          title = `Resources (${age}) — UEAH`;
+          description = `Free English resources for ages ${age}. Choose Reading, Listening, Writing, or Speaking.`;
+        } else if (parts.length === 3) {
+          const age = parts[1];
+          const skill = titleCase(parts[2]);
+          title = `${skill} resources (${age}) — UEAH`;
+          description = `Free ${skill.toLowerCase()} resources for ages ${age}.`;
+        } else if (parts.length >= 4) {
+          const age = parts[1];
+          const skill = titleCase(parts[2]);
+          title = `${skill} resource (${age}) — UEAH`;
+          description = `Resource detail page for ${skill.toLowerCase()} practice.`;
+        }
+      } else if (appPath.startsWith("/games")) {
+        title = "Games — UEAH";
+        description = "Play simple English learning games to practice vocabulary, spelling, and listening.";
+      } else if (appPath.startsWith("/tests")) {
+        const parts = appPath.split("/").filter(Boolean); // ["tests", "slug?"]
+        title = parts.length >= 2 ? "Test — UEAH" : "Tests — UEAH";
+        description =
+          parts.length >= 2
+            ? "Test detail page."
+            : "Take free English practice tests for Reading, Listening, Writing, and Speaking.";
+      } else if (appPath.startsWith("/profile/certificates")) {
+        const parts = appPath.split("/").filter(Boolean); // ["profile","certificates","all" | ":age"?]
+        title = "Certificate — UEAH";
+        description = "View and print your achievement certificate from your saved profile scores.";
+
+        if (parts.length >= 3 && parts[2] === "all") {
+          title = "All certificates — UEAH";
+          description = "View and print all unlocked achievement certificates.";
+        } else if (parts.length >= 3 && parts[2]) {
+          title = `Certificate (${parts[2]}) — UEAH`;
+          description = `View and print the certificate for age group ${parts[2]}.`;
+        }
+      } else if (appPath.startsWith("/profile")) {
+        title = "Profile — UEAH";
+        description = "Save your learning profile and track progress.";
+      } else if (appPath.startsWith("/scoring")) {
+        title = "Scoring plan — UEAH";
+        description = "Understand the practice scoring levels and certifications by age group and skill.";
+      } else if (appPath.startsWith("/favourites")) {
+        title = "Favourites — UEAH";
+        description = "Save and revisit your favourite resources and games.";
+      } else if (appPath.startsWith("/contact")) {
+        title = "Contact — UEAH";
+        description = "Send feedback, report issues, or suggest new resources.";
+      } else if (appPath.startsWith("/privacy")) {
+        title = "Privacy and data use — UEAH";
+        description = "How UEAH stores progress, uses the microphone, and opens external services.";
+      }
+
+      return { title, description };
+    }
+
+    const basePath = detectBasePath();
+    const appPath = getInitialAppPath(basePath);
+    const seo = initialRouteSEO(appPath);
+
+    applySEO(
+      {
+        title: seo.title,
+        description: seo.description,
+        canonicalPath: appPath,
+        robots: "index,follow",
+      },
+      { basePath }
+    );
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" data-nav>
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">UEAH</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link" href="/" data-nav data-nav-key="home"><span class="emoji" aria-hidden="true">🏠</span>
+          Home</a>
+        <a class="nav-link" href="/resources" data-nav data-nav-key="resources"><span class="emoji"
+            aria-hidden="true">📚</span> Resources</a>
+        <a class="nav-link" href="/games" data-nav data-nav-key="games"><span class="emoji" aria-hidden="true">🎮</span>
+          Games</a>
+        <a class="nav-link" href="/tests" data-nav data-nav-key="tests"><span class="emoji" aria-hidden="true">🧪</span>
+          Tests</a>
+        <a class="nav-link" href="/profile" data-nav data-nav-key="profile"><span class="emoji"
+            aria-hidden="true">👤</span> Profile</a>
+
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-main" tabindex="-1">
+    <div class="container">
+      <div id="app">
+        <section class="hero">
+          <p class="eyebrow">Ultimate English At Home <span class="emoji" aria-hidden="true">🏡</span></p>
+          <h1 class="hero-title">Learning Paths — by age and skill <small class="emoji" aria-hidden="true">🧭</small>
+          </h1>
+          <p class="hero-subtitle">
+            Resources and tests follow age-specific, IELTS-inspired standards — matched to the expected skill level for
+            each age group.
+            <span class="emoji" aria-hidden="true">🎯</span>
+          </p>
+
+          <div class="card-grid" role="list">
+            <a class="card card--primary" href="/resources" data-nav role="listitem" data-glow="green">
+              <div class="card-icon" aria-hidden="true">
+                <!-- Leaf / tree icon -->
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+                  <path
+                    d="M12 2c4.6 2.3 7.7 6.2 8 10.5.3 4.4-2.8 8.3-7.2 9.2-2.4.5-4.8.1-6.7-1.1-1.9-1.2-3.2-3.1-3.7-5.2C1.4 11.1 4.5 6 12 2Z"
+                    fill="currentColor" opacity=".18"></path>
+                  <path
+                    d="M12 5c3.7 2 6.2 5 6.3 8.1.2 3.3-2.2 6.3-5.6 7-1.8.4-3.7.1-5.2-.9-1.5-.9-2.5-2.4-2.9-4C3.9 11.7 6.3 8.1 12 5Z"
+                    fill="currentColor"></path>
+                  <path d="M12 7v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".75"></path>
+                  <path d="M12 13c1.2-1.1 2.5-2 4-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    opacity=".55"></path>
+                  <path d="M12 16c-1.1-.9-2.3-1.6-3.6-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    opacity=".55"></path>
+                </svg>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title"><span class="emoji" aria-hidden="true">📚</span> Resources</h2>
+                <p class="card-text">Improve a skill</p>
+              </div>
+              <span class="card-cta" aria-hidden="true">Explore →</span>
+            </a>
+
+            <a class="card" href="/games" data-nav role="listitem" data-glow="yellow">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+                  <path
+                    d="M7 9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6a3 3 0 0 1-3 3h-1l-1.2-1.2a1 1 0 0 0-.7-.3h-1.2a1 1 0 0 0-.7.3L9 18H8a3 3 0 0 1-3-3V9Z"
+                    fill="currentColor" opacity=".18"></path>
+                  <path d="M10 11H8v2h2v2h2v-2h2v-2h-2V9h-2v2Z" fill="currentColor"></path>
+                  <path d="M16.5 11.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill="currentColor"></path>
+                  <path d="M17.75 13a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title"><span class="emoji" aria-hidden="true">🎮</span> Games</h2>
+                <p class="card-text">Learn with fun</p>
+              </div>
+              <span class="card-cta" aria-hidden="true">Open →</span>
+            </a>
+
+            <a class="card" href="/tests" data-nav role="listitem" data-glow="blue">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+                  <path d="M7 4h7l3 3v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" fill="currentColor"
+                    opacity=".18"></path>
+                  <path d="M14 4v3a1 1 0 0 0 1 1h3" fill="currentColor"></path>
+                  <path d="M8.5 11.5h7v1.5h-7v-1.5Zm0 3h7V16h-7v-1.5Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title"><span class="emoji" aria-hidden="true">🧪</span> Tests</h2>
+                <p class="card-text">Test your skills</p>
+              </div>
+              <span class="card-cta" aria-hidden="true">Open →</span>
+            </a>
+
+            <a class="card" href="/profile" data-nav role="listitem" data-glow="orange">
+              <div class="card-icon" aria-hidden="true">
+                <!-- Profile / user icon -->
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+                  <path d="M12 12.2a4.2 4.2 0 1 0-4.2-4.2 4.2 4.2 0 0 0 4.2 4.2Z" fill="currentColor" opacity=".22">
+                  </path>
+                  <path d="M4.5 20a7.5 7.5 0 0 1 15 0v1H4.5v-1Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title"><span class="emoji" aria-hidden="true">👤</span> Profile</h2>
+                <p class="card-text">Save your progress</p>
+              </div>
+              <span class="card-cta" aria-hidden="true">Open →</span>
+            </a>
+
+            <!-- Swapped order: Favourites comes before Contact -->
+            <a class="card" href="/favourites" data-nav role="listitem" data-glow="pink">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+                  <path
+                    d="M12 21s-7-4.6-9.2-9C1 8.4 3.4 5.5 6.6 5.5c1.7 0 3.1.8 3.9 2 0 0 .8-2 3.5-2 3.2 0 5.6 2.9 3.8 6.5C19 16.4 12 21 12 21Z"
+                    fill="currentColor" opacity=".18"></path>
+                  <path
+                    d="M12 19.6c-1.9-1.3-5.5-4.2-6.8-7C3.7 9.4 5.3 7.5 7.3 7.5c1.5 0 2.6 1.1 3.1 2.1h1.1c.5-1 1.6-2.1 3.1-2.1 2 0 3.6 1.9 2.1 5.1-1.3 2.8-4.9 5.7-6.8 7Z"
+                    fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title"><span class="emoji" aria-hidden="true">⭐</span> Favourites</h2>
+                <p class="card-text">Save your favourites</p>
+              </div>
+              <span class="card-cta" aria-hidden="true">Open →</span>
+            </a>
+
+            <a class="card" href="/contact" data-nav role="listitem" data-glow="purple">
+              <div class="card-icon" aria-hidden="true">
+                <!-- Mail icon -->
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
+                  <path d="M5 6h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="currentColor"
+                    opacity=".18"></path>
+                  <path d="M4.5 8.2 12 13l7.5-4.8" stroke="currentColor" stroke-width="2" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title"><span class="emoji" aria-hidden="true">✉️</span> Contact</h2>
+                <p class="card-text">Send feedback</p>
+              </div>
+              <span class="card-cta" aria-hidden="true">Open →</span>
+            </a>
+          </div>
+
+          <p class="hero-subtitle home-made-with">
+            Made with❤️ for learners, families, and teachers who want FREE English practice at home 🏡📚✨
+          </p>
+
+          <div class="note">
+            <strong>Coming soon:</strong> Profile and Contact pages (and some other sections) may still be placeholders
+            while you build them.
+          </div>
+        </section>
+
+        <noscript>
+          <div class="noscript">
+            <h2>JavaScript required</h2>
+            <p>This site uses client-side routing to support clean URLs on GitHub Pages.</p>
+          </div>
+        </noscript>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-left">© <span data-year></span> Ultimate English At Home</p>
+      <p class="footer-right"><a href="/favourites" data-nav>Favourites</a> · <a href="/scoring" data-nav>Scoring</a> · <a href="/contact" data-nav>Contact</a> · <a href="/privacy" data-nav>Privacy</a> · <a href="https://github.com/HieuEnglish/ultimate-english-at-home" target="_blank"
+          rel="noopener noreferrer">GitHub</a></p>
+    </div>
+  </footer>
+
+  <!-- Load stores/data BEFORE main.js -->
+  <!-- Escape helpers first: classic game scripts use window.UEAH_SAFE -->
+  <script defer src="assets/js/safe-html.js"></script>
+  <script defer src="assets/js/resources-store.js"></script>
+
+  <script defer src="assets/js/tests-store.js"></script>
+
+  <!-- Age-group test registry (must load after tests-store.js) -->
+  <script defer src="assets/js/tests/age-skill.js"></script>
+
+  <!-- IELTS test registry (metadata + lazy loader module paths) -->
+  <script defer src="assets/js/tests/iels.js"></script>
+
+  <!-- Favourites store (must load before main.js) -->
+  <script defer src="assets/js/favourites-store.js"></script>
+
+  <!-- Profile store (localStorage) -->
+  <script defer src="assets/js/profile-store.js"></script>
+
+  <!-- Shared scoring helpers -->
+  <script defer src="assets/js/scoring.js"></script>
+
+  <!-- Scoring plan data (used by /scoring view) -->
+  <script defer src="assets/js/scoring-plan.js"></script>
+
+  <!-- Save-score helper (used by "Save to profile" buttons in test runners) -->
+  <script defer src="assets/js/tests/save-score.js"></script>
+
+  <!-- Contact (Google Forms) -->
+  <script defer src="assets/js/contact-config.js"></script>
+  <script defer src="assets/js/contact.js"></script>
+
+  <!-- Optional TTS runtime config (browser fallback if endpoint is blank) -->
+  <script defer src="assets/js/tts-config.js"></script>
+
+  <!-- Shared TTS helper -->
+  <script defer src="assets/js/tts.js"></script>
+
+  <!-- Game Engine (core logic) -->
+  <script defer src="assets/js/games/engine.js"></script>
+
+  <!-- Games store and scores (must load before main.js) -->
+  <script defer src="assets/js/games-store.js"></script>
+  <script defer src="assets/js/games-score-store.js"></script>
+
+  <!-- Cosmetic only: lazy-load after first paint so it never blocks content -->
+  <script>
+    (function () {
+      function load(src, isModule) {
+        var s = document.createElement('script');
+        s.src = src;
+        if (isModule) { s.type = 'module'; } else { s.defer = true; }
+        document.head.appendChild(s);
+      }
+      function kick() {
+        load('assets/js/animations.js');
+        load('assets/js/particle-scroll.js', true);
+      }
+      if ('requestIdleCallback' in window) requestIdleCallback(kick, { timeout: 3000 });
+      else window.addEventListener('load', kick, { once: true });
+    })();
+  </script>
+
+  <!-- Load the modular entrypoint as an ES module -->
+  <link rel="modulepreload" href="assets/js/main.js" />
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+
+</html>

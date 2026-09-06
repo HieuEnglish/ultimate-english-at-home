@@ -2,7 +2,7 @@
    Game play view - Container for playing individual games.
 */
 
-import { breadcrumbs } from "../common.js";
+import { breadcrumbs, escapeHtml } from "../common.js";
 
 const AGE_LABELS = {
   "0-3": "Ages 0-3",
@@ -93,6 +93,11 @@ function getStartButtonLabel(game, hasInlineStart) {
 
 export async function getView(ctx, age, skill, slug) {
   const { hrefFor, basePath } = ctx;
+  // Allow-list: strict charset blocks path traversal before any dynamic import.
+  if (!/^[a-z0-9-]+$/.test(String(age)) || !/^[a-z0-9-]+$/.test(String(skill)) || !/^[a-z0-9-]+$/.test(String(slug))) {
+    const nf = await import('./not-found.js');
+    return nf.getView(ctx, `/games/${age}/${skill}/${slug}`);
+  }
   const ageLabel = AGE_LABELS[age] || age;
   const skillLabel = SKILL_LABELS[skill] || skill;
 
@@ -355,7 +360,11 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
 
   const syncLaunchLabel = () => {
     const hasInlineStart = hasInlineStartOverlay() || Boolean(getInlineStartButton());
-    startBtn.innerHTML = `<span class="emoji">▶</span> ${getStartButtonLabel(game, hasInlineStart)}`;
+    startBtn.textContent = '';
+    const icon = document.createElement('span');
+    icon.className = 'emoji';
+    icon.textContent = '▶';
+    startBtn.append(icon, document.createTextNode(' ' + getStartButtonLabel(game, hasInlineStart)));
   };
 
   const launchGame = () => {
@@ -379,6 +388,14 @@ async function initGamePlayer(game, age, skill, slug, basePath) {
   };
 
   const loadGame = async () => {
+    // Re-validate + confirm registry entry before dynamic import (defense in depth).
+    if (!/^[a-z0-9-]+$/.test(String(age)) || !/^[a-z0-9-]+$/.test(String(slug))) {
+      throw new Error('Invalid game path');
+    }
+    const allowed = window.UEAH_GAMES_STORE
+      ? (age === 'featured' ? window.UEAH_GAMES_STORE.getGameBySlug(slug) : window.UEAH_GAMES_STORE.getGame(age, skill, slug))
+      : game;
+    if (!allowed) throw new Error('Game not in registry');
     const modulePath = `${basePath}/assets/js/games/${age}/${slug}.js`;
     const module = await import(modulePath);
 

@@ -125,7 +125,7 @@ class SoundMatchGame extends GameBase {
             const btn = document.createElement('button');
             btn.className = 'sm-option';
             btn.dataset.index = index;
-            btn.innerHTML = `<span class="sm-emoji">${emoji}</span>`;
+            btn.innerHTML = `<span class="sm-emoji">${window.UEAH_SAFE.escapeHtml(emoji)}</span>`;
             optionsContainer.appendChild(btn);
         });
     }

@@ -135,7 +135,7 @@ class InterviewSimulator extends GameBase {
     document.getElementById('feedback-box').textContent = 'Select the most professional answer.';
 
     const list = document.getElementById('options-list');
-    list.innerHTML = q.options.map((opt, idx) => `<button class="reply-btn" data-idx="${idx}">${opt.text}</button>`).join('');
+    list.innerHTML = q.options.map((opt, idx) => `<button class="reply-btn" data-idx="${idx}">${window.UEAH_SAFE.escapeHtml(opt.text)}</button>`).join('');
     list.querySelectorAll('.reply-btn').forEach((btn) => {
       btn.onclick = () => this.handleResponse(Number(btn.dataset.idx), btn);
     });

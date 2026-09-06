@@ -71,7 +71,7 @@ class LadderClimberGame extends GameBase {
   setupKeyboard() {
     const kb = document.getElementById('keyboard');
     const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    kb.innerHTML = `${keys.map((ch) => `<button class="key" data-key="${ch}">${ch}</button>`).join('')}<button class="key wide" data-key="DEL">BACK</button>`;
+    kb.innerHTML = `${keys.map((ch) => `<button class="key" data-key="${window.UEAH_SAFE.escapeAttr(ch)}">${window.UEAH_SAFE.escapeHtml(ch)}</button>`).join('')}<button class="key wide" data-key="DEL">BACK</button>`;
     kb.querySelectorAll('.key').forEach((key) => {
       key.onclick = () => this.handleInput(key.dataset.key);
     });

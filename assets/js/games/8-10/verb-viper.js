@@ -158,7 +158,7 @@ class VerbViperGame extends GameBase {
         const snakeIndex = this.snake.findIndex((s) => s.x === x && s.y === y);
         if (snakeIndex === 0) cell.innerHTML = '<div class="snake-head">🐍</div>';
         else if (snakeIndex > 0) cell.innerHTML = '<div class="snake-body"></div>';
-        else if (this.food && this.food.x === x && this.food.y === y) cell.innerHTML = `<div class="food-chip ${this.food.type}">${this.food.text}</div>`;
+        else if (this.food && this.food.x === x && this.food.y === y) cell.innerHTML = `<div class="food-chip ${window.UEAH_SAFE.safeClassToken(this.food.type)}">${window.UEAH_SAFE.escapeHtml(this.food.text)}</div>`;
         board.appendChild(cell);
       }
     }

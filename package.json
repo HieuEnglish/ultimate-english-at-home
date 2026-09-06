@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "generate": "node tools/generate-static-routes.js",
+    "build:css": "node tools/minify-css.js",
     "check:syntax": "node tools/syntax-check.js",
     "check:banks": "node tools/validate-banks.js",
     "check:encoding": "node tools/scan-badchars.js",

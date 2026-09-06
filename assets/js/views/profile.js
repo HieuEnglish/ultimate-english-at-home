@@ -809,7 +809,7 @@ export function getView(ctx) {
         })
         .join('');
 
-      progressHost.innerHTML = `${certPanel}<div class="profile-progress-stack">${cards}</div>`;
+      progressHost.innerHTML = `${certPanel}<div class="profile-progress-stack">${cards}</div>`; // ueah-safe: composed from safeText-escaped parts
     }
 
     function refreshAll(msgPersonal, msgProgress, focusTarget) {

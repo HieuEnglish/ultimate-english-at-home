@@ -95,7 +95,7 @@ class StoryStonesGame extends GameBase {
     document.getElementById('helper-text').textContent = 'Choose the best word to finish the sentence.';
 
     const stones = document.getElementById('stones-area');
-    stones.innerHTML = this.options.map((opt) => `<button class="stone-btn" data-word="${opt}">${opt}</button>`).join('');
+    stones.innerHTML = this.options.map((opt) => `<button class="stone-btn" data-word="${window.UEAH_SAFE.escapeAttr(opt)}">${window.UEAH_SAFE.escapeHtml(opt)}</button>`).join('');
     stones.querySelectorAll('.stone-btn').forEach((btn) => {
       btn.onclick = () => this.handlePick(btn);
     });
