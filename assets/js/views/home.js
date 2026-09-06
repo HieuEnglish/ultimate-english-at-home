@@ -101,58 +101,44 @@ export function getView(ctx) {
             <div class="hero-visual__spark hero-visual__spark--two"></div>
             <div class="hero-visual__spark hero-visual__spark--three"></div>
 
-            <div class="hero-visual__frame" data-hero-layer="6">
-              <div class="hero-visual__card hero-visual__card--lead">
-                <div class="hero-visual__eyebrow"><span class="live-dot" aria-hidden="true"></span>Live learning map</div>
-                <div class="hero-visual__title">Choose a route. Build momentum.</div>
-                <p class="hero-visual__caption">Resources, games, tests, and certificates connected in one practice path.</p>
-                <div class="hero-visual__mini-grid">
-                  <a class="hero-visual__mini-tile" href="${hrefFor('/resources')}" data-nav>
-                    <strong>📚</strong>
-                    <span>Resources</span>
+            <div class="hero-visual__frame hero-visual__frame--orbit">
+              <div class="hero-visual__eyebrow"><span class="live-dot" aria-hidden="true"></span>Pick a route</div>
+              <div class="orbit" data-orbit>
+                <div class="orbit__ring" data-orbit-ring>
+                  <a class="orbit__card" href="${hrefFor('/resources')}" data-nav data-orbit-card="Resources">
+                    <strong aria-hidden="true">📚</strong>
+                    <span class="orbit__name">Resources</span>
+                    <em class="orbit__sub">6 tracks · 4 skills</em>
                   </a>
-                  <a class="hero-visual__mini-tile" href="${hrefFor('/games')}" data-nav>
-                    <strong>🎮</strong>
-                    <span>Games</span>
-                    ${gamesCount > 0 ? `<em class="mini-count">${gamesCount}</em>` : ''}
+                  <a class="orbit__card" href="${hrefFor('/games')}" data-nav data-orbit-card="Games">
+                    <strong aria-hidden="true">🎮</strong>
+                    <span class="orbit__name">Games</span>
+                    <em class="orbit__sub">${gamesCount > 0 ? `${gamesCount} games` : 'Play & practice'}</em>
                   </a>
-                  <a class="hero-visual__mini-tile" href="${hrefFor('/tests')}" data-nav>
-                    <strong>🧪</strong>
-                    <span>Tests</span>
-                    ${testsCount > 0 ? `<em class="mini-count">${testsCount}</em>` : ''}
+                  <a class="orbit__card" href="${hrefFor('/tests')}" data-nav data-orbit-card="Tests">
+                    <strong aria-hidden="true">🧪</strong>
+                    <span class="orbit__name">Tests</span>
+                    <em class="orbit__sub">${testsCount > 0 ? `${testsCount} tests` : 'Check your level'}</em>
                   </a>
-                  <a class="hero-visual__mini-tile" href="${hrefFor('/profile/certificates')}" data-nav>
-                    <strong>🏆</strong>
-                    <span>Certificates</span>
-                    ${certsEarned > 0 ? `<em class="mini-count">${certsEarned}</em>` : ''}
+                  <a class="orbit__card" href="${hrefFor('/profile/certificates')}" data-nav data-orbit-card="Certificates">
+                    <strong aria-hidden="true">🏆</strong>
+                    <span class="orbit__name">Certificates</span>
+                    <em class="orbit__sub">${certsEarned > 0 ? `${certsEarned} earned` : 'Earn awards'}</em>
                   </a>
                 </div>
               </div>
-
-              <div class="hero-visual__stack">
-                <a class="hero-visual__card hero-visual__card--path" href="${hrefFor('/resources')}" data-nav data-hero-layer="10">
-                  <div class="hero-visual__card-icon">🧭</div>
-                  <div>
-                    <div class="hero-visual__card-label">Age path</div>
-                    <div class="hero-visual__card-value">6 learner tracks</div>
-                  </div>
-                </a>
-
-                <a class="hero-visual__card hero-visual__card--score${hasProgress ? ' has-live' : ''}" href="${hrefFor('/profile')}" data-nav data-hero-layer="14">
-                  <div class="hero-visual__card-icon">📈</div>
-                  <div>
-                    <div class="hero-visual__card-label">Progress</div>
-                    <div class="hero-visual__card-value">${hasProgress ? `${practicedSkills} skill${practicedSkills === 1 ? '' : 's'} practiced` : 'Skill scores + saved wins'}</div>
-                  </div>
-                  ${hasProgress ? `
-                  <div class="hero-meters">
-                    <div class="hero-meter"><span>Skills</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(practicedSkills, 24)}%; --fill-c: #38bdf8; transition-delay: 0.30s"></span></div><strong>${practicedSkills}</strong></div>
-                    <div class="hero-meter"><span>Awards</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(certsEarned, 6)}%; --fill-c: #f472b6; transition-delay: 0.42s"></span></div><strong>${certsEarned}</strong></div>
-                    <div class="hero-meter"><span>Saved</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(favCount, 10)}%; --fill-c: #fbbf24; transition-delay: 0.54s"></span></div><strong>${favCount}</strong></div>
-                  </div>
-                  ` : ''}
-                </a>
+              <div class="hero-carousel__controls" hidden>
+                <button type="button" class="hero-carousel__btn" data-orbit-prev aria-label="Previous route">←</button>
+                <div class="hero-carousel__dots" role="tablist" aria-label="Routes"></div>
+                <button type="button" class="hero-carousel__btn" data-orbit-next aria-label="Next route">→</button>
               </div>
+              ${hasProgress ? `
+              <div class="hero-meters hero-meters--orbit">
+                <div class="hero-meter"><span>Skills</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(practicedSkills, 24)}%; --fill-c: #38bdf8; transition-delay: 0.30s"></span></div><strong>${practicedSkills}</strong></div>
+                <div class="hero-meter"><span>Awards</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(certsEarned, 6)}%; --fill-c: #f472b6; transition-delay: 0.42s"></span></div><strong>${certsEarned}</strong></div>
+                <div class="hero-meter"><span>Saved</span><div class="hero-meter__track"><span class="hero-meter__fill" style="--fill: ${pct(favCount, 10)}%; --fill-c: #fbbf24; transition-delay: 0.54s"></span></div><strong>${favCount}</strong></div>
+              </div>
+              ` : ''}
             </div>
 
             <div class="hero-floating hero-floating--certificate">
@@ -608,11 +594,217 @@ export function getView(ctx) {
         heroVisual.classList.add('is-live');
       }
 
+      // Route orbit: a spinning 3D ring of route cards. Drag to spin, click
+      // to follow. Progressive enhancement: without motion/JS the cards
+      // render as a static grid.
+      let carouselActive = false;
+      const orbit = document.querySelector('.landing-home [data-orbit]');
+      const ring = orbit ? orbit.querySelector('[data-orbit-ring]') : null;
+      const cards = ring ? Array.from(ring.querySelectorAll('[data-orbit-card]')) : [];
+      const orbitControls = orbit ? orbit.parentElement.querySelector('.hero-carousel__controls') : null;
+      if (orbit && ring && cards.length > 1 && !reducedMotion) {
+        carouselActive = true;
+        orbit.classList.add('is-orbit');
+        orbit.setAttribute('role', 'region');
+        orbit.setAttribute('aria-roledescription', 'carousel');
+        orbit.setAttribute('aria-label', 'Learning routes');
+        const dotsWrap = orbit.parentElement.querySelector('.hero-carousel__dots');
+        if (orbitControls) orbitControls.hidden = false;
+
+        const n = cards.length;
+        const ARC = 0.96; // radians between neighbours (~55deg)
+        let pos = 0; // continuous position; card i sits at wrapped offset i - pos
+        let target = 0;
+        let index = 0;
+        let autoTimer = null;
+        let paused = false;
+        let dragging = false;
+        let raf = 0;
+        let radius = 200;
+
+        const wrapSpan = (o) => {
+          let w = (((o % n) + n) % n);
+          if (w > n / 2) w -= n;
+          return w;
+        };
+
+        const dots = cards.map((s, i) => {
+          const name = s.getAttribute('data-orbit-card') || `Slide ${i + 1}`;
+          const d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'hero-carousel__dot';
+          d.setAttribute('role', 'tab');
+          d.setAttribute('aria-label', `Show ${name}`);
+          d.addEventListener('click', () => goTo(i, true));
+          if (dotsWrap) dotsWrap.appendChild(d);
+          s.setAttribute('aria-roledescription', 'slide');
+          s.setAttribute('aria-label', `${i + 1} of ${n}: ${name}`);
+          return d;
+        });
+
+        const layout = () => {
+          try {
+            radius = Math.max(150, Math.min(210, orbit.clientWidth * 0.42));
+          } catch (_) {
+            radius = 190;
+          }
+          paint();
+        };
+        const paint = () => {
+          const active = ((Math.round(pos) % n) + n) % n;
+          if (active !== index) {
+            index = active;
+            dots.forEach((d, i) => {
+              const on_ = i === index;
+              d.classList.toggle('is-active', on_);
+              if (on_) d.setAttribute('aria-selected', 'true');
+              else d.removeAttribute('aria-selected');
+            });
+          }
+          cards.forEach((s, i) => {
+            const o = wrapSpan(i - pos);
+            const ax = Math.abs(o);
+            const ang = o * ARC;
+            const x = Math.sin(ang) * radius;
+            const z = (Math.cos(ang) - 1) * radius * 0.9;
+            const rot = (-ang * 180) / Math.PI;
+            s.style.transform =
+              `translateX(${x.toFixed(1)}px) ` +
+              `translateZ(${z.toFixed(0)}px) ` +
+              `rotateY(${rot.toFixed(1)}deg) ` +
+              `scale(${(1 - Math.min(ax, 2) * 0.1).toFixed(3)})`;
+            s.style.opacity = String(ax > 1.6 ? 0 : ax > 1 ? 0.55 : 0.75 + 0.25 * (1 - ax));
+            s.style.zIndex = String(100 - Math.round(ax * 20));
+            const interactive = ax < 1.2;
+            s.style.pointerEvents = interactive ? '' : 'none';
+            if (i === index && interactive) s.removeAttribute('tabindex');
+            else s.setAttribute('tabindex', '-1');
+          });
+        };
+
+        const loop = () => {
+          raf = 0;
+          pos += (target - pos) * 0.12;
+          if (Math.abs(target - pos) < 0.005) pos = target;
+          paint();
+          if (pos !== target || dragging) raf = requestAnimationFrame(loop);
+        };
+        const kick = () => {
+          if (!raf) raf = requestAnimationFrame(loop);
+        };
+        const goTo = (i, user) => {
+          const want = ((i % n) + n) % n;
+          target = pos + wrapSpan(want - pos);
+          kick();
+          dots.forEach((d, k) => {
+            const on_ = k === want;
+            d.classList.toggle('is-active', on_);
+            if (on_) d.setAttribute('aria-selected', 'true');
+            else d.removeAttribute('aria-selected');
+          });
+          index = want;
+          if (user) restartAuto();
+        };
+        const restartAuto = () => {
+          if (autoTimer) clearInterval(autoTimer);
+          autoTimer = null;
+          if (paused) return;
+          autoTimer = setInterval(() => {
+            if (!paused && !dragging) {
+              target += 1;
+              kick();
+            }
+          }, 4200);
+        };
+        const setPaused = (p) => {
+          paused = p;
+          restartAuto();
+        };
+
+        // Drag to spin; a still press stays a normal link click.
+        let dragX = null;
+        let dragPos = 0;
+        let moved = false;
+        on(ring, 'dragstart', (e) => e.preventDefault());
+        on(ring, 'pointerdown', (e) => {
+          dragging = true;
+          moved = false;
+          dragX = e.clientX;
+          dragPos = pos;
+          target = pos;
+          try {
+            orbit.classList.add('is-grabbing');
+          } catch (_) {}
+          kick();
+        });
+        on(window, 'pointermove', (e) => {
+          if (!dragging || dragX == null) return;
+          const dx = e.clientX - dragX;
+          if (Math.abs(dx) > 6) moved = true;
+          pos = dragPos - dx * 0.004;
+          target = pos;
+        });
+        const endDrag = () => {
+          if (!dragging) return;
+          dragging = false;
+          try {
+            orbit.classList.remove('is-grabbing');
+          } catch (_) {}
+          dragX = null;
+          target = Math.round(pos);
+          kick();
+          restartAuto();
+        };
+        on(window, 'pointerup', endDrag);
+        on(window, 'pointercancel', endDrag);
+        on(ring, 'click', (e) => {
+          if (moved) {
+            e.preventDefault();
+            e.stopPropagation();
+            moved = false;
+          }
+        }, true);
+
+        const prevBtn = orbit.parentElement.querySelector('[data-orbit-prev]');
+        const nextBtn = orbit.parentElement.querySelector('[data-orbit-next]');
+        if (prevBtn) on(prevBtn, 'click', () => goTo(index - 1, true));
+        if (nextBtn) on(nextBtn, 'click', () => goTo(index + 1, true));
+        on(orbit, 'pointerenter', () => setPaused(true));
+        on(orbit, 'pointerleave', () => setPaused(false));
+        on(orbit, 'focusin', () => setPaused(true));
+        on(orbit, 'focusout', () => setPaused(false));
+        on(orbit, 'keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            goTo(index - 1, true);
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            goTo(index + 1, true);
+          }
+        });
+
+        let resizeTimer = null;
+        on(window, 'resize', () => {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(layout, 200);
+        });
+
+        layout();
+        paint();
+        restartAuto();
+        cleanups.push(() => {
+          if (autoTimer) clearInterval(autoTimer);
+          if (raf) cancelAnimationFrame(raf);
+          if (resizeTimer) clearTimeout(resizeTimer);
+        });
+      }
+
       // Spotlight tour: cycle a glow across the mini-tiles (pauses on hover).
+      // Skipped while the carousel runs — its dots take over the guiding role.
       const tiles = Array.from(
         heroVisual.querySelectorAll('.hero-visual__mini-tile')
       );
-      if (heroVisual && tiles.length > 1) {
+      if (heroVisual && tiles.length > 1 && !carouselActive) {
         let spot = -1;
         let spotTimer = null;
         let hovering = false;
